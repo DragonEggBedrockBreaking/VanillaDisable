@@ -1,9 +1,13 @@
-# Fabric Example Mod
+# Vanilla Disable
 
-## Setup
+## Description
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+You can use gamerules to enable/disable a lot more stuff with this mod. A new command system *may* be developed in the future.
+
+## Status
+
+This mod is incomplete/experimental. Features may be added and removed at any time. Mods are not recommended to maintain compatibility with this mod at this stage due to rapid change.
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This mod is available under the LGPL-3.0 license.
