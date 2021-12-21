@@ -28,7 +28,7 @@ dependencies {
     modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version))
 
     // Runtime dependencies
-    modRuntimeOnly "supercoder79:databreaker:${project.databreaker_version}"
+    modLocalRuntime "supercoder79:databreaker:${project.databreaker_version}"
 }
 
 processResources {

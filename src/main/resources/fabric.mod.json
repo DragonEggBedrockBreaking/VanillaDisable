@@ -18,12 +18,18 @@
   "icon": "assets/vanilla_disable/icon.png",
 
   "environment": "*",
+  "entrypoints": {
+    "main": [
+        "uk.debb.vanilla_disable.VanillaDisableGamerules"
+    ]
+  },
   "mixins": [
     "vanilla_disable.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.12.12",
+    "fabric-game-rule-api-v1": ">=0.44.0",
     "minecraft": "1.18.x",
     "java": ">=17"
   }
