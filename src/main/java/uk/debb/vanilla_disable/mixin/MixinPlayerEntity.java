@@ -17,64 +17,63 @@ public abstract class MixinPlayerEntity extends LivingEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason Removes damage sources
-     * @return Opposite of gamerule
+     * @cir.setReturnValue(Opposite of gamerule)
      */
-    @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"))
-    public boolean isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable cir) {
+    @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"), cancellable = true)
+    private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (!this.world.getGameRules().getBoolean(VanillaDisableGamerules.DAMAGE_ENABLED)) {
-            return true;
+            cir.setReturnValue(true);
         }
         if (damageSource.isProjectile()) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.PROJECTILE_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.PROJECTILE_DAMAGE));
         }
         if (damageSource.isExplosive()) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.EXPLOSION_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.EXPLOSION_DAMAGE));
         }
         if (damageSource.isOutOfWorld()) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.VOID_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.VOID_DAMAGE));
         }
         if (damageSource.isMagic()) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.MAGIC_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.MAGIC_DAMAGE));
         }
         if (damageSource.isSourceCreativePlayer()) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.CREATIVE_PLAYER_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.CREATIVE_PLAYER_DAMAGE));
         }
         if (damageSource == DamageSource.LIGHTNING_BOLT) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.LIGHTNING_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.LIGHTNING_DAMAGE));
         }
         if (damageSource == DamageSource.IN_WALL) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.WALL_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.WALL_DAMAGE));
         }
         if (damageSource == DamageSource.CRAMMING) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.CRAMMING_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.CRAMMING_DAMAGE));
         }
         if (damageSource == DamageSource.STARVE) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.STARVATION_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.STARVATION_DAMAGE));
         }
         if (damageSource == DamageSource.CACTUS) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.CACTUS_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.CACTUS_DAMAGE));
         }
         if (damageSource == DamageSource.FLY_INTO_WALL) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.FLY_INTO_WALL_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.FLY_INTO_WALL_DAMAGE));
         }
         if (damageSource == DamageSource.WITHER) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.WITHER_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.WITHER_DAMAGE));
         }
         if (damageSource == DamageSource.ANVIL) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.ANVIL_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.ANVIL_DAMAGE));
         }
         if (damageSource == DamageSource.DRAGON_BREATH) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.DRAGON_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.DRAGON_DAMAGE));
         }
         if (damageSource == DamageSource.DRYOUT) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.DRYOUT_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.DRYOUT_DAMAGE));
         }
         if (damageSource == DamageSource.SWEET_BERRY_BUSH) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.SWEET_BERRY_BUSH_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.SWEET_BERRY_BUSH_DAMAGE));
         }
         if (damageSource == DamageSource.FALLING_STALACTITE) {
-            return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.FALLING_STALACTITE_DAMAGE);
+            cir.setReturnValue(!this.world.getGameRules().getBoolean(VanillaDisableGamerules.FALLING_STALACTITE_DAMAGE));
         }
-        return false;
     }
 }
