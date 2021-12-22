@@ -17,5 +17,7 @@
     "gamerule.dragonDamage": "Deal dragon damage",
     "gamerule.dryoutDamage": "Deal dryout damage",
     "gamerule.sweetBerryBushDamage": "Deal sweet berry bush damage",
-    "gamerule.fallingStalactiteDamage": "Deal falling stalactite damage"
+    "gamerule.fallingStalactiteDamage": "Deal falling stalactite damage",
+
+    "gamerule.category.damage": "Damage"
 }

@@ -4,8 +4,9 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.GameRules;
+import uk.debb.vanilla_disable.gamerules.CreateGameruleCategories;
 
-public class VanillaDisableGamerules implements ModInitializer {
+public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> DAMAGE_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> PROJECTILE_DAMAGE;
     public static GameRules.Key<GameRules.BooleanRule> EXPLOSION_DAMAGE;
@@ -29,42 +30,42 @@ public class VanillaDisableGamerules implements ModInitializer {
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
-            "damageEnabled",        GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "damageEnabled",        CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         PROJECTILE_DAMAGE         = GameRuleRegistry.register(
-            "projectileDamage",     GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "projectileDamage",     CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         EXPLOSION_DAMAGE          = GameRuleRegistry.register(
-            "explosionDamage",      GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "explosionDamage",      CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         FALLING_BLOCK_DAMAGE      = GameRuleRegistry.register(
-            "fallingBlockDamage",   GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "fallingBlockDamage",   CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         VOID_DAMAGE               = GameRuleRegistry.register(
-            "voidDamage",           GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "voidDamage",           CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         MAGIC_DAMAGE              = GameRuleRegistry.register(
-            "magicDamage",          GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "magicDamage",          CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         CREATIVE_PLAYER_DAMAGE    = GameRuleRegistry.register(
-            "creativePlayerDamage", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "creativePlayerDamage", CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         LIGHTNING_DAMAGE          = GameRuleRegistry.register(
-            "lightningDamage",      GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "lightningDamage",      CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         WALL_DAMAGE               = GameRuleRegistry.register(
-            "wallDamage",           GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "wallDamage",           CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         CRAMMING_DAMAGE           = GameRuleRegistry.register(
-            "crammingDamage",       GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "crammingDamage",       CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         STARVATION_DAMAGE         = GameRuleRegistry.register(
-            "starvationDamage",     GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "starvationDamage",     CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         CACTUS_DAMAGE             = GameRuleRegistry.register(
-            "cactusDamage",         GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "cactusDamage",         CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         FLY_INTO_WALL_DAMAGE      = GameRuleRegistry.register(
-            "flyIntoWallDamage",    GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "flyIntoWallDamage",    CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         WITHER_DAMAGE             = GameRuleRegistry.register(
-            "witherDamage",         GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "witherDamage",         CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         ANVIL_DAMAGE              = GameRuleRegistry.register(
-            "anvilDamage",          GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "anvilDamage",          CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         DRAGON_DAMAGE             = GameRuleRegistry.register(
-            "dragonDamage",         GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "dragonDamage",         CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         DRYOUT_DAMAGE             = GameRuleRegistry.register(
-            "dryoutDamage",         GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "dryoutDamage",         CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         SWEET_BERRY_BUSH_DAMAGE   = GameRuleRegistry.register(
-            "sweetBerryBushDamage", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "sweetBerryBushDamage", CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         FALLING_STALACTITE_DAMAGE = GameRuleRegistry.register(
-            "fallingStalactiteDamage", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+            "fallingStalactiteDamage", CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
     }
 }
