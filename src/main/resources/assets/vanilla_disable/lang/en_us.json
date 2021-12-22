@@ -1,0 +1,21 @@
+{
+    "gamerule.damageEnabled": "Deal damage",
+    "gamerule.projectileDamage": "Deal projectile damage",
+    "gamerule.explosionDamage": "Deal explosion damage",
+    "gamerule.fallingBlockDamage": "Deal falling block damage",
+    "gamerule.voidDamage": "Deal void damage",
+    "gamerule.magicDamage": "Deal magic damage",
+    "gamerule.creativePlayerDamage": "Deal creative player damage",
+    "gamerule.lightningDamage": "Deal lightning damage",
+    "gamerule.wallDamage": "Deal wall damage",
+    "gamerule.crammingDamage": "Deal cramming damage",
+    "gamerule.starvationDamage": "Deal starvation damage",
+    "gamerule.cactusDamage": "Deal cactus damage",
+    "gamerule.flyIntoWallDamage": "Deal fly into wall damage",
+    "gamerule.witherDamage": "Deal wither damage",
+    "gamerule.anvilDamage": "Deal anvil damage",
+    "gamerule.dragonDamage": "Deal dragon damage",
+    "gamerule.dryoutDamage": "Deal dryout damage",
+    "gamerule.sweetBerryBushDamage": "Deal sweet berry bush damage",
+    "gamerule.fallingStalactiteDamage": "Deal falling stalactite damage"
+}
