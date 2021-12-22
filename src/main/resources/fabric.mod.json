@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-        "uk.debb.vanilla_disable.VanillaDisableGamerules"
+        "uk.debb.vanilla_disable.gamerules.VanillaDisableGamerules"
     ]
   },
   "mixins": [

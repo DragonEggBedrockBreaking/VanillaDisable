@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable;
+package uk.debb.vanilla_disable.gamerules;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
