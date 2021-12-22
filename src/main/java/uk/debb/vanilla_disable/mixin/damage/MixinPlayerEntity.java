@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin;
+package uk.debb.vanilla_disable.damage.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
