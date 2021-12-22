@@ -2,11 +2,11 @@
 
 ## Description
 
-You can use gamerules to enable/disable a lot more stuff with this mod. A new command system *may* be developed in the future.
+You can use gamerules to enable/disable a lot more stuff with this mod.
 
 ## Status
 
-This mod is incomplete/experimental. Features may be added and removed at any time. Mods are not recommended to maintain compatibility with this mod at this stage due to rapid change.
+This mod is incomplete/experimental. Features may be added and removed at any time.
 
 ## License
 
