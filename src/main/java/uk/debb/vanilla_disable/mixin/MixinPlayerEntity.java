@@ -3,9 +3,10 @@ package uk.debb.vanilla_disable.mixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.VanillaDisableGamerules;
 
 @Mixin(PlayerEntity.class)
@@ -18,16 +19,10 @@ public abstract class MixinPlayerEntity extends LivingEntity {
      * @reason Removes damage sources
      * @return Opposite of gamerule
      */
-    @Overwrite
-    public boolean isInvulnerableTo(DamageSource damageSource) {
+    @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"))
+    public boolean isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable cir) {
         if (!this.world.getGameRules().getBoolean(VanillaDisableGamerules.DAMAGE_ENABLED)) {
             return true;
-        }
-        if (damageSource.isFromFalling()) {
-            return !this.world.getGameRules().getBoolean(GameRules.FALL_DAMAGE);
-        }
-        if (damageSource.isFire()) {
-            return !this.world.getGameRules().getBoolean(GameRules.FIRE_DAMAGE);
         }
         if (damageSource.isProjectile()) {
             return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.PROJECTILE_DAMAGE);
@@ -43,12 +38,6 @@ public abstract class MixinPlayerEntity extends LivingEntity {
         }
         if (damageSource.isSourceCreativePlayer()) {
             return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.CREATIVE_PLAYER_DAMAGE);
-        }
-        if (damageSource == DamageSource.DROWN) {
-            return !this.world.getGameRules().getBoolean(GameRules.DROWNING_DAMAGE);
-        }
-        if (damageSource == DamageSource.FREEZE) {
-            return !this.world.getGameRules().getBoolean(GameRules.FREEZE_DAMAGE);
         }
         if (damageSource == DamageSource.LIGHTNING_BOLT) {
             return !this.world.getGameRules().getBoolean(VanillaDisableGamerules.LIGHTNING_DAMAGE);
