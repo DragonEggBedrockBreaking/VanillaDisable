@@ -19,5 +19,16 @@
     "gamerule.sweetBerryBushDamage": "Deal sweet berry bush damage",
     "gamerule.fallingStalactiteDamage": "Deal falling stalactite damage",
 
-    "gamerule.category.damage": "Damage"
+    "gamerule.knockbackEnabled": "Apply knockback",
+    "gamerule.fireballKnockback": "Apply ghast fireball knockback",
+    "gamerule.witherSkullKnockback": "Apply wither skull knockback",
+    "gamerule.dragonKnockback": "Apply dragon knockback",
+    "gamerule.arrowKnockback": "Apply arrow knockback",
+    "gamerule.llamaSpitKnockback": "Apply llama spit knockback",
+    "gamerule.shulkerBulletKnockback": "Apply shulker bullet knockback",
+    "gamerule.mobAttackKnockback": "Apply general mob attack knockback",
+    "gamerule.playerAttackKnockback": "Apply player attack knockback",
+
+    "gamerule.category.damage": "Damage",
+    "gamerule.category.knockback": "Knockback"
 }

@@ -12,4 +12,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory KNOCKBACK = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.knockback"),
+        new TranslatableText("gamerule.category.knockback")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }

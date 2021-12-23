@@ -27,6 +27,16 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SWEET_BERRY_BUSH_DAMAGE;
     public static GameRules.Key<GameRules.BooleanRule> FALLING_STALACTITE_DAMAGE;
 
+    public static GameRules.Key<GameRules.BooleanRule> KNOCKBACK_ENABLED;
+    public static GameRules.Key<GameRules.BooleanRule> FIREBALL_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> WITHER_SKULL_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> DRAGON_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> ARROW_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> LLAMA_SPIT_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> SHULKER_BULLET_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> MOB_ATTACK_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> PLAYER_ATTACK_KNOCKBACK;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -67,5 +77,24 @@ public class RegisterGamerules implements ModInitializer {
             "sweetBerryBushDamage", CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
         FALLING_STALACTITE_DAMAGE = GameRuleRegistry.register(
             "fallingStalactiteDamage", CreateGameruleCategories.DAMAGE, GameRuleFactory.createBooleanRule(true));
+        
+        KNOCKBACK_ENABLED         = GameRuleRegistry.register(
+            "knockbackEnabled",     CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        FIREBALL_KNOCKBACK        = GameRuleRegistry.register(
+            "fireballKnockback",    CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        WITHER_SKULL_KNOCKBACK    = GameRuleRegistry.register(
+            "witherSkullKnockback", CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        DRAGON_KNOCKBACK          = GameRuleRegistry.register(
+            "dragonKnockback",      CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        ARROW_KNOCKBACK           = GameRuleRegistry.register(
+            "arrowKnockback",       CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        LLAMA_SPIT_KNOCKBACK      = GameRuleRegistry.register(
+            "llamaSpitKnockback",   CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        SHULKER_BULLET_KNOCKBACK  = GameRuleRegistry.register(
+            "shulkerBulletKnockback", CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        MOB_ATTACK_KNOCKBACK      = GameRuleRegistry.register(
+            "mobAttackKnockback",   CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        PLAYER_ATTACK_KNOCKBACK   = GameRuleRegistry.register(
+            "playerAttackKnockback", CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
     }
 }
