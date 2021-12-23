@@ -14,7 +14,7 @@
     "issues": "https://github.com/DragonEggBedrockBreaking/Vanilla-Disable/issues/"
   },
 
-  "license": "LGPL-3.0",
+  "license": "MIT",
   "icon": "assets/vanilla_disable/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -28,7 +28,7 @@
 
   "depends": {
     "fabricloader": ">=0.12.12",
-    "fabric-game-rule-api-v1": ">=0.44.0",
+    "fabric-game-rule-api-v1": ">=1.0.10",
     "fabric-resource-loader-v0": ">=0.4.11",
     "minecraft": "1.18.x",
     "java": ">=17"
