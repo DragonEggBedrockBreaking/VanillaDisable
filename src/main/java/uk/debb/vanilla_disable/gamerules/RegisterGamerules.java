@@ -37,6 +37,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SHULKER_BULLET_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> MOB_ATTACK_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> PLAYER_ATTACK_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> KNOCKBACK_ENCHANTMENT;
 
     @Override
     public void onInitialize() {
@@ -99,5 +100,7 @@ public class RegisterGamerules implements ModInitializer {
             "mobAttackKnockback",   CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         PLAYER_ATTACK_KNOCKBACK   = GameRuleRegistry.register(
             "playerAttackKnockback", CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        KNOCKBACK_ENCHANTMENT     = GameRuleRegistry.register(
+            "knockbackEnchantment", CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
     }
 }

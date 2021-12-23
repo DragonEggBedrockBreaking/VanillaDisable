@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "damage.MixinPlayerEntity",
-    "knockback.MixinLivingEntity"
+    "knockback.MixinLivingEntity",
+    "knockback.MixinMobEntity",
+    "knockback.MixinPlayerEntity"
   ],
   "injectors": {
     "defaultRequire": 1

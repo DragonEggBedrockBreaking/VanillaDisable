@@ -29,6 +29,7 @@
     "gamerule.shulkerBulletKnockback": "Apply shulker bullet knockback",
     "gamerule.mobAttackKnockback": "Apply general mob attack knockback",
     "gamerule.playerAttackKnockback": "Apply player attack knockback",
+    "gamerule.knockbackEnchantment": "Enable knockback enchantment",
 
     "gamerule.category.damage": "Damage",
     "gamerule.category.knockback": "Knockback"
