@@ -6,6 +6,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.BlazeEntity;
+import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.entity.mob.PillagerEntity;
@@ -61,6 +62,9 @@ public abstract class MixinLivingEntity extends Entity {
             (source instanceof PiglinEntity && source.isHolding(Items.CROSSBOW)) ||
             (source instanceof PillagerEntity)) {
             return !this.world.getGameRules().getBoolean(RegisterGamerules.ARROW_KNOCKBACK);
+        }
+        if (source instanceof DrownedEntity && source.isHolding(Items.TRIDENT)) {
+            return !this.world.getGameRules().getBoolean(RegisterGamerules.TRIDENT_KNOCKBACK);
         }
         if (source instanceof LlamaEntity) {
             return !this.world.getGameRules().getBoolean(RegisterGamerules.LLAMA_SPIT_KNOCKBACK);

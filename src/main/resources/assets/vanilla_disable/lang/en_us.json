@@ -24,6 +24,7 @@
     "gamerule.witherSkullKnockback": "Apply wither skull knockback",
     "gamerule.dragonKnockback": "Apply dragon knockback",
     "gamerule.arrowKnockback": "Apply arrow knockback",
+    "gamerule.tridentKnockback": "Apply trident knockback",
     "gamerule.llamaSpitKnockback": "Apply llama spit knockback",
     "gamerule.shulkerBulletKnockback": "Apply shulker bullet knockback",
     "gamerule.mobAttackKnockback": "Apply general mob attack knockback",

@@ -32,6 +32,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> WITHER_SKULL_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> DRAGON_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> ARROW_KNOCKBACK;
+    public static GameRules.Key<GameRules.BooleanRule> TRIDENT_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> LLAMA_SPIT_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> SHULKER_BULLET_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> MOB_ATTACK_KNOCKBACK;
@@ -88,6 +89,8 @@ public class RegisterGamerules implements ModInitializer {
             "dragonKnockback",      CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         ARROW_KNOCKBACK           = GameRuleRegistry.register(
             "arrowKnockback",       CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        TRIDENT_KNOCKBACK         = GameRuleRegistry.register(
+            "tridentKnockback",     CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         LLAMA_SPIT_KNOCKBACK      = GameRuleRegistry.register(
             "llamaSpitKnockback",   CreateGameruleCategories.KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         SHULKER_BULLET_KNOCKBACK  = GameRuleRegistry.register(
