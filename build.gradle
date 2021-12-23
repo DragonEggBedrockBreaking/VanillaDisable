@@ -16,6 +16,14 @@ repositories {
             "https://maven.gegy.dev/"
         }
     }
+    maven {
+        url = {
+            "https://api.modrinth.com/maven/"
+        }
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
@@ -30,6 +38,12 @@ dependencies {
 
     // Runtime dependencies
     modRuntimeOnly("supercoder79:databreaker:${project.databreaker_version}") {
+        transitive = false
+    }
+    modRuntimeOnly("maven.modrinth:tiefix:${project.tiefix_version}") {
+        transitive = false
+    }
+    modRuntimeOnly("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}") {
         transitive = false
     }
 }
