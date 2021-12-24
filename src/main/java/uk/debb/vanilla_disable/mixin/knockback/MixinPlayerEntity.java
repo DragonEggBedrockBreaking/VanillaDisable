@@ -31,7 +31,8 @@ public abstract class MixinPlayerEntity extends LivingEntity {
     )
     public int cancelKnockbackFromPlayerAttack(LivingEntity entity, Entity target) {
         if (target instanceof ServerPlayerEntity &&
-            !this.world.getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENCHANTMENT)) {
+            (!this.world.getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENCHANTMENT) ||
+             !this.world.getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED))) {
             return 0;
         }
         return EnchantmentHelper.getKnockback(entity);

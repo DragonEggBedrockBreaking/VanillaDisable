@@ -17,7 +17,7 @@ public abstract class MixinPlayerEntity extends LivingEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason Removes damage sources
-     * @cir.setReturnValue(Opposite of gamerule)
+     * @return Opposite of gamerule
      */
     @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"), cancellable = true)
     private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
