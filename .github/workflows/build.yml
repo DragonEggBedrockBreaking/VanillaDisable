@@ -13,8 +13,17 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: 17
-    - name: Build with Gradle
-      run: ./gradlew remapJar
+    - name: Caching
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.brachyura/cache
+          .brachyura
+          buildscript/build
+        key: ${{ runner.os }}-brachyura-${{ hashFiles('**/Buildscript.java') }}
+        restore-keys: z${{ runner.os }}-brachyura
+    - name: Build with Brachyura
+      run: java -jar brachyura-bootstrap-0.jar build -j 2
     - name: Upload build artifacts
       uses: actions/upload-artifact@v1
       with:

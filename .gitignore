@@ -5,6 +5,11 @@ build/
 out/
 classes/
 
+# brachyura
+
+.brachyura/
+buildscript/build/
+
 # eclipse
 
 *.launch
