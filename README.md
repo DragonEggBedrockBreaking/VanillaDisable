@@ -25,4 +25,4 @@ The artifacts will be in `build/libs/`, just like with the other builds systems.
 
 ## License
 
-This mod is available under the LGPL-3.0 license.
+This mod is available under the [MIT](LICENSE.txt) license.
