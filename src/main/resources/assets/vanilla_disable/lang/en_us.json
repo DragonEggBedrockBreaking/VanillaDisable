@@ -32,6 +32,15 @@
     "gamerule.knockbackEnchantment": "Enable knockback enchantment",
     "gamerule.explosionKnockback": "Apply explosion knockback",
 
+    "gamerule.monsterSpawning": "Spawn monsters",
+    "gamerule.creatureSpawning": "Spawn creatures",
+    "gamerule.ambientSpawning": "Spawn ambient mobs",
+    "gamerule.axolotlSpawning": "Spawn axolotls",
+    "gamerule.glowsquidSpawning": "Spawn glowsquids",
+    "gamerule.waterCreatureSpawning": "Spawn water creatures",
+    "gamerule.waterAmbientSpawning": "Spawn ambient water mobs",
+
     "gamerule.category.vd.damage": "VanillaDisable Damage",
-    "gamerule.category.vd.knockback": "VanillaDisable Knockback"
+    "gamerule.category.vd.knockback": "VanillaDisable Knockback",
+    "gamerule.category.vd.spawning": "VanillaDisable Spawning"
 }

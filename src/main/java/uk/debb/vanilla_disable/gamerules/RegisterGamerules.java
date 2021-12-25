@@ -40,6 +40,14 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> KNOCKBACK_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanRule> EXPLOSION_KNOCKBACK;
 
+    public static GameRules.Key<GameRules.BooleanRule> MONSTER_SPAWNING;
+    public static GameRules.Key<GameRules.BooleanRule> CREATURE_SPAWNING;
+    public static GameRules.Key<GameRules.BooleanRule> AMBIENT_SPAWNING;
+    public static GameRules.Key<GameRules.BooleanRule> AXOLOTL_SPAWNING;
+    public static GameRules.Key<GameRules.BooleanRule> GLOWSQUID_SPAWNING;
+    public static GameRules.Key<GameRules.BooleanRule> WATER_CREATURE_SPAWNING;
+    public static GameRules.Key<GameRules.BooleanRule> WATER_AMBIENT_SPAWNING;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -105,5 +113,20 @@ public class RegisterGamerules implements ModInitializer {
             "knockbackEnchantment", CreateGameruleCategories.VD_KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         EXPLOSION_KNOCKBACK       = GameRuleRegistry.register(
             "explosionKnockback",   CreateGameruleCategories.VD_KNOCKBACK, GameRuleFactory.createBooleanRule(true));
+        
+        MONSTER_SPAWNING          = GameRuleRegistry.register(
+            "monsterSpawning",      CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        CREATURE_SPAWNING         = GameRuleRegistry.register(
+            "creatureSpawning",     CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        AMBIENT_SPAWNING          = GameRuleRegistry.register(
+            "ambientSpawning",      CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        AXOLOTL_SPAWNING          = GameRuleRegistry.register(
+            "axolotlSpawning",      CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        GLOWSQUID_SPAWNING        = GameRuleRegistry.register(
+            "glowsquidSpawning",    CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        WATER_CREATURE_SPAWNING   = GameRuleRegistry.register(
+            "waterCreatureSpawning", CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        WATER_AMBIENT_SPAWNING    = GameRuleRegistry.register(
+            "waterAmbientSpawning", CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
     }
 }

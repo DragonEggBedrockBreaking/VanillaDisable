@@ -18,4 +18,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_SPAWNING = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.spawning"),
+        new TranslatableText("gamerule.category.vd.spawning")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }
