@@ -32,6 +32,6 @@
     "gamerule.knockbackEnchantment": "Enable knockback enchantment",
     "gamerule.explosionKnockback": "Apply explosion knockback",
 
-    "gamerule.category.damage": "Damage",
-    "gamerule.category.knockback": "Knockback"
+    "gamerule.category.vd.damage": "VanillaDisable Damage",
+    "gamerule.category.vd.knockback": "VanillaDisable Knockback"
 }
