@@ -8,7 +8,7 @@
     "knockback.MixinLivingEntity",
     "knockback.MixinMobEntity",
     "knockback.MixinPlayerEntity",
-    "knockback.MixinServerWorld"
+    "knockback.MixinServerPlayNetworkHandler"
   ],
   "injectors": {
     "defaultRequire": 1
