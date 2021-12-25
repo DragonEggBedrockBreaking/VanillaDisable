@@ -9,6 +9,7 @@
     "knockback.MixinMobEntity",
     "knockback.MixinPlayerEntity",
     "knockback.MixinServerPlayNetworkHandler",
+    "spawning.MixinMobSpawnerLogic",
     "spawning.MixinSpawnHelper"
   ],
   "injectors": {

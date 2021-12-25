@@ -47,6 +47,15 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> GLOWSQUID_SPAWNING;
     public static GameRules.Key<GameRules.BooleanRule> WATER_CREATURE_SPAWNING;
     public static GameRules.Key<GameRules.BooleanRule> WATER_AMBIENT_SPAWNING;
+    public static GameRules.Key<GameRules.BooleanRule> SPAWNERS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanRule> PIG_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> CAVE_SPIDER_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> SILVERFISH_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> ZOMBIE_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> SKELETON_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> BLAZE_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> SPIDER_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> MAGMA_CUBE_SPAWNERS;
 
     @Override
     public void onInitialize() {
@@ -128,5 +137,23 @@ public class RegisterGamerules implements ModInitializer {
             "waterCreatureSpawning", CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
         WATER_AMBIENT_SPAWNING    = GameRuleRegistry.register(
             "waterAmbientSpawning", CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        SPAWNERS_ENABLED          = GameRuleRegistry.register(
+            "spawnersEnabled",      CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        PIG_SPAWNERS              = GameRuleRegistry.register(
+            "pigSpawners",          CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        CAVE_SPIDER_SPAWNERS      = GameRuleRegistry.register(
+            "caveSpiderSpawners",   CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        SILVERFISH_SPAWNERS       = GameRuleRegistry.register(
+            "silverfishSpawners",   CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        ZOMBIE_SPAWNERS           = GameRuleRegistry.register(
+            "zombieSpawners",       CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        SKELETON_SPAWNERS         = GameRuleRegistry.register(
+            "skeletonSpawners",     CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        BLAZE_SPAWNERS            = GameRuleRegistry.register(
+            "blazeSpawners",        CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        SPIDER_SPAWNERS           = GameRuleRegistry.register(
+            "spiderSpawners",       CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        MAGMA_CUBE_SPAWNERS       = GameRuleRegistry.register(
+            "magmaCubeSpawners",    CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
     }
 }
