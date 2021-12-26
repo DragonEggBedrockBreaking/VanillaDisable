@@ -8,7 +8,6 @@ import net.minecraft.server.command.SummonCommand;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import org.lwjgl.system.CallbackI.I;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +30,7 @@ public abstract class MixinSummonCommand {
      * @param cir the returnable callback info
      */
     @Inject(method = "execute", at = @At(value = "HEAD"))
-    private static void execute(ServerCommandSource source, Identifier entity2, Vec3d pos, NbtCompound nbt, boolean initialise, CallbackInfoReturnable<I> cir) throws CommandSyntaxException {
+    private static void execute(ServerCommandSource source, Identifier entity2, Vec3d pos, NbtCompound nbt, boolean initialise, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
         if (!source.getWorld().getGameRules().getBoolean(RegisterGamerules.SUMMON_COMMAND)) {
             throw FAILED_EXCEPTION.create();
         }
