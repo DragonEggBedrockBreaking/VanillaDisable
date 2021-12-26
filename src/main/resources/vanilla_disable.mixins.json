@@ -6,6 +6,7 @@
   "mixins": [
     "damage.MixinPlayerEntity",
 
+    "despawning.MixinItemEntity",
     "despawning.MixinMobEntity",
 
     "knockback.MixinLivingEntity",

@@ -73,6 +73,7 @@
     "gamerule.glowsquidMinDespawn": "The range at which glowsquids can despawn",
     "gamerule.waterCreatureMinDespawn": "The range at which water creatures can despawn",
     "gamerule.waterAmbientMinDespawn": "The range at which ambient water mobs can despawn",
+    "gamerule.itemDespawnTime": "The time in seconds before items despawn",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",

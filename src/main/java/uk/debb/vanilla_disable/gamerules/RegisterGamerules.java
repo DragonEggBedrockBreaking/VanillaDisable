@@ -80,6 +80,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> GLOWSQUID_MIN_DESPAWN;
     public static GameRules.Key<GameRules.IntRule> WATER_CREATURE_MIN_DESPAWN;
     public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MIN_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> ITEM_DESPAWN_TIME;
 
     @Override
     public void onInitialize() {
@@ -228,5 +229,7 @@ public class RegisterGamerules implements ModInitializer {
             "waterCreatureMinDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
         WATER_AMBIENT_MIN_DESPAWN = GameRuleRegistry.register(
             "waterAmbientMinDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
+        ITEM_DESPAWN_TIME         = GameRuleRegistry.register(
+            "itemDespawnTime",      CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(300, 0, Integer.MAX_VALUE));
     }
 }
