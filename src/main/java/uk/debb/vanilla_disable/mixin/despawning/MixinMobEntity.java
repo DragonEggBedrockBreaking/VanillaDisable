@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
-@Mixin(MobEntity.class)
+@Mixin(value = MobEntity.class, priority = 999)
 public abstract class MixinMobEntity extends LivingEntity implements Bucketable {
     protected MixinMobEntity(EntityType<? extends MobEntity> entityType, World world) {
         super((EntityType<? extends LivingEntity>)entityType, world);
