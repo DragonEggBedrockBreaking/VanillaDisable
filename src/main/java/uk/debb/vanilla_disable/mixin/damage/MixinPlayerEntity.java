@@ -22,7 +22,7 @@ public abstract class MixinPlayerEntity extends LivingEntity {
     @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"), cancellable = true)
     private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (!this.world.getGameRules().getBoolean(RegisterGamerules.DAMAGE_ENABLED)) {
-            cir.setReturnValue(true);
+            cir.setReturnValue(false);
         }
         if (damageSource.isProjectile()) {
             cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.PROJECTILE_DAMAGE));
