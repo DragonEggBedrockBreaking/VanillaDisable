@@ -39,7 +39,15 @@ public abstract class MixinItemEntity extends Entity {
      * @reason cancel deleting the item if too early
      * @param ci
      */
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;discard()V", ordinal = 1), cancellable = true)
+    @Inject(
+        method = "tick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/ItemEntity;discard()V",
+            ordinal = 1
+        ),
+        cancellable = true
+    )
     private void cancelDiscard(CallbackInfo ci) {
         if (this.itemAge < MAX * 20 &&
             this.pickupDelay != Short.MAX_VALUE) {

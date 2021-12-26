@@ -81,6 +81,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> WATER_CREATURE_MIN_DESPAWN;
     public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MIN_DESPAWN;
     public static GameRules.Key<GameRules.IntRule> ITEM_DESPAWN_TIME;
+    public static GameRules.Key<GameRules.BooleanRule> ENDER_PEARLS_DESPAWN_ON_DEATH;
 
     @Override
     public void onInitialize() {
@@ -231,5 +232,7 @@ public class RegisterGamerules implements ModInitializer {
             "waterAmbientMinDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
         ITEM_DESPAWN_TIME         = GameRuleRegistry.register(
             "itemDespawnTime",      CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(300, 0, Integer.MAX_VALUE));
+        ENDER_PEARLS_DESPAWN_ON_DEATH = GameRuleRegistry.register(
+            "enderPearlsDespawnOnDeath", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
     }
 }
