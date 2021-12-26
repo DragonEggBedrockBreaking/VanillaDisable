@@ -56,6 +56,9 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> BLAZE_SPAWNERS;
     public static GameRules.Key<GameRules.BooleanRule> SPIDER_SPAWNERS;
     public static GameRules.Key<GameRules.BooleanRule> MAGMA_CUBE_SPAWNERS;
+    public static GameRules.Key<GameRules.BooleanRule> SPAWN_EGGS;
+    public static GameRules.Key<GameRules.BooleanRule> SUMMON_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> ANIMAL_BREEDING;
 
     @Override
     public void onInitialize() {
@@ -155,5 +158,11 @@ public class RegisterGamerules implements ModInitializer {
             "spiderSpawners",       CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
         MAGMA_CUBE_SPAWNERS       = GameRuleRegistry.register(
             "magmaCubeSpawners",    CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        SPAWN_EGGS                = GameRuleRegistry.register(
+            "spawnEggs",            CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        SUMMON_COMMAND            = GameRuleRegistry.register(
+            "summonCommand",        CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        ANIMAL_BREEDING           = GameRuleRegistry.register(
+            "animalBreeding",       CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
     }
 }

@@ -48,6 +48,9 @@
     "gamerule.blazeSpawners": "Enable blaze spawners",
     "gamerule.spiderSpawners": "Enable spider spawners",
     "gamerule.magmaCubeSpawners": "Enable magma cube spawners",
+    "gamerule.spawnEggs": "Enable spawn eggs",
+    "gamerule.summonCommand": "Enable /summon command",
+    "gamerule.animalBreeding": "Enable animal breeding",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",

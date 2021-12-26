@@ -9,8 +9,11 @@
     "knockback.MixinMobEntity",
     "knockback.MixinPlayerEntity",
     "knockback.MixinServerPlayNetworkHandler",
+    "spawning.MixinAnimalMateGoal",
+    "spawning.MixinEntityType",
     "spawning.MixinMobSpawnerLogic",
-    "spawning.MixinSpawnHelper"
+    "spawning.MixinSpawnHelper",
+    "spawning.MixinSummonCommand"
   ],
   "injectors": {
     "defaultRequire": 1
