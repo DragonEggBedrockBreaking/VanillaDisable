@@ -52,7 +52,30 @@
     "gamerule.summonCommand": "Enable /summon command",
     "gamerule.animalBreeding": "Enable animal breeding",
 
+    "gamerule.monstersDespawn": "Allow monsters to despawn",
+    "gamerule.creaturesDespawn": "Allow creatures to despawn",
+    "gamerule.ambientDespawn": "Allow ambient mobs to despawn",
+    "gamerule.axolotlsDespawn": "Allow axolotls to despawn",
+    "gamerule.glowsquidsDespawn": "Allow glowsquids to despawn",
+    "gamerule.waterCreaturesDespawn": "Allow water creatures to despawn",
+    "gamerule.waterAmbientDespawn": "Allow ambient water mobs to despawn",
+    "gamerule.monsterMaxDespawn": "The range at which monsters instantly despawn",
+    "gamerule.creatureMaxDespawn": "The range at which creatures instantly despawn",
+    "gamerule.ambientMaxDespawn": "The range at which ambient mobs instantly despawn",
+    "gamerule.axolotlMaxDespawn": "The range at which axolotls instantly despawn",
+    "gamerule.glowsquidMaxDespawn": "The range at which glowsquids instantly despawn",
+    "gamerule.waterCreatureMaxDespawn": "The range at which water creatures instantly despawn",
+    "gamerule.waterAmbientMaxDespawn": "The range at which ambient water mobs instantly despawn",
+    "gamerule.monsterMinDespawn": "The range at which monsters can despawn",
+    "gamerule.creatureMinDespawn": "The range at which creatures can despawn",
+    "gamerule.ambientMinDespawn": "The range at which ambient mobs can despawn",
+    "gamerule.axolotlMinDespawn": "The range at which axolotls can despawn",
+    "gamerule.glowsquidMinDespawn": "The range at which glowsquids can despawn",
+    "gamerule.waterCreatureMinDespawn": "The range at which water creatures can despawn",
+    "gamerule.waterAmbientMinDespawn": "The range at which ambient water mobs can despawn",
+
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
-    "gamerule.category.vd.spawning": "VanillaDisable Spawning"
+    "gamerule.category.vd.spawning": "VanillaDisable Spawning",
+    "gamerule.category.vd.despawning": "VanillaDisable Despawning"
 }

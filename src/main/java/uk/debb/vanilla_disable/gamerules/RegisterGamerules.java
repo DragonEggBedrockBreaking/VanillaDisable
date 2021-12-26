@@ -59,6 +59,28 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SUMMON_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> ANIMAL_BREEDING;
 
+    public static GameRules.Key<GameRules.BooleanRule> MONSTERS_DESPAWN;
+    public static GameRules.Key<GameRules.BooleanRule> CREATURES_DESPAWN;
+    public static GameRules.Key<GameRules.BooleanRule> AMBIENT_DESPAWN;
+    public static GameRules.Key<GameRules.BooleanRule> AXOLOTLS_DESPAWN;
+    public static GameRules.Key<GameRules.BooleanRule> GLOWSQUIDS_DESPAWN;
+    public static GameRules.Key<GameRules.BooleanRule> WATER_CREATURES_DESPAWN;
+    public static GameRules.Key<GameRules.BooleanRule> WATER_AMBIENT_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> MONSTER_MAX_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> CREATURE_MAX_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> AMBIENT_MAX_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> AXOLOTL_MAX_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> GLOWSQUID_MAX_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> WATER_CREATURE_MAX_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MAX_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> MONSTER_MIN_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> CREATURE_MIN_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> AMBIENT_MIN_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> AXOLOTL_MIN_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> GLOWSQUID_MIN_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> WATER_CREATURE_MIN_DESPAWN;
+    public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MIN_DESPAWN;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -163,5 +185,48 @@ public class RegisterGamerules implements ModInitializer {
             "summonCommand",        CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
         ANIMAL_BREEDING           = GameRuleRegistry.register(
             "animalBreeding",       CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
+        
+        MONSTERS_DESPAWN          = GameRuleRegistry.register(
+            "monstersDespawn",      CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+        CREATURES_DESPAWN         = GameRuleRegistry.register(
+            "creaturesDespawn",     CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(false));
+        AMBIENT_DESPAWN           = GameRuleRegistry.register(
+            "ambientDespawn",       CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+        AXOLOTLS_DESPAWN          = GameRuleRegistry.register(
+            "axolotlsDespawn",      CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+        GLOWSQUIDS_DESPAWN        = GameRuleRegistry.register(
+            "glowsquidsDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+        WATER_CREATURES_DESPAWN   = GameRuleRegistry.register(
+            "waterCreaturesDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+        WATER_AMBIENT_DESPAWN    = GameRuleRegistry.register(
+            "waterAmbientsDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+        MONSTER_MAX_DESPAWN       = GameRuleRegistry.register(
+            "monsterMaxDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(128, 0, 512));
+        CREATURE_MAX_DESPAWN      = GameRuleRegistry.register(
+            "creatureMaxDespawn",   CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(128, 0, 512));
+        AMBIENT_MAX_DESPAWN       = GameRuleRegistry.register(
+            "ambientMaxDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(128, 0, 512));
+        AXOLOTL_MAX_DESPAWN       = GameRuleRegistry.register(
+            "axolotlMaxDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(128, 0, 512));
+        GLOWSQUID_MAX_DESPAWN     = GameRuleRegistry.register(
+            "glowsquidMaxDespawn",  CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(128, 0, 512));
+        WATER_CREATURE_MAX_DESPAWN= GameRuleRegistry.register(
+            "waterCreatureMaxDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(128, 0, 512));
+        WATER_AMBIENT_MAX_DESPAWN = GameRuleRegistry.register(
+            "waterAmbientMaxDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(64, 0, 512));
+        MONSTER_MIN_DESPAWN       = GameRuleRegistry.register(
+            "monsterMinDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
+        CREATURE_MIN_DESPAWN      = GameRuleRegistry.register(
+            "creatureMinDespawn",   CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
+        AMBIENT_MIN_DESPAWN       = GameRuleRegistry.register(
+            "ambientMinDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
+        AXOLOTL_MIN_DESPAWN       = GameRuleRegistry.register(
+            "axolotlMinDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
+        GLOWSQUID_MIN_DESPAWN     = GameRuleRegistry.register(
+            "glowsquidMinDespawn",  CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
+        WATER_CREATURE_MIN_DESPAWN= GameRuleRegistry.register(
+            "waterCreatureMinDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
+        WATER_AMBIENT_MIN_DESPAWN = GameRuleRegistry.register(
+            "waterAmbientMinDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
     }
 }

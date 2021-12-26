@@ -24,4 +24,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_DESPAWNING = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.despawning"),
+        new TranslatableText("gamerule.category.vd.despawning")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }
