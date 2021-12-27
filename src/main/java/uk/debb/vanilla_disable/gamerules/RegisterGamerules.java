@@ -59,6 +59,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SUMMON_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> ANIMAL_BREEDING;
 
+    public static GameRules.Key<GameRules.IntRule> MIN_SPAWN_DISTANCE;
     public static GameRules.Key<GameRules.BooleanRule> MONSTERS_DESPAWN;
     public static GameRules.Key<GameRules.BooleanRule> CREATURES_DESPAWN;
     public static GameRules.Key<GameRules.BooleanRule> AMBIENT_DESPAWN;
@@ -197,6 +198,8 @@ public class RegisterGamerules implements ModInitializer {
         ANIMAL_BREEDING           = GameRuleRegistry.register(
             "animalBreeding",       CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
         
+        MIN_SPAWN_DISTANCE        = GameRuleRegistry.register(
+            "minSpawnDistance",     CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createIntRule(24, 0, 512));
         MONSTERS_DESPAWN          = GameRuleRegistry.register(
             "monstersDespawn",      CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
         CREATURES_DESPAWN         = GameRuleRegistry.register(
