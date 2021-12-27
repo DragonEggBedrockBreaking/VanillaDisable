@@ -149,6 +149,20 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> TRIGGER_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> WEATHER_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> WORLD_BORDER_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> BAN_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> BAN_IP_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> BAN_LIST_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> DE_OP_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> OP_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> PARDON_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> PARDON_IP_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> PERF_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SAVE_ALL_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SAVE_OFF_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SAVE_ON_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SET_IDLE_TIMEOUT_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> STOP_DEDICATED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> WHITELIST_DEDICATED_COMMAND;
 
     @Override
     public void onInitialize() {
@@ -427,5 +441,33 @@ public class RegisterGamerules implements ModInitializer {
             "weatherCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
         WORLD_BORDER_COMMAND     = GameRuleRegistry.register(
             "worldBorderCommand",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        BAN_DEDICATED_COMMAND       = GameRuleRegistry.register(
+            "banDedicatedCommand",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        BAN_IP_DEDICATED_COMMAND    = GameRuleRegistry.register(
+            "banIpDedicatedCommand",  CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        BAN_LIST_DEDICATED_COMMAND  = GameRuleRegistry.register(
+            "banListDedicatedCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        DE_OP_DEDICATED_COMMAND     = GameRuleRegistry.register(
+            "deOpDedicatedCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        OP_DEDICATED_COMMAND        = GameRuleRegistry.register(
+            "opDedicatedCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        PARDON_DEDICATED_COMMAND    = GameRuleRegistry.register(
+            "pardonDedicatedCommand",  CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        PARDON_IP_DEDICATED_COMMAND = GameRuleRegistry.register(
+            "pardonIpDedicatedCommand",CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        PERF_DEDICATED_COMMAND      = GameRuleRegistry.register(
+            "perfDedicatedCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SAVE_ALL_DEDICATED_COMMAND  = GameRuleRegistry.register(
+            "saveAllDedicatedCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SAVE_OFF_DEDICATED_COMMAND  = GameRuleRegistry.register(
+            "saveOffDedicatedCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SAVE_ON_DEDICATED_COMMAND   = GameRuleRegistry.register(
+            "saveOnDedicatedCommand",  CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SET_IDLE_TIMEOUT_DEDICATED_COMMAND = GameRuleRegistry.register(
+            "setIdleTimeoutDedicatedCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        STOP_DEDICATED_COMMAND      = GameRuleRegistry.register(
+            "stopDedicatedCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        WHITELIST_DEDICATED_COMMAND = GameRuleRegistry.register(
+            "whitelistDedicatedCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
     }
 }
