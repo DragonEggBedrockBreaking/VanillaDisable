@@ -30,4 +30,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_SPAWN_LIMITS = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.spawn_limits"),
+        new TranslatableText("gamerule.category.vd.spawn_limits")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }

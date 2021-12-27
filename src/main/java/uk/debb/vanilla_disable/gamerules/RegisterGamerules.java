@@ -83,6 +83,14 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> ITEM_DESPAWN_TIME;
     public static GameRules.Key<GameRules.BooleanRule> ENDER_PEARLS_DESPAWN_ON_DEATH;
 
+    public static GameRules.Key<GameRules.IntRule> MONSTER_MOBCAP;
+    public static GameRules.Key<GameRules.IntRule> CREATURE_MOBCAP;
+    public static GameRules.Key<GameRules.IntRule> AMBIENT_MOBCAP;
+    public static GameRules.Key<GameRules.IntRule> AXOLOTL_MOBCAP;
+    public static GameRules.Key<GameRules.IntRule> GLOWSQUID_MOBCAP;
+    public static GameRules.Key<GameRules.IntRule> WATER_CREATURE_MOBCAP;
+    public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MOBCAP;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -234,5 +242,20 @@ public class RegisterGamerules implements ModInitializer {
             "itemDespawnTime",      CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(300, 0, Integer.MAX_VALUE));
         ENDER_PEARLS_DESPAWN_ON_DEATH = GameRuleRegistry.register(
             "enderPearlsDespawnOnDeath", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+
+        MONSTER_MOBCAP           = GameRuleRegistry.register(
+            "monsterMobCap",        CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(70, 0, Integer.MAX_VALUE));
+        CREATURE_MOBCAP          = GameRuleRegistry.register(
+            "creatureMobCap",       CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(10, 0, Integer.MAX_VALUE));
+        AMBIENT_MOBCAP           = GameRuleRegistry.register(
+            "ambientMobCap",        CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(15, 0, Integer.MAX_VALUE));
+        AXOLOTL_MOBCAP           = GameRuleRegistry.register(
+            "axolotlMobCap",        CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(5, 0, Integer.MAX_VALUE));
+        GLOWSQUID_MOBCAP         = GameRuleRegistry.register(
+            "glowsquidMobCap",      CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(5, 0, Integer.MAX_VALUE));
+        WATER_CREATURE_MOBCAP    = GameRuleRegistry.register(
+            "waterCreatureMobCap",  CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(5, 0, Integer.MAX_VALUE));
+        WATER_AMBIENT_MOBCAP     = GameRuleRegistry.register(
+            "waterAmbientMobCap",   CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(20, 0, Integer.MAX_VALUE));
     }
 }

@@ -19,7 +19,10 @@
     "spawning.MixinEntityType",
     "spawning.MixinMobSpawnerLogic",
     "spawning.MixinSpawnHelper",
-    "spawning.MixinSummonCommand"
+    "spawning.MixinSummonCommand",
+
+    "spawn_limits.InterfaceSpawnHelperInner",
+    "spawn_limits.MixinSpawnHelper"
   ],
   "injectors": {
     "defaultRequire": 1
