@@ -17,7 +17,7 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 
 @Mixin(SpawnHelper.class)
-public abstract class MixinSpawnHelper implements InterfaceSpawnHelperInner {
+public abstract class MixinSpawnHelper implements IMixinSpawnHelper$Info {
     @Shadow static final int CHUNK_AREA = (int)Math.pow(17.0, 2.0);
     @Shadow public static final SpawnGroup[] SPAWNABLE_GROUPS = (SpawnGroup[])Stream.of(SpawnGroup.values()).filter(spawnGroup -> spawnGroup != SpawnGroup.MISC).toArray(SpawnGroup[]::new);
 
