@@ -373,8 +373,8 @@ public abstract class MixinCommandManager {
                 source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
                 cir.setReturnValue(0);
                 }
-            if (command.startsWith("/timeout") &&
-                !source.getWorld().getGameRules().getBoolean(RegisterGamerules.TIMEOUT_DEDICATED_COMMAND)) {
+            if (command.startsWith("/whitelist") &&
+                !source.getWorld().getGameRules().getBoolean(RegisterGamerules.WHITELIST_DEDICATED_COMMAND)) {
                 source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
                 cir.setReturnValue(0);
             }
