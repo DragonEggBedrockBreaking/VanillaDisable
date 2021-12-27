@@ -22,6 +22,7 @@
     "spawning.MixinSummonCommand",
 
     "spawn_limits.IMixinSpawnHelper$Info",
+    "spawn_limits.MixinHostileEntity",
     "spawn_limits.MixinSpawnHelper"
   ],
   "injectors": {

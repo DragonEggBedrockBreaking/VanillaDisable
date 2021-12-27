@@ -90,6 +90,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> GLOWSQUID_MOBCAP;
     public static GameRules.Key<GameRules.IntRule> WATER_CREATURE_MOBCAP;
     public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MOBCAP;
+    public static GameRules.Key<GameRules.IntRule> MONSTER_MAX_LIGHT_LEVEL;
 
     @Override
     public void onInitialize() {
@@ -257,5 +258,7 @@ public class RegisterGamerules implements ModInitializer {
             "waterCreatureMobCap",  CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(5, 0, Integer.MAX_VALUE));
         WATER_AMBIENT_MOBCAP     = GameRuleRegistry.register(
             "waterAmbientMobCap",   CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(20, 0, Integer.MAX_VALUE));
+        MONSTER_MAX_LIGHT_LEVEL  = GameRuleRegistry.register(
+            "monsterMaxLightLevel", CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(0, 0, 15));
     }
 }

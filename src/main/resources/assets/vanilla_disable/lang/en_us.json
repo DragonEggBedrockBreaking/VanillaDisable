@@ -76,13 +76,14 @@
     "gamerule.itemDespawnTime": "The time in seconds before items despawn",
     "gamerule.enderPearlsDespawnOnDeath": "Whether or not ender pearls should despawn on death",
 
-    "gamerule.monsterMobcap": "The maximum number of monsters that can spawn",
-    "gamerule.creatureMobcap": "The maximum number of creatures that can spawn",
-    "gamerule.ambientMobcap": "The maximum number of ambient mobs that can spawn",
-    "gamerule.axolotlMobcap": "The maximum number of axolotls that can spawn",
+    "gamerule.monsterMobCap": "The maximum number of monsters that can spawn",
+    "gamerule.creatureMobCap": "The maximum number of creatures that can spawn",
+    "gamerule.ambientMobCap": "The maximum number of ambient mobs that can spawn",
+    "gamerule.axolotlMobCap": "The maximum number of axolotls that can spawn",
     "gamerule.glowsquidMobcap": "The maximum number of glowsquids that can spawn",
     "gamerule.waterCreatureMobcap": "The maximum number of water creatures that can spawn",
     "gamerule.waterAmbientMobcap": "The maximum number of ambient water mobs that can spawn",
+    "gamerule.monsterMaxLightLevel": "The maximum light level at which monsters can spawn",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",

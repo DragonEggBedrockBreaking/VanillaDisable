@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(SpawnHelper.Info.class)
-public interface InterfaceSpawnHelperInner {
+public interface IMixinSpawnHelper$Info {
     @Accessor("spawningChunkCount") 
     int getSpawningChunkCount();
     @Accessor("groupToCount")
