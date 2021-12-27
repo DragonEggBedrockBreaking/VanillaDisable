@@ -56,7 +56,6 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SPIDER_SPAWNERS;
     public static GameRules.Key<GameRules.BooleanRule> MAGMA_CUBE_SPAWNERS;
     public static GameRules.Key<GameRules.BooleanRule> SPAWN_EGGS;
-    public static GameRules.Key<GameRules.BooleanRule> SUMMON_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> ANIMAL_BREEDING;
 
     public static GameRules.Key<GameRules.IntRule> MIN_SPAWN_DISTANCE;
@@ -92,6 +91,64 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> WATER_CREATURE_MOBCAP;
     public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MOBCAP;
     public static GameRules.Key<GameRules.IntRule> MONSTER_MAX_LIGHT_LEVEL;
+
+    public static GameRules.Key<GameRules.BooleanRule> ADVANCEMENT_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> ATTRIBUTE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> BOSS_BAR_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> CHASE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> CLEAR_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> CLONE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> DATAPACK_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> DATA_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> DIFFICULTY_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> EFFECT_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> ENCHANT_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> EXECUTE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> EXPERIENCE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> FILL_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> FORCE_LOAD_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> FUNCTION_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> GAME_MODE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> GIVE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> HELP_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> ITEM_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> JFR_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> KICK_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> KILL_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> LIST_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> LOCATE_BIOME_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> LOCATE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> LOOT_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> ME_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> MESSAGE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> PARTICLE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> PLAY_SOUND_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> PUBLISH_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> RAID_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> RECIPE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> RELOAD_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> RESET_CHUNKS_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SAY_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SCHEDULE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SCOREBOARD_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SEED_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SET_BLOCK_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SET_WORLD_SPAWN_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SPAWN_POINT_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SPECTATE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SPREAD_PLAYERS_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> STOP_SOUND_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> SUMMON_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TAG_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TEAM_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TEAM_MSG_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TELEPORT_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TELL_RAW_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TIME_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TITLE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> TRIGGER_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> WEATHER_COMMAND;
+    public static GameRules.Key<GameRules.BooleanRule> WORLD_BORDER_COMMAND;
 
     @Override
     public void onInitialize() {
@@ -193,8 +250,6 @@ public class RegisterGamerules implements ModInitializer {
             "magmaCubeSpawners",    CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
         SPAWN_EGGS                = GameRuleRegistry.register(
             "spawnEggs",            CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
-        SUMMON_COMMAND            = GameRuleRegistry.register(
-            "summonCommand",        CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
         ANIMAL_BREEDING           = GameRuleRegistry.register(
             "animalBreeding",       CreateGameruleCategories.VD_SPAWNING, GameRuleFactory.createBooleanRule(true));
         
@@ -263,5 +318,114 @@ public class RegisterGamerules implements ModInitializer {
             "waterAmbientMobCap",   CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(20, 0, Integer.MAX_VALUE));
         MONSTER_MAX_LIGHT_LEVEL  = GameRuleRegistry.register(
             "monsterMaxLightLevel", CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(0, 0, 15));
+        
+        ADVANCEMENT_COMMAND      = GameRuleRegistry.register(
+            "advancementCommand",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        ATTRIBUTE_COMMAND        = GameRuleRegistry.register(
+            "attributeCommand",     CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        BOSS_BAR_COMMAND         = GameRuleRegistry.register(
+            "bossBarCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        CHASE_COMMAND            = GameRuleRegistry.register(
+            "chaseCommand",         CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        CLEAR_COMMAND            = GameRuleRegistry.register(
+            "clearCommand",         CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        CLONE_COMMAND            = GameRuleRegistry.register(
+            "cloneCommand",         CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        DATAPACK_COMMAND         = GameRuleRegistry.register(
+            "datapackCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        DATA_COMMAND             = GameRuleRegistry.register(
+            "dataCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        DIFFICULTY_COMMAND       = GameRuleRegistry.register(
+            "difficultyCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        EFFECT_COMMAND           = GameRuleRegistry.register(
+            "effectCommand",        CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        ENCHANT_COMMAND          = GameRuleRegistry.register(
+            "enchantCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        EXECUTE_COMMAND          = GameRuleRegistry.register(
+            "executeCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        EXPERIENCE_COMMAND       = GameRuleRegistry.register(
+            "experienceCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        FILL_COMMAND             = GameRuleRegistry.register(
+            "fillCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        FORCE_LOAD_COMMAND       = GameRuleRegistry.register(
+            "forceLoadCommand",     CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        FUNCTION_COMMAND         = GameRuleRegistry.register(
+            "functionCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        GAME_MODE_COMMAND        = GameRuleRegistry.register(
+            "gameModeCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        GIVE_COMMAND             = GameRuleRegistry.register(
+            "giveCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        HELP_COMMAND             = GameRuleRegistry.register(
+            "helpCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        ITEM_COMMAND             = GameRuleRegistry.register(
+            "itemCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        JFR_COMMAND              = GameRuleRegistry.register(
+            "jfrCommand",           CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        KICK_COMMAND             = GameRuleRegistry.register(
+            "kickCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        KILL_COMMAND             = GameRuleRegistry.register(
+            "killCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        LIST_COMMAND             = GameRuleRegistry.register(
+            "listCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        LOCATE_BIOME_COMMAND     = GameRuleRegistry.register(
+            "locateBiomeCommand",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        LOCATE_COMMAND           = GameRuleRegistry.register(
+            "locateCommand",        CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        LOOT_COMMAND             = GameRuleRegistry.register(
+            "lootCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        ME_COMMAND               = GameRuleRegistry.register(
+            "meCommand",            CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        MESSAGE_COMMAND          = GameRuleRegistry.register(
+            "messageCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        PARTICLE_COMMAND         = GameRuleRegistry.register(
+            "particleCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        PLAY_SOUND_COMMAND       = GameRuleRegistry.register(
+            "playSoundCommand",     CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        PUBLISH_COMMAND          = GameRuleRegistry.register(
+            "publishCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        RAID_COMMAND             = GameRuleRegistry.register(
+            "raidCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        RECIPE_COMMAND           = GameRuleRegistry.register(
+            "recipeCommand",        CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        RELOAD_COMMAND           = GameRuleRegistry.register(
+            "reloadCommand",        CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        RESET_CHUNKS_COMMAND     = GameRuleRegistry.register(
+            "resetChunksCommand",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SAY_COMMAND              = GameRuleRegistry.register(
+            "sayCommand",           CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SCHEDULE_COMMAND         = GameRuleRegistry.register(
+            "scheduleCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SCOREBOARD_COMMAND       = GameRuleRegistry.register(
+            "scoreboardCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SEED_COMMAND             = GameRuleRegistry.register(
+            "seedCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SET_BLOCK_COMMAND        = GameRuleRegistry.register(
+            "setBlockCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SET_WORLD_SPAWN_COMMAND  = GameRuleRegistry.register(
+            "setWorldSpawnCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SPAWN_POINT_COMMAND      = GameRuleRegistry.register(
+            "spawnPointCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        STOP_SOUND_COMMAND       = GameRuleRegistry.register(
+            "stopSoundCommand",     CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        SUMMON_COMMAND           = GameRuleRegistry.register(
+            "summonCommand",        CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        TEAM_COMMAND             = GameRuleRegistry.register(
+            "teamCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        TEAM_MSG_COMMAND         = GameRuleRegistry.register(
+            "teamMsgCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        TELEPORT_COMMAND         = GameRuleRegistry.register(
+            "teleportCommand",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        TELL_RAW_COMMAND         = GameRuleRegistry.register(
+            "tellRawCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        TIME_COMMAND             = GameRuleRegistry.register(
+            "timeCommand",          CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        TITLE_COMMAND            = GameRuleRegistry.register(
+            "titleCommand",         CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        TRIGGER_COMMAND          = GameRuleRegistry.register(
+            "triggerCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        WEATHER_COMMAND          = GameRuleRegistry.register(
+            "weatherCommand",       CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        WORLD_BORDER_COMMAND     = GameRuleRegistry.register(
+            "worldBorderCommand",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
     }
 }

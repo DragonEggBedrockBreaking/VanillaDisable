@@ -4,6 +4,8 @@
   "package": "uk.debb.vanilla_disable.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "commands.MixinCommandManager",
+    
     "damage.MixinPlayerEntity",
 
     "despawning.MixinEnderPearlEntity",
@@ -20,7 +22,6 @@
     "spawning.MixinEntityType",
     "spawning.MixinMobSpawnerLogic",
     "spawning.MixinSpawnHelper",
-    "spawning.MixinSummonCommand",
 
     "spawn_limits.IMixinSpawnHelper$Info",
     "spawn_limits.MixinHostileEntity",

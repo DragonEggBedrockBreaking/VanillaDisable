@@ -36,4 +36,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_COMMANDS = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.commands"),
+        new TranslatableText("gamerule.category.vd.commands")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }
