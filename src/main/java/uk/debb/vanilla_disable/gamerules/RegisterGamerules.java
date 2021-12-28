@@ -292,7 +292,7 @@ public class RegisterGamerules implements ModInitializer {
         WATER_CREATURES_DESPAWN   = GameRuleRegistry.register(
             "waterCreaturesDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
         WATER_AMBIENT_DESPAWN    = GameRuleRegistry.register(
-            "waterAmbientsDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+            "waterAmbientDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
         MONSTER_MAX_DESPAWN       = GameRuleRegistry.register(
             "monsterMaxDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createIntRule(128, 0, 512));
         CREATURE_MAX_DESPAWN      = GameRuleRegistry.register(
