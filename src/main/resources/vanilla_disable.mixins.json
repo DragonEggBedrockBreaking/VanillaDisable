@@ -8,6 +8,10 @@
     
     "damage.MixinPlayerEntity",
 
+    "fluids.MixinFlowableFluid",
+    "fluids.MixinLavaFluid",
+    "fluids.MixinWaterFluid",
+
     "despawning.MixinEnderPearlEntity",
     "despawning.MixinItemEntity",
     "despawning.MixinMobEntity",

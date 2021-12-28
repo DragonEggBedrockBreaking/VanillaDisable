@@ -42,4 +42,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_FLUIDS = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.fluids"),
+        new TranslatableText("gamerule.category.vd.fluids")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }

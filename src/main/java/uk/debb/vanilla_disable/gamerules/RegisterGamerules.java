@@ -164,6 +164,15 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> STOP_DEDICATED_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> WHITELIST_DEDICATED_COMMAND;
 
+    public static GameRules.Key<GameRules.BooleanRule> INFINITE_WATER;
+    public static GameRules.Key<GameRules.BooleanRule> INFINITE_LAVA;
+    public static GameRules.Key<GameRules.BooleanRule> WATER_REACHES_FAR;
+    public static GameRules.Key<GameRules.BooleanRule> LAVA_REACHES_FAR;
+    public static GameRules.Key<GameRules.BooleanRule> LAVA_REACHES_FAR_IN_NETHER;
+    public static GameRules.Key<GameRules.IntRule> WATER_FLOW_SPEED;
+    public static GameRules.Key<GameRules.IntRule> LAVA_FLOW_SPEED;
+    public static GameRules.Key<GameRules.IntRule> LAVA_FLOW_SPEED_NETHER;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -469,5 +478,22 @@ public class RegisterGamerules implements ModInitializer {
             "stopDedicatedCommand",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
         WHITELIST_DEDICATED_COMMAND = GameRuleRegistry.register(
             "whitelistDedicatedCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        
+        INFINITE_WATER    = GameRuleRegistry.register(
+            "infiniteWater",  CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        INFINITE_LAVA     = GameRuleRegistry.register(
+            "infiniteLava",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(false));
+        WATER_REACHES_FAR  = GameRuleRegistry.register(
+            "waterReachesFar", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        LAVA_REACHES_FAR   = GameRuleRegistry.register(
+            "lavaReachesFar",  CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(false));
+        LAVA_REACHES_FAR_IN_NETHER = GameRuleRegistry.register(
+            "lavaReachesFarInNether", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
+        WATER_FLOW_SPEED  = GameRuleRegistry.register(
+            "waterFlowSpeed", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createIntRule(5, 1, 128));
+        LAVA_FLOW_SPEED   = GameRuleRegistry.register(
+            "lavaFlowSpeed",  CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createIntRule(30, 1, 128));
+        LAVA_FLOW_SPEED_NETHER = GameRuleRegistry.register(
+            "lavaFlowSpeedNether", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createIntRule(10, 1, 128));
     }
 }

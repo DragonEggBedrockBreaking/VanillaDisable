@@ -154,12 +154,22 @@
     "gamerule.stopDedicatedCommand": "Toggle the /stop command on dedicated servers",
     "gamerule.whitelistDedicatedCommand": "Toggle the /whitelist command on dedicated servers",
 
+    "gamerule.infiniteWater": "Toggle infinite water",
+    "gamerule.infiniteLava": "Toggle infinite lava",
+    "gamerule.waterReachesFar": "Toggle whether water can reach 8 blocks or 4",
+    "gamerule.lavaReachesFar": "Toggle whether lava can reach 8 blocks or 4",
+    "gamerule.lavaReachesFarInNether": "Toggle whether lava can reach 8 blocks or 4 in the nether",
+    "gamerule.waterFlowSpeed": "Set the speed of water flow",
+    "gamerule.lavaFlowSpeed": "Set the speed of lava flow",
+    "gamerule.lavaFlowSpeedNether": "Set the speed of lava flow in the nether",
+
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
     "gamerule.category.vd.spawning": "VanillaDisable Spawning",
     "gamerule.category.vd.despawning": "VanillaDisable Despawning",
     "gamerule.category.vd.spawn_limits": "VanillaDisable Spawn Limits",
     "gamerule.category.vd.commands": "VanillaDisable Commands",
+    "gamerule.category.vd.fluids": "VanillaDisable Fluids",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator"
 }
