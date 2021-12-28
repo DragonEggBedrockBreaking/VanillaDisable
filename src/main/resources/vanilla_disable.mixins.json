@@ -8,6 +8,7 @@
     
     "damage.MixinPlayerEntity",
 
+    "fluids.MixinBucketItem",
     "fluids.MixinFlowableFluid",
     "fluids.MixinLavaFluid",
     "fluids.MixinWaterFluid",

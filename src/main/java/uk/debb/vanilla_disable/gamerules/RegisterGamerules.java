@@ -172,6 +172,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> WATER_FLOW_SPEED;
     public static GameRules.Key<GameRules.IntRule> LAVA_FLOW_SPEED;
     public static GameRules.Key<GameRules.IntRule> LAVA_FLOW_SPEED_NETHER;
+    public static GameRules.Key<GameRules.BooleanRule> WATER_PLACEABLE_IN_NETHER;
 
     @Override
     public void onInitialize() {
@@ -493,7 +494,9 @@ public class RegisterGamerules implements ModInitializer {
             "waterFlowSpeed", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createIntRule(5, 1, 128));
         LAVA_FLOW_SPEED   = GameRuleRegistry.register(
             "lavaFlowSpeed",  CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createIntRule(30, 1, 128));
-        LAVA_FLOW_SPEED_NETHER = GameRuleRegistry.register(
-            "lavaFlowSpeedNether", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createIntRule(10, 1, 128));
+        LAVA_FLOW_SPEED_NETHER     = GameRuleRegistry.register(
+            "lavaFlowSpeedNether",    CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createIntRule(10, 1, 128));
+        WATER_PLACEABLE_IN_NETHER  = GameRuleRegistry.register(
+            "waterPlaceableInNether", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(false));
     }
 }
