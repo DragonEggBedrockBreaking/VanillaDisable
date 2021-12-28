@@ -51,6 +51,7 @@
     "gamerule.spawnEggs": "Enable spawn eggs",
     "gamerule.animalBreeding": "Enable animal breeding",
 
+    "gamerule.minSpawnDistance": "The distance away away that mobs start to spawn",
     "gamerule.monstersDespawn": "Allow monsters to despawn",
     "gamerule.creaturesDespawn": "Allow creatures to despawn",
     "gamerule.ambientDespawn": "Allow ambient mobs to despawn",
@@ -105,6 +106,8 @@
     "gamerule.helpCommand": "Toggle the /help command",
     "gamerule.itemCommand": "Toggle the /item command",
     "gamerule.jfrCommand": "Toggle the /jfr command",
+    "gamerule.kickCommand": "Toggle the /kick command",
+    "gamerule.killCommand": "Toggle the /kill command",
     "gamerule.listCommand": "Toggle the /list command",
     "gamerule.locateBiomeCommand": "Toggle the /locatebiome command",
     "gamerule.locateCommand": "Toggle the /locate command",
