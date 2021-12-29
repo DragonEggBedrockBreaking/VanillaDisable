@@ -1,7 +1,5 @@
 package uk.debb.vanilla_disable.mixin.spawn_limits;
 
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import java.util.stream.Stream;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.server.world.ServerWorld;
@@ -74,28 +72,6 @@ public abstract class MixinSpawnHelper implements IMixinSpawnHelper$Info {
             gamerules.getInt(RegisterGamerules.WATER_AMBIENT_MOBCAP) * info.getSpawningChunkCount() / CHUNK_AREA) {
             return false;
         }
-        final Object2IntMap<SpawnGroup> spawnGroupsToDensity = new Object2IntOpenHashMap<SpawnGroup>(SpawnGroup.values().length);
-        if (group == SpawnGroup.MONSTER) {
-            return spawnGroupsToDensity.getOrDefault((Object)group, 0) < gamerules.getInt(RegisterGamerules.MONSTER_MOBCAP);
-        }
-        if (group == SpawnGroup.CREATURE) {
-            return spawnGroupsToDensity.getOrDefault((Object)group, 0) < gamerules.getInt(RegisterGamerules.CREATURE_MOBCAP);
-        }
-        if (group == SpawnGroup.AMBIENT) {
-            return spawnGroupsToDensity.getOrDefault((Object)group, 0) < gamerules.getInt(RegisterGamerules.AMBIENT_MOBCAP);
-        }
-        if (group == SpawnGroup.AXOLOTLS) {
-            return spawnGroupsToDensity.getOrDefault((Object)group, 0) < gamerules.getInt(RegisterGamerules.AXOLOTL_MOBCAP);
-        }
-        if (group == SpawnGroup.UNDERGROUND_WATER_CREATURE) {
-            return spawnGroupsToDensity.getOrDefault((Object)group, 0) < gamerules.getInt(RegisterGamerules.GLOWSQUID_MOBCAP);
-        }
-        if (group == SpawnGroup.WATER_CREATURE) {
-            return spawnGroupsToDensity.getOrDefault((Object)group, 0) < gamerules.getInt(RegisterGamerules.WATER_CREATURE_MOBCAP);
-        }
-        if (group == SpawnGroup.WATER_AMBIENT) {
-            return spawnGroupsToDensity.getOrDefault((Object)group, 0) < gamerules.getInt(RegisterGamerules.WATER_AMBIENT_MOBCAP);
-        }
-        return false;
+        return ((IMixinSpawnHelper$Info) info).getDensityCapper().canSpawn(group, pos);
     }
 }
