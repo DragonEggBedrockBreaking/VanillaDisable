@@ -30,7 +30,9 @@ public abstract class MixinLivingEntity extends Entity {
     private void canItHaveStatusEffect(StatusEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
         StatusEffect statusEffect = effect.getEffectType();
         if (((Object) this) instanceof ServerPlayerEntity) {
-            if (!this.world.getGameRules().getBoolean(RegisterGamerules.ABSORPTION_EFFECT) &&
+            if (!this.world.getGameRules().getBoolean(RegisterGamerules.EFFECTS_ENABLED)) {
+                cir.setReturnValue(false);
+            } else if (!this.world.getGameRules().getBoolean(RegisterGamerules.ABSORPTION_EFFECT) &&
                 statusEffect == StatusEffects.ABSORPTION) {
                 cir.setReturnValue(false);
             } else if (!this.world.getGameRules().getBoolean(RegisterGamerules.BAD_OMEN_EFFECT) &&

@@ -92,6 +92,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> WATER_AMBIENT_MOBCAP;
     public static GameRules.Key<GameRules.IntRule> MONSTER_MAX_LIGHT_LEVEL;
 
+    public static GameRules.Key<GameRules.BooleanRule> COMMANDS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> ADVANCEMENT_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> ATTRIBUTE_COMMAND;
     public static GameRules.Key<GameRules.BooleanRule> BOSS_BAR_COMMAND;
@@ -184,6 +185,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SKELETONS_CONVERT_TO_STRAYS;
     public static GameRules.Key<GameRules.BooleanRule> INFINITE_TRADING;
 
+    public static GameRules.Key<GameRules.BooleanRule> EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> ABSORPTION_EFFECT;
     public static GameRules.Key<GameRules.BooleanRule> BAD_OMEN_EFFECT;
     public static GameRules.Key<GameRules.BooleanRule> BLINDNESS_EFFECT;
@@ -384,7 +386,9 @@ public class RegisterGamerules implements ModInitializer {
             "waterAmbientMobCap",   CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(20, 0, Integer.MAX_VALUE));
         MONSTER_MAX_LIGHT_LEVEL  = GameRuleRegistry.register(
             "monsterMaxLightLevel", CreateGameruleCategories.VD_SPAWN_LIMITS, GameRuleFactory.createIntRule(0, 0, 15));
-        
+
+        COMMANDS_ENABLED         = GameRuleRegistry.register(
+            "commandsEnabled",      CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
         ADVANCEMENT_COMMAND      = GameRuleRegistry.register(
             "advancementCommand",   CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
         ATTRIBUTE_COMMAND        = GameRuleRegistry.register(
@@ -559,7 +563,9 @@ public class RegisterGamerules implements ModInitializer {
             "skeletonsConvertToStrays",    CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         INFINITE_TRADING                = GameRuleRegistry.register(
             "infiniteTrading",             CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(false));
-        
+
+        EFFECTS_ENABLED          = GameRuleRegistry.register(
+            "effectsEnabled",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         ABSORPTION_EFFECT        = GameRuleRegistry.register(
             "absorbtionEffect",     CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         BAD_OMEN_EFFECT          = GameRuleRegistry.register(

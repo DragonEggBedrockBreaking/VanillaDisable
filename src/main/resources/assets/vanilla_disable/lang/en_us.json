@@ -85,6 +85,7 @@
     "gamerule.waterAmbientMobCap": "The maximum number of ambient water mobs that can spawn",
     "gamerule.monsterMaxLightLevel": "The maximum light level at which monsters can spawn",
 
+    "gamerule.commandsEnabled": "Toggle whether commands are enabled",
     "gamerule.advancementCommand": "Toggle the /advancement command",
     "gamerule.attributeCommand": "Toggle the /attribute command",
     "gamerule.bossBarCommand": "Toggle the /bossbar command",
@@ -177,6 +178,7 @@
     "gamerule.skeletonsConvertToStrays": "Toggle whether skeletons can convert to strays",
     "gamerule.infiniteTraging": "Toggle whether players can infinitely trade with villagers",
 
+    "gamerule.effectsEnabled": "Toggle whether effects are enabled",
     "gamerule.absorptionEffect": "Toggle absorption effect",
     "gamerule.badOmenEffect": "Toggle bad omen effect",
     "gamerule.blindnessEffect": "Toggle blindness effect",

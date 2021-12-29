@@ -22,6 +22,11 @@ public abstract class MixinCommandManager {
      */
     @Inject(method = "execute", at = @At(value = "HEAD"), cancellable = true)
     private void execute(ServerCommandSource source, String command, CallbackInfoReturnable<Integer> cir) {
+        if (!command.startsWith("/gamerule") &&
+            !source.getWorld().getGameRules().getBoolean(RegisterGamerules.COMMANDS_ENABLED)) {
+            source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
+            cir.setReturnValue(0);
+        }
         if (command.startsWith("/advancement") &&
             !source.getWorld().getGameRules().getBoolean(RegisterGamerules.ADVANCEMENT_COMMAND)) {
             source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
