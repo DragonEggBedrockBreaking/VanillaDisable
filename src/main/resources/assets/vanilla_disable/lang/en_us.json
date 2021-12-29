@@ -167,6 +167,12 @@
     "gamerule.lavaFlowSpeedNether": "Set the speed of lava flow in the nether",
     "gamerule.waterPlaceableInNether": "[BUGGY] Toggle placing water in the nether",
 
+    "gamerule.curableZillagers": "Toggle whether zillagers can be cured",
+    "gamerule.villagersConvertToZillagers": "Toggle whether villagers can convert to zombie villagers",
+    "gamerule.villagersConvertToWitches": "Toggle whether villagers can convert to witches",
+    "gamerule.piglinsConvertToZiglins": "Toggle whether piglins can convert to zombified piglins",
+    "gamerule.hoglinsConvertToZoglins": "Toggle whether hoglins can convert to zoglins",
+
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
     "gamerule.category.vd.spawning": "VanillaDisable Spawning",
@@ -174,6 +180,7 @@
     "gamerule.category.vd.spawn_limits": "VanillaDisable Spawn Limits",
     "gamerule.category.vd.commands": "VanillaDisable Commands",
     "gamerule.category.vd.fluids": "VanillaDisable Fluids",
+    "gamerule.category.vd.mobs": "VanillaDisable Mobs",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator"
 }

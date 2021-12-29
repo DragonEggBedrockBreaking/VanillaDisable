@@ -174,6 +174,12 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> LAVA_FLOW_SPEED_NETHER;
     public static GameRules.Key<GameRules.BooleanRule> WATER_PLACEABLE_IN_NETHER;
 
+    public static GameRules.Key<GameRules.BooleanRule> CURABLE_ZILLAGERS;
+    public static GameRules.Key<GameRules.BooleanRule> VILLAGERS_CONVERT_TO_ZILLAGERS;
+    public static GameRules.Key<GameRules.BooleanRule> VILLAGERS_CONVERT_TO_WITCHES;
+    public static GameRules.Key<GameRules.BooleanRule> PIGLINS_CONVERT_TO_ZIGLINS;
+    public static GameRules.Key<GameRules.BooleanRule> HOGLINS_CONVERT_TO_ZOGLINS;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -480,23 +486,34 @@ public class RegisterGamerules implements ModInitializer {
         WHITELIST_DEDICATED_COMMAND = GameRuleRegistry.register(
             "whitelistDedicatedCommand", CreateGameruleCategories.VD_COMMANDS, GameRuleFactory.createBooleanRule(true));
         
-        INFINITE_WATER    = GameRuleRegistry.register(
-            "infiniteWater",  CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(true));
-        INFINITE_LAVA     = GameRuleRegistry.register(
-            "infiniteLava",   CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
-        WATER_REACHES_FAR  = GameRuleRegistry.register(
-            "waterReachesFar", CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(true));
-        LAVA_REACHES_FAR   = GameRuleRegistry.register(
-            "lavaReachesFar",  CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
-        LAVA_REACHES_FAR_IN_NETHER = GameRuleRegistry.register(
-            "lavaReachesFarInNether", CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(true));
-        WATER_FLOW_SPEED  = GameRuleRegistry.register(
-            "waterFlowSpeed", CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createIntRule(5, 1, 128));
-        LAVA_FLOW_SPEED   = GameRuleRegistry.register(
-            "lavaFlowSpeed",  CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createIntRule(30, 1, 128));
-        LAVA_FLOW_SPEED_NETHER     = GameRuleRegistry.register(
-            "lavaFlowSpeedNether",    CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createIntRule(10, 1, 128));
-        WATER_PLACEABLE_IN_NETHER  = GameRuleRegistry.register(
-            "waterPlaceableInNether", CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
+        INFINITE_WATER              = GameRuleRegistry.register(
+            "infiniteWater",           CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(true));
+        INFINITE_LAVA               = GameRuleRegistry.register(
+            "infiniteLava",            CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
+        WATER_REACHES_FAR           = GameRuleRegistry.register(
+            "waterReachesFar",         CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(true));
+        LAVA_REACHES_FAR            = GameRuleRegistry.register(
+            "lavaReachesFar",          CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
+        LAVA_REACHES_FAR_IN_NETHER  = GameRuleRegistry.register(
+            "lavaReachesFarInNether",  CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(true));
+        WATER_FLOW_SPEED            = GameRuleRegistry.register(
+            "waterFlowSpeed",          CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createIntRule(5, 1, 128));
+        LAVA_FLOW_SPEED             = GameRuleRegistry.register(
+            "lavaFlowSpeed",           CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createIntRule(30, 1, 128));
+        LAVA_FLOW_SPEED_NETHER      = GameRuleRegistry.register(
+            "lavaFlowSpeedNether",     CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createIntRule(10, 1, 128));
+        WATER_PLACEABLE_IN_NETHER   = GameRuleRegistry.register(
+            "waterPlaceableInNether",  CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
+    
+        CURABLE_ZILLAGERS           = GameRuleRegistry.register(
+            "curableZillagers  ",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        VILLAGERS_CONVERT_TO_ZILLAGERS  = GameRuleRegistry.register(
+            "villagersConvertToZillagers", CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        VILLAGERS_CONVERT_TO_WITCHES    = GameRuleRegistry.register(
+            "villagersConvertToWitches",   CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        PIGLINS_CONVERT_TO_ZIGLINS      = GameRuleRegistry.register(
+            "piglinsConvertToZiglins",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        HOGLINS_CONVERT_TO_ZOGLINS      = GameRuleRegistry.register(
+            "hoglinsConvertToZoglins",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
     }
 }

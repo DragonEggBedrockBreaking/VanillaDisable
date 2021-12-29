@@ -23,6 +23,12 @@
     "knockback.MixinPlayerEntity",
     "knockback.MixinServerPlayNetworkHandler",
 
+    "mob.MixinAbstractPiglinEntity",
+    "mob.MixinHoglinEntity",
+    "mob.MixinVillagerEntity",
+    "mob.MixinZombieEntity",
+    "mob.MixinZombieVillagerEntity",
+
     "spawning.MixinAnimalMateGoal",
     "spawning.MixinEntityType",
     "spawning.MixinMobSpawnerLogic",

@@ -48,4 +48,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_MOBS = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.mobs"),
+        new TranslatableText("gamerule.category.vd.mobs")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }
