@@ -172,6 +172,9 @@
     "gamerule.villagersConvertToWitches": "Toggle whether villagers can convert to witches",
     "gamerule.piglinsConvertToZiglins": "Toggle whether piglins can convert to zombified piglins",
     "gamerule.hoglinsConvertToZoglins": "Toggle whether hoglins can convert to zoglins",
+    "gamerule.husksConvertToZombies": "Toggle whether husks can convert to zombies",
+    "gamerule.zombiesConvertToDrowned": "Toggle whether zombies can convert to drowned",
+    "gamerule.skeletonsConvertToStrays": "Toggle whether skeletons can convert to strays",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",

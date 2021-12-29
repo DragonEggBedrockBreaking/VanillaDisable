@@ -179,6 +179,9 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> VILLAGERS_CONVERT_TO_WITCHES;
     public static GameRules.Key<GameRules.BooleanRule> PIGLINS_CONVERT_TO_ZIGLINS;
     public static GameRules.Key<GameRules.BooleanRule> HOGLINS_CONVERT_TO_ZOGLINS;
+    public static GameRules.Key<GameRules.BooleanRule> HUSKS_CONVERT_TO_ZOMBIES;
+    public static GameRules.Key<GameRules.BooleanRule> ZOMBIES_CONVERT_TO_DROWNED;
+    public static GameRules.Key<GameRules.BooleanRule> SKELETONS_CONVERT_TO_STRAYS;
 
     @Override
     public void onInitialize() {
@@ -515,5 +518,11 @@ public class RegisterGamerules implements ModInitializer {
             "piglinsConvertToZiglins",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         HOGLINS_CONVERT_TO_ZOGLINS      = GameRuleRegistry.register(
             "hoglinsConvertToZoglins",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        HUSKS_CONVERT_TO_ZOMBIES        = GameRuleRegistry.register(
+            "husksConvertToZombies",       CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        ZOMBIES_CONVERT_TO_DROWNED      = GameRuleRegistry.register(
+            "zombiesConvertToDrowned",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        SKELETONS_CONVERT_TO_STRAYS     = GameRuleRegistry.register(
+            "skeletonsConvertToStrays",    CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
     }
 }
