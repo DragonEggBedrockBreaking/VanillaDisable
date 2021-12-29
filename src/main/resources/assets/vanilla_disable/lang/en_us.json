@@ -211,6 +211,11 @@
     "gamerule.weaknessEffect": "Toggle weakness effect",
     "gamerule.witherEffect": "Toggle wither effect",
 
+    "gamerule.netherPortalsEnabled": "Toggle whether nether portals are enabled",
+    "gamerule.endPortalsEnabled": "Toggle whether end portals are enabled",
+    "gamerule.endGatewaysEnabled": "Toggle whether end gateways are enabled",
+    "gamerule.netherPortalCooldown": "Set the cooldown for nether portals",
+
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
     "gamerule.category.vd.spawning": "VanillaDisable Spawning",
@@ -220,6 +225,7 @@
     "gamerule.category.vd.fluids": "VanillaDisable Fluids",
     "gamerule.category.vd.mobs": "VanillaDisable Mobs",
     "gamerule.category.vd.effects": "VanillaDisable Effects",
+    "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator"
 }

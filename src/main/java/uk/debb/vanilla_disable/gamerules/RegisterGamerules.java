@@ -218,6 +218,11 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> WEAKNESS_EFFECT;
     public static GameRules.Key<GameRules.BooleanRule> WITHER_EFFECT;
 
+    public static GameRules.Key<GameRules.BooleanRule> NETHER_PORTALS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanRule> END_PORTALS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanRule> END_GATEWAYS_ENABLED;
+    public static GameRules.Key<GameRules.IntRule> NETHER_PORTAL_COOLDOWN;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -628,5 +633,14 @@ public class RegisterGamerules implements ModInitializer {
             "weaknessEffect",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         WITHER_EFFECT            = GameRuleRegistry.register(
             "witherEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+
+        NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
+            "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+        END_PORTALS_ENABLED      = GameRuleRegistry.register(
+            "endPortalsEnabled",    CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+        END_GATEWAYS_ENABLED     = GameRuleRegistry.register(
+            "endGatewaysEnabled",   CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+        NETHER_PORTAL_COOLDOWN   = GameRuleRegistry.register(
+            "netherPortalCooldown", CreateGameruleCategories.VD_MISC, GameRuleFactory.createIntRule(300));
     }
 }

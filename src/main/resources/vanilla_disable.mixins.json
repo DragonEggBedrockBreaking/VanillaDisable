@@ -25,6 +25,11 @@
     "knockback.MixinPlayerEntity",
     "knockback.MixinServerPlayNetworkHandler",
 
+    "misc.MixinEndGatewayBlockEntity",
+    "misc.MixinEndPortalBlock",
+    "misc.MixinEntity",
+    "misc.MixinNetherPortalBlock",
+
     "mob.MixinAbstractPiglinEntity",
     "mob.MixinHoglinEntity",
     "mob.MixinHuskEntity",
