@@ -22,7 +22,6 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> WITHER_DAMAGE;
     public static GameRules.Key<GameRules.BooleanRule> ANVIL_DAMAGE;
     public static GameRules.Key<GameRules.BooleanRule> DRAGON_DAMAGE;
-    public static GameRules.Key<GameRules.BooleanRule> DRYOUT_DAMAGE;
     public static GameRules.Key<GameRules.BooleanRule> SWEET_BERRY_BUSH_DAMAGE;
     public static GameRules.Key<GameRules.BooleanRule> FALLING_STALACTITE_DAMAGE;
 
@@ -258,8 +257,6 @@ public class RegisterGamerules implements ModInitializer {
             "anvilDamage",          CreateGameruleCategories.VD_DAMAGE, GameRuleFactory.createBooleanRule(true));
         DRAGON_DAMAGE             = GameRuleRegistry.register(
             "dragonDamage",         CreateGameruleCategories.VD_DAMAGE, GameRuleFactory.createBooleanRule(true));
-        DRYOUT_DAMAGE             = GameRuleRegistry.register(
-            "dryoutDamage",         CreateGameruleCategories.VD_DAMAGE, GameRuleFactory.createBooleanRule(true));
         SWEET_BERRY_BUSH_DAMAGE   = GameRuleRegistry.register(
             "sweetBerryBushDamage", CreateGameruleCategories.VD_DAMAGE, GameRuleFactory.createBooleanRule(true));
         FALLING_STALACTITE_DAMAGE = GameRuleRegistry.register(

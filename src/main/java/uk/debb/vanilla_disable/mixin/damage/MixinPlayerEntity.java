@@ -51,8 +51,6 @@ public abstract class MixinPlayerEntity extends LivingEntity {
             cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.ANVIL_DAMAGE));
         } else if (damageSource == DamageSource.DRAGON_BREATH) {
             cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.DRAGON_DAMAGE));
-        } else if (damageSource == DamageSource.DRYOUT) {
-            cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.DRYOUT_DAMAGE));
         } else if (damageSource == DamageSource.SWEET_BERRY_BUSH) {
             cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.SWEET_BERRY_BUSH_DAMAGE));
         } else if (damageSource == DamageSource.FALLING_STALACTITE) {
