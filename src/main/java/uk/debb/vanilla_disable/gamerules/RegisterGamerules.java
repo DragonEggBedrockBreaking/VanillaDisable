@@ -509,7 +509,7 @@ public class RegisterGamerules implements ModInitializer {
             "waterPlaceableInNether",  CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
     
         CURABLE_ZILLAGERS           = GameRuleRegistry.register(
-            "curableZillagers  ",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+            "curableZillagers",        CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         VILLAGERS_CONVERT_TO_ZILLAGERS  = GameRuleRegistry.register(
             "villagersConvertToZillagers", CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         VILLAGERS_CONVERT_TO_WITCHES    = GameRuleRegistry.register(
