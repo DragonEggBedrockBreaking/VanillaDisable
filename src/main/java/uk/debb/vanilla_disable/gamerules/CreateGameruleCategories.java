@@ -54,4 +54,10 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_EFFECTS = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.effects"),
+        new TranslatableText("gamerule.category.vd.effects")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
 }

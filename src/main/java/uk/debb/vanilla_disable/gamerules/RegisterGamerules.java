@@ -184,6 +184,38 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SKELETONS_CONVERT_TO_STRAYS;
     public static GameRules.Key<GameRules.BooleanRule> INFINITE_TRADING;
 
+    public static GameRules.Key<GameRules.BooleanRule> ABSORPTION_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> BAD_OMEN_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> BLINDNESS_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> CONDUIT_POWER_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> DOLPHINS_GRACE_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> FIRE_RESISTANCE_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> GLOWING_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> HASTE_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> HEALTH_BOOST_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> HUNGER_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> INSTANT_DAMAGE_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> INSTANT_HEALTH_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> INVISIBILITY_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> JUMP_BOOST_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> LEVITATION_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> LUCK_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> MINING_FATIGUE_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> NAUSEA_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> NIGHT_VISION_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> POISON_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> REGENERATION_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> RESISTANCE_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> SATURATION_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> SLOWNESS_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> SLOW_FALLING_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> SPEED_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> STRENGTH_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> UNLUCK_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> WATER_BREATHING_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> WEAKNESS_EFFECT;
+    public static GameRules.Key<GameRules.BooleanRule> WITHER_EFFECT;
+
     @Override
     public void onInitialize() {
         DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -527,5 +559,68 @@ public class RegisterGamerules implements ModInitializer {
             "skeletonsConvertToStrays",    CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         INFINITE_TRADING                = GameRuleRegistry.register(
             "infiniteTrading",             CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(false));
+        
+        ABSORPTION_EFFECT        = GameRuleRegistry.register(
+            "absorbtionEffect",     CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        BAD_OMEN_EFFECT          = GameRuleRegistry.register(
+            "badOmenEffect",        CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        BLINDNESS_EFFECT         = GameRuleRegistry.register(
+            "blindnessEffect",      CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        CONDUIT_POWER_EFFECT     = GameRuleRegistry.register(
+            "conduitPowerEffect",   CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        DOLPHINS_GRACE_EFFECT    = GameRuleRegistry.register(
+            "dolphinsGraceEffect",  CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        FIRE_RESISTANCE_EFFECT   = GameRuleRegistry.register(
+            "fireResistanceEffect", CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        GLOWING_EFFECT           = GameRuleRegistry.register(
+            "glowingEffect",        CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        HASTE_EFFECT             = GameRuleRegistry.register(
+            "hasteEffect",          CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        HEALTH_BOOST_EFFECT      = GameRuleRegistry.register(
+            "healthBoostEffect",    CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        HUNGER_EFFECT            = GameRuleRegistry.register(
+            "hungerEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        INSTANT_DAMAGE_EFFECT    = GameRuleRegistry.register(
+            "instantDamageEffect",  CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        INSTANT_HEALTH_EFFECT    = GameRuleRegistry.register(
+            "instantHealthEffect",  CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        INVISIBILITY_EFFECT      = GameRuleRegistry.register(
+            "invisibilityEffect",   CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        JUMP_BOOST_EFFECT        = GameRuleRegistry.register(
+            "jumpBoostEffect",      CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        LEVITATION_EFFECT        = GameRuleRegistry.register(
+            "levitationEffect",     CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        LUCK_EFFECT              = GameRuleRegistry.register(
+            "luckEffect",           CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        MINING_FATIGUE_EFFECT    = GameRuleRegistry.register(
+            "miningFatigueEffect",  CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        NAUSEA_EFFECT            = GameRuleRegistry.register(
+            "nauseaEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        NIGHT_VISION_EFFECT      = GameRuleRegistry.register(
+            "nightVisionEffect",    CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        POISON_EFFECT            = GameRuleRegistry.register(
+            "poisonEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        REGENERATION_EFFECT      = GameRuleRegistry.register(
+            "regenerationEffect",   CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        RESISTANCE_EFFECT        = GameRuleRegistry.register(
+            "resistanceEffect",     CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        SATURATION_EFFECT        = GameRuleRegistry.register(
+            "saturationEffect",     CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        SLOWNESS_EFFECT          = GameRuleRegistry.register(
+            "slownessEffect",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        SLOW_FALLING_EFFECT      = GameRuleRegistry.register(
+            "slowFallingEffect",    CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        SPEED_EFFECT             = GameRuleRegistry.register(
+            "speedEffect",          CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        STRENGTH_EFFECT          = GameRuleRegistry.register(
+            "strengthEffect",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        UNLUCK_EFFECT            = GameRuleRegistry.register(
+            "unluckEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        WATER_BREATHING_EFFECT   = GameRuleRegistry.register(
+            "waterBreathingEffect", CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        WEAKNESS_EFFECT          = GameRuleRegistry.register(
+            "weaknessEffect",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+        WITHER_EFFECT            = GameRuleRegistry.register(
+            "witherEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
     }
 }
