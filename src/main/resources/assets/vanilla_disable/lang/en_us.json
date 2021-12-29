@@ -175,6 +175,7 @@
     "gamerule.husksConvertToZombies": "Toggle whether husks can convert to zombies",
     "gamerule.zombiesConvertToDrowned": "Toggle whether zombies can convert to drowned",
     "gamerule.skeletonsConvertToStrays": "Toggle whether skeletons can convert to strays",
+    "gamerule.infiniteTraging": "Toggle whether players can infinitely trade with villagers",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",

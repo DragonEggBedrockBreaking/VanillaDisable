@@ -182,6 +182,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> HUSKS_CONVERT_TO_ZOMBIES;
     public static GameRules.Key<GameRules.BooleanRule> ZOMBIES_CONVERT_TO_DROWNED;
     public static GameRules.Key<GameRules.BooleanRule> SKELETONS_CONVERT_TO_STRAYS;
+    public static GameRules.Key<GameRules.BooleanRule> INFINITE_TRADING;
 
     @Override
     public void onInitialize() {
@@ -524,5 +525,7 @@ public class RegisterGamerules implements ModInitializer {
             "zombiesConvertToDrowned",     CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         SKELETONS_CONVERT_TO_STRAYS     = GameRuleRegistry.register(
             "skeletonsConvertToStrays",    CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        INFINITE_TRADING                = GameRuleRegistry.register(
+            "infiniteTrading",             CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(false));
     }
 }
