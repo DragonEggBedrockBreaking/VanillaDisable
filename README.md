@@ -2,11 +2,19 @@
 
 ## Description
 
-You can use gamerules to enable/disable a lot more stuff with this mod.
+This is a fabric mod that allows you to toggle or change many vanilla features
+through the vanilla gamerule system. This mod supports the latest version of Minecraft.
+Only critical issues/major crashes will be fixed on older versions of Minecraft.
+Mod compatibility is an aim but not always a reality - if there is an incompatibility,
+I will likely try to resolve it, but my success is not guaranteed.
 
-## Status
+## Documentation
 
-This mod is incomplete/experimental. Features may be added and removed at any time.
+See the wiki page for more information.
+
+## Downloads
+
+You can download both stable releases of the mod, and also beta releases, from [Github Releases](https:/github.com/DragonEggBedrockBreaking/VanillaDisable/releases),.
 
 ## Compiling
 
