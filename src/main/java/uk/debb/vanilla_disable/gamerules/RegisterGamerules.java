@@ -222,6 +222,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> END_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_GATEWAYS_ENABLED;
     public static GameRules.Key<GameRules.IntRule> NETHER_PORTAL_COOLDOWN;
+    public static GameRules.Key<GameRules.BooleanRule> CROP_TRAMPLING;
 
     @Override
     public void onInitialize() {
@@ -642,5 +643,7 @@ public class RegisterGamerules implements ModInitializer {
             "endGatewaysEnabled",   CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
         NETHER_PORTAL_COOLDOWN   = GameRuleRegistry.register(
             "netherPortalCooldown", CreateGameruleCategories.VD_MISC, GameRuleFactory.createIntRule(300));
+        CROP_TRAMPLING           = GameRuleRegistry.register(
+            "cropTrampling",        CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
     }
 }

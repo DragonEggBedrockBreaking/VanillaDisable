@@ -28,6 +28,7 @@
     "misc.MixinEndGatewayBlockEntity",
     "misc.MixinEndPortalBlock",
     "misc.MixinEntity",
+    "misc.MixinFarmlandBlock",
     "misc.MixinNetherPortalBlock",
 
     "mob.MixinAbstractPiglinEntity",
