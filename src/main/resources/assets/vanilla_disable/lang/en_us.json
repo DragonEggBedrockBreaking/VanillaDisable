@@ -175,7 +175,7 @@
     "gamerule.husksConvertToZombies": "Toggle whether husks can convert to zombies",
     "gamerule.zombiesConvertToDrowned": "Toggle whether zombies can convert to drowned",
     "gamerule.skeletonsConvertToStrays": "Toggle whether skeletons can convert to strays",
-    "gamerule.infiniteTraging": "Toggle whether players can infinitely trade with villagers",
+    "gamerule.infiniteTrading": "Toggle whether players can infinitely trade with villagers",
 
     "gamerule.effectsEnabled": "Toggle whether effects are enabled",
     "gamerule.absorptionEffect": "Toggle absorption effect",
