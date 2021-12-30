@@ -33,5 +33,5 @@ The artifacts will be in `build/libs/`, just like with the other builds systems.
 
 ## License
 
-This mod is available under the [MIT](LICENSE.txt) license.
+This mod is available under the [MPL](LICENSE.txt) license.
 Some code is from another project which uses the [LGPL-3.0](https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE) license.
