@@ -35,6 +35,7 @@
     "fabricloader": ">=0.12.12",
     "fabric-game-rule-api-v1": ">=1.0.10",
     "fabric-resource-loader-v0": ">=0.4.11",
+    "fabric-lifecycle-events-v1": ">=1.4.10",
     "minecraft": "1.18.x",
     "java": ">=17"
   }

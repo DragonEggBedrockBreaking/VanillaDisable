@@ -45,9 +45,8 @@
     "spawning.MixinMobSpawnerLogic",
     "spawning.MixinSpawnHelper",
 
-    "spawn_limits.IMixinSpawnHelper$Info",
     "spawn_limits.MixinHostileEntity",
-    "spawn_limits.MixinSpawnHelper"
+    "spawn_limits.MixinSpawnGroup"
   ],
   "injectors": {
     "defaultRequire": 1

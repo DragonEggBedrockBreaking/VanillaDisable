@@ -1,11 +1,20 @@
 package uk.debb.vanilla_disable.gamerules;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;
 
 public class RegisterGamerules implements ModInitializer {
+    // Defining the minecraft server that I can use to get gamerules anywhere
+    private static MinecraftServer server;
+    public static MinecraftServer getServer() {
+        return server;
+    }
+
+    // Defining the gamerules themselves
     public static GameRules.Key<GameRules.BooleanRule> DAMAGE_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> PROJECTILE_DAMAGE;
     public static GameRules.Key<GameRules.BooleanRule> EXPLOSION_DAMAGE;
@@ -225,6 +234,7 @@ public class RegisterGamerules implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // Registering the gamerules that I previously defined
         DAMAGE_ENABLED            = GameRuleRegistry.register(
             "damageEnabled",        CreateGameruleCategories.VD_DAMAGE, GameRuleFactory.createBooleanRule(true));
         PROJECTILE_DAMAGE         = GameRuleRegistry.register(
@@ -642,5 +652,10 @@ public class RegisterGamerules implements ModInitializer {
             "netherPortalCooldown", CreateGameruleCategories.VD_MISC, GameRuleFactory.createIntRule(300));
         CROP_TRAMPLING           = GameRuleRegistry.register(
             "cropTrampling",        CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+
+        // Registering the Minecraft server to when it actually starts
+        ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {
+            RegisterGamerules.server = minecraftServer;
+        });
     }
 }
