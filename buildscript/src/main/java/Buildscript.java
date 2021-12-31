@@ -42,7 +42,7 @@ public class Buildscript extends FabricProject {
     @Override
     public String getVersion() {
         // Mod Version
-        return "1.0.0";
+        return "1.0.1";
     }
 
     @Override
