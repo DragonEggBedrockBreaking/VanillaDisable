@@ -313,7 +313,7 @@ public abstract class MixinCommandManager {
             cir.setReturnValue(0);
         }
         if (source.getServer().isDedicated()) {
-            if (command.startsWith("/ban") &&
+            if (command.startsWith("/ban ") &&
                 !source.getWorld().getGameRules().getBoolean(RegisterGamerules.BAN_DEDICATED_COMMAND)) {
                 source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
                 cir.setReturnValue(0);
