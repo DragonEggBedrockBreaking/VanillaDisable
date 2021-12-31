@@ -116,13 +116,9 @@ public abstract class MixinCommandManager {
         String commandName = command.split(" ")[0].substring(1);
         GameRules.Key<GameRules.BooleanRule> commandGamerule = commandNameGameruleMap.get(commandName);
         GameRules.Key<GameRules.BooleanRule> dedicatedCommandGamerule = dedicatedCommandNameGameruleMap.get(commandName);
-        if (commandName != "gamerule" && !source.getWorld().getGameRules().getBoolean(RegisterGamerules.COMMANDS_ENABLED)) {
-            source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
-            cir.setReturnValue(0);
-        } else if (commandGamerule != null && !source.getWorld().getGameRules().getBoolean(commandGamerule)) {
-            source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
-            cir.setReturnValue(0);
-        } else if (source.getServer().isDedicated() && dedicatedCommandGamerule != null && !source.getWorld().getGameRules().getBoolean(dedicatedCommandGamerule)) {
+        if ((commandName != "gamerule" && !source.getWorld().getGameRules().getBoolean(RegisterGamerules.COMMANDS_ENABLED)) ||
+            (commandGamerule != null && !source.getWorld().getGameRules().getBoolean(commandGamerule)) ||
+            (source.getServer().isDedicated() && dedicatedCommandGamerule != null && !source.getWorld().getGameRules().getBoolean(dedicatedCommandGamerule))) {
             source.getServer().getPlayerManager().broadcast(new TranslatableText("commands.disabled.by.vd").formatted(Formatting.RED), MessageType.CHAT, UUID.randomUUID());
             cir.setReturnValue(0);
         }
