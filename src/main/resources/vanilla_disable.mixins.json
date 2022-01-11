@@ -11,6 +11,7 @@
     "despawning.MixinEnderPearlEntity",
     "despawning.MixinItemEntity",
     "despawning.MixinMobEntity",
+    "despawning.MixinSpawnGroup",
     "despawning.MixinSpawnHelper",
 
     "effects.MixinLivingEntity",
