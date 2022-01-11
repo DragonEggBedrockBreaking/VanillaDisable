@@ -2,7 +2,6 @@ package uk.debb.vanilla_disable.mixin.despawning;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.entity.Bucketable;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.AmbientEntity;
@@ -23,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(MobEntity.class)
-public abstract class MixinMobEntity extends LivingEntity implements Bucketable {
+public abstract class MixinMobEntity extends LivingEntity {
     protected MixinMobEntity(EntityType<? extends MobEntity> entityType, World world) {
         super((EntityType<? extends LivingEntity>)entityType, world);
     }
@@ -56,8 +55,11 @@ public abstract class MixinMobEntity extends LivingEntity implements Bucketable 
      */
     private boolean additionalRestrictionsMet() {
         MobEntity entity = (MobEntity) (Object) this;
-        if (entity instanceof AxolotlEntity || entity instanceof FishEntity) {
-            return !this.hasCustomName() && !this.isFromBucket();
+        if (entity instanceof FishEntity) {
+            return !this.hasCustomName() && !((FishEntity)(Object)(this)).isFromBucket();
+        }
+        if (entity instanceof AxolotlEntity) {
+            return !this.hasCustomName() && !((AxolotlEntity)(Object)(this)).isFromBucket();
         }
         return true;
     }
