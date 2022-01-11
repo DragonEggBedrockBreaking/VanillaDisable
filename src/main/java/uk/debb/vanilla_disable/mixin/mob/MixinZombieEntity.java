@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
-@Mixin(ZombieEntity.class)
+@Mixin(value = ZombieEntity.class, priority = 1001)
 public abstract class MixinZombieEntity extends HostileEntity {
     public MixinZombieEntity(EntityType<? extends ZombieEntity> entityType, World world) {
         super(entityType, world);
