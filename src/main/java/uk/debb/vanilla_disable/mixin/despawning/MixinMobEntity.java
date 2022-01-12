@@ -16,6 +16,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -33,12 +34,14 @@ public abstract class MixinMobEntity extends LivingEntity {
      * @author DragonEggBedrockBreaking
      * @reason map of many mob groups to their gamerules
      */
+    @Unique
     private static final Map<Class<?>, GameRules.Key<GameRules.BooleanRule>> spawnGroupDespawnMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private void addOptionsToMap() {
         spawnGroupDespawnMap.put(HostileEntity.class, RegisterGamerules.MONSTERS_DESPAWN);
         spawnGroupDespawnMap.put(AnimalEntity.class, RegisterGamerules.CREATURES_DESPAWN);
@@ -48,11 +51,13 @@ public abstract class MixinMobEntity extends LivingEntity {
         spawnGroupDespawnMap.put(FishEntity.class, RegisterGamerules.WATER_AMBIENT_DESPAWN);
         spawnGroupDespawnMap.put(WaterCreatureEntity.class, RegisterGamerules.WATER_CREATURES_DESPAWN);
     }
+
     /**
      * @author DragonEggBedrockBreaking
      * @reason Fish and axolotls have additional restrictions
      * @return Whether the additional restrictions are met
      */
+    @Unique
     private boolean additionalRestrictionsMet() {
         MobEntity entity = (MobEntity) (Object) this;
         if (entity instanceof FishEntity) {

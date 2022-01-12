@@ -6,6 +6,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -19,6 +20,7 @@ public abstract class MixinItemEntity extends Entity {
 
     @Shadow private int itemAge;
     @Shadow private int pickupDelay;
+    @Unique
     final int MAX = this.world.getGameRules().getInt(RegisterGamerules.ITEM_DESPAWN_TIME);
 
     /**

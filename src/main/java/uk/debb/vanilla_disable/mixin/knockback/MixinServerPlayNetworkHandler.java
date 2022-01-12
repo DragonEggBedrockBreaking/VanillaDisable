@@ -14,6 +14,7 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 @Mixin(ServerPlayNetworkHandler.class)
 public abstract class MixinServerPlayNetworkHandler {
     @Shadow public ServerPlayerEntity player;
+
     /**
      * @author DragonEggBedrockBreaking
      * @reason Disable all explosion knockback if explosion knockback is disabled

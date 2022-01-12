@@ -13,6 +13,7 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 @Mixin(AnimalMateGoal.class)
 public abstract class MixinAnimalMateGoal {
     @Shadow @Final protected World world;
+
     /**
      * @author DragonEggBedrockBreaking
      * @reason Don't allow breeding to start
@@ -24,6 +25,7 @@ public abstract class MixinAnimalMateGoal {
             cir.setReturnValue(false);
         }
     }
+
     /**
      * @author DragonEggBedrockBreaking
      * @reason Don't allow breeding to continue

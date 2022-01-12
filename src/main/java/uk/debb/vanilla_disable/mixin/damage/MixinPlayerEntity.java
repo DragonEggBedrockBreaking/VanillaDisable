@@ -7,6 +7,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -22,12 +23,14 @@ public abstract class MixinPlayerEntity extends LivingEntity {
      * @author DragonEggBedrockBreaking
      * @reason map of all damage sources to their gamerules
      */
+    @Unique
     private static final Map<DamageSource, GameRules.Key<GameRules.BooleanRule>> damageSourceMap = new HashMap<DamageSource, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private void addOptionsToMap() {
         damageSourceMap.put(DamageSource.LIGHTNING_BOLT, RegisterGamerules.LIGHTNING_DAMAGE);
         damageSourceMap.put(DamageSource.IN_WALL, RegisterGamerules.WALL_DAMAGE);

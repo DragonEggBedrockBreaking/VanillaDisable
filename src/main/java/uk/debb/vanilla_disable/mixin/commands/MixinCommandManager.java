@@ -10,6 +10,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -22,12 +23,14 @@ public abstract class MixinCommandManager {
      * @author LittleLily
      * @reason map of all standard commands to their gamerules
      */
+    @Unique
     private static final Map<String, GameRules.Key<GameRules.BooleanRule>> commandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private void addOptionsToMap() {
         commandNameGameruleMap.put("advancement", RegisterGamerules.ADVANCEMENT_COMMAND);
         commandNameGameruleMap.put("attribute", RegisterGamerules.ATTRIBUTE_COMMAND);
@@ -93,12 +96,14 @@ public abstract class MixinCommandManager {
      * @author LittleLily
      * @reason map of all standard commands to their gamerules
      */
+    @Unique
     private static final Map<String, GameRules.Key<GameRules.BooleanRule>> dedicatedCommandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private void addDedicatedOptionsToMap() {
         dedicatedCommandNameGameruleMap.put("ban", RegisterGamerules.BAN_DEDICATED_COMMAND);
         dedicatedCommandNameGameruleMap.put("ban-ip", RegisterGamerules.BAN_IP_DEDICATED_COMMAND);

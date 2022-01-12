@@ -15,6 +15,7 @@ public abstract class MixinPlayerEntity extends LivingEntity {
     private MixinPlayerEntity() {
         super(null, null);
     }
+
     /*
      * @author Wesley1808
      * @author DragonEggBedrockBreaking

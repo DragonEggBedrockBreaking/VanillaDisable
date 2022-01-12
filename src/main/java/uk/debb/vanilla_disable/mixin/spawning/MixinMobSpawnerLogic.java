@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.MobSpawnerLogic;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -25,6 +26,7 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(MobSpawnerLogic.class)
 public abstract class MixinMobSpawnerLogic {
+    @Unique
     private Entity spawnedEntity;
     /**
      * @author FallenBreath (https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE)
@@ -49,12 +51,14 @@ public abstract class MixinMobSpawnerLogic {
      * @author DragonEggBedrockBreaking
      * @reason map of all damage sources to their gamerules
      */
+    @Unique
     private static final Map<Class<?>, GameRules.Key<GameRules.BooleanRule>> spawnerMobMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private void addOptionsToMap() {
         spawnerMobMap.put(PigEntity.class, RegisterGamerules.PIG_SPAWNERS);
         spawnerMobMap.put(CaveSpiderEntity.class, RegisterGamerules.CAVE_SPIDER_SPAWNERS);

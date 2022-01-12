@@ -12,6 +12,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -27,12 +28,14 @@ public abstract class MixinLivingEntity extends Entity {
      * @author DragonEggBedrockBreaking
      * @reason map of all status effects to their gamerules
      */
+    @Unique
     private static final Map<StatusEffect, GameRules.Key<GameRules.BooleanRule>> statusEffectMap = new HashMap<StatusEffect, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private void addOptionsToMap() {
         statusEffectMap.put(StatusEffects.ABSORPTION, RegisterGamerules.ABSORPTION_EFFECT);
         statusEffectMap.put(StatusEffects.BAD_OMEN, RegisterGamerules.BAD_OMEN_EFFECT);

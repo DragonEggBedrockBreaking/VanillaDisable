@@ -10,6 +10,7 @@ import net.minecraft.world.SpawnHelper.Checker;
 import net.minecraft.world.SpawnHelper.Runner;
 import net.minecraft.world.chunk.WorldChunk;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,12 +22,14 @@ public class MixinSpawnHelper {
      * @author DragonEggBedrockBreaking
      * @reason map of all spawn groups to their gamerules
      */
+    @Unique
     private static final Map<SpawnGroup, GameRules.Key<GameRules.BooleanRule>> spawnGroupMap = new HashMap<SpawnGroup, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private static void addOptionsToMap() {
         spawnGroupMap.put(SpawnGroup.MONSTER, RegisterGamerules.MONSTER_SPAWNING);
         spawnGroupMap.put(SpawnGroup.CREATURE, RegisterGamerules.CREATURE_SPAWNING);

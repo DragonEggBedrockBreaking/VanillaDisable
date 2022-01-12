@@ -42,12 +42,14 @@ public abstract class MixinLivingEntity extends Entity {
      * @author DragonEggBedrockBreaking
      * @reason map of all relevenat entities to their gamerules
      */
+    @Unique
     private static final Map<Class<?>, GameRules.Key<GameRules.BooleanRule>> entityMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
+    @Unique
     private void addOptionsToMap() {
         entityMap.put(BlazeEntity.class, RegisterGamerules.FIREBALL_KNOCKBACK);
         entityMap.put(GhastEntity.class, RegisterGamerules.FIREBALL_KNOCKBACK);

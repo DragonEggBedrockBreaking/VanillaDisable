@@ -17,6 +17,7 @@ public abstract class MixinMobEntity extends LivingEntity {
     protected MixinMobEntity(EntityType<? extends MobEntity> entityType, World world) {
         super((EntityType<? extends LivingEntity>)entityType, world);
     }
+
     /**
      * @author Wesley1808
      * @author DragonEggBedrockBreaking
