@@ -24,7 +24,7 @@ public class Buildscript extends FabricProject {
     @Override
     public MappingTree createMappings() {
         // Yarn Mappings Version
-        return Yarn.ofMaven(FabricMaven.URL, FabricMaven.yarn("1.18.1+build.7")).tree;
+        return Yarn.ofMaven(FabricMaven.URL, FabricMaven.yarn("1.18.1+build.18")).tree;
     }
 
     @Override
@@ -57,15 +57,15 @@ public class Buildscript extends FabricProject {
         // Tiefix (modrinth special lol)
         //d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.7.0"), ModDependencyFlag.RUNTIME);
         try {
-            Path target = getLocalBrachyuraPath().resolve("tiefix-1.7.0.jar");
+            Path target = getLocalBrachyuraPath().resolve("tiefix-1.7.1.jar");
             if (!Files.exists(target)) {
                 try (
                     AtomicFile f = new AtomicFile(target);
-                    InputStream is = new URL("https://api.modrinth.com/maven/maven/modrinth/tiefix/1.7.0/tiefix-1.7.0.jar").openStream();
+                    InputStream is = new URL("https://api.modrinth.com/maven/maven/modrinth/tiefix/1.7.1/tiefix-1.7.1.jar").openStream();
                 ) {
                     Files.copy(is, f.tempPath, StandardCopyOption.REPLACE_EXISTING);
                     f.commit();
-                    System.out.println("INFO: Remapped tiefix-1.7.0-sources.jar");
+                    System.out.println("INFO: Remapped tiefix-1.7.1-sources.jar");
                 }
             }
             d.add(new JavaJarDependency(target, null, null), ModDependencyFlag.RUNTIME);
