@@ -3,7 +3,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import io.github.coolcrabs.brachyura.decompiler.BrachyuraDecompiler;
 import io.github.coolcrabs.brachyura.dependency.JavaJarDependency;
 import io.github.coolcrabs.brachyura.fabric.FabricLoader;
 import io.github.coolcrabs.brachyura.fabric.FabricMaven;
@@ -72,10 +71,5 @@ public class Buildscript extends FabricProject {
         } catch (Exception e) {
             Util.sneak(e);
         }
-    }
-
-    @Override
-    public BrachyuraDecompiler decompiler() {
-        return null;
     }
 }
