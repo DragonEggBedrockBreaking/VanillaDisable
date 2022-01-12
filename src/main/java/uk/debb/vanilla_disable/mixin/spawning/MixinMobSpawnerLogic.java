@@ -1,5 +1,7 @@
 package uk.debb.vanilla_disable.mixin.spawning;
 
+import java.util.HashMap;
+import java.util.Map;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.BlazeEntity;
 import net.minecraft.entity.mob.CaveSpiderEntity;
@@ -45,6 +47,28 @@ public abstract class MixinMobSpawnerLogic {
 
     /**
      * @author DragonEggBedrockBreaking
+     * @reason map of all damage sources to their gamerules
+     */
+    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanRule>> spawnerMobMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanRule>>();
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason the map otherwise initialises before the gamerules are created and always returns null
+     */
+    private void addOptionsToMap() {
+        spawnerMobMap.put(PigEntity.class, RegisterGamerules.PIG_SPAWNERS);
+        spawnerMobMap.put(CaveSpiderEntity.class, RegisterGamerules.CAVE_SPIDER_SPAWNERS);
+        spawnerMobMap.put(SilverfishEntity.class, RegisterGamerules.SILVERFISH_SPAWNERS);
+        spawnerMobMap.put(ZombieEntity.class, RegisterGamerules.ZOMBIE_SPAWNERS);
+        spawnerMobMap.put(ChickenEntity.class, RegisterGamerules.ZOMBIE_SPAWNERS);
+        spawnerMobMap.put(SkeletonEntity.class, RegisterGamerules.SKELETON_SPAWNERS);
+        spawnerMobMap.put(BlazeEntity.class, RegisterGamerules.BLAZE_SPAWNERS);
+        spawnerMobMap.put(SpiderEntity.class, RegisterGamerules.SPIDER_SPAWNERS);
+        spawnerMobMap.put(MagmaCubeEntity.class, RegisterGamerules.MAGMA_CUBE_SPAWNERS);
+    }
+
+    /**
+     * @author DragonEggBedrockBreaking
      * @param entity the entity to spawn
      * @param ci the callback info
      * @param world the world
@@ -58,30 +82,11 @@ public abstract class MixinMobSpawnerLogic {
         cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(ServerWorld world, BlockPos pos, CallbackInfo ci) {
-        GameRules grs = this.spawnedEntity.getWorld().getGameRules();
-        if (this.spawnedEntity instanceof PigEntity && !grs.getBoolean(RegisterGamerules.PIG_SPAWNERS)) {
-            ci.cancel();
+        if (spawnerMobMap.isEmpty()) {
+            this.addOptionsToMap();
         }
-        if (this.spawnedEntity instanceof CaveSpiderEntity && !grs.getBoolean(RegisterGamerules.CAVE_SPIDER_SPAWNERS)) {
-            ci.cancel();
-        }
-        if (this.spawnedEntity instanceof SilverfishEntity && !grs.getBoolean(RegisterGamerules.SILVERFISH_SPAWNERS)) {
-            ci.cancel();
-        }
-        if ((this.spawnedEntity instanceof ZombieEntity || this.spawnedEntity instanceof ChickenEntity) &&
-            !grs.getBoolean(RegisterGamerules.ZOMBIE_SPAWNERS)) {
-            ci.cancel();
-        }
-        if (this.spawnedEntity instanceof SkeletonEntity && !grs.getBoolean(RegisterGamerules.SKELETON_SPAWNERS)) {
-            ci.cancel();
-        }
-        if (this.spawnedEntity instanceof BlazeEntity && !grs.getBoolean(RegisterGamerules.BLAZE_SPAWNERS)) {
-            ci.cancel();
-        }
-        if (this.spawnedEntity instanceof SpiderEntity && !grs.getBoolean(RegisterGamerules.SPIDER_SPAWNERS)) {
-            ci.cancel();
-        }
-        if (this.spawnedEntity instanceof MagmaCubeEntity && !grs.getBoolean(RegisterGamerules.MAGMA_CUBE_SPAWNERS)) {
+        GameRules.Key<GameRules.BooleanRule> gameRule = spawnerMobMap.get(this.spawnedEntity.getClass());
+        if (!this.spawnedEntity.getWorld().getGameRules().getBoolean(gameRule))  {
             ci.cancel();
         }
     }
