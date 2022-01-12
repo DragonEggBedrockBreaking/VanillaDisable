@@ -11,11 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(PlayerEntity.class)
-public abstract class MixinPlayerEntity extends LivingEntity {
-    private MixinPlayerEntity() {
-        super(null, null);
-    }
-
+public abstract class MixinPlayerEntity {
     /*
      * @author Wesley1808
      * @author DragonEggBedrockBreaking
@@ -32,8 +28,8 @@ public abstract class MixinPlayerEntity extends LivingEntity {
     )
     public int cancelKnockbackFromPlayerAttack(LivingEntity entity, Entity target) {
         if (target instanceof ServerPlayerEntity &&
-            (!this.world.getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENCHANTMENT) ||
-             !this.world.getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED))) {
+            (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENCHANTMENT) ||
+             !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED))) {
             return 0;
         }
         return EnchantmentHelper.getKnockback(entity);

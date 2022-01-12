@@ -1,9 +1,7 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -13,15 +11,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(ItemEntity.class)
-public abstract class MixinItemEntity extends Entity {
-    public MixinItemEntity(EntityType<? extends ItemEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
+public abstract class MixinItemEntity {
     @Shadow private int itemAge;
     @Shadow private int pickupDelay;
     @Unique
-    final int MAX = this.world.getGameRules().getInt(RegisterGamerules.ITEM_DESPAWN_TIME);
+    final int MAX = RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.ITEM_DESPAWN_TIME);
 
     /**
      * @author DragonEggBedrockBreaking
@@ -31,8 +25,8 @@ public abstract class MixinItemEntity extends Entity {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void discardItem(CallbackInfo ci) {    
         if (this.itemAge >= MAX * 20 &&
-            !this.world.isClient) {
-            this.discard();
+            !((Entity) (Object) (this)).getWorld().isClient) {
+            ((Entity) (Object) (this)).discard();
         }
     }
 

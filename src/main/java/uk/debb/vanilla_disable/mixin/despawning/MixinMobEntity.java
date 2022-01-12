@@ -2,8 +2,7 @@ package uk.debb.vanilla_disable.mixin.despawning;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.AmbientEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -13,7 +12,6 @@ import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -23,11 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(MobEntity.class)
-public abstract class MixinMobEntity extends LivingEntity {
-    protected MixinMobEntity(EntityType<? extends MobEntity> entityType, World world) {
-        super((EntityType<? extends LivingEntity>)entityType, world);
-    }
-    
+public abstract class MixinMobEntity {
     @Shadow private boolean persistent;
 
     /**
@@ -61,10 +55,10 @@ public abstract class MixinMobEntity extends LivingEntity {
     private boolean additionalRestrictionsMet() {
         MobEntity entity = (MobEntity) (Object) this;
         if (entity instanceof FishEntity) {
-            return !this.hasCustomName() && !((FishEntity)(Object)(this)).isFromBucket();
+            return !((Entity)(Object)(this)).hasCustomName() && !((FishEntity)(Object)(this)).isFromBucket();
         }
         if (entity instanceof AxolotlEntity) {
-            return !this.hasCustomName() && !((AxolotlEntity)(Object)(this)).isFromBucket();
+            return !((Entity)(Object)(this)).hasCustomName() && !((AxolotlEntity)(Object)(this)).isFromBucket();
         }
         return true;
     }

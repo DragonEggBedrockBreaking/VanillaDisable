@@ -2,15 +2,12 @@ package uk.debb.vanilla_disable.mixin.effects;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,11 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity extends Entity {
-    protected MixinLivingEntity(EntityType<? extends LivingEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
+public abstract class MixinLivingEntity{
     /**
      * @author DragonEggBedrockBreaking
      * @reason map of all status effects to their gamerules
@@ -84,8 +77,8 @@ public abstract class MixinLivingEntity extends Entity {
                 this.addOptionsToMap();
             }
             GameRules.Key<GameRules.BooleanRule> effectGamerule = statusEffectMap.get(statusEffect);
-            if ((!this.world.getGameRules().getBoolean(RegisterGamerules.EFFECTS_ENABLED)) ||
-                (effectGamerule != null && !this.world.getGameRules().getBoolean(effectGamerule))) {
+            if ((!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.EFFECTS_ENABLED)) ||
+                (effectGamerule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(effectGamerule))) {
                 cir.setReturnValue(false);
             }
         }

@@ -2,8 +2,6 @@ package uk.debb.vanilla_disable.mixin.knockback;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -20,7 +18,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,11 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity extends Entity {
-    protected MixinLivingEntity (EntityType<? extends LivingEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
+public abstract class MixinLivingEntity {
     @Shadow
     private LivingEntity attacker;
 
@@ -72,17 +65,17 @@ public abstract class MixinLivingEntity extends Entity {
             this.addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> knockbackGamerule = entityMap.get(this.getClass());
-        if ((!this.world.getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED)) ||
-            (knockbackGamerule != null && !this.world.getGameRules().getBoolean(knockbackGamerule))) {
+        if ((!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED)) ||
+            (knockbackGamerule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(knockbackGamerule))) {
             return true;
         }
         if ((source instanceof SkeletonEntity && !(source instanceof WitherSkeletonEntity)) ||
             (source instanceof PiglinEntity && source.isHolding(Items.CROSSBOW)) ||
             (source instanceof PillagerEntity)) {
-            return !this.world.getGameRules().getBoolean(RegisterGamerules.ARROW_KNOCKBACK);
+            return !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ARROW_KNOCKBACK);
         }
         if (source instanceof DrownedEntity && source.isHolding(Items.TRIDENT)) {
-            return !this.world.getGameRules().getBoolean(RegisterGamerules.TRIDENT_KNOCKBACK);
+            return !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.TRIDENT_KNOCKBACK);
         }
         return false;
     }

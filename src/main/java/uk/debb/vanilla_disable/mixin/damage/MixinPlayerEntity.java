@@ -2,7 +2,6 @@ package uk.debb.vanilla_disable.mixin.damage;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.GameRules;
@@ -14,11 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(PlayerEntity.class)
-public abstract class MixinPlayerEntity extends LivingEntity {
-    private MixinPlayerEntity() {
-        super(null, null);
-    }
-
+public abstract class MixinPlayerEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason map of all damage sources to their gamerules
@@ -56,20 +51,20 @@ public abstract class MixinPlayerEntity extends LivingEntity {
             this.addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> damageGamerule = damageSourceMap.get(damageSource);
-        if (!this.world.getGameRules().getBoolean(RegisterGamerules.DAMAGE_ENABLED)) {
+        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.DAMAGE_ENABLED)) {
             cir.setReturnValue(true);
-        } else if (damageGamerule != null && !this.world.getGameRules().getBoolean(damageGamerule)) {
+        } else if (damageGamerule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(damageGamerule)) {
             cir.setReturnValue(true);
         } else if (damageSource.isProjectile()) {
-            cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.PROJECTILE_DAMAGE));
+            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PROJECTILE_DAMAGE));
         } else if (damageSource.isExplosive()) {
-            cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.EXPLOSION_DAMAGE));
+            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.EXPLOSION_DAMAGE));
         } else if (damageSource.isOutOfWorld()) {
-            cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.VOID_DAMAGE));
+            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VOID_DAMAGE));
         } else if (damageSource.isMagic()) {
-            cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.MAGIC_DAMAGE));
+            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.MAGIC_DAMAGE));
         } else if (damageSource.isSourceCreativePlayer()) {
-            cir.setReturnValue(!this.world.getGameRules().getBoolean(RegisterGamerules.CREATIVE_PLAYER_DAMAGE));
+            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.CREATIVE_PLAYER_DAMAGE));
         }
     }
 }
