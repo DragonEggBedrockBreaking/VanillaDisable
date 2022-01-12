@@ -46,14 +46,6 @@ public abstract class MixinBucketItem {
     )
     public boolean isNotUltrawarm(DimensionType type, @Nullable PlayerEntity player, World world, BlockPos pos, @Nullable BlockHitResult hitResult) {
         if (world.getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER) && this.fluid.isIn(FluidTags.WATER)) {
-            // run all vanilla code, except instead of quitting out of the method, continue on running 
-            int i = pos.getX();
-            int j = pos.getY();
-            int k = pos.getZ();
-            world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.random.nextFloat() - world.random.nextFloat()) * 0.8f);
-            for (int l = 0; l < 8; ++l) {
-                world.addParticle(ParticleTypes.LARGE_SMOKE, (double)i + Math.random(), (double)j + Math.random(), (double)k + Math.random(), 0.0, 0.0, 0.0);
-            }
             return false;
         }
         return type.isUltrawarm();
@@ -71,6 +63,10 @@ public abstract class MixinBucketItem {
     protected void cancelPlayingEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, CallbackInfo ci) {
         if (world.getDimension().isUltrawarm() && this.fluid.isIn(FluidTags.WATER) &&
             ((ServerWorldAccess)world).toServerWorld().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER)) {
+            world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);
+            for (int l = 0; l < 8; ++l) {
+                world.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + Math.random(), (double)pos.getY() + Math.random(), (double)pos.getZ() + Math.random(), 0.0, 0.0, 0.0);
+            }
             ci.cancel();
         }
     }
