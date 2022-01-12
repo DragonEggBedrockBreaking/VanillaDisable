@@ -36,4 +36,14 @@ public abstract class MixinWaterFluid {
             cir.setReturnValue(((World) world).getGameRules().getInt(RegisterGamerules.WATER_FLOW_SPEED));
         }
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason modify whether or not the fluid can form infinite water sources
+     * @param cir the returnable callback info
+     */
+    @Inject(method = "isInfinite", at = @At("HEAD"), cancellable = true)
+    private void changeInfinite(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_WATER));
+    }
 }

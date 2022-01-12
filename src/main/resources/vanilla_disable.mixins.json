@@ -17,7 +17,6 @@
     "effects.MixinLivingEntity",
 
     "fluids.MixinBucketItem",
-    "fluids.MixinFlowableFluid",
     "fluids.MixinLavaFluid",
     "fluids.MixinWaterFluid",
 
