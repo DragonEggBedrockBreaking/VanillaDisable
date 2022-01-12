@@ -22,87 +22,99 @@ public abstract class MixinCommandManager {
      * @author LittleLily
      * @reason map of all standard commands to their gamerules
      */
-    private static final Map<String, GameRules.Key<GameRules.BooleanRule>> commandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanRule>>() {{
-        put("advancement", RegisterGamerules.ADVANCEMENT_COMMAND);
-        put("attribute", RegisterGamerules.ATTRIBUTE_COMMAND);
-        put("bossbar", RegisterGamerules.BOSS_BAR_COMMAND);
-        put("chase", RegisterGamerules.CHASE_COMMAND);
-        put("clear", RegisterGamerules.CLEAR_COMMAND);
-        put("clone", RegisterGamerules.CLONE_COMMAND);
-        put("datapack", RegisterGamerules.DATAPACK_COMMAND);
-        put("data", RegisterGamerules.DATA_COMMAND);
-        put("difficulty", RegisterGamerules.DIFFICULTY_COMMAND);
-        put("effect", RegisterGamerules.EFFECT_COMMAND);
-        put("enchant", RegisterGamerules.ENCHANT_COMMAND);
-        put("execute", RegisterGamerules.EXECUTE_COMMAND);
-        put("experience", RegisterGamerules.EXPERIENCE_COMMAND);
-        put("fill", RegisterGamerules.FILL_COMMAND);
-        put("forceload", RegisterGamerules.FORCE_LOAD_COMMAND);
-        put("function", RegisterGamerules.FUNCTION_COMMAND);
-        put("gamemode", RegisterGamerules.GAME_MODE_COMMAND);
-        put("give", RegisterGamerules.GIVE_COMMAND);
-        put("help", RegisterGamerules.HELP_COMMAND);
-        put("item", RegisterGamerules.ITEM_COMMAND);
-        put("jfr", RegisterGamerules.JFR_COMMAND);
-        put("kick", RegisterGamerules.KICK_COMMAND);
-        put("kill", RegisterGamerules.KILL_COMMAND);
-        put("list", RegisterGamerules.LIST_COMMAND);
-        put("locatebiome", RegisterGamerules.LOCATE_BIOME_COMMAND);
-        put("locate", RegisterGamerules.LOCATE_COMMAND);
-        put("loot", RegisterGamerules.LOOT_COMMAND);
-        put("me", RegisterGamerules.ME_COMMAND);
-        put("msg", RegisterGamerules.MESSAGE_COMMAND);
-        put("particle", RegisterGamerules.PARTICLE_COMMAND);
-        put("playsound", RegisterGamerules.PLAY_SOUND_COMMAND);
-        put("publish", RegisterGamerules.PUBLISH_COMMAND);
-        put("raid", RegisterGamerules.RAID_COMMAND);
-        put("recipe", RegisterGamerules.RECIPE_COMMAND);
-        put("reload", RegisterGamerules.RELOAD_COMMAND);
-        put("resetchunks", RegisterGamerules.RESET_CHUNKS_COMMAND);
-        put("say", RegisterGamerules.SAY_COMMAND);
-        put("schedule", RegisterGamerules.SCHEDULE_COMMAND);
-        put("scoreboard", RegisterGamerules.SCOREBOARD_COMMAND);
-        put("seed", RegisterGamerules.SEED_COMMAND);
-        put("setblock", RegisterGamerules.SET_BLOCK_COMMAND);
-        put("setworldspawn", RegisterGamerules.SET_WORLD_SPAWN_COMMAND);
-        put("spawnpoint", RegisterGamerules.SPAWN_POINT_COMMAND);
-        put("spectate", RegisterGamerules.SPECTATE_COMMAND);
-        put("spreadplayers", RegisterGamerules.SPREAD_PLAYERS_COMMAND);
-        put("stopsound", RegisterGamerules.STOP_SOUND_COMMAND);
-        put("summon", RegisterGamerules.SUMMON_COMMAND);
-        put("tag", RegisterGamerules.TAG_COMMAND);
-        put("team", RegisterGamerules.TEAM_COMMAND);
-        put("teammsg", RegisterGamerules.TEAM_MSG_COMMAND);
-        put("teleport", RegisterGamerules.TELEPORT_COMMAND);
-        put("tellraw", RegisterGamerules.TELL_RAW_COMMAND);
-        put("time", RegisterGamerules.TIME_COMMAND);
-        put("title", RegisterGamerules.TITLE_COMMAND);
-        put("trigger", RegisterGamerules.TRIGGER_COMMAND);
-        put("weather", RegisterGamerules.WEATHER_COMMAND);
-        put("worldborder", RegisterGamerules.WORLD_BORDER_COMMAND);
-    }};
+    private static final Map<String, GameRules.Key<GameRules.BooleanRule>> commandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanRule>>();
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason the map otherwise initialises before the gamerules are created and always returns null
+     */
+    private void addOptionsToMap() {
+        commandNameGameruleMap.put("advancement", RegisterGamerules.ADVANCEMENT_COMMAND);
+        commandNameGameruleMap.put("attribute", RegisterGamerules.ATTRIBUTE_COMMAND);
+        commandNameGameruleMap.put("bossbar", RegisterGamerules.BOSS_BAR_COMMAND);
+        commandNameGameruleMap.put("chase", RegisterGamerules.CHASE_COMMAND);
+        commandNameGameruleMap.put("clear", RegisterGamerules.CLEAR_COMMAND);
+        commandNameGameruleMap.put("clone", RegisterGamerules.CLONE_COMMAND);
+        commandNameGameruleMap.put("datapack", RegisterGamerules.DATAPACK_COMMAND);
+        commandNameGameruleMap.put("data", RegisterGamerules.DATA_COMMAND);
+        commandNameGameruleMap.put("difficulty", RegisterGamerules.DIFFICULTY_COMMAND);
+        commandNameGameruleMap.put("effect", RegisterGamerules.EFFECT_COMMAND);
+        commandNameGameruleMap.put("enchant", RegisterGamerules.ENCHANT_COMMAND);
+        commandNameGameruleMap.put("execute", RegisterGamerules.EXECUTE_COMMAND);
+        commandNameGameruleMap.put("experience", RegisterGamerules.EXPERIENCE_COMMAND);
+        commandNameGameruleMap.put("fill", RegisterGamerules.FILL_COMMAND);
+        commandNameGameruleMap.put("forceload", RegisterGamerules.FORCE_LOAD_COMMAND);
+        commandNameGameruleMap.put("function", RegisterGamerules.FUNCTION_COMMAND);
+        commandNameGameruleMap.put("gamemode", RegisterGamerules.GAME_MODE_COMMAND);
+        commandNameGameruleMap.put("give", RegisterGamerules.GIVE_COMMAND);
+        commandNameGameruleMap.put("help", RegisterGamerules.HELP_COMMAND);
+        commandNameGameruleMap.put("item", RegisterGamerules.ITEM_COMMAND);
+        commandNameGameruleMap.put("jfr", RegisterGamerules.JFR_COMMAND);
+        commandNameGameruleMap.put("kick", RegisterGamerules.KICK_COMMAND);
+        commandNameGameruleMap.put("kill", RegisterGamerules.KILL_COMMAND);
+        commandNameGameruleMap.put("list", RegisterGamerules.LIST_COMMAND);
+        commandNameGameruleMap.put("locatebiome", RegisterGamerules.LOCATE_BIOME_COMMAND);
+        commandNameGameruleMap.put("locate", RegisterGamerules.LOCATE_COMMAND);
+        commandNameGameruleMap.put("loot", RegisterGamerules.LOOT_COMMAND);
+        commandNameGameruleMap.put("me", RegisterGamerules.ME_COMMAND);
+        commandNameGameruleMap.put("msg", RegisterGamerules.MESSAGE_COMMAND);
+        commandNameGameruleMap.put("particle", RegisterGamerules.PARTICLE_COMMAND);
+        commandNameGameruleMap.put("playsound", RegisterGamerules.PLAY_SOUND_COMMAND);
+        commandNameGameruleMap.put("publish", RegisterGamerules.PUBLISH_COMMAND);
+        commandNameGameruleMap.put("raid", RegisterGamerules.RAID_COMMAND);
+        commandNameGameruleMap.put("recipe", RegisterGamerules.RECIPE_COMMAND);
+        commandNameGameruleMap.put("reload", RegisterGamerules.RELOAD_COMMAND);
+        commandNameGameruleMap.put("resetchunks", RegisterGamerules.RESET_CHUNKS_COMMAND);
+        commandNameGameruleMap.put("say", RegisterGamerules.SAY_COMMAND);
+        commandNameGameruleMap.put("schedule", RegisterGamerules.SCHEDULE_COMMAND);
+        commandNameGameruleMap.put("scoreboard", RegisterGamerules.SCOREBOARD_COMMAND);
+        commandNameGameruleMap.put("seed", RegisterGamerules.SEED_COMMAND);
+        commandNameGameruleMap.put("setblock", RegisterGamerules.SET_BLOCK_COMMAND);
+        commandNameGameruleMap.put("setworldspawn", RegisterGamerules.SET_WORLD_SPAWN_COMMAND);
+        commandNameGameruleMap.put("spawnpoint", RegisterGamerules.SPAWN_POINT_COMMAND);
+        commandNameGameruleMap.put("spectate", RegisterGamerules.SPECTATE_COMMAND);
+        commandNameGameruleMap.put("spreadplayers", RegisterGamerules.SPREAD_PLAYERS_COMMAND);
+        commandNameGameruleMap.put("stopsound", RegisterGamerules.STOP_SOUND_COMMAND);
+        commandNameGameruleMap.put("summon", RegisterGamerules.SUMMON_COMMAND);
+        commandNameGameruleMap.put("tag", RegisterGamerules.TAG_COMMAND);
+        commandNameGameruleMap.put("team", RegisterGamerules.TEAM_COMMAND);
+        commandNameGameruleMap.put("teammsg", RegisterGamerules.TEAM_MSG_COMMAND);
+        commandNameGameruleMap.put("teleport", RegisterGamerules.TELEPORT_COMMAND);
+        commandNameGameruleMap.put("tellraw", RegisterGamerules.TELL_RAW_COMMAND);
+        commandNameGameruleMap.put("time", RegisterGamerules.TIME_COMMAND);
+        commandNameGameruleMap.put("title", RegisterGamerules.TITLE_COMMAND);
+        commandNameGameruleMap.put("trigger", RegisterGamerules.TRIGGER_COMMAND);
+        commandNameGameruleMap.put("weather", RegisterGamerules.WEATHER_COMMAND);
+        commandNameGameruleMap.put("worldborder", RegisterGamerules.WORLD_BORDER_COMMAND);
+    }
 
     /**
      * @author DragonEggBedrockBreaking
      * @author LittleLily
      * @reason map of all standard commands to their gamerules
      */
-    private static final Map<String, GameRules.Key<GameRules.BooleanRule>> dedicatedCommandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanRule>>() {{
-        put("ban", RegisterGamerules.BAN_DEDICATED_COMMAND);
-        put("ban-ip", RegisterGamerules.BAN_IP_DEDICATED_COMMAND);
-        put("ban-list", RegisterGamerules.BAN_LIST_DEDICATED_COMMAND);
-        put("deop", RegisterGamerules.DE_OP_DEDICATED_COMMAND);
-        put("op", RegisterGamerules.OP_DEDICATED_COMMAND);
-        put("pardon", RegisterGamerules.PARDON_DEDICATED_COMMAND);
-        put("pardon-ip", RegisterGamerules.PARDON_IP_DEDICATED_COMMAND);
-        put("perf", RegisterGamerules.PERF_DEDICATED_COMMAND);
-        put("save-all", RegisterGamerules.SAVE_ALL_DEDICATED_COMMAND);
-        put("save-off", RegisterGamerules.SAVE_OFF_DEDICATED_COMMAND);
-        put("save-on", RegisterGamerules.SAVE_ON_DEDICATED_COMMAND);
-        put("setidletimeout", RegisterGamerules.SET_IDLE_TIMEOUT_DEDICATED_COMMAND);
-        put("stop", RegisterGamerules.STOP_DEDICATED_COMMAND);
-        put("whitelist", RegisterGamerules.WHITELIST_DEDICATED_COMMAND);
-    }};
+    private static final Map<String, GameRules.Key<GameRules.BooleanRule>> dedicatedCommandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanRule>>();
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason the map otherwise initialises before the gamerules are created and always returns null
+     */
+    private void addDedicatedOptionsToMap() {
+        dedicatedCommandNameGameruleMap.put("ban", RegisterGamerules.BAN_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("ban-ip", RegisterGamerules.BAN_IP_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("ban-list", RegisterGamerules.BAN_LIST_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("deop", RegisterGamerules.DE_OP_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("op", RegisterGamerules.OP_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("pardon", RegisterGamerules.PARDON_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("pardon-ip", RegisterGamerules.PARDON_IP_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("perf", RegisterGamerules.PERF_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("save-all", RegisterGamerules.SAVE_ALL_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("save-off", RegisterGamerules.SAVE_OFF_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("save-on", RegisterGamerules.SAVE_ON_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("setidletimeout", RegisterGamerules.SET_IDLE_TIMEOUT_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("stop", RegisterGamerules.STOP_DEDICATED_COMMAND);
+        dedicatedCommandNameGameruleMap.put("whitelist", RegisterGamerules.WHITELIST_DEDICATED_COMMAND);
+    }
 
     /**
      * @author LittleLily
@@ -114,6 +126,12 @@ public abstract class MixinCommandManager {
     @Inject(method = "execute", at = @At(value = "HEAD"), cancellable = true)
     private void execute(ServerCommandSource source, String command, CallbackInfoReturnable<Integer> cir) {
         String commandName = command.split(" ")[0].substring(1);
+        if (commandNameGameruleMap.isEmpty()) {
+            this.addOptionsToMap();
+        }
+        if (dedicatedCommandNameGameruleMap.isEmpty()) {
+            this.addDedicatedOptionsToMap();
+        }
         GameRules.Key<GameRules.BooleanRule> commandGamerule = commandNameGameruleMap.get(commandName);
         GameRules.Key<GameRules.BooleanRule> dedicatedCommandGamerule = dedicatedCommandNameGameruleMap.get(commandName);
         if ((!command.startsWith("/gamerule") && !source.getWorld().getGameRules().getBoolean(RegisterGamerules.COMMANDS_ENABLED)) ||
