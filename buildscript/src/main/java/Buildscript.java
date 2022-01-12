@@ -72,4 +72,9 @@ public class Buildscript extends FabricProject {
             Util.sneak(e);
         }
     }
+
+    @Override
+    public int getJavaVersion() {
+        return 17;
+    }
 }

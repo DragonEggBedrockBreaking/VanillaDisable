@@ -2,6 +2,7 @@ package uk.debb.vanilla_disable.mixin.despawning;
 
 import java.util.HashMap;
 import java.util.Map;
+import net.minecraft.entity.Bucketable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.AmbientEntity;
 import net.minecraft.entity.mob.HostileEntity;
@@ -54,11 +55,8 @@ public abstract class MixinMobEntity {
     @Unique
     private boolean additionalRestrictionsMet() {
         MobEntity entity = (MobEntity) (Object) this;
-        if (entity instanceof FishEntity) {
-            return !((Entity)(Object)(this)).hasCustomName() && !((FishEntity)(Object)(this)).isFromBucket();
-        }
-        if (entity instanceof AxolotlEntity) {
-            return !((Entity)(Object)(this)).hasCustomName() && !((AxolotlEntity)(Object)(this)).isFromBucket();
+        if (entity instanceof Bucketable bucketable) {
+            return !((Entity)(Object)(this)).hasCustomName() && !bucketable.isFromBucket();
         }
         return true;
     }
