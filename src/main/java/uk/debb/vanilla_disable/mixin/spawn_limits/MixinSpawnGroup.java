@@ -1,6 +1,9 @@
 package uk.debb.vanilla_disable.mixin.spawn_limits;
 
+import java.util.HashMap;
+import java.util.Map;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.world.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -11,31 +14,37 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 public abstract class MixinSpawnGroup {
     /**
      * @author DragonEggBedrockBreaking
+     * @reason map of all spawn groups to their gamerules
+     */
+    private static final Map<SpawnGroup, GameRules.Key<GameRules.IntRule>> spawnGroupMap = new HashMap<SpawnGroup, GameRules.Key<GameRules.IntRule>>();
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason the map otherwise initialises before the gamerules are created and always returns null
+     */
+    private void addOptionsToMap() {
+        spawnGroupMap.put(SpawnGroup.MONSTER, RegisterGamerules.MONSTER_MOBCAP);
+        spawnGroupMap.put(SpawnGroup.CREATURE, RegisterGamerules.CREATURE_MOBCAP);
+        spawnGroupMap.put(SpawnGroup.AMBIENT, RegisterGamerules.AMBIENT_MOBCAP);
+        spawnGroupMap.put(SpawnGroup.AXOLOTLS, RegisterGamerules.AXOLOTL_MOBCAP);
+        spawnGroupMap.put(SpawnGroup.UNDERGROUND_WATER_CREATURE, RegisterGamerules.GLOWSQUID_MOBCAP);
+        spawnGroupMap.put(SpawnGroup.WATER_AMBIENT, RegisterGamerules.WATER_AMBIENT_MOBCAP);
+        spawnGroupMap.put(SpawnGroup.WATER_CREATURE, RegisterGamerules.WATER_CREATURE_MOBCAP);
+    }
+
+    /**
+     * @author DragonEggBedrockBreaking
      * @reason modify vanilla spawn caps
      * @param cir the returnable callback info
      */
     @Inject(method = "getCapacity", at = @At("HEAD"), cancellable = true)
     public void getCapacity(CallbackInfoReturnable<Integer> cir) {
-        if ((SpawnGroup) (Object) this == SpawnGroup.MONSTER) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MONSTER_MOBCAP));
+        if (spawnGroupMap.isEmpty()) {
+            this.addOptionsToMap();
         }
-        if ((SpawnGroup) (Object) this == SpawnGroup.CREATURE) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.CREATURE_MOBCAP));
-        }
-        if ((SpawnGroup) (Object) this == SpawnGroup.AMBIENT) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.AMBIENT_MOBCAP));
-        }
-        if ((SpawnGroup) (Object) this == SpawnGroup.AXOLOTLS) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.AXOLOTL_MOBCAP));
-        }
-        if ((SpawnGroup) (Object) this == SpawnGroup.UNDERGROUND_WATER_CREATURE) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.GLOWSQUID_MOBCAP));
-        }
-        if ((SpawnGroup) (Object) this == SpawnGroup.WATER_CREATURE) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.WATER_CREATURE_MOBCAP));
-        }
-        if ((SpawnGroup) (Object) this == SpawnGroup.WATER_AMBIENT) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.WATER_AMBIENT_MOBCAP));
+        GameRules.Key<GameRules.IntRule> gameRule = spawnGroupMap.get((SpawnGroup) (Object) this);
+        if (gameRule != null) {
+            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(gameRule));
         }
     }
 }
