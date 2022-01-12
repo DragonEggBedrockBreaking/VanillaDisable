@@ -27,7 +27,7 @@ public abstract class MixinLivingEntity extends Entity {
      * @author DragonEggBedrockBreaking
      * @reason map of all status effects to their gamerules
      */
-    private static final Map<StatusEffect, GameRules.Key<GameRules.BooleanRule>> statusEffectMap = new HashMap<StatusEffect, GameRules.Key<GameRules.BooleanRule>>() {{}};
+    private static final Map<StatusEffect, GameRules.Key<GameRules.BooleanRule>> statusEffectMap = new HashMap<StatusEffect, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking

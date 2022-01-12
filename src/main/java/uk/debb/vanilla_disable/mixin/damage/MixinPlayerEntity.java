@@ -22,7 +22,7 @@ public abstract class MixinPlayerEntity extends LivingEntity {
      * @author DragonEggBedrockBreaking
      * @reason map of all damage sources to their gamerules
      */
-    private static final Map<DamageSource, GameRules.Key<GameRules.BooleanRule>> damageSourceMap = new HashMap<DamageSource, GameRules.Key<GameRules.BooleanRule>>() {{}};
+    private static final Map<DamageSource, GameRules.Key<GameRules.BooleanRule>> damageSourceMap = new HashMap<DamageSource, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking

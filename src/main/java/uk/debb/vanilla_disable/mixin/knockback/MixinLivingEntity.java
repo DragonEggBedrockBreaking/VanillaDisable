@@ -42,7 +42,7 @@ public abstract class MixinLivingEntity extends Entity {
      * @author DragonEggBedrockBreaking
      * @reason map of all relevenat entities to their gamerules
      */
-    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanRule>> entityMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanRule>>() {{}};
+    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanRule>> entityMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanRule>>();
 
     /**
      * @author DragonEggBedrockBreaking
