@@ -44,7 +44,6 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SHULKER_BULLET_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> MOB_ATTACK_KNOCKBACK;
     public static GameRules.Key<GameRules.BooleanRule> PLAYER_ATTACK_KNOCKBACK;
-    public static GameRules.Key<GameRules.BooleanRule> KNOCKBACK_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanRule> EXPLOSION_KNOCKBACK;
 
     public static GameRules.Key<GameRules.BooleanRule> MONSTER_SPAWNING;
@@ -226,6 +225,45 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> WEAKNESS_EFFECT;
     public static GameRules.Key<GameRules.BooleanRule> WITHER_EFFECT;
 
+    public static GameRules.Key<GameRules.BooleanRule> AQUA_AFFINITY_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> BANE_OF_ARTHROPODS_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> BLAST_PROTECTION_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> CHANNELING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> DEPTH_STRIDER_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> EFFICIENCY_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> FEATHER_FALLING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> FIRE_ASPECT_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> FIRE_PROTECTION_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> FLAME_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> FORTUNE_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> FROST_WALKER_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> IMPALING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> INFINITY_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> KNOCKBACK_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> LOOTING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> LOYALTY_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> LUCK_OF_THE_SEA_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> LURE_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> MENDING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> MULTISHOT_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> PIERCING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> POWER_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> PROJECTILE_PROTECTION_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> PROTECTION_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> PUNCH_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> QUICK_CHARGE_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> RESPIRATION_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> RIPTIDE_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> SHARPNESS_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> SILK_TOUCH_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> SMITE_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> SOUL_SPEED_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> SWEEPING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> THORNS_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> UNBREAKING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanRule> BINDING_CURSE;
+    public static GameRules.Key<GameRules.BooleanRule> VANISHING_CURSE;
+
     public static GameRules.Key<GameRules.BooleanRule> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_GATEWAYS_ENABLED;
@@ -292,8 +330,6 @@ public class RegisterGamerules implements ModInitializer {
             "mobAttackKnockback",   CreateGameruleCategories.VD_KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         PLAYER_ATTACK_KNOCKBACK   = GameRuleRegistry.register(
             "playerAttackKnockback", CreateGameruleCategories.VD_KNOCKBACK, GameRuleFactory.createBooleanRule(true));
-        KNOCKBACK_ENCHANTMENT     = GameRuleRegistry.register(
-            "knockbackEnchantment", CreateGameruleCategories.VD_KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         EXPLOSION_KNOCKBACK       = GameRuleRegistry.register(
             "explosionKnockback",   CreateGameruleCategories.VD_KNOCKBACK, GameRuleFactory.createBooleanRule(true));
         
@@ -641,6 +677,83 @@ public class RegisterGamerules implements ModInitializer {
             "weaknessEffect",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         WITHER_EFFECT            = GameRuleRegistry.register(
             "witherEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+
+        AQUA_AFFINITY_ENCHANTMENT            = GameRuleRegistry.register(
+            "aquaAffinityEnchantment",          CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        BANE_OF_ARTHROPODS_ENCHANTMENT       = GameRuleRegistry.register(
+            "baneOfArthropodsEnchantment",     CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        BLAST_PROTECTION_ENCHANTMENT         = GameRuleRegistry.register(
+            "blastProtectionEnchantment",      CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        CHANNELING_ENCHANTMENT               = GameRuleRegistry.register(
+            "channelingEnchantment",           CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        DEPTH_STRIDER_ENCHANTMENT            = GameRuleRegistry.register(
+            "depthStriderEnchantment",         CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        EFFICIENCY_ENCHANTMENT               = GameRuleRegistry.register(
+            "efficiencyEnchantment",           CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        FEATHER_FALLING_ENCHANTMENT          = GameRuleRegistry.register(
+            "featherFallingEnchantment",       CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        FIRE_ASPECT_ENCHANTMENT              = GameRuleRegistry.register(
+            "fireAspectEnchantment",           CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        FIRE_PROTECTION_ENCHANTMENT          = GameRuleRegistry.register(
+            "fireProtectionEnchantment",       CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        FLAME_ENCHANTMENT                    = GameRuleRegistry.register(
+            "flameEnchantment",                CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        FORTUNE_ENCHANTMENT                  = GameRuleRegistry.register(
+            "fortuneEnchantment",              CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        FROST_WALKER_ENCHANTMENT             = GameRuleRegistry.register(
+            "frostWalkerEnchantment",          CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        IMPALING_ENCHANTMENT                 = GameRuleRegistry.register(
+            "impalingEnchantment",             CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        INFINITY_ENCHANTMENT                 = GameRuleRegistry.register(
+            "infinityEnchantment",             CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        KNOCKBACK_ENCHANTMENT                = GameRuleRegistry.register(
+            "knockbackEnchantment",            CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        LOOTING_ENCHANTMENT                  = GameRuleRegistry.register(
+            "lootingEnchantment",              CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        LOYALTY_ENCHANTMENT                  = GameRuleRegistry.register(
+            "loyaltyEnchantment",              CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        LUCK_OF_THE_SEA_ENCHANTMENT          = GameRuleRegistry.register(
+            "luckOfTheSeaEnchantment",         CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        LURE_ENCHANTMENT                     = GameRuleRegistry.register(
+            "lureEnchantment",                 CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        MENDING_ENCHANTMENT                  = GameRuleRegistry.register(
+            "mendingEnchantment",              CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        MULTISHOT_ENCHANTMENT                = GameRuleRegistry.register(
+            "multishotEnchantment",            CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        PIERCING_ENCHANTMENT                 = GameRuleRegistry.register(
+            "piercingEnchantment",             CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        POWER_ENCHANTMENT                    = GameRuleRegistry.register(
+            "powerEnchantment",                CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        PROJECTILE_PROTECTION_ENCHANTMENT    = GameRuleRegistry.register(
+            "projectileProtectionEnchantment", CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        PROTECTION_ENCHANTMENT               = GameRuleRegistry.register(
+            "protectionEnchantment",           CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        PUNCH_ENCHANTMENT                    = GameRuleRegistry.register(
+            "punchEnchantment",                CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        QUICK_CHARGE_ENCHANTMENT             = GameRuleRegistry.register(
+            "quickChargeEnchantment",          CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        RESPIRATION_ENCHANTMENT              = GameRuleRegistry.register(
+            "respirationEnchantment",          CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        RIPTIDE_ENCHANTMENT                  = GameRuleRegistry.register(
+            "riptideEnchantment",              CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        SHARPNESS_ENCHANTMENT                = GameRuleRegistry.register(
+            "sharpnessEnchantment",            CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        SILK_TOUCH_ENCHANTMENT               = GameRuleRegistry.register(
+            "silkTouchEnchantment",            CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        SMITE_ENCHANTMENT                    = GameRuleRegistry.register(
+            "smiteEnchantment",                CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        SOUL_SPEED_ENCHANTMENT               = GameRuleRegistry.register(
+            "soulSpeedEnchantment",            CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        SWEEPING_ENCHANTMENT                 = GameRuleRegistry.register(
+            "sweepingEnchantment",             CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        THORNS_ENCHANTMENT                   = GameRuleRegistry.register(
+            "thornsEnchantment",               CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        UNBREAKING_ENCHANTMENT               = GameRuleRegistry.register(
+            "unbreakingEnchantment",           CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        BINDING_CURSE                        = GameRuleRegistry.register(
+            "bindingCurse",                    CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+        VANISHING_CURSE                      = GameRuleRegistry.register(
+            "vanishingCurse",                  CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
 
         NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
             "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));

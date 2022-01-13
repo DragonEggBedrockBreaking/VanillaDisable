@@ -60,6 +60,12 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_ENCHANTMENTS = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.enchantments"),
+        new TranslatableText("gamerule.category.vd.enchantments")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
     public static final CustomGameRuleCategory VD_MISC = new CustomGameRuleCategory(
         new Identifier("gamerule.category.vd.misc"),
         new TranslatableText("gamerule.category.vd.misc")

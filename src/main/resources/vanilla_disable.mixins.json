@@ -16,11 +16,12 @@
 
     "effects.MixinLivingEntity",
 
+    "enchantments.MixinEnchantmentHelper",
+
     "fluids.MixinBucketItem",
     "fluids.MixinLavaFluid",
     "fluids.MixinWaterFluid",
 
-    "knockback.MixinEnchantmentHelper",
     "knockback.MixinLivingEntity",
     "knockback.MixinServerPlayNetworkHandler",
 
