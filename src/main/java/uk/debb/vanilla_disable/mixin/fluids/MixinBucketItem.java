@@ -59,7 +59,7 @@ public abstract class MixinBucketItem {
      * @param pos the position at which the water is being placed
      * @param ci the callback info
      */
-    @Inject(method = "playEmptyingSound", at = @At(value = "HEAD"))
+    @Inject(method = "playEmptyingSound", at = @At(value = "HEAD"), cancellable = true)
     protected void cancelPlayingEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, CallbackInfo ci) {
         if (world.getDimension().isUltrawarm() && this.fluid.isIn(FluidTags.WATER) &&
             ((ServerWorldAccess)world).toServerWorld().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER)) {
