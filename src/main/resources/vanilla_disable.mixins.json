@@ -20,9 +20,8 @@
     "fluids.MixinLavaFluid",
     "fluids.MixinWaterFluid",
 
+    "knockback.MixinEnchantmentHelper",
     "knockback.MixinLivingEntity",
-    "knockback.MixinMobEntity",
-    "knockback.MixinPlayerEntity",
     "knockback.MixinServerPlayNetworkHandler",
 
     "misc.MixinEndGatewayBlockEntity",
