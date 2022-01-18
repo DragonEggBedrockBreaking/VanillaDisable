@@ -264,6 +264,25 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> BINDING_CURSE;
     public static GameRules.Key<GameRules.BooleanRule> VANISHING_CURSE;
 
+    public static GameRules.Key<GameRules.BooleanRule> BASTION_REMNANT_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> BURIED_TREASURE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> DESERT_PYRAMID_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> END_CITY_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> FORTRESS_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> IGLOO_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> JUNGLE_PYRAMID_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> MANSION_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> MINESHAFT_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> MONUMENT_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> NETHER_FOSSIL_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> OCEAN_RUIN_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> PILLAGER_OUTPOST_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> RUINED_PORTAL_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> SHIPWRECK_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> STRONGHOLD_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> SWAMP_HUT_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> VILLAGE_GENERATION;
+
     public static GameRules.Key<GameRules.BooleanRule> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_GATEWAYS_ENABLED;
@@ -754,6 +773,43 @@ public class RegisterGamerules implements ModInitializer {
             "bindingCurse",                    CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
         VANISHING_CURSE                      = GameRuleRegistry.register(
             "vanishingCurse",                  CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+
+        BASTION_REMNANT_GENERATION     = GameRuleRegistry.register(
+            "bastionRemnantGeneration", CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        BURIED_TREASURE_GENERATION     = GameRuleRegistry.register(
+            "buriedTreasureGeneration", CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        DESERT_PYRAMID_GENERATION      = GameRuleRegistry.register(
+            "desertPyramidGeneration",  CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        END_CITY_GENERATION            = GameRuleRegistry.register(
+            "endCityGeneration",        CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        FORTRESS_GENERATION            = GameRuleRegistry.register(
+            "fortressGeneration",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        IGLOO_GENERATION               = GameRuleRegistry.register(
+            "iglooGeneration",          CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        JUNGLE_PYRAMID_GENERATION      = GameRuleRegistry.register(
+            "junglePyramidGeneration",  CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        MANSION_GENERATION             = GameRuleRegistry.register(
+            "mansionGeneration",        CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        MINESHAFT_GENERATION           = GameRuleRegistry.register(
+            "mineshaftGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        MONUMENT_GENERATION            = GameRuleRegistry.register(
+            "monumentGeneration",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        NETHER_FOSSIL_GENERATION       = GameRuleRegistry.register(
+            "netherFossilGeneration",   CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        OCEAN_RUIN_GENERATION          = GameRuleRegistry.register(
+            "oceanRuinGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        PILLAGER_OUTPOST_GENERATION    = GameRuleRegistry.register(
+            "pillagerOutpostGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        RUINED_PORTAL_GENERATION        = GameRuleRegistry.register(
+            "ruinedPortalGeneration",    CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        SHIPWRECK_GENERATION           = GameRuleRegistry.register(
+            "shipwreckGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        STRONGHOLD_GENERATION          = GameRuleRegistry.register(
+            "strongholdGeneration",     CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        SWAMP_HUT_GENERATION           = GameRuleRegistry.register(
+            "swampHutGeneration",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        VILLAGE_GENERATION             = GameRuleRegistry.register(
+            "villageGeneration",        CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
 
         NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
             "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));

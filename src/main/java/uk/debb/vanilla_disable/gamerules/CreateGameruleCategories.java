@@ -66,6 +66,12 @@ public class CreateGameruleCategories {
             .formatted(Formatting.BOLD)
             .formatted(Formatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_WORLDGEN = new CustomGameRuleCategory(
+        new Identifier("gamerule.category.vd.worldgen"),
+        new TranslatableText("gamerule.category.vd.worldgen")
+            .formatted(Formatting.BOLD)
+            .formatted(Formatting.YELLOW)
+    );
     public static final CustomGameRuleCategory VD_MISC = new CustomGameRuleCategory(
         new Identifier("gamerule.category.vd.misc"),
         new TranslatableText("gamerule.category.vd.misc")

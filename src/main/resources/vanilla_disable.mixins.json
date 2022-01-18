@@ -46,7 +46,9 @@
     "spawning.MixinSpawnHelper",
 
     "spawn_limits.MixinHostileEntity",
-    "spawn_limits.MixinSpawnGroup"
+    "spawn_limits.MixinSpawnGroup",
+
+    "structures.MixinStructuresConfig"
   ],
   "injectors": {
     "defaultRequire": 1
