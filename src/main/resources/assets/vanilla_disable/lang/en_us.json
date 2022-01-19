@@ -209,6 +209,7 @@
     "gamerule.weaknessEffect": "Toggle weakness effect",
     "gamerule.witherEffect": "Toggle wither effect",
 
+    "gamerule.enchantmentsEnabled": "Enable enchantments",
     "gamerule.aquaAffinityEnchantment": "Enable aqua affinity enchantment",
     "gamerule.baneOfArthropodsEnchantment": "Enable bane of arthropods enchantment",
     "gamerule.blastProtectionEnchantment": "Enable blast protection enchantment",

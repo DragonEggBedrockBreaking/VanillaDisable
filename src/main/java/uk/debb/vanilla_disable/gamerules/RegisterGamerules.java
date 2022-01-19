@@ -225,6 +225,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> WEAKNESS_EFFECT;
     public static GameRules.Key<GameRules.BooleanRule> WITHER_EFFECT;
 
+    public static GameRules.Key<GameRules.BooleanRule> ENCHANTMENTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> AQUA_AFFINITY_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanRule> BANE_OF_ARTHROPODS_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanRule> BLAST_PROTECTION_ENCHANTMENT;
@@ -733,8 +734,10 @@ public class RegisterGamerules implements ModInitializer {
         WITHER_EFFECT            = GameRuleRegistry.register(
             "witherEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
 
+        ENCHANTMENTS_ENABLED                 = GameRuleRegistry.register(
+            "enchantmentsEnabled",             CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
         AQUA_AFFINITY_ENCHANTMENT            = GameRuleRegistry.register(
-            "aquaAffinityEnchantment",          CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+            "aquaAffinityEnchantment",         CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
         BANE_OF_ARTHROPODS_ENCHANTMENT       = GameRuleRegistry.register(
             "baneOfArthropodsEnchantment",     CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
         BLAST_PROTECTION_ENCHANTMENT         = GameRuleRegistry.register(

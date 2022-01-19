@@ -82,7 +82,8 @@ public abstract class MixinEnchantmentHelper {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = enchantmentMap.get(enchantment);
-        if (gameRule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(gameRule)) {
+        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ENCHANTMENTS_ENABLED) ||
+            (gameRule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(gameRule))) {
             cir.setReturnValue(0);
         }
     }
