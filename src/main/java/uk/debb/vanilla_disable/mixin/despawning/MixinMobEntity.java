@@ -73,8 +73,8 @@ public abstract class MixinMobEntity {
             this.addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = spawnGroupDespawnMap.get(this.getClass());
-        if (gameRule != null && RegisterGamerules.getServer().getGameRules().getBoolean(gameRule)) {
-            cir.setReturnValue(this.additionalRestrictionsMet());
+        if (gameRule != null) {
+            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(gameRule) && this.additionalRestrictionsMet());
         }
     }
 }
