@@ -672,7 +672,7 @@ public class RegisterGamerules implements ModInitializer {
         EFFECTS_ENABLED          = GameRuleRegistry.register(
             "effectsEnabled",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         ABSORPTION_EFFECT        = GameRuleRegistry.register(
-            "absorbtionEffect",     CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+            "absorptionEffect",     CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         BAD_OMEN_EFFECT          = GameRuleRegistry.register(
             "badOmenEffect",        CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         BLINDNESS_EFFECT         = GameRuleRegistry.register(
