@@ -166,6 +166,7 @@
     "gamerule.lavaFlowSpeed": "Set the speed of lava flow",
     "gamerule.lavaFlowSpeedNether": "Set the speed of lava flow in the nether",
     "gamerule.waterPlaceableInNether": "Toggle placing water in the nether",
+    "gamerule.bubbleColumnsEnabled": "Toggle whether water bubbles columns are enabled",
 
     "gamerule.curableZillagers": "Toggle whether zillagers can be cured",
     "gamerule.villagersConvertToZillagers": "Toggle whether villagers can convert to zombie villagers",

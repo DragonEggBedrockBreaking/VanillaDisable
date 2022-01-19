@@ -19,6 +19,7 @@
     "enchantments.MixinEnchantmentHelper",
 
     "fluids.MixinBucketItem",
+    "fluids.MixinEntity",
     "fluids.MixinLavaFluid",
     "fluids.MixinWaterFluid",
 

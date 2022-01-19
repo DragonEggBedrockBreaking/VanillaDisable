@@ -182,6 +182,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> LAVA_FLOW_SPEED;
     public static GameRules.Key<GameRules.IntRule> LAVA_FLOW_SPEED_NETHER;
     public static GameRules.Key<GameRules.BooleanRule> WATER_PLACEABLE_IN_NETHER;
+    public static GameRules.Key<GameRules.BooleanRule> BUBBLE_COLUMNS_ENABLED;
 
     public static GameRules.Key<GameRules.BooleanRule> CURABLE_ZILLAGERS;
     public static GameRules.Key<GameRules.BooleanRule> VILLAGERS_CONVERT_TO_ZILLAGERS;
@@ -652,7 +653,9 @@ public class RegisterGamerules implements ModInitializer {
             "lavaFlowSpeedNether",     CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createIntRule(10, 1, 128));
         WATER_PLACEABLE_IN_NETHER   = GameRuleRegistry.register(
             "waterPlaceableInNether",  CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(false));
-    
+        BUBBLE_COLUMNS_ENABLED      = GameRuleRegistry.register(
+            "bubbleColumnsEnabled",    CreateGameruleCategories.VD_FLUIDS, GameRuleFactory.createBooleanRule(true));
+
         CURABLE_ZILLAGERS           = GameRuleRegistry.register(
             "curableZillagers",        CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         VILLAGERS_CONVERT_TO_ZILLAGERS  = GameRuleRegistry.register(
