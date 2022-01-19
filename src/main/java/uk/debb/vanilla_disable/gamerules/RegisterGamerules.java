@@ -71,6 +71,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> AMBIENT_DESPAWN;
     public static GameRules.Key<GameRules.BooleanRule> AXOLOTLS_DESPAWN;
     public static GameRules.Key<GameRules.BooleanRule> GLOWSQUIDS_DESPAWN;
+    public static GameRules.Key<GameRules.BooleanRule> VILLAGERS_DESPAWN;
     public static GameRules.Key<GameRules.BooleanRule> WATER_CREATURES_DESPAWN;
     public static GameRules.Key<GameRules.BooleanRule> WATER_AMBIENT_DESPAWN;
     public static GameRules.Key<GameRules.IntRule> MONSTER_MAX_DESPAWN;
@@ -438,6 +439,8 @@ public class RegisterGamerules implements ModInitializer {
             "axolotlsDespawn",      CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
         GLOWSQUIDS_DESPAWN        = GameRuleRegistry.register(
             "glowsquidsDespawn",    CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
+        VILLAGERS_DESPAWN         = GameRuleRegistry.register(
+            "villagersDespawn",     CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(false));
         WATER_CREATURES_DESPAWN   = GameRuleRegistry.register(
             "waterCreaturesDespawn", CreateGameruleCategories.VD_DESPAWNING, GameRuleFactory.createBooleanRule(true));
         WATER_AMBIENT_DESPAWN    = GameRuleRegistry.register(

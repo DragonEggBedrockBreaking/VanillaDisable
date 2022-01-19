@@ -55,6 +55,7 @@
     "gamerule.ambientDespawn": "Allow ambient mobs to despawn",
     "gamerule.axolotlsDespawn": "Allow axolotls to despawn",
     "gamerule.glowsquidsDespawn": "Allow glowsquids to despawn",
+    "gamerule.villagersDespawn": "Allow villagers to despawn",
     "gamerule.waterCreaturesDespawn": "Allow water creatures to despawn",
     "gamerule.waterAmbientDespawn": "Allow ambient water mobs to despawn",
     "gamerule.monsterMaxDespawn": "The range at which monsters instantly despawn",
