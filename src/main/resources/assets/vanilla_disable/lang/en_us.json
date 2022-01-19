@@ -177,6 +177,7 @@
     "gamerule.zombiesConvertToDrowned": "Toggle whether zombies can convert to drowned",
     "gamerule.skeletonsConvertToStrays": "Toggle whether skeletons can convert to strays",
     "gamerule.infiniteTrading": "Toggle whether players can infinitely trade with villagers",
+    "gamerule.villagerTradingEnabled": "Toggle whether players can trade with villagers",
 
     "gamerule.effectsEnabled": "Toggle whether effects are enabled",
     "gamerule.absorptionEffect": "Toggle absorption effect",

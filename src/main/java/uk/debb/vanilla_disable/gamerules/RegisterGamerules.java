@@ -193,6 +193,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> ZOMBIES_CONVERT_TO_DROWNED;
     public static GameRules.Key<GameRules.BooleanRule> SKELETONS_CONVERT_TO_STRAYS;
     public static GameRules.Key<GameRules.BooleanRule> INFINITE_TRADING;
+    public static GameRules.Key<GameRules.BooleanRule> VILLAGER_TRADING_ENABLED;
 
     public static GameRules.Key<GameRules.BooleanRule> EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> ABSORPTION_EFFECT;
@@ -674,6 +675,8 @@ public class RegisterGamerules implements ModInitializer {
             "skeletonsConvertToStrays",    CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         INFINITE_TRADING                = GameRuleRegistry.register(
             "infiniteTrading",             CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(false));
+        VILLAGER_TRADING_ENABLED        = GameRuleRegistry.register(
+            "villagerTradingEnabled",      CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
 
         EFFECTS_ENABLED          = GameRuleRegistry.register(
             "effectsEnabled",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
