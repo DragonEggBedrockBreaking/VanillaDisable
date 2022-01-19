@@ -282,6 +282,42 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> STRONGHOLD_GENERATION;
     public static GameRules.Key<GameRules.BooleanRule> SWAMP_HUT_GENERATION;
     public static GameRules.Key<GameRules.BooleanRule> VILLAGE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> END_VEGETATION;
+    public static GameRules.Key<GameRules.BooleanRule> NETHER_VEGETATION;
+    public static GameRules.Key<GameRules.BooleanRule> OCEAN_VEGETATION;
+    public static GameRules.Key<GameRules.BooleanRule> UNDERGROUND_VEGETATION;
+    public static GameRules.Key<GameRules.BooleanRule> AMETHYST_GEODE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> BAMBOO_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> BASALT_BLACKSTONE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> BERRY_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> CACTUS_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> DEAD_BUSH_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> DESERT_WELL_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> DRIPSTONE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> DUNGEON_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> FLOWER_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> FOREST_ROCK_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> FOSSIL_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> GLOWSTONE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> GRASS_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> ICE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> LAVA_LAKE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> MELON_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> MUSHROOM_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> NETHER_FIRE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> NETHER_SPRING_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> OBSIDIAN_END_PILLAR_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> OCEAN_FLOOR_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> ORE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> RETURN_END_GATEWAY_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> SMALL_END_ISLAND_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> SPRING_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> SUGAR_CANE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> TREE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> UNDERWATER_MAGMA_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> VILLAGE_MISC_FEATURE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> VINE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> WELL_GENERATION;
 
     public static GameRules.Key<GameRules.BooleanRule> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_PORTALS_ENABLED;
@@ -810,6 +846,78 @@ public class RegisterGamerules implements ModInitializer {
             "swampHutGeneration",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         VILLAGE_GENERATION             = GameRuleRegistry.register(
             "villageGeneration",        CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        BAMBOO_GENERATION              = GameRuleRegistry.register(
+            "bambooGeneration",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        CACTUS_GENERATION              = GameRuleRegistry.register(
+            "cactusGeneration",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        END_VEGETATION                 = GameRuleRegistry.register(
+            "endVegetation",            CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        NETHER_VEGETATION              = GameRuleRegistry.register(
+            "netherVegetation",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        OCEAN_VEGETATION               = GameRuleRegistry.register(
+            "oceanVegetation",          CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        UNDERGROUND_VEGETATION         = GameRuleRegistry.register(
+            "undergroundVegetation",    CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        AMETHYST_GEODE_GENERATION      = GameRuleRegistry.register(
+            "amethystGeodeGeneration",  CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        BASALT_BLACKSTONE_GENERATION   = GameRuleRegistry.register(
+            "basaltBlackstoneGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        BERRY_GENERATION               = GameRuleRegistry.register(
+            "berryGeneration",          CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        DEAD_BUSH_GENERATION           = GameRuleRegistry.register(
+            "deadBushGeneration",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        DESERT_WELL_GENERATION         = GameRuleRegistry.register(
+            "desertWellGeneration",     CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        DRIPSTONE_GENERATION           = GameRuleRegistry.register(
+            "dripstoneGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        DUNGEON_GENERATION             = GameRuleRegistry.register(
+            "dungeonGeneration",        CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        FLOWER_GENERATION              = GameRuleRegistry.register(
+            "flowerGeneration",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        FOREST_ROCK_GENERATION         = GameRuleRegistry.register(
+            "forestRockGeneration",     CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        FOSSIL_GENERATION              = GameRuleRegistry.register(
+            "fossilGeneration",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        GLOWSTONE_GENERATION           = GameRuleRegistry.register(
+            "glowstoneGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        GRASS_GENERATION               = GameRuleRegistry.register(
+            "grassGeneration",          CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        ICE_GENERATION                 = GameRuleRegistry.register(
+            "iceGeneration",            CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        LAVA_LAKE_GENERATION           = GameRuleRegistry.register(
+            "lavaLakeGeneration",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        MELON_GENERATION               = GameRuleRegistry.register(
+            "melonGeneration",          CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        MUSHROOM_GENERATION            = GameRuleRegistry.register(
+            "mushroomGeneration",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        NETHER_FIRE_GENERATION         = GameRuleRegistry.register(
+            "netherFireGeneration",     CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        NETHER_SPRING_GENERATION       = GameRuleRegistry.register(
+            "netherSpringGeneration",   CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        OBSIDIAN_END_PILLAR_GENERATION = GameRuleRegistry.register(
+            "obsidianEndPillarGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        OCEAN_FLOOR_GENERATION         = GameRuleRegistry.register(
+            "oceanFloorGeneration",     CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        ORE_GENERATION                 = GameRuleRegistry.register(
+            "oreGeneration",            CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        RETURN_END_GATEWAY_GENERATION  = GameRuleRegistry.register(
+            "returnEndGatewayGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        SMALL_END_ISLAND_GENERATION    = GameRuleRegistry.register(
+            "smallEndIslandGeneration", CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        SPRING_GENERATION              = GameRuleRegistry.register(
+            "springGeneration",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        SUGAR_CANE_GENERATION          = GameRuleRegistry.register(
+            "sugarCaneGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        TREE_GENERATION                = GameRuleRegistry.register(
+            "treeGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        UNDERWATER_MAGMA_GENERATION    = GameRuleRegistry.register(
+            "underwaterMagmaGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        VILLAGE_MISC_FEATURE_GENERATION = GameRuleRegistry.register(
+            "villageMiscFeatureGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        VINE_GENERATION                = GameRuleRegistry.register(
+            "vineGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        WELL_GENERATION                = GameRuleRegistry.register(
+            "wellGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
 
         NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
             "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
