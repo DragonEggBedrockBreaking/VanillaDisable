@@ -12,6 +12,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.passive.GlowSquidEntity;
+import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.world.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -71,7 +72,7 @@ public abstract class MixinMobEntity {
             this.addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = spawnGroupDespawnMap.get(this.getClass());
-        if (gameRule != null) {
+        if (gameRule != null && (Object) this.getClass() != MerchantEntity.class) {
             cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(gameRule) && this.additionalRestrictionsMet());
         }
     }
