@@ -51,6 +51,8 @@ public class Buildscript extends FabricProject {
         d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-game-rule-api-v1", "1.0.10+3ac43d9514"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-lifecycle-events-v1", "1.4.10+c15ca33565"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-api-base", "0.4.1+b4f4f6cd14"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        // CaffeineConfig
+        d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:383ee33be5"), ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ, ModDependencyFlag.RUNTIME);
         // DataBreaker
         d.addMaven("https://maven.gegy.dev/", new MavenId("supercoder79:databreaker:0.2.8"), ModDependencyFlag.RUNTIME);
         // Tiefix (modrinth special lol)
