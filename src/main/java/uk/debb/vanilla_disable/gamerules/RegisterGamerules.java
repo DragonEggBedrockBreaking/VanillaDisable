@@ -322,6 +322,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> VILLAGE_MISC_FEATURE_GENERATION;
     public static GameRules.Key<GameRules.BooleanRule> VINE_GENERATION;
     public static GameRules.Key<GameRules.BooleanRule> WELL_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> END_SPAWN_PLATFORM_GENERATION;
 
     public static GameRules.Key<GameRules.BooleanRule> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_PORTALS_ENABLED;
@@ -930,6 +931,8 @@ public class RegisterGamerules implements ModInitializer {
             "vineGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         WELL_GENERATION                = GameRuleRegistry.register(
             "wellGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        END_SPAWN_PLATFORM_GENERATION  = GameRuleRegistry.register(
+            "endSpawnPlatformGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
 
         NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
             "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));

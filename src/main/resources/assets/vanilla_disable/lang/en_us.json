@@ -307,6 +307,7 @@
     "gamerule.villageMiscFeatureGeneration": "Allow misc village features (like hay) to generate",
     "gamerule.vineGeneration": "Allow vines to generate",
     "gamerule.wellGeneration": "Allow desert wells to generate",
+    "gamerule.endSpawnPlatformGeneration": "Allow the obsidian platform in the end to generate",
 
     "gamerule.netherPortalsEnabled": "Toggle whether nether portals are enabled",
     "gamerule.endPortalsEnabled": "Toggle whether end portals are enabled",

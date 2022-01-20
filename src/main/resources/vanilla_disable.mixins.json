@@ -37,6 +37,7 @@
     "mob.MixinHuskEntity",
     "mob.MixinMerchantEntity",
     "mob.MixinPiglinBrain",
+    "mob.MixinServerWorld",
     "mob.MixinSkeletonEntity",
     "mob.MixinVillagerEntity",
     "mob.MixinZombieEntity",
