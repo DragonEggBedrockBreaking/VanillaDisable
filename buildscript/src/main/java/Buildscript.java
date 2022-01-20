@@ -23,7 +23,7 @@ public class Buildscript extends FabricProject {
     @Override
     public MappingTree createMappings() {
         // Yarn Mappings Version
-        return Yarn.ofMaven(FabricMaven.URL, FabricMaven.yarn("1.18.1+build.18")).tree;
+        return Yarn.ofMaven(FabricMaven.URL, FabricMaven.yarn("1.18.1+build.22")).tree;
     }
 
     @Override
