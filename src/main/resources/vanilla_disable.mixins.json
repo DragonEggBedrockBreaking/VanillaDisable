@@ -40,6 +40,7 @@
     "mob.MixinPiglinBrain",
     "mob.MixinSkeletonEntity",
     "mob.MixinVillagerEntity",
+    "mob.MixinWitherEntity",
     "mob.MixinZombieEntity",
     "mob.MixinZombieVillagerEntity",
 

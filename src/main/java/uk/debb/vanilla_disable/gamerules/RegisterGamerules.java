@@ -194,6 +194,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> INFINITE_TRADING;
     public static GameRules.Key<GameRules.BooleanRule> VILLAGER_TRADING_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> PIGLIN_BARTERING_ENABLED;
+    public static GameRules.Key<GameRules.BooleanRule> WITHER_SPAWNS;
 
     public static GameRules.Key<GameRules.BooleanRule> EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> ABSORPTION_EFFECT;
@@ -678,6 +679,8 @@ public class RegisterGamerules implements ModInitializer {
             "villagerTradingEnabled",      CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         PIGLIN_BARTERING_ENABLED        = GameRuleRegistry.register(
             "piglinBarteringEnabled",      CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        WITHER_SPAWNS                   = GameRuleRegistry.register(
+            "witherSpawns",                CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
 
         EFFECTS_ENABLED          = GameRuleRegistry.register(
             "effectsEnabled",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
