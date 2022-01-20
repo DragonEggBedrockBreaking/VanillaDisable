@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.mob;
+package uk.debb.vanilla_disable.mixin.worldgen;
 
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.structures;
+package uk.debb.vanilla_disable.mixin.worldgen;
 
 import java.util.HashMap;
 import java.util.Map;

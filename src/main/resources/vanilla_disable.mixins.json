@@ -38,7 +38,6 @@
     "mob.MixinHuskEntity",
     "mob.MixinMerchantEntity",
     "mob.MixinPiglinBrain",
-    "mob.MixinServerWorld",
     "mob.MixinSkeletonEntity",
     "mob.MixinVillagerEntity",
     "mob.MixinZombieEntity",
@@ -52,8 +51,9 @@
     "spawn_limits.MixinHostileEntity",
     "spawn_limits.MixinSpawnGroup",
 
-    "structures.MixinGenerationSettings",
-    "structures.MixinStructuresConfig"
+    "worldgen.MixinGenerationSettings",
+    "worldgen.MixinServerWorld",
+    "worldgen.MixinStructuresConfig"
   ],
   "injectors": {
     "defaultRequire": 1
