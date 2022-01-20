@@ -193,6 +193,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> SKELETONS_CONVERT_TO_STRAYS;
     public static GameRules.Key<GameRules.BooleanRule> INFINITE_TRADING;
     public static GameRules.Key<GameRules.BooleanRule> VILLAGER_TRADING_ENABLED;
+    public static GameRules.Key<GameRules.BooleanRule> PIGLIN_BARTERING_ENABLED;
 
     public static GameRules.Key<GameRules.BooleanRule> EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> ABSORPTION_EFFECT;
@@ -674,6 +675,8 @@ public class RegisterGamerules implements ModInitializer {
             "infiniteTrading",             CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(false));
         VILLAGER_TRADING_ENABLED        = GameRuleRegistry.register(
             "villagerTradingEnabled",      CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        PIGLIN_BARTERING_ENABLED        = GameRuleRegistry.register(
+            "piglinBarteringEnabled",      CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
 
         EFFECTS_ENABLED          = GameRuleRegistry.register(
             "effectsEnabled",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
