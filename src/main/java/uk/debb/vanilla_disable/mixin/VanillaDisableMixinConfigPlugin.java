@@ -5,11 +5,9 @@ import net.caffeinemc.caffeineconfig.CaffeineConfig;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
-    private static final String MIXIN_PACKAGE_ROOT = "uk.debb.vanilla_disable.mixin.";
-
     @Override
     protected CaffeineConfig createConfig() {
-        return CaffeineConfig.builder("Vanilla Disable")
+        return CaffeineConfig.builder("VanillaDisable")
             .addMixinOption("commands", true)
             .addMixinOption("damage", true)
             .addMixinOption("despawning", true)
@@ -28,6 +26,6 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
 
     @Override
     protected String mixinPackageRoot() {
-        return MIXIN_PACKAGE_ROOT;
+        return "uk.debb.vanilla_disable.mixin.";
     }
 }
