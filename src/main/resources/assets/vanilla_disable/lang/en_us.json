@@ -319,7 +319,7 @@
     "gamerule.endGatewaysEnabled": "Toggle whether end gateways are enabled",
     "gamerule.netherPortalCooldown": "Set the cooldown for nether portals",
     "gamerule.cropTrampling": "Toggle whether crops can be trampled",
-
+    "gamerule.oldHunger": "Toggle whether hunger directly increases hunger or health",
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
     "gamerule.category.vd.spawning": "VanillaDisable Spawning",

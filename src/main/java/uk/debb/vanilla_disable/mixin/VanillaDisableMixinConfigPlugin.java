@@ -16,6 +16,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
             .addMixinOption("fluids", true)
             .addMixinOption("knockback", true)
             .addMixinOption("misc", true)
+            .addMixinOption("misc.hunger", true)
             .addMixinOption("mob", true)
             .addMixinOption("spawn_limits", true)
             .addMixinOption("spawning", true)
