@@ -55,24 +55,8 @@ public class Buildscript extends FabricProject {
         d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:383ee33be5"), ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ, ModDependencyFlag.RUNTIME);
         // DataBreaker
         d.addMaven("https://maven.gegy.dev/", new MavenId("supercoder79:databreaker:0.2.8"), ModDependencyFlag.RUNTIME);
-        // Tiefix (modrinth special lol)
-        //d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.7.0"), ModDependencyFlag.RUNTIME);
-        try {
-            Path target = getLocalBrachyuraPath().resolve("tiefix-1.7.1.jar");
-            if (!Files.exists(target)) {
-                try (
-                    AtomicFile f = new AtomicFile(target);
-                    InputStream is = new URL("https://api.modrinth.com/maven/maven/modrinth/tiefix/1.7.1/tiefix-1.7.1.jar").openStream();
-                ) {
-                    Files.copy(is, f.tempPath, StandardCopyOption.REPLACE_EXISTING);
-                    f.commit();
-                    System.out.println("INFO: Remapped tiefix-1.7.1-sources.jar");
-                }
-            }
-            d.add(new JavaJarDependency(target, null, null), ModDependencyFlag.RUNTIME);
-        } catch (Exception e) {
-            Util.sneak(e);
-        }
+        // Tiefix
+        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.7.0"), ModDependencyFlag.RUNTIME);
     }
 
     @Override
