@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "vanilla_disable",
-  "version": "1.1.0",
+  "version": "{dev-env}",
 
   "name": "Vanilla Disable",
   "description": "Allows you to disable a lot of vanilla features.",

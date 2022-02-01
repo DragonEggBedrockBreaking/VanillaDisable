@@ -1,16 +1,13 @@
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import io.github.coolcrabs.brachyura.dependency.JavaJarDependency;
+import io.github.coolcrabs.brachyura.decompiler.BrachyuraDecompiler;
+import io.github.coolcrabs.brachyura.decompiler.fernflower.FernflowerDecompiler;
 import io.github.coolcrabs.brachyura.fabric.FabricLoader;
 import io.github.coolcrabs.brachyura.fabric.FabricMaven;
 import io.github.coolcrabs.brachyura.fabric.FabricProject;
 import io.github.coolcrabs.brachyura.fabric.Yarn;
+import io.github.coolcrabs.brachyura.maven.Maven;
 import io.github.coolcrabs.brachyura.maven.MavenId;
-import io.github.coolcrabs.brachyura.util.AtomicFile;
-import io.github.coolcrabs.brachyura.util.Util;
+import io.github.coolcrabs.brachyura.processing.ProcessorChain;
 import net.fabricmc.mappingio.tree.MappingTree;
 
 public class Buildscript extends FabricProject {
@@ -61,6 +58,25 @@ public class Buildscript extends FabricProject {
 
     @Override
     public int getJavaVersion() {
+        // Default is Java 8
         return 17;
+    }
+
+    @Override
+    public BrachyuraDecompiler decompiler() {
+        // Uses QuiltFlower instead of CFR
+        return new FernflowerDecompiler(Maven.getMavenJarDep("https://maven.quiltmc.org/repository/release", new MavenId("org.quiltmc:quiltflower:1.7.0"))); 
+    };
+
+    @Override
+    public Path getBuildJarPath() {
+        // Changes the jar file name
+        return getBuildLibsDir().resolve(getModId() + "-" + "mc" + getMcVersion() + "-" + getVersion() + ".jar");
+    }
+
+    @Override
+    public ProcessorChain resourcesProcessingChain() {
+        // Overrides the version tag in fabric.mod.json
+        return new ProcessorChain(super.resourcesProcessingChain(), new FmjVersionFixer(this));
     }
 }
