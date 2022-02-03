@@ -39,6 +39,7 @@
     "mob.MixinHoglinEntity",
     "mob.MixinHuskEntity",
     "mob.MixinMerchantEntity",
+    "mob.MixinMobEntity",
     "mob.MixinPigEntity",
     "mob.MixinPiglinBrain",
     "mob.MixinSkeletonEntity",

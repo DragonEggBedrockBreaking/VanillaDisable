@@ -180,7 +180,7 @@
     "gamerule.piglinBarteringEnabled": "Toggle whether players can barter with piglins",
     "gamerule.witherSpawns": "Toggle whether withers can spawn",
     "gamerule.pigsBreedWithWheat": "Change pigs to breed with wheat, like other mobs",
-
+    "gamerule.mobsBurnInSunlight": "Toggle whether some hostile mobs burn in sunlight",
     "gamerule.effectsEnabled": "Toggle whether effects are enabled",
     "gamerule.absorptionEffect": "Toggle absorption effect",
     "gamerule.badOmenEffect": "Toggle bad omen effect",
