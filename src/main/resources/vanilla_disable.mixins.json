@@ -57,6 +57,7 @@
     "spawn_limits.MixinHostileEntity",
     "spawn_limits.MixinSpawnGroup",
 
+    "worldgen.MixinEndSpikeFeature$Spike",
     "worldgen.MixinGenerationSettings",
     "worldgen.MixinServerWorld",
     "worldgen.MixinStructuresConfig"

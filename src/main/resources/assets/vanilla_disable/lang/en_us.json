@@ -315,6 +315,7 @@
     "gamerule.vineGeneration": "Allow vines to generate",
     "gamerule.wellGeneration": "Allow desert wells to generate",
     "gamerule.endSpawnPlatformGeneration": "Allow the obsidian platform in the end to generate",
+    "gamerule.endPillarCageGeneration": "Allow cages to generate on two of the obsidian pillars",
 
     "gamerule.netherPortalsEnabled": "Toggle whether nether portals are enabled",
     "gamerule.endPortalsEnabled": "Toggle whether end portals are enabled",
@@ -322,6 +323,7 @@
     "gamerule.netherPortalCooldown": "Set the cooldown for nether portals",
     "gamerule.cropTrampling": "Toggle whether crops can be trampled",
     "gamerule.oldHunger": "Toggle whether hunger directly increases hunger or health",
+
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
     "gamerule.category.vd.spawning": "VanillaDisable Spawning",
