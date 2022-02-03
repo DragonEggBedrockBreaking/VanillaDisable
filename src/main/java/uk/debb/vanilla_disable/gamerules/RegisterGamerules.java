@@ -197,6 +197,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> WITHER_SPAWNS;
     public static GameRules.Key<GameRules.BooleanRule> PIGS_BREED_WITH_WHEAT;
     public static GameRules.Key<GameRules.BooleanRule> MOBS_BURN_IN_SUNLIGHT;
+    public static GameRules.Key<GameRules.BooleanRule> DRAGON_FIREBALLS;
 
     public static GameRules.Key<GameRules.BooleanRule> EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> ABSORPTION_EFFECT;
@@ -691,6 +692,8 @@ public class RegisterGamerules implements ModInitializer {
             "pigsBreedWithWheat",          CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(false));
         MOBS_BURN_IN_SUNLIGHT           = GameRuleRegistry.register(
             "mobsBurnInSunlight",          CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        DRAGON_FIREBALLS                = GameRuleRegistry.register(
+            "dragonFireballs",             CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
 
         EFFECTS_ENABLED          = GameRuleRegistry.register(
             "effectsEnabled",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));

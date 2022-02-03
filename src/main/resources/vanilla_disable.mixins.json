@@ -43,6 +43,7 @@
     "mob.MixinPigEntity",
     "mob.MixinPiglinBrain",
     "mob.MixinSkeletonEntity",
+    "mob.MixinStrafePlayerPhase",
     "mob.MixinVillagerEntity",
     "mob.MixinWitherEntity",
     "mob.MixinZombieEntity",
