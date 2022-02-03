@@ -323,6 +323,7 @@
     "gamerule.netherPortalCooldown": "Set the cooldown for nether portals",
     "gamerule.cropTrampling": "Toggle whether crops can be trampled",
     "gamerule.oldHunger": "Toggle whether hunger directly increases hunger or health",
+    "gamerule.oldBoats": "Toggle whether boats drop when they hit a block",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",

@@ -338,6 +338,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.IntRule> NETHER_PORTAL_COOLDOWN;
     public static GameRules.Key<GameRules.BooleanRule> CROP_TRAMPLING;
     public static GameRules.Key<GameRules.BooleanRule> OLD_HUNGER;
+    public static GameRules.Key<GameRules.BooleanRule> OLD_BOATS;
 
     @Override
     public void onInitialize() {
@@ -971,6 +972,8 @@ public class RegisterGamerules implements ModInitializer {
             "cropTrampling",        CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
         OLD_HUNGER               = GameRuleRegistry.register(
             "oldHunger",            CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
+        OLD_BOATS                = GameRuleRegistry.register(
+            "oldBoats",             CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
 
         // Registering the Minecraft server to when it actually starts
         ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {
