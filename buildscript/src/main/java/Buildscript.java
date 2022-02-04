@@ -53,7 +53,7 @@ public class Buildscript extends FabricProject {
         // DataBreaker
         d.addMaven("https://maven.gegy.dev/", new MavenId("supercoder79:databreaker:0.2.8"), ModDependencyFlag.RUNTIME);
         // Tiefix
-        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.7.0"), ModDependencyFlag.RUNTIME);
+        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.9.0"), ModDependencyFlag.RUNTIME);
     }
 
     @Override
