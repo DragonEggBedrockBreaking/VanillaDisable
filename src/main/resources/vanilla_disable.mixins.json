@@ -33,6 +33,7 @@
     "misc.MixinFarmlandBlock",
     "misc.MixinNetherPortalBlock",
     "misc.hunger.MixinHungerManager",
+    "misc.hunger.MixinItem",
     "misc.hunger.MixinPlayerEntity",
 
     "mob.MixinAbstractPiglinEntity",
