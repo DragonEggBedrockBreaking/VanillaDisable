@@ -48,7 +48,7 @@ public abstract class MixinPlayerEntity {
     @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"), cancellable = true)
     private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (damageSourceMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> damageGamerule = damageSourceMap.get(damageSource);
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.DAMAGE_ENABLED)) {

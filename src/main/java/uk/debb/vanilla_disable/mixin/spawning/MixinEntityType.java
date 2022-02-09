@@ -29,7 +29,7 @@ public abstract class MixinEntityType<T extends Entity> {
      */
     @Inject(method = "spawnFromItemStack", at = @At(value = "HEAD"), cancellable = true)
     private void cancelSpawningFromItemStack(ServerWorld world, ItemStack stack, PlayerEntity player, BlockPos pos, SpawnReason spawnReason, boolean alignPosition, boolean invertY, CallbackInfoReturnable<Entity> cir) {
-        if (!world.getGameRules().getBoolean(RegisterGamerules.SPAWN_EGGS)) {
+        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.SPAWN_EGGS)) {
             cir.cancel();
         }
     }

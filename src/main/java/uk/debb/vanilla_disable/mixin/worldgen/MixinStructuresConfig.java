@@ -60,7 +60,7 @@ public abstract class MixinStructuresConfig {
     @Inject(method = "getConfiguredStructureFeature", at = @At("HEAD"), cancellable = true)
     private void cancelGettingConfiguredStructureFeature(StructureFeature<?> feature, CallbackInfoReturnable<ImmutableMultimap<ConfiguredStructureFeature<?, ?>, RegistryKey<Biome>>> cir) {
         if (structureToGameruleMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = structureToGameruleMap.get(feature);
         if (gameRule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(gameRule)) {

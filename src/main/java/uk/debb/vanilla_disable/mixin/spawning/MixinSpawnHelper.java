@@ -55,7 +55,7 @@ public class MixinSpawnHelper {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = spawnGroupMap.get(group);
-        if (gameRule != null && !world.getGameRules().getBoolean(gameRule)) {
+        if (gameRule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(gameRule)) {
             ci.cancel();
         }
     }

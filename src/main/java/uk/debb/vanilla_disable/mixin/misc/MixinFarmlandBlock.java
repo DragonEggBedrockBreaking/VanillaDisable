@@ -33,7 +33,7 @@ public abstract class MixinFarmlandBlock {
         )
     )
     private void cancelSettingToDirt(BlockState state, World world, BlockPos pos, World theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
-        if (world.getGameRules().getBoolean(RegisterGamerules.CROP_TRAMPLING)) {
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.CROP_TRAMPLING)) {
             world.setBlockState(pos, FarmlandBlock.pushEntitiesUpBeforeBlockChange(state, Blocks.DIRT.getDefaultState(), world, pos));
         }
     }

@@ -69,11 +69,11 @@ public abstract class MixinMobEntity {
     @Inject(method = "canImmediatelyDespawn", at = @At("HEAD"), cancellable = true)
     private void cannotImmediatelyDespawn(double distanceSquared, CallbackInfoReturnable<Boolean> cir) {
         if (spawnGroupDespawnMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = spawnGroupDespawnMap.get(this.getClass());
         if (gameRule != null && (Object) this.getClass() != MerchantEntity.class) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(gameRule) && this.additionalRestrictionsMet());
+            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(gameRule) && additionalRestrictionsMet());
         }
     }
 }

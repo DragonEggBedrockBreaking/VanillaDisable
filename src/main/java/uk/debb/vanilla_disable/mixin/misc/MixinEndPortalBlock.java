@@ -24,7 +24,7 @@ public abstract class MixinEndPortalBlock {
      */
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
     private void cancelEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (!world.getGameRules().getBoolean(RegisterGamerules.END_PORTALS_ENABLED)) {
+        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.END_PORTALS_ENABLED)) {
             ci.cancel();
         }
     }

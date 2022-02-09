@@ -74,7 +74,7 @@ public abstract class MixinLivingEntity{
         if (((Object) this) instanceof ServerPlayerEntity) {
             StatusEffect statusEffect = effect.getEffectType();
             if (statusEffectMap.isEmpty()) {
-                this.addOptionsToMap();
+                addOptionsToMap();
             }
             GameRules.Key<GameRules.BooleanRule> effectGamerule = statusEffectMap.get(statusEffect);
             if ((!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.EFFECTS_ENABLED)) ||

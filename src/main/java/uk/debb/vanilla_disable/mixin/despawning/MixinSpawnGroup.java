@@ -55,7 +55,7 @@ public abstract class MixinSpawnGroup {
     @Inject(method = "getImmediateDespawnRange", at = @At("HEAD"), cancellable = true)
     public void editImmediateDespawnRange(CallbackInfoReturnable<Integer> cir) {
         if (spawnGroupImmediateMap.isEmpty()) {
-            this.addImmediateOptionsToMap();
+            addImmediateOptionsToMap();
         }
        GameRules.Key<GameRules.IntRule> gameRule = spawnGroupImmediateMap.get((SpawnGroup) (Object) this);
        if (gameRule != null) {
@@ -71,7 +71,7 @@ public abstract class MixinSpawnGroup {
     @Inject(method = "getDespawnStartRange", at = @At("HEAD"), cancellable = true)
     public void editDespawnStartRange(CallbackInfoReturnable<Integer> cir) {
         if (spawnGroupStartMap.isEmpty()) {
-            this.addStartOptionsToMap();
+            addStartOptionsToMap();
         }
         GameRules.Key<GameRules.IntRule> gameRule = spawnGroupStartMap.get((SpawnGroup) (Object) this);
         if (gameRule != null) {

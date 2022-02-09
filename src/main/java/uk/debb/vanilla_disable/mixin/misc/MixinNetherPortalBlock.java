@@ -24,7 +24,7 @@ public abstract class MixinNetherPortalBlock {
      */
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
     private void cancelEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (!world.getGameRules().getBoolean(RegisterGamerules.NETHER_PORTALS_ENABLED)) {
+        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.NETHER_PORTALS_ENABLED)) {
             ci.cancel();
         }
     }

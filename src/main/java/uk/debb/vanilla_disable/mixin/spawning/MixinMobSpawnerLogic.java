@@ -87,7 +87,7 @@ public abstract class MixinMobSpawnerLogic {
     )
     private void cancelSpawningNewEntityAndPassengers(ServerWorld world, BlockPos pos, CallbackInfo ci) {
         if (spawnerMobMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = spawnerMobMap.get(this.spawnedEntity.getClass());
         if (!this.spawnedEntity.getWorld().getGameRules().getBoolean(gameRule))  {

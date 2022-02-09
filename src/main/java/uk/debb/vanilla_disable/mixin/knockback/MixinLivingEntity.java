@@ -62,7 +62,7 @@ public abstract class MixinLivingEntity {
     @Unique
     private boolean isInvulnerableToKnockback(LivingEntity source) {
         if (entityMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> knockbackGamerule = entityMap.get(this.getClass());
         if ((!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED)) ||
@@ -90,7 +90,7 @@ public abstract class MixinLivingEntity {
      */
     @Inject(method = "takeKnockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(double strength, double x, double z, CallbackInfo ci) {
-        if ((Object)this instanceof PlayerEntity && this.isInvulnerableToKnockback(this.attacker)) {
+        if ((Object)this instanceof PlayerEntity && isInvulnerableToKnockback(this.attacker)) {
             ci.cancel();
         }
     }

@@ -29,7 +29,7 @@ public abstract class MixinZombieEntity {
         )
     )
     public Difficulty getWrongDifficulty(ServerWorld world, ServerWorld serverWorld, LivingEntity other) {
-        if (world.getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
             return world.getDifficulty();
         } else {
             return Difficulty.PEACEFUL;

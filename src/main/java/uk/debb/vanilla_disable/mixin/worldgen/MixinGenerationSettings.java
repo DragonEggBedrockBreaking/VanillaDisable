@@ -269,7 +269,7 @@ public abstract class MixinGenerationSettings {
     @Inject(method = "isFeatureAllowed", at = @At("HEAD"), cancellable = true)
     private void cancelFeature(PlacedFeature feature, CallbackInfoReturnable<Boolean> cir) {
         if (featureToGameruleMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> gameRule = featureToGameruleMap.get(String.format("%s", feature));
         if (gameRule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(gameRule)) {

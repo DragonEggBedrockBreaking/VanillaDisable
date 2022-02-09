@@ -43,7 +43,7 @@ public abstract class MixinSpawnGroup {
     @Inject(method = "getCapacity", at = @At("HEAD"), cancellable = true)
     public void getCapacity(CallbackInfoReturnable<Integer> cir) {
         if (spawnGroupMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         GameRules.Key<GameRules.IntRule> gameRule = spawnGroupMap.get((SpawnGroup) (Object) this);
         if (gameRule != null) {

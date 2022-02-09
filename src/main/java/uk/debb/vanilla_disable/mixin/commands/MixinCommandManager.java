@@ -132,10 +132,10 @@ public abstract class MixinCommandManager {
     private void execute(ServerCommandSource source, String command, CallbackInfoReturnable<Integer> cir) {
         String commandName = command.split(" ")[0].substring(1);
         if (commandNameGameruleMap.isEmpty()) {
-            this.addOptionsToMap();
+            addOptionsToMap();
         }
         if (dedicatedCommandNameGameruleMap.isEmpty()) {
-            this.addDedicatedOptionsToMap();
+            addDedicatedOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanRule> commandGamerule = commandNameGameruleMap.get(commandName);
         GameRules.Key<GameRules.BooleanRule> dedicatedCommandGamerule = dedicatedCommandNameGameruleMap.get(commandName);

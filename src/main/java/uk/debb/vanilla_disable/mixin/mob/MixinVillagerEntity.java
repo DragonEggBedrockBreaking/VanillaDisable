@@ -27,7 +27,7 @@ public abstract class MixinVillagerEntity {
         )
     )
     public Difficulty getWrongDifficulty(ServerWorld world, ServerWorld serverWorld, LightningEntity entity) {
-        if (world.getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
             return world.getDifficulty();
         } else {
             return Difficulty.PEACEFUL;

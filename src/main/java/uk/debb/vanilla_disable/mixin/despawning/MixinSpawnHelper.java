@@ -25,9 +25,9 @@ public abstract class MixinSpawnHelper {
      */
     @Inject(method = "isAcceptableSpawnPosition", at = @At("HEAD"), cancellable = true)
     private static void mayBeAcceptableSpawnPosition(ServerWorld world, Chunk chunk, BlockPos.Mutable pos, double squaredDistance, CallbackInfoReturnable<Boolean> cir) {
-        if (squaredDistance <= Math.pow(world.getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE), 2)) {
+        if (squaredDistance <= Math.pow(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE), 2)) {
             cir.setReturnValue(false);
-        } else if (world.getSpawnPos().isWithinDistance(new Vec3d((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5), world.getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE))) {
+        } else if (world.getSpawnPos().isWithinDistance(new Vec3d((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5), RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE))) {
             cir.setReturnValue(false);
         } else {
             cir.setReturnValue(Objects.equals(new ChunkPos(pos), chunk.getPos()) || world.shouldTickEntity(pos));
