@@ -29,8 +29,11 @@ cd VanillaDisable
 java -jar brachyura-bootstrap-0.jar build
 ```
 
-You can speed it up by using the `-j n`, where n is the number of threads that you want to use.
 The artifacts will be in `build/libs/`, just like with the other builds systems.
+
+There are other tasks as well, but they are not necessary to compile the mod.
+`runMinecraftClient` and `runMinecraftServer` are the equivalents of gradle's `runClient` and `runServer` tasks.
+The IDE tasks `idea` and `netbeans` are for the respective IDEs, and `jdt` is for both eclipse and vscode.
 
 ## License
 
