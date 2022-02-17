@@ -316,6 +316,9 @@
     "gamerule.wellGeneration": "Allow desert wells to generate",
     "gamerule.endSpawnPlatformGeneration": "Allow the obsidian platform in the end to generate",
     "gamerule.endPillarCageGeneration": "Allow cages to generate on two of the obsidian pillars",
+    "gamerule.removeOverworldBiomes": "Whether or not to keep only plains and ocean in overworld",
+    "gamerule.removeNetherBiomes": "Whether or not to keep only nether wastes in nether",
+    "gamerule.removeEndBiomes": "Whether or not to keep only the main end biome in the end",
 
     "gamerule.netherPortalsEnabled": "Toggle whether nether portals are enabled",
     "gamerule.endPortalsEnabled": "Toggle whether end portals are enabled",
@@ -338,5 +341,6 @@
     "gamerule.category.vd.worldgen": "VanillaDisable World Generation",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
-    "commands.disabled.by.vd": "This command has been disabled by an operator"
+    "commands.disabled.by.vd": "This command has been disabled by an operator",
+    "closing.in.one.minute": "You will be kicked in 60 seconds. Rejoin afterwards."
 }

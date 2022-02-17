@@ -331,6 +331,9 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> WELL_GENERATION;
     public static GameRules.Key<GameRules.BooleanRule> END_SPAWN_PLATFORM_GENERATION;
     public static GameRules.Key<GameRules.BooleanRule> END_PILLAR_CAGE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanRule> REMOVE_OVERWORLD_BIOMES;
+    public static GameRules.Key<GameRules.BooleanRule> REMOVE_NETHER_BIOMES;
+    public static GameRules.Key<GameRules.BooleanRule> REMOVE_END_BIOMES;
 
     public static GameRules.Key<GameRules.BooleanRule> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> END_PORTALS_ENABLED;
@@ -959,6 +962,12 @@ public class RegisterGamerules implements ModInitializer {
             "endSpawnPlatformGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         END_PILLAR_CAGE_GENERATION     = GameRuleRegistry.register(
             "endPillarCageGeneration",  CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
+        REMOVE_OVERWORLD_BIOMES        = GameRuleRegistry.register(
+            "removeOverworldBiomes",    CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(false));
+        REMOVE_NETHER_BIOMES           = GameRuleRegistry.register(
+            "removeNetherBiomes",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(false));
+        REMOVE_END_BIOMES              = GameRuleRegistry.register(
+            "removeEndBiomes",          CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(false));
 
         NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
             "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));

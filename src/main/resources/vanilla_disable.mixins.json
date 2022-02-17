@@ -61,7 +61,10 @@
     "worldgen.MixinEndSpikeFeature$Spike",
     "worldgen.MixinGenerationSettings",
     "worldgen.MixinServerWorld",
-    "worldgen.MixinStructuresConfig"
+    "worldgen.MixinStructuresConfig",
+    "worldgen.biomes.MixinMinecraftServer",
+    "worldgen.biomes.MixinPlayerManager",
+    "worldgen.biomes.MixinTimeCommand"
   ],
   "injectors": {
     "defaultRequire": 1

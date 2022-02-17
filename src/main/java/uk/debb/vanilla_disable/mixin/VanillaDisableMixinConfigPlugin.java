@@ -21,6 +21,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
             .addMixinOption("spawn_limits", true)
             .addMixinOption("spawning", true)
             .addMixinOption("worldgen", true)
+            .addMixinOption("worldgen.biomes", true)
             .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
             .build(FabricLoader.getInstance().getConfigDir().resolve("vanilla-disable-mixin.properties"));
     }

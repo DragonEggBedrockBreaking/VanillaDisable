@@ -41,5 +41,8 @@
     "fabric-api-base": ">=0.4.1",
     "minecraft": "1.18.x",
     "java": ">=17"
+  },
+  "recommends": {
+    "here-be-no-dragons": "*"
   }
 }
