@@ -39,9 +39,15 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void createDatapackDirectories() {
-        createDatapackDir("vanilla_disable_overworld_biomes");
-        createDatapackDir("vanilla_disable_nether_biomes");
-        createDatapackDir("vanilla_disable_end_biomes");
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES)) {
+            createDatapackDir("vanilla_disable_overworld_biomes");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES)) {
+            createDatapackDir("vanilla_disable_nether_biomes");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) {
+            createDatapackDir("vanilla_disable_end_biomes");
+        }
     }
 
     /**
@@ -66,9 +72,15 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addMcmetaFiles() throws IOException {
-        addMcmetaFile("vanilla_disable_overworld_biomes");
-        addMcmetaFile("vanilla_disable_nether_biomes");
-        addMcmetaFile("vanilla_disable_end_biomes");
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES)) {
+            addMcmetaFile("vanilla_disable_overworld_biomes");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES)) {
+            addMcmetaFile("vanilla_disable_nether_biomes");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) {
+            addMcmetaFile("vanilla_disable_end_biomes");
+        }
     }
 
     /**
@@ -96,15 +108,21 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addJsonFiles() throws IOException {
-        addJsonFile(
-            "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/overworld.json",
-            "vanilla_disable_overworld_biomes", "overworld");
-        addJsonFile(
-            "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_nether.json",
-            "vanilla_disable_nether_biomes", "the_nether");
-        addJsonFile(
-            "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_end.json",
-            "vanilla_disable_end_biomes", "the_end");
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES)) {
+            addJsonFile(
+                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/overworld.json",
+                "vanilla_disable_overworld_biomes", "overworld");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES)) {
+            addJsonFile(
+                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_nether.json",
+                "vanilla_disable_nether_biomes", "the_nether");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) {
+            addJsonFile(
+                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_end.json",
+                "vanilla_disable_end_biomes", "the_end");
+        }
     }
 
     /**
@@ -137,9 +155,15 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void patchJsonFiles() throws IOException {
-        patchJsonFile("vanilla_disable_overworld_biomes", "overworld");
-        patchJsonFile("vanilla_disable_nether_biomes", "the_nether");
-        patchJsonFile("vanilla_disable_end_biomes", "the_end");
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES)) {
+            patchJsonFile("vanilla_disable_overworld_biomes", "overworld");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES)) {
+            patchJsonFile("vanilla_disable_nether_biomes", "the_nether");
+        }
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) {
+            patchJsonFile("vanilla_disable_end_biomes", "the_end");
+        }
     }
 
     /**
@@ -162,24 +186,15 @@ public abstract class MixinMinecraftServer {
     @Unique
     private void toggleDataPacks() {
         MinecraftServer server = RegisterGamerules.getServer();
-        if (server.getGameRules().getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES)) {
-            server.getCommandManager().execute(
-                server.getCommandSource(), "/datapack enable \"file/vanilla_disable_overworld_biomes\"");
-        } else {
+        if (!server.getGameRules().getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES)) {
             server.getCommandManager().execute(
                 server.getCommandSource(), "/datapack disable \"file/vanilla_disable_overworld_biomes\"");
         }
-        if (server.getGameRules().getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES)) {
-            server.getCommandManager().execute(
-                server.getCommandSource(), "/datapack enable \"file/vanilla_disable_nether_biomes\"");
-        } else {
+        if (!server.getGameRules().getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES)) {
             server.getCommandManager().execute(
                 server.getCommandSource(), "/datapack disable \"file/vanilla_disable_nether_biomes\"");
         }
-        if (server.getGameRules().getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) {
-            server.getCommandManager().execute(
-                server.getCommandSource(), "/datapack enable \"file/vanilla_disable_end_biomes\"");
-        } else {
+        if (!server.getGameRules().getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) {
             server.getCommandManager().execute(
                 server.getCommandSource(), "/datapack disable \"file/vanilla_disable_end_biomes\"");
         }
