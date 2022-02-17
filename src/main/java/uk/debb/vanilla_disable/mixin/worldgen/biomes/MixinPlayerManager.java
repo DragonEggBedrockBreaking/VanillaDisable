@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.MessageType;
 import net.minecraft.server.PlayerManager;
+import net.minecraft.server.command.TimeCommand;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.WorldSavePath;
@@ -79,6 +80,17 @@ public abstract class MixinPlayerManager {
 
     /**
      * @author DragonEggBedrockBreaking
+     * @reason turning off the daylight cycle shouldn't break the mod
+     */
+    @Unique
+    private void patchTime() {
+        if (!RegisterGamerules.getServer().getGameRules().getBoolean(GameRules.DO_DAYLIGHT_CYCLE) &&
+            RegisterGamerules.getServer().getOverworld().getTimeOfDay() < 100) {
+            TimeCommand.executeAdd(RegisterGamerules.getServer().getCommandSource(), 24000);
+        }
+    }
+    /**
+     * @author DragonEggBedrockBreaking
      * @reason kick the player, then delete the region files, only if it is the first load
      * @param connection the client's connection to the game
      * @param player the player who connected
@@ -92,7 +104,10 @@ public abstract class MixinPlayerManager {
             !(RegisterGamerules.getServer().getOverworld().getChunkManager().getChunkGenerator() instanceof DebugChunkGenerator) &&
             (gameRules.getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES) || gameRules.getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES) ||
              gameRules.getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) && player.getWorld().getTimeOfDay() < 100) {
+            patchTime();
             deleteRegionFilesAndClose();
+        } else {
+            patchTime();
         }
     }
 }
