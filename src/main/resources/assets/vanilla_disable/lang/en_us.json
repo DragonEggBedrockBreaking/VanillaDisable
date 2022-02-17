@@ -182,7 +182,7 @@
     "gamerule.pigsBreedWithWheat": "Change pigs to breed with wheat, like other mobs",
     "gamerule.mobsBurnInSunlight": "Toggle whether some hostile mobs burn in sunlight",
     "gamerule.dragonFireballs": "Toggle whether the ender dragon can breath fireballs",
-
+    "gamerule.fireAspectIgnitesCreepers": "Toggle whether creepers hit by fire aspect ignite",
     "gamerule.effectsEnabled": "Toggle whether effects are enabled",
     "gamerule.absorptionEffect": "Toggle absorption effect",
     "gamerule.badOmenEffect": "Toggle bad omen effect",

@@ -198,6 +198,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanRule> PIGS_BREED_WITH_WHEAT;
     public static GameRules.Key<GameRules.BooleanRule> MOBS_BURN_IN_SUNLIGHT;
     public static GameRules.Key<GameRules.BooleanRule> DRAGON_FIREBALLS;
+    public static GameRules.Key<GameRules.BooleanRule> FIRE_ASPECT_IGNITES_CREEPERS;
 
     public static GameRules.Key<GameRules.BooleanRule> EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanRule> ABSORPTION_EFFECT;
@@ -699,6 +700,8 @@ public class RegisterGamerules implements ModInitializer {
             "mobsBurnInSunlight",          CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
         DRAGON_FIREBALLS                = GameRuleRegistry.register(
             "dragonFireballs",             CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(true));
+        FIRE_ASPECT_IGNITES_CREEPERS    = GameRuleRegistry.register(
+            "fireAspectIgnitesCreepers",   CreateGameruleCategories.VD_MOBS, GameRuleFactory.createBooleanRule(false));
 
         EFFECTS_ENABLED          = GameRuleRegistry.register(
             "effectsEnabled",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
