@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
+import net.minecraft.world.gen.chunk.DebugChunkGenerator;
+import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -211,9 +213,12 @@ public abstract class MixinMinecraftServer {
      */
     @Inject(method = "loadWorld", at = @At("RETURN"), cancellable = true)
     private void onWorldLoad(CallbackInfo ci) throws IOException {
-        if (RegisterGamerules.getServer().getOverworld().getTimeOfDay() < 100) {
-            getAndPatchDataPacks();
+        if (!(RegisterGamerules.getServer().getOverworld().getChunkManager().getChunkGenerator() instanceof FlatChunkGenerator) &&
+            !(RegisterGamerules.getServer().getOverworld().getChunkManager().getChunkGenerator() instanceof DebugChunkGenerator)) {
+            if (RegisterGamerules.getServer().getOverworld().getTimeOfDay() < 100) {
+                getAndPatchDataPacks();
+            }
+            toggleDataPacks();
         }
-        toggleDataPacks();
     }
 }
