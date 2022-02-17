@@ -11,6 +11,8 @@ import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.WorldSavePath;
+import net.minecraft.world.GameRules;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -84,7 +86,11 @@ public abstract class MixinPlayerManager {
      */
     @Inject(method = "onPlayerConnect", at = @At("RETURN"), cancellable = true)
     private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) throws InterruptedException {
-        if (player.getWorld().getTimeOfDay() < 100) {
+        GameRules gameRules = RegisterGamerules.getServer().getGameRules();
+        if ((gameRules.getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES) ||
+             gameRules.getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES) ||
+             gameRules.getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) &&
+             player.getWorld().getTimeOfDay() < 100) {
             deleteRegionFilesAndClose();
         }
     }
