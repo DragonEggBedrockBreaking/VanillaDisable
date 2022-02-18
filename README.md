@@ -8,32 +8,14 @@ Only critical issues/major crashes will be fixed on older versions of Minecraft.
 Mod compatibility is an aim but not always a reality - if there is an incompatibility,
 I will likely try to resolve it, but my success is not guaranteed.
 
-## Documentation
-
-See the wiki page for more information.
-
 ## Downloads
 
 You can download both stable releases of the mod, and also beta releases, from [Github Releases](https:/github.com/DragonEggBedrockBreaking/VanillaDisable/releases).
-You can also download stable releases from [Modrinth](https://modrinth.com/mod/vanilla-disable). 
+You can also download stable releases from [Modrinth](https://modrinth.com/mod/vanilla-disable).
 
-## Compiling
+## Other
 
-Unlike most minecraft mods, this mod does not use the maven or gradle build systems.
-This mod uses a new, faster, more minecraft-focused build system called [Brachyura](https://github.com/CoolCrabs/brachyura).
-
-To compile the project, run the commands (prequisite: you need Java version 17 or above installed and in path):
-```
-git clone https://github.com/DragonEggBedrockBreaking/VanillaDisable.git/
-cd VanillaDisable
-java -jar brachyura-bootstrap-0.jar build
-```
-
-The artifacts will be in `build/libs/`, just like with the other builds systems.
-
-There are other tasks as well, but they are not necessary to compile the mod.
-`runMinecraftClient` and `runMinecraftServer` are the equivalents of gradle's `runClient` and `runServer` tasks.
-The IDE tasks `idea` and `netbeans` are for the respective IDEs, and `jdt` is for both eclipse and vscode.
+The wiki page contains information for development, a list and description of gamerules, more detailed installation instructions, information about the mixin configuration system, and details about the choice of modloader, version, and feature toggling system.
 
 ## License
 
