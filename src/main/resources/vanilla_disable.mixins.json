@@ -27,6 +27,8 @@
     "knockback.MixinLivingEntity",
     "knockback.MixinServerGamePacketListenerImpl",
 
+    "misc.MixinBeaconBlockEntity",
+    "misc.MixinConduitBlockEntity",
     "misc.MixinEndPortalBlock",
     "misc.MixinEntity",
     "misc.MixinFarmBlock",

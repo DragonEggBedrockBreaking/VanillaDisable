@@ -350,6 +350,8 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> CROP_TRAMPLING;
     public static GameRules.Key<GameRules.BooleanValue> OLD_HUNGER;
     public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
+    public static GameRules.Key<GameRules.BooleanValue> BEACONS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> CONDUITS_ENABLED;
 
     @Override
     public void onInitialize() {
@@ -1006,6 +1008,10 @@ public class RegisterGamerules implements ModInitializer {
             "oldHunger",            CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
         OLD_BOATS                = GameRuleRegistry.register(
             "oldBoats",             CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
+        BEACONS_ENABLED          = GameRuleRegistry.register(
+            "beaconsEnabled",       CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+        CONDUITS_ENABLED         = GameRuleRegistry.register(
+            "conduitsEnabled",      CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
 
         // Registering the Minecraft server to when it actually starts
         ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {
