@@ -1,18 +1,18 @@
 package uk.debb.vanilla_disable.mixin.fluids;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.BucketItem;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,7 +25,7 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(BucketItem.class)
 public abstract class MixinBucketItem {
-    @Shadow @Final Fluid fluid;
+    @Shadow @Final Fluid content;
 
     /**
      * @author DragonEggBedrockBreaking
@@ -38,17 +38,17 @@ public abstract class MixinBucketItem {
      * @return whether or not the biome should be counted as ultrawarm
      */
     @Redirect(
-        method = "placeFluid",
+        method = "emptyContents",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/dimension/DimensionType;isUltrawarm()Z"
+            target = "Lnet/minecraft/world/level/dimension/DimensionType;ultraWarm()Z"
         )
     )
-    public boolean isNotUltrawarm(DimensionType type, @Nullable PlayerEntity player, World world, BlockPos pos, @Nullable BlockHitResult hitResult) {
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER) && this.fluid.isIn(FluidTags.WATER)) {
+    public boolean isNotUltraWarm(DimensionType type, @Nullable Player player, Level world, BlockPos pos, @Nullable BlockHitResult hitResult) {
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER) && this.content.is(FluidTags.WATER)) {
             return false;
         }
-        return type.isUltrawarm();
+        return type.ultraWarm();
     }
 
     /**
@@ -59,11 +59,11 @@ public abstract class MixinBucketItem {
      * @param pos the position at which the water is being placed
      * @param ci the callback info
      */
-    @Inject(method = "playEmptyingSound", at = @At(value = "HEAD"), cancellable = true)
-    protected void cancelPlayingEmptyingSound(@Nullable PlayerEntity player, WorldAccess world, BlockPos pos, CallbackInfo ci) {
-        if (world.getDimension().isUltrawarm() && this.fluid.isIn(FluidTags.WATER) &&
-            ((ServerWorldAccess)world).toServerWorld().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER)) {
-            world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);
+    @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
+    protected void cancelPlayiningEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
+        if (world.dimensionType().ultraWarm() && this.content.is(FluidTags.WATER) &&
+            ((ServerLevelAccessor)world).getLevel().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER)) {
+            world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);
             for (int l = 0; l < 8; ++l) {
                 world.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + Math.random(), (double)pos.getY() + Math.random(), (double)pos.getZ() + Math.random(), 0.0, 0.0, 0.0);
             }

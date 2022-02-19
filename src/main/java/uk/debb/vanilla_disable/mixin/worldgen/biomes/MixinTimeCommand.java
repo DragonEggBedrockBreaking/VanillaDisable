@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.worldgen.biomes;
 
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.command.TimeCommand;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.commands.TimeCommand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -15,7 +15,7 @@ public abstract class MixinTimeCommand {
      * @return
      */
     @Overwrite
-    public static int executeSet(ServerCommandSource source, int time) {
+    public static int setTime(CommandSourceStack source, int time) {
         // the "/time set" command can reset the time
         // this makes the mod think that it is the first launch
         // this patches it by pushing forward the time to switch
@@ -23,7 +23,7 @@ public abstract class MixinTimeCommand {
         // this patch will make it 30000 instead of resetting to 6000
         // to the client, both are noon, so vanilla behaviour is preserved
 
-        int currentTime = (int)(source.getWorld().getTimeOfDay() % 24000L);
+        int currentTime = (int)(source.getLevel().getDayTime() % 24000L);
         int relativeTime = time % 24000;
         int timeToAdd;
         if (currentTime > relativeTime) {
@@ -33,6 +33,6 @@ public abstract class MixinTimeCommand {
         } else {
             timeToAdd = 0;
         }
-        return TimeCommand.executeAdd(source, timeToAdd);
+        return TimeCommand.addTime(source, timeToAdd);
     }
 }

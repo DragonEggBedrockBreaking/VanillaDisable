@@ -2,22 +2,22 @@ package uk.debb.vanilla_disable.mixin.knockback;
 
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.WitherEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.mob.BlazeEntity;
-import net.minecraft.entity.mob.DrownedEntity;
-import net.minecraft.entity.mob.GhastEntity;
-import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.entity.mob.PillagerEntity;
-import net.minecraft.entity.mob.ShulkerEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.WitherSkeletonEntity;
-import net.minecraft.entity.passive.LlamaEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.GameRules;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.horse.Llama;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.monster.Drowned;
+import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.monster.Pillager;
+import net.minecraft.world.entity.monster.Shulker;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.WitherSkeleton;
+import net.minecraft.world.entity.monster.piglin.Piglin;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,15 +28,14 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
-    @Shadow
-    private LivingEntity attacker;
+    @Shadow private LivingEntity lastHurtByMob;
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason map of all relevenat entities to their gamerules
      */
     @Unique
-    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanRule>> entityMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanRule>>();
+    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanValue>> entityMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -44,13 +43,13 @@ public abstract class MixinLivingEntity {
      */
     @Unique
     private void addOptionsToMap() {
-        entityMap.put(BlazeEntity.class, RegisterGamerules.FIREBALL_KNOCKBACK);
-        entityMap.put(GhastEntity.class, RegisterGamerules.FIREBALL_KNOCKBACK);
-        entityMap.put(WitherEntity.class, RegisterGamerules.WITHER_SKULL_KNOCKBACK);
-        entityMap.put(EnderDragonEntity.class, RegisterGamerules.DRAGON_KNOCKBACK);
-        entityMap.put(LlamaEntity.class, RegisterGamerules.LLAMA_SPIT_KNOCKBACK);
-        entityMap.put(ShulkerEntity.class, RegisterGamerules.SHULKER_BULLET_KNOCKBACK);
-        entityMap.put(ServerPlayerEntity.class, RegisterGamerules.PLAYER_ATTACK_KNOCKBACK);
+        entityMap.put(Blaze.class, RegisterGamerules.FIREBALL_KNOCKBACK);
+        entityMap.put(Ghast.class, RegisterGamerules.FIREBALL_KNOCKBACK);
+        entityMap.put(WitherBoss.class, RegisterGamerules.WITHER_SKULL_KNOCKBACK);
+        entityMap.put(EnderDragon.class, RegisterGamerules.DRAGON_KNOCKBACK);
+        entityMap.put(Llama.class, RegisterGamerules.LLAMA_SPIT_KNOCKBACK);
+        entityMap.put(Shulker.class, RegisterGamerules.SHULKER_BULLET_KNOCKBACK);
+        entityMap.put(ServerPlayer.class, RegisterGamerules.PLAYER_ATTACK_KNOCKBACK);
     }
 
     /**
@@ -64,17 +63,17 @@ public abstract class MixinLivingEntity {
         if (entityMap.isEmpty()) {
             addOptionsToMap();
         }
-        GameRules.Key<GameRules.BooleanRule> knockbackGamerule = entityMap.get(this.getClass());
+        GameRules.Key<GameRules.BooleanValue> knockbackGamerule = entityMap.get(this.getClass());
         if ((!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED)) ||
             (knockbackGamerule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(knockbackGamerule))) {
             return true;
         }
-        if ((source instanceof SkeletonEntity && !(source instanceof WitherSkeletonEntity)) ||
-            (source instanceof PiglinEntity && source.isHolding(Items.CROSSBOW)) ||
-            (source instanceof PillagerEntity)) {
+        if ((source instanceof Skeleton && !(source instanceof WitherSkeleton)) ||
+            (source instanceof Piglin && source.isHolding(Items.CROSSBOW)) ||
+            (source instanceof Pillager)) {
             return !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ARROW_KNOCKBACK);
         }
-        if (source instanceof DrownedEntity && source.isHolding(Items.TRIDENT)) {
+        if (source instanceof Drowned && source.isHolding(Items.TRIDENT)) {
             return !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.TRIDENT_KNOCKBACK);
         }
         return false;
@@ -88,9 +87,9 @@ public abstract class MixinLivingEntity {
      * @param z The z-coordinate of the knockback
      * @param ci The CallbackInfo
      */
-    @Inject(method = "takeKnockback", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(double strength, double x, double z, CallbackInfo ci) {
-        if ((Object)this instanceof PlayerEntity && isInvulnerableToKnockback(this.attacker)) {
+        if ((Object)this instanceof Player && isInvulnerableToKnockback(this.lastHurtByMob)) {
             ci.cancel();
         }
     }

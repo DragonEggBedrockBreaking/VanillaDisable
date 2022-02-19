@@ -4,23 +4,24 @@ import io.github.coolcrabs.brachyura.decompiler.fernflower.FernflowerDecompiler;
 import io.github.coolcrabs.brachyura.fabric.FabricLoader;
 import io.github.coolcrabs.brachyura.fabric.FabricMaven;
 import io.github.coolcrabs.brachyura.fabric.FabricProject;
-import io.github.coolcrabs.brachyura.fabric.Yarn;
 import io.github.coolcrabs.brachyura.maven.Maven;
 import io.github.coolcrabs.brachyura.maven.MavenId;
+import io.github.coolcrabs.brachyura.minecraft.Minecraft;
+import io.github.coolcrabs.brachyura.minecraft.VersionMeta;
 import io.github.coolcrabs.brachyura.processing.ProcessorChain;
 import net.fabricmc.mappingio.tree.MappingTree;
 
 public class Buildscript extends FabricProject {
     @Override
-    public String getMcVersion() {
+    public VersionMeta createMcVersion() {
         // Minecraft Version
-        return "1.18.1";
+        return Minecraft.getVersion("1.18.1");
     }
 
     @Override
     public MappingTree createMappings() {
-        // Yarn Mappings Version
-        return Yarn.ofMaven(FabricMaven.URL, FabricMaven.yarn("1.18.1+build.22")).tree;
+        // Uses Mojang Official Mappings
+        return createMojmap();
     }
 
     @Override
@@ -71,7 +72,7 @@ public class Buildscript extends FabricProject {
     @Override
     public Path getBuildJarPath() {
         // Changes the jar file name
-        return getBuildLibsDir().resolve(getModId() + "-" + "mc" + getMcVersion() + "-" + getVersion() + ".jar");
+        return getBuildLibsDir().resolve(getModId() + "-" + "mc" + createMcVersion().version + "-" + getVersion() + ".jar");
     }
 
     @Override

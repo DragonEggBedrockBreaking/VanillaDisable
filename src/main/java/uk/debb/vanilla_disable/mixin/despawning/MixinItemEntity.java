@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(ItemEntity.class)
 public abstract class MixinItemEntity {
-    @Shadow private int itemAge;
+    @Shadow private int age;
     @Shadow private int pickupDelay;
     @Unique
     final int MAX = RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.ITEM_DESPAWN_TIME);
@@ -24,8 +24,8 @@ public abstract class MixinItemEntity {
      */
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void discardItem(CallbackInfo ci) {    
-        if (this.itemAge >= MAX * 20 &&
-            !((Entity) (Object) (this)).getWorld().isClient) {
+        if (this.age >= MAX * 20 &&
+            !((Entity) (Object) (this)).getLevel().isClientSide) {
             ((Entity) (Object) (this)).discard();
         }
     }
@@ -39,13 +39,13 @@ public abstract class MixinItemEntity {
         method = "tick",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/ItemEntity;discard()V",
+            target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V",
             ordinal = 1
         ),
         cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (this.itemAge < MAX * 20 &&
+        if (this.age < MAX * 20 &&
             this.pickupDelay != Short.MAX_VALUE) {
             ci.cancel();
         }

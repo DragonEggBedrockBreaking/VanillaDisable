@@ -1,12 +1,12 @@
 package uk.debb.vanilla_disable.mixin.misc;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,17 +17,17 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
-    @Shadow public World world;
-    @Shadow BlockPos blockPos;
-    @Shadow public abstract boolean damage(DamageSource source, float amount);
+    @Shadow public Level level;
+    @Shadow BlockPos blockPosition;
+    @Shadow public abstract boolean hurt(DamageSource source, float amount);
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason chnge nether portal cooldown for entities
      * @param cir the returnable callback info
      */
-    @Inject(method = "getDefaultNetherPortalCooldown", at = @At("HEAD"), cancellable = true)
-    private void modifyDefaultNetherPortalCooldown(CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "getDimensionChangingDelay", at = @At("HEAD"), cancellable = true)
+    private void modifyDimensionChangingDelay(CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.NETHER_PORTAL_COOLDOWN));
     }
 
@@ -37,14 +37,14 @@ public abstract class MixinEntity {
      * @param state the state of the block below the entity
      * @param ci the callback info
      */
-    @Inject(method = "onBlockCollision", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onInsideBlock", at = @At("HEAD"), cancellable = true)
     private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_BOATS) &&
-            (Object) this instanceof BoatEntity) {
-            for (Direction direction : Direction.Type.HORIZONTAL) {
-                BlockState blockState = world.getBlockState(this.blockPos.offset(direction));
+            (Object) this instanceof Boat) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));
                 if (blockState.getMaterial().isSolid()) {
-                    this.damage(DamageSource.GENERIC, Float.MAX_VALUE);
+                    this.hurt(DamageSource.GENERIC, Float.MAX_VALUE);
                     ci.cancel();;
                 }
             }

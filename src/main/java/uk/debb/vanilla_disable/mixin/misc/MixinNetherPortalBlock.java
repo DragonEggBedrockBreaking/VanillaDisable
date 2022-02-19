@@ -1,10 +1,10 @@
 package uk.debb.vanilla_disable.mixin.misc;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.NetherPortalBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.NetherPortalBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,8 +22,8 @@ public abstract class MixinNetherPortalBlock {
      * @param entity the entity going through the portal
      * @param ci the callback info
      */
-    @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
-    private void cancelEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
+    @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
+    private void cancelInsideEntity(BlockState state, Level world, BlockPos pos, Entity entity, CallbackInfo ci) {
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.NETHER_PORTALS_ENABLED)) {
             ci.cancel();
         }

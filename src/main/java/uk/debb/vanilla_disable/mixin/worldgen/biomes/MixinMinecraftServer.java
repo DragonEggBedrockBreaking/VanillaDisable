@@ -11,9 +11,9 @@ import java.nio.file.Files;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.WorldSavePath;
-import net.minecraft.world.gen.chunk.DebugChunkGenerator;
-import net.minecraft.world.gen.chunk.FlatChunkGenerator;
+import net.minecraft.world.level.levelgen.DebugLevelSource;
+import net.minecraft.world.level.levelgen.FlatLevelSource;
+import net.minecraft.world.level.storage.LevelResource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,7 +29,7 @@ public abstract class MixinMinecraftServer {
      * @param name the name of the datapack
      */
     private void createDatapackDir(String name) {
-        String dataPackPath = RegisterGamerules.getServer().getSavePath(WorldSavePath.DATAPACKS).toString();
+        String dataPackPath = RegisterGamerules.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
         File dataPackDir = new File(dataPackPath + "/" + name + "/data/minecraft/dimension/");
         dataPackDir.getParentFile().mkdirs();
         dataPackDir.mkdir();
@@ -60,7 +60,7 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addMcmetaFile(String name) throws IOException {
-        String dataPackPath = RegisterGamerules.getServer().getSavePath(WorldSavePath.DATAPACKS).toString();
+        String dataPackPath = RegisterGamerules.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
         File mcmetaFile = new File(dataPackPath + "/" + name + "/pack.mcmeta");
         FileWriter myWriter = new FileWriter(mcmetaFile.toString());
         myWriter.write("{\"pack\":{\"pack_format\":8,\"description\":\"Vanilla Disable Biomes\"}}");
@@ -95,7 +95,7 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addJsonFile(String url, String name, String shortname) throws IOException {
-        String dataPackPath = RegisterGamerules.getServer().getSavePath(WorldSavePath.DATAPACKS).toString();
+        String dataPackPath = RegisterGamerules.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
         FileOutputStream jsonFileDir = new FileOutputStream(dataPackPath + "/" + name + "/data/minecraft/dimension/" + shortname + ".json");
         URL URLToDownload = new URL(url);
         ReadableByteChannel readableByteChannel = Channels.newChannel(URLToDownload.openStream());
@@ -136,13 +136,13 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void patchJsonFile(String name, String shortname) throws IOException {
-        String dataPackPath = RegisterGamerules.getServer().getSavePath(WorldSavePath.DATAPACKS).toString();
+        String dataPackPath = RegisterGamerules.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
         File jsonFile = new File(dataPackPath + "/" + name + "/data/minecraft/dimension/" + shortname + ".json");
         String jsonFileToString = Files.readString(jsonFile.toPath());
 
         Pattern p = Pattern.compile("\"seed\": 0");
         Matcher m = p.matcher(jsonFileToString);
-        Long seed = RegisterGamerules.getServer().getOverworld().getSeed();
+        Long seed = RegisterGamerules.getServer().overworld().getSeed();
         String outputString = m.replaceAll("\"seed\": " + seed);
 
         FileWriter myWriter = new FileWriter(jsonFile.toString());
@@ -189,19 +189,19 @@ public abstract class MixinMinecraftServer {
     private void toggleDataPacks() {
         MinecraftServer server = RegisterGamerules.getServer();
         if (!server.getGameRules().getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES)) {
-            server.getCommandManager().execute(
-                server.getCommandSource(), "/datapack disable \"file/vanilla_disable_overworld_biomes\"");
+            server.getCommands().performCommand(
+                server.createCommandSourceStack(), "/datapack disable \"file/vanilla_disable_overworld_biomes\"");
         }
         if (!server.getGameRules().getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES)) {
-            server.getCommandManager().execute(
-                server.getCommandSource(), "/datapack disable \"file/vanilla_disable_nether_biomes\"");
+            server.getCommands().performCommand(
+                server.createCommandSourceStack(), "/datapack disable \"file/vanilla_disable_nether_biomes\"");
         }
         if (!server.getGameRules().getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) {
-            server.getCommandManager().execute(
-                server.getCommandSource(), "/datapack disable \"file/vanilla_disable_end_biomes\"");
+            server.getCommands().performCommand(
+                server.createCommandSourceStack(), "/datapack disable \"file/vanilla_disable_end_biomes\"");
         }
-        server.getCommandManager().execute(
-            server.getCommandSource(), "/reload");
+        server.getCommands().performCommand(
+            server.createCommandSourceStack(), "/reload");
     }
 
     /**
@@ -211,11 +211,11 @@ public abstract class MixinMinecraftServer {
      * @param ci the callback info
      * @throws IOException
      */
-    @Inject(method = "loadWorld", at = @At("RETURN"), cancellable = true)
-    private void onWorldLoad(CallbackInfo ci) throws IOException {
-        if (!(RegisterGamerules.getServer().getOverworld().getChunkManager().getChunkGenerator() instanceof FlatChunkGenerator) &&
-            !(RegisterGamerules.getServer().getOverworld().getChunkManager().getChunkGenerator() instanceof DebugChunkGenerator)) {
-            if (RegisterGamerules.getServer().getOverworld().getTimeOfDay() < 100) {
+    @Inject(method = "loadLevel", at = @At("RETURN"), cancellable = true)
+    private void onLevelLoad(CallbackInfo ci) throws IOException {
+        if (!(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof FlatLevelSource) &&
+            !(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof DebugLevelSource)) {
+            if (RegisterGamerules.getServer().overworld().getDayTime() < 100) {
                 getAndPatchDataPacks();
             }
             toggleDataPacks();

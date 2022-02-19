@@ -1,8 +1,8 @@
 package uk.debb.vanilla_disable.mixin.fluids;
 
-import net.minecraft.fluid.LavaFluid;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.material.LavaFluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,13 +17,13 @@ public abstract class MixinLavaFluid {
      * @param world the world
      * @param cir the returnable callback info
      */
-    @Inject(method = "getLevelDecreasePerBlock", at = @At("HEAD"), cancellable = true)
-    private void getWaterLevelDecreasePerBlock(WorldView world, CallbackInfoReturnable<Integer> cir) {
-        if (world instanceof World) {
-            if (world.getDimension().isUltrawarm()) {
-                cir.setReturnValue(((World) world).getGameRules().getBoolean(RegisterGamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2);
+    @Inject(method = "getDropOff", at = @At("HEAD"), cancellable = true)
+    private void getLavaDropOff(LevelReader world, CallbackInfoReturnable<Integer> cir) {
+        if (world instanceof Level) {
+            if (world.dimensionType().ultraWarm()) {
+                cir.setReturnValue(((Level) world).getGameRules().getBoolean(RegisterGamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2);
             } else {
-                cir.setReturnValue(((World) world).getGameRules().getBoolean(RegisterGamerules.LAVA_REACHES_FAR) ? 1 : 2);
+                cir.setReturnValue(((Level) world).getGameRules().getBoolean(RegisterGamerules.LAVA_REACHES_FAR) ? 1 : 2);
             }
         }
     }
@@ -34,13 +34,13 @@ public abstract class MixinLavaFluid {
      * @param world the world
      * @param cir the returnable callback info
      */
-    @Inject(method = "getTickRate", at = @At("HEAD"), cancellable = true)
-    private void getWaterTickRate(WorldView world, CallbackInfoReturnable<Integer> cir) {
-        if (world instanceof World) {
-            if (world.getDimension().isUltrawarm()) {
-                cir.setReturnValue(((World) world).getGameRules().getInt(RegisterGamerules.LAVA_FLOW_SPEED_NETHER));
+    @Inject(method = "getTickDelay", at = @At("HEAD"), cancellable = true)
+    private void getLavaTickDelay(LevelReader world, CallbackInfoReturnable<Integer> cir) {
+        if (world instanceof Level) {
+            if (world.dimensionType().ultraWarm()) {
+                cir.setReturnValue(((Level) world).getGameRules().getInt(RegisterGamerules.LAVA_FLOW_SPEED_NETHER));
             } else {
-                cir.setReturnValue(((World) world).getGameRules().getInt(RegisterGamerules.LAVA_FLOW_SPEED));
+                cir.setReturnValue(((Level) world).getGameRules().getInt(RegisterGamerules.LAVA_FLOW_SPEED));
             }
         }
     }
@@ -50,8 +50,8 @@ public abstract class MixinLavaFluid {
      * @reason modify whether or not the fluid can form infinite water sources
      * @param cir the returnable callback info
      */
-    @Inject(method = "isInfinite", at = @At("HEAD"), cancellable = true)
-    private void changeInfinite(CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
+    private void canLavaConvertToSource(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_LAVA));
     }
 }
