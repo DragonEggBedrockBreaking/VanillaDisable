@@ -27,12 +27,12 @@ public abstract class MixinEntity {
      * @reason stop players from crouching under slabs
      * @param cir the returnable callback info
      */
-    /*@Inject(method = "isCrouching", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isShiftKeyDown", at = @At("HEAD"), cancellable = true)
     private void cannotCrouch(CallbackInfoReturnable<Boolean> cir) {
         if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_CROUCH)) {
             cir.setReturnValue(false);
         }
-    }*/
+    }
 
     /**
      * @author DragonEggBedrockBreaking

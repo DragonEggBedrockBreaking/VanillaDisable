@@ -338,7 +338,7 @@ public class RegisterGamerules implements ModInitializer {
 
     public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_BE_ON_FIRE;
     public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_SPRINT;
-    //public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_CROUCH;
+    public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_CROUCH;
     public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_SWIM;
     public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_JUMP;
     public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_BE_INVISIBLE;
@@ -983,8 +983,8 @@ public class RegisterGamerules implements ModInitializer {
             "playerCanBeOnFire",   CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
         PLAYER_CAN_SPRINT       = GameRuleRegistry.register(
             "playerCanSprint",     CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
-        //PLAYER_CAN_CROUCH       = GameRuleRegistry.register(
-        //    "playerCanCrouch",     CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
+        PLAYER_CAN_CROUCH       = GameRuleRegistry.register(
+            "playerCanCrouch",     CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
         PLAYER_CAN_SWIM         = GameRuleRegistry.register(
             "playerCanSwim",       CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
         PLAYER_CAN_JUMP         = GameRuleRegistry.register(
