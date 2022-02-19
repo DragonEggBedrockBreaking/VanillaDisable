@@ -42,7 +42,7 @@
     "minecraft": "1.18.x",
     "java": ">=17"
   },
-  "recommends": {
+  "suggests": {
     "here-be-no-dragons": "*"
   }
 }
