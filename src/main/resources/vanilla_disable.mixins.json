@@ -51,6 +51,8 @@
     "mob.MixinZombie",
     "mob.MixinZombieVillager",
 
+    "player.MixinEntity",
+
     "spawn_limits.MixinMobCategory",
     "spawn_limits.MixinMonster",
 

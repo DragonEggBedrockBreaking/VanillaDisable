@@ -320,6 +320,13 @@
     "gamerule.removeNetherBiomes": "Whether or not to keep only nether wastes in nether",
     "gamerule.removeEndBiomes": "Whether or not to keep only the main end biome in the end",
 
+    "gamerule.playerCanBeOnFire": "Whether or not players can be on fire",
+    "gamerule.playerCanSprint": "Whether or not players can sprint",
+    "gamerule.playerCanCrouch": "Whether or not players can crouch",
+    "gamerule.playerCanSwim": "Whether or not players can swim",
+    "gamerule.playerCanJump": "Whether or not players can jump",
+    "gamerule.playerCanBeInvisible": "Whether or not players can be invisible",
+
     "gamerule.netherPortalsEnabled": "Toggle whether nether portals are enabled",
     "gamerule.endPortalsEnabled": "Toggle whether end portals are enabled",
     "gamerule.endGatewaysEnabled": "Toggle whether end gateways are enabled",
@@ -339,6 +346,7 @@
     "gamerule.category.vd.effects": "VanillaDisable Effects",
     "gamerule.category.vd.enchantments": "VanillaDisable Enchantments",
     "gamerule.category.vd.worldgen": "VanillaDisable World Generation",
+    "gamerule.category.vd.player": "VanillaDisable Player",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator",

@@ -72,6 +72,12 @@ public class CreateGameruleCategories {
             .withStyle(ChatFormatting.BOLD)
             .withStyle(ChatFormatting.YELLOW)
     );
+    public static final CustomGameRuleCategory VD_PLAYER = new CustomGameRuleCategory(
+        new ResourceLocation("gamerule.category.vd.player"),
+        new TranslatableComponent("gamerule.category.vd.player")
+            .withStyle(ChatFormatting.BOLD)
+            .withStyle(ChatFormatting.YELLOW)
+    );
     public static final CustomGameRuleCategory VD_MISC = new CustomGameRuleCategory(
         new ResourceLocation("gamerule.category.vd.misc"),
         new TranslatableComponent("gamerule.category.vd.misc")

@@ -336,6 +336,13 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> REMOVE_NETHER_BIOMES;
     public static GameRules.Key<GameRules.BooleanValue> REMOVE_END_BIOMES;
 
+    public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_BE_ON_FIRE;
+    public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_SPRINT;
+    //public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_CROUCH;
+    public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_SWIM;
+    public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_JUMP;
+    public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_BE_INVISIBLE;
+
     public static GameRules.Key<GameRules.BooleanValue> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_GATEWAYS_ENABLED;
@@ -971,6 +978,19 @@ public class RegisterGamerules implements ModInitializer {
             "removeNetherBiomes",       CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(false));
         REMOVE_END_BIOMES              = GameRuleRegistry.register(
             "removeEndBiomes",          CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(false));
+
+        PLAYER_CAN_BE_ON_FIRE   = GameRuleRegistry.register(
+            "playerCanBeOnFire",   CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
+        PLAYER_CAN_SPRINT       = GameRuleRegistry.register(
+            "playerCanSprint",     CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
+        //PLAYER_CAN_CROUCH       = GameRuleRegistry.register(
+        //    "playerCanCrouch",     CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
+        PLAYER_CAN_SWIM         = GameRuleRegistry.register(
+            "playerCanSwim",       CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
+        PLAYER_CAN_JUMP         = GameRuleRegistry.register(
+            "playerCanJump",       CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
+        PLAYER_CAN_BE_INVISIBLE = GameRuleRegistry.register(
+            "playerCanBeInvisible",CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
 
         NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
             "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
