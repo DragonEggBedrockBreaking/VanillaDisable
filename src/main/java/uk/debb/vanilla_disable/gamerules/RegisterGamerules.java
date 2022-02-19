@@ -352,6 +352,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
     public static GameRules.Key<GameRules.BooleanValue> BEACONS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> CONDUITS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> ICE_SLIDING;
 
     @Override
     public void onInitialize() {
@@ -1012,6 +1013,8 @@ public class RegisterGamerules implements ModInitializer {
             "beaconsEnabled",       CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
         CONDUITS_ENABLED         = GameRuleRegistry.register(
             "conduitsEnabled",      CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+        ICE_SLIDING              = GameRuleRegistry.register(
+            "iceSliding",           CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
 
         // Registering the Minecraft server to when it actually starts
         ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {

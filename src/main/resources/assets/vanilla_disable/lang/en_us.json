@@ -336,6 +336,7 @@
     "gamerule.oldBoats": "Toggle whether boats drop when they hit a block",
     "gamerule.beaconsEnabled": "Toggle whether beacons are enabled",
     "gamerule.conduitsEnabled": "Toggle whether conduits are enabled",
+    "gamerule.iceSliding": "Toggle whether entities can slide faster on ice",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
