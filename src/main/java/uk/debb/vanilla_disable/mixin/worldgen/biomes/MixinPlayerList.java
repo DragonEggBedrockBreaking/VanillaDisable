@@ -69,6 +69,8 @@ public abstract class MixinPlayerList {
     private void deleteRegionFilesAndClose() throws InterruptedException {
         String worldPath = RegisterGamerules.getServer().getWorldPath(LevelResource.ROOT).toString();
         RegisterGamerules.getServer().getPlayerList().broadcastMessage(new TranslatableComponent("closing.in.twenty.seconds"), ChatType.CHAT, UUID.randomUUID());
+        RegisterGamerules.getServer().getPlayerList().broadcastMessage(new TranslatableComponent("deleting.region.files"), ChatType.CHAT, UUID.randomUUID());
+        RegisterGamerules.getServer().getPlayerList().broadcastMessage(new TranslatableComponent("dont.delete.region.files"), ChatType.CHAT, UUID.randomUUID());
 
         final ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         service.schedule(() -> {
