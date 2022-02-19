@@ -24,13 +24,13 @@ public abstract class MixinNaturalSpawner {
      * @param cir the returnable callback info
      */
     @Inject(method = "isRightDistanceToPlayerAndSpawnPoint", at = @At("HEAD"), cancellable = true)
-    private static void mayMeRightDistanceToPlayerAndSpawnPoint(ServerLevel world, ChunkAccess chunk, BlockPos.MutableBlockPos pos, double squaredDistance, CallbackInfoReturnable<Boolean> cir) {
+    private static void mayMeRightDistanceToPlayerAndSpawnPoint(ServerLevel level, ChunkAccess chunk, BlockPos.MutableBlockPos pos, double squaredDistance, CallbackInfoReturnable<Boolean> cir) {
         if (squaredDistance <= Math.pow(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE), 2)) {
             cir.setReturnValue(false);
-        } else if (world.getSharedSpawnPos().closerThan(new Vec3((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5), RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE))) {
+        } else if (level.getSharedSpawnPos().closerThan(new Vec3((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5), RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE))) {
             cir.setReturnValue(false);
         } else {
-            cir.setReturnValue(Objects.equals(new ChunkPos(pos), chunk.getPos()) || world.isPositionEntityTicking(pos));
+            cir.setReturnValue(Objects.equals(new ChunkPos(pos), chunk.getPos()) || level.isPositionEntityTicking(pos));
         }
     }
 }

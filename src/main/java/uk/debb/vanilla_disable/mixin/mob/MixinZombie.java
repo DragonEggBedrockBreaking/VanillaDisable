@@ -28,9 +28,9 @@ public abstract class MixinZombie {
             target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
         )
     )
-    public Difficulty getWrongDifficulty(ServerLevel world, ServerLevel serverWorld, LivingEntity other) {
+    public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LivingEntity other) {
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
-            return world.getDifficulty();
+            return level.getDifficulty();
         } else {
             return Difficulty.PEACEFUL;
         }

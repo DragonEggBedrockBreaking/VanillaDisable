@@ -23,10 +23,10 @@ public abstract class MixinDragonStrafePlayerPhase {
             target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"
         )
     )
-    public boolean spawnFreshEntity(Level world, Entity entity) {
+    public boolean spawnFreshEntity(Level level, Entity entity) {
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.DRAGON_FIREBALLS)) {
             return false;
         }
-        return world.addFreshEntity(entity);
+        return level.addFreshEntity(entity);
     }
 }

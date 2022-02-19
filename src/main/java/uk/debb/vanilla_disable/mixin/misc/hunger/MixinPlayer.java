@@ -19,7 +19,7 @@ public abstract class MixinPlayer {
      * @reason increases your health when you eat food
      */
     @Inject(method = "eat", at = @At("HEAD"), cancellable = true)
-    private void changeEating(Level world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+    private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
             ((LivingEntity)(Object)this).setHealth(((LivingEntity)(Object)this).getHealth() + stack.getItem().getFoodProperties().getNutrition());
         }

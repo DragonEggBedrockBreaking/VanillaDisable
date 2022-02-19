@@ -24,7 +24,7 @@ public abstract class MixinTheEndGatewayBlockEntity {
      * @param ci the callback info
      */
     @Inject(method = "teleportEntity", at = @At("HEAD"), cancellable = true)
-    private static void cancelTeleportingEntity(Level world, BlockPos pos, BlockState state, Entity entity, TheEndGatewayBlockEntity blockEntity, CallbackInfo ci) {
+    private static void cancelTeleportingEntity(Level level, BlockPos pos, BlockState state, Entity entity, TheEndGatewayBlockEntity blockEntity, CallbackInfo ci) {
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.END_GATEWAYS_ENABLED)) {
             ci.cancel();
         }

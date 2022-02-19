@@ -85,7 +85,7 @@ public abstract class MixinBaseSpawner {
         ),
         cancellable = true
     )
-    private void cancelSpawningNewEntityAndPassengers(ServerLevel world, BlockPos pos, CallbackInfo ci) {
+    private void cancelSpawningNewEntityAndPassengers(ServerLevel level, BlockPos pos, CallbackInfo ci) {
         if (spawnerMobMap.isEmpty()) {
             addOptionsToMap();
         }

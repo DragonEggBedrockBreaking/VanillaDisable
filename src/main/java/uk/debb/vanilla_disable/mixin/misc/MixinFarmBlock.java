@@ -32,9 +32,9 @@ public abstract class MixinFarmBlock {
             target = "Lnet/minecraft/world/level/block/FarmBlock;turnToDirt(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
         )
     )
-    private void cancelTurningToDirt(BlockState state, Level world, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
+    private void cancelTurningToDirt(BlockState state, Level level, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.CROP_TRAMPLING)) {
-            world.setBlockAndUpdate(pos, FarmBlock.pushEntitiesUp(state, Blocks.DIRT.defaultBlockState(), world, pos));
+            level.setBlockAndUpdate(pos, FarmBlock.pushEntitiesUp(state, Blocks.DIRT.defaultBlockState(), level, pos));
         }
     }
 }

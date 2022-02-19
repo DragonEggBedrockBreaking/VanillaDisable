@@ -24,11 +24,11 @@ public abstract class MixinFoodData {
             target = "Lnet/minecraft/world/level/Level;getDifficulty()Lnet/minecraft/world/Difficulty;"
         )
     )
-    private Difficulty getWrongDifficulty(Level world) {
+    private Difficulty getWrongDifficulty(Level level) {
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_HUNGER)) {
             RegisterGamerules.getServer().getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, RegisterGamerules.getServer());
             return Difficulty.PEACEFUL;
         }
-        return world.getDifficulty();
+        return level.getDifficulty();
     }
 }

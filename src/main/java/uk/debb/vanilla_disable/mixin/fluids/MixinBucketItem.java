@@ -44,7 +44,7 @@ public abstract class MixinBucketItem {
             target = "Lnet/minecraft/world/level/dimension/DimensionType;ultraWarm()Z"
         )
     )
-    public boolean isNotUltraWarm(DimensionType type, @Nullable Player player, Level world, BlockPos pos, @Nullable BlockHitResult hitResult) {
+    public boolean isNotUltraWarm(DimensionType type, @Nullable Player player, Level level, BlockPos pos, @Nullable BlockHitResult hitResult) {
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER) && this.content.is(FluidTags.WATER)) {
             return false;
         }

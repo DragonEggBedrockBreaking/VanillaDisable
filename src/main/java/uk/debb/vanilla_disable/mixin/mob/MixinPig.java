@@ -27,8 +27,8 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(Pig.class)
 public abstract class MixinPig extends Animal {
-    public MixinPig(EntityType<? extends Animal> entityType, Level world) {
-        super(entityType, world);
+    public MixinPig(EntityType<? extends Animal> entityType, Level level) {
+        super(entityType, level);
     }
 
     @Shadow @Final private static Ingredient FOOD_ITEMS;

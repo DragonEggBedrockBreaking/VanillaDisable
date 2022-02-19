@@ -26,9 +26,9 @@ public abstract class MixinVillager {
             target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
         )
     )
-    public Difficulty getWrongDifficulty(ServerLevel world, ServerLevel serverWorld, LightningBolt entity) {
+    public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LightningBolt entity) {
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
-            return world.getDifficulty();
+            return level.getDifficulty();
         } else {
             return Difficulty.PEACEFUL;
         }

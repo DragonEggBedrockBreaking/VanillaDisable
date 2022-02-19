@@ -23,7 +23,7 @@ public abstract class MixinNetherPortalBlock {
      * @param ci the callback info
      */
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
-    private void cancelInsideEntity(BlockState state, Level world, BlockPos pos, Entity entity, CallbackInfo ci) {
+    private void cancelInsideEntity(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.NETHER_PORTALS_ENABLED)) {
             ci.cancel();
         }
