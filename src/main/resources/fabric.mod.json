@@ -34,7 +34,7 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.12.12",
+    "fabricloader": ">=0.13.1",
     "fabric-game-rule-api-v1": ">=1.0.10",
     "fabric-resource-loader-v0": ">=0.4.11",
     "fabric-lifecycle-events-v1": ">=1.4.10",

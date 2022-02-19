@@ -27,7 +27,7 @@ public class Buildscript extends FabricProject {
     @Override
     public FabricLoader getLoader() {
         // Fabric Loader Version
-        return new FabricLoader(FabricMaven.URL, FabricMaven.loader("0.12.12"));
+        return new FabricLoader(FabricMaven.URL, FabricMaven.loader("0.13.2"));
     }
 
     @Override
