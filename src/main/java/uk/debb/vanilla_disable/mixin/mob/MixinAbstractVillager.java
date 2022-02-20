@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
-@Mixin(AbstractVillager.class)
+@Mixin(value = AbstractVillager.class, priority = 999)
 public abstract class MixinAbstractVillager {
     /**
      * @author DragonEggBedrockBreaking
@@ -23,7 +23,8 @@ public abstract class MixinAbstractVillager {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/item/trading/MerchantOffer;increaseUses()V"
-        )
+        ),
+        require = 0
     )
     private void cancelUses(MerchantOffer tradeOffer, MerchantOffer offer) {
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_TRADING)) {
