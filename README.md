@@ -10,7 +10,7 @@ I will likely try to resolve it, but my success is not guaranteed.
 
 ## Downloads
 
-You can download both stable releases of the mod, and also beta releases, from [Github Releases](https:/github.com/DragonEggBedrockBreaking/VanillaDisable/releases).
+You can download both stable releases of the mod, and also beta releases, from [Github Releases](https://github.com/DragonEggBedrockBreaking/VanillaDisable/releases).
 You can also download stable releases from [Modrinth](https://modrinth.com/mod/vanilla-disable).
 
 ## Other
