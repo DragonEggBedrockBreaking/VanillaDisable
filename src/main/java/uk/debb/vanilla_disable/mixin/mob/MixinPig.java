@@ -41,6 +41,7 @@ public abstract class MixinPig extends Animal {
      */
     @Inject(method = "isFood", at = @At("HEAD"), cancellable = true)
     private void changeFood(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGS_BREED_WITH_WHEAT)) {
             cir.setReturnValue(Ingredient.of(Items.WHEAT).test(stack));
         }
@@ -52,6 +53,7 @@ public abstract class MixinPig extends Animal {
      */
     @Overwrite
     public void registerGoals() {
+        if (RegisterGamerules.getServer() == null) return;
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));

@@ -65,6 +65,7 @@ public abstract class MixinMob {
      */
     @Inject(method = "removeWhenFarAway", at = @At("HEAD"), cancellable = true)
     private void cancelRemovelWhenFarAway(double distanceSquared, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (spawnGroupDespawnMap.isEmpty()) {
             addOptionsToMap();
         }

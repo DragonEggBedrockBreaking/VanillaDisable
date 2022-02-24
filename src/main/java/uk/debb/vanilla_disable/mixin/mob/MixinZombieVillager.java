@@ -21,6 +21,7 @@ public abstract class MixinZombieVillager {
      */
     @Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
     private void cureMob(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!player.getLevel().getGameRules().getBoolean(RegisterGamerules.CURABLE_ZILLAGERS)) {
             cir.setReturnValue(InteractionResult.CONSUME);
         }

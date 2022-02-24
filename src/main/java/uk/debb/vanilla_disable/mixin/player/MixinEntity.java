@@ -17,6 +17,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isOnFire", at = @At("HEAD"), cancellable = true)
     private void cannotBeOnFire(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_BE_ON_FIRE)) {
             cir.setReturnValue(false);
         }
@@ -29,6 +30,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isShiftKeyDown", at = @At("HEAD"), cancellable = true)
     private void cannotCrouch(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_CROUCH)) {
             cir.setReturnValue(false);
         }
@@ -41,6 +43,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isSprinting", at = @At("HEAD"), cancellable = true)
     private void cannotSprint(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_SPRINT)) {
             cir.setReturnValue(true);
         }
@@ -53,6 +56,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isSwimming", at = @At("HEAD"), cancellable = true)
     private void cannotSwim(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_SWIM)) {
             cir.setReturnValue(false);
         }
@@ -65,6 +69,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isInvisible", at = @At("HEAD"), cancellable = true)
     private void cannotBeInvisible(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_BE_INVISIBLE)) {
             cir.setReturnValue(false);
         }
@@ -77,6 +82,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "getBlockJumpFactor", at = @At("HEAD"), cancellable = true)
     private void cannotJump(CallbackInfoReturnable<Float> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_JUMP)) {
             cir.setReturnValue(0.0F);
         }

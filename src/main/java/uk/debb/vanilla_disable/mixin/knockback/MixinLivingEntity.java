@@ -89,6 +89,7 @@ public abstract class MixinLivingEntity {
      */
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(double strength, double x, double z, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if ((Object)this instanceof Player && isInvulnerableToKnockback(this.lastHurtByMob)) {
             ci.cancel();
         }

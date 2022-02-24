@@ -20,6 +20,7 @@ public abstract class MixinPlayer {
      */
     @Inject(method = "attack", at = @At("RETURN"), cancellable = true)
     private void igniteCreeper(Entity target, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.FIRE_ASPECT_IGNITES_CREEPERS) &&
             target instanceof Creeper && EnchantmentHelper.getFireAspect((Player)(Object)this) > 0) {
             ((Creeper)target).ignite();

@@ -17,6 +17,7 @@ public abstract class MixinWitherBoss {
      */
     @Inject(method = "checkDespawn", at = @At(value = "HEAD"), cancellable = true)
     private void forceDespawn(CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.WITHER_SPAWNS)) {
             ((Entity)(Object)this).discard();
             ci.cancel();

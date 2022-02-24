@@ -86,6 +86,7 @@ public abstract class MixinBaseSpawner {
         cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(ServerLevel level, BlockPos pos, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (spawnerMobMap.isEmpty()) {
             addOptionsToMap();
         }

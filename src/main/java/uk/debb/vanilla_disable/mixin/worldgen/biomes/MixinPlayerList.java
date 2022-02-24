@@ -101,6 +101,7 @@ public abstract class MixinPlayerList {
      */
     @Inject(method = "placeNewPlayer", at = @At("RETURN"), cancellable = true)
     private void onPlacingNewPlayer(Connection connection, ServerPlayer player, CallbackInfo ci) throws InterruptedException {
+        if (RegisterGamerules.getServer() == null) return;
         GameRules gameRules = RegisterGamerules.getServer().getGameRules();
         if (!(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof FlatLevelSource) &&
             !(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof DebugLevelSource) &&

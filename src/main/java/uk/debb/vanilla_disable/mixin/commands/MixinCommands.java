@@ -130,6 +130,7 @@ public abstract class MixinCommands {
      */
     @Inject(method = "performCommand", at = @At(value = "HEAD"), cancellable = true)
     private void performCommand(CommandSourceStack source, String command, CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         String commandName = command.split(" ")[0].substring(1);
         if (commandNameGameruleMap.isEmpty()) {
             addOptionsToMap();

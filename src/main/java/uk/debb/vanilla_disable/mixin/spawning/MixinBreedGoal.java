@@ -16,6 +16,7 @@ public abstract class MixinBreedGoal {
      */
     @Inject(method = "canUse", at = @At(value = "HEAD"), cancellable = true)
     private void cannotUse(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ANIMAL_BREEDING)) {
             cir.setReturnValue(false);
         }
@@ -28,6 +29,7 @@ public abstract class MixinBreedGoal {
      */
     @Inject(method = "canContinueToUse", at = @At(value = "HEAD"), cancellable = true)
     private void shouldContinueToUse(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ANIMAL_BREEDING)) {
             cir.setReturnValue(false);
         }

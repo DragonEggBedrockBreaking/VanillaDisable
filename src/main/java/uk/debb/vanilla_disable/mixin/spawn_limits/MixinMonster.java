@@ -22,6 +22,7 @@ public abstract class MixinMonster {
      */
     @Inject(method = "isDarkEnoughToSpawn", at = @At("HEAD"), cancellable = true)
     private static void spawnIsDarkEnough(ServerLevelAccessor world, BlockPos pos, Random random, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (world.getBrightness(LightLayer.SKY, pos) > random.nextInt(32)) {
             cir.setReturnValue(false);
         }

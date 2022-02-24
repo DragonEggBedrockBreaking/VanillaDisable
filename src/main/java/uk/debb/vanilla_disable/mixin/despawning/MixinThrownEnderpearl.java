@@ -23,6 +23,7 @@ public abstract class MixinThrownEnderpearl {
         cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ENDER_PEARLS_DESPAWN_ON_DEATH)) {
             ci.cancel();
         }

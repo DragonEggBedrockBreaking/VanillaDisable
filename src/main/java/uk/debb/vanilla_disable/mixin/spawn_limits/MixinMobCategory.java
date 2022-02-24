@@ -42,6 +42,7 @@ public abstract class MixinMobCategory {
      */
     @Inject(method = "getMaxInstancesPerChunk", at = @At("HEAD"), cancellable = true)
     public void getMaxInstancesPerChunk(CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (spawnGroupMap.isEmpty()) {
             addOptionsToMap();
         }

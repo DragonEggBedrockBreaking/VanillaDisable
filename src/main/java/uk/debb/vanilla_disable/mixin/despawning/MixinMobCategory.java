@@ -54,6 +54,7 @@ public abstract class MixinMobCategory {
      */
     @Inject(method = "getDespawnDistance", at = @At("HEAD"), cancellable = true)
     public void editDespawnDistance(CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (spawnGroupImmediateMap.isEmpty()) {
             addImmediateOptionsToMap();
         }
@@ -70,6 +71,7 @@ public abstract class MixinMobCategory {
      */
     @Inject(method = "getNoDespawnDistance", at = @At("HEAD"), cancellable = true)
     public void editNoDespawnDistance(CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (spawnGroupStartMap.isEmpty()) {
             addStartOptionsToMap();
         }

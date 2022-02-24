@@ -17,6 +17,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "onAboveBubbleCol", at = @At("HEAD"), cancellable = true)
     private void cancelAboveBubbleCol(boolean drag, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.BUBBLE_COLUMNS_ENABLED)) {
             ci.cancel();
         }
@@ -30,6 +31,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "onInsideBubbleColumn", at = @At("HEAD"), cancellable = true)
     private void cancelInsideBubbleCol(boolean drag, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.BUBBLE_COLUMNS_ENABLED)) {
             ci.cancel();
         }

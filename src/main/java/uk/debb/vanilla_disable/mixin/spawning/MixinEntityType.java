@@ -29,6 +29,7 @@ public abstract class MixinEntityType<T extends Entity> {
      */
     @Inject(method = "spawn", at = @At(value = "HEAD"), cancellable = true)
     private void cancelSpawning(ServerLevel level, ItemStack stack, Player player, BlockPos pos, MobSpawnType spawnReason, boolean alignPosition, boolean invertY, CallbackInfoReturnable<Entity> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.SPAWN_EGGS)) {
             cir.cancel();
         }

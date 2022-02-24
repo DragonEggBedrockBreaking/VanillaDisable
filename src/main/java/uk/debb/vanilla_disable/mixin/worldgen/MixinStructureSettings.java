@@ -59,6 +59,7 @@ public abstract class MixinStructureSettings {
      */
     @Inject(method = "structures", at = @At("HEAD"), cancellable = true)
     private void cancelGettingStructures(StructureFeature<?> feature, CallbackInfoReturnable<ImmutableMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (structureToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }

@@ -19,6 +19,7 @@ public abstract class MixinLavaFluid {
      */
     @Inject(method = "getDropOff", at = @At("HEAD"), cancellable = true)
     private void getLavaDropOff(LevelReader world, CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
                 cir.setReturnValue(((Level) world).getGameRules().getBoolean(RegisterGamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2);
@@ -36,6 +37,7 @@ public abstract class MixinLavaFluid {
      */
     @Inject(method = "getTickDelay", at = @At("HEAD"), cancellable = true)
     private void getLavaTickDelay(LevelReader world, CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
                 cir.setReturnValue(((Level) world).getGameRules().getInt(RegisterGamerules.LAVA_FLOW_SPEED_NETHER));
@@ -52,6 +54,7 @@ public abstract class MixinLavaFluid {
      */
     @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
     private void canLavaConvertToSource(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_LAVA));
     }
 }

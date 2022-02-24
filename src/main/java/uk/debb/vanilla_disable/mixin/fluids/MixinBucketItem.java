@@ -61,6 +61,7 @@ public abstract class MixinBucketItem {
      */
     @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
     protected void cancelPlayiningEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (world.dimensionType().ultraWarm() && this.content.is(FluidTags.WATER) &&
             ((ServerLevelAccessor)world).getLevel().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER)) {
             world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);

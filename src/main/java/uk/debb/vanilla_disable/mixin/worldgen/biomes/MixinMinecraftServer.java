@@ -213,6 +213,7 @@ public abstract class MixinMinecraftServer {
      */
     @Inject(method = "loadLevel", at = @At("RETURN"), cancellable = true)
     private void onLevelLoad(CallbackInfo ci) throws IOException {
+        if (RegisterGamerules.getServer() == null) return;
         if (!(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof FlatLevelSource) &&
             !(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof DebugLevelSource)) {
             if (RegisterGamerules.getServer().overworld().getDayTime() < 100) {

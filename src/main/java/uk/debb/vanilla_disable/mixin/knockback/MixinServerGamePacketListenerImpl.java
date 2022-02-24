@@ -23,6 +23,7 @@ public abstract class MixinServerGamePacketListenerImpl {
      */
     @Inject(method = "send", at = @At("HEAD"), cancellable = true)
     public void sendPacket(Packet<?> packet, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (packet instanceof ClientboundExplodePacket &&
             !(this.player.getLevel().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED) &&
               this.player.getLevel().getGameRules().getBoolean(RegisterGamerules.EXPLOSION_KNOCKBACK))) {

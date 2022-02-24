@@ -16,6 +16,7 @@ public abstract class MixinHoglin {
      */
     @Inject(method = "isImmuneToZombification", at = @At("HEAD"), cancellable = true)
     protected void setImmuneToZombification(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.HOGLINS_CONVERT_TO_ZOGLINS)) {
             cir.setReturnValue(true);
         }

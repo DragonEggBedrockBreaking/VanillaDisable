@@ -19,6 +19,7 @@ public abstract class MixinWaterFluid {
      */
     @Inject(method = "getDropOff", at = @At("HEAD"), cancellable = true)
     private void getWaterDropOff(LevelReader world, CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (world instanceof Level) {
             cir.setReturnValue(((Level) world).getGameRules().getBoolean(RegisterGamerules.WATER_REACHES_FAR) ? 1 : 2);
         }
@@ -32,6 +33,7 @@ public abstract class MixinWaterFluid {
      */
     @Inject(method = "getTickDelay", at = @At("HEAD"), cancellable = true)
     private void getWaterTickDelay(LevelReader world, CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (world instanceof Level) {
             cir.setReturnValue(((Level) world).getGameRules().getInt(RegisterGamerules.WATER_FLOW_SPEED));
         }
@@ -44,6 +46,7 @@ public abstract class MixinWaterFluid {
      */
     @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
     private void canWaterConvertToSource(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_WATER));
     }
 }

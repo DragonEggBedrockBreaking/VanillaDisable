@@ -24,6 +24,7 @@ public abstract class MixinBeaconBlockEntity {
      */
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void cancelEffects(Level level, BlockPos blockPos, int i, MobEffect mobEffect, MobEffect mobEffect2, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.BEACONS_ENABLED)) {
             ci.cancel();
         }

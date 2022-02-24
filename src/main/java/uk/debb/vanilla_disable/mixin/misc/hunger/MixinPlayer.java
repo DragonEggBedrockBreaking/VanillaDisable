@@ -20,6 +20,7 @@ public abstract class MixinPlayer {
      */
     @Inject(method = "eat", at = @At("HEAD"), cancellable = true)
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
             ((LivingEntity)(Object)this).setHealth(((LivingEntity)(Object)this).getHealth() + stack.getItem().getFoodProperties().getNutrition());
         }

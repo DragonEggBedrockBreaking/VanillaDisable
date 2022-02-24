@@ -51,6 +51,7 @@ public class MixinNaturalSpawner {
      */
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
     private static void cancelSpawningCategoryForChunk(MobCategory group, ServerLevel level, LevelChunk chunk, SpawnPredicate checker, AfterSpawnCallback runner, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (spawnGroupMap.isEmpty()) {
             addOptionsToMap();
         }

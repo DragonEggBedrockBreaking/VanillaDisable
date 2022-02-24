@@ -28,6 +28,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "getDimensionChangingDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDimensionChangingDelay(CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.NETHER_PORTAL_COOLDOWN));
     }
 
@@ -39,6 +40,7 @@ public abstract class MixinEntity {
      */
     @Inject(method = "onInsideBlock", at = @At("HEAD"), cancellable = true)
     private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_BOATS) &&
             (Object) this instanceof Boat) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {

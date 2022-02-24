@@ -16,6 +16,7 @@ public abstract class MixinSpikeFeature$EndSpike {
      */
     @Inject(method = "isGuarded", at = @At("HEAD"), cancellable = true)
     private void notGuarded(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.END_PILLAR_CAGE_GENERATION)) {
             cir.setReturnValue(false);
         }

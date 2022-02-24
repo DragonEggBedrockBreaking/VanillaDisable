@@ -18,6 +18,7 @@ public abstract class MixinItem {
      */
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
     private void editUseDuration(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
             cir.setReturnValue(1);
         }

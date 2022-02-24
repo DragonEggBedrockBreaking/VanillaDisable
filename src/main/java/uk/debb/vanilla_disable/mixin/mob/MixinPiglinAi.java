@@ -18,6 +18,7 @@ public abstract class MixinPiglinAi {
      */
     @Inject(method = "isBarterCurrency", at = @At("HEAD"), cancellable = true)
     private static void cancelBarter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGLIN_BARTERING_ENABLED)) {
             cir.setReturnValue(false);
         }

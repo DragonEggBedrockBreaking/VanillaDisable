@@ -47,6 +47,7 @@ public abstract class MixinPlayer {
      */
     @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"), cancellable = true)
     private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (damageSourceMap.isEmpty()) {
             addOptionsToMap();
         }

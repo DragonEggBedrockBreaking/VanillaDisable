@@ -27,6 +27,7 @@ public abstract class MixinAbstractVillager {
         require = 0
     )
     private void cancelUses(MerchantOffer tradeOffer, MerchantOffer offer) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_TRADING)) {
             offer.increaseUses();
         } else {
@@ -41,6 +42,7 @@ public abstract class MixinAbstractVillager {
      */
     @Inject(method = "getOffers", at = @At("HEAD"), cancellable = true)
     private void clearOffers(CallbackInfoReturnable<MerchantOffers> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGER_TRADING_ENABLED)) {
             cir.setReturnValue(new MerchantOffers());
         }

@@ -23,7 +23,8 @@ public abstract class MixinItemEntity {
      * @param ci
      */
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    private void discardItem(CallbackInfo ci) {    
+    private void discardItem(CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (this.age >= MAX * 20 &&
             !((Entity) (Object) (this)).getLevel().isClientSide) {
             ((Entity) (Object) (this)).discard();
@@ -45,6 +46,7 @@ public abstract class MixinItemEntity {
         cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (this.age < MAX * 20 &&
             this.pickupDelay != Short.MAX_VALUE) {
             ci.cancel();

@@ -25,6 +25,7 @@ public abstract class MixinNaturalSpawner {
      */
     @Inject(method = "isRightDistanceToPlayerAndSpawnPoint", at = @At("HEAD"), cancellable = true)
     private static void mayMeRightDistanceToPlayerAndSpawnPoint(ServerLevel level, ChunkAccess chunk, BlockPos.MutableBlockPos pos, double squaredDistance, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (squaredDistance <= Math.pow(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE), 2)) {
             cir.setReturnValue(false);
         } else if (level.getSharedSpawnPos().closerThan(new Vec3((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5), RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE))) {

@@ -16,6 +16,7 @@ public abstract class MixinSkeleton {
      */
     @Inject(method = "doFreezeConversion", at = @At("HEAD"), cancellable = true)
     private void cancelFreezeConversion(CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.SKELETONS_CONVERT_TO_STRAYS)) {
             ci.cancel();
         }

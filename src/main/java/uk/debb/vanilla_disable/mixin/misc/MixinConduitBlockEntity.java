@@ -22,6 +22,7 @@ public abstract class MixinConduitBlockEntity {
      */
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void cancelEffects(Level level, BlockPos blockPos, List<BlockPos> list, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.CONDUITS_ENABLED)) {
             ci.cancel();
         }

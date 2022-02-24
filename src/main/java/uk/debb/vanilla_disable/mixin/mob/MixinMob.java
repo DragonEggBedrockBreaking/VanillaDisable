@@ -16,6 +16,7 @@ public abstract class MixinMob {
      */
     @Inject(method = "isSunBurnTick", at = @At("HEAD"), cancellable = true)
     private void stopBurning(CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.MOBS_BURN_IN_SUNLIGHT)) {
             cir.setReturnValue(false);
         }

@@ -24,6 +24,7 @@ public abstract class MixinEndPortalBlock {
      */
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
     private void cancelEntityInside(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.END_PORTALS_ENABLED)) {
             ci.cancel();
         }

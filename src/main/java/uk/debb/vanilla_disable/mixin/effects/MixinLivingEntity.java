@@ -71,6 +71,7 @@ public abstract class MixinLivingEntity{
      */
     @Inject(method = "canBeAffected", at = @At("HEAD"), cancellable = true)
     private void canItBeAffected(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (((Object) this) instanceof ServerPlayer) {
             MobEffect statusEffect = effect.getEffect();
             if (statusEffectMap.isEmpty()) {

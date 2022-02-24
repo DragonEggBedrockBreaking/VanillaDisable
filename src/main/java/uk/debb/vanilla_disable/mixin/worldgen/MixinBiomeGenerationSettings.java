@@ -268,6 +268,7 @@ public abstract class MixinBiomeGenerationSettings {
      */
     @Inject(method = "hasFeature", at = @At("HEAD"), cancellable = true)
     private void cancelHavingFeature(PlacedFeature feature, CallbackInfoReturnable<Boolean> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (featureToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }

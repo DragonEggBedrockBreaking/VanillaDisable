@@ -78,6 +78,7 @@ public abstract class MixinEnchantmentHelper {
      */
     @Inject(method = "getItemEnchantmentLevel", at = @At("HEAD"), cancellable = true)
     private static void removeEnchantmentLevel(Enchantment enchantment, ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+        if (RegisterGamerules.getServer() == null) return;
         if (enchantmentMap.isEmpty()) {
             addOptionsToMap();
         }

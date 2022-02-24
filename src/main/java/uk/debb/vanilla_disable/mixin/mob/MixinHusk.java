@@ -16,6 +16,7 @@ public abstract class MixinHusk {
      */
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelConversionInWater(CallbackInfo ci) {
+        if (RegisterGamerules.getServer() == null) return;
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.HUSKS_CONVERT_TO_ZOMBIES)) {
             ci.cancel();
         }
