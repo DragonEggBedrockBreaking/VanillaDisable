@@ -1,6 +1,8 @@
-package uk.debb.vanilla_disable.mixin.worldgen.biomes;
+package uk.debb.vanilla_disable.mixin.worldgen.datapacks;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -91,6 +93,7 @@ public abstract class MixinPlayerList {
             TimeCommand.addTime(RegisterGamerules.getServer().createCommandSourceStack(), 24000);
         }
     }
+
     /**
      * @author DragonEggBedrockBreaking
      * @reason kick the player, then delete the region files, only if it is the first load
@@ -103,10 +106,51 @@ public abstract class MixinPlayerList {
     private void onPlacingNewPlayer(Connection connection, ServerPlayer player, CallbackInfo ci) throws InterruptedException {
         if (RegisterGamerules.getServer() == null) return;
         GameRules gameRules = RegisterGamerules.getServer().getGameRules();
+
+        List<Boolean> biomeGameRules = new ArrayList<Boolean>();
+        biomeGameRules.add(gameRules.getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES));
+        biomeGameRules.add(gameRules.getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES));
+        biomeGameRules.add(gameRules.getBoolean(RegisterGamerules.REMOVE_END_BIOMES));
+
+        boolean anyEnabledBiomeGameRules = false;
+        for (Boolean biomeGameRule : biomeGameRules) {
+            if (biomeGameRule) {
+                anyEnabledBiomeGameRules = true;
+                break;
+            }
+        }
+
+        List<Boolean> structureGameRules = new ArrayList<Boolean>();
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.BASTION_REMNANT_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.BURIED_TREASURE_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.DESERT_PYRAMID_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.END_CITY_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.IGLOO_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.JUNGLE_PYRAMID_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.MINESHAFT_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.FORTRESS_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.NETHER_FOSSIL_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.MONUMENT_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.OCEAN_RUIN_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.PILLAGER_OUTPOST_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.RUINED_PORTAL_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.SHIPWRECK_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.STRONGHOLD_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.SWAMP_HUT_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.VILLAGE_GENERATION));
+        structureGameRules.add(!gameRules.getBoolean(RegisterGamerules.MANSION_GENERATION));
+
+        boolean anyDisabledStructureGameRules = false;
+        for (Boolean structureGameRule : structureGameRules) {
+            if (structureGameRule) {
+                anyDisabledStructureGameRules = true;
+                break;
+            }
+        }
+
         if (!(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof FlatLevelSource) &&
             !(RegisterGamerules.getServer().overworld().getChunkSource().getGenerator() instanceof DebugLevelSource) &&
-            (gameRules.getBoolean(RegisterGamerules.REMOVE_OVERWORLD_BIOMES) || gameRules.getBoolean(RegisterGamerules.REMOVE_NETHER_BIOMES) ||
-             gameRules.getBoolean(RegisterGamerules.REMOVE_END_BIOMES)) && player.getLevel().getDayTime() < 100) {
+            (anyEnabledBiomeGameRules || anyDisabledStructureGameRules) && player.getLevel().getDayTime() < 100) {
             patchTime();
             deleteRegionFilesAndClose();
         } else {

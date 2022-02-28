@@ -67,10 +67,9 @@
     "worldgen.MixinBiomeGenerationSettings",
     "worldgen.MixinServerLevel",
     "worldgen.MixinSpikeFeature$EndSpike",
-    "worldgen.MixinStructureSettings",
-    "worldgen.biomes.MixinMinecraftServer",
-    "worldgen.biomes.MixinPlayerList",
-    "worldgen.biomes.MixinTimeCommand"
+    "worldgen.datapacks.MixinMinecraftServer",
+    "worldgen.datapacks.MixinPlayerList",
+    "worldgen.datapacks.MixinTimeCommand"
   ],
   "injectors": {
     "defaultRequire": 1

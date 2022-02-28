@@ -28,7 +28,7 @@ public abstract class MixinNaturalSpawner {
         if (RegisterGamerules.getServer() == null) return;
         if (squaredDistance <= Math.pow(RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE), 2)) {
             cir.setReturnValue(false);
-        } else if (level.getSharedSpawnPos().closerThan(new Vec3((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5), RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE))) {
+        } else if (level.getSharedSpawnPos().closerToCenterThan(new Vec3((double)pos.getX() + 0.5, pos.getY(), (double)pos.getZ() + 0.5), RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.MIN_SPAWN_DISTANCE))) {
             cir.setReturnValue(false);
         } else {
             cir.setReturnValue(Objects.equals(new ChunkPos(pos), chunk.getPos()) || level.isPositionEntityTicking(pos));

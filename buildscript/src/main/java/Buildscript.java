@@ -15,7 +15,7 @@ public class Buildscript extends FabricProject {
     @Override
     public VersionMeta createMcVersion() {
         // Minecraft Version
-        return Minecraft.getVersion("1.18.1");
+        return Minecraft.getVersion("1.18.2");
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Buildscript extends FabricProject {
     @Override
     public FabricLoader getLoader() {
         // Fabric Loader Version
-        return new FabricLoader(FabricMaven.URL, FabricMaven.loader("0.13.2"));
+        return new FabricLoader(FabricMaven.URL, FabricMaven.loader("0.13.3"));
     }
 
     @Override
@@ -45,14 +45,14 @@ public class Buildscript extends FabricProject {
     @Override
     public void getModDependencies(ModDependencyCollector d) {
         // Fabric API
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-resource-loader-v0", "0.4.11+3ac43d9514"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-game-rule-api-v1", "1.0.10+3ac43d9514"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-lifecycle-events-v1", "1.4.10+c15ca33565"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-api-base", "0.4.1+b4f4f6cd14"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-resource-loader-v0", "0.4.16+55dca1a4d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-game-rule-api-v1", "1.0.12+d7c144a8d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-lifecycle-events-v1", "2.0.1+25407454d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-api-base", "0.4.3+d7c144a8d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
         d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:383ee33be5"), ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ, ModDependencyFlag.RUNTIME);
         // DataBreaker
-        d.addMaven("https://maven.gegy.dev/", new MavenId("supercoder79:databreaker:0.2.8"), ModDependencyFlag.RUNTIME);
+        //d.addMaven("https://maven.gegy.dev/", new MavenId("supercoder79:databreaker:0.2.8"), ModDependencyFlag.RUNTIME);
         // Tiefix
         d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.9.0"), ModDependencyFlag.RUNTIME);
     }

@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.worldgen.biomes;
+package uk.debb.vanilla_disable.mixin.worldgen.datapacks;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.commands.TimeCommand;

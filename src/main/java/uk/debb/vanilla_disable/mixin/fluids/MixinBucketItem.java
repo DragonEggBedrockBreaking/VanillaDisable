@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.Level;
@@ -12,6 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -45,7 +45,7 @@ public abstract class MixinBucketItem {
         )
     )
     public boolean isNotUltraWarm(DimensionType type, @Nullable Player player, Level level, BlockPos pos, @Nullable BlockHitResult hitResult) {
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER) && this.content.is(FluidTags.WATER)) {
+        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER) && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER)) {
             return false;
         }
         return type.ultraWarm();
@@ -62,7 +62,7 @@ public abstract class MixinBucketItem {
     @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
     protected void cancelPlayiningEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
         if (RegisterGamerules.getServer() == null) return;
-        if (world.dimensionType().ultraWarm() && this.content.is(FluidTags.WATER) &&
+        if (world.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&
             ((ServerLevelAccessor)world).getLevel().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER)) {
             world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);
             for (int l = 0; l < 8; ++l) {

@@ -354,6 +354,6 @@
 
     "commands.disabled.by.vd": "This command has been disabled by an operator",
     "closing.in.twenty.seconds": "You will be kicked in 20 seconds. Rejoin afterwards.",
-    "deleting.region.files": "Your current world data will be deleted to re-generate with biome gamerule options you selected.",
+    "deleting.region.files": "Your current world data will be deleted to re-generate with biome/structure gamerule options you selected.",
     "dont.delete.region.files": "If you do not want this to occur, close and re-open your world, since this will not happen on next world load."
 }
