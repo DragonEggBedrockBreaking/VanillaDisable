@@ -70,8 +70,8 @@ public class Buildscript extends FabricProject {
         d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-api-base", "0.4.3+d7c144a8d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
         d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:383ee33be5"), ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ, ModDependencyFlag.RUNTIME);
-        // DataBreaker
-        //d.addMaven("https://maven.gegy.dev/", new MavenId("supercoder79:databreaker:0.2.8"), ModDependencyFlag.RUNTIME);
+        // LazyDFU
+        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:lazydfu:0.1.2"), ModDependencyFlag.RUNTIME);
         // Tiefix
         d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.9.0"), ModDependencyFlag.RUNTIME);
     }
