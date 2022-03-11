@@ -6,8 +6,16 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegisterGamerules implements ModInitializer {
+    // Creates a logger for this mod to use
+    private static Logger logger = LoggerFactory.getLogger("Vanilla Disable");
+    public static Logger getLogger() {
+        return logger;
+    }
+
     // Defining the minecraft server that I can use to get gamerules anywhere
     private static MinecraftServer server;
     public static MinecraftServer getServer() {

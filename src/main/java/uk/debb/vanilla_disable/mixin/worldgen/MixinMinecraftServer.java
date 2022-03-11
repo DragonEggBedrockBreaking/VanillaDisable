@@ -486,6 +486,9 @@ public abstract class MixinMinecraftServer {
         disabledCopy.remove(name);
         config.enabled = enabledCopy;
         config.disabled = disabledCopy;
+        RegisterGamerules.getLogger().debug(String.format(
+            "Datapack %s has been enabled due to your gamerule choices.",
+            name.replaceAll("vanilla_disable_", "")));
     }
 
     /**
@@ -505,6 +508,9 @@ public abstract class MixinMinecraftServer {
         disabledCopy.add(name);
         config.enabled = enabledCopy;
         config.disabled = disabledCopy;
+        RegisterGamerules.getLogger().debug(String.format(
+            "Datapack %s has been disabled due to your gamerule choices.",
+            name.replaceAll("vanilla_disable_", "")));
     }
 
     /**
