@@ -32,6 +32,7 @@
   "mixins": [
     "vanilla_disable.mixins.json"
   ],
+  "accessWidener": "vanilla_disable.aw",
 
   "depends": {
     "fabricloader": ">=0.13.3",
