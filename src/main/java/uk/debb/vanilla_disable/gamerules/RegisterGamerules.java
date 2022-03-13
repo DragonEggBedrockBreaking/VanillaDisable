@@ -351,6 +351,29 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_JUMP;
     public static GameRules.Key<GameRules.BooleanValue> PLAYER_CAN_BE_INVISIBLE;
 
+    public static GameRules.Key<GameRules.IntegerValue> REPEATER_BASE_DELAY;
+    public static GameRules.Key<GameRules.IntegerValue> REPEATER_SIGNAL;
+    public static GameRules.Key<GameRules.IntegerValue> COMPARATOR_BASE_DELAY;
+    public static GameRules.Key<GameRules.BooleanValue> COMPARATOR_ENABLED;
+    public static GameRules.Key<GameRules.IntegerValue> TORCH_REDSTONE_SIGNAL;
+    public static GameRules.Key<GameRules.BooleanValue> REDSTONE_WIRE_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> DROPPER_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> DAYLIGHT_SENSOR_ENABLED;
+    public static GameRules.Key<GameRules.IntegerValue> WOOD_BUTTON_PRESS_DURATION;
+    public static GameRules.Key<GameRules.IntegerValue> STONE_BUTTON_PRESS_DURATION;
+    public static GameRules.Key<GameRules.BooleanValue> BUTTON_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> LEVER_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> LIGHTNING_ROD_ENABLED;
+    public static GameRules.Key<GameRules.IntegerValue> OBSERVER_DELAY;
+    public static GameRules.Key<GameRules.IntegerValue> OBSERVER_DURATION;
+    public static GameRules.Key<GameRules.BooleanValue> OBSERVER_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> PRESSURE_PLATE_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> TARGET_BLOCK_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> TRAPPED_CHEST_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> TRIPWIRE_HOOK_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> PISTON_ENABLED;
+
     public static GameRules.Key<GameRules.BooleanValue> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_GATEWAYS_ENABLED;
@@ -1002,6 +1025,51 @@ public class RegisterGamerules implements ModInitializer {
             "playerCanJump",       CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
         PLAYER_CAN_BE_INVISIBLE = GameRuleRegistry.register(
             "playerCanBeInvisible",CreateGameruleCategories.VD_PLAYER, GameRuleFactory.createBooleanRule(true));
+
+        REPEATER_BASE_DELAY         = GameRuleRegistry.register(
+            "repeaterBaseDelay",       CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(2, 0));
+        REPEATER_SIGNAL            = GameRuleRegistry.register(
+            "repeaterSignal",          CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(15, 0, 15));
+        COMPARATOR_BASE_DELAY       = GameRuleRegistry.register(
+            "comparatorBaseDelay",     CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(2, 0));
+        COMPARATOR_ENABLED          = GameRuleRegistry.register(
+            "comparatorEnabled",       CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        TORCH_REDSTONE_SIGNAL       = GameRuleRegistry.register(
+            "torchRedstoneSignal",     CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(15, 0, 15));
+        REDSTONE_WIRE_ENABLED       = GameRuleRegistry.register(
+            "redstoneWireEnabled",     CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        DROPPER_ENABLED             = GameRuleRegistry.register(
+            "dropperEnabled",          CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        DISPENSER_ENABLED           = GameRuleRegistry.register(
+            "dispenserEnabled",        CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        DAYLIGHT_SENSOR_ENABLED     = GameRuleRegistry.register(
+            "daylightSensorEnabled",   CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        WOOD_BUTTON_PRESS_DURATION  = GameRuleRegistry.register(
+            "woodButtonPressDuration", CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(30, 0));
+        STONE_BUTTON_PRESS_DURATION = GameRuleRegistry.register(
+            "stoneButtonPressDuration",CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(20, 0));
+        BUTTON_ENABLED              = GameRuleRegistry.register(
+            "buttonEnabled",           CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        LEVER_ENABLED               = GameRuleRegistry.register(
+            "leverEnabled",            CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        LIGHTNING_ROD_ENABLED       = GameRuleRegistry.register(
+            "lightningRodEnabled",     CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        OBSERVER_DELAY              = GameRuleRegistry.register(
+            "observerDelay",           CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(2, 0));
+        OBSERVER_DURATION           = GameRuleRegistry.register(
+            "observerDuration",        CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createIntRule(2, 0));
+        OBSERVER_ENABLED            = GameRuleRegistry.register(
+            "observerEnabled",         CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        PRESSURE_PLATE_ENABLED      = GameRuleRegistry.register(
+            "pressurePlateEnabled",    CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        TARGET_BLOCK_ENABLED        = GameRuleRegistry.register(
+            "targetBlockEnabled",      CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        TRAPPED_CHEST_ENABLED       = GameRuleRegistry.register(
+            "trappedChestEnabled",     CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        TRIPWIRE_HOOK_ENABLED       = GameRuleRegistry.register(
+            "tripwireHookEnabled",     CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
+        PISTON_ENABLED              = GameRuleRegistry.register(
+            "pistonEnabled",           CreateGameruleCategories.VD_REDSTONE, GameRuleFactory.createBooleanRule(true));
 
         NETHER_PORTALS_ENABLED   = GameRuleRegistry.register(
             "netherPortalsEnabled", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));

@@ -56,6 +56,23 @@
 
     "player.MixinEntity",
 
+    "redstone.MixinButtonBlock",
+    "redstone.MixinComparatorBlock",
+    "redstone.MixinDaylightDetectorBlock",
+    "redstone.MixinDispenserBlock",
+    "redstone.MixinDropperBlock",
+    "redstone.MixinLeverBlock",
+    "redstone.MixinLightningRodBlock",
+    "redstone.MixinObserverBlock",
+    "redstone.MixinPistonBaseBlock",
+    "redstone.MixinPressurePlateBlock",
+    "redstone.MixinRedstoneTorchBlock",
+    "redstone.MixinRedStoneWireBlock",
+    "redstone.MixinRepeaterBlock",
+    "redstone.MixinTargetBlock",
+    "redstone.MixinTrappedChestBlock",
+    "redstone.MixinTripWireHookBlock",
+
     "spawn_limits.MixinMobCategory",
     "spawn_limits.MixinMonster",
 

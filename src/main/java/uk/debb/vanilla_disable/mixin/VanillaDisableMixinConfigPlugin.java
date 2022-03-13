@@ -19,6 +19,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
             .addMixinOption("misc.hunger", true)
             .addMixinOption("mob", true)
             .addMixinOption("player", true)
+            .addMixinOption("redstone", true)
             .addMixinOption("spawn_limits", true)
             .addMixinOption("spawning", true)
             .addMixinOption("worldgen", true)
