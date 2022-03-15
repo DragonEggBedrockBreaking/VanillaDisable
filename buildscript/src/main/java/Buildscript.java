@@ -64,10 +64,10 @@ public class Buildscript extends FabricProject {
     @Override
     public void getModDependencies(ModDependencyCollector d) {
         // Fabric API
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-resource-loader-v0", "0.4.18+2de5574560"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-game-rule-api-v1", "1.0.13+d7c144a860"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-lifecycle-events-v1", "2.0.2+2540745460"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
-        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-api-base", "0.4.4+d7c144a860"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-resource-loader-v0", "0.4.16+55dca1a4d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-game-rule-api-v1", "1.0.12+d7c144a8d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-lifecycle-events-v1", "2.0.1+25407454d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-api-base", "0.4.3+d7c144a8d2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
         d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:383ee33be5"), ModDependencyFlag.COMPILE, ModDependencyFlag.JIJ, ModDependencyFlag.RUNTIME);
         // LazyDFU
