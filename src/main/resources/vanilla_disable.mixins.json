@@ -33,6 +33,7 @@
     "misc.MixinEndPortalBlock",
     "misc.MixinEntity",
     "misc.MixinFarmBlock",
+    "misc.MixinLivingEntity",
     "misc.MixinNetherPortalBlock",
     "misc.MixinSwordItem",
     "misc.MixinTheEndGatewayBlockEntity",

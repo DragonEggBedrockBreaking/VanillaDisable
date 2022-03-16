@@ -367,6 +367,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> BEACONS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> CONDUITS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> ICE_SLIDING;
+    public static GameRules.Key<GameRules.BooleanValue> TOTEMS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> CREATIVE_SWORD_CAN_BREAK_BLOCKS;
 
     @Override
@@ -1041,6 +1042,8 @@ public class RegisterGamerules implements ModInitializer {
             "conduitsEnabled",      CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
         ICE_SLIDING              = GameRuleRegistry.register(
             "iceSliding",           CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+        TOTEMS_ENABLED           = GameRuleRegistry.register(
+            "totemsEnabled",        CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
         CREATIVE_SWORD_CAN_BREAK_BLOCKS = GameRuleRegistry.register(
             "creativeSwordCanBreakBlocks", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
 
