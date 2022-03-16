@@ -136,18 +136,18 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(TreePlacements.FANCY_OAK_BEES_002.toString(), RegisterGamerules.TREE_GENERATION);
         featureToGameruleMap.put(TreePlacements.FANCY_OAK_BEES.toString(), RegisterGamerules.TREE_GENERATION);
 
-        featureToGameruleMap.put(VillagePlacements.PILE_HAY_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PILE_ICE_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PILE_MELON_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PILE_PUMPKIN_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PILE_SNOW_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.OAK_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.ACACIA_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.SPRUCE_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PINE_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PATCH_BERRY_BUSH_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PATCH_CACTUS_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
-        featureToGameruleMap.put(VillagePlacements.PATCH_TAIGA_GRASS_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PILE_HAY_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PILE_ICE_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PILE_MELON_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PILE_PUMPKIN_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PILE_SNOW_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.OAK_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.ACACIA_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.SPRUCE_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PINE_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PATCH_BERRY_BUSH_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PATCH_CACTUS_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
+        featureToGameruleMap.put(VillagePlacements.PATCH_TAIGA_GRASS_VILLAGE.toString(), RegisterGamerules.VILLAGE_GENERATION);
 
         featureToGameruleMap.put(OrePlacements.ORE_ANCIENT_DEBRIS_LARGE.toString(), RegisterGamerules.NETHER_ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_ANDESITE_LOWER.toString(), RegisterGamerules.ORE_GENERATION);

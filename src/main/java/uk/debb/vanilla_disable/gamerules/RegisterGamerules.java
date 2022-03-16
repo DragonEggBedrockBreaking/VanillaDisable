@@ -325,7 +325,6 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> SPRING_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> TREE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> UNDERWATER_MAGMA_GENERATION;
-    public static GameRules.Key<GameRules.BooleanValue> VILLAGE_MISC_FEATURE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> WELL_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> END_SPAWN_PLATFORM_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> END_PILLAR_CAGE_GENERATION;
@@ -965,8 +964,6 @@ public class RegisterGamerules implements ModInitializer {
             "treeGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         UNDERWATER_MAGMA_GENERATION    = GameRuleRegistry.register(
             "underwaterMagmaGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
-        VILLAGE_MISC_FEATURE_GENERATION = GameRuleRegistry.register(
-            "villageMiscFeatureGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         WELL_GENERATION                = GameRuleRegistry.register(
             "wellGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         END_SPAWN_PLATFORM_GENERATION  = GameRuleRegistry.register(
