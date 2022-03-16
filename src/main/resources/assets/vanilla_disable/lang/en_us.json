@@ -342,6 +342,7 @@
     "gamerule.beaconsEnabled": "Toggle whether beacons are enabled",
     "gamerule.conduitsEnabled": "Toggle whether conduits are enabled",
     "gamerule.iceSliding": "Toggle whether entities can slide faster on ice",
+    "gamerule.creativeSwordCanBreakBlocks": "Toggle whether a sword can break blocks in creative mode",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",

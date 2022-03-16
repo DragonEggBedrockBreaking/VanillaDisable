@@ -34,6 +34,7 @@
     "misc.MixinEntity",
     "misc.MixinFarmBlock",
     "misc.MixinNetherPortalBlock",
+    "misc.MixinSwordItem",
     "misc.MixinTheEndGatewayBlockEntity",
     "misc.hunger.MixinFoodData",
     "misc.hunger.MixinItem",
