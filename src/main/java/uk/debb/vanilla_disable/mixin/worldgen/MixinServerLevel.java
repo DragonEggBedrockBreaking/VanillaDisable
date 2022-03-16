@@ -18,7 +18,7 @@ public abstract class MixinServerLevel {
     @Inject(method = "makeObsidianPlatform", at = @At("HEAD"), cancellable = true)
     private static void cancelMakingObsidianPlatform(ServerLevel level, CallbackInfo ci) {
         if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.END_SPAWN_PLATFORM_GENERATION)) {
+        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.END_FEATURES_GENERATION)) {
             ci.cancel();
         }
     }

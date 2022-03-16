@@ -68,9 +68,9 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(CavePlacements.CLASSIC_VINES.toString(), RegisterGamerules.UNDERGROUND_VEGETATION);
         featureToGameruleMap.put(CavePlacements.AMETHYST_GEODE.toString(), RegisterGamerules.AMETHYST_GEODE_GENERATION);
 
-        featureToGameruleMap.put(EndPlacements.END_SPIKE.toString(), RegisterGamerules.OBSIDIAN_END_PILLAR_GENERATION);
-        featureToGameruleMap.put(EndPlacements.END_GATEWAY_RETURN.toString(), RegisterGamerules.RETURN_END_GATEWAY_GENERATION);
-        featureToGameruleMap.put(EndPlacements.END_ISLAND_DECORATED.toString(), RegisterGamerules.SMALL_END_ISLAND_GENERATION);
+        featureToGameruleMap.put(EndPlacements.END_SPIKE.toString(), RegisterGamerules.END_FEATURES_GENERATION);
+        featureToGameruleMap.put(EndPlacements.END_GATEWAY_RETURN.toString(), RegisterGamerules.END_FEATURES_GENERATION);
+        featureToGameruleMap.put(EndPlacements.END_ISLAND_DECORATED.toString(), RegisterGamerules.END_FEATURES_GENERATION);
         featureToGameruleMap.put(EndPlacements.CHORUS_PLANT.toString(), RegisterGamerules.END_VEGETATION);
 
         featureToGameruleMap.put(NetherPlacements.DELTA.toString(), RegisterGamerules.BASALT_BLACKSTONE_GENERATION);
@@ -104,7 +104,7 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(MiscOverworldPlacements.DISK_CLAY.toString(), RegisterGamerules.OCEAN_FLOOR_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.DISK_GRAVEL.toString(), RegisterGamerules.OCEAN_FLOOR_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.DISK_SAND.toString(), RegisterGamerules.OCEAN_FLOOR_GENERATION);
-        featureToGameruleMap.put(MiscOverworldPlacements.VOID_START_PLATFORM.toString(), RegisterGamerules.OBSIDIAN_END_PILLAR_GENERATION);
+        featureToGameruleMap.put(MiscOverworldPlacements.VOID_START_PLATFORM.toString(), RegisterGamerules.END_FEATURES_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.DESERT_WELL.toString(), RegisterGamerules.DESERT_WELL_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.SPRING_LAVA.toString(), RegisterGamerules.SPRING_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.SPRING_LAVA_FROZEN.toString(), RegisterGamerules.SPRING_GENERATION);
