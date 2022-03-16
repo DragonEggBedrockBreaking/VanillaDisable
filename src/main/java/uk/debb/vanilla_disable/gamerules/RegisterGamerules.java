@@ -316,7 +316,6 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> MAGMA_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> NETHER_FIRE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> NETHER_ORE_GENERATION;
-    public static GameRules.Key<GameRules.BooleanValue> NETHER_SPRING_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> OBSIDIAN_END_PILLAR_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> OCEAN_FLOOR_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> ORE_GENERATION;
@@ -324,7 +323,6 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> SMALL_END_ISLAND_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> SPRING_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> TREE_GENERATION;
-    public static GameRules.Key<GameRules.BooleanValue> UNDERWATER_MAGMA_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> WELL_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> END_SPAWN_PLATFORM_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> END_PILLAR_CAGE_GENERATION;
@@ -946,8 +944,6 @@ public class RegisterGamerules implements ModInitializer {
             "netherFireGeneration",     CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         NETHER_ORE_GENERATION          = GameRuleRegistry.register(
             "netherOreGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
-        NETHER_SPRING_GENERATION       = GameRuleRegistry.register(
-            "netherSpringGeneration",   CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         OBSIDIAN_END_PILLAR_GENERATION = GameRuleRegistry.register(
             "obsidianEndPillarGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         OCEAN_FLOOR_GENERATION         = GameRuleRegistry.register(
@@ -962,8 +958,6 @@ public class RegisterGamerules implements ModInitializer {
             "springGeneration",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         TREE_GENERATION                = GameRuleRegistry.register(
             "treeGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
-        UNDERWATER_MAGMA_GENERATION    = GameRuleRegistry.register(
-            "underwaterMagmaGeneration",CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         WELL_GENERATION                = GameRuleRegistry.register(
             "wellGeneration",           CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         END_SPAWN_PLATFORM_GENERATION  = GameRuleRegistry.register(

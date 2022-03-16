@@ -57,7 +57,7 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(CavePlacements.DRIPSTONE_CLUSTER.toString(), RegisterGamerules.DRIPSTONE_GENERATION);
         featureToGameruleMap.put(CavePlacements.LARGE_DRIPSTONE.toString(), RegisterGamerules.DRIPSTONE_GENERATION);
         featureToGameruleMap.put(CavePlacements.POINTED_DRIPSTONE.toString(), RegisterGamerules.DRIPSTONE_GENERATION);
-        featureToGameruleMap.put(CavePlacements.UNDERWATER_MAGMA.toString(), RegisterGamerules.UNDERWATER_MAGMA_GENERATION);
+        featureToGameruleMap.put(CavePlacements.UNDERWATER_MAGMA.toString(), RegisterGamerules.MAGMA_GENERATION);
         featureToGameruleMap.put(CavePlacements.GLOW_LICHEN.toString(), RegisterGamerules.UNDERGROUND_VEGETATION);
         featureToGameruleMap.put(CavePlacements.ROOTED_AZALEA_TREE.toString(), RegisterGamerules.UNDERGROUND_VEGETATION);
         featureToGameruleMap.put(CavePlacements.CAVE_VINES.toString(), RegisterGamerules.UNDERGROUND_VEGETATION);
@@ -81,10 +81,10 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(NetherPlacements.BLACKSTONE_BLOBS.toString(), RegisterGamerules.BASALT_BLACKSTONE_GENERATION);
         featureToGameruleMap.put(NetherPlacements.GLOWSTONE.toString(), RegisterGamerules.GLOWSTONE_GENERATION);
         featureToGameruleMap.put(NetherPlacements.GLOWSTONE_EXTRA.toString(), RegisterGamerules.GLOWSTONE_GENERATION);
-        featureToGameruleMap.put(NetherPlacements.SPRING_CLOSED.toString(), RegisterGamerules.NETHER_SPRING_GENERATION);
-        featureToGameruleMap.put(NetherPlacements.SPRING_CLOSED_DOUBLE.toString(), RegisterGamerules.NETHER_SPRING_GENERATION);
-        featureToGameruleMap.put(NetherPlacements.SPRING_DELTA.toString(), RegisterGamerules.NETHER_SPRING_GENERATION);
-        featureToGameruleMap.put(NetherPlacements.SPRING_OPEN.toString(), RegisterGamerules.NETHER_SPRING_GENERATION);
+        featureToGameruleMap.put(NetherPlacements.SPRING_CLOSED.toString(), RegisterGamerules.SPRING_GENERATION);
+        featureToGameruleMap.put(NetherPlacements.SPRING_CLOSED_DOUBLE.toString(), RegisterGamerules.SPRING_GENERATION);
+        featureToGameruleMap.put(NetherPlacements.SPRING_DELTA.toString(), RegisterGamerules.SPRING_GENERATION);
+        featureToGameruleMap.put(NetherPlacements.SPRING_OPEN.toString(), RegisterGamerules.SPRING_GENERATION);
         featureToGameruleMap.put(NetherPlacements.PATCH_FIRE.toString(), RegisterGamerules.NETHER_FIRE_GENERATION);
         featureToGameruleMap.put(NetherPlacements.PATCH_SOUL_FIRE.toString(), RegisterGamerules.NETHER_FIRE_GENERATION);
         featureToGameruleMap.put(NetherPlacements.CRIMSON_FOREST_VEGETATION.toString(), RegisterGamerules.NETHER_VEGETATION);
