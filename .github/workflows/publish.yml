@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-brachyura-${{ hashFiles('**/Buildscript.java') }}
           restore-keys: z${{ runner.os }}-brachyura
       - name: Build with Brachyura
-        run: java -jar brachyura-bootstrap-0.jar build -j 2
+        run: java -jar brachyura-bootstrap-0.jar build
       - name: Publish to GitHub and Modrinth
         uses: Kir-Antipov/mc-publish@v2.1
         with:

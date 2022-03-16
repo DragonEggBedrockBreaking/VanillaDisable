@@ -23,7 +23,7 @@ jobs:
         key: ${{ runner.os }}-brachyura-${{ hashFiles('**/Buildscript.java') }}
         restore-keys: z${{ runner.os }}-brachyura
     - name: Build with Brachyura
-      run: java -jar brachyura-bootstrap-0.jar build -j 2
+      run: java -jar brachyura-bootstrap-0.jar build
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
