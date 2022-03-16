@@ -150,10 +150,10 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(VillagePlacements.PATCH_TAIGA_GRASS_VILLAGE.toString(), RegisterGamerules.VILLAGE_MISC_FEATURE_GENERATION);
 
         featureToGameruleMap.put(OrePlacements.ORE_ANCIENT_DEBRIS_LARGE.toString(), RegisterGamerules.NETHER_ORE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_ANDESITE_LOWER.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_ANDESITE_UPPER.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_ANDESITE_LOWER.toString(), RegisterGamerules.ORE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_ANDESITE_UPPER.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_BLACKSTONE.toString(), RegisterGamerules.BASALT_BLACKSTONE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_CLAY.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_CLAY.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_COAL_LOWER.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_COAL_UPPER.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_COPPER.toString(), RegisterGamerules.ORE_GENERATION);
@@ -162,20 +162,20 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(OrePlacements.ORE_DIAMOND.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_DIAMOND_BURIED.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_DIAMOND_LARGE.toString(), RegisterGamerules.ORE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_DIORITE_LOWER.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_DIORITE_UPPER.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_DIRT.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_DIORITE_LOWER.toString(), RegisterGamerules.ORE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_DIORITE_UPPER.toString(), RegisterGamerules.ORE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_DIRT.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_EMERALD.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_GOLD.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_GOLD_DELTAS.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_GOLD_EXTRA.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_GOLD_LOWER.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_GOLD_NETHER.toString(), RegisterGamerules.NETHER_ORE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_GRANITE_LOWER.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_GRANITE_UPPER.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_GRANITE_LOWER.toString(), RegisterGamerules.ORE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_GRANITE_UPPER.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_GRAVEL.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_GRAVEL_NETHER.toString(), RegisterGamerules.NETHER_ORE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_INFESTED.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_INFESTED.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_IRON_MIDDLE.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_IRON_SMALL.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_IRON_UPPER.toString(), RegisterGamerules.ORE_GENERATION);
@@ -187,7 +187,7 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(OrePlacements.ORE_REDSTONE.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_REDSTONE_LOWER.toString(), RegisterGamerules.ORE_GENERATION);
         featureToGameruleMap.put(OrePlacements.ORE_SOUL_SAND.toString(), RegisterGamerules.NETHER_ORE_GENERATION);
-        featureToGameruleMap.put(OrePlacements.ORE_TUFF.toString(), RegisterGamerules.EXTRA_STONE_TYPE_GENERATION);
+        featureToGameruleMap.put(OrePlacements.ORE_TUFF.toString(), RegisterGamerules.ORE_GENERATION);
 
         featureToGameruleMap.put(VegetationPlacements.BAMBOO.toString(), RegisterGamerules.OVERWORLD_VEGETATION);
         featureToGameruleMap.put(VegetationPlacements.BAMBOO_LIGHT.toString(), RegisterGamerules.OVERWORLD_VEGETATION);

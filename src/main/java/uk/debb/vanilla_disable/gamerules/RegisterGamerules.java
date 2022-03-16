@@ -309,8 +309,6 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> DESERT_WELL_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> DRIPSTONE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> DUNGEON_GENERATION;
-    public static GameRules.Key<GameRules.BooleanValue> EXTRA_STONE_TYPE_GENERATION;
-    public static GameRules.Key<GameRules.BooleanValue> FOREST_ROCK_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> FOSSIL_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> GLOWSTONE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> ICE_GENERATION;
@@ -935,10 +933,6 @@ public class RegisterGamerules implements ModInitializer {
             "dripstoneGeneration",      CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         DUNGEON_GENERATION             = GameRuleRegistry.register(
             "dungeonGeneration",        CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
-        EXTRA_STONE_TYPE_GENERATION    = GameRuleRegistry.register(
-            "extraStoneTypeGeneration", CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
-        FOREST_ROCK_GENERATION         = GameRuleRegistry.register(
-            "forestRockGeneration",     CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         FOSSIL_GENERATION              = GameRuleRegistry.register(
             "fossilGeneration",         CreateGameruleCategories.VD_WORLDGEN, GameRuleFactory.createBooleanRule(true));
         GLOWSTONE_GENERATION           = GameRuleRegistry.register(
