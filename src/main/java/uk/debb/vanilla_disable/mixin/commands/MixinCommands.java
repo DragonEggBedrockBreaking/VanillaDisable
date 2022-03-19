@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.commands;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -24,7 +24,7 @@ public abstract class MixinCommands {
      * @reason map of all standard commands to their gamerules
      */
     @Unique
-    private static final Map<String, GameRules.Key<GameRules.BooleanValue>> commandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> commandNameGameruleMap = new Object2ObjectOpenHashMap<String, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -97,7 +97,7 @@ public abstract class MixinCommands {
      * @reason map of all standard commands to their gamerules
      */
     @Unique
-    private static final Map<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new Object2ObjectOpenHashMap<String, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.spawning;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.GameRules;
@@ -23,7 +23,7 @@ public class MixinNaturalSpawner {
      * @reason map of all spawn groups to their gamerules
      */
     @Unique
-    private static final Map<MobCategory, GameRules.Key<GameRules.BooleanValue>> spawnGroupMap = new HashMap<MobCategory, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.BooleanValue>> spawnGroupMap = new Object2ObjectOpenHashMap<MobCategory, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

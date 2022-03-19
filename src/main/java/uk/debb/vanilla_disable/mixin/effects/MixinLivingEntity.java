@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.effects;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -22,7 +22,7 @@ public abstract class MixinLivingEntity{
      * @reason map of all status effects to their gamerules
      */
     @Unique
-    private static final Map<MobEffect, GameRules.Key<GameRules.BooleanValue>> statusEffectMap = new HashMap<MobEffect, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<MobEffect, GameRules.Key<GameRules.BooleanValue>> statusEffectMap = new Object2ObjectOpenHashMap<MobEffect, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

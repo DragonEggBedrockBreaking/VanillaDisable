@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.enchantments;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -21,7 +21,7 @@ public abstract class MixinEnchantmentHelper {
      * @reason map of all enchantments to their gamerules
      */
     @Unique
-    private static final Map<Enchantment, GameRules.Key<GameRules.BooleanValue>> enchantmentMap = new HashMap<Enchantment, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Enchantment, GameRules.Key<GameRules.BooleanValue>> enchantmentMap = new Object2ObjectOpenHashMap<Enchantment, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

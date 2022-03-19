@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.damage;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
@@ -19,7 +19,7 @@ public abstract class MixinPlayer {
      * @reason map of all damage sources to their gamerules
      */
     @Unique
-    private static final Map<DamageSource, GameRules.Key<GameRules.BooleanValue>> damageSourceMap = new HashMap<DamageSource, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<DamageSource, GameRules.Key<GameRules.BooleanValue>> damageSourceMap = new Object2ObjectOpenHashMap<DamageSource, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

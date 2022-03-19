@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.spawning;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -52,7 +52,7 @@ public abstract class MixinBaseSpawner {
      * @reason map of all damage sources to their gamerules
      */
     @Unique
-    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnerMobMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnerMobMap = new Object2ObjectOpenHashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

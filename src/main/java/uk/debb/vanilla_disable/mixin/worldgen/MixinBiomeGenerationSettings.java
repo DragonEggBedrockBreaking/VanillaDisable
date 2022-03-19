@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.worldgen;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.data.worldgen.placement.EndPlacements;
@@ -28,7 +28,7 @@ public abstract class MixinBiomeGenerationSettings {
      * @reason map of all placed features to their gamerules
      */
     @Unique
-    private static final Map<String, GameRules.Key<GameRules.BooleanValue>> featureToGameruleMap = new HashMap<String, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> featureToGameruleMap = new Object2ObjectOpenHashMap<String, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

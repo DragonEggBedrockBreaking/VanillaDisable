@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.knockback;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Llama;
@@ -35,7 +35,7 @@ public abstract class MixinLivingEntity {
      * @reason map of all relevenat entities to their gamerules
      */
     @Unique
-    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanValue>> entityMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> entityMap = new Object2ObjectOpenHashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

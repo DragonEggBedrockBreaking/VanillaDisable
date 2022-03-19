@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,9 +18,9 @@ public abstract class MixinMobCategory {
      * @reason map of many mob groups to their gamerules
      */
     @Unique
-    private static final Map<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupImmediateMap = new HashMap<MobCategory, GameRules.Key<GameRules.IntegerValue>>();
+    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupImmediateMap = new Object2ObjectOpenHashMap<MobCategory, GameRules.Key<GameRules.IntegerValue>>();
     @Unique
-    private static final Map<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupStartMap = new HashMap<MobCategory, GameRules.Key<GameRules.IntegerValue>>();
+    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupStartMap = new Object2ObjectOpenHashMap<MobCategory, GameRules.Key<GameRules.IntegerValue>>();
 
     /**
      * @author DragonEggBedrockBreaking

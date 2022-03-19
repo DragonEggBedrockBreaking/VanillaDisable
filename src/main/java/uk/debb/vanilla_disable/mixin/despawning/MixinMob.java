@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.Mob;
@@ -28,7 +28,7 @@ public abstract class MixinMob {
      * @reason map of many mob groups to their gamerules
      */
     @Unique
-    private static final Map<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnGroupDespawnMap = new HashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnGroupDespawnMap = new Object2ObjectOpenHashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
 
     /**
      * @author DragonEggBedrockBreaking
