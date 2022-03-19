@@ -1,14 +1,11 @@
 package uk.debb.vanilla_disable.mixin.mob;
 
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,11 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(Pig.class)
-public abstract class MixinPig extends Animal {
-    public MixinPig(EntityType<? extends Animal> entityType, Level level) {
-        super(entityType, level);
-    }
-
+public abstract class MixinPig {
     /**
      * @author DragonEggBedrockBreaking
      * @reason change the item which the pig cen breed with
@@ -54,7 +47,7 @@ public abstract class MixinPig extends Animal {
     private Goal modifyCarrotOnStickGoal(Goal goal) {
         if (RegisterGamerules.getServer() == null) return goal;
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGS_BREED_WITH_WHEAT)) {
-            return new TemptGoal(this, 1.2D, Ingredient.of(Items.WHEAT), false);
+            return new TemptGoal((Pig)(Object)this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;
     }
@@ -77,7 +70,7 @@ public abstract class MixinPig extends Animal {
     private Goal modifyBreedItemsGoal(Goal goal) {
         if (RegisterGamerules.getServer() == null) return goal;
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGS_BREED_WITH_WHEAT)) {
-            return new TemptGoal(this, 1.2D, Ingredient.of(Items.WHEAT), false);
+            return new TemptGoal((Pig)(Object)this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;
     }
