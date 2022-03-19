@@ -1,5 +1,7 @@
 package uk.debb.vanilla_disable.mixin.worldgen;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -8,8 +10,6 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -478,8 +478,8 @@ public abstract class MixinMinecraftServer {
     private void enableDatapack(String name) {
         PackRepository repo = RegisterGamerules.getServer().getPackRepository();
         DataPackConfig config = MixinMinecraftServer.getSelectedPacks(repo);
-        List<String> enabledCopy = new ArrayList<String>();
-        List<String> disabledCopy = new ArrayList<String>();
+        ObjectList<String> enabledCopy = new ObjectArrayList<String>();
+        ObjectList<String> disabledCopy = new ObjectArrayList<String>();
         enabledCopy.addAll(config.enabled); 
         disabledCopy.addAll(config.disabled);
         enabledCopy.add(name);
@@ -500,8 +500,8 @@ public abstract class MixinMinecraftServer {
     private void disableDatapack(String name) {
         PackRepository repo = RegisterGamerules.getServer().getPackRepository();
         DataPackConfig config = MixinMinecraftServer.getSelectedPacks(repo);
-        List<String> enabledCopy = new ArrayList<String>();
-        List<String> disabledCopy = new ArrayList<String>();
+        ObjectList<String> enabledCopy = new ObjectArrayList<String>();
+        ObjectList<String> disabledCopy = new ObjectArrayList<String>();
         enabledCopy.addAll(config.enabled); 
         disabledCopy.addAll(config.disabled);
         enabledCopy.remove(name);
