@@ -45,7 +45,7 @@ public abstract class MixinPlayer {
      * @reason Removes damage sources
      * @return Opposite of gamerule
      */
-    @Inject(method = "isInvulnerableTo", at = @At(value = "TAIL"), cancellable = true)
+    @Inject(method = "isInvulnerableTo", at = @At(value = "HEAD"), cancellable = true)
     private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (RegisterGamerules.getServer() == null) return;
         if (damageSourceMap.isEmpty()) {
