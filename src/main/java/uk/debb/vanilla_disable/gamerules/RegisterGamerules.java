@@ -368,6 +368,8 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> CONDUITS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> ICE_SLIDING;
     public static GameRules.Key<GameRules.BooleanValue> TOTEMS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BOW_SPAMMING;
+    public static GameRules.Key<GameRules.BooleanValue> CROSSBOW_SPAMMING;
     public static GameRules.Key<GameRules.BooleanValue> CREATIVE_SWORD_CAN_BREAK_BLOCKS;
 
     @Override
@@ -1044,6 +1046,10 @@ public class RegisterGamerules implements ModInitializer {
             "iceSliding",           CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
         TOTEMS_ENABLED           = GameRuleRegistry.register(
             "totemsEnabled",        CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+        BOW_SPAMMING             = GameRuleRegistry.register(
+            "bowSpamming",          CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
+        CROSSBOW_SPAMMING        = GameRuleRegistry.register(
+            "crossbowSpamming",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
         CREATIVE_SWORD_CAN_BREAK_BLOCKS = GameRuleRegistry.register(
             "creativeSwordCanBreakBlocks", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
 

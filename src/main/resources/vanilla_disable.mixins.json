@@ -29,7 +29,9 @@
 
     "misc.MixinBeaconBlockEntity",
     "misc.MixinBlock",
+    "misc.MixinBowItem",
     "misc.MixinConduitBlockEntity",
+    "misc.MixinCrossbowItem",
     "misc.MixinEndPortalBlock",
     "misc.MixinEntity",
     "misc.MixinFarmBlock",

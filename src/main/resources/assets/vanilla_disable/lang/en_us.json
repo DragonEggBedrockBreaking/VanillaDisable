@@ -343,6 +343,8 @@
     "gamerule.conduitsEnabled": "Toggle whether conduits are enabled",
     "gamerule.iceSliding": "Toggle whether entities can slide faster on ice",
     "gamerule.totemsEnabled": "Toggle whether totems are enabled",
+    "gamerule.bowSpamming": "Toggle whether bows have no cooldown",
+    "gamerule.crossbowSpamming": "Toggle whether crossbows have no cooldown",
     "gamerule.creativeSwordCanBreakBlocks": "Toggle whether a sword can break blocks in creative mode",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
