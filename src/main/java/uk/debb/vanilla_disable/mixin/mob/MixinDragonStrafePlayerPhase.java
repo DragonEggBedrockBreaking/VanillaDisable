@@ -24,6 +24,9 @@ public abstract class MixinDragonStrafePlayerPhase {
         )
     )
     public boolean spawnFreshEntity(Level level, Entity entity) {
+        if (RegisterGamerules.getServer() == null) {
+            return false;
+        }
         if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.DRAGON_FIREBALLS)) {
             return false;
         }

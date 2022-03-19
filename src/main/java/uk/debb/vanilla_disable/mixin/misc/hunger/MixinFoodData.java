@@ -25,6 +25,9 @@ public abstract class MixinFoodData {
         )
     )
     private Difficulty getWrongDifficulty(Level level) {
+        if (RegisterGamerules.getServer() == null) {
+            return level.getDifficulty();
+        }
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_HUNGER)) {
             RegisterGamerules.getServer().getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, RegisterGamerules.getServer());
             return Difficulty.PEACEFUL;

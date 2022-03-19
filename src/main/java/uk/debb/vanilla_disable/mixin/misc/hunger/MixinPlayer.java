@@ -41,6 +41,9 @@ public abstract class MixinPlayer {
         )
     )
     public boolean alwaysNeedsFood(FoodData hungerManager, boolean ignoreHunger) {
+        if (RegisterGamerules.getServer() == null) {
+            return hungerManager.needsFood();
+        }
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_HUNGER)) {
             return ((LivingEntity)(Object)this).getHealth() < ((LivingEntity)(Object)this).getMaxHealth();
         }

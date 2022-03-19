@@ -45,6 +45,9 @@ public abstract class MixinBucketItem {
         )
     )
     public boolean isNotUltraWarm(DimensionType type, @Nullable Player player, Level level, BlockPos pos, @Nullable BlockHitResult hitResult) {
+        if (RegisterGamerules.getServer() == null) {
+            return type.ultraWarm();
+        }
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.WATER_PLACEABLE_IN_NETHER) && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER)) {
             return false;
         }

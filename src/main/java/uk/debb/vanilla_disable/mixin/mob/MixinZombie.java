@@ -29,6 +29,9 @@ public abstract class MixinZombie {
         )
     )
     public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LivingEntity other) {
+        if (RegisterGamerules.getServer() == null) {
+            return level.getDifficulty();
+        }
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
             return level.getDifficulty();
         } else {

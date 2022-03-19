@@ -27,6 +27,9 @@ public abstract class MixinVillager {
         )
     )
     public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LightningBolt entity) {
+        if (RegisterGamerules.getServer() == null) {
+            return level.getDifficulty();
+        }
         if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
             return level.getDifficulty();
         } else {
