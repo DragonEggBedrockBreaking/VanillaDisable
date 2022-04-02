@@ -77,7 +77,7 @@ public class Buildscript extends SimpleFabricProject {
         d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-lifecycle-events-v1", "2.0.2+2540745460"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-api-base", "0.4.4+d7c144a860"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
-        jij(d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:383ee33be5"), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
+        jij(d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:afbaa01"), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
         d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:lazydfu:0.1.2"), ModDependencyFlag.RUNTIME);
         // Tiefix
