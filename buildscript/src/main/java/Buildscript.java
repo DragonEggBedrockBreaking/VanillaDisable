@@ -95,7 +95,7 @@ public class Buildscript extends SimpleFabricProject {
     @Override
     public BrachyuraDecompiler decompiler() {
         // Uses QuiltFlower instead of CFR
-        return new FernflowerDecompiler(Maven.getMavenJarDep("https://maven.quiltmc.org/repository/release", new MavenId("org.quiltmc:quiltflower:1.7.0"))); 
+        return new FernflowerDecompiler(Maven.getMavenJarDep("https://maven.quiltmc.org/repository/release", new MavenId("org.quiltmc:quiltflower:1.8.0"))); 
     };
 
     @Override
