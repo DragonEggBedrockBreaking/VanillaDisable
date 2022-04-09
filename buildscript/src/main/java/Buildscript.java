@@ -81,7 +81,7 @@ public class Buildscript extends SimpleFabricProject {
         // LazyDFU
         d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:lazydfu:0.1.2"), ModDependencyFlag.RUNTIME);
         // Tiefix
-        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.9.0"), ModDependencyFlag.RUNTIME);
+        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.10.0"), ModDependencyFlag.RUNTIME);
         // In Game Account Switcher
         d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:in-game-account-switcher:7.1.3-fa1.18"), ModDependencyFlag.RUNTIME);
     }
