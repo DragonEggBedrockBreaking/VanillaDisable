@@ -24,7 +24,7 @@ public abstract class MixinEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason chnge nether portal cooldown for entities
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDimensionChangingDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDimensionChangingDelay(CallbackInfoReturnable<Integer> cir) {

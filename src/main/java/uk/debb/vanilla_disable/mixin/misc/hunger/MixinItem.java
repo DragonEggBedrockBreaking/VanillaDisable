@@ -14,7 +14,7 @@ public abstract class MixinItem {
      * @author DragonEggBedrockBreaking
      * @reason make food eating instant
      * @param stack the stack of items that the player is holding
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
     private void editUseDuration(ItemStack stack, CallbackInfoReturnable<Integer> cir) {

@@ -20,7 +20,7 @@ public abstract class MixinPistonBaseBlock {
      * @param blockPos the position of the block
      * @param i ???
      * @param j ???
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "triggerEvent", at = @At("HEAD"), cancellable = true)
     private void cancelTriggeringEvent(BlockState blockState, Level level, BlockPos blockPos, int i, int j, CallbackInfoReturnable<Boolean> cir) {

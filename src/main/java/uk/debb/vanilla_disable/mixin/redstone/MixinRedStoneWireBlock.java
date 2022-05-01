@@ -20,7 +20,7 @@ public abstract class MixinRedStoneWireBlock {
      * @param blockGetter the block getter
      * @param blockPos the position of the block
      * @param direction the direction of the block
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
     private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
@@ -36,7 +36,7 @@ public abstract class MixinRedStoneWireBlock {
      * @param blockGetter the block getter
      * @param blockPos the position of the block
      * @param direction the direction of the block
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDirectSignal", at = @At("HEAD"), cancellable = true)
     private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {

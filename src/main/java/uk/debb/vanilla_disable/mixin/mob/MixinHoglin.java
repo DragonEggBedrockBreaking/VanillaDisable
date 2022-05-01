@@ -12,7 +12,7 @@ public abstract class MixinHoglin {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop hoglins from zombifying
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isImmuneToZombification", at = @At("HEAD"), cancellable = true)
     protected void setImmuneToZombification(CallbackInfoReturnable<Boolean> cir) {

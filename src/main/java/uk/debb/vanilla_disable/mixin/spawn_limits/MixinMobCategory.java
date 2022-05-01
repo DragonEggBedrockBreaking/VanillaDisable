@@ -38,7 +38,7 @@ public abstract class MixinMobCategory {
     /**
      * @author DragonEggBedrockBreaking
      * @reason modify vanilla spawn caps
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getMaxInstancesPerChunk", at = @At("HEAD"), cancellable = true)
     public void getMaxInstancesPerChunk(CallbackInfoReturnable<Integer> cir) {

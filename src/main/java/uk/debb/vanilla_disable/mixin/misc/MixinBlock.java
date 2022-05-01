@@ -16,7 +16,7 @@ public abstract class MixinBlock {
     /**
      * @author DragonEggBedrockBreaking
      * @reason change the friction of blocks to the default (stone)
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Float)
      */
     @Inject(method = "getFriction", at = @At("HEAD"), cancellable = true)
     private void cancelFriction(CallbackInfoReturnable<Float> cir) {

@@ -13,7 +13,7 @@ public abstract class MixinEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop players from being set on fire
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isOnFire", at = @At("HEAD"), cancellable = true)
     private void cannotBeOnFire(CallbackInfoReturnable<Boolean> cir) {
@@ -26,7 +26,7 @@ public abstract class MixinEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop players from crouching under slabs
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isShiftKeyDown", at = @At("HEAD"), cancellable = true)
     private void cannotCrouch(CallbackInfoReturnable<Boolean> cir) {
@@ -39,7 +39,7 @@ public abstract class MixinEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop players from sprinting
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isSprinting", at = @At("HEAD"), cancellable = true)
     private void cannotSprint(CallbackInfoReturnable<Boolean> cir) {
@@ -52,7 +52,7 @@ public abstract class MixinEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop players from swimming
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isSwimming", at = @At("HEAD"), cancellable = true)
     private void cannotSwim(CallbackInfoReturnable<Boolean> cir) {

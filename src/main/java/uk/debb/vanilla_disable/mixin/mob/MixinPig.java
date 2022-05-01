@@ -19,7 +19,7 @@ public abstract class MixinPig {
      * @author DragonEggBedrockBreaking
      * @reason change the item which the pig cen breed with
      * @param stack the stack of items that the player is holding
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isFood", at = @At("HEAD"), cancellable = true)
     private void changeFood(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {

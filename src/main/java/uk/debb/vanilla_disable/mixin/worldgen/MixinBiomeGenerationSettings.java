@@ -264,7 +264,7 @@ public abstract class MixinBiomeGenerationSettings {
      * @author DragonEggBedrockBreaking
      * @reason don't allow disabled features
      * @param feature the feature that is being checked for
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "hasFeature", at = @At("HEAD"), cancellable = true)
     private void cancelHavingFeature(PlacedFeature feature, CallbackInfoReturnable<Boolean> cir) {

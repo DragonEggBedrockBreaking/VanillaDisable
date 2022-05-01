@@ -25,7 +25,7 @@ public abstract class MixinEntityType<T extends Entity> {
      * @param spawnReason The reason for the spawn
      * @param alignPosition The position to align to
      * @param invertY ???
-     * @param cir The returnable callback info
+     * @param cir The returnable callback info (net.minecraft.world.entity.Entity)
      */
     @Inject(method = "spawn", at = @At(value = "HEAD"), cancellable = true)
     private void cancelSpawning(ServerLevel level, ItemStack stack, Player player, BlockPos pos, MobSpawnType spawnReason, boolean alignPosition, boolean invertY, CallbackInfoReturnable<Entity> cir) {

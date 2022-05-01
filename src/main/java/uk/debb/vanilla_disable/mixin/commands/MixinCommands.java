@@ -126,7 +126,7 @@ public abstract class MixinCommands {
      * @author DragonEggBedrockBreaking
      * @param source the source of the command
      * @param command the command to be executed
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "performCommand", at = @At(value = "HEAD"), cancellable = true)
     private void performCommand(CommandSourceStack source, String command, CallbackInfoReturnable<Integer> cir) {

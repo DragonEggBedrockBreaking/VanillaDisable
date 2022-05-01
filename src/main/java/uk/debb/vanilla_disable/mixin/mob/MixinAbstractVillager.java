@@ -38,7 +38,7 @@ public abstract class MixinAbstractVillager {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop players from trading with villagers
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (net.minecraft.world.item.trading.MerchantOffers)
      */
     @Inject(method = "getOffers", at = @At("HEAD"), cancellable = true)
     private void clearOffers(CallbackInfoReturnable<MerchantOffers> cir) {

@@ -67,7 +67,7 @@ public abstract class MixinLivingEntity{
      * @author DragonEggBedrockBreaking
      * @reason disable vanilla effects
      * @param effect the status effect
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "canBeAffected", at = @At("HEAD"), cancellable = true)
     private void canItBeAffected(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {

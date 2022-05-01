@@ -74,7 +74,7 @@ public abstract class MixinEnchantmentHelper {
      * @reason disable vanilla enchantments
      * @param enchantment the enchantment on the item to disable
      * @param stack the stack of items with that enchantment
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getItemEnchantmentLevel", at = @At("HEAD"), cancellable = true)
     private static void removeEnchantmentLevel(Enchantment enchantment, ItemStack stack, CallbackInfoReturnable<Integer> cir) {

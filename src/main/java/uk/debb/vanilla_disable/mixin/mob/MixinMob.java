@@ -12,7 +12,7 @@ public abstract class MixinMob {
     /**
      * @author DragonEggBedrockBreaking
      * @reason prevent zombies/skeletons from burning in sunlight
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isSunBurnTick", at = @At("HEAD"), cancellable = true)
     private void stopBurning(CallbackInfoReturnable<Boolean> cir) {

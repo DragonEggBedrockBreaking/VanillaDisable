@@ -21,7 +21,7 @@ public abstract class MixinNaturalSpawner {
      * @param chunk the chunk to spawn in
      * @param pos the position to spawn at
      * @param squaredDistance the squared distance from the position
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isRightDistanceToPlayerAndSpawnPoint", at = @At("HEAD"), cancellable = true)
     private static void mayMeRightDistanceToPlayerAndSpawnPoint(ServerLevel level, ChunkAccess chunk, BlockPos.MutableBlockPos pos, double squaredDistance, CallbackInfoReturnable<Boolean> cir) {

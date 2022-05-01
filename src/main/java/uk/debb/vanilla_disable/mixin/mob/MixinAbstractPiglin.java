@@ -12,7 +12,7 @@ public abstract class MixinAbstractPiglin {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop piglins from zombifying
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isImmuneToZombification", at = @At("HEAD"), cancellable = true)
     protected void setImmuneToZombification(CallbackInfoReturnable<Boolean> cir) {

@@ -16,7 +16,7 @@ public abstract class MixinTargetBlock {
      * @reason edit the signal strength outputted by the redstone component
      * @param blockHitResult the result of hitting the block
      * @param vec3 the vec3 position/data
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getRedstoneStrength", at = @At("HEAD"), cancellable = true)
     private static void modifyRedstoneStrength(BlockHitResult blockHitResult, Vec3 vec3, CallbackInfoReturnable<Integer> cir) {

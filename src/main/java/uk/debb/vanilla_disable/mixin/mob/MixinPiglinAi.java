@@ -14,7 +14,7 @@ public abstract class MixinPiglinAi {
      * @author DragonEggBedrockBreaking
      * @reason don't allow bartering with any items
      * @param stack the stack that the player is trying to barter with
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isBarterCurrency", at = @At("HEAD"), cancellable = true)
     private static void cancelBarter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {

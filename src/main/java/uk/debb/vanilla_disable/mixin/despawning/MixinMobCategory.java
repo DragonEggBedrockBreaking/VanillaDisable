@@ -50,7 +50,7 @@ public abstract class MixinMobCategory {
     /**
      * @author DragonEggBedrockBreaking
      * @reason edit immediate despawn range
-     * @param cir returnable callback info
+     * @param cir returnable callback info (Integer)
      */
     @Inject(method = "getDespawnDistance", at = @At("HEAD"), cancellable = true)
     public void editDespawnDistance(CallbackInfoReturnable<Integer> cir) {
@@ -67,7 +67,7 @@ public abstract class MixinMobCategory {
     /**
      * @author DragonEggBedrockBreaking
      * @reason edit immediate despawn range
-     * @param cir returnable callback info
+     * @param cir returnable callback info (Integer)
      */
     @Inject(method = "getNoDespawnDistance", at = @At("HEAD"), cancellable = true)
     public void editNoDespawnDistance(CallbackInfoReturnable<Integer> cir) {

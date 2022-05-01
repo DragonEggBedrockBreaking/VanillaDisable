@@ -14,7 +14,7 @@ public abstract class MixinLivingEntity {
      * @author DragonEggBedrockBreaking
      * @reason prevent totems from activating
      * @param damageSource the cause of totem activtion
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "checkTotemDeathProtection", at = @At("HEAD"), cancellable = true)
     private void totemsDoNotWork(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {

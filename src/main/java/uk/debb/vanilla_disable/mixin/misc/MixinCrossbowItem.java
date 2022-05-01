@@ -14,7 +14,7 @@ public abstract class MixinCrossbowItem {
      * @author DragonEggBedrockBreaking
      * @reason make crossbows quickly shoot
      * @param itemStack the crossbow
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
     private void lowerUseDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
@@ -28,7 +28,7 @@ public abstract class MixinCrossbowItem {
      * @author DragonEggBedrockBreaking
      * @reason make crossbows quickly charge
      * @param itemStack the crossbow
-     * @param cir the returnable callback info
+     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getChargeDuration", at = @At("HEAD"), cancellable = true)
     private static void lowerChargeDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
