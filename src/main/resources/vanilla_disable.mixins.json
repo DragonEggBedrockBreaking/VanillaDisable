@@ -31,6 +31,7 @@
     "misc.MixinBeaconBlockEntity",
     "misc.MixinBlock",
     "misc.MixinBowItem",
+    "misc.MixinBuddingAmethystBlock",
     "misc.MixinConduitBlockEntity",
     "misc.MixinCrossbowItem",
     "misc.MixinEndPortalBlock",

@@ -347,6 +347,7 @@
     "gamerule.bowSpamming": "Toggle whether bows have no cooldown",
     "gamerule.crossbowSpamming": "Toggle whether crossbows have no cooldown",
     "gamerule.creativeSwordCanBreakBlocks": "Toggle whether a sword can break blocks in creative mode",
+    "gamerule.pushableBuddingAmethyst": "Toggle whether budding amethyst blocks can be pushed by pistons",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
