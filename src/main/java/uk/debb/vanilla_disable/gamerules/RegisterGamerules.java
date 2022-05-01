@@ -241,6 +241,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> WATER_BREATHING_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> WEAKNESS_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> WITHER_EFFECT;
+    public static GameRules.Key<GameRules.BooleanValue> MILK_CLEARS_EFFECTS;
 
     public static GameRules.Key<GameRules.BooleanValue> ENCHANTMENTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> AQUA_AFFINITY_ENCHANTMENT;
@@ -805,6 +806,8 @@ public class RegisterGamerules implements ModInitializer {
                 "weaknessEffect",       CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
             WITHER_EFFECT            = GameRuleRegistry.register(
                 "witherEffect",         CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
+            MILK_CLEARS_EFFECTS      = GameRuleRegistry.register(
+                "milkClearsEffects",    CreateGameruleCategories.VD_EFFECTS, GameRuleFactory.createBooleanRule(true));
         }
         if (VanillaDisableMixinConfigPlugin.enchantments) {
             ENCHANTMENTS_ENABLED                 = GameRuleRegistry.register(

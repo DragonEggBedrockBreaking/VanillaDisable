@@ -16,6 +16,7 @@
     "despawning.MixinThrownEnderpearl",
 
     "effects.MixinLivingEntity",
+    "effects.MixinMilkBucketItem",
 
     "enchantments.MixinEnchantmentHelper",
 

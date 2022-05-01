@@ -215,6 +215,7 @@
     "gamerule.waterBreathingEffect": "Toggle water breathing effect",
     "gamerule.weaknessEffect": "Toggle weakness effect",
     "gamerule.witherEffect": "Toggle wither effect",
+    "gamerule.milkClearsEffects": "Toggle whether milk clears effects",
 
     "gamerule.enchantmentsEnabled": "Enable enchantments",
     "gamerule.aquaAffinityEnchantment": "Enable aqua affinity enchantment",
