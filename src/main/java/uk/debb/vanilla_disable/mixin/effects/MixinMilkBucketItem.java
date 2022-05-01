@@ -9,6 +9,12 @@ import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 
 @Mixin(MilkBucketItem.class)
 public class MixinMilkBucketItem {
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason stop milk buckets from removing effects
+     * @param livingEntity the entity drinking the milk bucket
+     * @return whether the entity has had its effects removed
+     */
     @Redirect(
         method = "finishUsingItem",
         at = @At(
