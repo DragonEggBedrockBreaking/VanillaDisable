@@ -89,7 +89,7 @@ public class Buildscript extends SimpleFabricProject {
     @Override
     public int getJavaVersion() {
         // Default is Java 8
-        return 18;
+        return 17;
     }
 
     @Override
