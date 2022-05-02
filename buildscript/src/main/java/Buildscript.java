@@ -2,12 +2,9 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 import io.github.coolcrabs.brachyura.decompiler.BrachyuraDecompiler;
 import io.github.coolcrabs.brachyura.decompiler.fernflower.FernflowerDecompiler;
-import io.github.coolcrabs.brachyura.dependency.JavaJarDependency;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyCollector;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyFlag;
 import io.github.coolcrabs.brachyura.fabric.FabricLoader;
@@ -18,9 +15,6 @@ import io.github.coolcrabs.brachyura.maven.Maven;
 import io.github.coolcrabs.brachyura.maven.MavenId;
 import io.github.coolcrabs.brachyura.minecraft.Minecraft;
 import io.github.coolcrabs.brachyura.minecraft.VersionMeta;
-import io.github.coolcrabs.brachyura.processing.sinks.AtomicZipProcessingSink;
-import io.github.coolcrabs.brachyura.processing.sources.DirectoryProcessingSource;
-import io.github.coolcrabs.brachyura.util.Util;
 import io.github.coolcrabs.brachyura.processing.ProcessorChain;
 import net.fabricmc.accesswidener.AccessWidenerReader;
 import net.fabricmc.accesswidener.AccessWidenerVisitor;
@@ -105,18 +99,7 @@ public class Buildscript extends SimpleFabricProject {
     }
 
     @Override
-    public JavaJarDependency build() {
-        // Fixes fabric.mod.json versioning
-        try {
-            try (AtomicZipProcessingSink out = new AtomicZipProcessingSink(getBuildJarPath())) {
-                context.get().modDependencies.get(); // Ugly hack
-                new ProcessorChain(context.get().resourcesProcessingChain(jijList), new FmjVersionFixer(this)).apply(out, Arrays.stream(getResourceDirs()).map(DirectoryProcessingSource::new).collect(Collectors.toList()));
-                context.get().getRemappedClasses(module.get()).values().forEach(s -> s.getInputs(out));
-                out.commit();
-            }
-            return new JavaJarDependency(getBuildJarPath(), null, getId());
-        } catch (Exception e) {
-            throw Util.sneak(e);
-        }
+    public ProcessorChain resourcesProcessingChain() {
+        return new ProcessorChain(super.resourcesProcessingChain(), new FmjVersionFixer(this));
     }
 }
