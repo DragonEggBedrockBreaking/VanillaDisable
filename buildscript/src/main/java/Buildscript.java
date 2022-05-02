@@ -100,6 +100,7 @@ public class Buildscript extends SimpleFabricProject {
 
     @Override
     public ProcessorChain resourcesProcessingChain() {
+        // Adds version to fabric.mod.json
         return new ProcessorChain(super.resourcesProcessingChain(), new FmjVersionFixer(this));
     }
 }
