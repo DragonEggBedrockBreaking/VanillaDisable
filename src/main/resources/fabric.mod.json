@@ -44,6 +44,7 @@
     "java": ">=17"
   },
   "suggests": {
-    "here-be-no-dragons": "*"
+    "here-be-no-dragons": "*",
+    "quilt_loader": "*"
   }
 }

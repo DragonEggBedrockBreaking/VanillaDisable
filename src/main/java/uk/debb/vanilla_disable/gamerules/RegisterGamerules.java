@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 import org.slf4j.Logger;
@@ -1081,5 +1082,12 @@ public class RegisterGamerules implements ModInitializer {
         ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {
             RegisterGamerules.server = minecraftServer;
         });
+
+        // Fabric is deprecated
+        if (!FabricLoader.getInstance().isModLoaded("quilt_loader")) {
+            for (int i = 0; i < 30; ++i) {
+                logger.warn("Using this mod on Fabric is deprecated. This mod will be Quilt only from 1.19.");
+            }
+        }
     }
 }
