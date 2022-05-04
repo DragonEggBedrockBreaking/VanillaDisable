@@ -1,8 +1,4 @@
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.function.Consumer;
 import io.github.coolcrabs.brachyura.decompiler.BrachyuraDecompiler;
 import io.github.coolcrabs.brachyura.decompiler.fernflower.FernflowerDecompiler;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyCollector;
@@ -10,14 +6,11 @@ import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyFlag;
 import io.github.coolcrabs.brachyura.fabric.FabricLoader;
 import io.github.coolcrabs.brachyura.fabric.FabricMaven;
 import io.github.coolcrabs.brachyura.fabric.SimpleFabricProject;
-import io.github.coolcrabs.brachyura.mappings.Namespaces;
 import io.github.coolcrabs.brachyura.maven.Maven;
 import io.github.coolcrabs.brachyura.maven.MavenId;
 import io.github.coolcrabs.brachyura.minecraft.Minecraft;
 import io.github.coolcrabs.brachyura.minecraft.VersionMeta;
 import io.github.coolcrabs.brachyura.processing.ProcessorChain;
-import net.fabricmc.accesswidener.AccessWidenerReader;
-import net.fabricmc.accesswidener.AccessWidenerVisitor;
 import net.fabricmc.mappingio.tree.MappingTree;
 
 public class Buildscript extends SimpleFabricProject {
@@ -49,18 +42,6 @@ public class Buildscript extends SimpleFabricProject {
     public String getVersion() {
         // Mod Version
         return "1.6.0";
-    }
-
-    @Override
-    public Consumer<AccessWidenerVisitor> getAw() {
-        // The path to the accesswidener
-        return v -> {
-            try {
-                new AccessWidenerReader(v).read(Files.newBufferedReader(getResourcesDir().resolve("vanilla_disable.aw")), Namespaces.NAMED);
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
-        };
     }
 
     @Override
