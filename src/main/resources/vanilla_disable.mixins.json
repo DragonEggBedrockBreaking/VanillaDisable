@@ -18,7 +18,17 @@
     "effects.MixinLivingEntity",
     "effects.MixinMilkBucketItem",
 
+    "enchantments.MixinArrowInfiniteEnchantment",
+    "enchantments.MixinArrowPiercingEnchantment",
+    "enchantments.MixinDamageEnchantment",
     "enchantments.MixinEnchantmentHelper",
+    "enchantments.MixinFrostWalkerEnchantment",
+    "enchantments.MixinLootBonusEnchantment",
+    "enchantments.MixinMultiShotEnchantment",
+    "enchantments.MixinProtectionEnchantment",
+    "enchantments.MixinTridentRiptideEnchantment",
+    "enchantments.MixinUntouchingEnchantment",
+    "enchantments.MixinWaterWalkerEnchantment",
 
     "fluids.MixinBucketItem",
     "fluids.MixinEntity",

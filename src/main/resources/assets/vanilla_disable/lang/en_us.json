@@ -256,6 +256,13 @@
     "gamerule.unbreakingEnchantment": "Enable unbreaking enchantment",
     "gamerule.bindingCurse": "Enable binding curse",
     "gamerule.vanishingCurse": "Enable vanishing curse",
+    "gamerule.bootEnchantmentConflicts": "Toggle conflicts between depth strider and frost walker",
+    "gamerule.bowEnchantmentConflicts": "Toggle conflicts between infinity and mending",
+    "gamerule.crossbowEnchantmentConflicts": "Toggle conflicts between multishot and piercing",
+    "gamerule.damageEnchantmentConflicts": "Toggle conflicts between different damage enchantments",
+    "gamerule.miningEnchantmentConflicts": "Toggle conflicts between fortune and silk touch",
+    "gamerule.protectionEnchantmentConflicts": "Toggle conflicts between different protection enchantments",
+    "gamerule.tridentEnchantmentConflicts": "Toggle conflicts between riptide and loyalty/channeling",
 
     "gamerule.bastionRemnantGeneration": "Allow bastion remnants to generate",
     "gamerule.buriedTreasureGeneration": "Allow buried treasure to generate",
