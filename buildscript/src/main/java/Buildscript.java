@@ -41,7 +41,7 @@ public class Buildscript extends SimpleFabricProject {
     @Override
     public String getVersion() {
         // Mod Version
-        return "1.6.0";
+        return "1.7.0";
     }
 
     @Override
