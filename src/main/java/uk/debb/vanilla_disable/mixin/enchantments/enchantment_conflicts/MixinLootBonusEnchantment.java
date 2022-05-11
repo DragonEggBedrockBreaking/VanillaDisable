@@ -15,6 +15,13 @@ public abstract class MixinLootBonusEnchantment extends Enchantment {
     public MixinLootBonusEnchantment(Enchantment.Rarity rarity, EquipmentSlot... equipmentSlots) {
         super(rarity, EnchantmentCategory.DIGGER, equipmentSlots);
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason disable compatibility check between fortune and silk touch
+     * @param enchantment the enchantment to check compatibility with
+     * @param cir the returnable callback info (boolean)
+     */
     @Inject(method = "checkCompatibility", at = @At("HEAD"), cancellable = true)
     private void cancelCompatibility(Enchantment enchantment, CallbackInfoReturnable<Boolean> cir) {
         if (RegisterGamerules.getServer() == null) return;

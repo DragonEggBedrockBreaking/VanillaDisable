@@ -15,6 +15,13 @@ public abstract class MixinDamageEnchantment extends Enchantment {
     public MixinDamageEnchantment(Enchantment.Rarity rarity, int i, EquipmentSlot... equipmentSlots) {
         super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason disable compatibility check between sharpness, smite, and bane of arthropods
+     * @param enchantment the enchantment to check compatibility with
+     * @param cir the returnable callback info (boolean)
+     */
     @Inject(method = "checkCompatibility", at = @At("HEAD"), cancellable = true)
     private void cancelCompatibility(Enchantment enchantment, CallbackInfoReturnable<Boolean> cir) {
         if (RegisterGamerules.getServer() == null) return;

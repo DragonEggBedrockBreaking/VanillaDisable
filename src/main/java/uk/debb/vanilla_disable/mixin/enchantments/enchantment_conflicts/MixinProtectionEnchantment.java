@@ -15,6 +15,13 @@ public abstract class MixinProtectionEnchantment extends Enchantment {
     public MixinProtectionEnchantment(Enchantment.Rarity rarity, ProtectionEnchantment.Type type, EquipmentSlot... equipmentSlots) {
         super(rarity, type == ProtectionEnchantment.Type.FALL ? EnchantmentCategory.ARMOR_FEET : EnchantmentCategory.ARMOR, equipmentSlots);
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason disable compatibility check between protection, blast protection, fire protection, and projectile protection
+     * @param enchantment the enchantment to check compatibility with
+     * @param cir the returnable callback info (boolean)
+     */
     @Inject(method = "checkCompatibility", at = @At("HEAD"), cancellable = true)
     private void cancelCompatibility(Enchantment enchantment, CallbackInfoReturnable<Boolean> cir) {
         if (RegisterGamerules.getServer() == null) return;

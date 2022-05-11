@@ -15,6 +15,13 @@ public abstract class MixinTridentRiptideEnchantment extends Enchantment {
     public MixinTridentRiptideEnchantment(Enchantment.Rarity rarity, EquipmentSlot... equipmentSlots) {
         super(rarity, EnchantmentCategory.TRIDENT, equipmentSlots);
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason disable compatibility check between riptide and channeling/loyalty
+     * @param enchantment the enchantment to check compatibility with
+     * @param cir the returnable callback info (boolean)
+     */
     @Inject(method = "checkCompatibility", at = @At("HEAD"), cancellable = true)
     private void cancelCompatibility(Enchantment enchantment, CallbackInfoReturnable<Boolean> cir) {
         if (RegisterGamerules.getServer() == null) return;
