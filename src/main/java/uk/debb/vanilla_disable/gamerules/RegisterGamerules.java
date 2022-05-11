@@ -382,6 +382,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> CROSSBOW_SPAMMING;
     public static GameRules.Key<GameRules.BooleanValue> CREATIVE_SWORD_CAN_BREAK_BLOCKS;
     public static GameRules.Key<GameRules.BooleanValue> PUSHABLE_BUDDING_AMETHYST;
+    public static GameRules.Key<GameRules.BooleanValue> CONTAINER_OPENING_BLOCKED;
 
     @Override
     public void onInitialize() {
@@ -1097,6 +1098,8 @@ public class RegisterGamerules implements ModInitializer {
                 "creativeSwordCanBreakBlocks", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
             PUSHABLE_BUDDING_AMETHYST       = GameRuleRegistry.register(
                 "pushableBuddingAmethyst",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
+            CONTAINER_OPENING_BLOCKED       = GameRuleRegistry.register(
+                "containerOpeningBlocked",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
         }
 
         // Registering the Minecraft server to when it actually starts
