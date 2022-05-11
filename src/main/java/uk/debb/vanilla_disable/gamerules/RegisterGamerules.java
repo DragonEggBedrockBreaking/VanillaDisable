@@ -898,20 +898,22 @@ public class RegisterGamerules implements ModInitializer {
                 "bindingCurse",                    CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
             VANISHING_CURSE                      = GameRuleRegistry.register(
                 "vanishingCurse",                  CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
-            BOOT_ENCHANTMENT_CONFLICTS           = GameRuleRegistry.register(
-                "bootEnchantmentConflicts",        CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
-            BOW_ENCHANTMENT_CONFLICTS            = GameRuleRegistry.register(
-                "bowEnchantmentConflicts",         CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
-            CROSSBOW_ENCHANTMENT_CONFLICTS       = GameRuleRegistry.register(
-                "crossbowEnchantmentConflicts",    CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
-            DAMAGE_ENCHANTMENT_CONFLICTS         = GameRuleRegistry.register(
-                "damageEnchantmentConflicts",      CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
-            MINING_ENCHANTMENT_CONFLICTS         = GameRuleRegistry.register(
-                "miningEnchantmentConflicts",      CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
-            PROTECTION_ENCHANTMENT_CONFLICTS     = GameRuleRegistry.register(
-                "protectionEnchantmentConflicts",  CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
-            TRIDENT_ENCHANTMENT_CONFLICTS        = GameRuleRegistry.register(
-                "tridentEnchantmentConflicts",     CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+            if (VanillaDisableMixinConfigPlugin.enchantment_conflicts) {
+                BOOT_ENCHANTMENT_CONFLICTS           = GameRuleRegistry.register(
+                    "bootEnchantmentConflicts",        CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+                BOW_ENCHANTMENT_CONFLICTS            = GameRuleRegistry.register(
+                    "bowEnchantmentConflicts",         CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+                CROSSBOW_ENCHANTMENT_CONFLICTS       = GameRuleRegistry.register(
+                    "crossbowEnchantmentConflicts",    CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+                DAMAGE_ENCHANTMENT_CONFLICTS         = GameRuleRegistry.register(
+                    "damageEnchantmentConflicts",      CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+                MINING_ENCHANTMENT_CONFLICTS         = GameRuleRegistry.register(
+                    "miningEnchantmentConflicts",      CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+                PROTECTION_ENCHANTMENT_CONFLICTS     = GameRuleRegistry.register(
+                    "protectionEnchantmentConflicts",  CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+                TRIDENT_ENCHANTMENT_CONFLICTS        = GameRuleRegistry.register(
+                    "tridentEnchantmentConflicts",     CreateGameruleCategories.VD_ENCHANTMENTS, GameRuleFactory.createBooleanRule(true));
+            }
         }
         if (VanillaDisableMixinConfigPlugin.worldgen) {
             BASTION_REMNANT_GENERATION     = GameRuleRegistry.register(

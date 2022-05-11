@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.enchantments;
+package uk.debb.vanilla_disable.mixin.enchantments.enchantment_conflicts;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
