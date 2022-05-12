@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.misc;
+package uk.debb.vanilla_disable.mixin.misc.container;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

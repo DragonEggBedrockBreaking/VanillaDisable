@@ -16,6 +16,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
     public static boolean fluids;
     public static boolean knockback;
     public static boolean misc;
+    public static boolean misc_container;
     public static boolean misc_hunger;
     public static boolean mob;
     public static boolean player;
@@ -36,6 +37,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
             .addMixinOption("fluids", true)
             .addMixinOption("knockback", true)
             .addMixinOption("misc", true)
+            .addMixinOption("misc.container", true)
             .addMixinOption("misc.hunger", true)
             .addMixinOption("mob", true)
             .addMixinOption("player", true)
@@ -61,6 +63,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
         fluids                =  this.caffeineConfig.getEffectiveOptionForMixin("fluids.MixinBucketItem").isEnabled();
         knockback             =  this.caffeineConfig.getEffectiveOptionForMixin("knockback.MixinLivingEntity").isEnabled();
         misc                  =  this.caffeineConfig.getEffectiveOptionForMixin("misc.MixinBeaconBlockEntity").isEnabled();
+        misc_container       =  this.caffeineConfig.getEffectiveOptionForMixin("misc.container.MixinChestBlock").isEnabled();
         misc_hunger           =  this.caffeineConfig.getEffectiveOptionForMixin("misc.hunger.MixinFoodData").isEnabled();
         mob                   =  this.caffeineConfig.getEffectiveOptionForMixin("mob.MixinAbstractPiglin").isEnabled();
         player                =  this.caffeineConfig.getEffectiveOptionForMixin("player.MixinEntity").isEnabled();

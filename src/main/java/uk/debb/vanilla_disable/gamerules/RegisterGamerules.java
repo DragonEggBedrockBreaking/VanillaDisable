@@ -1100,8 +1100,10 @@ public class RegisterGamerules implements ModInitializer {
                 "creativeSwordCanBreakBlocks", CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
             PUSHABLE_BUDDING_AMETHYST       = GameRuleRegistry.register(
                 "pushableBuddingAmethyst",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(false));
-            CONTAINER_OPENING_BLOCKED       = GameRuleRegistry.register(
-                "containerOpeningBlocked",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+            if (VanillaDisableMixinConfigPlugin.misc_container) {
+                CONTAINER_OPENING_BLOCKED       = GameRuleRegistry.register(
+                    "containerOpeningBlocked",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
+            }
         }
 
         // Registering the Minecraft server to when it actually starts
