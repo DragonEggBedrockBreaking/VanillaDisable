@@ -1,9 +1,9 @@
 package uk.debb.vanilla_disable.gamerules;
 
-import net.fabricmc.api.ModInitializer;
+import org.quiltmc.loader.api.ModContainer;
+import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 import org.slf4j.Logger;
@@ -387,7 +387,7 @@ public class RegisterGamerules implements ModInitializer {
     public static GameRules.Key<GameRules.BooleanValue> CONTAINER_OPENING_BLOCKED;
 
     @Override
-    public void onInitialize() {
+    public void onInitialize(ModContainer mod) {
         // Registering the gamerules that I previously defined
         if (VanillaDisableMixinConfigPlugin.damage) {
             DAMAGE_ENABLED            = GameRuleRegistry.register(
@@ -1105,13 +1105,6 @@ public class RegisterGamerules implements ModInitializer {
             if (VanillaDisableMixinConfigPlugin.misc_container) {
                 CONTAINER_OPENING_BLOCKED       = GameRuleRegistry.register(
                     "containerOpeningBlocked",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
-            }
-        }
-
-        // Fabric is deprecated
-        if (!FabricLoader.getInstance().isModLoaded("quilt_loader")) {
-            for (int i = 0; i < 30; ++i) {
-                logger.warn("Using this mod on Fabric is deprecated. This mod will be Quilt only from 1.19.");
             }
         }
     }
