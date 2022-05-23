@@ -8,14 +8,15 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ItemEntity.class)
 public abstract class MixinItemEntity {
     @Shadow private int age;
     @Shadow private int pickupDelay;
     @Unique
-    final int MAX = RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.ITEM_DESPAWN_TIME);
+    final int MAX = VDServer.getServer().getGameRules().getInt(Gamerules.ITEM_DESPAWN_TIME);
 
     /**
      * @author DragonEggBedrockBreaking
@@ -24,7 +25,7 @@ public abstract class MixinItemEntity {
      */
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void discardItem(CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (this.age >= MAX * 20 &&
             !((Entity) (Object) (this)).getLevel().isClientSide) {
             ((Entity) (Object) (this)).discard();
@@ -46,7 +47,7 @@ public abstract class MixinItemEntity {
         cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (this.age < MAX * 20 &&
             this.pickupDelay != Short.MAX_VALUE) {
             ci.cancel();

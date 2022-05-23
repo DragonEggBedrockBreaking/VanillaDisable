@@ -103,9 +103,7 @@
     "worldgen.MixinBiomeGenerationSettings",
     "worldgen.MixinMinecraftServer",
     "worldgen.MixinServerLevel",
-    "worldgen.MixinSpikeFeature$EndSpike",
-
-    "util.MixinMinecraftServer"
+    "worldgen.MixinSpikeFeature$EndSpike"
   ],
   "injectors": {
     "defaultRequire": 1

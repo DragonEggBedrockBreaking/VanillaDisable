@@ -5,7 +5,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(BreedGoal.class)
 public abstract class MixinBreedGoal {
@@ -16,8 +17,8 @@ public abstract class MixinBreedGoal {
      */
     @Inject(method = "canUse", at = @At(value = "HEAD"), cancellable = true)
     private void cannotUse(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ANIMAL_BREEDING)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.ANIMAL_BREEDING)) {
             cir.setReturnValue(false);
         }
     }
@@ -29,8 +30,8 @@ public abstract class MixinBreedGoal {
      */
     @Inject(method = "canContinueToUse", at = @At(value = "HEAD"), cancellable = true)
     private void shouldContinueToUse(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ANIMAL_BREEDING)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.ANIMAL_BREEDING)) {
             cir.setReturnValue(false);
         }
     }

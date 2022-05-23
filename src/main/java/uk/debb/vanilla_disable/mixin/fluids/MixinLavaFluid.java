@@ -7,7 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(LavaFluid.class)
 public abstract class MixinLavaFluid {
@@ -19,12 +20,12 @@ public abstract class MixinLavaFluid {
      */
     @Inject(method = "getDropOff", at = @At("HEAD"), cancellable = true)
     private void getLavaDropOff(LevelReader world, CallbackInfoReturnable<Integer> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                cir.setReturnValue(((Level) world).getGameRules().getBoolean(RegisterGamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2);
+                cir.setReturnValue(((Level) world).getGameRules().getBoolean(Gamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2);
             } else {
-                cir.setReturnValue(((Level) world).getGameRules().getBoolean(RegisterGamerules.LAVA_REACHES_FAR) ? 1 : 2);
+                cir.setReturnValue(((Level) world).getGameRules().getBoolean(Gamerules.LAVA_REACHES_FAR) ? 1 : 2);
             }
         }
     }
@@ -37,12 +38,12 @@ public abstract class MixinLavaFluid {
      */
     @Inject(method = "getTickDelay", at = @At("HEAD"), cancellable = true)
     private void getLavaTickDelay(LevelReader world, CallbackInfoReturnable<Integer> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                cir.setReturnValue(((Level) world).getGameRules().getInt(RegisterGamerules.LAVA_FLOW_SPEED_NETHER));
+                cir.setReturnValue(((Level) world).getGameRules().getInt(Gamerules.LAVA_FLOW_SPEED_NETHER));
             } else {
-                cir.setReturnValue(((Level) world).getGameRules().getInt(RegisterGamerules.LAVA_FLOW_SPEED));
+                cir.setReturnValue(((Level) world).getGameRules().getInt(Gamerules.LAVA_FLOW_SPEED));
             }
         }
     }
@@ -54,7 +55,7 @@ public abstract class MixinLavaFluid {
      */
     @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
     private void canLavaConvertToSource(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_LAVA));
+        if (VDServer.getServer() == null) return;
+        cir.setReturnValue(VDServer.getServer().getGameRules().getBoolean(Gamerules.INFINITE_LAVA));
     }
 }

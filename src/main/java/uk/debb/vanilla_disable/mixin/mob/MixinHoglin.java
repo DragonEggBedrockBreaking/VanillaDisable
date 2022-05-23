@@ -5,7 +5,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Hoglin.class)
 public abstract class MixinHoglin {
@@ -16,8 +17,8 @@ public abstract class MixinHoglin {
      */
     @Inject(method = "isImmuneToZombification", at = @At("HEAD"), cancellable = true)
     protected void setImmuneToZombification(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.HOGLINS_CONVERT_TO_ZOGLINS)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.HOGLINS_CONVERT_TO_ZOGLINS)) {
             cir.setReturnValue(true);
         }
     }

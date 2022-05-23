@@ -9,7 +9,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ServerGamePacketListenerImpl.class)
 public abstract class MixinServerGamePacketListenerImpl {
@@ -23,10 +24,10 @@ public abstract class MixinServerGamePacketListenerImpl {
      */
     @Inject(method = "send", at = @At("HEAD"), cancellable = true)
     public void sendPacket(Packet<?> packet, CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (packet instanceof ClientboundExplodePacket &&
-            !(this.player.getLevel().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED) &&
-              this.player.getLevel().getGameRules().getBoolean(RegisterGamerules.EXPLOSION_KNOCKBACK))) {
+            !(this.player.getLevel().getGameRules().getBoolean(Gamerules.KNOCKBACK_ENABLED) &&
+              this.player.getLevel().getGameRules().getBoolean(Gamerules.EXPLOSION_KNOCKBACK))) {
             ci.cancel();
         }
     }

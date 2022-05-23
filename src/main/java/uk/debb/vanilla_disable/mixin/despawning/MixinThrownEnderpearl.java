@@ -5,7 +5,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ThrownEnderpearl.class)
 public abstract class MixinThrownEnderpearl {
@@ -23,8 +24,8 @@ public abstract class MixinThrownEnderpearl {
         cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ENDER_PEARLS_DESPAWN_ON_DEATH)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.ENDER_PEARLS_DESPAWN_ON_DEATH)) {
             ci.cancel();
         }
     }

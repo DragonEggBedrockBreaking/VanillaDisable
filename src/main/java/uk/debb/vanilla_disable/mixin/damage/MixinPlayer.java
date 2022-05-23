@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer {
@@ -27,17 +28,17 @@ public abstract class MixinPlayer {
      */
     @Unique
     private void addOptionsToMap() {
-        damageSourceMap.put(DamageSource.LIGHTNING_BOLT, RegisterGamerules.LIGHTNING_DAMAGE);
-        damageSourceMap.put(DamageSource.IN_WALL, RegisterGamerules.WALL_DAMAGE);
-        damageSourceMap.put(DamageSource.CRAMMING, RegisterGamerules.CRAMMING_DAMAGE);
-        damageSourceMap.put(DamageSource.STARVE, RegisterGamerules.STARVATION_DAMAGE);
-        damageSourceMap.put(DamageSource.CACTUS, RegisterGamerules.CACTUS_DAMAGE);
-        damageSourceMap.put(DamageSource.FLY_INTO_WALL, RegisterGamerules.FLY_INTO_WALL_DAMAGE);
-        damageSourceMap.put(DamageSource.WITHER, RegisterGamerules.WITHER_DAMAGE);
-        damageSourceMap.put(DamageSource.ANVIL, RegisterGamerules.ANVIL_DAMAGE);
-        damageSourceMap.put(DamageSource.DRAGON_BREATH, RegisterGamerules.DRAGON_DAMAGE);
-        damageSourceMap.put(DamageSource.SWEET_BERRY_BUSH, RegisterGamerules.SWEET_BERRY_BUSH_DAMAGE);
-        damageSourceMap.put(DamageSource.FALLING_STALACTITE, RegisterGamerules.FALLING_STALACTITE_DAMAGE);
+        damageSourceMap.put(DamageSource.LIGHTNING_BOLT, Gamerules.LIGHTNING_DAMAGE);
+        damageSourceMap.put(DamageSource.IN_WALL, Gamerules.WALL_DAMAGE);
+        damageSourceMap.put(DamageSource.CRAMMING, Gamerules.CRAMMING_DAMAGE);
+        damageSourceMap.put(DamageSource.STARVE, Gamerules.STARVATION_DAMAGE);
+        damageSourceMap.put(DamageSource.CACTUS, Gamerules.CACTUS_DAMAGE);
+        damageSourceMap.put(DamageSource.FLY_INTO_WALL, Gamerules.FLY_INTO_WALL_DAMAGE);
+        damageSourceMap.put(DamageSource.WITHER, Gamerules.WITHER_DAMAGE);
+        damageSourceMap.put(DamageSource.ANVIL, Gamerules.ANVIL_DAMAGE);
+        damageSourceMap.put(DamageSource.DRAGON_BREATH, Gamerules.DRAGON_DAMAGE);
+        damageSourceMap.put(DamageSource.SWEET_BERRY_BUSH, Gamerules.SWEET_BERRY_BUSH_DAMAGE);
+        damageSourceMap.put(DamageSource.FALLING_STALACTITE, Gamerules.FALLING_STALACTITE_DAMAGE);
     }
 
     /**
@@ -47,25 +48,25 @@ public abstract class MixinPlayer {
      */
     @Inject(method = "isInvulnerableTo", at = @At(value = "HEAD"), cancellable = true)
     private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (damageSourceMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> damageGamerule = damageSourceMap.get(damageSource);
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.DAMAGE_ENABLED)) {
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.DAMAGE_ENABLED)) {
             cir.setReturnValue(true);
-        } else if (damageGamerule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(damageGamerule)) {
+        } else if (damageGamerule != null && !VDServer.getServer().getGameRules().getBoolean(damageGamerule)) {
             cir.setReturnValue(true);
         } else if (damageSource.isProjectile()) {
-            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PROJECTILE_DAMAGE));
+            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.PROJECTILE_DAMAGE));
         } else if (damageSource.isExplosion()) {
-            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.EXPLOSION_DAMAGE));
+            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.EXPLOSION_DAMAGE));
         } else if (damageSource.isBypassInvul()) {
-            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VOID_DAMAGE));
+            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.VOID_DAMAGE));
         } else if (damageSource.isMagic()) {
-            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.MAGIC_DAMAGE));
+            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.MAGIC_DAMAGE));
         } else if (damageSource.isCreativePlayer()) {
-            cir.setReturnValue(!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.CREATIVE_PLAYER_DAMAGE));
+            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.CREATIVE_PLAYER_DAMAGE));
         }
     }
 }

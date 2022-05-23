@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(RepeaterBlock.class)
 public abstract class MixinRepeaterBlock extends DiodeBlock {
@@ -28,8 +29,8 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
      */
     @Inject(method = "getDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDelay(BlockState blockState, CallbackInfoReturnable<Integer> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        cir.setReturnValue(blockState.getValue(BlockStateProperties.DELAY) * RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.REPEATER_BASE_DELAY));
+        if (VDServer.getServer() == null) return;
+        cir.setReturnValue(blockState.getValue(BlockStateProperties.DELAY) * VDServer.getServer().getGameRules().getInt(Gamerules.REPEATER_BASE_DELAY));
     }
 
     /**
@@ -42,9 +43,9 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
      */
     @Override
     public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
-        if (RegisterGamerules.getServer() == null) return 0;
+        if (VDServer.getServer() == null) return 0;
         if (blockState.getValue(BlockStateProperties.POWERED)) {
-            return RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.REPEATER_SIGNAL);
+            return VDServer.getServer().getGameRules().getInt(Gamerules.REPEATER_SIGNAL);
         }
         return 0;
     }
@@ -60,9 +61,9 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
      */
     @Override
     public int getDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
-        if (RegisterGamerules.getServer() == null) return 0;
+        if (VDServer.getServer() == null) return 0;
         if (blockState.getValue(BlockStateProperties.POWERED)) {
-            return RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.REPEATER_SIGNAL);
+            return VDServer.getServer().getGameRules().getInt(Gamerules.REPEATER_SIGNAL);
         }
         return 0;
     }

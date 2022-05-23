@@ -13,7 +13,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity{
@@ -30,37 +31,37 @@ public abstract class MixinLivingEntity{
      */
     @Unique
     private void addOptionsToMap() {
-        statusEffectMap.put(MobEffects.ABSORPTION, RegisterGamerules.ABSORPTION_EFFECT);
-        statusEffectMap.put(MobEffects.BAD_OMEN, RegisterGamerules.BAD_OMEN_EFFECT);
-        statusEffectMap.put(MobEffects.BLINDNESS, RegisterGamerules.BLINDNESS_EFFECT);
-        statusEffectMap.put(MobEffects.CONDUIT_POWER, RegisterGamerules.CONDUIT_POWER_EFFECT);
-        statusEffectMap.put(MobEffects.DOLPHINS_GRACE, RegisterGamerules.DOLPHINS_GRACE_EFFECT);
-        statusEffectMap.put(MobEffects.FIRE_RESISTANCE, RegisterGamerules.FIRE_RESISTANCE_EFFECT);
-        statusEffectMap.put(MobEffects.GLOWING, RegisterGamerules.GLOWING_EFFECT);
-        statusEffectMap.put(MobEffects.DIG_SPEED, RegisterGamerules.HASTE_EFFECT);
-        statusEffectMap.put(MobEffects.HEALTH_BOOST, RegisterGamerules.HEALTH_BOOST_EFFECT);
-        statusEffectMap.put(MobEffects.HUNGER, RegisterGamerules.HUNGER_EFFECT);
-        statusEffectMap.put(MobEffects.HARM, RegisterGamerules.INSTANT_DAMAGE_EFFECT);
-        statusEffectMap.put(MobEffects.HEAL, RegisterGamerules.INSTANT_HEALTH_EFFECT);
-        statusEffectMap.put(MobEffects.INVISIBILITY, RegisterGamerules.INVISIBILITY_EFFECT);
-        statusEffectMap.put(MobEffects.JUMP, RegisterGamerules.JUMP_BOOST_EFFECT);
-        statusEffectMap.put(MobEffects.LEVITATION, RegisterGamerules.LEVITATION_EFFECT);
-        statusEffectMap.put(MobEffects.LUCK, RegisterGamerules.LUCK_EFFECT);
-        statusEffectMap.put(MobEffects.DIG_SLOWDOWN, RegisterGamerules.MINING_FATIGUE_EFFECT);
-        statusEffectMap.put(MobEffects.CONFUSION, RegisterGamerules.NAUSEA_EFFECT);
-        statusEffectMap.put(MobEffects.NIGHT_VISION, RegisterGamerules.NIGHT_VISION_EFFECT);
-        statusEffectMap.put(MobEffects.POISON, RegisterGamerules.POISON_EFFECT);
-        statusEffectMap.put(MobEffects.REGENERATION, RegisterGamerules.REGENERATION_EFFECT);
-        statusEffectMap.put(MobEffects.DAMAGE_RESISTANCE, RegisterGamerules.RESISTANCE_EFFECT);
-        statusEffectMap.put(MobEffects.SATURATION, RegisterGamerules.SATURATION_EFFECT);
-        statusEffectMap.put(MobEffects.MOVEMENT_SLOWDOWN, RegisterGamerules.SLOWNESS_EFFECT);
-        statusEffectMap.put(MobEffects.SLOW_FALLING, RegisterGamerules.SLOW_FALLING_EFFECT);
-        statusEffectMap.put(MobEffects.MOVEMENT_SPEED, RegisterGamerules.SPEED_EFFECT);
-        statusEffectMap.put(MobEffects.DAMAGE_BOOST, RegisterGamerules.STRENGTH_EFFECT);
-        statusEffectMap.put(MobEffects.UNLUCK, RegisterGamerules.UNLUCK_EFFECT);
-        statusEffectMap.put(MobEffects.WATER_BREATHING, RegisterGamerules.WATER_BREATHING_EFFECT);
-        statusEffectMap.put(MobEffects.WEAKNESS, RegisterGamerules.WEAKNESS_EFFECT);
-        statusEffectMap.put(MobEffects.WITHER, RegisterGamerules.WITHER_EFFECT);
+        statusEffectMap.put(MobEffects.ABSORPTION, Gamerules.ABSORPTION_EFFECT);
+        statusEffectMap.put(MobEffects.BAD_OMEN, Gamerules.BAD_OMEN_EFFECT);
+        statusEffectMap.put(MobEffects.BLINDNESS, Gamerules.BLINDNESS_EFFECT);
+        statusEffectMap.put(MobEffects.CONDUIT_POWER, Gamerules.CONDUIT_POWER_EFFECT);
+        statusEffectMap.put(MobEffects.DOLPHINS_GRACE, Gamerules.DOLPHINS_GRACE_EFFECT);
+        statusEffectMap.put(MobEffects.FIRE_RESISTANCE, Gamerules.FIRE_RESISTANCE_EFFECT);
+        statusEffectMap.put(MobEffects.GLOWING, Gamerules.GLOWING_EFFECT);
+        statusEffectMap.put(MobEffects.DIG_SPEED, Gamerules.HASTE_EFFECT);
+        statusEffectMap.put(MobEffects.HEALTH_BOOST, Gamerules.HEALTH_BOOST_EFFECT);
+        statusEffectMap.put(MobEffects.HUNGER, Gamerules.HUNGER_EFFECT);
+        statusEffectMap.put(MobEffects.HARM, Gamerules.INSTANT_DAMAGE_EFFECT);
+        statusEffectMap.put(MobEffects.HEAL, Gamerules.INSTANT_HEALTH_EFFECT);
+        statusEffectMap.put(MobEffects.INVISIBILITY, Gamerules.INVISIBILITY_EFFECT);
+        statusEffectMap.put(MobEffects.JUMP, Gamerules.JUMP_BOOST_EFFECT);
+        statusEffectMap.put(MobEffects.LEVITATION, Gamerules.LEVITATION_EFFECT);
+        statusEffectMap.put(MobEffects.LUCK, Gamerules.LUCK_EFFECT);
+        statusEffectMap.put(MobEffects.DIG_SLOWDOWN, Gamerules.MINING_FATIGUE_EFFECT);
+        statusEffectMap.put(MobEffects.CONFUSION, Gamerules.NAUSEA_EFFECT);
+        statusEffectMap.put(MobEffects.NIGHT_VISION, Gamerules.NIGHT_VISION_EFFECT);
+        statusEffectMap.put(MobEffects.POISON, Gamerules.POISON_EFFECT);
+        statusEffectMap.put(MobEffects.REGENERATION, Gamerules.REGENERATION_EFFECT);
+        statusEffectMap.put(MobEffects.DAMAGE_RESISTANCE, Gamerules.RESISTANCE_EFFECT);
+        statusEffectMap.put(MobEffects.SATURATION, Gamerules.SATURATION_EFFECT);
+        statusEffectMap.put(MobEffects.MOVEMENT_SLOWDOWN, Gamerules.SLOWNESS_EFFECT);
+        statusEffectMap.put(MobEffects.SLOW_FALLING, Gamerules.SLOW_FALLING_EFFECT);
+        statusEffectMap.put(MobEffects.MOVEMENT_SPEED, Gamerules.SPEED_EFFECT);
+        statusEffectMap.put(MobEffects.DAMAGE_BOOST, Gamerules.STRENGTH_EFFECT);
+        statusEffectMap.put(MobEffects.UNLUCK, Gamerules.UNLUCK_EFFECT);
+        statusEffectMap.put(MobEffects.WATER_BREATHING, Gamerules.WATER_BREATHING_EFFECT);
+        statusEffectMap.put(MobEffects.WEAKNESS, Gamerules.WEAKNESS_EFFECT);
+        statusEffectMap.put(MobEffects.WITHER, Gamerules.WITHER_EFFECT);
     }
 
     /**
@@ -71,15 +72,15 @@ public abstract class MixinLivingEntity{
      */
     @Inject(method = "canBeAffected", at = @At("HEAD"), cancellable = true)
     private void canItBeAffected(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (((Object) this) instanceof ServerPlayer) {
             MobEffect statusEffect = effect.getEffect();
             if (statusEffectMap.isEmpty()) {
                 addOptionsToMap();
             }
             GameRules.Key<GameRules.BooleanValue> effectGamerule = statusEffectMap.get(statusEffect);
-            if ((!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.EFFECTS_ENABLED)) ||
-                (effectGamerule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(effectGamerule))) {
+            if ((!VDServer.getServer().getGameRules().getBoolean(Gamerules.EFFECTS_ENABLED)) ||
+                (effectGamerule != null && !VDServer.getServer().getGameRules().getBoolean(effectGamerule))) {
                 cir.setReturnValue(false);
             }
         }

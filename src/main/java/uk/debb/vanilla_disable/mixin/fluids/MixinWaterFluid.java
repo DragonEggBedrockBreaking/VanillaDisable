@@ -7,7 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(WaterFluid.class)
 public abstract class MixinWaterFluid {
@@ -19,9 +20,9 @@ public abstract class MixinWaterFluid {
      */
     @Inject(method = "getDropOff", at = @At("HEAD"), cancellable = true)
     private void getWaterDropOff(LevelReader world, CallbackInfoReturnable<Integer> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (world instanceof Level) {
-            cir.setReturnValue(((Level) world).getGameRules().getBoolean(RegisterGamerules.WATER_REACHES_FAR) ? 1 : 2);
+            cir.setReturnValue(((Level) world).getGameRules().getBoolean(Gamerules.WATER_REACHES_FAR) ? 1 : 2);
         }
     }
 
@@ -33,9 +34,9 @@ public abstract class MixinWaterFluid {
      */
     @Inject(method = "getTickDelay", at = @At("HEAD"), cancellable = true)
     private void getWaterTickDelay(LevelReader world, CallbackInfoReturnable<Integer> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (world instanceof Level) {
-            cir.setReturnValue(((Level) world).getGameRules().getInt(RegisterGamerules.WATER_FLOW_SPEED));
+            cir.setReturnValue(((Level) world).getGameRules().getInt(Gamerules.WATER_FLOW_SPEED));
         }
     }
 
@@ -46,7 +47,7 @@ public abstract class MixinWaterFluid {
      */
     @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
     private void canWaterConvertToSource(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.INFINITE_WATER));
+        if (VDServer.getServer() == null) return;
+        cir.setReturnValue(VDServer.getServer().getGameRules().getBoolean(Gamerules.INFINITE_WATER));
     }
 }

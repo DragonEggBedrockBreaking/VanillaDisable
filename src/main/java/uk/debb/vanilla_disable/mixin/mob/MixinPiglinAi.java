@@ -6,7 +6,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(PiglinAi.class)
 public abstract class MixinPiglinAi {
@@ -18,8 +19,8 @@ public abstract class MixinPiglinAi {
      */
     @Inject(method = "isBarterCurrency", at = @At("HEAD"), cancellable = true)
     private static void cancelBarter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGLIN_BARTERING_ENABLED)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.PIGLIN_BARTERING_ENABLED)) {
             cir.setReturnValue(false);
         }
     }

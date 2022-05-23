@@ -24,7 +24,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
@@ -43,13 +44,13 @@ public abstract class MixinLivingEntity {
      */
     @Unique
     private void addOptionsToMap() {
-        entityMap.put(Blaze.class, RegisterGamerules.FIREBALL_KNOCKBACK);
-        entityMap.put(Ghast.class, RegisterGamerules.FIREBALL_KNOCKBACK);
-        entityMap.put(WitherBoss.class, RegisterGamerules.WITHER_SKULL_KNOCKBACK);
-        entityMap.put(EnderDragon.class, RegisterGamerules.DRAGON_KNOCKBACK);
-        entityMap.put(Llama.class, RegisterGamerules.LLAMA_SPIT_KNOCKBACK);
-        entityMap.put(Shulker.class, RegisterGamerules.SHULKER_BULLET_KNOCKBACK);
-        entityMap.put(ServerPlayer.class, RegisterGamerules.PLAYER_ATTACK_KNOCKBACK);
+        entityMap.put(Blaze.class, Gamerules.FIREBALL_KNOCKBACK);
+        entityMap.put(Ghast.class, Gamerules.FIREBALL_KNOCKBACK);
+        entityMap.put(WitherBoss.class, Gamerules.WITHER_SKULL_KNOCKBACK);
+        entityMap.put(EnderDragon.class, Gamerules.DRAGON_KNOCKBACK);
+        entityMap.put(Llama.class, Gamerules.LLAMA_SPIT_KNOCKBACK);
+        entityMap.put(Shulker.class, Gamerules.SHULKER_BULLET_KNOCKBACK);
+        entityMap.put(ServerPlayer.class, Gamerules.PLAYER_ATTACK_KNOCKBACK);
     }
 
     /**
@@ -64,17 +65,17 @@ public abstract class MixinLivingEntity {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> knockbackGamerule = entityMap.get(this.getClass());
-        if ((!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.KNOCKBACK_ENABLED)) ||
-            (knockbackGamerule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(knockbackGamerule))) {
+        if ((!VDServer.getServer().getGameRules().getBoolean(Gamerules.KNOCKBACK_ENABLED)) ||
+            (knockbackGamerule != null && !VDServer.getServer().getGameRules().getBoolean(knockbackGamerule))) {
             return true;
         }
         if ((source instanceof Skeleton && !(source instanceof WitherSkeleton)) ||
             (source instanceof Piglin && source.isHolding(Items.CROSSBOW)) ||
             (source instanceof Pillager)) {
-            return !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ARROW_KNOCKBACK);
+            return !VDServer.getServer().getGameRules().getBoolean(Gamerules.ARROW_KNOCKBACK);
         }
         if (source instanceof Drowned && source.isHolding(Items.TRIDENT)) {
-            return !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.TRIDENT_KNOCKBACK);
+            return !VDServer.getServer().getGameRules().getBoolean(Gamerules.TRIDENT_KNOCKBACK);
         }
         return false;
     }
@@ -89,7 +90,7 @@ public abstract class MixinLivingEntity {
      */
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(double strength, double x, double z, CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if ((Object)this instanceof Player && isInvulnerableToKnockback(this.lastHurtByMob)) {
             ci.cancel();
         }

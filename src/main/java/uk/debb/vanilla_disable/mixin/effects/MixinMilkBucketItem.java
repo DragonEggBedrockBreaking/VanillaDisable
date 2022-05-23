@@ -5,7 +5,8 @@ import net.minecraft.world.item.MilkBucketItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(MilkBucketItem.class)
 public class MixinMilkBucketItem {
@@ -23,7 +24,7 @@ public class MixinMilkBucketItem {
         )
     )
     private boolean cancelRemovingEffects(LivingEntity livingEntity) {
-        if (RegisterGamerules.getServer() != null && RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.MILK_CLEARS_EFFECTS)) {
+        if (VDServer.getServer() != null && VDServer.getServer().getGameRules().getBoolean(Gamerules.MILK_CLEARS_EFFECTS)) {
             return livingEntity.removeAllEffects();
         }
         return false;

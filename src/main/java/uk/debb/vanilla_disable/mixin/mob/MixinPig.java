@@ -11,7 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Pig.class)
 public abstract class MixinPig {
@@ -23,8 +24,8 @@ public abstract class MixinPig {
      */
     @Inject(method = "isFood", at = @At("HEAD"), cancellable = true)
     private void changeFood(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGS_BREED_WITH_WHEAT)) {
+        if (VDServer.getServer() == null) return;
+        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.PIGS_BREED_WITH_WHEAT)) {
             cir.setReturnValue(Ingredient.of(Items.WHEAT).test(stack));
         }
     }
@@ -45,8 +46,8 @@ public abstract class MixinPig {
         index = 1
     )
     private Goal modifyCarrotOnStickGoal(Goal goal) {
-        if (RegisterGamerules.getServer() == null) return goal;
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGS_BREED_WITH_WHEAT)) {
+        if (VDServer.getServer() == null) return goal;
+        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.PIGS_BREED_WITH_WHEAT)) {
             return new TemptGoal((Pig)(Object)this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;
@@ -68,8 +69,8 @@ public abstract class MixinPig {
         index = 1
     )
     private Goal modifyBreedItemsGoal(Goal goal) {
-        if (RegisterGamerules.getServer() == null) return goal;
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PIGS_BREED_WITH_WHEAT)) {
+        if (VDServer.getServer() == null) return goal;
+        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.PIGS_BREED_WITH_WHEAT)) {
             return new TemptGoal((Pig)(Object)this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;

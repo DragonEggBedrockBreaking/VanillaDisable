@@ -9,7 +9,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ShulkerBoxBlock.class)
 public abstract class MixinShulkerBoxBlock {
@@ -23,8 +24,8 @@ public abstract class MixinShulkerBoxBlock {
      */
     @Inject(method = "canOpen", at = @At("HEAD"), cancellable = true)
     private static void canAlwaysOpen(BlockState blockState, Level level, BlockPos blockPos, ShulkerBoxBlockEntity shulkerBoxBlockEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.CONTAINER_OPENING_BLOCKED)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.CONTAINER_OPENING_BLOCKED)) {
             cir.setReturnValue(true);
         }
     }

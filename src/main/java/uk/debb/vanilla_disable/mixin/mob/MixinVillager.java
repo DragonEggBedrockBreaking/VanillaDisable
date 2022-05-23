@@ -7,7 +7,8 @@ import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Villager.class)
 public abstract class MixinVillager {
@@ -27,10 +28,10 @@ public abstract class MixinVillager {
         )
     )
     public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LightningBolt entity) {
-        if (RegisterGamerules.getServer() == null) {
+        if (VDServer.getServer() == null) {
             return level.getDifficulty();
         }
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
+        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
             return level.getDifficulty();
         } else {
             return Difficulty.PEACEFUL;

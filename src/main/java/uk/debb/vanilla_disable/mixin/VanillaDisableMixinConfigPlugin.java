@@ -45,26 +45,6 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
             .addMixinOption("spawn_limits", true)
             .addMixinOption("spawning", true)
             .addMixinOption("worldgen", true)
-
-            .addMixinOption("util", true)
-            .addOptionDependency("commands", "util", true)
-            .addOptionDependency("damage", "util", true)
-            .addOptionDependency("despawning", "util", true)
-            .addOptionDependency("effects", "util", true)
-            .addOptionDependency("enchantments", "util", true)
-            .addOptionDependency("enchantments.enchantment_conflicts", "util", true)
-            .addOptionDependency("fluids", "util", true)
-            .addOptionDependency("knockback", "util", true)
-            .addOptionDependency("misc", "util", true)
-            .addOptionDependency("misc.container", "util", true)
-            .addOptionDependency("misc.hunger", "util", true)
-            .addOptionDependency("mob", "util", true)
-            .addOptionDependency("player", "util", true)
-            .addOptionDependency("redstone", "util", true)
-            .addOptionDependency("spawn_limits", "util", true)
-            .addOptionDependency("spawning", "util", true)
-            .addOptionDependency("worldgen", "util", true)
-
             .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
             .build(QuiltLoader.getConfigDir().resolve("vanilla-disable-mixin.properties"));
 

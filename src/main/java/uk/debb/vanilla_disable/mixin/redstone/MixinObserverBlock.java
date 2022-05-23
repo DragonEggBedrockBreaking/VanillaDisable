@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ObserverBlock.class)
 public abstract class MixinObserverBlock {
@@ -25,8 +26,8 @@ public abstract class MixinObserverBlock {
      */
     @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
     private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OBSERVER_ENABLED)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.OBSERVER_ENABLED)) {
             cir.setReturnValue(0);
         }
     }
@@ -42,8 +43,8 @@ public abstract class MixinObserverBlock {
      */
     @Inject(method = "getDirectSignal", at = @At("HEAD"), cancellable = true)
     private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OBSERVER_ENABLED)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.OBSERVER_ENABLED)) {
             cir.setReturnValue(0);
         }
     }
@@ -63,7 +64,7 @@ public abstract class MixinObserverBlock {
         index = 2
     )
     private int modifyObserverDelay(int delay) {
-        if (RegisterGamerules.getServer() == null) return delay;
-        return RegisterGamerules.getServer().getGameRules().getInt(RegisterGamerules.OBSERVER_DELAY);
+        if (VDServer.getServer() == null) return delay;
+        return VDServer.getServer().getGameRules().getInt(Gamerules.OBSERVER_DELAY);
     }
 }

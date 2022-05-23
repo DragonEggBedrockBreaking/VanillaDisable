@@ -14,7 +14,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(NaturalSpawner.class)
 public class MixinNaturalSpawner {
@@ -31,13 +32,13 @@ public class MixinNaturalSpawner {
      */
     @Unique
     private static void addOptionsToMap() {
-        spawnGroupMap.put(MobCategory.MONSTER, RegisterGamerules.MONSTER_SPAWNING);
-        spawnGroupMap.put(MobCategory.CREATURE, RegisterGamerules.CREATURE_SPAWNING);
-        spawnGroupMap.put(MobCategory.AMBIENT, RegisterGamerules.AMBIENT_SPAWNING);
-        spawnGroupMap.put(MobCategory.AXOLOTLS, RegisterGamerules.AXOLOTL_SPAWNING);
-        spawnGroupMap.put(MobCategory.UNDERGROUND_WATER_CREATURE, RegisterGamerules.GLOWSQUID_SPAWNING);
-        spawnGroupMap.put(MobCategory.WATER_AMBIENT, RegisterGamerules.WATER_AMBIENT_SPAWNING);
-        spawnGroupMap.put(MobCategory.WATER_CREATURE, RegisterGamerules.WATER_CREATURE_SPAWNING);
+        spawnGroupMap.put(MobCategory.MONSTER, Gamerules.MONSTER_SPAWNING);
+        spawnGroupMap.put(MobCategory.CREATURE, Gamerules.CREATURE_SPAWNING);
+        spawnGroupMap.put(MobCategory.AMBIENT, Gamerules.AMBIENT_SPAWNING);
+        spawnGroupMap.put(MobCategory.AXOLOTLS, Gamerules.AXOLOTL_SPAWNING);
+        spawnGroupMap.put(MobCategory.UNDERGROUND_WATER_CREATURE, Gamerules.GLOWSQUID_SPAWNING);
+        spawnGroupMap.put(MobCategory.WATER_AMBIENT, Gamerules.WATER_AMBIENT_SPAWNING);
+        spawnGroupMap.put(MobCategory.WATER_CREATURE, Gamerules.WATER_CREATURE_SPAWNING);
     }
 
     /**
@@ -51,12 +52,12 @@ public class MixinNaturalSpawner {
      */
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
     private static void cancelSpawningCategoryForChunk(MobCategory group, ServerLevel level, LevelChunk chunk, SpawnPredicate checker, AfterSpawnCallback runner, CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (spawnGroupMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupMap.get(group);
-        if (gameRule != null && !RegisterGamerules.getServer().getGameRules().getBoolean(gameRule)) {
+        if (gameRule != null && !VDServer.getServer().getGameRules().getBoolean(gameRule)) {
             ci.cancel();
         }
     }

@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(BeaconBlockEntity.class)
 public abstract class MixinBeaconBlockEntity {
@@ -24,8 +25,8 @@ public abstract class MixinBeaconBlockEntity {
      */
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void cancelEffects(Level level, BlockPos blockPos, int i, MobEffect mobEffect, MobEffect mobEffect2, CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.BEACONS_ENABLED)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.BEACONS_ENABLED)) {
             ci.cancel();
         }
     }

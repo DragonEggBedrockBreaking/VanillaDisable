@@ -7,7 +7,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.ChestBlock;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ChestBlock.class)
 public abstract class MixinChestBlock {
@@ -20,8 +21,8 @@ public abstract class MixinChestBlock {
      */
     @Inject(method = "isChestBlockedAt", at = @At("HEAD"), cancellable = true)
     private static void chestNotBlocked(LevelAccessor levelAccessor, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.CONTAINER_OPENING_BLOCKED)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.CONTAINER_OPENING_BLOCKED)) {
             cir.setReturnValue(false);
         }
     }

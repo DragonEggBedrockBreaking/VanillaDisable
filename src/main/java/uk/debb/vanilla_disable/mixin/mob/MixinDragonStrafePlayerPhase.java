@@ -6,7 +6,8 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(DragonStrafePlayerPhase.class)
 public abstract class MixinDragonStrafePlayerPhase {
@@ -24,10 +25,10 @@ public abstract class MixinDragonStrafePlayerPhase {
         )
     )
     public boolean spawnFreshEntity(Level level, Entity entity) {
-        if (RegisterGamerules.getServer() == null) {
+        if (VDServer.getServer() == null) {
             return false;
         }
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.DRAGON_FIREBALLS)) {
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.DRAGON_FIREBALLS)) {
             return false;
         }
         return level.addFreshEntity(entity);

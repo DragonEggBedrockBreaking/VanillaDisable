@@ -9,7 +9,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Monster.class)
 public abstract class MixinMonster {
@@ -22,11 +23,11 @@ public abstract class MixinMonster {
      */
     @Inject(method = "isDarkEnoughToSpawn", at = @At("HEAD"), cancellable = true)
     private static void spawnIsDarkEnough(ServerLevelAccessor world, BlockPos pos, Random random, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (world.getBrightness(LightLayer.SKY, pos) > random.nextInt(32)) {
             cir.setReturnValue(false);
         }
-        if (world.getBrightness(LightLayer.BLOCK, pos) > world.getLevel().getGameRules().getInt(RegisterGamerules.MONSTER_MAX_LIGHT_LEVEL)) {
+        if (world.getBrightness(LightLayer.BLOCK, pos) > world.getLevel().getGameRules().getInt(Gamerules.MONSTER_MAX_LIGHT_LEVEL)) {
             cir.setReturnValue(false);
         } else {
             if (!world.getLevel().isThundering()) {

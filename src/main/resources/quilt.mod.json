@@ -1,4 +1,3 @@
-
 {
     "schema_version": 1,
     "quilt_loader": {
@@ -37,10 +36,6 @@
                 "versions": ">=17"
             },
             {
-                "id": "quilt_base",
-                "versions": ">=1.1.0-beta.12"
-            },
-            {
                 "id": "quilt_resource_loader",
                 "versions": ">=1.1.0-beta.12"
             },
@@ -48,16 +43,14 @@
                 "id": "quilted_fabric_game_rule_api_v1",
                 "versions": ">=1.0.0-beta.14"
             }
-        ],
-        "entrypoints": {
-            "init": [
-                "uk.debb.vanilla_disable.gamerules.RegisterGamerules"
-            ]
-        }
+        ]
     },
     "minecraft": {
         "environment": "*"
     },
-    "mixin": "vanilla_disable.mixins.json",
+    "mixin": [
+        "vanilla_disable.mixins.json",
+        "vanilla_disable_util.mixins.json"
+    ],
     "access_widener": "vanilla_disable.aw"
 }

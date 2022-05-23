@@ -1,11 +1,11 @@
-package uk.debb.vanilla_disable.gamerules;
+package uk.debb.vanilla_disable.util;
 
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public class CreateGameruleCategories {
+public class GameruleCategories {
     public static final CustomGameRuleCategory VD_DAMAGE = new CustomGameRuleCategory(
         new ResourceLocation("gamerule.category.vd.damage"),
         new TranslatableComponent("gamerule.category.vd.damage")

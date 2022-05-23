@@ -6,7 +6,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
@@ -17,8 +18,8 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isOnFire", at = @At("HEAD"), cancellable = true)
     private void cannotBeOnFire(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_BE_ON_FIRE)) {
+        if (VDServer.getServer() == null) return;
+        if ((Object)this instanceof Player && !VDServer.getServer().getGameRules().getBoolean(Gamerules.PLAYER_CAN_BE_ON_FIRE)) {
             cir.setReturnValue(false);
         }
     }
@@ -30,8 +31,8 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isShiftKeyDown", at = @At("HEAD"), cancellable = true)
     private void cannotCrouch(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_CROUCH)) {
+        if (VDServer.getServer() == null) return;
+        if ((Object)this instanceof Player && !VDServer.getServer().getGameRules().getBoolean(Gamerules.PLAYER_CAN_CROUCH)) {
             cir.setReturnValue(false);
         }
     }
@@ -43,8 +44,8 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isSprinting", at = @At("HEAD"), cancellable = true)
     private void cannotSprint(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_SPRINT)) {
+        if (VDServer.getServer() == null) return;
+        if ((Object)this instanceof Player && !VDServer.getServer().getGameRules().getBoolean(Gamerules.PLAYER_CAN_SPRINT)) {
             cir.setReturnValue(true);
         }
     }
@@ -56,8 +57,8 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isSwimming", at = @At("HEAD"), cancellable = true)
     private void cannotSwim(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_SWIM)) {
+        if (VDServer.getServer() == null) return;
+        if ((Object)this instanceof Player && !VDServer.getServer().getGameRules().getBoolean(Gamerules.PLAYER_CAN_SWIM)) {
             cir.setReturnValue(false);
         }
     }
@@ -69,8 +70,8 @@ public abstract class MixinEntity {
      */
     @Inject(method = "isInvisible", at = @At("HEAD"), cancellable = true)
     private void cannotBeInvisible(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_BE_INVISIBLE)) {
+        if (VDServer.getServer() == null) return;
+        if ((Object)this instanceof Player && !VDServer.getServer().getGameRules().getBoolean(Gamerules.PLAYER_CAN_BE_INVISIBLE)) {
             cir.setReturnValue(false);
         }
     }
@@ -82,8 +83,8 @@ public abstract class MixinEntity {
      */
     @Inject(method = "getBlockJumpFactor", at = @At("HEAD"), cancellable = true)
     private void cannotJump(CallbackInfoReturnable<Float> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if ((Object)this instanceof Player && !RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.PLAYER_CAN_JUMP)) {
+        if (VDServer.getServer() == null) return;
+        if ((Object)this instanceof Player && !VDServer.getServer().getGameRules().getBoolean(Gamerules.PLAYER_CAN_JUMP)) {
             cir.setReturnValue(0.0F);
         }
     }

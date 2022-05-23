@@ -1,11 +1,11 @@
-package uk.debb.vanilla_disable.mixin.util;
+package uk.debb.vanilla_disable.util.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
@@ -22,6 +22,6 @@ public abstract class MixinMinecraftServer {
         )
     )
     private void beforeServerSetup(CallbackInfo ci) {
-        RegisterGamerules.setServer((MinecraftServer) (Object) this);
+        VDServer.setServer((MinecraftServer) (Object) this);
     }
 }

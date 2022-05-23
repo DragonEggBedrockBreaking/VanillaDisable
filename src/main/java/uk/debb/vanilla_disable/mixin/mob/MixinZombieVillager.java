@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ZombieVillager.class)
 public abstract class MixinZombieVillager {
@@ -21,8 +22,8 @@ public abstract class MixinZombieVillager {
      */
     @Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
     private void cureMob(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!player.getLevel().getGameRules().getBoolean(RegisterGamerules.CURABLE_ZILLAGERS)) {
+        if (VDServer.getServer() == null) return;
+        if (!player.getLevel().getGameRules().getBoolean(Gamerules.CURABLE_ZILLAGERS)) {
             cir.setReturnValue(InteractionResult.CONSUME);
         }
     }

@@ -9,7 +9,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(value = Zombie.class, priority = 1001)
 public abstract class MixinZombie {
@@ -29,10 +30,10 @@ public abstract class MixinZombie {
         )
     )
     public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LivingEntity other) {
-        if (RegisterGamerules.getServer() == null) {
+        if (VDServer.getServer() == null) {
             return level.getDifficulty();
         }
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
+        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
             return level.getDifficulty();
         } else {
             return Difficulty.PEACEFUL;
@@ -46,8 +47,8 @@ public abstract class MixinZombie {
      */
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelUnderWaterConversion(CallbackInfo ci) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.ZOMBIES_CONVERT_TO_DROWNED)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.ZOMBIES_CONVERT_TO_DROWNED)) {
             ci.cancel();
         }
     }

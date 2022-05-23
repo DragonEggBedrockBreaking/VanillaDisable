@@ -4,10 +4,11 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(FoodData.class)
 public abstract class MixinFoodData {
@@ -25,11 +26,11 @@ public abstract class MixinFoodData {
         )
     )
     private Difficulty getWrongDifficulty(Level level) {
-        if (RegisterGamerules.getServer() == null) {
+        if (VDServer.getServer() == null) {
             return level.getDifficulty();
         }
-        if (RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.OLD_HUNGER)) {
-            RegisterGamerules.getServer().getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, RegisterGamerules.getServer());
+        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.OLD_HUNGER)) {
+            VDServer.getServer().getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, VDServer.getServer());
             return Difficulty.PEACEFUL;
         }
         return level.getDifficulty();

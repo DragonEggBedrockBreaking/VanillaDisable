@@ -5,7 +5,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(SpikeFeature.EndSpike.class)
 public abstract class MixinSpikeFeature$EndSpike {
@@ -16,8 +17,8 @@ public abstract class MixinSpikeFeature$EndSpike {
      */
     @Inject(method = "isGuarded", at = @At("HEAD"), cancellable = true)
     private void notGuarded(CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
-        if (!RegisterGamerules.getServer().getGameRules().getBoolean(RegisterGamerules.END_PILLAR_CAGE_GENERATION)) {
+        if (VDServer.getServer() == null) return;
+        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.END_PILLAR_CAGE_GENERATION)) {
             cir.setReturnValue(false);
         }
     }

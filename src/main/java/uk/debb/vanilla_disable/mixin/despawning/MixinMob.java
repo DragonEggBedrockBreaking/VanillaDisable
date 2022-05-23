@@ -19,7 +19,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Mob.class)
 public abstract class MixinMob {
@@ -36,13 +37,13 @@ public abstract class MixinMob {
      */
     @Unique
     private void addOptionsToMap() {
-        spawnGroupDespawnMap.put(Monster.class, RegisterGamerules.MONSTERS_DESPAWN);
-        spawnGroupDespawnMap.put(Animal.class, RegisterGamerules.CREATURES_DESPAWN);
-        spawnGroupDespawnMap.put(AmbientCreature.class, RegisterGamerules.AMBIENT_DESPAWN);
-        spawnGroupDespawnMap.put(Axolotl.class, RegisterGamerules.AXOLOTLS_DESPAWN);
-        spawnGroupDespawnMap.put(GlowSquid.class, RegisterGamerules.GLOWSQUIDS_DESPAWN);
-        spawnGroupDespawnMap.put(AbstractFish.class, RegisterGamerules.WATER_AMBIENT_DESPAWN);
-        spawnGroupDespawnMap.put(WaterAnimal.class, RegisterGamerules.WATER_CREATURES_DESPAWN);
+        spawnGroupDespawnMap.put(Monster.class, Gamerules.MONSTERS_DESPAWN);
+        spawnGroupDespawnMap.put(Animal.class, Gamerules.CREATURES_DESPAWN);
+        spawnGroupDespawnMap.put(AmbientCreature.class, Gamerules.AMBIENT_DESPAWN);
+        spawnGroupDespawnMap.put(Axolotl.class, Gamerules.AXOLOTLS_DESPAWN);
+        spawnGroupDespawnMap.put(GlowSquid.class, Gamerules.GLOWSQUIDS_DESPAWN);
+        spawnGroupDespawnMap.put(AbstractFish.class, Gamerules.WATER_AMBIENT_DESPAWN);
+        spawnGroupDespawnMap.put(WaterAnimal.class, Gamerules.WATER_CREATURES_DESPAWN);
     }
 
     /**
@@ -65,13 +66,13 @@ public abstract class MixinMob {
      */
     @Inject(method = "removeWhenFarAway", at = @At("HEAD"), cancellable = true)
     private void cancelRemovelWhenFarAway(double distanceSquared, CallbackInfoReturnable<Boolean> cir) {
-        if (RegisterGamerules.getServer() == null) return;
+        if (VDServer.getServer() == null) return;
         if (spawnGroupDespawnMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupDespawnMap.get(this.getClass());
         if (gameRule != null && (Object) this.getClass() != AbstractVillager.class) {
-            cir.setReturnValue(RegisterGamerules.getServer().getGameRules().getBoolean(gameRule) && additionalRestrictionsMet());
+            cir.setReturnValue(VDServer.getServer().getGameRules().getBoolean(gameRule) && additionalRestrictionsMet());
         }
     }
 }
