@@ -53,8 +53,6 @@ public class Buildscript extends SimpleFabricProject {
         jij(d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:afbaa01"), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
         d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:lazydfu:0.1.2"), ModDependencyFlag.RUNTIME);
-        // Tiefix
-        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:tiefix:1.10.0"), ModDependencyFlag.RUNTIME);
     }
 
     @Override
