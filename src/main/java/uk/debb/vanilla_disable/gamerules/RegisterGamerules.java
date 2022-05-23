@@ -1,7 +1,6 @@
 package uk.debb.vanilla_disable.gamerules;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -22,6 +21,9 @@ public class RegisterGamerules implements ModInitializer {
     private static MinecraftServer server;
     public static MinecraftServer getServer() {
         return server;
+    }
+    public static void setServer(MinecraftServer serverArg) {
+        RegisterGamerules.server = serverArg;
     }
 
     // Defining the gamerules themselves
@@ -1105,11 +1107,6 @@ public class RegisterGamerules implements ModInitializer {
                     "containerOpeningBlocked",     CreateGameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
             }
         }
-
-        // Registering the Minecraft server to when it actually starts
-        ServerLifecycleEvents.SERVER_STARTING.register((minecraftServer) -> {
-            RegisterGamerules.server = minecraftServer;
-        });
 
         // Fabric is deprecated
         if (!FabricLoader.getInstance().isModLoaded("quilt_loader")) {
