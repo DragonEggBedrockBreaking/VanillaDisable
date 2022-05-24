@@ -31,7 +31,7 @@ public abstract class MixinFoodData {
             return level.getDifficulty();
         }
         if (GameruleHelper.getBool(Gamerules.OLD_HUNGER)) {
-            VDServer.getServer().getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, VDServer.getServer());
+            GameruleHelper.setBool(GameRules.RULE_NATURAL_REGENERATION, false);
             return Difficulty.PEACEFUL;
         }
         return level.getDifficulty();

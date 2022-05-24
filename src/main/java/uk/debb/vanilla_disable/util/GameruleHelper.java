@@ -76,4 +76,15 @@ public class GameruleHelper {
     public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
         return GameruleHelper.getInt(key);
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason set new boolean values to boolean gamerules
+     * @param key the gamerule key
+     * @param newValue the gamerule's new value (boolean)
+     */
+    @Unique
+    public static void setBool(GameRules.Key<GameRules.BooleanValue> key, boolean newValue) {
+        VDServer.getServer().getGameRules().getRule(key).set(newValue, VDServer.getServer());
+    }
 }
