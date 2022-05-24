@@ -74,7 +74,7 @@ public class Buildscript extends SimpleQuiltProject {
 
     @Override
     public ProcessorChain resourcesProcessingChain() {
-        // Patches some issues in certain json files
+        // Patches version in quilt.mod.json
         return new ProcessorChain(super.resourcesProcessingChain(), new QmjVersionPatcher(this));
     }
 }
