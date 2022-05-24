@@ -48,7 +48,7 @@ public class Buildscript extends SimpleQuiltProject {
     public void getModDependencies(ModDependencyCollector d) {
         // Fabric API
         d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".qsl.core", "qsl_base", "1.1.0-beta.12+1.18.2"), ModDependencyFlag.RUNTIME);
-        d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".qsl.core", "resource_loader", "1.1.0-beta.12+1.18.2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".qsl.core", "resource_loader", "1.1.0-beta.12+1.18.2"), ModDependencyFlag.RUNTIME);
         d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", "1.0.0-beta.14+0.51.1-1.18.2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
         jij(d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:afbaa01"), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
