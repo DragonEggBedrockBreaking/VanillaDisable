@@ -1,9 +1,16 @@
 package uk.debb.vanilla_disable.util.mixin;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.server.Bootstrap;
+import org.quiltmc.loader.api.QuiltLoader;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -15,17 +22,10 @@ import uk.debb.vanilla_disable.util.Gamerules;
 public abstract class MixinBootstrap {
     /**
      * @author DragonEggBedrockBreaking
-     * @reason manually run code on initialisation without base api
-     * @param ci callback info
+     * @reason register all of our gamerules
      */
-    @Inject(
-        method = "bootStrap",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/core/Registry;freezeBuiltins()V"
-        )
-    )
-    private static void onInitialize(CallbackInfo ci) {
+    @Unique
+    private static void registerGamerules() {
         if (VanillaDisableMixinConfigPlugin.damage) {
             Gamerules.DAMAGE_ENABLED            = GameRuleRegistry.register(
                 "damageEnabled",   GameruleCategories.VD_DAMAGE, GameRuleFactory.createBooleanRule(true));
@@ -744,5 +744,44 @@ public abstract class MixinBootstrap {
                     "containerOpeningBlocked",GameruleCategories.VD_MISC, GameRuleFactory.createBooleanRule(true));
             }
         }
+    }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason if there is no resource loader, manually load the lang files
+     * @throws IOException
+     */
+    @Unique
+    private static void langFileFallback() throws IOException {
+        File outerrpackdir = new File(QuiltLoader.getGameDir().toString() + "/resourcepacks/vdlangfile");
+        outerrpackdir.delete();
+        if (!QuiltLoader.isModLoaded("quilt_resource_loader")) {
+            File rpackdir = new File(QuiltLoader.getGameDir().toString() + "/resourcepacks/vdlangfile/assets/vanilladisablelangfile/lang");
+            rpackdir.mkdirs();
+            InputStream inputUrl = MixinBootstrap.class.getResourceAsStream("/assets/vanilla_disable/lang/en_us.json");
+            Path dest = new File(rpackdir.toString() + "/en_us.json").toPath();
+            Files.copy(inputUrl, dest);
+            InputStream otherInputUrl = MixinBootstrap.class.getResourceAsStream("/pack.mcmeta");
+            Path otherDest = new File(outerrpackdir.toString() + "/pack.mcmeta").toPath();
+            Files.copy(otherInputUrl, otherDest);
+        }
+    }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason manually run code on initialisation without base api
+     * @param ci callback info
+     * @throws IOException
+     */
+    @Inject(
+        method = "bootStrap",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/core/Registry;freezeBuiltins()V"
+        )
+    )
+    private static void onInitialize(CallbackInfo ci) throws IOException {
+        registerGamerules();
+        langFileFallback();
     }
 }
