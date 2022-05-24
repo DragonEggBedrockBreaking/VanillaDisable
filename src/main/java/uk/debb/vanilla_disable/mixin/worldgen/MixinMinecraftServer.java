@@ -18,8 +18,7 @@ import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.world.level.DataPackConfig;
 import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.level.storage.WorldData;
-import uk.debb.vanilla_disable.util.Gamerules;
-
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,8 +26,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDLogger;
 import uk.debb.vanilla_disable.util.VDServer;
+import uk.debb.vanilla_disable.util.Gamerules;
 
 
 @Mixin(MinecraftServer.class)
@@ -490,7 +489,7 @@ public abstract class MixinMinecraftServer {
         disabledCopy.remove(name);
         config.enabled = enabledCopy;
         config.disabled = disabledCopy;
-        VDLogger.getLogger().debug(String.format(
+        LoggerFactory.getLogger("Vanilla Disable").debug(String.format(
             "Datapack %s has been enabled due to your gamerule choices.",
             name.replaceAll("vanilla_disable_", "")));
     }
@@ -512,7 +511,7 @@ public abstract class MixinMinecraftServer {
         disabledCopy.add(name);
         config.enabled = enabledCopy;
         config.disabled = disabledCopy;
-        VDLogger.getLogger().debug(String.format(
+        LoggerFactory.getLogger("Vanilla Disable").debug(String.format(
             "Datapack %s has been disabled due to your gamerule choices.",
             name.replaceAll("vanilla_disable_", "")));
     }
