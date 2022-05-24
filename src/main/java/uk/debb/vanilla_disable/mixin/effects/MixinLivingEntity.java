@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -79,8 +80,8 @@ public abstract class MixinLivingEntity{
                 addOptionsToMap();
             }
             GameRules.Key<GameRules.BooleanValue> effectGamerule = statusEffectMap.get(statusEffect);
-            if ((!VDServer.getServer().getGameRules().getBoolean(Gamerules.EFFECTS_ENABLED)) ||
-                (effectGamerule != null && !VDServer.getServer().getGameRules().getBoolean(effectGamerule))) {
+            if ((!GameruleHelper.getBool(Gamerules.EFFECTS_ENABLED)) ||
+                (effectGamerule != null && !GameruleHelper.getBool(effectGamerule))) {
                 cir.setReturnValue(false);
             }
         }

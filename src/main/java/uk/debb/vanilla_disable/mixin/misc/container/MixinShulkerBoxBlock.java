@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -25,7 +26,7 @@ public abstract class MixinShulkerBoxBlock {
     @Inject(method = "canOpen", at = @At("HEAD"), cancellable = true)
     private static void canAlwaysOpen(BlockState blockState, Level level, BlockPos blockPos, ShulkerBoxBlockEntity shulkerBoxBlockEntity, CallbackInfoReturnable<Boolean> cir) {
         if (VDServer.getServer() == null) return;
-        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.CONTAINER_OPENING_BLOCKED)) {
+        if (!GameruleHelper.getBool(Gamerules.CONTAINER_OPENING_BLOCKED)) {
             cir.setReturnValue(true);
         }
     }

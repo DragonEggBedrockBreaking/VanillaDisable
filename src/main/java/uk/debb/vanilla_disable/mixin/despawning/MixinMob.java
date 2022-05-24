@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -72,7 +73,7 @@ public abstract class MixinMob {
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupDespawnMap.get(this.getClass());
         if (gameRule != null && (Object) this.getClass() != AbstractVillager.class) {
-            cir.setReturnValue(VDServer.getServer().getGameRules().getBoolean(gameRule) && additionalRestrictionsMet());
+            cir.setReturnValue(GameruleHelper.getBool(gameRule) && additionalRestrictionsMet());
         }
     }
 }

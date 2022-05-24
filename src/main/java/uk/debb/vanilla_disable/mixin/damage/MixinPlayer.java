@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -53,20 +54,20 @@ public abstract class MixinPlayer {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> damageGamerule = damageSourceMap.get(damageSource);
-        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.DAMAGE_ENABLED)) {
+        if (!GameruleHelper.getBool(Gamerules.DAMAGE_ENABLED)) {
             cir.setReturnValue(true);
-        } else if (damageGamerule != null && !VDServer.getServer().getGameRules().getBoolean(damageGamerule)) {
+        } else if (damageGamerule != null && !GameruleHelper.getBool(damageGamerule)) {
             cir.setReturnValue(true);
         } else if (damageSource.isProjectile()) {
-            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.PROJECTILE_DAMAGE));
+            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.PROJECTILE_DAMAGE));
         } else if (damageSource.isExplosion()) {
-            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.EXPLOSION_DAMAGE));
+            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.EXPLOSION_DAMAGE));
         } else if (damageSource.isBypassInvul()) {
-            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.VOID_DAMAGE));
+            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.VOID_DAMAGE));
         } else if (damageSource.isMagic()) {
-            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.MAGIC_DAMAGE));
+            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.MAGIC_DAMAGE));
         } else if (damageSource.isCreativePlayer()) {
-            cir.setReturnValue(!VDServer.getServer().getGameRules().getBoolean(Gamerules.CREATIVE_PLAYER_DAMAGE));
+            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.CREATIVE_PLAYER_DAMAGE));
         }
     }
 }

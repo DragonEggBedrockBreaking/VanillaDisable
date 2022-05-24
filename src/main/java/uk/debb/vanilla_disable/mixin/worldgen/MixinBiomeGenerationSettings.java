@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -274,7 +275,7 @@ public abstract class MixinBiomeGenerationSettings {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = featureToGameruleMap.get(String.format("%s", feature));
-        if (gameRule != null && !VDServer.getServer().getGameRules().getBoolean(gameRule)) {
+        if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             cir.setReturnValue(false);
         }
     }

@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -22,7 +23,7 @@ public abstract class MixinBlock {
     @Inject(method = "getFriction", at = @At("HEAD"), cancellable = true)
     private void cancelFriction(CallbackInfoReturnable<Float> cir) {
         if (VDServer.getServer() == null) return;
-        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.ICE_SLIDING) && this.getFriction() == 0.98F) {
+        if (!GameruleHelper.getBool(Gamerules.ICE_SLIDING) && this.getFriction() == 0.98F) {
             cir.setReturnValue(Blocks.STONE.getFriction());
         }
     }

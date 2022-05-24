@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -27,7 +28,7 @@ public abstract class MixinRedstoneTorchBlock {
     private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
         if (direction != Direction.UP) {
-            cir.setReturnValue(VDServer.getServer().getGameRules().getInt(Gamerules.TORCH_REDSTONE_SIGNAL));
+            cir.setReturnValue(GameruleHelper.getInt(Gamerules.TORCH_REDSTONE_SIGNAL));
         }
     }
 
@@ -44,7 +45,7 @@ public abstract class MixinRedstoneTorchBlock {
     private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
         if (direction == Direction.DOWN) {
-            cir.setReturnValue(VDServer.getServer().getGameRules().getInt(Gamerules.TORCH_REDSTONE_SIGNAL));
+            cir.setReturnValue(GameruleHelper.getInt(Gamerules.TORCH_REDSTONE_SIGNAL));
         }
     }
 }

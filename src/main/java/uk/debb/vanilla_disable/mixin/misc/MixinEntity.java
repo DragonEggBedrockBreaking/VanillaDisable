@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -30,7 +31,7 @@ public abstract class MixinEntity {
     @Inject(method = "getDimensionChangingDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDimensionChangingDelay(CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
-        cir.setReturnValue(VDServer.getServer().getGameRules().getInt(Gamerules.NETHER_PORTAL_COOLDOWN));
+        cir.setReturnValue(GameruleHelper.getInt(Gamerules.NETHER_PORTAL_COOLDOWN));
     }
 
     /**
@@ -42,7 +43,7 @@ public abstract class MixinEntity {
     @Inject(method = "onInsideBlock", at = @At("HEAD"), cancellable = true)
     private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.OLD_BOATS) &&
+        if (GameruleHelper.getBool(Gamerules.OLD_BOATS) &&
             (Object) this instanceof Boat) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));

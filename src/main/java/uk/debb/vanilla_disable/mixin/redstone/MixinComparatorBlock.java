@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -22,7 +23,7 @@ public abstract class MixinComparatorBlock {
     @Inject(method = "getDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDelay(BlockState blockState, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
-        cir.setReturnValue(VDServer.getServer().getGameRules().getInt(Gamerules.COMPARATOR_BASE_DELAY));
+        cir.setReturnValue(GameruleHelper.getInt(Gamerules.COMPARATOR_BASE_DELAY));
     }
 
     /**
@@ -36,7 +37,7 @@ public abstract class MixinComparatorBlock {
     @Inject(method = "getOutputSignal", at = @At("HEAD"), cancellable = true)
     private void modifyOutputSignal(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
-        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.COMPARATOR_ENABLED)) {
+        if (!GameruleHelper.getBool(Gamerules.COMPARATOR_ENABLED)) {
             cir.setReturnValue(0);
         }
     }

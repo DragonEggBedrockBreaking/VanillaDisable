@@ -22,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -92,7 +93,7 @@ public abstract class MixinBaseSpawner {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnerMobMap.get(this.spawnedEntity.getClass());
-        if (!this.spawnedEntity.getLevel().getGameRules().getBoolean(gameRule))  {
+        if (!GameruleHelper.getBool(gameRule))  {
             ci.cancel();
         }
     }

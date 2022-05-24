@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -20,7 +21,7 @@ public abstract class MixinBowItem {
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
     private void lowerUseDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.BOW_SPAMMING)) {
+        if (GameruleHelper.getBool(Gamerules.BOW_SPAMMING)) {
             cir.setReturnValue(4);
         }
     }
@@ -34,7 +35,7 @@ public abstract class MixinBowItem {
     @Inject(method = "getPowerForTime", at = @At("HEAD"), cancellable = true)
     private static void modifyPower(int i, CallbackInfoReturnable<Float> cir) {
         if (VDServer.getServer() == null) return;
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.BOW_SPAMMING)) {
+        if (GameruleHelper.getBool(Gamerules.BOW_SPAMMING)) {
             cir.setReturnValue(1.0F);
         }
     }

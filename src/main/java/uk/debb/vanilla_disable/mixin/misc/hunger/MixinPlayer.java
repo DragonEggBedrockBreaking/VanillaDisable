@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -22,7 +23,7 @@ public abstract class MixinPlayer {
     @Inject(method = "eat", at = @At("HEAD"), cancellable = true)
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (VDServer.getServer() == null) return;
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
+        if (GameruleHelper.getBool(Gamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
             ((LivingEntity)(Object)this).setHealth(((LivingEntity)(Object)this).getHealth() + stack.getItem().getFoodProperties().getNutrition());
         }
     }
@@ -45,7 +46,7 @@ public abstract class MixinPlayer {
         if (VDServer.getServer() == null) {
             return hungerManager.needsFood();
         }
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.OLD_HUNGER)) {
+        if (GameruleHelper.getBool(Gamerules.OLD_HUNGER)) {
             return ((LivingEntity)(Object)this).getHealth() < ((LivingEntity)(Object)this).getMaxHealth();
         }
         return hungerManager.needsFood();

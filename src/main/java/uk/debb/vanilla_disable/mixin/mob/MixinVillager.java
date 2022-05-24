@@ -7,6 +7,7 @@ import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -31,7 +32,7 @@ public abstract class MixinVillager {
         if (VDServer.getServer() == null) {
             return level.getDifficulty();
         }
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
+        if (GameruleHelper.getBool(Gamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
             return level.getDifficulty();
         } else {
             return Difficulty.PEACEFUL;

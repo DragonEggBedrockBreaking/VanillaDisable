@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -16,7 +17,7 @@ public abstract class MixinItemEntity {
     @Shadow private int age;
     @Shadow private int pickupDelay;
     @Unique
-    final int MAX = VDServer.getServer().getGameRules().getInt(Gamerules.ITEM_DESPAWN_TIME);
+    final int MAX = GameruleHelper.getInt(Gamerules.ITEM_DESPAWN_TIME);
 
     /**
      * @author DragonEggBedrockBreaking

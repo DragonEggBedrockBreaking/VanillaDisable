@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -22,7 +23,7 @@ public abstract class MixinTargetBlock {
     @Inject(method = "getRedstoneStrength", at = @At("HEAD"), cancellable = true)
     private static void modifyRedstoneStrength(BlockHitResult blockHitResult, Vec3 vec3, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
-        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.TARGET_BLOCK_ENABLED)) {
+        if (!GameruleHelper.getBool(Gamerules.TARGET_BLOCK_ENABLED)) {
             cir.setReturnValue(0);
         }
     }

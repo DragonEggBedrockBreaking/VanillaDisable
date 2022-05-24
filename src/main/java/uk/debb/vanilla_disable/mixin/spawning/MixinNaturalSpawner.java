@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -57,7 +58,7 @@ public class MixinNaturalSpawner {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupMap.get(group);
-        if (gameRule != null && !VDServer.getServer().getGameRules().getBoolean(gameRule)) {
+        if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             ci.cancel();
         }
     }

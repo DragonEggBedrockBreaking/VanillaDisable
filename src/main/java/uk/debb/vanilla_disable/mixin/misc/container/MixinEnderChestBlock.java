@@ -11,6 +11,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -38,7 +39,7 @@ public abstract class MixinEnderChestBlock {
     )
     private boolean isFullBlock(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, BlockState blockState2, Level level, BlockPos blockPos2, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (VDServer.getServer() == null) return blockState.isRedstoneConductor(blockGetter, blockPos);
-        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.CONTAINER_OPENING_BLOCKED)) {
+        if (!GameruleHelper.getBool(Gamerules.CONTAINER_OPENING_BLOCKED)) {
             return false;
         }
         return blockState.isRedstoneConductor(blockGetter, blockPos);

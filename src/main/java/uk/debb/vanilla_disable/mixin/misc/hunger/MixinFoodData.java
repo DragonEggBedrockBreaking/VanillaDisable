@@ -7,6 +7,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -29,7 +30,7 @@ public abstract class MixinFoodData {
         if (VDServer.getServer() == null) {
             return level.getDifficulty();
         }
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.OLD_HUNGER)) {
+        if (GameruleHelper.getBool(Gamerules.OLD_HUNGER)) {
             VDServer.getServer().getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION).set(false, VDServer.getServer());
             return Difficulty.PEACEFUL;
         }

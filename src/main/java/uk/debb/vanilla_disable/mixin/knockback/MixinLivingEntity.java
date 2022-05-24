@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -65,17 +66,17 @@ public abstract class MixinLivingEntity {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> knockbackGamerule = entityMap.get(this.getClass());
-        if ((!VDServer.getServer().getGameRules().getBoolean(Gamerules.KNOCKBACK_ENABLED)) ||
-            (knockbackGamerule != null && !VDServer.getServer().getGameRules().getBoolean(knockbackGamerule))) {
+        if ((!GameruleHelper.getBool(Gamerules.KNOCKBACK_ENABLED)) ||
+            (knockbackGamerule != null && !GameruleHelper.getBool(knockbackGamerule))) {
             return true;
         }
         if ((source instanceof Skeleton && !(source instanceof WitherSkeleton)) ||
             (source instanceof Piglin && source.isHolding(Items.CROSSBOW)) ||
             (source instanceof Pillager)) {
-            return !VDServer.getServer().getGameRules().getBoolean(Gamerules.ARROW_KNOCKBACK);
+            return !GameruleHelper.getBool(Gamerules.ARROW_KNOCKBACK);
         }
         if (source instanceof Drowned && source.isHolding(Items.TRIDENT)) {
-            return !VDServer.getServer().getGameRules().getBoolean(Gamerules.TRIDENT_KNOCKBACK);
+            return !GameruleHelper.getBool(Gamerules.TRIDENT_KNOCKBACK);
         }
         return false;
     }

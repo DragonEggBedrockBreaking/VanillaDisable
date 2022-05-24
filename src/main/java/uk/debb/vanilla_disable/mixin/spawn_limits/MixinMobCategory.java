@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -49,7 +50,7 @@ public abstract class MixinMobCategory {
         }
         GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupMap.get((MobCategory) (Object) this);
         if (gameRule != null) {
-            cir.setReturnValue(VDServer.getServer().getGameRules().getInt(gameRule));
+            cir.setReturnValue(GameruleHelper.getInt(gameRule));
         }
     }
 }

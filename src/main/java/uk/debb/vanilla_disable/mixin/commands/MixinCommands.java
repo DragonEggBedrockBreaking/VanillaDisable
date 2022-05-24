@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -141,9 +142,9 @@ public abstract class MixinCommands {
         }
         GameRules.Key<GameRules.BooleanValue> commandGamerule = commandNameGameruleMap.get(commandName);
         GameRules.Key<GameRules.BooleanValue> dedicatedCommandGamerule = dedicatedCommandNameGameruleMap.get(commandName);
-        if ((!command.startsWith("/gamerule") && !VDServer.getServer().getGameRules().getBoolean(Gamerules.COMMANDS_ENABLED)) ||
-            (commandGamerule != null && !VDServer.getServer().getGameRules().getBoolean(commandGamerule)) ||
-            (source.getServer().isDedicatedServer() && dedicatedCommandGamerule != null && !VDServer.getServer().getGameRules().getBoolean(dedicatedCommandGamerule))) {
+        if ((!command.startsWith("/gamerule") && !GameruleHelper.getBool(Gamerules.COMMANDS_ENABLED)) ||
+            (commandGamerule != null && !GameruleHelper.getBool(commandGamerule)) ||
+            (source.getServer().isDedicatedServer() && dedicatedCommandGamerule != null && !GameruleHelper.getBool(dedicatedCommandGamerule))) {
             source.getServer().getPlayerList().broadcastMessage(new TranslatableComponent("commands.disabled.by.vd").withStyle(ChatFormatting.RED), ChatType.CHAT, UUID.randomUUID());
             cir.setReturnValue(0);
         }

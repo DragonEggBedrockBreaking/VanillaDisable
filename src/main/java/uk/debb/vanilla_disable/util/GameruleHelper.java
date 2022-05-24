@@ -55,4 +55,25 @@ public class GameruleHelper {
     public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue, int minValue, int maxValue) {
         return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue, minValue, maxValue));
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason get boolean values of boolean gamerules
+     * @param key the gamerule key
+     * @return the gamerule value (boolean)
+     */
+    @Unique
+    public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key) {
+        return GameruleHelper.getBool(key);
+    }
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason get integer values of integer gamerules
+     * @param key the gamerule key
+     * @return the gamerule value (int)
+     */
+    @Unique
+    public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
+        return GameruleHelper.getInt(key);
+    }
 }

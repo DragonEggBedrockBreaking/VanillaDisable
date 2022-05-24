@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -23,9 +24,9 @@ public abstract class MixinLavaFluid {
         if (VDServer.getServer() == null) return;
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                cir.setReturnValue(((Level) world).getGameRules().getBoolean(Gamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2);
+                cir.setReturnValue(GameruleHelper.getBool(Gamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2);
             } else {
-                cir.setReturnValue(((Level) world).getGameRules().getBoolean(Gamerules.LAVA_REACHES_FAR) ? 1 : 2);
+                cir.setReturnValue(GameruleHelper.getBool(Gamerules.LAVA_REACHES_FAR) ? 1 : 2);
             }
         }
     }
@@ -41,9 +42,9 @@ public abstract class MixinLavaFluid {
         if (VDServer.getServer() == null) return;
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                cir.setReturnValue(((Level) world).getGameRules().getInt(Gamerules.LAVA_FLOW_SPEED_NETHER));
+                cir.setReturnValue(GameruleHelper.getInt(Gamerules.LAVA_FLOW_SPEED_NETHER));
             } else {
-                cir.setReturnValue(((Level) world).getGameRules().getInt(Gamerules.LAVA_FLOW_SPEED));
+                cir.setReturnValue(GameruleHelper.getInt(Gamerules.LAVA_FLOW_SPEED));
             }
         }
     }
@@ -56,6 +57,6 @@ public abstract class MixinLavaFluid {
     @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
     private void canLavaConvertToSource(CallbackInfoReturnable<Boolean> cir) {
         if (VDServer.getServer() == null) return;
-        cir.setReturnValue(VDServer.getServer().getGameRules().getBoolean(Gamerules.INFINITE_LAVA));
+        cir.setReturnValue(GameruleHelper.getBool(Gamerules.INFINITE_LAVA));
     }
 }

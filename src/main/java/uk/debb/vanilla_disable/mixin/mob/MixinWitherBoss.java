@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -19,7 +20,7 @@ public abstract class MixinWitherBoss {
     @Inject(method = "checkDespawn", at = @At(value = "HEAD"), cancellable = true)
     private void forceDespawn(CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
-        if (!VDServer.getServer().getGameRules().getBoolean(Gamerules.WITHER_SPAWNS)) {
+        if (!GameruleHelper.getBool(Gamerules.WITHER_SPAWNS)) {
             ((Entity)(Object)this).discard();
             ci.cancel();
         }

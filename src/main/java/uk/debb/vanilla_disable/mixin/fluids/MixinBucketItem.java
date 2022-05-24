@@ -8,7 +8,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -21,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
@@ -49,7 +49,7 @@ public abstract class MixinBucketItem {
         if (VDServer.getServer() == null) {
             return type.ultraWarm();
         }
-        if (VDServer.getServer().getGameRules().getBoolean(Gamerules.WATER_PLACEABLE_IN_NETHER) && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER)) {
+        if (GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER) && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER)) {
             return false;
         }
         return type.ultraWarm();
@@ -67,7 +67,7 @@ public abstract class MixinBucketItem {
     protected void cancelPlayiningEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (world.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&
-            ((ServerLevelAccessor)world).getLevel().getGameRules().getBoolean(Gamerules.WATER_PLACEABLE_IN_NETHER)) {
+            GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER)) {
             world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);
             for (int l = 0; l < 8; ++l) {
                 world.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + Math.random(), (double)pos.getY() + Math.random(), (double)pos.getZ() + Math.random(), 0.0, 0.0, 0.0);
