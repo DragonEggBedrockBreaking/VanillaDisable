@@ -64,7 +64,7 @@ public class GameruleHelper {
      */
     @Unique
     public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key) {
-        return GameruleHelper.getBool(key);
+        return VDServer.getServer().getGameRules().getBoolean(key);
     }
     /**
      * @author DragonEggBedrockBreaking
@@ -74,7 +74,7 @@ public class GameruleHelper {
      */
     @Unique
     public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
-        return GameruleHelper.getInt(key);
+        return VDServer.getServer().getGameRules().getInt(key);
     }
 
     /**
