@@ -34,10 +34,6 @@
             {
                 "id": "java",
                 "versions": ">=17"
-            },
-            {
-                "id": "quilted_fabric_game_rule_api_v1",
-                "versions": ">=1.0.0-beta.14"
             }
         ]
     },
