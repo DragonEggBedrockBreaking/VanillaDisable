@@ -56,13 +56,13 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void createBiomeDatapackDirectories() {
-        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             createDatapackDir("vanilla_disable_overworld_biomes", "dimension");
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
             createDatapackDir("vanilla_disable_nether_biomes", "dimension");
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
             createDatapackDir("vanilla_disable_end_biomes", "dimension");
         }
     }
@@ -73,58 +73,58 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void createStructureDatapackDirectories() {
-        if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_bastion_remnant", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_buried_treasure", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_desert_pyramid", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_end_city", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_igloo", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_jungle_pyramid", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_mineshaft", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_fortress", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_nether_fossil", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_monument", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_ocean_ruin", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_pillager_outpost", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_ruined_portal", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_shipwreck", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_stronghold", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_swamp_hut", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_mansion", "tags/worldgen/biome/has_structure");
         }
     }
@@ -152,13 +152,13 @@ public abstract class MixinMinecraftServer {
     @Unique
     private void addBiomeMcmetaFiles() throws IOException {
         String content = "{\"pack\":{\"pack_format\":9,\"description\":\"Vanilla Disable Biomes\"}}";
-        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             addMcmetaFile("vanilla_disable_overworld_biomes", content);
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
             addMcmetaFile("vanilla_disable_nether_biomes", content);
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
             addMcmetaFile("vanilla_disable_end_biomes", content);
         }
     }
@@ -171,58 +171,58 @@ public abstract class MixinMinecraftServer {
     @Unique
     private void addStructureMcmetaFiles() throws IOException {
         String content = "{\"pack\":{\"pack_format\":9,\"description\":\"Vanilla Disable Structures\"}}";
-        if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_bastion_remnant", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_buried_treasure", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_desert_pyramid", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_end_city", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_igloo", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_jungle_temple", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_mineshaft", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_fortress", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_nether_fossil", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_monument", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_ocean_ruin", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_pillager_outpost", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_ruined_portal", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_shipwreck", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_stronghold", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_swamp_hut", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_village", content);
         }
-        if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_mansion", content);
         }
     }
@@ -252,17 +252,17 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addBiomeJsonFiles() throws IOException {
-        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/overworld.json",
                 "vanilla_disable_overworld_biomes", "overworld", "dimension");
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_nether.json",
                 "vanilla_disable_nether_biomes", "the_nether", "dimension");
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_end.json",
                 "vanilla_disable_end_biomes", "the_end", "dimension");
@@ -276,37 +276,37 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addStructureJsonFiles() throws IOException {
-        if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_bastion_remnants", "bastion_remnant", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_buried_treasure", "buried_treasure", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_desert_pyramid", "desert_pyramid", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_end_city", "end_city", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_igloo", "igloo", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_jungle_pyramid", "jungle_pyramid", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_mineshaft", "mineshaft", "tags/worldgen/biome/has_structure");
@@ -314,22 +314,22 @@ public abstract class MixinMinecraftServer {
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_mineshaft", "mineshaft_mesa", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_fortress", "nether_fortress", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_nether_fossil", "nether_fossil", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_monument", "ocean_monument", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_ocean_ruin", "ocean_ruin_cold", "tags/worldgen/biome/has_structure");
@@ -337,12 +337,12 @@ public abstract class MixinMinecraftServer {
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_ocean_ruin", "ocean_ruin_warm", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_pillager_outpost", "pillager_outpost", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_ruined_portal", "ruined_portal_desert", "tags/worldgen/biome/has_structure");
@@ -365,7 +365,7 @@ public abstract class MixinMinecraftServer {
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_ruined_portal", "ruined_portal_swamp", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_shipwreck", "shipwreck", "tags/worldgen/biome/has_structure");
@@ -373,17 +373,17 @@ public abstract class MixinMinecraftServer {
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_shipwreck", "shipwreck_beached", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_stronghold", "stronghold", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_swamp_hut", "swamp_hut", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_village", "village_desert", "tags/worldgen/biome/has_structure");
@@ -400,7 +400,7 @@ public abstract class MixinMinecraftServer {
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_village", "village_taiga", "tags/worldgen/biome/has_structure");
         }
-        if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION)) {
+        if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
                 "vanilla_disable_structures_mansion", "woodland_mansion", "tags/worldgen/biome/has_structure");
@@ -437,13 +437,13 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void patchBiomeJsonFiles() throws IOException {
-        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             patchBiomeJsonFile("vanilla_disable_overworld_biomes", "overworld");
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
             patchBiomeJsonFile("vanilla_disable_nether_biomes", "the_nether");
         }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES)) {
+        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
             patchBiomeJsonFile("vanilla_disable_end_biomes", "the_end");
         }
     }
@@ -523,17 +523,17 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void toggleBiomeDataPacks() throws CommandSyntaxException {
-        if (!GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
+        if (!GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             disableDatapack("vanilla_disable_overworld_biomes");
         } else {
             enableDatapack("vanilla_disable_overworld_biomes");
         }
-        if (!GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES)) {
+        if (!GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
             disableDatapack("vanilla_disable_nether_biomes");
         } else {
             enableDatapack("vanilla_disable_nether_biomes");
         }
-        if (!GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES)) {
+        if (!GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
             disableDatapack("vanilla_disable_end_biomes");
         } else {
             enableDatapack("vanilla_disable_end_biomes");
@@ -547,92 +547,92 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void toggleStructureDataPacks() throws CommandSyntaxException {
-        if (GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_bastion_remnant");
         } else {
             enableDatapack("vanilla_disable_structures_bastion_remnant");
         }
-        if (GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_buried_treasure");
         } else {
             enableDatapack("vanilla_disable_structures_buried_treasure");
         }
-        if (GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_desert_pyramid");
         } else {
             enableDatapack("vanilla_disable_structures_desert_pyramid");
         }
-        if (GameruleHelper.getBool(Gamerules.END_CITY_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.END_CITY_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_end_city");
         } else {
             enableDatapack("vanilla_disable_structures_end_city");
         }
-        if (GameruleHelper.getBool(Gamerules.IGLOO_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.IGLOO_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_igloo");
         } else {
             enableDatapack("vanilla_disable_structures_igloo");
         }
-        if (GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_jungle_pyramid");
         } else {
             enableDatapack("vanilla_disable_structures_jungle_pyramid");
         }
-        if (GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_mineshaft");
         } else {
             enableDatapack("vanilla_disable_structures_mineshaft");
         }
-        if (GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_fortress");
         } else {
             enableDatapack("vanilla_disable_structures_fortress");
         }
-        if (GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_nether_fossil");
         } else {
             enableDatapack("vanilla_disable_structures_nether_fossil");
         }
-        if (GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_monument");
         } else {
             enableDatapack("vanilla_disable_structures_monument");
         }
-        if (GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_ocean_ruin");
         } else {
             enableDatapack("vanilla_disable_structures_ocean_ruin");
         }
-        if (GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_pillager_outpost");
         } else {
             enableDatapack("vanilla_disable_structures_pillager_outpost");
         }
-        if (GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_ruined_portal");
         } else {
             enableDatapack("vanilla_disable_structures_ruined_portal");
         }
-        if (GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_shipwreck");
         } else {
             enableDatapack("vanilla_disable_structures_shipwreck");
         }
-        if (GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_stronghold");
         } else {
             enableDatapack("vanilla_disable_structures_stronghold");
         }
-        if (GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_swamp_hut");
         } else {
             enableDatapack("vanilla_disable_structures_swamp_hut");
         }
-        if (GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_village");
         } else {
             enableDatapack("vanilla_disable_structures_village");
         }
-        if (GameruleHelper.getBool(Gamerules.MANSION_GENERATION)) {
+        if (GameruleHelper.getBool(Gamerules.MANSION_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_mansion");
         } else {
             enableDatapack("vanilla_disable_structures_mansion");

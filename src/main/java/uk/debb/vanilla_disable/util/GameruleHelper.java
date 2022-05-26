@@ -4,6 +4,8 @@ import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.storage.WorldData;
+
 import org.spongepowered.asm.mixin.Unique;
 
 public class GameruleHelper {
@@ -68,6 +70,17 @@ public class GameruleHelper {
     }
     /**
      * @author DragonEggBedrockBreaking
+     * @reason get boolean values of boolean gamerules using specified worldData
+     * @param key the gamerule key
+     * @param worldData the world data
+     * @return the gamerule value (boolean)
+     */
+    @Unique
+    public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key, WorldData worldData) {
+        return worldData.getGameRules().getBoolean(key);
+    }
+    /**
+     * @author DragonEggBedrockBreaking
      * @reason get integer values of integer gamerules
      * @param key the gamerule key
      * @return the gamerule value (int)
@@ -75,6 +88,17 @@ public class GameruleHelper {
     @Unique
     public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
         return VDServer.getServer().getGameRules().getInt(key);
+    }
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason get integer values of integer gamerules using specified worldData
+     * @param key the gamerule key
+     * @param worldData the world data
+     * @return the gamerule value (int)
+     */
+    @Unique
+    public static int getInt(GameRules.Key<GameRules.IntegerValue> key, WorldData worldData) {
+        return worldData.getGameRules().getInt(key);
     }
 
     /**
