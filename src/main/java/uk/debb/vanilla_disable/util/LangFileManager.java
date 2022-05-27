@@ -1,6 +1,7 @@
 package uk.debb.vanilla_disable.util;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -24,9 +25,11 @@ public class LangFileManager {
             InputStream inputUrl = LangFileManager.class.getResourceAsStream("/assets/vanilla_disable/lang/en_us.json");
             Path dest = new File(rpackdir.toString() + "/en_us.json").toPath();
             Files.copy(inputUrl, dest, StandardCopyOption.REPLACE_EXISTING);
-            InputStream otherInputUrl = LangFileManager.class.getResourceAsStream("/pack.mcmeta");
-            Path otherDest = new File(outerrpackdir.toString() + "/pack.mcmeta").toPath();
-            Files.copy(otherInputUrl, otherDest, StandardCopyOption.REPLACE_EXISTING);
+            String content = "{\"pack\":{\"pack_format\":8,\"description\":\"Vanilla Disable Language File\"}}";
+            String mcmetaPath = new File(outerrpackdir.toString() + "/pack.mcmeta").toString();
+            FileWriter mcmetaWriter = new FileWriter(mcmetaPath);
+            mcmetaWriter.write(content);
+            mcmetaWriter.close();
         }
     }
 }
