@@ -1,7 +1,6 @@
 package uk.debb.vanilla_disable.mixin.redstone;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.DiodeBlock;
 import net.minecraft.world.level.block.RepeaterBlock;
@@ -37,31 +36,13 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
     /**
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param direction the direction of the block
+     * @param blockGetter the getter for the repeater
+     * @param blockPos the position of the repeater
+     * @param blockState the state of the repeater
+     * @return the signal outputted
      */
     @Override
-    public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
-        if (VDServer.getServer() == null) return 0;
-        if (blockState.getValue(BlockStateProperties.POWERED)) {
-            return GameruleHelper.getInt(Gamerules.REPEATER_SIGNAL);
-        }
-        return 0;
-    }
-
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param direction the direction of the block
-     * @param cir the returnable callback info
-     */
-    @Override
-    public int getDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
+    protected int getOutputSignal(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
         if (VDServer.getServer() == null) return 0;
         if (blockState.getValue(BlockStateProperties.POWERED)) {
             return GameruleHelper.getInt(Gamerules.REPEATER_SIGNAL);
