@@ -363,6 +363,7 @@ public class RegisterGamerules {
             Gamerules.TRAPPED_CHEST_ENABLED = GameruleHelper.register("trappedChestEnabled",GameruleCategories.VD_REDSTONE, true);
             Gamerules.TRIPWIRE_HOOK_ENABLED = GameruleHelper.register("tripwireHookEnabled",GameruleCategories.VD_REDSTONE, true);
             Gamerules.PISTON_ENABLED = GameruleHelper.register("pistonEnabled", GameruleCategories.VD_REDSTONE, true);
+            Gamerules.PISTON_PUSH_LIMIT = GameruleHelper.register("pistonPushLimit", GameruleCategories.VD_REDSTONE, 12, 0);
         }
         if (VanillaDisableMixinConfigPlugin.misc) {
             Gamerules.NETHER_PORTALS_ENABLED = GameruleHelper.register("netherPortalsEnabled", GameruleCategories.VD_MISC, true);

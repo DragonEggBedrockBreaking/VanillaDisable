@@ -341,6 +341,7 @@
     "gamerule.trappedChestEnabled": "Toggle trapped chests being enabled",
     "gamerule.tripwireHookEnabled": "Toggle tripwire hooks being enabled",
     "gamerule.pistonEnabled": "Toggle pistons being enabled",
+    "gamerule.pistonPushLimit": "Maximum number of blocks a piston can push",
 
     "gamerule.netherPortalsEnabled": "Toggle nether portals",
     "gamerule.endPortalsEnabled": "Toggle end portals",

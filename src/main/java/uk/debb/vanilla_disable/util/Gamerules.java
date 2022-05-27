@@ -345,6 +345,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> TRAPPED_CHEST_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> TRIPWIRE_HOOK_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> PISTON_ENABLED;
+    public static GameRules.Key<GameRules.IntegerValue> PISTON_PUSH_LIMIT;
 
     public static GameRules.Key<GameRules.BooleanValue> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_PORTALS_ENABLED;
