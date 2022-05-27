@@ -9,7 +9,7 @@ import net.minecraft.world.level.storage.WorldData;
 import org.spongepowered.asm.mixin.Unique;
 
 public class GameruleHelper {
-        /**
+    /**
      * @author DragonEggBedrockBreaking
      * @reason register boolean gamerules
      * @param name the name of the gamerule
