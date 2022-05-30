@@ -17,7 +17,7 @@ public class Buildscript extends SimpleQuiltProject {
     @Override
     public VersionMeta createMcVersion() {
         // Minecraft Version
-        return Minecraft.getVersion("1.18.2");
+        return Minecraft.getVersion(Versions.MINECRAFT_VERSION);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Buildscript extends SimpleQuiltProject {
     @Override
     public FabricLoader getLoader() {
         // Quilt Loader Version
-        return new FabricLoader(QuiltMaven.URL, QuiltMaven.loader("0.16.1"));
+        return new FabricLoader(QuiltMaven.URL, QuiltMaven.loader(Versions.QUILT_LOADER_VERSION));
     }
 
     @Override
@@ -41,29 +41,30 @@ public class Buildscript extends SimpleQuiltProject {
     @Override
     public String getVersion() {
         // Mod Version
-        return "1.7.0";
+        return Versions.MOD_VERSION;
     }
 
     @Override
     public void getModDependencies(ModDependencyCollector d) {
         // Quilt Standard Libraries
-        jij(d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", "1.0.0-beta.14+0.51.1-1.18.2"), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE));
+        if (Versions.JIJ_QFAPI) jij(d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE));
+        else d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
-        jij(d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese:CaffeineConfig:afbaa01"), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
+        jij(d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese", "CaffeineConfig", Versions.CAFFEINE_CONFIG_COMMIT), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
-        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth:lazydfu:0.1.2"), ModDependencyFlag.RUNTIME);
+        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);
     }
 
     @Override
     public int getJavaVersion() {
         // Default is Java 8
-        return 17;
+        return Versions.JAVA_VERSION;
     }
 
     @Override
     public BrachyuraDecompiler decompiler() {
         // Uses QuiltFlower instead of CFR
-        return new FernflowerDecompiler(Maven.getMavenJarDep(QuiltMaven.URL, new MavenId("org.quiltmc:quiltflower:1.8.1")));
+        return new FernflowerDecompiler(Maven.getMavenJarDep(QuiltMaven.URL, new MavenId("org.quiltmc", "quiltflower", Versions.QUILTFLOWER_VERSION)));
     };
 
     @Override
@@ -75,6 +76,6 @@ public class Buildscript extends SimpleQuiltProject {
     @Override
     public ProcessorChain resourcesProcessingChain() {
         // Patches version in quilt.mod.json
-        return new ProcessorChain(super.resourcesProcessingChain(), new QmjVersionPatcher(this));
+        return new ProcessorChain(super.resourcesProcessingChain(), new QmjVersionPatcher());
     }
 }

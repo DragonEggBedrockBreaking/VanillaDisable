@@ -12,12 +12,6 @@ import io.github.coolcrabs.brachyura.processing.Processor;
 import io.github.coolcrabs.brachyura.util.GsonUtil;
 
 public class QmjVersionPatcher implements Processor {
-    private final Buildscript parent;
-
-    public QmjVersionPatcher(Buildscript parent) {
-        this.parent = parent;
-    }
-
     @Override
     public void process(Collection<ProcessingEntry> inputs, ProcessingSink sink) throws IOException {
         for (ProcessingEntry e : inputs) {
@@ -27,7 +21,7 @@ public class QmjVersionPatcher implements Processor {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(e.in.get(), StandardCharsets.UTF_8))) {
                     quiltModJson = gson.fromJson(reader, JsonObject.class);
                 }
-                quiltModJson.getAsJsonObject("quilt_loader").addProperty("version", parent.getVersion());
+                quiltModJson.getAsJsonObject("quilt_loader").addProperty("version", Versions.MOD_VERSION);
                 sink.sink(() -> GsonUtil.toIs(quiltModJson, gson), e.id);
             } else {
                 sink.sink(e.in, e.id);
