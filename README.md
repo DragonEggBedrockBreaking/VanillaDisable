@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a fabric mod that allows you to toggle or change many vanilla features
+This is a quilt mod that allows you to toggle or change many vanilla features
 through the vanilla gamerule system. This mod supports the latest version of Minecraft.
 Only critical issues/major crashes will be fixed on older versions of Minecraft.
 Mod compatibility is an aim but not always a reality - if there is an incompatibility,
@@ -20,4 +20,3 @@ The wiki page contains information for development, a list and description of ga
 ## License
 
 This mod is available under the [MPL](LICENSE.txt) license.
-Some code is from another project which uses the [LGPL-3.0](https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE) license.
