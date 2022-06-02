@@ -15,7 +15,7 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Mixin(EnderChestBlock.class)
+@Mixin(value = EnderChestBlock.class, priority = 1001)
 public abstract class MixinEnderChestBlock {
     /**
      * @author DragonEggBedrockBreaking
@@ -35,7 +35,8 @@ public abstract class MixinEnderChestBlock {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/block/state/BlockState;isRedstoneConductor(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z"
-        )
+        ),
+        require = 0
     )
     private boolean isFullBlock(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, BlockState blockState2, Level level, BlockPos blockPos2, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (VDServer.getServer() == null) return blockState.isRedstoneConductor(blockGetter, blockPos);

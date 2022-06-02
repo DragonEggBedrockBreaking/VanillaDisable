@@ -13,7 +13,7 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Mixin(FarmBlock.class)
+@Mixin(value = FarmBlock.class, priority = 1001)
 public abstract class MixinFarmBlock {
     /**
      * @author DragonEggBedrockBreaking
@@ -32,7 +32,8 @@ public abstract class MixinFarmBlock {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/block/FarmBlock;turnToDirt(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
-        )
+        ),
+        require = 0
     )
     private void cancelTurningToDirt(BlockState state, Level level, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
         if (VDServer.getServer() == null) return;
