@@ -327,7 +327,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.IntegerValue> REPEATER_SIGNAL;
     public static GameRules.Key<GameRules.IntegerValue> COMPARATOR_BASE_DELAY;
     public static GameRules.Key<GameRules.BooleanValue> COMPARATOR_ENABLED;
-    public static GameRules.Key<GameRules.IntegerValue> TORCH_REDSTONE_SIGNAL;
+    public static GameRules.Key<GameRules.BooleanValue> REDSTONE_TORCH_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> REDSTONE_WIRE_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> DROPPER_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> DISPENSER_ENABLED;

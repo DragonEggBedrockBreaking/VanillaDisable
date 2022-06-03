@@ -27,8 +27,8 @@ public abstract class MixinRedstoneTorchBlock {
     @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
     private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
-        if (direction != Direction.UP) {
-            cir.setReturnValue(GameruleHelper.getInt(Gamerules.TORCH_REDSTONE_SIGNAL));
+        if (!GameruleHelper.getBool(Gamerules.REDSTONE_TORCH_ENABLED)) {
+            cir.setReturnValue(0);
         }
     }
 
@@ -44,8 +44,8 @@ public abstract class MixinRedstoneTorchBlock {
     @Inject(method = "getDirectSignal", at = @At("HEAD"), cancellable = true)
     private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
-        if (direction == Direction.DOWN) {
-            cir.setReturnValue(GameruleHelper.getInt(Gamerules.TORCH_REDSTONE_SIGNAL));
+        if (!GameruleHelper.getBool(Gamerules.REDSTONE_TORCH_ENABLED)) {
+            cir.setReturnValue(0);
         }
     }
 }

@@ -323,7 +323,7 @@
     "gamerule.repeaterSignal": "Signal strength of a repeater",
     "gamerule.comparatorBaseDelay": "Delay of a comparator",
     "gamerule.comparatorEnabled": "Toggle comparators being enabled",
-    "gamerule.torchRedstoneSignal": "Signal strength of a redstone torch",
+    "gamerule.redstoneTorchEnabled": "Toggle redstone torches being enabled",
     "gamerule.redstoneWireEnabled": "Toggle redstone wire being enabled",
     "gamerule.dropperEnabled": "Toggle droppers being enabled",
     "gamerule.dispenserEnabled": "Toggle dispensers being enabled",

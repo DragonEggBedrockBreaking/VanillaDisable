@@ -345,7 +345,7 @@ public class RegisterGamerules {
             Gamerules.REPEATER_SIGNAL = GameruleHelper.register("repeaterSignal", GameruleCategories.VD_REDSTONE, 15, 0, 15);
             Gamerules.COMPARATOR_BASE_DELAY = GameruleHelper.register("comparatorBaseDelay",GameruleCategories.VD_REDSTONE, 2, 0);
             Gamerules.COMPARATOR_ENABLED = GameruleHelper.register("comparatorEnabled", GameruleCategories.VD_REDSTONE, true);
-            Gamerules.TORCH_REDSTONE_SIGNAL = GameruleHelper.register("torchRedstoneSignal",GameruleCategories.VD_REDSTONE, 15, 0, 15);
+            Gamerules.REDSTONE_TORCH_ENABLED = GameruleHelper.register("torchRedstoneSignal",GameruleCategories.VD_REDSTONE, true);
             Gamerules.REDSTONE_WIRE_ENABLED = GameruleHelper.register("redstoneWireEnabled",GameruleCategories.VD_REDSTONE, true);
             Gamerules.DROPPER_ENABLED = GameruleHelper.register("dropperEnabled", GameruleCategories.VD_REDSTONE, true);
             Gamerules.DISPENSER_ENABLED = GameruleHelper.register("dispenserEnabled", GameruleCategories.VD_REDSTONE, true);
