@@ -50,7 +50,7 @@ public class Buildscript extends SimpleQuiltProject {
         if (Versions.JIJ_QFAPI) jij(d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE));
         else d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
-        jij(d.addMaven("https://jitpack.io", new MavenId("com.github.FlashyReese", "CaffeineConfig", Versions.CAFFEINE_CONFIG_COMMIT), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
+        jij(d.addMaven("https://maven.flashyreese.me/", new MavenId("releases.net.caffeinemc", "mixin-config", Versions.CAFFEINE_CONFIG_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
         d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);
     }
