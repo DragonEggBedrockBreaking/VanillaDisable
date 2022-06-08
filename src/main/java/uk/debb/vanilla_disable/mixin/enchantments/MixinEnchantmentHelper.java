@@ -65,6 +65,7 @@ public abstract class MixinEnchantmentHelper {
         enchantmentMap.put(Enchantments.SMITE, Gamerules.SMITE_ENCHANTMENT);
         enchantmentMap.put(Enchantments.SOUL_SPEED, Gamerules.SOUL_SPEED_ENCHANTMENT);
         enchantmentMap.put(Enchantments.SWEEPING_EDGE, Gamerules.SWEEPING_ENCHANTMENT);
+        enchantmentMap.put(Enchantments.SWIFT_SNEAK, Gamerules.SWIFT_SNEAK_ENCHANTMENT);
         enchantmentMap.put(Enchantments.THORNS, Gamerules.THORNS_ENCHANTMENT);
         enchantmentMap.put(Enchantments.UNBREAKING, Gamerules.UNBREAKING_ENCHANTMENT);
         enchantmentMap.put(Enchantments.BINDING_CURSE, Gamerules.BINDING_CURSE);

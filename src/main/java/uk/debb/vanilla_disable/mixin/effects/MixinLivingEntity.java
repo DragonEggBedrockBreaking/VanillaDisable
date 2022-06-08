@@ -36,6 +36,7 @@ public abstract class MixinLivingEntity{
         statusEffectMap.put(MobEffects.BAD_OMEN, Gamerules.BAD_OMEN_EFFECT);
         statusEffectMap.put(MobEffects.BLINDNESS, Gamerules.BLINDNESS_EFFECT);
         statusEffectMap.put(MobEffects.CONDUIT_POWER, Gamerules.CONDUIT_POWER_EFFECT);
+        statusEffectMap.put(MobEffects.DARKNESS, Gamerules.DARKNESS_EFFECT);
         statusEffectMap.put(MobEffects.DOLPHINS_GRACE, Gamerules.DOLPHINS_GRACE_EFFECT);
         statusEffectMap.put(MobEffects.FIRE_RESISTANCE, Gamerules.FIRE_RESISTANCE_EFFECT);
         statusEffectMap.put(MobEffects.GLOWING, Gamerules.GLOWING_EFFECT);

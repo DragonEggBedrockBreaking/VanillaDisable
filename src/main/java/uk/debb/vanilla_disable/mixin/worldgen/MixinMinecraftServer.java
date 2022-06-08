@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Files;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.repository.PackRepository;
@@ -73,6 +70,9 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void createStructureDatapackDirectories() {
+        if (!GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
+            createDatapackDir("vanilla_disable_structures_ancient_city", "tags/worldgen/biome/has_structure");
+        }
         if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             createDatapackDir("vanilla_disable_structures_bastion_remnant", "tags/worldgen/biome/has_structure");
         }
@@ -151,7 +151,7 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addBiomeMcmetaFiles() throws IOException {
-        String content = "{\"pack\":{\"pack_format\":9,\"description\":\"Vanilla Disable Biomes\"}}";
+        String content = "{\"pack\":{\"pack_format\":10,\"description\":\"Vanilla Disable Biomes\"}}";
         if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             addMcmetaFile("vanilla_disable_overworld_biomes", content);
         }
@@ -171,6 +171,9 @@ public abstract class MixinMinecraftServer {
     @Unique
     private void addStructureMcmetaFiles() throws IOException {
         String content = "{\"pack\":{\"pack_format\":9,\"description\":\"Vanilla Disable Structures\"}}";
+        if (!GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
+            addMcmetaFile("vanilla_disable_structures_ancient_city", content);
+        }
         if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             addMcmetaFile("vanilla_disable_structures_bastion_remnant", content);
         }
@@ -254,17 +257,17 @@ public abstract class MixinMinecraftServer {
     private void addBiomeJsonFiles() throws IOException {
         if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/overworld.json",
+                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/overworld.json",
                 "vanilla_disable_overworld_biomes", "overworld", "dimension");
         }
         if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_nether.json",
+                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_nether.json",
                 "vanilla_disable_nether_biomes", "the_nether", "dimension");
         }
         if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f4ba3e1f7e83948c66a5f383c199b338/raw/aa1c18898ccde6bb6cbba9c134d066b6c81bc1b6/the_end.json",
+                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_end.json",
                 "vanilla_disable_end_biomes", "the_end", "dimension");
         }
     }
@@ -276,6 +279,11 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addStructureJsonFiles() throws IOException {
+        if (!GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
+            addJsonFile(
+                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                "vanilla_disable_structures_ancient_city", "ancient_city", "tags/worldgen/biome/has_structure");
+        }
         if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             addJsonFile(
                 "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
@@ -409,56 +417,14 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason patch the json files by using a random seed instead of seed 0
-     * @param name the name of the datapack
-     * @param shortname the name of the json file (without extension)
+     * @reason create all of the biome datapacks
      * @throws IOException
      */
     @Unique
-    private void patchBiomeJsonFile(String name, String shortname) throws IOException {
-        String dataPackPath = VDServer.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
-        File jsonFile = new File(dataPackPath + "/" + name + "/data/minecraft/dimension/" + shortname + ".json");
-        String jsonFileToString = Files.readString(jsonFile.toPath());
-
-        Pattern p = Pattern.compile("\"seed\": 0");
-        Matcher m = p.matcher(jsonFileToString);
-        Long seed = this.worldData.worldGenSettings().seed();
-        String outputString = m.replaceAll("\"seed\": " + seed);
-
-        FileWriter myWriter = new FileWriter(jsonFile.toString());
-        myWriter.write(outputString);
-        myWriter.close();
-    }
-
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason patch all of the datapacks by using a random seed instead of seed 0
-     * @throws IOException
-     */
-    @Unique
-    private void patchBiomeJsonFiles() throws IOException {
-        if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
-            patchBiomeJsonFile("vanilla_disable_overworld_biomes", "overworld");
-        }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
-            patchBiomeJsonFile("vanilla_disable_nether_biomes", "the_nether");
-        }
-        if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
-            patchBiomeJsonFile("vanilla_disable_end_biomes", "the_end");
-        }
-    }
-
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason create and patch all of the biome datapacks
-     * @throws IOException
-     */
-    @Unique
-    private void getAndPatchBiomeDataPacks() throws IOException {
+    private void getBiomeDataPacks() throws IOException {
         createBiomeDatapackDirectories();
         addBiomeMcmetaFiles();
         addBiomeJsonFiles();
-        patchBiomeJsonFiles();
     }
 
     /**
@@ -547,6 +513,11 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void toggleStructureDataPacks() throws CommandSyntaxException {
+        if (GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
+            disableDatapack("vanilla_disable_structures_ancient_city");
+        } else {
+            enableDatapack("vanilla_disable_structures_ancient_city");
+        }
         if (GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_bastion_remnant");
         } else {
@@ -649,7 +620,7 @@ public abstract class MixinMinecraftServer {
     @Inject(method = "createLevels", at = @At("HEAD"), cancellable = true)
     private void onLevelLoad(CallbackInfo ci) throws IOException, CommandSyntaxException {
         if (VDServer.getServer() == null) return;
-        getAndPatchBiomeDataPacks();
+        getBiomeDataPacks();
         getStructureDataPacks();
         toggleBiomeDataPacks();
         toggleStructureDataPacks();

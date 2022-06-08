@@ -125,12 +125,12 @@ public class RegisterGamerules {
             Gamerules.KICK_COMMAND = GameruleHelper.register("kickCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.KILL_COMMAND = GameruleHelper.register("killCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.LIST_COMMAND = GameruleHelper.register("listCommand", GameruleCategories.VD_COMMANDS, true);
-            Gamerules.LOCATE_BIOME_COMMAND = GameruleHelper.register("locateBiomeCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.LOCATE_COMMAND = GameruleHelper.register("locateCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.LOOT_COMMAND = GameruleHelper.register("lootCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.ME_COMMAND = GameruleHelper.register("meCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.MESSAGE_COMMAND = GameruleHelper.register("messageCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.PARTICLE_COMMAND = GameruleHelper.register("particleCommand", GameruleCategories.VD_COMMANDS, true);
+            Gamerules.PLACE_COMMAND = GameruleHelper.register("placeCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.PLAY_SOUND_COMMAND = GameruleHelper.register("playSoundCommand",GameruleCategories.VD_COMMANDS, true);
             Gamerules.PUBLISH_COMMAND = GameruleHelper.register("publishCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.RAID_COMMAND = GameruleHelper.register("raidCommand", GameruleCategories.VD_COMMANDS, true);
@@ -206,6 +206,7 @@ public class RegisterGamerules {
             Gamerules.BAD_OMEN_EFFECT = GameruleHelper.register("badOmenEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.BLINDNESS_EFFECT = GameruleHelper.register("blindnessEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.CONDUIT_POWER_EFFECT = GameruleHelper.register("conduitPowerEffect", GameruleCategories.VD_EFFECTS, true);
+            Gamerules.DARKNESS_EFFECT = GameruleHelper.register("darknessEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.DOLPHINS_GRACE_EFFECT = GameruleHelper.register("dolphinsGraceEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.FIRE_RESISTANCE_EFFECT = GameruleHelper.register("fireResistanceEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.GLOWING_EFFECT = GameruleHelper.register("glowingEffect", GameruleCategories.VD_EFFECTS, true);
@@ -271,6 +272,7 @@ public class RegisterGamerules {
             Gamerules.SMITE_ENCHANTMENT = GameruleHelper.register("smiteEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.SOUL_SPEED_ENCHANTMENT = GameruleHelper.register("soulSpeedEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.SWEEPING_ENCHANTMENT = GameruleHelper.register("sweepingEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
+            Gamerules.SWIFT_SNEAK_ENCHANTMENT = GameruleHelper.register("swiftSneakEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.THORNS_ENCHANTMENT = GameruleHelper.register("thornsEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.UNBREAKING_ENCHANTMENT = GameruleHelper.register("unbreakingEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.BINDING_CURSE = GameruleHelper.register("bindingCurse", GameruleCategories.VD_ENCHANTMENTS, true);
@@ -286,6 +288,7 @@ public class RegisterGamerules {
             }
         }
         if (VanillaDisableMixinConfigPlugin.worldgen) {
+            Gamerules.ANCIENT_CITY_GENERATION = GameruleHelper.register("ancientCityGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.BASTION_REMNANT_GENERATION = GameruleHelper.register("bastionRemnantGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.BURIED_TREASURE_GENERATION = GameruleHelper.register("buriedTreasureGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.DESERT_PYRAMID_GENERATION = GameruleHelper.register("desertPyramidGeneration", GameruleCategories.VD_WORLDGEN, true);
@@ -324,6 +327,7 @@ public class RegisterGamerules {
             Gamerules.NETHER_ORE_GENERATION = GameruleHelper.register("netherOreGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.OCEAN_FLOOR_GENERATION = GameruleHelper.register("oceanFloorGeneration",GameruleCategories.VD_WORLDGEN, true);
             Gamerules.ORE_GENERATION = GameruleHelper.register("oreGeneration", GameruleCategories.VD_WORLDGEN, true);
+            Gamerules.SCULK_GENERATION = GameruleHelper.register("sculkGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.SPRING_GENERATION = GameruleHelper.register("springGeneration",GameruleCategories.VD_WORLDGEN, true);
             Gamerules.TREE_GENERATION = GameruleHelper.register("treeGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.WELL_GENERATION = GameruleHelper.register("wellGeneration", GameruleCategories.VD_WORLDGEN, true);
@@ -363,6 +367,7 @@ public class RegisterGamerules {
             Gamerules.TRAPPED_CHEST_ENABLED = GameruleHelper.register("trappedChestEnabled",GameruleCategories.VD_REDSTONE, true);
             Gamerules.TRIPWIRE_HOOK_ENABLED = GameruleHelper.register("tripwireHookEnabled",GameruleCategories.VD_REDSTONE, true);
             Gamerules.PISTON_ENABLED = GameruleHelper.register("pistonEnabled", GameruleCategories.VD_REDSTONE, true);
+            Gamerules.SCULK_SENSOR_ENABLED = GameruleHelper.register("sculkSensorEnabled",GameruleCategories.VD_REDSTONE, true);
         }
         if (VanillaDisableMixinConfigPlugin.misc) {
             Gamerules.NETHER_PORTALS_ENABLED = GameruleHelper.register("netherPortalsEnabled", GameruleCategories.VD_MISC, true);

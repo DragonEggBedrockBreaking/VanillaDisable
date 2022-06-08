@@ -69,6 +69,9 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(CavePlacements.SPORE_BLOSSOM.toString(), Gamerules.UNDERGROUND_VEGETATION);
         featureToGameruleMap.put(CavePlacements.CLASSIC_VINES.toString(), Gamerules.UNDERGROUND_VEGETATION);
         featureToGameruleMap.put(CavePlacements.AMETHYST_GEODE.toString(), Gamerules.AMETHYST_GEODE_GENERATION);
+        featureToGameruleMap.put(CavePlacements.SCULK_PATCH_ANCIENT_CITY.toString(), Gamerules.SCULK_GENERATION);
+        featureToGameruleMap.put(CavePlacements.SCULK_PATCH_DEEP_DARK.toString(), Gamerules.SCULK_GENERATION);
+        featureToGameruleMap.put(CavePlacements.SCULK_VEIN.toString(), Gamerules.SCULK_GENERATION);
 
         featureToGameruleMap.put(EndPlacements.END_SPIKE.toString(), Gamerules.END_FEATURES_GENERATION);
         featureToGameruleMap.put(EndPlacements.END_GATEWAY_RETURN.toString(), Gamerules.END_FEATURES_GENERATION);
@@ -104,6 +107,7 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(MiscOverworldPlacements.LAKE_LAVA_SURFACE.toString(), Gamerules.LAVA_LAKE_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.LAKE_LAVA_UNDERGROUND.toString(), Gamerules.LAVA_LAKE_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.DISK_CLAY.toString(), Gamerules.OCEAN_FLOOR_GENERATION);
+        featureToGameruleMap.put(MiscOverworldPlacements.DISK_GRASS.toString(), Gamerules.OVERWORLD_VEGETATION);
         featureToGameruleMap.put(MiscOverworldPlacements.DISK_GRAVEL.toString(), Gamerules.OCEAN_FLOOR_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.DISK_SAND.toString(), Gamerules.OCEAN_FLOOR_GENERATION);
         featureToGameruleMap.put(MiscOverworldPlacements.VOID_START_PLATFORM.toString(), Gamerules.END_FEATURES_GENERATION);
@@ -137,6 +141,8 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(TreePlacements.FANCY_OAK_BEES_0002.toString(), Gamerules.TREE_GENERATION);
         featureToGameruleMap.put(TreePlacements.FANCY_OAK_BEES_002.toString(), Gamerules.TREE_GENERATION);
         featureToGameruleMap.put(TreePlacements.FANCY_OAK_BEES.toString(), Gamerules.TREE_GENERATION);
+        featureToGameruleMap.put(TreePlacements.MANGROVE_CHECKED.toString(), Gamerules.TREE_GENERATION);
+        featureToGameruleMap.put(TreePlacements.TALL_MANGROVE_CHECKED.toString(), Gamerules.TREE_GENERATION);
 
         featureToGameruleMap.put(VillagePlacements.PILE_HAY_VILLAGE.toString(), Gamerules.VILLAGE_GENERATION);
         featureToGameruleMap.put(VillagePlacements.PILE_ICE_VILLAGE.toString(), Gamerules.VILLAGE_GENERATION);

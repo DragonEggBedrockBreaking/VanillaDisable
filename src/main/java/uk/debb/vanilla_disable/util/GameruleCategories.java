@@ -2,7 +2,7 @@ package uk.debb.vanilla_disable.util;
 
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -17,7 +17,7 @@ public class GameruleCategories {
     private static CustomGameRuleCategory createCustomGameRuleCategory(String identifier) {
         return new CustomGameRuleCategory(
             new ResourceLocation(identifier),
-            new TranslatableComponent(identifier)
+            Component.translatable(identifier)
                 .withStyle(ChatFormatting.BOLD)
                 .withStyle(ChatFormatting.DARK_GREEN)
         );

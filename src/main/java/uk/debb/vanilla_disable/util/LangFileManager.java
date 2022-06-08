@@ -25,7 +25,7 @@ public class LangFileManager {
             InputStream inputUrl = LangFileManager.class.getResourceAsStream("/assets/vanilla_disable/lang/en_us.json");
             Path dest = new File(rpackdir.toString() + "/en_us.json").toPath();
             Files.copy(inputUrl, dest, StandardCopyOption.REPLACE_EXISTING);
-            String content = "{\"pack\":{\"pack_format\":8,\"description\":\"Vanilla Disable Language File\"}}";
+            String content = "{\"pack\":{\"pack_format\":9,\"description\":\"Vanilla Disable Language File\"}}";
             String mcmetaPath = new File(outerrpackdir.toString() + "/pack.mcmeta").toString();
             FileWriter mcmetaWriter = new FileWriter(mcmetaPath);
             mcmetaWriter.write(content);

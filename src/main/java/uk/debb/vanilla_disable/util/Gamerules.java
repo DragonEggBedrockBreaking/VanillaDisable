@@ -113,12 +113,12 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> KICK_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> KILL_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> LIST_COMMAND;
-    public static GameRules.Key<GameRules.BooleanValue> LOCATE_BIOME_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> LOCATE_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> LOOT_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> ME_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> MESSAGE_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> PARTICLE_COMMAND;
+    public static GameRules.Key<GameRules.BooleanValue> PLACE_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> PLAY_SOUND_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> PUBLISH_COMMAND;
     public static GameRules.Key<GameRules.BooleanValue> RAID_COMMAND;
@@ -194,6 +194,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> BAD_OMEN_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> BLINDNESS_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> CONDUIT_POWER_EFFECT;
+    public static GameRules.Key<GameRules.BooleanValue> DARKNESS_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> DOLPHINS_GRACE_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> FIRE_RESISTANCE_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> GLOWING_EFFECT;
@@ -258,6 +259,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> SMITE_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanValue> SOUL_SPEED_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanValue> SWEEPING_ENCHANTMENT;
+    public static GameRules.Key<GameRules.BooleanValue> SWIFT_SNEAK_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanValue> THORNS_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanValue> UNBREAKING_ENCHANTMENT;
     public static GameRules.Key<GameRules.BooleanValue> BINDING_CURSE;
@@ -270,6 +272,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> PROTECTION_ENCHANTMENT_CONFLICTS;
     public static GameRules.Key<GameRules.BooleanValue> TRIDENT_ENCHANTMENT_CONFLICTS;
 
+    public static GameRules.Key<GameRules.BooleanValue> ANCIENT_CITY_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> BASTION_REMNANT_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> BURIED_TREASURE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> DESERT_PYRAMID_GENERATION;
@@ -308,6 +311,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> NETHER_ORE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> OCEAN_FLOOR_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> ORE_GENERATION;
+    public static GameRules.Key<GameRules.BooleanValue> SCULK_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> SPRING_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> TREE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> WELL_GENERATION;
@@ -345,6 +349,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> TRAPPED_CHEST_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> TRIPWIRE_HOOK_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> PISTON_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SCULK_SENSOR_ENABLED;
 
     public static GameRules.Key<GameRules.BooleanValue> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_PORTALS_ENABLED;

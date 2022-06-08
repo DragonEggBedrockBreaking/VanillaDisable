@@ -2,12 +2,11 @@ package uk.debb.vanilla_disable.mixin.commands;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import java.util.UUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.ChatType;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -58,12 +57,12 @@ public abstract class MixinCommands {
         commandNameGameruleMap.put("kick", Gamerules.KICK_COMMAND);
         commandNameGameruleMap.put("kill", Gamerules.KILL_COMMAND);
         commandNameGameruleMap.put("list", Gamerules.LIST_COMMAND);
-        commandNameGameruleMap.put("locatebiome", Gamerules.LOCATE_BIOME_COMMAND);
         commandNameGameruleMap.put("locate", Gamerules.LOCATE_COMMAND);
         commandNameGameruleMap.put("loot", Gamerules.LOOT_COMMAND);
         commandNameGameruleMap.put("me", Gamerules.ME_COMMAND);
         commandNameGameruleMap.put("msg", Gamerules.MESSAGE_COMMAND);
         commandNameGameruleMap.put("particle", Gamerules.PARTICLE_COMMAND);
+        commandNameGameruleMap.put("place", Gamerules.PLACE_COMMAND);
         commandNameGameruleMap.put("playsound", Gamerules.PLAY_SOUND_COMMAND);
         commandNameGameruleMap.put("publish", Gamerules.PUBLISH_COMMAND);
         commandNameGameruleMap.put("raid", Gamerules.RAID_COMMAND);
@@ -145,7 +144,7 @@ public abstract class MixinCommands {
         if ((!command.startsWith("/gamerule") && !GameruleHelper.getBool(Gamerules.COMMANDS_ENABLED)) ||
             (commandGamerule != null && !GameruleHelper.getBool(commandGamerule)) ||
             (source.getServer().isDedicatedServer() && dedicatedCommandGamerule != null && !GameruleHelper.getBool(dedicatedCommandGamerule))) {
-            source.getServer().getPlayerList().broadcastMessage(new TranslatableComponent("commands.disabled.by.vd").withStyle(ChatFormatting.RED), ChatType.CHAT, UUID.randomUUID());
+            source.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), ChatType.CHAT);
             cir.setReturnValue(0);
         }
     }

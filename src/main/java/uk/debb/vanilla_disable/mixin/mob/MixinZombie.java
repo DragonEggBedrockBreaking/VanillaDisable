@@ -24,7 +24,7 @@ public abstract class MixinZombie {
      * @return the difficulty
      */
     @Redirect(
-        method = "killed",
+        method = "wasKilled",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
