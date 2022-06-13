@@ -6,7 +6,7 @@ public class Versions {
     public static String QUILTFLOWER_VERSION = "1.8.1";
 
     public static String QFAPI_VERSION = "2.0.0-alpha.3+0.55.3-1.19";
-    public static boolean JIJ_QFAPI = true;
+    public static boolean JIJ_QFAPI = false;
     public static String CAFFEINE_CONFIG_VERSION = "1.0.0";
     public static String LAZYDFU_VERSION = "0.1.3";
     public static boolean LAZYDFU_ENABLED = true;
