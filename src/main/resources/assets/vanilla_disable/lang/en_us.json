@@ -177,6 +177,7 @@
     "gamerule.zombiesConvertToDrowned": "Toggle zombie --> drowned conversion",
     "gamerule.skeletonsConvertToStrays": "Toggle skeleton --> stray conversion",
     "gamerule.infiniteTrading": "Toggle infinite trading with villagers",
+    "gamerule.villagerDailyRestocks": "Number of villager restocks per day",
     "gamerule.villagerTradingEnabled": "Toggle trading with villagers",
     "gamerule.piglinBarteringEnabled": "Toggle bartering with piglins",
     "gamerule.witherSpawns": "Toggle withers despawning",

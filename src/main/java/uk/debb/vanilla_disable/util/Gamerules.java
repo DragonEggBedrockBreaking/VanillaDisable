@@ -181,6 +181,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> ZOMBIES_CONVERT_TO_DROWNED;
     public static GameRules.Key<GameRules.BooleanValue> SKELETONS_CONVERT_TO_STRAYS;
     public static GameRules.Key<GameRules.BooleanValue> INFINITE_TRADING;
+    public static GameRules.Key<GameRules.IntegerValue> VILLAGER_DAILY_RESTOCKS;
     public static GameRules.Key<GameRules.BooleanValue> VILLAGER_TRADING_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> PIGLIN_BARTERING_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> WITHER_SPAWNS;

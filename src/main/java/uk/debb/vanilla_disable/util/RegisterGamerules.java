@@ -192,6 +192,7 @@ public class RegisterGamerules {
             Gamerules.ZOMBIES_CONVERT_TO_DROWNED = GameruleHelper.register("zombiesConvertToDrowned",GameruleCategories.VD_MOBS, true);
             Gamerules.SKELETONS_CONVERT_TO_STRAYS = GameruleHelper.register("skeletonsConvertToStrays",GameruleCategories.VD_MOBS, true);
             Gamerules.INFINITE_TRADING = GameruleHelper.register("infiniteTrading", GameruleCategories.VD_MOBS, false);
+            Gamerules.VILLAGER_DAILY_RESTOCKS = GameruleHelper.register("villagerDailyRestocks", GameruleCategories.VD_MOBS, 2, 0);
             Gamerules.VILLAGER_TRADING_ENABLED = GameruleHelper.register("villagerTradingEnabled", GameruleCategories.VD_MOBS, true);
             Gamerules.PIGLIN_BARTERING_ENABLED = GameruleHelper.register("piglinBarteringEnabled", GameruleCategories.VD_MOBS, true);
             Gamerules.WITHER_SPAWNS = GameruleHelper.register("witherSpawns", GameruleCategories.VD_MOBS, true);
