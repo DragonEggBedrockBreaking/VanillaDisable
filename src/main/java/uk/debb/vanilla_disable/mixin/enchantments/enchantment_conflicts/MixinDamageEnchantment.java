@@ -14,7 +14,7 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(DamageEnchantment.class)
 public abstract class MixinDamageEnchantment extends Enchantment {
-    public MixinDamageEnchantment(Enchantment.Rarity rarity, int i, EquipmentSlot... equipmentSlots) {
+    public MixinDamageEnchantment(Enchantment.Rarity rarity, EquipmentSlot... equipmentSlots) {
         super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
     }
 

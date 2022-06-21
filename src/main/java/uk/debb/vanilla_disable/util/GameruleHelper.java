@@ -26,7 +26,7 @@ public class GameruleHelper {
      * @reason register integer gamerules with only a default
      * @param name the name of the gamerule
      * @param category the gamerule category
-     * @param defaultValue the default value (a ineger)
+     * @param defaultValue the default value (an integer)
      * @return the gamerule key (int)
      */
     @Unique
@@ -38,7 +38,7 @@ public class GameruleHelper {
      * @reason register integer gamerules with default and minimum values
      * @param name the name of the gamerule
      * @param category the gamerule category
-     * @param defaultValue the default value (a ineger)
+     * @param defaultValue the default value (an integer)
      * @return the gamerule key (int)
      */
     @Unique
@@ -50,7 +50,7 @@ public class GameruleHelper {
      * @reason register integer gamerules with default, minimum, and maximum values
      * @param name the name of the gamerule
      * @param category the gamerule category
-     * @param defaultValue the default value (a ineger)
+     * @param defaultValue the default value (an integer)
      * @return the gamerule key (int)
      */
     @Unique

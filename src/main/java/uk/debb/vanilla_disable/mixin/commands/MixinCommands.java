@@ -25,7 +25,7 @@ public abstract class MixinCommands {
      * @reason map of all standard commands to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> commandNameGameruleMap = new Object2ObjectOpenHashMap<String, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> commandNameGameruleMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -98,7 +98,7 @@ public abstract class MixinCommands {
      * @reason map of all standard commands to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new Object2ObjectOpenHashMap<String, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking

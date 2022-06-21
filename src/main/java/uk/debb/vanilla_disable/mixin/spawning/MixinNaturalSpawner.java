@@ -25,7 +25,7 @@ public class MixinNaturalSpawner {
      * @reason map of all spawn groups to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.BooleanValue>> spawnGroupMap = new Object2ObjectOpenHashMap<MobCategory, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.BooleanValue>> spawnGroupMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -45,7 +45,7 @@ public class MixinNaturalSpawner {
     /**
      * @author DragonEggBedrockBreaking
      * @param group the type of entity
-     * @param world the world
+     * @param level the level
      * @param chunk the chunk
      * @param checker profiling/testing
      * @param runner profiling/testing

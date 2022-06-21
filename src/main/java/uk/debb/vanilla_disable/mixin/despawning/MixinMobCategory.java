@@ -20,9 +20,9 @@ public abstract class MixinMobCategory {
      * @reason map of many mob groups to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupImmediateMap = new Object2ObjectOpenHashMap<MobCategory, GameRules.Key<GameRules.IntegerValue>>();
+    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupImmediateMap = new Object2ObjectOpenHashMap<>();
     @Unique
-    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupStartMap = new Object2ObjectOpenHashMap<MobCategory, GameRules.Key<GameRules.IntegerValue>>();
+    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupStartMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -60,7 +60,7 @@ public abstract class MixinMobCategory {
         if (spawnGroupImmediateMap.isEmpty()) {
             addImmediateOptionsToMap();
         }
-       GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupImmediateMap.get((MobCategory) (Object) this);
+       GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupImmediateMap.get(this);
        if (gameRule != null) {
            cir.setReturnValue(GameruleHelper.getInt(gameRule));
        }
@@ -77,7 +77,7 @@ public abstract class MixinMobCategory {
         if (spawnGroupStartMap.isEmpty()) {
             addStartOptionsToMap();
         }
-        GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupStartMap.get((MobCategory) (Object) this);
+        GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupStartMap.get(this);
         if (gameRule != null) {
             cir.setReturnValue(GameruleHelper.getInt(gameRule));
         }

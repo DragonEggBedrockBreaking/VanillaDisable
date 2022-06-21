@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.world.level.DataPackConfig;
@@ -40,11 +39,10 @@ public abstract class MixinMinecraftServer {
      * @reason create the directories for a datapacks
      * @param name the name of the datapack
      */
-    private void createDatapackDir(String name, String dirname) {
+    private boolean createDatapackDir(String name, String dirname) {
         String dataPackPath = VDServer.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
         File dataPackDir = new File(dataPackPath + "/" + name + "/data/minecraft/" + dirname + "/");
-        dataPackDir.getParentFile().mkdirs();
-        dataPackDir.mkdir();
+        return dataPackDir.getParentFile().mkdirs() && dataPackDir.mkdir();
     }
 
     /**
@@ -52,16 +50,17 @@ public abstract class MixinMinecraftServer {
      * @reason create the directories for datapacks for each dimension
      */
     @Unique
-    private void createBiomeDatapackDirectories() {
+    private boolean createBiomeDatapackDirectories() {
         if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
-            createDatapackDir("vanilla_disable_overworld_biomes", "dimension");
+            if (!createDatapackDir("vanilla_disable_overworld_biomes", "dimension")) return false;
         }
         if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
-            createDatapackDir("vanilla_disable_nether_biomes", "dimension");
+            if (!createDatapackDir("vanilla_disable_nether_biomes", "dimension")) return false;
         }
         if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
-            createDatapackDir("vanilla_disable_end_biomes", "dimension");
+            return createDatapackDir("vanilla_disable_end_biomes", "dimension");
         }
+        return true;
     }
 
     /**
@@ -69,71 +68,71 @@ public abstract class MixinMinecraftServer {
      * @reason create the directories for datapacks for each structure
      */
     @Unique
-    private void createStructureDatapackDirectories() {
+    private boolean createStructureDatapackDirectories() {
         if (!GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_ancient_city", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_ancient_city", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_bastion_remnant", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_bastion_remnant", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_buried_treasure", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_buried_treasure", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_desert_pyramid", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_desert_pyramid", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_end_city", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_end_city", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_igloo", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_igloo", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_jungle_pyramid", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_jungle_pyramid", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_mineshaft", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_mineshaft", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_fortress", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_fortress", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_nether_fossil", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_nether_fossil", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_monument", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_monument", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_ocean_ruin", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_ocean_ruin", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_pillager_outpost", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_pillager_outpost", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_ruined_portal", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_ruined_portal", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_shipwreck", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_shipwreck", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_stronghold", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_stronghold", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_swamp_hut", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_swamp_hut", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure");
+            if (!createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure")) return false;
         }
         if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION, this.worldData)) {
-            createDatapackDir("vanilla_disable_structures_mansion", "tags/worldgen/biome/has_structure");
+            return createDatapackDir("vanilla_disable_structures_mansion", "tags/worldgen/biome/has_structure");
         }
+        return true;
     }
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason create and write the mcmeta file for a datapack
      * @param name the name of the datapack
-     * @throws IOException
      */
     @Unique
     private void addMcmetaFile(String name, String content) throws IOException {
@@ -147,7 +146,6 @@ public abstract class MixinMinecraftServer {
     /**
      * @author DragonEggBedrockBreaking
      * @reason create and write the mcmeta file for datapacks for each dimension
-     * @throws IOException
      */
     @Unique
     private void addBiomeMcmetaFiles() throws IOException {
@@ -166,7 +164,6 @@ public abstract class MixinMinecraftServer {
     /**
      * @author DragonEggBedrockBreaking
      * @reason create and write the mcmeta file for datapacks for each structure
-     * @throws IOException
      */
     @Unique
     private void addStructureMcmetaFiles() throws IOException {
@@ -236,7 +233,6 @@ public abstract class MixinMinecraftServer {
      * @param url the url of the json files to download
      * @param name the name of the datapack
      * @param shortname the name of the json file (without extension)
-     * @throws IOException
      */
     @Unique
     private void addJsonFile(String url, String name, String shortname, String dirname) throws IOException {
@@ -251,7 +247,6 @@ public abstract class MixinMinecraftServer {
     /**
      * @author DragonEggBedrockBreaking
      * @reason download and add the json files for each dimension
-     * @throws IOException
      */
     @Unique
     private void addBiomeJsonFiles() throws IOException {
@@ -275,7 +270,6 @@ public abstract class MixinMinecraftServer {
     /**
      * @author DragonEggBedrockBreaking
      * @reason download and add the json files for each structure/biome-specific structure variant
-     * @throws IOException
      */
     @Unique
     private void addStructureJsonFiles() throws IOException {
@@ -417,26 +411,26 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create all of the biome datapacks
-     * @throws IOException
+     * @reason create all the biome datapacks
      */
     @Unique
     private void getBiomeDataPacks() throws IOException {
-        createBiomeDatapackDirectories();
-        addBiomeMcmetaFiles();
-        addBiomeJsonFiles();
+        if (createBiomeDatapackDirectories()) {
+            addBiomeMcmetaFiles();
+            addBiomeJsonFiles();
+        }
     }
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create all of the structure datapacks
-     * @throws IOException
+     * @reason create all the structure datapacks
      */
     @Unique
     private void getStructureDataPacks() throws IOException {
-        createStructureDatapackDirectories();
-        addStructureMcmetaFiles();
-        addStructureJsonFiles();
+        if (createStructureDatapackDirectories()) {
+            addStructureMcmetaFiles();
+            addStructureJsonFiles();
+        }
     }
 
     /**
@@ -448,9 +442,10 @@ public abstract class MixinMinecraftServer {
     private void enableDatapack(String name) {
         PackRepository repo = VDServer.getServer().getPackRepository();
         DataPackConfig config = MixinMinecraftServer.getSelectedPacks(repo);
-        ObjectList<String> enabledCopy = new ObjectArrayList<String>();
-        ObjectList<String> disabledCopy = new ObjectArrayList<String>();
-        enabledCopy.addAll(config.enabled); 
+        ObjectList<String> enabledCopy = new ObjectArrayList<>();
+        ObjectList<String> disabledCopy = new ObjectArrayList<>();
+        assert config != null;
+        enabledCopy.addAll(config.enabled);
         disabledCopy.addAll(config.disabled);
         enabledCopy.add(name);
         disabledCopy.remove(name);
@@ -470,9 +465,10 @@ public abstract class MixinMinecraftServer {
     private void disableDatapack(String name) {
         PackRepository repo = VDServer.getServer().getPackRepository();
         DataPackConfig config = MixinMinecraftServer.getSelectedPacks(repo);
-        ObjectList<String> enabledCopy = new ObjectArrayList<String>();
-        ObjectList<String> disabledCopy = new ObjectArrayList<String>();
-        enabledCopy.addAll(config.enabled); 
+        ObjectList<String> enabledCopy = new ObjectArrayList<>();
+        ObjectList<String> disabledCopy = new ObjectArrayList<>();
+        assert config != null;
+        enabledCopy.addAll(config.enabled);
         disabledCopy.addAll(config.disabled);
         enabledCopy.remove(name);
         disabledCopy.add(name);
@@ -488,7 +484,7 @@ public abstract class MixinMinecraftServer {
      * @reason toggle the biome datapacks based on the gamerules
      */
     @Unique
-    private void toggleBiomeDataPacks() throws CommandSyntaxException {
+    private void toggleBiomeDataPacks() {
         if (!GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             disableDatapack("vanilla_disable_overworld_biomes");
         } else {
@@ -508,11 +504,10 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @throws CommandSyntaxException
      * @reason toggle the structure datapacks based on the gamerules
      */
     @Unique
-    private void toggleStructureDataPacks() throws CommandSyntaxException {
+    private void toggleStructureDataPacks() {
         if (GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
             disableDatapack("vanilla_disable_structures_ancient_city");
         } else {
@@ -615,10 +610,9 @@ public abstract class MixinMinecraftServer {
      * @reason after the world is loaded, if first load, create datapacks and patch them
      * @reason and always toggle them, on all loads
      * @param ci the callback info
-     * @throws IOException
      */
     @Inject(method = "createLevels", at = @At("HEAD"), cancellable = true)
-    private void onLevelLoad(CallbackInfo ci) throws IOException, CommandSyntaxException {
+    private void onLevelLoad(CallbackInfo ci) throws IOException {
         if (VDServer.getServer() == null) return;
         getBiomeDataPacks();
         getStructureDataPacks();

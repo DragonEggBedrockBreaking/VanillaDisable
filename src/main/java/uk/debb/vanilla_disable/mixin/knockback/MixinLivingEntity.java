@@ -34,10 +34,10 @@ public abstract class MixinLivingEntity {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason map of all relevenat entities to their gamerules
+     * @reason map of all relevant entities to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> entityMap = new Object2ObjectOpenHashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> entityMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking

@@ -1,7 +1,9 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -13,7 +15,11 @@ import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ItemEntity.class)
-public abstract class MixinItemEntity {
+public abstract class MixinItemEntity extends Entity {
+    public MixinItemEntity(EntityType<? extends Entity> entityType, Level level) {
+        super(entityType, level);
+    }
+
     @Shadow private int age;
     @Shadow private int pickupDelay;
     @Unique
@@ -22,21 +28,20 @@ public abstract class MixinItemEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason delete the item when necessary
-     * @param ci
+     * @param ci callback info
      */
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void discardItem(CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
-        if (this.age >= MAX * 20 &&
-            !((Entity) (Object) (this)).getLevel().isClientSide) {
-            ((Entity) (Object) (this)).discard();
+        if (this.age >= MAX * 20 && !(this.getLevel().isClientSide())) {
+            this.discard();
         }
     }
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason cancel deleting the item if too early
-     * @param ci
+     * @param ci callback info
      */
     @Inject(
         method = "tick",

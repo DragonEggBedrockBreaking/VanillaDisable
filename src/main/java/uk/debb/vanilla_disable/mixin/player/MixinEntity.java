@@ -67,7 +67,7 @@ public abstract class MixinEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop players from being invisible
-     * @param cir
+     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isInvisible", at = @At("HEAD"), cancellable = true)
     private void cannotBeInvisible(CallbackInfoReturnable<Boolean> cir) {
@@ -80,7 +80,7 @@ public abstract class MixinEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop players from jumping
-     * @param cir
+     * @param cir the returnable callback info (Float)
      */
     @Inject(method = "getBlockJumpFactor", at = @At("HEAD"), cancellable = true)
     private void cannotJump(CallbackInfoReturnable<Float> cir) {

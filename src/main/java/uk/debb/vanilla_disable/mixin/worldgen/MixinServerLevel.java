@@ -14,7 +14,7 @@ public abstract class MixinServerLevel {
     /**
      * @author DragonEggBedrockBreaking
      * @reason disable generation of the end spawn platform
-     * @param world the server world
+     * @param level the level
      * @param ci the callback info
      */
     @Inject(method = "makeObsidianPlatform", at = @At("HEAD"), cancellable = true)

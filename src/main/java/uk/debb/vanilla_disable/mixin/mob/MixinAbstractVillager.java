@@ -16,7 +16,7 @@ import uk.debb.vanilla_disable.util.VDServer;
 public abstract class MixinAbstractVillager {
     /**
      * @author DragonEggBedrockBreaking
-     * @reason allow for infintie trading with villagers
+     * @reason allow for infinite trading with villagers
      * @param tradeOffer the trade offer
      * @param offer the trade offer
      */

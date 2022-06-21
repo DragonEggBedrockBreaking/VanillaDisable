@@ -20,7 +20,7 @@ public abstract class MixinMobCategory {
      * @reason map of all spawn groups to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupMap = new Object2ObjectOpenHashMap<MobCategory, GameRules.Key<GameRules.IntegerValue>>();
+    private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -48,7 +48,7 @@ public abstract class MixinMobCategory {
         if (spawnGroupMap.isEmpty()) {
             addOptionsToMap();
         }
-        GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupMap.get((MobCategory) (Object) this);
+        GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupMap.get(this);
         if (gameRule != null) {
             cir.setReturnValue(GameruleHelper.getInt(gameRule));
         }

@@ -51,7 +51,7 @@ public abstract class MixinLavaFluid {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason modify whether or not the fluid can form infinite water sources
+     * @reason modify whether the fluid can form infinite water sources
      * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)

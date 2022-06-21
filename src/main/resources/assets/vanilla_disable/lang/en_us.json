@@ -108,7 +108,6 @@
     "gamerule.kickCommand": "Toggle the /kick command",
     "gamerule.killCommand": "Toggle the /kill command",
     "gamerule.listCommand": "Toggle the /list command",
-    "gamerule.locateBiomeCommand": "Toggle the /locatebiome command",
     "gamerule.locateCommand": "Toggle the /locate command",
     "gamerule.lootCommand": "Toggle the /loot command",
     "gamerule.meCommand": "Toggle the /me command",

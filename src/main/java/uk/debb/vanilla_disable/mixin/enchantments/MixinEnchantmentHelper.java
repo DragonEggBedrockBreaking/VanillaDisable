@@ -23,7 +23,7 @@ public abstract class MixinEnchantmentHelper {
      * @reason map of all enchantments to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<Enchantment, GameRules.Key<GameRules.BooleanValue>> enchantmentMap = new Object2ObjectOpenHashMap<Enchantment, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Enchantment, GameRules.Key<GameRules.BooleanValue>> enchantmentMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking

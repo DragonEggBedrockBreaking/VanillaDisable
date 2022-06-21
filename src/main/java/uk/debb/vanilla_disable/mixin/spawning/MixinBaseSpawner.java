@@ -33,7 +33,7 @@ public abstract class MixinBaseSpawner {
     /**
      * @author FallenBreath (https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE)
      * @reason get entity
-     * @param spawnedEntity the entity spawned
+     * @param entity the entity spawned
      * @return the entity spawned
      */
     @ModifyArg(
@@ -54,7 +54,7 @@ public abstract class MixinBaseSpawner {
      * @reason map of all damage sources to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnerMobMap = new Object2ObjectOpenHashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnerMobMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -75,9 +75,9 @@ public abstract class MixinBaseSpawner {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @param entity the entity to spawn
+     * @param level the level
+     * @param pos the position
      * @param ci the callback info
-     * @param world the world
      */
     @Inject(
         method = "serverTick",

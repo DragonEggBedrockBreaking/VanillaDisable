@@ -30,13 +30,13 @@ public abstract class MixinBucketItem {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason whether or not nether water evaporation should be considered
+     * @reason whether nether water evaporation should be considered
      * @param type the type of dimension
      * @param player the player placing the water
-     * @param world the world
+     * @param level the level
      * @param pos the position to place the water
      * @param hitResult the result of using the water bucket
-     * @return whether or not the biome should be counted as ultrawarm
+     * @return whether the biome should be counted as ultrawarm
      */
     @Redirect(
         method = "emptyContents",
@@ -64,7 +64,7 @@ public abstract class MixinBucketItem {
      * @param ci the callback info
      */
     @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
-    protected void cancelPlayiningEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
+    protected void cancelPlayingEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (world.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&
             GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER)) {

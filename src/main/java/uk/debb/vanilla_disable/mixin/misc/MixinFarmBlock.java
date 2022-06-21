@@ -19,7 +19,7 @@ public abstract class MixinFarmBlock {
      * @author DragonEggBedrockBreaking
      * @reason disable crop trampling
      * @param state the state of the block
-     * @param world the world
+     * @param level the level
      * @param pos the position of the block
      * @param theWorld the world
      * @param blockState the state of the block

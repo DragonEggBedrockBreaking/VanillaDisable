@@ -16,11 +16,11 @@ import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(EntityType.class)
-public abstract class MixinEntityType<T extends Entity> {
+public abstract class MixinEntityType {
     /**
      * @author DragonEggBedrockBreaking
      * @reason Disable spawn eggs
-     * @param world The world
+     * @param level the level
      * @param stack The item stack
      * @param player The player
      * @param pos The position

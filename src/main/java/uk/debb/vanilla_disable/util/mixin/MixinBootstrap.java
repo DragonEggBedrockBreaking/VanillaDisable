@@ -15,7 +15,6 @@ public abstract class MixinBootstrap {
      * @author DragonEggBedrockBreaking
      * @reason manually run code on initialisation without base api
      * @param ci callback info
-     * @throws IOException
      */
     @Inject(
         method = "bootStrap",

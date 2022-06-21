@@ -28,7 +28,7 @@ public abstract class MixinEnderChestBlock {
      * @param player the player trying to open the echest
      * @param interactionHand the hand the player is trying to open the echest with
      * @param blockHitResult the result of the player trying to open the echest
-     * @return whether or not the player can open the echest
+     * @return whether the player can open the echest
      */
     @Redirect(
         method = "use",

@@ -18,7 +18,7 @@ public abstract class MixinTheEndGatewayBlockEntity {
     /**
      * @author DragonEggBedrockBreaking
      * @reason prevent entities from going through end gateways
-     * @param world the world
+     * @param level the level
      * @param pos the position of the gateway
      * @param state the state
      * @param entity the entity going through the gateway

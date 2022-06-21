@@ -21,7 +21,7 @@ public abstract class MixinSwordItem {
      * @param blockState the state of the block being targeted
      * @param level the level
      * @param blockPos the position of the block being targeted
-     * @param player the player targetting the block
+     * @param player the player targeting the block
      * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "canAttackBlock", at = @At("HEAD"), cancellable = true)

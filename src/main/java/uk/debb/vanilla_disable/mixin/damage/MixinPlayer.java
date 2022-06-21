@@ -21,7 +21,7 @@ public abstract class MixinPlayer {
      * @reason map of all damage sources to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<DamageSource, GameRules.Key<GameRules.BooleanValue>> damageSourceMap = new Object2ObjectOpenHashMap<DamageSource, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<DamageSource, GameRules.Key<GameRules.BooleanValue>> damageSourceMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking

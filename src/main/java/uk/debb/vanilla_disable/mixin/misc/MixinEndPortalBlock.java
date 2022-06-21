@@ -19,7 +19,7 @@ public abstract class MixinEndPortalBlock {
      * @author DragonEggBedrockBreaking
      * @reason prevent people from going through end portals
      * @param state the state
-     * @param world the world
+     * @param level the level
      * @param pos the position of the portal
      * @param entity the entity going through the portal
      * @param ci the callback info

@@ -21,7 +21,7 @@ public abstract class MixinButtonBlock {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason modify how long long a button is held down for
+     * @reason modify how long a button is held down for
      * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getPressDuration", at = @At("HEAD"), cancellable = true)

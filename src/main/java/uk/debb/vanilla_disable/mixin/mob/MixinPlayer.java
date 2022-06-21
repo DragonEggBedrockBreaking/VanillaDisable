@@ -17,7 +17,7 @@ public abstract class MixinPlayer {
     /**
      * @author DragonEggBedrockBreaking
      * @reason creepers ignite when clicked with flint and steel, fire aspect should be the same
-     * @param target the entity the player is targetting
+     * @param target the entity the player is targeting
      * @param ci the callback info
      */
     @Inject(method = "attack", at = @At("RETURN"), cancellable = true)

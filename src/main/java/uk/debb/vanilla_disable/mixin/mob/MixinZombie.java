@@ -18,7 +18,7 @@ public abstract class MixinZombie {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop villagers from turning into zombie villagers
-     * @param world the world
+     * @param level the level
      * @param serverWorld the world
      * @param other the entity
      * @return the difficulty

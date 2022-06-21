@@ -14,9 +14,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 public abstract class MixinDragonStrafePlayerPhase {
     /**
      * @author DragonEggBedrockBreaking
-     * @param world the world the dragon is in
+     * @param level the level the dragon is in
      * @param entity the dragon fireball
-     * @return whether or not to spawn the fireball
+     * @return whether to spawn the fireball
      */
     @Redirect(
         method = "doServerTick",

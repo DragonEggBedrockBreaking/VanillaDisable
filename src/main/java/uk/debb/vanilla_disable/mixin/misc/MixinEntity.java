@@ -25,7 +25,7 @@ public abstract class MixinEntity {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason chnge nether portal cooldown for entities
+     * @reason change nether portal cooldown for entities
      * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDimensionChangingDelay", at = @At("HEAD"), cancellable = true)
@@ -43,13 +43,12 @@ public abstract class MixinEntity {
     @Inject(method = "onInsideBlock", at = @At("HEAD"), cancellable = true)
     private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
-        if (GameruleHelper.getBool(Gamerules.OLD_BOATS) &&
-            (Object) this instanceof Boat) {
+        if (GameruleHelper.getBool(Gamerules.OLD_BOATS) && (Object) this instanceof Boat) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));
                 if (blockState.getMaterial().isSolid()) {
-                    this.hurt(DamageSource.GENERIC, Float.MAX_VALUE);
-                    ci.cancel();;
+                    if (!this.hurt(DamageSource.GENERIC, Float.MAX_VALUE)) return;
+                    ci.cancel();
                 }
             }
         }

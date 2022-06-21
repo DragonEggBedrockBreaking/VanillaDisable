@@ -14,7 +14,7 @@ public abstract class MixinThrownEnderpearl {
     /**
      * @author DragonEggBedrockBreaking
      * @reason don't delete ender pearls on player death
-     * @param ci
+     * @param ci callback info
      */
     @Inject(
         method = "tick",

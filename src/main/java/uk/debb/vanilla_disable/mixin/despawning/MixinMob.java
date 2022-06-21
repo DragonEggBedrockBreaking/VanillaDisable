@@ -3,6 +3,7 @@ package uk.debb.vanilla_disable.mixin.despawning;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ambient.AmbientCreature;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,13 +26,16 @@ import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Mob.class)
-public abstract class MixinMob {
+public abstract class MixinMob extends Entity {
+    public MixinMob(EntityType<? extends Entity> entityType, Level level) {
+        super(entityType, level);
+    }
     /**
      * @author DragonEggBedrockBreaking
      * @reason map of many mob groups to their gamerules
      */
     @Unique
-    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnGroupDespawnMap = new Object2ObjectOpenHashMap<Class<?>, GameRules.Key<GameRules.BooleanValue>>();
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnGroupDespawnMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -54,9 +59,8 @@ public abstract class MixinMob {
      */
     @Unique
     private boolean additionalRestrictionsMet() {
-        Mob entity = (Mob) (Object) this;
-        if (entity instanceof Bucketable bucketable) {
-            return !((Entity)(Object)(this)).hasCustomName() && !bucketable.fromBucket();
+        if (this instanceof Bucketable bucketable) {
+            return !this.hasCustomName() && !bucketable.fromBucket();
         }
         return true;
     }
@@ -66,13 +70,13 @@ public abstract class MixinMob {
      * @reason Change whether the mob despawns based on gamerules
      */
     @Inject(method = "removeWhenFarAway", at = @At("HEAD"), cancellable = true)
-    private void cancelRemovelWhenFarAway(double distanceSquared, CallbackInfoReturnable<Boolean> cir) {
+    private void cancelRemovalWhenFarAway(double distanceSquared, CallbackInfoReturnable<Boolean> cir) {
         if (VDServer.getServer() == null) return;
         if (spawnGroupDespawnMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupDespawnMap.get(this.getClass());
-        if (gameRule != null && (Object) this.getClass() != AbstractVillager.class) {
+        if (gameRule != null && !(((Object) this) instanceof AbstractVillager)) {
             cir.setReturnValue(GameruleHelper.getBool(gameRule) && additionalRestrictionsMet());
         }
     }

@@ -19,7 +19,7 @@ import uk.debb.vanilla_disable.util.VDServer;
 public abstract class MixinNaturalSpawner {
     /**
      * @author DragonEggBedrockBreaking
-     * @param world the world to spawn in
+     * @param level the world to spawn in
      * @param chunk the chunk to spawn in
      * @param pos the position to spawn at
      * @param squaredDistance the squared distance from the position
