@@ -63,7 +63,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
         fluids                =  this.caffeineConfig.getEffectiveOptionForMixin("fluids.MixinBucketItem").isEnabled();
         knockback             =  this.caffeineConfig.getEffectiveOptionForMixin("knockback.MixinLivingEntity").isEnabled();
         misc                  =  this.caffeineConfig.getEffectiveOptionForMixin("misc.MixinBeaconBlockEntity").isEnabled();
-        misc_container       =  this.caffeineConfig.getEffectiveOptionForMixin("misc.container.MixinChestBlock").isEnabled();
+        misc_container        =  this.caffeineConfig.getEffectiveOptionForMixin("misc.container.MixinChestBlock").isEnabled();
         misc_hunger           =  this.caffeineConfig.getEffectiveOptionForMixin("misc.hunger.MixinFoodData").isEnabled();
         mob                   =  this.caffeineConfig.getEffectiveOptionForMixin("mob.MixinAbstractPiglin").isEnabled();
         player                =  this.caffeineConfig.getEffectiveOptionForMixin("player.MixinEntity").isEnabled();
