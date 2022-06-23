@@ -17,7 +17,6 @@ public class GameruleHelper {
      * @param defaultValue the default value (a boolean)
      * @return the gamerule key (boolean)
      */
-    @Unique
     public static GameRules.Key<GameRules.BooleanValue> register(String name, CustomGameRuleCategory category, boolean defaultValue) {
         return GameRuleRegistry.register(name, category, GameRuleFactory.createBooleanRule(defaultValue));
     }
@@ -29,7 +28,6 @@ public class GameruleHelper {
      * @param defaultValue the default value (an integer)
      * @return the gamerule key (int)
      */
-    @Unique
     public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue) {
         return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue));
     }
@@ -41,7 +39,6 @@ public class GameruleHelper {
      * @param defaultValue the default value (an integer)
      * @return the gamerule key (int)
      */
-    @Unique
     public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue, int minValue) {
         return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue, minValue));
     }
@@ -53,7 +50,6 @@ public class GameruleHelper {
      * @param defaultValue the default value (an integer)
      * @return the gamerule key (int)
      */
-    @Unique
     public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue, int minValue, int maxValue) {
         return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue, minValue, maxValue));
     }
@@ -64,7 +60,6 @@ public class GameruleHelper {
      * @param key the gamerule key
      * @return the gamerule value (boolean)
      */
-    @Unique
     public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key) {
         return VDServer.getServer().getGameRules().getBoolean(key);
     }
@@ -75,7 +70,6 @@ public class GameruleHelper {
      * @param worldData the world data
      * @return the gamerule value (boolean)
      */
-    @Unique
     public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key, WorldData worldData) {
         return worldData.getGameRules().getBoolean(key);
     }
@@ -85,7 +79,6 @@ public class GameruleHelper {
      * @param key the gamerule key
      * @return the gamerule value (int)
      */
-    @Unique
     public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
         return VDServer.getServer().getGameRules().getInt(key);
     }
@@ -96,7 +89,6 @@ public class GameruleHelper {
      * @param worldData the world data
      * @return the gamerule value (int)
      */
-    @Unique
     public static int getInt(GameRules.Key<GameRules.IntegerValue> key, WorldData worldData) {
         return worldData.getGameRules().getInt(key);
     }
@@ -107,7 +99,6 @@ public class GameruleHelper {
      * @param key the gamerule key
      * @param newValue the gamerule's new value (boolean)
      */
-    @Unique
     public static void setBool(GameRules.Key<GameRules.BooleanValue> key, boolean newValue) {
         VDServer.getServer().getGameRules().getRule(key).set(newValue, VDServer.getServer());
     }

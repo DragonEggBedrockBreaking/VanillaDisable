@@ -13,7 +13,6 @@ public class GameruleCategories {
      * @param identifier the id for the gamerule category
      * @return the gamerule category
      */
-    @Unique
     private static CustomGameRuleCategory createCustomGameRuleCategory(String identifier) {
         return new CustomGameRuleCategory(
             new ResourceLocation(identifier),

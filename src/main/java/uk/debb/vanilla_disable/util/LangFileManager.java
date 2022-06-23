@@ -15,7 +15,6 @@ public class LangFileManager {
      * @author DragonEggBedrockBreaking
      * @reason if there is no resource loader, manually load the lang files
      */
-    @Unique
     public static void langFileFallback() throws IOException {
         if (!QuiltLoader.isModLoaded("quilt_resource_loader")) {
             File outerrpackdir = new File(QuiltLoader.getGameDir().toString() + "/resourcepacks/vdlangfile");

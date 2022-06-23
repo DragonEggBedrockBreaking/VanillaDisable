@@ -8,7 +8,6 @@ public class RegisterGamerules {
      * @author DragonEggBedrockBreaking
      * @reason register all of our gamerules
      */
-    @Unique
     public static void registerGamerules() {
         if (VanillaDisableMixinConfigPlugin.damage) {
             Gamerules.DAMAGE_ENABLED = GameruleHelper.register("damageEnabled", GameruleCategories.VD_DAMAGE, true);
