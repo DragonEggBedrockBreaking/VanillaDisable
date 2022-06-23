@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.spongepowered.asm.mixin.Unique;
 
 public class GameruleCategories {
     /**

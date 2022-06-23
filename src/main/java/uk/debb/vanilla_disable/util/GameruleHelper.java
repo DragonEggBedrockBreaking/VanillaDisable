@@ -6,8 +6,6 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.storage.WorldData;
 
-import org.spongepowered.asm.mixin.Unique;
-
 public class GameruleHelper {
     /**
      * @author DragonEggBedrockBreaking
