@@ -1,6 +1,5 @@
 package uk.debb.vanilla_disable.util;
 
-import org.spongepowered.asm.mixin.Unique;
 import uk.debb.vanilla_disable.mixin.VanillaDisableMixinConfigPlugin;
 
 public class RegisterGamerules {
@@ -199,6 +198,78 @@ public class RegisterGamerules {
             Gamerules.MOBS_BURN_IN_SUNLIGHT = GameruleHelper.register("mobsBurnInSunlight", GameruleCategories.VD_MOBS, true);
             Gamerules.DRAGON_FIREBALLS = GameruleHelper.register("dragonFireballs", GameruleCategories.VD_MOBS, true);
             Gamerules.FIRE_ASPECT_IGNITES_CREEPERS = GameruleHelper.register("fireAspectIgnitesCreepers", GameruleCategories.VD_MOBS, false);
+        }
+        if (VanillaDisableMixinConfigPlugin.mob_toggles) {
+            Gamerules.ALLAYS_ENABLED = GameruleHelper.register("allaysEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.BATS_ENABLED = GameruleHelper.register("batsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.CATS_ENABLED = GameruleHelper.register("catsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.CHICKENS_ENABLED = GameruleHelper.register("chickensEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.CODS_ENABLED = GameruleHelper.register("codsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.COWS_ENABLED = GameruleHelper.register("cowsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.DONKEYS_ENABLED = GameruleHelper.register("donkeysEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.FOXES_ENABLED = GameruleHelper.register("foxesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.FROGS_ENABLED = GameruleHelper.register("frogsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.HORSES_ENABLED = GameruleHelper.register("horsesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.MOOSHROOMS_ENABLED = GameruleHelper.register("mooshroomsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.MULES_ENABLED = GameruleHelper.register("mulesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.OCELOTS_ENABLED = GameruleHelper.register("ocelotsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PARROTS_ENABLED = GameruleHelper.register("parrotsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PIGS_ENABLED = GameruleHelper.register("pigsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PUFFERFISH_ENABLED = GameruleHelper.register("pufferfishEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.RABBITS_ENABLED = GameruleHelper.register("rabbitsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SALMONS_ENABLED = GameruleHelper.register("salmonsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SHEEP_ENABLED = GameruleHelper.register("sheepEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SKELETON_HORSES_ENABLED = GameruleHelper.register("skeletonHorsesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SNOW_GOLEMS_ENABLED = GameruleHelper.register("snowGolemsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SQUIDS_ENABLED = GameruleHelper.register("squidsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.STRIDERS_ENABLED = GameruleHelper.register("stridersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.TADPOLES_ENABLED = GameruleHelper.register("tadpolesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.TROPICAL_FISH_ENABLED = GameruleHelper.register("tropicalFishEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.TURTLES_ENABLED = GameruleHelper.register("turtlesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.VILLAGERS_ENABLED = GameruleHelper.register("villagersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.WANDERING_TRADERS_ENABLED = GameruleHelper.register("wanderingTradersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.BEES_ENABLED = GameruleHelper.register("beesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.CAVE_SPIDERS_ENABLED = GameruleHelper.register("caveSpidersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.DOLPHINS_ENABLED = GameruleHelper.register("dolphinsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.ENDERMEN_ENABLED = GameruleHelper.register("endermenEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.GOATS_ENABLED = GameruleHelper.register("goatsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.IRON_GOLEMS_ENABLED = GameruleHelper.register("ironGolemsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.LLAMAS_ENABLED = GameruleHelper.register("llamasEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PANDAS_ENABLED = GameruleHelper.register("pandasEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PIGLINS_ENABLED = GameruleHelper.register("piglinsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.POLAR_BEARS_ENABLED = GameruleHelper.register("polarBearsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SPIDERS_ENABLED = GameruleHelper.register("spidersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.TRADER_LLAMAS_ENABLED = GameruleHelper.register("traderLlamasEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.WOLVES_ENABLED = GameruleHelper.register("wolvesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.ZOMBIFIED_PIGLINS_ENABLED = GameruleHelper.register("zombifiedPiglinsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.BLAZES_ENABLED = GameruleHelper.register("blazesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.CREEPERS_ENABLED = GameruleHelper.register("creepersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.DROWNED_ENABLED = GameruleHelper.register("drownedEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.ELDER_GUARDIANS_ENABLED = GameruleHelper.register("elderGuardiansEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.ENDERMITES_ENABLED = GameruleHelper.register("endermitesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.EVOKERS_ENABLED = GameruleHelper.register("evokersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.GHASTS_ENABLED = GameruleHelper.register("ghastsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.GUARDIANS_ENABLED = GameruleHelper.register("guardiansEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.HOGLINS_ENABLED = GameruleHelper.register("hoglinsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.HUSKS_ENABLED = GameruleHelper.register("husksEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.MAGMA_CUBES_ENABLED = GameruleHelper.register("magmaCubesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PHANTOMS_ENABLED = GameruleHelper.register("phantomsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PIGLIN_BRUTES_ENABLED = GameruleHelper.register("piglinBrutesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.PILLAGERS_ENABLED = GameruleHelper.register("pillagersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.RAVAGERS_ENABLED = GameruleHelper.register("ravagersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SHULKERS_ENABLED = GameruleHelper.register("shulkersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SILVERFISH_ENABLED = GameruleHelper.register("silverfishEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SKELETONS_ENABLED = GameruleHelper.register("skeletonsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.SLIMES_ENABLED = GameruleHelper.register("slimesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.STRAYS_ENABLED = GameruleHelper.register("straysEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.VEXES_ENABLED = GameruleHelper.register("vexesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.VINDICATORS_ENABLED = GameruleHelper.register("vindicatorsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.WARDENS_ENABLED = GameruleHelper.register("wardensEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.WITCHES_ENABLED = GameruleHelper.register("witchesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.WITHER_SKELETONS_ENABLED = GameruleHelper.register("witherSkeletonsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.ZOGLINS_ENABLED = GameruleHelper.register("zoglinsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.ZOMBIES_ENABLED = GameruleHelper.register("zombiesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.ZOMBIE_VILLAGERS_ENABLED = GameruleHelper.register("zombieVillagersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
         }
         if (VanillaDisableMixinConfigPlugin.effects) {
             Gamerules.EFFECTS_ENABLED = GameruleHelper.register("effectsEnabled", GameruleCategories.VD_EFFECTS, true);

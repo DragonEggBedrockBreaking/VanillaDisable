@@ -19,6 +19,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
     public static boolean misc_container;
     public static boolean misc_hunger;
     public static boolean mob;
+    public static boolean mob_toggles;
     public static boolean player;
     public static boolean redstone;
     public static boolean spawn_limits;
@@ -40,6 +41,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
             .addMixinOption("misc.container", true)
             .addMixinOption("misc.hunger", true)
             .addMixinOption("mob", true)
+            .addMixinOption("mob_toggles", true)
             .addMixinOption("player", true)
             .addMixinOption("redstone", true)
             .addMixinOption("spawn_limits", true)
@@ -66,6 +68,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
         misc_container        =  this.caffeineConfig.getEffectiveOptionForMixin("misc.container.MixinChestBlock").isEnabled();
         misc_hunger           =  this.caffeineConfig.getEffectiveOptionForMixin("misc.hunger.MixinFoodData").isEnabled();
         mob                   =  this.caffeineConfig.getEffectiveOptionForMixin("mob.MixinAbstractPiglin").isEnabled();
+        mob_toggles           =  this.caffeineConfig.getEffectiveOptionForMixin("mob_toggles.MixinMob").isEnabled();
         player                =  this.caffeineConfig.getEffectiveOptionForMixin("player.MixinEntity").isEnabled();
         redstone              =  this.caffeineConfig.getEffectiveOptionForMixin("redstone.MixinButtonBlock").isEnabled();
         spawn_limits          =  this.caffeineConfig.getEffectiveOptionForMixin("spawn_limits.MixinMobCategory").isEnabled();
