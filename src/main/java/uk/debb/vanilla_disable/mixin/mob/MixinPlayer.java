@@ -20,7 +20,7 @@ public abstract class MixinPlayer {
      * @param target the entity the player is targeting
      * @param ci the callback info
      */
-    @Inject(method = "attack", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "attack", at = @At("RETURN"))
     private void igniteCreeper(Entity target, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (GameruleHelper.getBool(Gamerules.FIRE_ASPECT_IGNITES_CREEPERS) &&

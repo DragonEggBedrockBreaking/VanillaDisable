@@ -383,7 +383,6 @@
     "gamerule.sculkGeneration": "Toggle skulk vein/patch generation",
     "gamerule.springGeneration": "Toggle spring generation",
     "gamerule.treeGeneration": "Toggle tree generation",
-    "gamerule.wellGeneration": "Toggle desert well generation",
     "gamerule.endPillarCageGeneration": "Toggle obsidian pillar cage generation",
     "gamerule.removeOverworldBiomes": "Toggle removal of overworld biomes",
     "gamerule.removeNetherBiomes": "Toggle removal of nether biomes",

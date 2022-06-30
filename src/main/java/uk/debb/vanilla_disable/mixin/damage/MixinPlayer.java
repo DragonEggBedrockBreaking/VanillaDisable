@@ -16,16 +16,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of all damage sources to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<DamageSource, GameRules.Key<GameRules.BooleanValue>> damageSourceMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {
@@ -40,12 +35,12 @@ public abstract class MixinPlayer {
         damageSourceMap.put(DamageSource.DRAGON_BREATH, Gamerules.DRAGON_DAMAGE);
         damageSourceMap.put(DamageSource.SWEET_BERRY_BUSH, Gamerules.SWEET_BERRY_BUSH_DAMAGE);
         damageSourceMap.put(DamageSource.FALLING_STALACTITE, Gamerules.FALLING_STALACTITE_DAMAGE);
+        damageSourceMap.put(DamageSource.FALLING_BLOCK, Gamerules.FALLING_BLOCK_DAMAGE);
     }
 
     /**
      * @author DragonEggBedrockBreaking
      * @reason Removes damage sources
-     * @return Opposite of gamerule
      */
     @Inject(method = "isInvulnerableTo", at = @At(value = "HEAD"), cancellable = true)
     private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {

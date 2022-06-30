@@ -30,7 +30,7 @@ public abstract class MixinItemEntity extends Entity {
      * @reason delete the item when necessary
      * @param ci callback info
      */
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "tick", at = @At("HEAD"))
     private void discardItem(CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (this.age >= MAX * 20 && !(this.getLevel().isClientSide())) {

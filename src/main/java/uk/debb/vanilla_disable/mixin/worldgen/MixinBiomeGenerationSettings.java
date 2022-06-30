@@ -25,16 +25,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(BiomeGenerationSettings.class)
 public abstract class MixinBiomeGenerationSettings {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of all placed features to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> featureToGameruleMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {

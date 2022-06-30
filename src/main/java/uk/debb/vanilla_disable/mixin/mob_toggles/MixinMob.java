@@ -38,15 +38,11 @@ public abstract class MixinMob extends LivingEntity {
         super(entityType, level);
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of most mobs to their gamerules
-     */
-    Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> mobTypeMap = new Object2ObjectOpenHashMap<>();
+    @Unique
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> mobTypeMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {
@@ -129,7 +125,7 @@ public abstract class MixinMob extends LivingEntity {
      * @reason stops mobs from spawning if they are disabled
      * @param ci the callback info
      */
-    @Inject(method = "checkDespawn", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "checkDespawn", at = @At("HEAD"))
     private void checkIfEnabled(CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (mobTypeMap.isEmpty()) {

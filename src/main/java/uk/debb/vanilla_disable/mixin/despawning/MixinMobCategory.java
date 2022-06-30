@@ -15,10 +15,6 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(MobCategory.class)
 public abstract class MixinMobCategory {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of many mob groups to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupImmediateMap = new Object2ObjectOpenHashMap<>();
     @Unique
@@ -26,7 +22,6 @@ public abstract class MixinMobCategory {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addImmediateOptionsToMap() {

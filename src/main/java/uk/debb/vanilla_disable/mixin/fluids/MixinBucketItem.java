@@ -26,7 +26,7 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(BucketItem.class)
 public abstract class MixinBucketItem {
-    @Shadow @Final Fluid content;
+    @Shadow @Final private Fluid content;
 
     /**
      * @author DragonEggBedrockBreaking

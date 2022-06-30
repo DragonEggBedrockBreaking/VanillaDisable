@@ -12,7 +12,6 @@ import org.quiltmc.loader.api.QuiltLoader;
 public class LangFileManager {
     /**
      * @author DragonEggBedrockBreaking
-     * @reason if there is no resource loader, manually load the lang files
      */
     public static void langFileFallback() throws IOException {
         if (!QuiltLoader.isModLoaded("quilt_resource_loader")) {

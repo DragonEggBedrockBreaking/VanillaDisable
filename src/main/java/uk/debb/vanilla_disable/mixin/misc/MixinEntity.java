@@ -20,7 +20,7 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Entity.class)
 public abstract class MixinEntity {
     @Shadow public Level level;
-    @Shadow BlockPos blockPosition;
+    @Shadow private BlockPos blockPosition;
     @Shadow public abstract boolean hurt(DamageSource source, float amount);
 
     /**

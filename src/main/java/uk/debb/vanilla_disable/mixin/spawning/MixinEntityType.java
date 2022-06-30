@@ -29,7 +29,7 @@ public abstract class MixinEntityType {
      * @param invertY ???
      * @param cir The returnable callback info (net.minecraft.world.entity.Entity)
      */
-    @Inject(method = "spawn", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "spawn(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;ZZ)Lnet/minecraft/world/entity/Entity;", at = @At(value = "HEAD"))
     private void cancelSpawning(ServerLevel level, ItemStack stack, Player player, BlockPos pos, MobSpawnType spawnReason, boolean alignPosition, boolean invertY, CallbackInfoReturnable<Entity> cir) {
         if (VDServer.getServer() == null) return;
         if (!GameruleHelper.getBool(Gamerules.SPAWN_EGGS)) {

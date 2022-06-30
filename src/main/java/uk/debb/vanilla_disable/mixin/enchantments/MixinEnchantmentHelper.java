@@ -18,16 +18,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(EnchantmentHelper.class)
 public abstract class MixinEnchantmentHelper {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of all enchantments to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<Enchantment, GameRules.Key<GameRules.BooleanValue>> enchantmentMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private static void addOptionsToMap() {

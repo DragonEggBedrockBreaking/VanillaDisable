@@ -32,16 +32,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 public abstract class MixinLivingEntity {
     @Shadow private LivingEntity lastHurtByMob;
 
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of all relevant entities to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> entityMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {
@@ -56,7 +51,6 @@ public abstract class MixinLivingEntity {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason Prevents knockback if the respective gamerule is disabled
      * @param source The entity that caused the knockback
      * @return the opposite of the gamerule
      */
@@ -77,6 +71,9 @@ public abstract class MixinLivingEntity {
         }
         if (source instanceof Drowned && source.isHolding(Items.TRIDENT)) {
             return !GameruleHelper.getBool(Gamerules.TRIDENT_KNOCKBACK);
+        }
+        if (source != null) {
+            return !GameruleHelper.getBool(Gamerules.MOB_ATTACK_KNOCKBACK);
         }
         return false;
     }

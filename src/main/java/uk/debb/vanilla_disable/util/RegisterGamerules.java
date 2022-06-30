@@ -5,7 +5,6 @@ import uk.debb.vanilla_disable.mixin.VanillaDisableMixinConfigPlugin;
 public class RegisterGamerules {
     /**
      * @author DragonEggBedrockBreaking
-     * @reason register all of our gamerules
      */
     public static void registerGamerules() {
         if (VanillaDisableMixinConfigPlugin.damage) {
@@ -402,7 +401,6 @@ public class RegisterGamerules {
             Gamerules.SCULK_GENERATION = GameruleHelper.register("sculkGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.SPRING_GENERATION = GameruleHelper.register("springGeneration",GameruleCategories.VD_WORLDGEN, true);
             Gamerules.TREE_GENERATION = GameruleHelper.register("treeGeneration", GameruleCategories.VD_WORLDGEN, true);
-            Gamerules.WELL_GENERATION = GameruleHelper.register("wellGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.END_PILLAR_CAGE_GENERATION = GameruleHelper.register("endPillarCageGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.REMOVE_OVERWORLD_BIOMES = GameruleHelper.register("removeOverworldBiomes",GameruleCategories.VD_WORLDGEN, false);
             Gamerules.REMOVE_NETHER_BIOMES = GameruleHelper.register("removeNetherBiomes", GameruleCategories.VD_WORLDGEN, false);

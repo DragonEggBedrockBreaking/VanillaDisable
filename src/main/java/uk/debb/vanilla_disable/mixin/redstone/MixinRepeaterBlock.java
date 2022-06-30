@@ -35,7 +35,6 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
      * @param blockGetter the getter for the repeater
      * @param blockPos the position of the repeater
      * @param blockState the state of the repeater

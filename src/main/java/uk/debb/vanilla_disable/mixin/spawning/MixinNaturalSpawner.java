@@ -20,16 +20,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(NaturalSpawner.class)
 public class MixinNaturalSpawner {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of all spawn groups to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.BooleanValue>> spawnGroupMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private static void addOptionsToMap() {

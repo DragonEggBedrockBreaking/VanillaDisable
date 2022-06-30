@@ -19,16 +19,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of all status effects to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<MobEffect, GameRules.Key<GameRules.BooleanValue>> statusEffectMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {

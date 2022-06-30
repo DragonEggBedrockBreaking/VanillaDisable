@@ -30,16 +30,12 @@ public abstract class MixinMob extends Entity {
     public MixinMob(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of many mob groups to their gamerules
-     */
+
     @Unique
     private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnGroupDespawnMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {
@@ -54,7 +50,6 @@ public abstract class MixinMob extends Entity {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason Fish and axolotls have additional restrictions
      * @return Whether the additional restrictions are met
      */
     @Unique

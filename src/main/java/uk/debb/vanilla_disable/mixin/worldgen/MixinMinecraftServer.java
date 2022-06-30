@@ -36,7 +36,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create the directories for a datapacks
      * @param name the name of the datapack
      */
     private boolean createDatapackDir(String name, String dirname) {
@@ -47,7 +46,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create the directories for datapacks for each dimension
      */
     @Unique
     private boolean createBiomeDatapackDirectories() {
@@ -65,7 +63,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create the directories for datapacks for each structure
      */
     @Unique
     private boolean createStructureDatapackDirectories() {
@@ -131,7 +128,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create and write the mcmeta file for a datapack
      * @param name the name of the datapack
      */
     @Unique
@@ -145,7 +141,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create and write the mcmeta file for datapacks for each dimension
      */
     @Unique
     private void addBiomeMcmetaFiles() throws IOException {
@@ -163,7 +158,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create and write the mcmeta file for datapacks for each structure
      */
     @Unique
     private void addStructureMcmetaFiles() throws IOException {
@@ -229,7 +223,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason download and add the json files
      * @param url the url of the json files to download
      * @param name the name of the datapack
      * @param shortname the name of the json file (without extension)
@@ -246,7 +239,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason download and add the json files for each dimension
      */
     @Unique
     private void addBiomeJsonFiles() throws IOException {
@@ -269,7 +261,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason download and add the json files for each structure/biome-specific structure variant
      */
     @Unique
     private void addStructureJsonFiles() throws IOException {
@@ -411,7 +402,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create all the biome datapacks
      */
     @Unique
     private void getBiomeDataPacks() throws IOException {
@@ -423,7 +413,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason create all the structure datapacks
      */
     @Unique
     private void getStructureDataPacks() throws IOException {
@@ -435,7 +424,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason easily enables the relevant datapack for worldgen
      * @param name the name of the datapack to enable
      */
     @Unique
@@ -458,7 +446,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason easily disables the relevant datapack for worldgen
      * @param name the name of the datapack to disable
      */
     @Unique
@@ -481,7 +468,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason toggle the biome datapacks based on the gamerules
      */
     @Unique
     private void toggleBiomeDataPacks() {
@@ -504,7 +490,6 @@ public abstract class MixinMinecraftServer {
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason toggle the structure datapacks based on the gamerules
      */
     @Unique
     private void toggleStructureDataPacks() {
@@ -611,7 +596,7 @@ public abstract class MixinMinecraftServer {
      * @reason and always toggle them, on all loads
      * @param ci the callback info
      */
-    @Inject(method = "createLevels", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "createLevels", at = @At("HEAD"))
     private void onLevelLoad(CallbackInfo ci) throws IOException {
         if (VDServer.getServer() == null) return;
         getBiomeDataPacks();

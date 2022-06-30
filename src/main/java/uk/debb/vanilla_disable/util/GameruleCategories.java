@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 public class GameruleCategories {
     /**
      * @author DragonEggBedrockBreaking
-     * @reason helper function to register each gamerule category
      * @param identifier the id for the gamerule category
      * @return the gamerule category
      */

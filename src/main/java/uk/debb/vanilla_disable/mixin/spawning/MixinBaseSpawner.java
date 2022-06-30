@@ -31,7 +31,7 @@ public abstract class MixinBaseSpawner {
     @Unique
     private Entity spawnedEntity;
     /**
-     * @author FallenBreath (https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE)
+     * @author FallenBreath (<a href="https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE">...</a>)
      * @reason get entity
      * @param entity the entity spawned
      * @return the entity spawned
@@ -49,16 +49,11 @@ public abstract class MixinBaseSpawner {
         return entity;
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason map of all damage sources to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnerMobMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {
@@ -93,7 +88,7 @@ public abstract class MixinBaseSpawner {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnerMobMap.get(this.spawnedEntity.getClass());
-        if (!GameruleHelper.getBool(gameRule))  {
+        if (!GameruleHelper.getBool(gameRule) || !GameruleHelper.getBool(Gamerules.SPAWNERS_ENABLED))  {
             ci.cancel();
         }
     }

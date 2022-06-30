@@ -19,7 +19,7 @@ public abstract class MixinServerGamePacketListenerImpl {
      * @param packet the packet
      * @param ci the callback info
      */
-    @Inject(method = "send", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "send(Lnet/minecraft/network/protocol/Packet;)V", at = @At("HEAD"), cancellable = true)
     public void sendPacket(Packet<?> packet, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (packet instanceof ClientboundExplodePacket &&

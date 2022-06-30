@@ -19,17 +19,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Commands.class)
 public abstract class MixinCommands {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @author LittleLily
-     * @reason map of all standard commands to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> commandNameGameruleMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addOptionsToMap() {
@@ -92,17 +86,11 @@ public abstract class MixinCommands {
         commandNameGameruleMap.put("worldborder", Gamerules.WORLD_BORDER_COMMAND);
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     * @author LittleLily
-     * @reason map of all standard commands to their gamerules
-     */
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
-     * @reason the map otherwise initialises before the gamerules are created and always returns null
      */
     @Unique
     private void addDedicatedOptionsToMap() {

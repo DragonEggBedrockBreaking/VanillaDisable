@@ -16,7 +16,7 @@ public abstract class MixinFoodData {
     /**
      * @author DragonEggBedrockBreaking
      * @reason stop hunger from reducing
-     * @param world the world
+     * @param level the level
      * @return peaceful if old hunger enabled else the difficulty
      */
     @Redirect(

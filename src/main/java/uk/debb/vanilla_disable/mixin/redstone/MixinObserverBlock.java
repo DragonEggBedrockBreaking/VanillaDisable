@@ -68,4 +68,23 @@ public abstract class MixinObserverBlock {
         if (VDServer.getServer() == null) return delay;
         return GameruleHelper.getInt(Gamerules.OBSERVER_DELAY);
     }
+
+    /**
+     * @author DragonEggBedrockBreaking
+     * @reason edit the duration of the redstone pulse
+     * @param duration the original duration of the redstone pulse
+     * @return the new duration that it will be changed to
+     */
+    @ModifyArg(
+        method = "tick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/level/ServerLevel;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"
+        ),
+        index = 2
+    )
+    private int modifyObserverDuration(int duration) {
+        if (VDServer.getServer() == null) return duration;
+        return GameruleHelper.getInt(Gamerules.OBSERVER_DURATION);
+    }
 }

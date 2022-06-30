@@ -387,7 +387,6 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> SCULK_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> SPRING_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> TREE_GENERATION;
-    public static GameRules.Key<GameRules.BooleanValue> WELL_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> END_PILLAR_CAGE_GENERATION;
     public static GameRules.Key<GameRules.BooleanValue> REMOVE_OVERWORLD_BIOMES;
     public static GameRules.Key<GameRules.BooleanValue> REMOVE_NETHER_BIOMES;
