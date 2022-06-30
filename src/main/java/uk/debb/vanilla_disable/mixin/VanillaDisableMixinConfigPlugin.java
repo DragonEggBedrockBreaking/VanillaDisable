@@ -7,6 +7,7 @@ import org.quiltmc.loader.api.QuiltLoader;
 public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
     private CaffeineConfig caffeineConfig;
 
+    public static boolean ai;
     public static boolean commands;
     public static boolean damage;
     public static boolean despawning;
@@ -29,6 +30,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
     @Override
     protected CaffeineConfig createConfig() {
         CaffeineConfig localCaffeineConfig = CaffeineConfig.builder("VanillaDisable")
+            .addMixinOption("ai", true)
             .addMixinOption("commands", true)
             .addMixinOption("damage", true)
             .addMixinOption("despawning", true)
@@ -56,6 +58,7 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
     }
 
     private void updateData() {
+        ai                    = this.caffeineConfig.getEffectiveOptionForMixin("ai.MixinGoal").isEnabled();
         commands              =  this.caffeineConfig.getEffectiveOptionForMixin("commands.MixinCommands").isEnabled();
         damage                =  this.caffeineConfig.getEffectiveOptionForMixin("damage.MixinPlayer").isEnabled();
         despawning            =  this.caffeineConfig.getEffectiveOptionForMixin("despawning.MixinItemEntity").isEnabled();

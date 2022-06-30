@@ -423,6 +423,25 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> PISTON_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> SCULK_SENSOR_ENABLED;
 
+    public static GameRules.Key<GameRules.BooleanValue> BEE_AI;
+    public static GameRules.Key<GameRules.BooleanValue> BLAZE_AI;
+    public static GameRules.Key<GameRules.BooleanValue> DOLPHIN_AI;
+    public static GameRules.Key<GameRules.BooleanValue> DROWNED_AI;
+    public static GameRules.Key<GameRules.BooleanValue> ENDERMAN_AI;
+    public static GameRules.Key<GameRules.BooleanValue> FOX_AI;
+    public static GameRules.Key<GameRules.BooleanValue> GHAST_AI;
+    public static GameRules.Key<GameRules.BooleanValue> GUARDIAN_AI;
+    public static GameRules.Key<GameRules.BooleanValue> LLAMA_AI;
+    public static GameRules.Key<GameRules.BooleanValue> PANDA_AI;
+    public static GameRules.Key<GameRules.BooleanValue> PHANTOM_AI;
+    public static GameRules.Key<GameRules.BooleanValue> PUFFERFISH_AI;
+    public static GameRules.Key<GameRules.BooleanValue> SHULKER_AI;
+    public static GameRules.Key<GameRules.BooleanValue> SILVERFISH_AI;
+    public static GameRules.Key<GameRules.BooleanValue> SLIME_AI;
+    public static GameRules.Key<GameRules.BooleanValue> SQUID_AI;
+    public static GameRules.Key<GameRules.BooleanValue> TURTLE_AI;
+    public static GameRules.Key<GameRules.BooleanValue> VEX_AI;
+
     public static GameRules.Key<GameRules.BooleanValue> NETHER_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_PORTALS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> END_GATEWAYS_ENABLED;

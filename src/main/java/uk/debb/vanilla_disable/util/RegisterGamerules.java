@@ -439,6 +439,26 @@ public class RegisterGamerules {
             Gamerules.PISTON_ENABLED = GameruleHelper.register("pistonEnabled", GameruleCategories.VD_REDSTONE, true);
             Gamerules.SCULK_SENSOR_ENABLED = GameruleHelper.register("sculkSensorEnabled",GameruleCategories.VD_REDSTONE, true);
         }
+        if (true) {
+            Gamerules.BEE_AI = GameruleHelper.register("beeAi", GameruleCategories.VD_AI, true);
+            Gamerules.BLAZE_AI = GameruleHelper.register("blazeAi", GameruleCategories.VD_AI, true);
+            Gamerules.DOLPHIN_AI = GameruleHelper.register("dolphinAi", GameruleCategories.VD_AI, true);
+            Gamerules.DROWNED_AI = GameruleHelper.register("drownedAi", GameruleCategories.VD_AI, true);
+            Gamerules.ENDERMAN_AI = GameruleHelper.register("endermanAi", GameruleCategories.VD_AI, true);
+            Gamerules.FOX_AI = GameruleHelper.register("foxAi", GameruleCategories.VD_AI, true);
+            Gamerules.GHAST_AI = GameruleHelper.register("ghastAi", GameruleCategories.VD_AI, true);
+            Gamerules.GUARDIAN_AI = GameruleHelper.register("guardianAi", GameruleCategories.VD_AI, true);
+            Gamerules.LLAMA_AI = GameruleHelper.register("llamaAi", GameruleCategories.VD_AI, true);
+            Gamerules.PANDA_AI = GameruleHelper.register("pandaAi", GameruleCategories.VD_AI, true);
+            Gamerules.PHANTOM_AI = GameruleHelper.register("phantomAi", GameruleCategories.VD_AI, true);
+            Gamerules.PUFFERFISH_AI = GameruleHelper.register("pufferfishAi", GameruleCategories.VD_AI, true);
+            Gamerules.SHULKER_AI = GameruleHelper.register("shulkerAi", GameruleCategories.VD_AI, true);
+            Gamerules.SILVERFISH_AI = GameruleHelper.register("silverfishAi", GameruleCategories.VD_AI, true);
+            Gamerules.SLIME_AI = GameruleHelper.register("slimeAi", GameruleCategories.VD_AI, true);
+            Gamerules.SQUID_AI = GameruleHelper.register("squidAi", GameruleCategories.VD_AI, true);
+            Gamerules.TURTLE_AI = GameruleHelper.register("turtleAi", GameruleCategories.VD_AI, true);
+            Gamerules.VEX_AI = GameruleHelper.register("vexAi", GameruleCategories.VD_AI, true);
+        }
         if (VanillaDisableMixinConfigPlugin.misc) {
             Gamerules.NETHER_PORTALS_ENABLED = GameruleHelper.register("netherPortalsEnabled", GameruleCategories.VD_MISC, true);
             Gamerules.END_PORTALS_ENABLED = GameruleHelper.register("endPortalsEnabled",GameruleCategories.VD_MISC, true);

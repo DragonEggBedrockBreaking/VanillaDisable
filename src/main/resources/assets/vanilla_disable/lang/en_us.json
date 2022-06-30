@@ -419,6 +419,25 @@
     "gamerule.pistonEnabled": "Toggle pistons being enabled",
     "gamerule.sculkSensorEnabled": "Toggle sculk sensors being enabled",
 
+    "gamerule.beeAi": "Toggle the AI of bees",
+    "gamerule.blazeAi": "Toggle the AI of blazes",
+    "gamerule.dolphinAi": "Toggle the AI of dolphins",
+    "gamerule.drownedAi": "Toggle the AI of drowned",
+    "gamerule.endermanAi": "Toggle the AI of endermen",
+    "gamerule.foxAi": "Toggle the AI of foxes",
+    "gamerule.ghastAi": "Toggle the AI of ghasts",
+    "gamerule.guardianAi": "Toggle the AI of guardians",
+    "gamerule.llamaAi": "Toggle the AI of llamas",
+    "gamerule.pandaAi": "Toggle the AI of pandas",
+    "gamerule.phantomAi": "Toggle the AI of phantoms",
+    "gamerule.pufferfishAi": "Toggle the AI of pufferfish",
+    "gamerule.shulkerAi": "Toggle the AI of shulkers",
+    "gamerule.silverfishAi": "Toggle the AI of silverfish",
+    "gamerule.slimeAi": "Toggle the AI of slimes",
+    "gamerule.squidAi": "Toggle the AI of squids",
+    "gamerule.turtleAi": "Toggle the AI of turtles",
+    "gamerule.vexAi": "Toggle the AI of vexes",
+
     "gamerule.netherPortalsEnabled": "Toggle nether portals",
     "gamerule.endPortalsEnabled": "Toggle end portals",
     "gamerule.endGatewaysEnabled": "Toggle end gateways",
@@ -450,6 +469,7 @@
     "gamerule.category.vd.worldgen": "VanillaDisable World Generation",
     "gamerule.category.vd.player": "VanillaDisable Player",
     "gamerule.category.vd.redstone": "VanillaDisable Redstone",
+    "gamerule.category.vd.ai": "VanillaDisable AI",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator"
