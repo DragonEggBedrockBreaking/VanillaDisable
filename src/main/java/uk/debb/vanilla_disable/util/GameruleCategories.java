@@ -27,7 +27,7 @@ public class GameruleCategories {
     public static final CustomGameRuleCategory VD_SPAWN_LIMITS = createCustomGameRuleCategory("gamerule.category.vd.spawn_limits");
     public static final CustomGameRuleCategory VD_COMMANDS = createCustomGameRuleCategory("gamerule.category.vd.commands");
     public static final CustomGameRuleCategory VD_FLUIDS = createCustomGameRuleCategory("gamerule.category.vd.fluids");
-    public static final CustomGameRuleCategory VD_MOBS = createCustomGameRuleCategory("gamerule.category.vd.mods");
+    public static final CustomGameRuleCategory VD_MOBS = createCustomGameRuleCategory("gamerule.category.vd.mobs");
     public static final CustomGameRuleCategory VD_MOB_TOGGLES = createCustomGameRuleCategory("gamerule.category.vd.mob_toggles");
     public static final CustomGameRuleCategory VD_EFFECTS = createCustomGameRuleCategory("gamerule.category.vd.effects");
     public static final CustomGameRuleCategory VD_ENCHANTMENTS = createCustomGameRuleCategory("gamerule.category.vd.enchantments");
