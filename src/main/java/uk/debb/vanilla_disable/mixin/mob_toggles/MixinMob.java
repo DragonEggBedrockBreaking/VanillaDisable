@@ -12,6 +12,8 @@ import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.frog.Tadpole;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.monster.piglin.Piglin;
@@ -118,6 +120,8 @@ public abstract class MixinMob extends LivingEntity {
         mobTypeMap.put(Zoglin.class, Gamerules.ZOGLINS_ENABLED);
         mobTypeMap.put(Zombie.class, Gamerules.ZOMBIES_ENABLED);
         mobTypeMap.put(ZombieVillager.class, Gamerules.ZOMBIE_VILLAGERS_ENABLED);
+        mobTypeMap.put(EnderDragon.class, Gamerules.DRAGONS_ENABLED);
+        mobTypeMap.put(WitherBoss.class, Gamerules.WITHERS_ENABLED);
     }
 
     /**

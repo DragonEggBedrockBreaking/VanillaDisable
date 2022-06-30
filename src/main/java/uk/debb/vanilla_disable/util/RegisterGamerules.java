@@ -193,7 +193,6 @@ public class RegisterGamerules {
             Gamerules.VILLAGER_DAILY_RESTOCKS = GameruleHelper.register("villagerDailyRestocks", GameruleCategories.VD_MOBS, 2, 0);
             Gamerules.VILLAGER_TRADING_ENABLED = GameruleHelper.register("villagerTradingEnabled", GameruleCategories.VD_MOBS, true);
             Gamerules.PIGLIN_BARTERING_ENABLED = GameruleHelper.register("piglinBarteringEnabled", GameruleCategories.VD_MOBS, true);
-            Gamerules.WITHER_SPAWNS = GameruleHelper.register("witherSpawns", GameruleCategories.VD_MOBS, true);
             Gamerules.PIGS_BREED_WITH_WHEAT = GameruleHelper.register("pigsBreedWithWheat", GameruleCategories.VD_MOBS, false);
             Gamerules.MOBS_BURN_IN_SUNLIGHT = GameruleHelper.register("mobsBurnInSunlight", GameruleCategories.VD_MOBS, true);
             Gamerules.DRAGON_FIREBALLS = GameruleHelper.register("dragonFireballs", GameruleCategories.VD_MOBS, true);
@@ -270,6 +269,8 @@ public class RegisterGamerules {
             Gamerules.ZOGLINS_ENABLED = GameruleHelper.register("zoglinsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
             Gamerules.ZOMBIES_ENABLED = GameruleHelper.register("zombiesEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
             Gamerules.ZOMBIE_VILLAGERS_ENABLED = GameruleHelper.register("zombieVillagersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.DRAGONS_ENABLED = GameruleHelper.register("dragonsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
+            Gamerules.WITHERS_ENABLED = GameruleHelper.register("withersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
         }
         if (VanillaDisableMixinConfigPlugin.effects) {
             Gamerules.EFFECTS_ENABLED = GameruleHelper.register("effectsEnabled", GameruleCategories.VD_EFFECTS, true);

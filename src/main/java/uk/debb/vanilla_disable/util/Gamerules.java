@@ -184,7 +184,6 @@ public class Gamerules {
     public static GameRules.Key<GameRules.IntegerValue> VILLAGER_DAILY_RESTOCKS;
     public static GameRules.Key<GameRules.BooleanValue> VILLAGER_TRADING_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> PIGLIN_BARTERING_ENABLED;
-    public static GameRules.Key<GameRules.BooleanValue> WITHER_SPAWNS;
     public static GameRules.Key<GameRules.BooleanValue> PIGS_BREED_WITH_WHEAT;
     public static GameRules.Key<GameRules.BooleanValue> MOBS_BURN_IN_SUNLIGHT;
     public static GameRules.Key<GameRules.BooleanValue> DRAGON_FIREBALLS;
@@ -260,6 +259,8 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> ZOGLINS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> ZOMBIES_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> ZOMBIE_VILLAGERS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> DRAGONS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> WITHERS_ENABLED;
 
     public static GameRules.Key<GameRules.BooleanValue> EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> ABSORPTION_EFFECT;

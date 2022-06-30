@@ -179,7 +179,6 @@
     "gamerule.villagerDailyRestocks": "Number of villager restocks per day",
     "gamerule.villagerTradingEnabled": "Toggle trading with villagers",
     "gamerule.piglinBarteringEnabled": "Toggle bartering with piglins",
-    "gamerule.witherSpawns": "Toggle withers despawning",
     "gamerule.pigsBreedWithWheat": "Toggle pigs breeding with wheat",
     "gamerule.mobsBurnInSunlight": "Toggle some mobs burning in sunlight",
     "gamerule.dragonFireballs": "Toggle dragon fireballs",
@@ -255,6 +254,8 @@
     "gamerule.zoglinsEnabled":  "Toggle zoglins being enabled.",
     "gamerule.zombiesEnabled":  "Toggle zombie being enabled.",
     "gamerule.zombieVillagersEnabled":  "Toggle zombie villagers being enabled.",
+    "gamerule.dragonsEnabled": "Toggle ender dragons being enabled",
+    "gamerule.withersEnabled": "Toggle withers being enabled",
 
     "gamerule.effectsEnabled": "Whether effects are enabled",
     "gamerule.absorptionEffect": "Toggle absorption effect",

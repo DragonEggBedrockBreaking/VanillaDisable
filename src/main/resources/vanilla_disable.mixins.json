@@ -69,7 +69,6 @@
     "mob.MixinPlayer",
     "mob.MixinSkeleton",
     "mob.MixinVillager",
-    "mob.MixinWitherBoss",
     "mob.MixinZombie",
     "mob.MixinZombieVillager",
 
