@@ -36,5 +36,6 @@ public class GameruleCategories {
     public static final CustomGameRuleCategory VD_REDSTONE = createCustomGameRuleCategory("gamerule.category.vd.redstone");
     public static final CustomGameRuleCategory VD_AI = createCustomGameRuleCategory("gamerule.category.vd.ai");
     public static final CustomGameRuleCategory VD_BLOCKS = createCustomGameRuleCategory("gamerule.category.vd.blocks");
+    public static final CustomGameRuleCategory VD_FOOD = createCustomGameRuleCategory("gamerule.category.vd.food");
     public static final CustomGameRuleCategory VD_MISC = createCustomGameRuleCategory("gamerule.category.vd.misc");
 }

@@ -46,6 +46,11 @@
     "enchantments.enchantment_conflicts.MixinUntouchingEnchantment",
     "enchantments.enchantment_conflicts.MixinWaterWalkerEnchantment",
 
+    "food.MixinFoodData",
+    "food.hunger.MixinFoodData",
+    "food.hunger.MixinItem",
+    "food.hunger.MixinPlayer",
+
     "fluids.MixinBucketItem",
     "fluids.MixinEntity",
     "fluids.MixinLavaFluid",
@@ -58,9 +63,6 @@
     "misc.MixinCrossbowItem",
     "misc.MixinEntity",
     "misc.MixinLivingEntity",
-    "misc.hunger.MixinFoodData",
-    "misc.hunger.MixinItem",
-    "misc.hunger.MixinPlayer",
 
     "mob.MixinAbstractPiglin",
     "mob.MixinAbstractVillager",

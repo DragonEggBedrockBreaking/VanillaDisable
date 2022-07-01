@@ -17,9 +17,10 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
     public static boolean enchantments;
     public static boolean enchantment_conflicts;
     public static boolean fluids;
+    public static boolean food;
+    public static boolean food_hunger;
     public static boolean knockback;
     public static boolean misc;
-    public static boolean misc_hunger;
     public static boolean mob;
     public static boolean mob_toggles;
     public static boolean player;
@@ -41,9 +42,10 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
             .addMixinOption("enchantments", true)
             .addMixinOption("enchantments.enchantment_conflicts", true)
             .addMixinOption("fluids", true)
+            .addMixinOption("food", true)
+            .addMixinOption("food.hunger", true)
             .addMixinOption("knockback", true)
             .addMixinOption("misc", true)
-            .addMixinOption("misc.hunger", true)
             .addMixinOption("mob", true)
             .addMixinOption("mob_toggles", true)
             .addMixinOption("player", true)
@@ -60,9 +62,9 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
     }
 
     private void updateData() {
-        ai                    = this.caffeineConfig.getEffectiveOptionForMixin("ai.MixinGoal").isEnabled();
-        blocks                = this.caffeineConfig.getEffectiveOptionForMixin("blocks.MixinBeaconBlockEntity").isEnabled();
-        blocks_container      = this.caffeineConfig.getEffectiveOptionForMixin("blocks.container.MixinChestBlock").isEnabled();
+        ai                    =  this.caffeineConfig.getEffectiveOptionForMixin("ai.MixinGoal").isEnabled();
+        blocks                =  this.caffeineConfig.getEffectiveOptionForMixin("blocks.MixinBeaconBlockEntity").isEnabled();
+        blocks_container      =  this.caffeineConfig.getEffectiveOptionForMixin("blocks.container.MixinChestBlock").isEnabled();
         commands              =  this.caffeineConfig.getEffectiveOptionForMixin("commands.MixinCommands").isEnabled();
         damage                =  this.caffeineConfig.getEffectiveOptionForMixin("damage.MixinPlayer").isEnabled();
         despawning            =  this.caffeineConfig.getEffectiveOptionForMixin("despawning.MixinItemEntity").isEnabled();
@@ -70,9 +72,10 @@ public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixin
         enchantments          =  this.caffeineConfig.getEffectiveOptionForMixin("enchantments.MixinEnchantmentHelper").isEnabled();
         enchantment_conflicts =  this.caffeineConfig.getEffectiveOptionForMixin("enchantments.enchantment_conflicts.MixinDamageEnchantment").isEnabled();
         fluids                =  this.caffeineConfig.getEffectiveOptionForMixin("fluids.MixinBucketItem").isEnabled();
+        food                  =  this.caffeineConfig.getEffectiveOptionForMixin("food.MixinFoodData").isEnabled();
+        food_hunger           =  this.caffeineConfig.getEffectiveOptionForMixin("food.hunger.MixinFoodData").isEnabled();
         knockback             =  this.caffeineConfig.getEffectiveOptionForMixin("knockback.MixinLivingEntity").isEnabled();
         misc                  =  this.caffeineConfig.getEffectiveOptionForMixin("misc.MixinBowItem").isEnabled();
-        misc_hunger           =  this.caffeineConfig.getEffectiveOptionForMixin("misc.hunger.MixinFoodData").isEnabled();
         mob                   =  this.caffeineConfig.getEffectiveOptionForMixin("mob.MixinAbstractPiglin").isEnabled();
         mob_toggles           =  this.caffeineConfig.getEffectiveOptionForMixin("mob_toggles.MixinMob").isEnabled();
         player                =  this.caffeineConfig.getEffectiveOptionForMixin("player.MixinEntity").isEnabled();

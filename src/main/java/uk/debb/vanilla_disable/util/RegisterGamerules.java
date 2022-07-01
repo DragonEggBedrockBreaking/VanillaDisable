@@ -474,15 +474,56 @@ public class RegisterGamerules {
             Gamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS = GameruleHelper.register("creativeSwordCanBreakBlocks", GameruleCategories.VD_BLOCKS, false);
             Gamerules.PUSHABLE_BUDDING_AMETHYST = GameruleHelper.register("pushableBuddingAmethyst",GameruleCategories.VD_BLOCKS, false);
         }
-        if (VanillaDisableMixinConfigPlugin.misc) {
-            if (VanillaDisableMixinConfigPlugin.misc_hunger) {
+        if (VanillaDisableMixinConfigPlugin.food) {
+            if (VanillaDisableMixinConfigPlugin.food_hunger) {
                 Gamerules.OLD_HUNGER = GameruleHelper.register("oldHunger", GameruleCategories.VD_MISC, false);
             }
+            Gamerules.APPLE_NUTRITION = GameruleHelper.register("appleNutrition", GameruleCategories.VD_FOOD, 4, 0);
+            Gamerules.BAKED_POTATO_NUTRITION = GameruleHelper.register("bakedPotatoNutrition", GameruleCategories.VD_FOOD, 5, 0);
+            Gamerules.BEEF_NUTRITION = GameruleHelper.register("beefNutrition", GameruleCategories.VD_FOOD, 3, 0);
+            Gamerules.BEETROOT_NUTRITION = GameruleHelper.register("beetrootNutrition", GameruleCategories.VD_FOOD, 1, 0);
+            Gamerules.BEETROOT_SOUP_NUTRITION = GameruleHelper.register("beetrootSoupNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.BREAD_NUTRITION = GameruleHelper.register("breadNutrition", GameruleCategories.VD_FOOD, 5, 0);
+            Gamerules.CARROT_NUTRITION = GameruleHelper.register("carrotNutrition", GameruleCategories.VD_FOOD, 3, 0);
+            Gamerules.CHICKEN_NUTRITION = GameruleHelper.register("chickenNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.CHORUS_FRUIT_NUTRITION = GameruleHelper.register("chorusFruitNutrition", GameruleCategories.VD_FOOD, 4, 0);
+            Gamerules.COD_NUTRITION = GameruleHelper.register("codNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.COOKED_BEEF_NUTRITION = GameruleHelper.register("cookedBeefNutrition", GameruleCategories.VD_FOOD, 8, 0);
+            Gamerules.COOKED_CHICKEN_NUTRITION = GameruleHelper.register("cookedChickenNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.COOKED_COD_NUTRITION = GameruleHelper.register("cookedCodNutrition", GameruleCategories.VD_FOOD, 5, 0);
+            Gamerules.COOKED_MUTTON_NUTRITION = GameruleHelper.register("cookedMuttonNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.COOKED_PORKCHOP_NUTRITION = GameruleHelper.register("cookedPorkchopNutrition", GameruleCategories.VD_FOOD, 8, 0);
+            Gamerules.COOKED_RABBIT_NUTRITION = GameruleHelper.register("cookedRabbitNutrition", GameruleCategories.VD_FOOD, 5, 0);
+            Gamerules.COOKED_SALMON_NUTRITION = GameruleHelper.register("cookedSalmonNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.COOKIE_NUTRITION = GameruleHelper.register("cookieNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.DRIED_KELP_NUTRITION = GameruleHelper.register("driedKelpNutrition", GameruleCategories.VD_FOOD, 1, 0);
+            Gamerules.ENCHANTED_GOLDEN_APPLE_NUTRITION = GameruleHelper.register("enchantedGoldenAppleNutrition", GameruleCategories.VD_FOOD, 4, 0);
+            Gamerules.GOLDEN_APPLE_NUTRITION = GameruleHelper.register("goldenAppleNutrition", GameruleCategories.VD_FOOD, 4, 0);
+            Gamerules.GOLDEN_CARROT_NUTRITION = GameruleHelper.register("goldenCarrotNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.HONEY_BOTTLE_NUTRITION = GameruleHelper.register("honeyBottleNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.MELON_SLICE_NUTRITION = GameruleHelper.register("melonSliceNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.MUSHROOM_STEW_NUTRITION = GameruleHelper.register("mushroomStewNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.MUTTON_NUTRITION = GameruleHelper.register("muttonNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.POISONOUS_POTATO_NUTRITION = GameruleHelper.register("poisonousPotatoNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.PORKCHOP_NUTRITION = GameruleHelper.register("porkchopNutrition", GameruleCategories.VD_FOOD, 3, 0);
+            Gamerules.POTATO_NUTRITION = GameruleHelper.register("potatoNutrition", GameruleCategories.VD_FOOD, 1, 0);
+            Gamerules.PUFFERFISH_NUTRITION = GameruleHelper.register("pufferfishNutrition", GameruleCategories.VD_FOOD, 1, 0);
+            Gamerules.PUMPKIN_PIE_NUTRITION = GameruleHelper.register("pumpkinPieNutrition", GameruleCategories.VD_FOOD, 8, 0);
+            Gamerules.RABBIT_NUTRITION = GameruleHelper.register("rabbitNutrition", GameruleCategories.VD_FOOD, 3, 0);
+            Gamerules.RABBIT_STEW_NUTRITION = GameruleHelper.register("rabbitStewNutrition", GameruleCategories.VD_FOOD, 10, 0);
+            Gamerules.ROTTEN_FLESH_NUTRITION = GameruleHelper.register("rottenFleshNutrition", GameruleCategories.VD_FOOD, 4, 0);
+            Gamerules.SALMON_NUTRITION = GameruleHelper.register("salmonNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.SPIDER_EYE_NUTRITION = GameruleHelper.register("spiderEyeNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.SUSPICIOUS_STEW_NUTRITION = GameruleHelper.register("suspiciousStewNutrition", GameruleCategories.VD_FOOD, 6, 0);
+            Gamerules.SWEET_BERRIES_NUTRITION = GameruleHelper.register("sweetBerriesNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.GLOW_BERRIES_NUTRITION = GameruleHelper.register("glowBerriesNutrition", GameruleCategories.VD_FOOD, 2, 0);
+            Gamerules.TROPICAL_FISH_NUTRITION = GameruleHelper.register("tropicalFishNutrition", GameruleCategories.VD_FOOD, 1, 0);
+        }
+        if (VanillaDisableMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.register("oldBoats", GameruleCategories.VD_MISC, false);
             Gamerules.TOTEMS_ENABLED = GameruleHelper.register("totemsEnabled", GameruleCategories.VD_MISC, true);
             Gamerules.BOW_SPAMMING = GameruleHelper.register("bowSpamming", GameruleCategories.VD_MISC, false);
             Gamerules.CROSSBOW_SPAMMING = GameruleHelper.register("crossbowSpamming",GameruleCategories.VD_MISC, false);
-
         }
     }
 }

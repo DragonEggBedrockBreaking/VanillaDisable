@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.misc.hunger;
+package uk.debb.vanilla_disable.mixin.food.hunger;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
