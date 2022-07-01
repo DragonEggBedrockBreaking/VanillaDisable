@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -22,17 +21,6 @@ public abstract class MixinEntity {
     @Shadow public Level level;
     @Shadow private BlockPos blockPosition;
     @Shadow public abstract boolean hurt(DamageSource source, float amount);
-
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason change nether portal cooldown for entities
-     * @param cir the returnable callback info (Integer)
-     */
-    @Inject(method = "getDimensionChangingDelay", at = @At("HEAD"), cancellable = true)
-    private void modifyDimensionChangingDelay(CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
-        cir.setReturnValue(GameruleHelper.getInt(Gamerules.NETHER_PORTAL_COOLDOWN));
-    }
 
     /**
      * @author DragonEggBedrockBreaking

@@ -1,9 +1,9 @@
-package uk.debb.vanilla_disable.mixin.misc;
+package uk.debb.vanilla_disable.mixin.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.EndPortalBlock;
+import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,11 +13,11 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Mixin(EndPortalBlock.class)
-public abstract class MixinEndPortalBlock {
+@Mixin(NetherPortalBlock.class)
+public abstract class MixinNetherPortalBlock {
     /**
      * @author DragonEggBedrockBreaking
-     * @reason prevent people from going through end portals
+     * @reason prevent people from going through nether portals
      * @param state the state
      * @param level the level
      * @param pos the position of the portal
@@ -25,9 +25,9 @@ public abstract class MixinEndPortalBlock {
      * @param ci the callback info
      */
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
-    private void cancelEntityInside(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
+    private void cancelInsideEntity(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
-        if (!GameruleHelper.getBool(Gamerules.END_PORTALS_ENABLED)) {
+        if (!GameruleHelper.getBool(Gamerules.NETHER_PORTALS_ENABLED)) {
             ci.cancel();
         }
     }

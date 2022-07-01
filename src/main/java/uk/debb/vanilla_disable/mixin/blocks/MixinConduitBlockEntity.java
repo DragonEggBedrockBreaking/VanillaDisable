@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.misc;
+package uk.debb.vanilla_disable.mixin.blocks;
 
 import java.util.List;
 import net.minecraft.core.BlockPos;

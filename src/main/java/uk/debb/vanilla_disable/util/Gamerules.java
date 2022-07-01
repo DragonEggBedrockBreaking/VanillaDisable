@@ -447,15 +447,16 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> END_GATEWAYS_ENABLED;
     public static GameRules.Key<GameRules.IntegerValue> NETHER_PORTAL_COOLDOWN;
     public static GameRules.Key<GameRules.BooleanValue> CROP_TRAMPLING;
-    public static GameRules.Key<GameRules.BooleanValue> OLD_HUNGER;
-    public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
     public static GameRules.Key<GameRules.BooleanValue> BEACONS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> CONDUITS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> ICE_SLIDING;
-    public static GameRules.Key<GameRules.BooleanValue> TOTEMS_ENABLED;
-    public static GameRules.Key<GameRules.BooleanValue> BOW_SPAMMING;
-    public static GameRules.Key<GameRules.BooleanValue> CROSSBOW_SPAMMING;
     public static GameRules.Key<GameRules.BooleanValue> CREATIVE_SWORD_CAN_BREAK_BLOCKS;
     public static GameRules.Key<GameRules.BooleanValue> PUSHABLE_BUDDING_AMETHYST;
     public static GameRules.Key<GameRules.BooleanValue> CONTAINER_OPENING_BLOCKED;
+
+    public static GameRules.Key<GameRules.BooleanValue> OLD_HUNGER;
+    public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
+    public static GameRules.Key<GameRules.BooleanValue> TOTEMS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BOW_SPAMMING;
+    public static GameRules.Key<GameRules.BooleanValue> CROSSBOW_SPAMMING;
 }

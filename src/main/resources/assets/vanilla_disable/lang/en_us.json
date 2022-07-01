@@ -443,17 +443,18 @@
     "gamerule.endGatewaysEnabled": "Toggle end gateways",
     "gamerule.netherPortalCooldown": "Cooldown for nether portals",
     "gamerule.cropTrampling": "Toggle crop trampling",
-    "gamerule.oldHunger": "Toggle old (alpha) hunger",
-    "gamerule.oldBoats": "Toggle old (pre-1.9) boats",
     "gamerule.beaconsEnabled": "Toggle beacons",
     "gamerule.conduitsEnabled": "Toggle conduits",
     "gamerule.iceSliding": "Toggle entities sliding on ice",
-    "gamerule.totemsEnabled": "Toggle totems of undying",
-    "gamerule.bowSpamming": "Toggle bow spamming",
-    "gamerule.crossbowSpamming": "Toogle crossbow spamming",
     "gamerule.creativeSwordCanBreakBlocks": "Toggle swords breaking blocks in creative",
     "gamerule.pushableBuddingAmethyst": "Toggle budding amethysts being pushable",
     "gamerule.containerOpeningBlocked": "Toggle blocks/cats blocking container opening",
+
+    "gamerule.oldHunger": "Toggle old (alpha) hunger",
+    "gamerule.oldBoats": "Toggle old (pre-1.9) boats",
+    "gamerule.totemsEnabled": "Toggle totems of undying",
+    "gamerule.bowSpamming": "Toggle bow spamming",
+    "gamerule.crossbowSpamming": "Toogle crossbow spamming",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
     "gamerule.category.vd.knockback": "VanillaDisable Knockback",
@@ -470,6 +471,7 @@
     "gamerule.category.vd.player": "VanillaDisable Player",
     "gamerule.category.vd.redstone": "VanillaDisable Redstone",
     "gamerule.category.vd.ai": "VanillaDisable AI",
+    "gamerule.category.vd.blocks": "VanillaDisable Blocks",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator"

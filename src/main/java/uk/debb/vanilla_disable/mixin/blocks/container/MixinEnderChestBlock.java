@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.misc.container;
+package uk.debb.vanilla_disable.mixin.blocks.container;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

@@ -439,7 +439,7 @@ public class RegisterGamerules {
             Gamerules.PISTON_ENABLED = GameruleHelper.register("pistonEnabled", GameruleCategories.VD_REDSTONE, true);
             Gamerules.SCULK_SENSOR_ENABLED = GameruleHelper.register("sculkSensorEnabled",GameruleCategories.VD_REDSTONE, true);
         }
-        if (true) {
+        if (VanillaDisableMixinConfigPlugin.ai) {
             Gamerules.BEE_AI = GameruleHelper.register("beeAi", GameruleCategories.VD_AI, true);
             Gamerules.BLAZE_AI = GameruleHelper.register("blazeAi", GameruleCategories.VD_AI, true);
             Gamerules.DOLPHIN_AI = GameruleHelper.register("dolphinAi", GameruleCategories.VD_AI, true);
@@ -459,27 +459,30 @@ public class RegisterGamerules {
             Gamerules.TURTLE_AI = GameruleHelper.register("turtleAi", GameruleCategories.VD_AI, true);
             Gamerules.VEX_AI = GameruleHelper.register("vexAi", GameruleCategories.VD_AI, true);
         }
+        if (VanillaDisableMixinConfigPlugin.blocks) {
+            if (VanillaDisableMixinConfigPlugin.blocks_container) {
+                Gamerules.CONTAINER_OPENING_BLOCKED = GameruleHelper.register("containerOpeningBlocked", GameruleCategories.VD_BLOCKS, true);
+            }
+            Gamerules.NETHER_PORTALS_ENABLED = GameruleHelper.register("netherPortalsEnabled", GameruleCategories.VD_BLOCKS, true);
+            Gamerules.END_PORTALS_ENABLED = GameruleHelper.register("endPortalsEnabled",GameruleCategories.VD_BLOCKS, true);
+            Gamerules.END_GATEWAYS_ENABLED = GameruleHelper.register("endGatewaysEnabled", GameruleCategories.VD_BLOCKS, true);
+            Gamerules.NETHER_PORTAL_COOLDOWN = GameruleHelper.register("netherPortalCooldown", GameruleCategories.VD_BLOCKS, 300);
+            Gamerules.CROP_TRAMPLING = GameruleHelper.register("cropTrampling", GameruleCategories.VD_BLOCKS, true);
+            Gamerules.BEACONS_ENABLED = GameruleHelper.register("beaconsEnabled", GameruleCategories.VD_BLOCKS, true);
+            Gamerules.CONDUITS_ENABLED = GameruleHelper.register("conduitsEnabled", GameruleCategories.VD_BLOCKS, true);
+            Gamerules.ICE_SLIDING = GameruleHelper.register("iceSliding", GameruleCategories.VD_BLOCKS, true);
+            Gamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS = GameruleHelper.register("creativeSwordCanBreakBlocks", GameruleCategories.VD_BLOCKS, false);
+            Gamerules.PUSHABLE_BUDDING_AMETHYST = GameruleHelper.register("pushableBuddingAmethyst",GameruleCategories.VD_BLOCKS, false);
+        }
         if (VanillaDisableMixinConfigPlugin.misc) {
-            Gamerules.NETHER_PORTALS_ENABLED = GameruleHelper.register("netherPortalsEnabled", GameruleCategories.VD_MISC, true);
-            Gamerules.END_PORTALS_ENABLED = GameruleHelper.register("endPortalsEnabled",GameruleCategories.VD_MISC, true);
-            Gamerules.END_GATEWAYS_ENABLED = GameruleHelper.register("endGatewaysEnabled", GameruleCategories.VD_MISC, true);
-            Gamerules.NETHER_PORTAL_COOLDOWN = GameruleHelper.register("netherPortalCooldown", GameruleCategories.VD_MISC, 300);
-            Gamerules.CROP_TRAMPLING = GameruleHelper.register("cropTrampling", GameruleCategories.VD_MISC, true);
             if (VanillaDisableMixinConfigPlugin.misc_hunger) {
                 Gamerules.OLD_HUNGER = GameruleHelper.register("oldHunger", GameruleCategories.VD_MISC, false);
             }
             Gamerules.OLD_BOATS = GameruleHelper.register("oldBoats", GameruleCategories.VD_MISC, false);
-            Gamerules.BEACONS_ENABLED = GameruleHelper.register("beaconsEnabled", GameruleCategories.VD_MISC, true);
-            Gamerules.CONDUITS_ENABLED = GameruleHelper.register("conduitsEnabled", GameruleCategories.VD_MISC, true);
-            Gamerules.ICE_SLIDING = GameruleHelper.register("iceSliding", GameruleCategories.VD_MISC, true);
             Gamerules.TOTEMS_ENABLED = GameruleHelper.register("totemsEnabled", GameruleCategories.VD_MISC, true);
             Gamerules.BOW_SPAMMING = GameruleHelper.register("bowSpamming", GameruleCategories.VD_MISC, false);
             Gamerules.CROSSBOW_SPAMMING = GameruleHelper.register("crossbowSpamming",GameruleCategories.VD_MISC, false);
-            Gamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS = GameruleHelper.register("creativeSwordCanBreakBlocks", GameruleCategories.VD_MISC, false);
-            Gamerules.PUSHABLE_BUDDING_AMETHYST = GameruleHelper.register("pushableBuddingAmethyst",GameruleCategories.VD_MISC, false);
-            if (VanillaDisableMixinConfigPlugin.misc_container) {
-                Gamerules.CONTAINER_OPENING_BLOCKED = GameruleHelper.register("containerOpeningBlocked",GameruleCategories.VD_MISC, true);
-            }
+
         }
     }
 }
