@@ -11,13 +11,16 @@ accessible class net/minecraft/world/entity/monster/Blaze$BlazeAttackGoal
 accessible class net/minecraft/world/entity/animal/Dolphin$DolphinSwimToTreasureGoal
 accessible class net/minecraft/world/entity/animal/Dolphin$DolphinSwimWithPlayerGoal
 accessible class net/minecraft/world/entity/animal/Dolphin$PlayWithItemsGoal
+accessible class net/minecraft/world/entity/animal/Cat$CatRelaxOnOwnerGoal
 accessible class net/minecraft/world/entity/monster/Drowned$DrownedSwimUpGoal
 accessible class net/minecraft/world/entity/monster/Drowned$DrownedGoToWaterGoal
 accessible class net/minecraft/world/entity/monster/EnderMan$EndermanFreezeWhenLookedAt
 accessible class net/minecraft/world/entity/monster/EnderMan$EndermanLeaveBlockGoal
 accessible class net/minecraft/world/entity/monster/EnderMan$EndermanTakeBlockGoal
+accessible class net/minecraft/world/entity/animal/Fox$FaceplantGoal
 accessible class net/minecraft/world/entity/animal/Fox$FoxBehaviorGoal
 accessible class net/minecraft/world/entity/animal/Fox$FoxSearchForItemsGoal
+accessible class net/minecraft/world/entity/animal/Fox$StalkPreyGoal
 accessible class net/minecraft/world/entity/monster/Ghast$GhastLookGoal
 accessible class net/minecraft/world/entity/monster/Ghast$GhastShootFireballGoal
 accessible class net/minecraft/world/entity/monster/Ghast$RandomFloatAroundGoal
@@ -30,6 +33,8 @@ accessible class net/minecraft/world/entity/monster/Phantom$PhantomAttackPlayerT
 accessible class net/minecraft/world/entity/monster/Phantom$PhantomAttackStrategyGoal
 accessible class net/minecraft/world/entity/monster/Phantom$PhantomMoveTargetGoal
 accessible class net/minecraft/world/entity/animal/Pufferfish$PufferfishPuffGoal
+accessible class net/minecraft/world/entity/raid/Raider$HoldGroundAttackGoal
+accessible class net/minecraft/world/entity/raid/Raider$RaiderMoveThroughVillageGoal
 accessible class net/minecraft/world/entity/monster/Shulker$ShulkerAttackGoal
 accessible class net/minecraft/world/entity/monster/Shulker$ShulkerPeekGoal
 accessible class net/minecraft/world/entity/monster/Silverfish$SilverfishWakeUpFriendsGoal
