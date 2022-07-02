@@ -535,6 +535,24 @@
     "gamerule.tropicalFishNutrition": "How much hunger tropical fish provides",
     "gamerule.tropicalFishSaturation": "How much saturation tropical fish provides",
 
+    "gamerule.potionsEnabled": "Toggle potions being enabled",
+    "gamerule.fireResistancePotion": "Toggle fire resistance potions being enabled",
+    "gamerule.harmingPotion": "Toggle harming potions being enabled",
+    "gamerule.healingPotion":  "Toggle healing potions being enabled",
+    "gamerule.invisibilityPotion": "Toggle invisibility potions being enabled",
+    "gamerule.leapingPotion":  "Toggle leaping potions being enabled",
+    "gamerule.luckPotion":  "Toggle luck potion potions being enabled",
+    "gamerule.nightVisionPotion":  "Toggle night vision potions being enabled",
+    "gamerule.poisonPotion":  "Toggle poison potions being enabled",
+    "gamerule.regenerationPotion": "Toggle regeneration potions being enabled",
+    "gamerule.slowFallingPotion": "Toggle slow falling potions being enabled",
+    "gamerule.slownessPotion": "Toggle slowness potions being enabled",
+    "gamerule.strengthPotion":  "Toggle strength potions being enabled",
+    "gamerule.swiftnessPotion":  "Toggle swiftness potions being enabled",
+    "gamerule.turtleMasterPotion":  "Toggle turtle master potions being enabled",
+    "gamerule.waterBreathingPotion": "Toggle water breathing potions being enabled",
+    "gamerule.weaknessPotion": "Toggle weakness potions being enabled",
+
     "gamerule.oldBoats": "Toggle old (pre-1.9) boats",
     "gamerule.totemsEnabled": "Toggle totems of undying",
     "gamerule.bowSpamming": "Toggle bow spamming",
@@ -557,6 +575,7 @@
     "gamerule.category.vd.ai": "VanillaDisable AI",
     "gamerule.category.vd.blocks": "VanillaDisable Blocks",
     "gamerule.category.vd.food": "VanillaDisable Food",
+    "gamerule.category.vd.potions": "VanillaDisable Potions",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator"

@@ -81,6 +81,7 @@
     "mob_toggles.MixinMob",
 
     "player.MixinEntity",
+    "potions.MixinPotionUtils",
 
     "redstone.MixinButtonBlock",
     "redstone.MixinComparatorBlock",

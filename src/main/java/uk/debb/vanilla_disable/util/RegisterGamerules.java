@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.util;
 
+import net.minecraft.world.level.GameRules;
 import uk.debb.vanilla_disable.mixin.VanillaDisableMixinConfigPlugin;
 
 public class RegisterGamerules {
@@ -561,6 +562,25 @@ public class RegisterGamerules {
             Gamerules.GLOW_BERRIES_SATURATION = GameruleHelper.register("glowBerriesSaturation", GameruleCategories.VD_FOOD, 1, 0, 99);
             Gamerules.TROPICAL_FISH_NUTRITION = GameruleHelper.register("tropicalFishNutrition", GameruleCategories.VD_FOOD, 1, 0, 20);
             Gamerules.TROPICAL_FISH_SATURATION = GameruleHelper.register("tropicalFishSaturation", GameruleCategories.VD_FOOD, 1, 0, 99);
+        }
+        if (VanillaDisableMixinConfigPlugin.potions) {
+            Gamerules.POTIONS_ENABLED = GameruleHelper.register("potionsEnabled", GameruleCategories.VD_POTIONS, true);
+            Gamerules.FIRE_RESISTANCE_POTION = GameruleHelper.register("fireResistancePotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.HARMING_POTION = GameruleHelper.register("harmingPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.HEALING_POTION = GameruleHelper.register("healingPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.INVISIBILITY_POTION = GameruleHelper.register("invisibilityPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.LEAPING_POTION = GameruleHelper.register("leapingPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.LUCK_POTION = GameruleHelper.register("luckPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.NIGHT_VISION_POTION = GameruleHelper.register("nightVisionPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.POISON_POTION = GameruleHelper.register("poisonPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.REGENERATION_POTION = GameruleHelper.register("regenerationPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.SLOW_FALLING_POTION = GameruleHelper.register("slowFallingPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.SLOWNESS_POTION = GameruleHelper.register("slownessPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.STRENGTH_POTION = GameruleHelper.register("strengthPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.SWIFTNESS_POTION = GameruleHelper.register("swiftnessPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.TURTLE_MASTER_POTION = GameruleHelper.register("turtleMasterPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.WATER_BREATHING_POTION = GameruleHelper.register("waterBreathingPotion", GameruleCategories.VD_POTIONS, true);
+            Gamerules.WEAKNESS_POTION = GameruleHelper.register("weaknessPotion", GameruleCategories.VD_POTIONS, true);
         }
         if (VanillaDisableMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.register("oldBoats", GameruleCategories.VD_MISC, false);

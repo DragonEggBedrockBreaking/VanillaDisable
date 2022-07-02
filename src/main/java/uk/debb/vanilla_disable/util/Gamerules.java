@@ -539,6 +539,24 @@ public class Gamerules {
     public static GameRules.Key<GameRules.IntegerValue> TROPICAL_FISH_NUTRITION;
     public static GameRules.Key<GameRules.IntegerValue> TROPICAL_FISH_SATURATION;
 
+    public static GameRules.Key<GameRules.BooleanValue> POTIONS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> FIRE_RESISTANCE_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> HARMING_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> HEALING_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> INVISIBILITY_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> LEAPING_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> LUCK_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> NIGHT_VISION_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> POISON_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> REGENERATION_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> SLOWNESS_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> SLOW_FALLING_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> STRENGTH_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> SWIFTNESS_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> TURTLE_MASTER_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> WATER_BREATHING_POTION;
+    public static GameRules.Key<GameRules.BooleanValue> WEAKNESS_POTION;
+
     public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
     public static GameRules.Key<GameRules.BooleanValue> TOTEMS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> BOW_SPAMMING;
