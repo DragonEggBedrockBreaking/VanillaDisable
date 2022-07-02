@@ -1,4 +1,3 @@
-import java.nio.file.Path;
 import io.github.coolcrabs.brachyura.decompiler.BrachyuraDecompiler;
 import io.github.coolcrabs.brachyura.decompiler.fernflower.FernflowerDecompiler;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyCollector;
@@ -12,6 +11,8 @@ import io.github.coolcrabs.brachyura.processing.ProcessorChain;
 import io.github.coolcrabs.brachyura.quilt.QuiltMaven;
 import io.github.coolcrabs.brachyura.quilt.SimpleQuiltProject;
 import net.fabricmc.mappingio.tree.MappingTree;
+
+import java.nio.file.Path;
 
 public class Buildscript extends SimpleQuiltProject {
     @Override
@@ -47,12 +48,15 @@ public class Buildscript extends SimpleQuiltProject {
     @Override
     public void getModDependencies(ModDependencyCollector d) {
         // Quilt Standard Libraries
-        if (Versions.JIJ_QFAPI) jij(d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE));
-        else d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        if (Versions.JIJ_QFAPI)
+            jij(d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE));
+        else
+            d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
         jij(d.addMaven("https://maven.flashyreese.me/", new MavenId("releases.net.caffeinemc", "mixin-config", Versions.CAFFEINE_CONFIG_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
-        if (Versions.LAZYDFU_ENABLED) d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);
+        if (Versions.LAZYDFU_ENABLED)
+            d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);
     }
 
     @Override
