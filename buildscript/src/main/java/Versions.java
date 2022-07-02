@@ -5,7 +5,7 @@ public class Versions {
     public static final int JAVA_VERSION = 17;
     public static final String QUILTFLOWER_VERSION = "1.8.1";
 
-    public static final String QFAPI_VERSION = "2.0.0-alpha.3+0.55.3-1.19";
+    public static final String QFAPI_VERSION = "2.0.0-beta.3+0.57.0-1.19";
     public static final boolean JIJ_QFAPI = false;
     public static final String CAFFEINE_CONFIG_VERSION = "1.0.0";
     public static final String LAZYDFU_VERSION = "0.1.3";
