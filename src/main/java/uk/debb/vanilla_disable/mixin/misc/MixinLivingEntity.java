@@ -13,16 +13,16 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
     /**
+     * @param damageSource the cause of totem activation
+     * @param cir          the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason prevent totems from activating
-     * @param damageSource the cause of totem activation
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "checkTotemDeathProtection", at = @At("HEAD"), cancellable = true)
     private void totemsDoNotWork(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (VDServer.getServer() == null) return;
         if (!GameruleHelper.getBool(Gamerules.TOTEMS_ENABLED)) {
             cir.setReturnValue(false);
-        } 
+        }
     }
 }

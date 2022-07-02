@@ -12,9 +12,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(SpikeFeature.EndSpike.class)
 public abstract class MixinSpikeFeature$EndSpike {
     /**
+     * @param cir the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason remove cages on the two end pillars which have them
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isGuarded", at = @At("HEAD"), cancellable = true)
     private void notGuarded(CallbackInfoReturnable<Boolean> cir) {

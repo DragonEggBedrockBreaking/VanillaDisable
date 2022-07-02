@@ -12,9 +12,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Entity.class)
 public abstract class MixinEntity {
     /**
+     * @param cir the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason change nether portal cooldown for entities
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDimensionChangingDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDimensionChangingDelay(CallbackInfoReturnable<Integer> cir) {

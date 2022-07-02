@@ -14,10 +14,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(WaterFluid.class)
 public abstract class MixinWaterFluid {
     /**
+     * @param world the world
+     * @param cir   the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason edit how far the fluid flows
-     * @param world the world
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDropOff", at = @At("HEAD"), cancellable = true)
     private void getWaterDropOff(LevelReader world, CallbackInfoReturnable<Integer> cir) {
@@ -28,10 +28,10 @@ public abstract class MixinWaterFluid {
     }
 
     /**
+     * @param world the world
+     * @param cir   the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason edit how fast the fluid flows
-     * @param world the world
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getTickDelay", at = @At("HEAD"), cancellable = true)
     private void getWaterTickDelay(LevelReader world, CallbackInfoReturnable<Integer> cir) {
@@ -42,9 +42,9 @@ public abstract class MixinWaterFluid {
     }
 
     /**
+     * @param cir the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason modify whether the fluid can form infinite water sources
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
     private void canWaterConvertToSource(CallbackInfoReturnable<Boolean> cir) {

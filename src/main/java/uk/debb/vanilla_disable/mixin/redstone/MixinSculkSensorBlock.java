@@ -13,10 +13,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(SculkSensorBlock.class)
 public abstract class MixinSculkSensorBlock {
     /**
+     * @param blockState the state of the sculk sensor
+     * @param cir        the returnable callback info
      * @author DragonEggBedrockBreaking
      * @reason prevent the sculk sensor from being activated at all
-     * @param blockState the state of the sculk sensor
-     * @param cir the returnable callback info
      */
     @Inject(method = "canActivate", at = @At("HEAD"), cancellable = true)
     private static void cannotActivate(BlockState blockState, CallbackInfoReturnable<Boolean> cir) {

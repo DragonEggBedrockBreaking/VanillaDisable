@@ -12,9 +12,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Husk.class)
 public abstract class MixinHusk {
     /**
+     * @param ci the callback info
      * @author DragonEggBedrockBreaking
      * @reason stop husks from converting into zombies
-     * @param ci the callback info
      */
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelConversionInWater(CallbackInfo ci) {

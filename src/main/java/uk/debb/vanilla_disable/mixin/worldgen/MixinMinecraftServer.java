@@ -2,13 +2,6 @@ package uk.debb.vanilla_disable.mixin.worldgen;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.world.level.DataPackConfig;
@@ -22,21 +15,33 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.VDServer;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
-    @Shadow @Final protected WorldData worldData;
-    @Shadow private static DataPackConfig getSelectedPacks(PackRepository repo) {
+    @Shadow
+    @Final
+    protected WorldData worldData;
+
+    @Shadow
+    private static DataPackConfig getSelectedPacks(PackRepository repo) {
         return null;
     }
 
     /**
-     * @author DragonEggBedrockBreaking
      * @param name the name of the datapack
+     * @author DragonEggBedrockBreaking
      */
     private boolean createDatapackDir(String name, String dirname) {
         String dataPackPath = VDServer.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
@@ -67,58 +72,76 @@ public abstract class MixinMinecraftServer {
     @Unique
     private boolean createStructureDatapackDirectories() {
         if (!GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_ancient_city", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_ancient_city", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_bastion_remnant", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_bastion_remnant", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_buried_treasure", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_buried_treasure", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_desert_pyramid", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_desert_pyramid", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_end_city", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_end_city", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_igloo", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_igloo", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_jungle_pyramid", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_jungle_pyramid", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_mineshaft", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_mineshaft", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_fortress", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_fortress", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_nether_fossil", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_nether_fossil", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_monument", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_monument", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_ocean_ruin", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_ocean_ruin", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_pillager_outpost", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_pillager_outpost", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_ruined_portal", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_ruined_portal", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_shipwreck", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_shipwreck", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_stronghold", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_stronghold", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_swamp_hut", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_swamp_hut", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure")) return false;
+            if (!createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure"))
+                return false;
         }
         if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION, this.worldData)) {
             return createDatapackDir("vanilla_disable_structures_mansion", "tags/worldgen/biome/has_structure");
@@ -127,8 +150,8 @@ public abstract class MixinMinecraftServer {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
      * @param name the name of the datapack
+     * @author DragonEggBedrockBreaking
      */
     @Unique
     private void addMcmetaFile(String name, String content) throws IOException {
@@ -222,10 +245,10 @@ public abstract class MixinMinecraftServer {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
-     * @param url the url of the json files to download
-     * @param name the name of the datapack
+     * @param url       the url of the json files to download
+     * @param name      the name of the datapack
      * @param shortname the name of the json file (without extension)
+     * @author DragonEggBedrockBreaking
      */
     @Unique
     private void addJsonFile(String url, String name, String shortname, String dirname) throws IOException {
@@ -244,18 +267,18 @@ public abstract class MixinMinecraftServer {
     private void addBiomeJsonFiles() throws IOException {
         if (GameruleHelper.getBool(Gamerules.REMOVE_OVERWORLD_BIOMES, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/overworld.json",
-                "vanilla_disable_overworld_biomes", "overworld", "dimension");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/overworld.json",
+                    "vanilla_disable_overworld_biomes", "overworld", "dimension");
         }
         if (GameruleHelper.getBool(Gamerules.REMOVE_NETHER_BIOMES, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_nether.json",
-                "vanilla_disable_nether_biomes", "the_nether", "dimension");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_nether.json",
+                    "vanilla_disable_nether_biomes", "the_nether", "dimension");
         }
         if (GameruleHelper.getBool(Gamerules.REMOVE_END_BIOMES, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_end.json",
-                "vanilla_disable_end_biomes", "the_end", "dimension");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_end.json",
+                    "vanilla_disable_end_biomes", "the_end", "dimension");
         }
     }
 
@@ -266,137 +289,137 @@ public abstract class MixinMinecraftServer {
     private void addStructureJsonFiles() throws IOException {
         if (!GameruleHelper.getBool(Gamerules.ANCIENT_CITY_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ancient_city", "ancient_city", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ancient_city", "ancient_city", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.BASTION_REMNANT_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_bastion_remnants", "bastion_remnant", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_bastion_remnants", "bastion_remnant", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.BURIED_TREASURE_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_buried_treasure", "buried_treasure", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_buried_treasure", "buried_treasure", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.DESERT_PYRAMID_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_desert_pyramid", "desert_pyramid", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_desert_pyramid", "desert_pyramid", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.END_CITY_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_end_city", "end_city", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_end_city", "end_city", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.IGLOO_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_igloo", "igloo", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_igloo", "igloo", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.JUNGLE_PYRAMID_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_jungle_pyramid", "jungle_pyramid", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_jungle_pyramid", "jungle_pyramid", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.MINESHAFT_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_mineshaft", "mineshaft", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_mineshaft", "mineshaft", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_mineshaft", "mineshaft_mesa", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_mineshaft", "mineshaft_mesa", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.FORTRESS_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_fortress", "nether_fortress", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_fortress", "nether_fortress", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.NETHER_FOSSIL_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_nether_fossil", "nether_fossil", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_nether_fossil", "nether_fossil", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.MONUMENT_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_monument", "ocean_monument", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_monument", "ocean_monument", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.OCEAN_RUIN_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ocean_ruin", "ocean_ruin_cold", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ocean_ruin", "ocean_ruin_cold", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ocean_ruin", "ocean_ruin_warm", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ocean_ruin", "ocean_ruin_warm", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.PILLAGER_OUTPOST_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_pillager_outpost", "pillager_outpost", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_pillager_outpost", "pillager_outpost", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.RUINED_PORTAL_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ruined_portal", "ruined_portal_desert", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ruined_portal", "ruined_portal_desert", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ruined_portal", "ruined_portal_jungle", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ruined_portal", "ruined_portal_jungle", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ruined_portal", "ruined_portal_mountain", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ruined_portal", "ruined_portal_mountain", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ruined_portal", "ruined_portal_nether", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ruined_portal", "ruined_portal_nether", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ruined_portal", "ruined_portal_ocean", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ruined_portal", "ruined_portal_ocean", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ruined_portal", "ruined_portal_standard", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ruined_portal", "ruined_portal_standard", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_ruined_portal", "ruined_portal_swamp", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_ruined_portal", "ruined_portal_swamp", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.SHIPWRECK_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_shipwreck", "shipwreck", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_shipwreck", "shipwreck", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_shipwreck", "shipwreck_beached", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_shipwreck", "shipwreck_beached", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.STRONGHOLD_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_stronghold", "stronghold", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_stronghold", "stronghold", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.SWAMP_HUT_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_swamp_hut", "swamp_hut", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_swamp_hut", "swamp_hut", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_village", "village_desert", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_village", "village_desert", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_village", "village_plains", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_village", "village_plains", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_village", "village_savanna", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_village", "village_savanna", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_village", "village_snowy", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_village", "village_snowy", "tags/worldgen/biome/has_structure");
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_village", "village_taiga", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_village", "village_taiga", "tags/worldgen/biome/has_structure");
         }
         if (!GameruleHelper.getBool(Gamerules.MANSION_GENERATION, this.worldData)) {
             addJsonFile(
-                "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                "vanilla_disable_structures_mansion", "woodland_mansion", "tags/worldgen/biome/has_structure");
+                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
+                    "vanilla_disable_structures_mansion", "woodland_mansion", "tags/worldgen/biome/has_structure");
         }
     }
 
@@ -423,8 +446,8 @@ public abstract class MixinMinecraftServer {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
      * @param name the name of the datapack to enable
+     * @author DragonEggBedrockBreaking
      */
     @Unique
     private void enableDatapack(String name) {
@@ -440,13 +463,13 @@ public abstract class MixinMinecraftServer {
         config.enabled = enabledCopy;
         config.disabled = disabledCopy;
         LoggerFactory.getLogger("Vanilla Disable").debug(String.format(
-            "Datapack %s has been enabled due to your gamerule choices.",
-            name.replaceAll("vanilla_disable_", "")));
+                "Datapack %s has been enabled due to your gamerule choices.",
+                name.replaceAll("vanilla_disable_", "")));
     }
 
     /**
-     * @author DragonEggBedrockBreaking
      * @param name the name of the datapack to disable
+     * @author DragonEggBedrockBreaking
      */
     @Unique
     private void disableDatapack(String name) {
@@ -462,8 +485,8 @@ public abstract class MixinMinecraftServer {
         config.enabled = enabledCopy;
         config.disabled = disabledCopy;
         LoggerFactory.getLogger("Vanilla Disable").debug(String.format(
-            "Datapack %s has been disabled due to your gamerule choices.",
-            name.replaceAll("vanilla_disable_", "")));
+                "Datapack %s has been disabled due to your gamerule choices.",
+                name.replaceAll("vanilla_disable_", "")));
     }
 
     /**
@@ -591,10 +614,10 @@ public abstract class MixinMinecraftServer {
     }
 
     /**
+     * @param ci the callback info
      * @author DragonEggBedrockBreaking
      * @reason after the world is loaded, if first load, create datapacks and patch them
      * @reason and always toggle them, on all loads
-     * @param ci the callback info
      */
     @Inject(method = "createLevels", at = @At("HEAD"))
     private void onLevelLoad(CallbackInfo ci) throws IOException {

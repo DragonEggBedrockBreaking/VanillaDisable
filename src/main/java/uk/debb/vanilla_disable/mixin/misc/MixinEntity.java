@@ -18,15 +18,19 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
-    @Shadow public Level level;
-    @Shadow private BlockPos blockPosition;
-    @Shadow public abstract boolean hurt(DamageSource source, float amount);
+    @Shadow
+    public Level level;
+    @Shadow
+    private BlockPos blockPosition;
+
+    @Shadow
+    public abstract boolean hurt(DamageSource source, float amount);
 
     /**
+     * @param state the state of the block below the entity
+     * @param ci    the callback info
      * @author DragonEggBedrockBreaking
      * @reason kills boats when they hit blocks
-     * @param state the state of the block below the entity
-     * @param ci the callback info
      */
     @Inject(method = "onInsideBlock", at = @At("HEAD"), cancellable = true)
     private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {

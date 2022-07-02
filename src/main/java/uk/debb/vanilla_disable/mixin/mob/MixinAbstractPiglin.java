@@ -12,9 +12,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(AbstractPiglin.class)
 public abstract class MixinAbstractPiglin {
     /**
+     * @param cir the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason stop piglins from zombifying
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isImmuneToZombification", at = @At("HEAD"), cancellable = true)
     protected void setImmuneToZombification(CallbackInfoReturnable<Boolean> cir) {

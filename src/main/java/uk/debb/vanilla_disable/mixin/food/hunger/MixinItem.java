@@ -13,10 +13,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Item.class)
 public abstract class MixinItem {
     /**
+     * @param stack the stack of items that the player is holding
+     * @param cir   the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason make food eating instant
-     * @param stack the stack of items that the player is holding
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
     private void editUseDuration(ItemStack stack, CallbackInfoReturnable<Integer> cir) {

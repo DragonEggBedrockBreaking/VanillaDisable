@@ -15,14 +15,14 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(BeaconBlockEntity.class)
 public abstract class MixinBeaconBlockEntity {
     /**
+     * @param level      the level
+     * @param blockPos   the block position
+     * @param i          ???
+     * @param mobEffect  the effect to be applied
+     * @param mobEffect2 the other effect to be applied
+     * @param ci         the callback info
      * @author DragonEggBedrockBreaking
      * @reason prevent beacons from applying effects
-     * @param level the level
-     * @param blockPos the block position
-     * @param i ???
-     * @param mobEffect the effect to be applied
-     * @param mobEffect2 the other effect to be applied
-     * @param ci the callback info
      */
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void cancelEffects(Level level, BlockPos blockPos, int i, MobEffect mobEffect, MobEffect mobEffect2, CallbackInfo ci) {

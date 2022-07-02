@@ -34,12 +34,12 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Mob.class)
 public abstract class MixinMob extends LivingEntity {
+    @Unique
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> mobTypeMap = new Object2ObjectOpenHashMap<>();
+
     public MixinMob(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
-
-    @Unique
-    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> mobTypeMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -121,9 +121,9 @@ public abstract class MixinMob extends LivingEntity {
     }
 
     /**
+     * @param ci the callback info
      * @author DragonEggBedrockBreaking
      * @reason stops mobs from spawning if they are disabled
-     * @param ci the callback info
      */
     @Inject(method = "checkDespawn", at = @At("HEAD"))
     private void checkIfEnabled(CallbackInfo ci) {

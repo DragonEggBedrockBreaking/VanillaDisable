@@ -13,30 +13,30 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(CrossbowItem.class)
 public abstract class MixinCrossbowItem {
     /**
-     * @author DragonEggBedrockBreaking
-     * @reason make crossbows quickly shoot
      * @param itemStack the crossbow
-     * @param cir the returnable callback info (Integer)
-     */
-    @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
-    private void lowerUseDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
-        if (GameruleHelper.getBool(Gamerules.CROSSBOW_SPAMMING)) {
-            cir.setReturnValue(2);
-        }
-    }
-
-    /**
+     * @param cir       the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason make crossbows quickly charge
-     * @param itemStack the crossbow
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getChargeDuration", at = @At("HEAD"), cancellable = true)
     private static void lowerChargeDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
         if (VDServer.getServer() == null) return;
         if (GameruleHelper.getBool(Gamerules.CROSSBOW_SPAMMING)) {
             cir.setReturnValue(1);
+        }
+    }
+
+    /**
+     * @param itemStack the crossbow
+     * @param cir       the returnable callback info (Integer)
+     * @author DragonEggBedrockBreaking
+     * @reason make crossbows quickly shoot
+     */
+    @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
+    private void lowerUseDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
+        if (VDServer.getServer() == null) return;
+        if (GameruleHelper.getBool(Gamerules.CROSSBOW_SPAMMING)) {
+            cir.setReturnValue(2);
         }
     }
 }

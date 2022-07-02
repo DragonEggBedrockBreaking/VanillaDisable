@@ -12,10 +12,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(ServerLevel.class)
 public abstract class MixinServerLevel {
     /**
+     * @param level the level
+     * @param ci    the callback info
      * @author DragonEggBedrockBreaking
      * @reason disable generation of the end spawn platform
-     * @param level the level
-     * @param ci the callback info
      */
     @Inject(method = "makeObsidianPlatform", at = @At("HEAD"), cancellable = true)
     private static void cancelMakingObsidianPlatform(ServerLevel level, CallbackInfo ci) {

@@ -22,10 +22,10 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
     }
 
     /**
+     * @param blockState the state of the block
+     * @param cir        the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason edit the delay of the redstone component
-     * @param blockState the state of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDelay(BlockState blockState, CallbackInfoReturnable<Integer> cir) {
@@ -34,11 +34,11 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
      * @param blockGetter the getter for the repeater
-     * @param blockPos the position of the repeater
-     * @param blockState the state of the repeater
+     * @param blockPos    the position of the repeater
+     * @param blockState  the state of the repeater
      * @return the signal outputted
+     * @author DragonEggBedrockBreaking
      */
     @Override
     protected int getOutputSignal(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {

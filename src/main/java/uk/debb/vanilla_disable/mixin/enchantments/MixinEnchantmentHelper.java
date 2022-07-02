@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.enchantments;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -68,11 +68,11 @@ public abstract class MixinEnchantmentHelper {
     }
 
     /**
+     * @param enchantment the enchantment on the item to disable
+     * @param stack       the stack of items with that enchantment
+     * @param cir         the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason disable vanilla enchantments
-     * @param enchantment the enchantment on the item to disable
-     * @param stack the stack of items with that enchantment
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getItemEnchantmentLevel", at = @At("HEAD"), cancellable = true)
     private static void removeEnchantmentLevel(Enchantment enchantment, ItemStack stack, CallbackInfoReturnable<Integer> cir) {
@@ -82,7 +82,7 @@ public abstract class MixinEnchantmentHelper {
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = enchantmentMap.get(enchantment);
         if (!GameruleHelper.getBool(Gamerules.ENCHANTMENTS_ENABLED) ||
-            (gameRule != null && !GameruleHelper.getBool(gameRule))) {
+                (gameRule != null && !GameruleHelper.getBool(gameRule))) {
             cir.setReturnValue(0);
         }
     }

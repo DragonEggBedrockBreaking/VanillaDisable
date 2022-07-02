@@ -15,10 +15,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(ComparatorBlock.class)
 public abstract class MixinComparatorBlock {
     /**
+     * @param blockState the state of the block
+     * @param cir        the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason edit the delay of the redstone component
-     * @param blockState the state of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDelay", at = @At("HEAD"), cancellable = true)
     private void modifyDelay(BlockState blockState, CallbackInfoReturnable<Integer> cir) {
@@ -27,12 +27,12 @@ public abstract class MixinComparatorBlock {
     }
 
     /**
+     * @param blockGetter the block getter
+     * @param blockPos    the position of the block
+     * @param blockState  the state of the block
+     * @param cir         the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason edit the signal that is outputted by the redstone component
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param blockState the state of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getOutputSignal", at = @At("HEAD"), cancellable = true)
     private void modifyOutputSignal(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<Integer> cir) {

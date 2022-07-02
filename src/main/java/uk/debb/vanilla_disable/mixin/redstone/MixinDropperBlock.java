@@ -14,11 +14,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(DropperBlock.class)
 public abstract class MixinDropperBlock {
     /**
+     * @param serverLevel the server level
+     * @param blockPos    the position of the block
+     * @param ci          the callback info
      * @author DragonEggBedrockBreaking
      * @reason stop the block from being activated by redstone
-     * @param serverLevel the server level
-     * @param blockPos the position of the block
-     * @param ci the callback info
      */
     @Inject(method = "dispenseFrom", at = @At("HEAD"), cancellable = true)
     private void cancelDispensing(ServerLevel serverLevel, BlockPos blockPos, CallbackInfo ci) {

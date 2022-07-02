@@ -1,5 +1,7 @@
 package uk.debb.vanilla_disable.util;
 
+import org.quiltmc.loader.api.QuiltLoader;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,7 +9,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import org.quiltmc.loader.api.QuiltLoader;
 
 public class LangFileManager {
     /**

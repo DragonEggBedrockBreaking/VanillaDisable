@@ -15,18 +15,18 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(value = AbstractVillager.class, priority = 999)
 public abstract class MixinAbstractVillager {
     /**
+     * @param tradeOffer the trade offer
+     * @param offer      the trade offer
      * @author DragonEggBedrockBreaking
      * @reason allow for infinite trading with villagers
-     * @param tradeOffer the trade offer
-     * @param offer the trade offer
      */
     @Redirect(
-        method = "notifyTrade",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/item/trading/MerchantOffer;increaseUses()V"
-        ),
-        require = 0
+            method = "notifyTrade",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/trading/MerchantOffer;increaseUses()V"
+            ),
+            require = 0
     )
     private void cancelUses(MerchantOffer tradeOffer, MerchantOffer offer) {
         if (VDServer.getServer() == null) return;
@@ -38,9 +38,9 @@ public abstract class MixinAbstractVillager {
     }
 
     /**
+     * @param cir the returnable callback info (net.minecraft.world.item.trading.MerchantOffers)
      * @author DragonEggBedrockBreaking
      * @reason stop players from trading with villagers
-     * @param cir the returnable callback info (net.minecraft.world.item.trading.MerchantOffers)
      */
     @Inject(method = "getOffers", at = @At("HEAD"), cancellable = true)
     private void clearOffers(CallbackInfoReturnable<MerchantOffers> cir) {

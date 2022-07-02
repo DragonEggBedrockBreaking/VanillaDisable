@@ -16,19 +16,19 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(value = Zombie.class, priority = 1001)
 public abstract class MixinZombie {
     /**
+     * @param level       the level
+     * @param serverWorld the world
+     * @param other       the entity
+     * @return the difficulty
      * @author DragonEggBedrockBreaking
      * @reason stop villagers from turning into zombie villagers
-     * @param level the level
-     * @param serverWorld the world
-     * @param other the entity
-     * @return the difficulty
      */
     @Redirect(
-        method = "wasKilled",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
-        )
+            method = "wasKilled",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
+            )
     )
     public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LivingEntity other) {
         if (VDServer.getServer() == null) {
@@ -42,9 +42,9 @@ public abstract class MixinZombie {
     }
 
     /**
+     * @param ci the callback info
      * @author DragonEggBedrockBreaking
      * @reason stop zombies from converting into drowned
-     * @param ci the callback info
      */
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelUnderWaterConversion(CallbackInfo ci) {

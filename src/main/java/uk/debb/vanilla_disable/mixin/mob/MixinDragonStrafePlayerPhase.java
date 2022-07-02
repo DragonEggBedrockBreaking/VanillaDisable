@@ -13,17 +13,17 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(DragonStrafePlayerPhase.class)
 public abstract class MixinDragonStrafePlayerPhase {
     /**
-     * @author DragonEggBedrockBreaking
-     * @param level the level the dragon is in
+     * @param level  the level the dragon is in
      * @param entity the dragon fireball
      * @return whether to spawn the fireball
+     * @author DragonEggBedrockBreaking
      */
     @Redirect(
-        method = "doServerTick",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"
-        )
+            method = "doServerTick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"
+            )
     )
     public boolean spawnFreshEntity(Level level, Entity entity) {
         if (VDServer.getServer() == null) {

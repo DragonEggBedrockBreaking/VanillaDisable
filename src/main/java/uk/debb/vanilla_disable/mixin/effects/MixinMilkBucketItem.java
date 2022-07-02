@@ -12,17 +12,17 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(MilkBucketItem.class)
 public class MixinMilkBucketItem {
     /**
-     * @author DragonEggBedrockBreaking
-     * @reason stop milk buckets from removing effects
      * @param livingEntity the entity drinking the milk bucket
      * @return whether the entity has had its effects removed
+     * @author DragonEggBedrockBreaking
+     * @reason stop milk buckets from removing effects
      */
     @Redirect(
-        method = "finishUsingItem",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/LivingEntity;removeAllEffects()Z"
-        )
+            method = "finishUsingItem",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/LivingEntity;removeAllEffects()Z"
+            )
     )
     private boolean cancelRemovingEffects(LivingEntity livingEntity) {
         if (VDServer.getServer() != null && GameruleHelper.getBool(Gamerules.MILK_CLEARS_EFFECTS)) {

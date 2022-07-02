@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.spawning;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.GameRules;
@@ -38,13 +38,13 @@ public class MixinNaturalSpawner {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
-     * @param group the type of entity
-     * @param level the level
-     * @param chunk the chunk
+     * @param group   the type of entity
+     * @param level   the level
+     * @param chunk   the chunk
      * @param checker profiling/testing
-     * @param runner profiling/testing
-     * @param ci the callback info
+     * @param runner  profiling/testing
+     * @param ci      the callback info
+     * @author DragonEggBedrockBreaking
      */
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
     private static void cancelSpawningCategoryForChunk(MobCategory group, ServerLevel level, LevelChunk chunk, SpawnPredicate checker, AfterSpawnCallback runner, CallbackInfo ci) {

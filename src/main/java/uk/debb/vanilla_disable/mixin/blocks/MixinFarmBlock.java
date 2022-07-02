@@ -16,24 +16,24 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(value = FarmBlock.class, priority = 1001)
 public abstract class MixinFarmBlock {
     /**
+     * @param state        the state of the block
+     * @param level        the level
+     * @param pos          the position of the block
+     * @param theWorld     the world
+     * @param blockState   the state of the block
+     * @param blockPos     the position of the block
+     * @param entity       the entity falling on the block
+     * @param fallDistance how far the entity fell on the block
      * @author DragonEggBedrockBreaking
      * @reason disable crop trampling
-     * @param state the state of the block
-     * @param level the level
-     * @param pos the position of the block
-     * @param theWorld the world
-     * @param blockState the state of the block
-     * @param blockPos the position of the block
-     * @param entity the entity falling on the block
-     * @param fallDistance how far the entity fell on the block
      */
     @Redirect(
-        method = "fallOn",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/FarmBlock;turnToDirt(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
-        ),
-        require = 0
+            method = "fallOn",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/FarmBlock;turnToDirt(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
+            ),
+            require = 0
     )
     private void cancelTurningToDirt(BlockState state, Level level, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
         if (VDServer.getServer() == null) return;

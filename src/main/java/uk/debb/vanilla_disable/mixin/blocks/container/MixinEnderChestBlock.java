@@ -18,25 +18,25 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(value = EnderChestBlock.class, priority = 1001)
 public abstract class MixinEnderChestBlock {
     /**
-     * @author DragonEggBedrockBreaking
-     * @param blockState the state of the block above the echest
-     * @param blockGetter the getter of the block above the echest
-     * @param blockPos the position of the block above the echest
-     * @param blockState2 the state of the block above the echest
-     * @param level the level the echest is in
-     * @param blockPos2 the position of the block above the echest
-     * @param player the player trying to open the echest
+     * @param blockState      the state of the block above the echest
+     * @param blockGetter     the getter of the block above the echest
+     * @param blockPos        the position of the block above the echest
+     * @param blockState2     the state of the block above the echest
+     * @param level           the level the echest is in
+     * @param blockPos2       the position of the block above the echest
+     * @param player          the player trying to open the echest
      * @param interactionHand the hand the player is trying to open the echest with
-     * @param blockHitResult the result of the player trying to open the echest
+     * @param blockHitResult  the result of the player trying to open the echest
      * @return whether the player can open the echest
+     * @author DragonEggBedrockBreaking
      */
     @Redirect(
-        method = "use",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/state/BlockState;isRedstoneConductor(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z"
-        ),
-        require = 0
+            method = "use",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/block/state/BlockState;isRedstoneConductor(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z"
+            ),
+            require = 0
     )
     private boolean isFullBlock(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, BlockState blockState2, Level level, BlockPos blockPos2, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (VDServer.getServer() == null) return blockState.isRedstoneConductor(blockGetter, blockPos);

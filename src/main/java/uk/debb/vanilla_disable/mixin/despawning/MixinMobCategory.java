@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,6 +33,7 @@ public abstract class MixinMobCategory {
         spawnGroupImmediateMap.put(MobCategory.WATER_AMBIENT, Gamerules.WATER_AMBIENT_MAX_DESPAWN);
         spawnGroupImmediateMap.put(MobCategory.WATER_CREATURE, Gamerules.WATER_CREATURE_MIN_DESPAWN);
     }
+
     @Unique
     private void addStartOptionsToMap() {
         spawnGroupStartMap.put(MobCategory.MONSTER, Gamerules.MONSTER_MIN_DESPAWN);
@@ -45,9 +46,9 @@ public abstract class MixinMobCategory {
     }
 
     /**
+     * @param cir returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason edit immediate despawn range
-     * @param cir returnable callback info (Integer)
      */
     @Inject(method = "getDespawnDistance", at = @At("HEAD"), cancellable = true)
     public void editDespawnDistance(CallbackInfoReturnable<Integer> cir) {
@@ -55,16 +56,16 @@ public abstract class MixinMobCategory {
         if (spawnGroupImmediateMap.isEmpty()) {
             addImmediateOptionsToMap();
         }
-       GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupImmediateMap.get(this);
-       if (gameRule != null) {
-           cir.setReturnValue(GameruleHelper.getInt(gameRule));
-       }
+        GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupImmediateMap.get(this);
+        if (gameRule != null) {
+            cir.setReturnValue(GameruleHelper.getInt(gameRule));
+        }
     }
 
     /**
+     * @param cir returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason edit immediate despawn range
-     * @param cir returnable callback info (Integer)
      */
     @Inject(method = "getNoDespawnDistance", at = @At("HEAD"), cancellable = true)
     public void editNoDespawnDistance(CallbackInfoReturnable<Integer> cir) {

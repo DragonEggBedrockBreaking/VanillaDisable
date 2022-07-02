@@ -14,11 +14,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(PressurePlateBlock.class)
 public abstract class MixinPressurePlateBlock {
     /**
+     * @param level    the level
+     * @param blockPos the position of the block
+     * @param cir      the returnable callback info
      * @author DragonEggBedrockBreaking
      * @reason edit the signal strength outputted by the redstone component
-     * @param level the level
-     * @param blockPos the position of the block
-     * @param cir the returnable callback info
      */
     @Inject(method = "getSignalStrength", at = @At("HEAD"), cancellable = true)
     private void modifySignalStrength(Level level, BlockPos blockPos, CallbackInfoReturnable<Integer> cir) {

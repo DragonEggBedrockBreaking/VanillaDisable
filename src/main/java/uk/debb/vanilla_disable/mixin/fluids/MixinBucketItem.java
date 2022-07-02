@@ -26,24 +26,26 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(BucketItem.class)
 public abstract class MixinBucketItem {
-    @Shadow @Final private Fluid content;
+    @Shadow
+    @Final
+    private Fluid content;
 
     /**
-     * @author DragonEggBedrockBreaking
-     * @reason whether nether water evaporation should be considered
-     * @param type the type of dimension
-     * @param player the player placing the water
-     * @param level the level
-     * @param pos the position to place the water
+     * @param type      the type of dimension
+     * @param player    the player placing the water
+     * @param level     the level
+     * @param pos       the position to place the water
      * @param hitResult the result of using the water bucket
      * @return whether the biome should be counted as ultrawarm
+     * @author DragonEggBedrockBreaking
+     * @reason whether nether water evaporation should be considered
      */
     @Redirect(
-        method = "emptyContents",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/level/dimension/DimensionType;ultraWarm()Z"
-        )
+            method = "emptyContents",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/dimension/DimensionType;ultraWarm()Z"
+            )
     )
     public boolean isNotUltraWarm(DimensionType type, @Nullable Player player, Level level, BlockPos pos, @Nullable BlockHitResult hitResult) {
         if (VDServer.getServer() == null) {
@@ -56,21 +58,21 @@ public abstract class MixinBucketItem {
     }
 
     /**
+     * @param player the player placing the water
+     * @param world  the world
+     * @param pos    the position at which the water is being placed
+     * @param ci     the callback info
      * @author DragonEggBedrockBreaking
      * @reason don't play bucket sound if placing in the nether
-     * @param player the player placing the water
-     * @param world the world
-     * @param pos the position at which the water is being placed
-     * @param ci the callback info
      */
     @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
     protected void cancelPlayingEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (world.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&
-            GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER)) {
+                GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER)) {
             world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);
             for (int l = 0; l < 8; ++l) {
-                world.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + Math.random(), (double)pos.getY() + Math.random(), (double)pos.getZ() + Math.random(), 0.0, 0.0, 0.0);
+                world.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + Math.random(), (double) pos.getY() + Math.random(), (double) pos.getZ() + Math.random(), 0.0, 0.0, 0.0);
             }
             ci.cancel();
         }

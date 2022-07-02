@@ -16,19 +16,20 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ItemEntity.class)
 public abstract class MixinItemEntity extends Entity {
+    @Unique
+    final int MAX = GameruleHelper.getInt(Gamerules.ITEM_DESPAWN_TIME);
+    @Shadow
+    private int age;
+    @Shadow
+    private int pickupDelay;
     public MixinItemEntity(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
 
-    @Shadow private int age;
-    @Shadow private int pickupDelay;
-    @Unique
-    final int MAX = GameruleHelper.getInt(Gamerules.ITEM_DESPAWN_TIME);
-
     /**
+     * @param ci callback info
      * @author DragonEggBedrockBreaking
      * @reason delete the item when necessary
-     * @param ci callback info
      */
     @Inject(method = "tick", at = @At("HEAD"))
     private void discardItem(CallbackInfo ci) {
@@ -39,23 +40,23 @@ public abstract class MixinItemEntity extends Entity {
     }
 
     /**
+     * @param ci callback info
      * @author DragonEggBedrockBreaking
      * @reason cancel deleting the item if too early
-     * @param ci callback info
      */
     @Inject(
-        method = "tick",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V",
-            ordinal = 1
-        ),
-        cancellable = true
+            method = "tick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/item/ItemEntity;discard()V",
+                    ordinal = 1
+            ),
+            cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
         if (this.age < MAX * 20 &&
-            this.pickupDelay != Short.MAX_VALUE) {
+                this.pickupDelay != Short.MAX_VALUE) {
             ci.cancel();
         }
     }

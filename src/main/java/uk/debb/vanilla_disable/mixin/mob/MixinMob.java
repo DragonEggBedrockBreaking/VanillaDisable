@@ -12,9 +12,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Mob.class)
 public abstract class MixinMob {
     /**
+     * @param cir the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason prevent zombies/skeletons from burning in sunlight
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isSunBurnTick", at = @At("HEAD"), cancellable = true)
     private void stopBurning(CallbackInfoReturnable<Boolean> cir) {

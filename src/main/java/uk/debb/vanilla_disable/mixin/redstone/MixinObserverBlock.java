@@ -17,13 +17,13 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(ObserverBlock.class)
 public abstract class MixinObserverBlock {
     /**
+     * @param blockState  the state of the block
+     * @param blockGetter the block getter
+     * @param blockPos    the position of the block
+     * @param direction   the direction of the block
+     * @param cir         the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param direction the direction of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
     private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
@@ -34,13 +34,13 @@ public abstract class MixinObserverBlock {
     }
 
     /**
+     * @param blockState  the state of the block
+     * @param blockGetter the block getter
+     * @param blockPos    the position of the block
+     * @param direction   the direction of the block
+     * @param cir         the returnable callback info
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param direction the direction of the block
-     * @param cir the returnable callback info
      */
     @Inject(method = "getDirectSignal", at = @At("HEAD"), cancellable = true)
     private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
@@ -51,18 +51,18 @@ public abstract class MixinObserverBlock {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
-     * @reason edit the delay of the redstone component
      * @param delay the original delay of the block
      * @return the new delay that it will be changed to
+     * @author DragonEggBedrockBreaking
+     * @reason edit the delay of the redstone component
      */
     @ModifyArg(
-        method = "startSignal",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/level/LevelAccessor;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"
-        ),
-        index = 2
+            method = "startSignal",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/LevelAccessor;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"
+            ),
+            index = 2
     )
     private int modifyObserverDelay(int delay) {
         if (VDServer.getServer() == null) return delay;
@@ -70,18 +70,18 @@ public abstract class MixinObserverBlock {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
-     * @reason edit the duration of the redstone pulse
      * @param duration the original duration of the redstone pulse
      * @return the new duration that it will be changed to
+     * @author DragonEggBedrockBreaking
+     * @reason edit the duration of the redstone pulse
      */
     @ModifyArg(
-        method = "tick",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerLevel;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"
-        ),
-        index = 2
+            method = "tick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/level/ServerLevel;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"
+            ),
+            index = 2
     )
     private int modifyObserverDuration(int duration) {
         if (VDServer.getServer() == null) return duration;

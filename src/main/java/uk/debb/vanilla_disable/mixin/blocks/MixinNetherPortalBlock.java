@@ -16,13 +16,13 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(NetherPortalBlock.class)
 public abstract class MixinNetherPortalBlock {
     /**
+     * @param state  the state
+     * @param level  the level
+     * @param pos    the position of the portal
+     * @param entity the entity going through the portal
+     * @param ci     the callback info
      * @author DragonEggBedrockBreaking
      * @reason prevent people from going through nether portals
-     * @param state the state
-     * @param level the level
-     * @param pos the position of the portal
-     * @param entity the entity going through the portal
-     * @param ci the callback info
      */
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
     private void cancelInsideEntity(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {

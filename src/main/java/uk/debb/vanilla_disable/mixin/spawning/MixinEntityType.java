@@ -18,16 +18,16 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(EntityType.class)
 public abstract class MixinEntityType {
     /**
+     * @param level         the level
+     * @param stack         The item stack
+     * @param player        The player
+     * @param pos           The position
+     * @param spawnReason   The reason for the spawn
+     * @param alignPosition The position to align to
+     * @param invertY       ???
+     * @param cir           The returnable callback info (net.minecraft.world.entity.Entity)
      * @author DragonEggBedrockBreaking
      * @reason Disable spawn eggs
-     * @param level the level
-     * @param stack The item stack
-     * @param player The player
-     * @param pos The position
-     * @param spawnReason The reason for the spawn
-     * @param alignPosition The position to align to
-     * @param invertY ???
-     * @param cir The returnable callback info (net.minecraft.world.entity.Entity)
      */
     @Inject(method = "spawn(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/MobSpawnType;ZZ)Lnet/minecraft/world/entity/Entity;", at = @At(value = "HEAD"))
     private void cancelSpawning(ServerLevel level, ItemStack stack, Player player, BlockPos pos, MobSpawnType spawnReason, boolean alignPosition, boolean invertY, CallbackInfoReturnable<Entity> cir) {

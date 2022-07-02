@@ -19,27 +19,28 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Villager.class)
 public abstract class MixinVillager extends Entity {
+    @Shadow
+    private int numberOfRestocksToday;
+    @Shadow
+    private long lastRestockGameTime;
     public MixinVillager(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
 
-    @Shadow private int numberOfRestocksToday;
-    @Shadow private long lastRestockGameTime;
-
     /**
+     * @param level       the level
+     * @param serverWorld the world
+     * @param entity      the lightning
+     * @return the difficulty
      * @author DragonEggBedrockBreaking
      * @reason stop villagers from turning into witches
-     * @param level the level
-     * @param serverWorld the world
-     * @param entity the lightning
-     * @return the difficulty
      */
     @Redirect(
-        method = "thunderHit",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
-        )
+            method = "thunderHit",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
+            )
     )
     public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LightningBolt entity) {
         if (VDServer.getServer() == null) {
@@ -53,9 +54,9 @@ public abstract class MixinVillager extends Entity {
     }
 
     /**
+     * @param cir the returnable callback info
      * @author DragonEggBedrockBreaking
      * @reason change how frequently villagers can restock
-     * @param cir the returnable callback info
      */
     @Inject(method = "allowedToRestock", at = @At("HEAD"), cancellable = true)
     private void editRestockFrequency(CallbackInfoReturnable<Boolean> cir) {

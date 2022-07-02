@@ -10,16 +10,16 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
     /**
+     * @param ci the callback info
      * @author DragonEggBedrockBreaking
      * @reason write this ourselves instead of depending on an entire api
-     * @param ci the callback info
      */
     @Inject(
-        method = "runServer",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"
-        )
+            method = "runServer",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"
+            )
     )
     private void beforeServerSetup(CallbackInfo ci) {
         VDServer.setServer((MinecraftServer) (Object) this);

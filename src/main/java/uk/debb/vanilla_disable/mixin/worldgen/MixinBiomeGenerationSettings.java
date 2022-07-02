@@ -1,16 +1,8 @@
 package uk.debb.vanilla_disable.mixin.worldgen;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import net.minecraft.data.worldgen.placement.AquaticPlacements;
-import net.minecraft.data.worldgen.placement.CavePlacements;
-import net.minecraft.data.worldgen.placement.EndPlacements;
-import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
-import net.minecraft.data.worldgen.placement.NetherPlacements;
-import net.minecraft.data.worldgen.placement.OrePlacements;
-import net.minecraft.data.worldgen.placement.TreePlacements;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
-import net.minecraft.data.worldgen.placement.VillagePlacements;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.data.worldgen.placement.*;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -264,10 +256,10 @@ public abstract class MixinBiomeGenerationSettings {
     }
 
     /**
+     * @param feature the feature that is being checked for
+     * @param cir     the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason don't allow disabled features
-     * @param feature the feature that is being checked for
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "hasFeature", at = @At("HEAD"), cancellable = true)
     private void cancelHavingFeature(PlacedFeature feature, CallbackInfoReturnable<Boolean> cir) {

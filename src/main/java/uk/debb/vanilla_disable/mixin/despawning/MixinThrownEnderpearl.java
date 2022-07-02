@@ -12,17 +12,17 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(ThrownEnderpearl.class)
 public abstract class MixinThrownEnderpearl {
     /**
+     * @param ci callback info
      * @author DragonEggBedrockBreaking
      * @reason don't delete ender pearls on player death
-     * @param ci callback info
      */
     @Inject(
-        method = "tick",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/projectile/ThrownEnderpearl;discard()V"
-        ),
-        cancellable = true
+            method = "tick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/projectile/ThrownEnderpearl;discard()V"
+            ),
+            cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
         if (VDServer.getServer() == null) return;

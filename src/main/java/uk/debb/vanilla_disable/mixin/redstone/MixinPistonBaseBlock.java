@@ -15,14 +15,14 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(PistonBaseBlock.class)
 public abstract class MixinPistonBaseBlock {
     /**
+     * @param blockState the state of the block
+     * @param level      the level
+     * @param blockPos   the position of the block
+     * @param i          ???
+     * @param j          ???
+     * @param cir        the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason stop pistons extending and retracting
-     * @param blockState the state of the block
-     * @param level the level
-     * @param blockPos the position of the block
-     * @param i ???
-     * @param j ???
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "triggerEvent", at = @At("HEAD"), cancellable = true)
     private void cancelTriggeringEvent(BlockState blockState, Level level, BlockPos blockPos, int i, int j, CallbackInfoReturnable<Boolean> cir) {

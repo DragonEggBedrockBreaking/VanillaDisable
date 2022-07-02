@@ -13,12 +13,13 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Block.class)
 public abstract class MixinBlock {
-    @Shadow public abstract float getFriction();
+    @Shadow
+    public abstract float getFriction();
 
     /**
+     * @param cir the returnable callback info (Float)
      * @author DragonEggBedrockBreaking
      * @reason change the friction of blocks to the default (stone)
-     * @param cir the returnable callback info (Float)
      */
     @Inject(method = "getFriction", at = @At("HEAD"), cancellable = true)
     private void cancelFriction(CallbackInfoReturnable<Float> cir) {

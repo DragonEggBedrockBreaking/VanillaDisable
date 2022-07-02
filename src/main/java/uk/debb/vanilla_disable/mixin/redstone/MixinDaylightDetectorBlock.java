@@ -16,13 +16,13 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(DaylightDetectorBlock.class)
 public abstract class MixinDaylightDetectorBlock {
     /**
+     * @param blockState  the state of the block
+     * @param blockGetter the block getter
+     * @param blockPos    the position of the block
+     * @param direction   the direction of the block
+     * @param cir         the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param direction the direction of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
     private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {

@@ -15,11 +15,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(ZombieVillager.class)
 public abstract class MixinZombieVillager {
     /**
+     * @param player the player curing
+     * @param hand   the hand of the player
+     * @param cir    the returnable callback info (net.minecraft.world.InteractionResult)
      * @author DragonEggBedrockBreaking
      * @reason stop curing of zombie villagers
-     * @param player the player curing
-     * @param hand the hand of the player
-     * @param cir the returnable callback info (net.minecraft.world.InteractionResult)
      */
     @Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
     private void cureMob(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {

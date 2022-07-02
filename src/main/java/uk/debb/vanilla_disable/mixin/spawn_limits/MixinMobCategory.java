@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.spawn_limits;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,9 +33,9 @@ public abstract class MixinMobCategory {
     }
 
     /**
+     * @param cir the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason modify vanilla spawn caps
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getMaxInstancesPerChunk", at = @At("HEAD"), cancellable = true)
     public void getMaxInstancesPerChunk(CallbackInfoReturnable<Integer> cir) {

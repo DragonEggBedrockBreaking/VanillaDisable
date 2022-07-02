@@ -26,30 +26,30 @@ public abstract class MixinPlayer {
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (VDServer.getServer() == null) return;
         if (GameruleHelper.getBool(Gamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
-            ((LivingEntity)(Object)this).setHealth(((LivingEntity)(Object)this).getHealth() + Objects.requireNonNull(stack.getItem().getFoodProperties()).getNutrition());
+            ((LivingEntity) (Object) this).setHealth(((LivingEntity) (Object) this).getHealth() + Objects.requireNonNull(stack.getItem().getFoodProperties()).getNutrition());
         }
     }
 
     /**
+     * @param hungerManager the hunger manager
+     * @param ignoreHunger  whether to ignore hunger
+     * @return whether one can eat food
      * @author DragonEggBedrockBreaking
      * @reason allows you to eat food with a full hunger bar
-     * @param hungerManager the hunger manager
-     * @param ignoreHunger whether to ignore hunger
-     * @return whether one can eat food
      */
     @Redirect(
-        method = "canEat",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/food/FoodData;needsFood()Z"
-        )
+            method = "canEat",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/food/FoodData;needsFood()Z"
+            )
     )
     public boolean alwaysNeedsFood(FoodData hungerManager, boolean ignoreHunger) {
         if (VDServer.getServer() == null) {
             return hungerManager.needsFood();
         }
         if (GameruleHelper.getBool(Gamerules.OLD_HUNGER)) {
-            return ((LivingEntity)(Object)this).getHealth() < ((LivingEntity)(Object)this).getMaxHealth();
+            return ((LivingEntity) (Object) this).getHealth() < ((LivingEntity) (Object) this).getMaxHealth();
         }
         return hungerManager.needsFood();
     }

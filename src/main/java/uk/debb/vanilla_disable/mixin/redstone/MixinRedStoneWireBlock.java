@@ -13,10 +13,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(RedStoneWireBlock.class)
 public abstract class MixinRedStoneWireBlock {
     /**
+     * @param blockState the state of the block
+     * @param cir        the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getWireSignal", at = @At("HEAD"), cancellable = true)
     private void modifySignal(BlockState blockState, CallbackInfoReturnable<Integer> cir) {

@@ -1,19 +1,13 @@
 package uk.debb.vanilla_disable.mixin.spawning;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Pig;
-import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.monster.CaveSpider;
-import net.minecraft.world.entity.monster.MagmaCube;
-import net.minecraft.world.entity.monster.Silverfish;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Spider;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,28 +23,28 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(BaseSpawner.class)
 public abstract class MixinBaseSpawner {
     @Unique
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnerMobMap = new Object2ObjectOpenHashMap<>();
+    @Unique
     private Entity spawnedEntity;
+
     /**
-     * @author FallenBreath (<a href="https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE">...</a>)
-     * @reason get entity
      * @param entity the entity spawned
      * @return the entity spawned
+     * @author FallenBreath (<a href="https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE">...</a>)
+     * @reason get entity
      */
     @ModifyArg(
-        method = "serverTick",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerLevel;tryAddFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)Z"
-        ),
-        index = 0
+            method = "serverTick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/level/ServerLevel;tryAddFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)Z"
+            ),
+            index = 0
     )
     private Entity recordSpawnedEntity(Entity entity) {
         this.spawnedEntity = entity;
         return entity;
     }
-
-    @Unique
-    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnerMobMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -69,18 +63,18 @@ public abstract class MixinBaseSpawner {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
      * @param level the level
-     * @param pos the position
-     * @param ci the callback info
+     * @param pos   the position
+     * @param ci    the callback info
+     * @author DragonEggBedrockBreaking
      */
     @Inject(
-        method = "serverTick",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerLevel;tryAddFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)Z"
-        ),
-        cancellable = true
+            method = "serverTick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/level/ServerLevel;tryAddFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)Z"
+            ),
+            cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(ServerLevel level, BlockPos pos, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
@@ -88,7 +82,7 @@ public abstract class MixinBaseSpawner {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnerMobMap.get(this.spawnedEntity.getClass());
-        if (!GameruleHelper.getBool(gameRule) || !GameruleHelper.getBool(Gamerules.SPAWNERS_ENABLED))  {
+        if (!GameruleHelper.getBool(gameRule) || !GameruleHelper.getBool(Gamerules.SPAWNERS_ENABLED)) {
             ci.cancel();
         }
     }

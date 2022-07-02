@@ -16,14 +16,14 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(TheEndGatewayBlockEntity.class)
 public abstract class MixinTheEndGatewayBlockEntity {
     /**
+     * @param level       the level
+     * @param pos         the position of the gateway
+     * @param state       the state
+     * @param entity      the entity going through the gateway
+     * @param blockEntity the gateway
+     * @param ci          the callback info
      * @author DragonEggBedrockBreaking
      * @reason prevent entities from going through end gateways
-     * @param level the level
-     * @param pos the position of the gateway
-     * @param state the state
-     * @param entity the entity going through the gateway
-     * @param blockEntity the gateway
-     * @param ci the callback info
      */
     @Inject(method = "teleportEntity", at = @At("HEAD"), cancellable = true)
     private static void cancelTeleportingEntity(Level level, BlockPos pos, BlockState state, Entity entity, TheEndGatewayBlockEntity blockEntity, CallbackInfo ci) {

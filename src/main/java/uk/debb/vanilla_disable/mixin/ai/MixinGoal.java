@@ -68,9 +68,9 @@ public abstract class MixinGoal {
     }
 
     /**
+     * @param cir the returnable callback info (Boolean)
      * @author DragonEggBedrockNreaking
      * @reason block some AIs based on gamerules
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "canContinueToUse", at = @At("HEAD"), cancellable = true)
     private void blockContinuance(CallbackInfoReturnable<Boolean> cir) {

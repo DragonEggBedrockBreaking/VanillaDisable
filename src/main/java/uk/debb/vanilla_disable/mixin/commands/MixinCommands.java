@@ -21,6 +21,8 @@ import uk.debb.vanilla_disable.util.VDServer;
 public abstract class MixinCommands {
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> commandNameGameruleMap = new Object2ObjectOpenHashMap<>();
+    @Unique
+    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -86,9 +88,6 @@ public abstract class MixinCommands {
         commandNameGameruleMap.put("worldborder", Gamerules.WORLD_BORDER_COMMAND);
     }
 
-    @Unique
-    private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new Object2ObjectOpenHashMap<>();
-
     /**
      * @author DragonEggBedrockBreaking
      */
@@ -111,11 +110,11 @@ public abstract class MixinCommands {
     }
 
     /**
+     * @param source  the source of the command
+     * @param command the command to be executed
+     * @param cir     the returnable callback info (Integer)
      * @author LittleLily
      * @author DragonEggBedrockBreaking
-     * @param source the source of the command
-     * @param command the command to be executed
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "performCommand", at = @At(value = "HEAD"), cancellable = true)
     private void performCommand(CommandSourceStack source, String command, CallbackInfoReturnable<Integer> cir) {
@@ -130,8 +129,8 @@ public abstract class MixinCommands {
         GameRules.Key<GameRules.BooleanValue> commandGamerule = commandNameGameruleMap.get(commandName);
         GameRules.Key<GameRules.BooleanValue> dedicatedCommandGamerule = dedicatedCommandNameGameruleMap.get(commandName);
         if ((!command.startsWith("/gamerule") && !GameruleHelper.getBool(Gamerules.COMMANDS_ENABLED)) ||
-            (commandGamerule != null && !GameruleHelper.getBool(commandGamerule)) ||
-            (source.getServer().isDedicatedServer() && dedicatedCommandGamerule != null && !GameruleHelper.getBool(dedicatedCommandGamerule))) {
+                (commandGamerule != null && !GameruleHelper.getBool(commandGamerule)) ||
+                (source.getServer().isDedicatedServer() && dedicatedCommandGamerule != null && !GameruleHelper.getBool(dedicatedCommandGamerule))) {
             source.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), ChatType.CHAT);
             cir.setReturnValue(0);
         }

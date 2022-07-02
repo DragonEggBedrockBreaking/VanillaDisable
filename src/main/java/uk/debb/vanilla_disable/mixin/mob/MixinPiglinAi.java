@@ -13,10 +13,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(PiglinAi.class)
 public abstract class MixinPiglinAi {
     /**
+     * @param stack the stack that the player is trying to barter with
+     * @param cir   the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason don't allow bartering with any items
-     * @param stack the stack that the player is trying to barter with
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "isBarterCurrency", at = @At("HEAD"), cancellable = true)
     private static void cancelBarter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {

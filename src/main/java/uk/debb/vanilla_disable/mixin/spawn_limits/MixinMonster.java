@@ -16,11 +16,11 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Monster.class)
 public abstract class MixinMonster {
     /**
-     * @author DragonEggBedrockBreaking
-     * @param world the access to ServerWorld
-     * @param pos the position to spawn at
+     * @param world        the access to ServerWorld
+     * @param pos          the position to spawn at
      * @param randomSource the random number generator
-     * @param cir cancellable returnable info
+     * @param cir          cancellable returnable info
+     * @author DragonEggBedrockBreaking
      */
     @Inject(method = "isDarkEnoughToSpawn", at = @At("HEAD"), cancellable = true)
     private static void spawnIsDarkEnough(ServerLevelAccessor world, BlockPos pos, RandomSource randomSource, CallbackInfoReturnable<Boolean> cir) {

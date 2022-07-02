@@ -20,12 +20,13 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(FoodData.class)
 public abstract class MixinFoodData {
-    @Shadow public abstract void eat(int i, float f);
     @Unique
     private static final Object2ObjectMap<FoodProperties, GameRules.Key<GameRules.IntegerValue>> nutritionMap = new Object2ObjectOpenHashMap<>();
-
     @Unique
     private static final Object2ObjectMap<FoodProperties, GameRules.Key<GameRules.IntegerValue>> saturationMap = new Object2ObjectOpenHashMap<>();
+
+    @Shadow
+    public abstract void eat(int i, float f);
 
     /**
      * @author DragonEggBedrockBreaking
@@ -114,11 +115,11 @@ public abstract class MixinFoodData {
     }
 
     /**
+     * @param item      the food item
+     * @param itemStack the stack of the food item
+     * @param ci        the callback info
      * @author DragonEggBEdrockBreaking
      * @reason change the nutrition level of food
-     * @param item the food item
-     * @param itemStack the stack of the food item
-     * @param ci the callback info
      */
     @Inject(method = "eat(Lnet/minecraft/world/item/Item;Lnet/minecraft/world/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
     private void modifyNutrition(Item item, ItemStack itemStack, CallbackInfo ci) {
@@ -129,7 +130,7 @@ public abstract class MixinFoodData {
         if (item.isEdible()) {
             GameRules.Key<GameRules.IntegerValue> nutritionGamerule = nutritionMap.get(item.getFoodProperties());
             GameRules.Key<GameRules.IntegerValue> saturationGamerule = saturationMap.get(item.getFoodProperties());
-            this.eat(GameruleHelper.getInt(nutritionGamerule), (float)GameruleHelper.getInt(saturationGamerule) / 10);
+            this.eat(GameruleHelper.getInt(nutritionGamerule), (float) GameruleHelper.getInt(saturationGamerule) / 10);
         }
         ci.cancel();
     }

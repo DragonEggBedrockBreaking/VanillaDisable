@@ -17,12 +17,14 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(ButtonBlock.class)
 public abstract class MixinButtonBlock {
-    @Shadow @Final private boolean sensitive;
+    @Shadow
+    @Final
+    private boolean sensitive;
 
     /**
+     * @param cir the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason modify how long a button is held down for
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getPressDuration", at = @At("HEAD"), cancellable = true)
     private void modifyPressDuration(CallbackInfoReturnable<Integer> cir) {
@@ -35,13 +37,13 @@ public abstract class MixinButtonBlock {
     }
 
     /**
+     * @param blockState  the state of the block
+     * @param blockGetter the block getter
+     * @param blockPos    the position of the block
+     * @param direction   the direction of the block
+     * @param cir         the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param direction the direction of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
     private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
@@ -52,13 +54,13 @@ public abstract class MixinButtonBlock {
     }
 
     /**
+     * @param blockState  the state of the block
+     * @param blockGetter the block getter
+     * @param blockPos    the position of the block
+     * @param direction   the direction of the block
+     * @param cir         the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
-     * @param blockState the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos the position of the block
-     * @param direction the direction of the block
-     * @param cir the returnable callback info (Integer)
      */
     @Inject(method = "getDirectSignal", at = @At("HEAD"), cancellable = true)
     private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {

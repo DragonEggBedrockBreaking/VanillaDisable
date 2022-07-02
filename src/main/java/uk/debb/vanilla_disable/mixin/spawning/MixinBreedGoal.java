@@ -12,9 +12,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(BreedGoal.class)
 public abstract class MixinBreedGoal {
     /**
+     * @param cir Returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason Don't allow breeding to start
-     * @param cir Returnable callback info (Boolean)
      */
     @Inject(method = "canUse", at = @At(value = "HEAD"), cancellable = true)
     private void cannotUse(CallbackInfoReturnable<Boolean> cir) {
@@ -25,9 +25,9 @@ public abstract class MixinBreedGoal {
     }
 
     /**
+     * @param cir Returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason Don't allow breeding to continue
-     * @param cir Returnable callback info (Boolean)
      */
     @Inject(method = "canContinueToUse", at = @At(value = "HEAD"), cancellable = true)
     private void shouldContinueToUse(CallbackInfoReturnable<Boolean> cir) {

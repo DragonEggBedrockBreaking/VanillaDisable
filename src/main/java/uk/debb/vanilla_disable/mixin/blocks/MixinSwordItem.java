@@ -16,13 +16,13 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(SwordItem.class)
 public abstract class MixinSwordItem {
     /**
+     * @param blockState the state of the block being targeted
+     * @param level      the level
+     * @param blockPos   the position of the block being targeted
+     * @param player     the player targeting the block
+     * @param cir        the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason make swords be able to break blocks in creative mode
-     * @param blockState the state of the block being targeted
-     * @param level the level
-     * @param blockPos the position of the block being targeted
-     * @param player the player targeting the block
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "canAttackBlock", at = @At("HEAD"), cancellable = true)
     private void canAlwaysAttackBlock(BlockState blockState, Level level, BlockPos blockPos, Player player, CallbackInfoReturnable<Boolean> cir) {

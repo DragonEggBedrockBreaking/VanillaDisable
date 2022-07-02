@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.effects;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -62,10 +62,10 @@ public abstract class MixinLivingEntity {
     }
 
     /**
+     * @param effect the status effect
+     * @param cir    the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason disable vanilla effects
-     * @param effect the status effect
-     * @param cir the returnable callback info (Boolean)
      */
     @Inject(method = "canBeAffected", at = @At("HEAD"), cancellable = true)
     private void canItBeAffected(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
@@ -77,7 +77,7 @@ public abstract class MixinLivingEntity {
             }
             GameRules.Key<GameRules.BooleanValue> effectGamerule = statusEffectMap.get(statusEffect);
             if ((!GameruleHelper.getBool(Gamerules.EFFECTS_ENABLED)) ||
-                (effectGamerule != null && !GameruleHelper.getBool(effectGamerule))) {
+                    (effectGamerule != null && !GameruleHelper.getBool(effectGamerule))) {
                 cir.setReturnValue(false);
             }
         }

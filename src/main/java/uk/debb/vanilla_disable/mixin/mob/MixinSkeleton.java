@@ -12,9 +12,9 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Skeleton.class)
 public abstract class MixinSkeleton {
     /**
+     * @param ci the callback info
      * @author DragonEggBedrockBreaking
      * @reason stop skeletons from converting into strays
-     * @param ci the callback info
      */
     @Inject(method = "doFreezeConversion", at = @At("HEAD"), cancellable = true)
     private void cancelFreezeConversion(CallbackInfo ci) {

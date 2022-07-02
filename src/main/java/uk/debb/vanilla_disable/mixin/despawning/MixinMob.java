@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.GlowSquid;
@@ -27,12 +27,12 @@ import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(Mob.class)
 public abstract class MixinMob extends Entity {
+    @Unique
+    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnGroupDespawnMap = new Object2ObjectOpenHashMap<>();
+
     public MixinMob(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
-
-    @Unique
-    private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> spawnGroupDespawnMap = new Object2ObjectOpenHashMap<>();
 
     /**
      * @author DragonEggBedrockBreaking
@@ -49,8 +49,8 @@ public abstract class MixinMob extends Entity {
     }
 
     /**
-     * @author DragonEggBedrockBreaking
      * @return Whether the additional restrictions are met
+     * @author DragonEggBedrockBreaking
      */
     @Unique
     private boolean additionalRestrictionsMet() {
