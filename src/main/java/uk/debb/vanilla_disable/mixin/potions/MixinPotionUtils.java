@@ -4,6 +4,8 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.LingeringPotionItem;
+import net.minecraft.world.item.SplashPotionItem;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
@@ -79,7 +81,19 @@ public abstract class MixinPotionUtils {
         if (potionMap.isEmpty()) {
             addOptionsToMap();
         }
-        GameRules.Key<GameRules.BooleanValue> gameRule = potionMap.get(PotionUtils.getPotion(itemStack));
+        Potion potion = PotionUtils.getPotion(itemStack);
+        if (itemStack.getItem() instanceof SplashPotionItem) {
+            if (!GameruleHelper.getBool(Gamerules.SPLASH_POTIONS_ENABLED)) {
+                cir.setReturnValue(new ArrayList<>());
+            }
+        } else if (itemStack.getItem() instanceof LingeringPotionItem) {
+            if (!GameruleHelper.getBool(Gamerules.LINGERING_POTIONS_ENABLED)) {
+                cir.setReturnValue(new ArrayList<>());
+            }
+        } else if (!GameruleHelper.getBool(Gamerules.NORMAL_POTIONS_ENABLED)) {
+            cir.setReturnValue(new ArrayList<>());
+        }
+        GameRules.Key<GameRules.BooleanValue> gameRule = potionMap.get(potion);
         if (!GameruleHelper.getBool(Gamerules.POTIONS_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
             cir.setReturnValue(new ArrayList<>());
         }

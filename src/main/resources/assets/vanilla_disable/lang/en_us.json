@@ -536,6 +536,9 @@
     "gamerule.tropicalFishSaturation": "How much saturation tropical fish provides",
 
     "gamerule.potionsEnabled": "Toggle potions being enabled",
+    "gamerule.normalPotionsEnabled": "Toggle normal potions being enabled",
+    "gamerule.splashPotionsEnabled": "Toggle splash potions being enabled",
+    "gamerule.lingeringPotionsEnabled": "Toggle lingering potions being enabled",
     "gamerule.fireResistancePotion": "Toggle fire resistance potions being enabled",
     "gamerule.harmingPotion": "Toggle harming potions being enabled",
     "gamerule.healingPotion":  "Toggle healing potions being enabled",

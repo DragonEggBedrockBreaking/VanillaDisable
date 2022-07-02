@@ -565,6 +565,9 @@ public class RegisterGamerules {
         }
         if (VanillaDisableMixinConfigPlugin.potions) {
             Gamerules.POTIONS_ENABLED = GameruleHelper.register("potionsEnabled", GameruleCategories.VD_POTIONS, true);
+            Gamerules.NORMAL_POTIONS_ENABLED = GameruleHelper.register("normalPotionsEnabled", GameruleCategories.VD_POTIONS, true);
+            Gamerules.SPLASH_POTIONS_ENABLED = GameruleHelper.register("splashPotionsEnabled", GameruleCategories.VD_POTIONS, true);
+            Gamerules.LINGERING_POTIONS_ENABLED = GameruleHelper.register("lingeringPotionsEnabled", GameruleCategories.VD_POTIONS, true);
             Gamerules.FIRE_RESISTANCE_POTION = GameruleHelper.register("fireResistancePotion", GameruleCategories.VD_POTIONS, true);
             Gamerules.HARMING_POTION = GameruleHelper.register("harmingPotion", GameruleCategories.VD_POTIONS, true);
             Gamerules.HEALING_POTION = GameruleHelper.register("healingPotion", GameruleCategories.VD_POTIONS, true);

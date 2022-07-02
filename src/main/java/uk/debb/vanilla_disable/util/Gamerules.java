@@ -540,6 +540,9 @@ public class Gamerules {
     public static GameRules.Key<GameRules.IntegerValue> TROPICAL_FISH_SATURATION;
 
     public static GameRules.Key<GameRules.BooleanValue> POTIONS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> NORMAL_POTIONS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SPLASH_POTIONS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> LINGERING_POTIONS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> FIRE_RESISTANCE_POTION;
     public static GameRules.Key<GameRules.BooleanValue> HARMING_POTION;
     public static GameRules.Key<GameRules.BooleanValue> HEALING_POTION;
