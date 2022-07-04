@@ -1,10 +1,9 @@
 package uk.debb.vanilla_disable.mixin.spawning;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -12,28 +11,30 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(BreedGoal.class)
 public abstract class MixinBreedGoal {
     /**
-     * @param cir Returnable callback info (Boolean)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason Don't allow breeding to start
      */
-    @Inject(method = "canUse", at = @At(value = "HEAD"), cancellable = true)
-    private void cannotUse(CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "canUse", at = @At(value = "RETURN"))
+    private boolean cannotUse(boolean original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.ANIMAL_BREEDING)) {
-            cir.setReturnValue(false);
+            return false;
         }
+        return original;
     }
 
     /**
-     * @param cir Returnable callback info (Boolean)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason Don't allow breeding to continue
      */
-    @Inject(method = "canContinueToUse", at = @At(value = "HEAD"), cancellable = true)
-    private void shouldContinueToUse(CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "canContinueToUse", at = @At(value = "RETURN"))
+    private boolean shouldContinueToUse(boolean original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.ANIMAL_BREEDING)) {
-            cir.setReturnValue(false);
+            return false;
         }
+        return original;
     }
 }

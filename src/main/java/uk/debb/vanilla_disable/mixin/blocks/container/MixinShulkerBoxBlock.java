@@ -1,14 +1,9 @@
 package uk.debb.vanilla_disable.mixin.blocks.container;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -16,18 +11,15 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(ShulkerBoxBlock.class)
 public abstract class MixinShulkerBoxBlock {
     /**
-     * @param blockState            the state of the shulker box
-     * @param level                 the level the shulker box is in
-     * @param blockPos              the position of the shulker box
-     * @param shulkerBoxBlockEntity the block entity code for the shulker box
-     * @param cir                   the returnable callback info (Boolean)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      */
-    @Inject(method = "canOpen", at = @At("HEAD"), cancellable = true)
-    private static void canAlwaysOpen(BlockState blockState, Level level, BlockPos blockPos, ShulkerBoxBlockEntity shulkerBoxBlockEntity, CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "canOpen", at = @At("RETURN"))
+    private static boolean canAlwaysOpen(boolean original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.CONTAINER_OPENING_BLOCKED)) {
-            cir.setReturnValue(true);
+            return true;
         }
+        return original;
     }
 }

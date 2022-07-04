@@ -10,4 +10,5 @@ public class Versions {
     public static final String CAFFEINE_CONFIG_VERSION = "1.0.0";
     public static final String LAZYDFU_VERSION = "0.1.3";
     public static final boolean LAZYDFU_ENABLED = true;
+    public static String MIXIN_EXTRAS_VERSION = "0.0.11";
 }

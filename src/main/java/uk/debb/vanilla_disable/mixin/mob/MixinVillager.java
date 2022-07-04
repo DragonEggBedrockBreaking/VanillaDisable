@@ -1,18 +1,15 @@
 package uk.debb.vanilla_disable.mixin.mob;
 
-import net.minecraft.server.level.ServerLevel;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -23,47 +20,45 @@ public abstract class MixinVillager extends Entity {
     private int numberOfRestocksToday;
     @Shadow
     private long lastRestockGameTime;
+
     public MixinVillager(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }
 
     /**
-     * @param level       the level
-     * @param serverWorld the world
-     * @param entity      the lightning
+     * @param original the original difficulty
      * @return the difficulty
      * @author DragonEggBedrockBreaking
      * @reason stop villagers from turning into witches
      */
-    @Redirect(
+    @ModifyExpressionValue(
             method = "thunderHit",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
             )
     )
-    public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LightningBolt entity) {
+    private Difficulty getWrongDifficulty(Difficulty original) {
         if (VDServer.getServer() == null) {
-            return level.getDifficulty();
+            return original;
         }
-        if (GameruleHelper.getBool(Gamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
-            return level.getDifficulty();
-        } else {
+        if (!GameruleHelper.getBool(Gamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
             return Difficulty.PEACEFUL;
         }
+        return original;
     }
 
     /**
-     * @param cir the returnable callback info
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason change how frequently villagers can restock
      */
-    @Inject(method = "allowedToRestock", at = @At("HEAD"), cancellable = true)
-    private void editRestockFrequency(CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "allowedToRestock", at = @At("RETURN"))
+    private boolean editRestockFrequency(boolean original) {
+        if (VDServer.getServer() == null) return original;
         int villagerDailyRestocks = GameruleHelper.getInt(Gamerules.VILLAGER_DAILY_RESTOCKS);
-        if (villagerDailyRestocks == 0) return;
+        if (villagerDailyRestocks == 0) return original;
         long restockTimeLimit = 4800L / villagerDailyRestocks;
-        cir.setReturnValue(this.numberOfRestocksToday == 0 | this.numberOfRestocksToday < 2 && this.level.getGameTime() > this.lastRestockGameTime + restockTimeLimit);
+        return this.numberOfRestocksToday == 0 | this.numberOfRestocksToday < 2 && this.level.getGameTime() > this.lastRestockGameTime + restockTimeLimit;
     }
 }

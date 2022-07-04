@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.entity.MobCategory;
@@ -7,8 +8,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -46,36 +45,38 @@ public abstract class MixinMobCategory {
     }
 
     /**
-     * @param cir returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason edit immediate despawn range
      */
-    @Inject(method = "getDespawnDistance", at = @At("HEAD"), cancellable = true)
-    public void editDespawnDistance(CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getDespawnDistance", at = @At("RETURN"))
+    public int editDespawnDistance(int original) {
+        if (VDServer.getServer() == null) return original;
         if (spawnGroupImmediateMap.isEmpty()) {
             addImmediateOptionsToMap();
         }
         GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupImmediateMap.get(this);
         if (gameRule != null) {
-            cir.setReturnValue(GameruleHelper.getInt(gameRule));
+            return GameruleHelper.getInt(gameRule);
         }
+        return original;
     }
 
     /**
-     * @param cir returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason edit immediate despawn range
      */
-    @Inject(method = "getNoDespawnDistance", at = @At("HEAD"), cancellable = true)
-    public void editNoDespawnDistance(CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getNoDespawnDistance", at = @At("RETURN"))
+    public int editNoDespawnDistance(int original) {
+        if (VDServer.getServer() == null) return original;
         if (spawnGroupStartMap.isEmpty()) {
             addStartOptionsToMap();
         }
         GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupStartMap.get(this);
         if (gameRule != null) {
-            cir.setReturnValue(GameruleHelper.getInt(gameRule));
+            return GameruleHelper.getInt(gameRule);
         }
+        return original;
     }
 }

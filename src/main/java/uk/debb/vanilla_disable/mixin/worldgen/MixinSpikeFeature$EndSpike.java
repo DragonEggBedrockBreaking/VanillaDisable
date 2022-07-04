@@ -1,10 +1,9 @@
 package uk.debb.vanilla_disable.mixin.worldgen;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.levelgen.feature.SpikeFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -12,15 +11,16 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(SpikeFeature.EndSpike.class)
 public abstract class MixinSpikeFeature$EndSpike {
     /**
-     * @param cir the returnable callback info (Boolean)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason remove cages on the two end pillars which have them
      */
-    @Inject(method = "isGuarded", at = @At("HEAD"), cancellable = true)
-    private void notGuarded(CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "isGuarded", at = @At("RETURN"))
+    private boolean notGuarded(boolean original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.END_PILLAR_CAGE_GENERATION)) {
-            cir.setReturnValue(false);
+            return false;
         }
+        return original;
     }
 }

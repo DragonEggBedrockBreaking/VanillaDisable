@@ -1,14 +1,13 @@
 package uk.debb.vanilla_disable.mixin.blocks;
 
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -27,7 +26,7 @@ public abstract class MixinFarmBlock {
      * @author DragonEggBedrockBreaking
      * @reason disable crop trampling
      */
-    @Redirect(
+    @WrapWithCondition(
             method = "fallOn",
             at = @At(
                     value = "INVOKE",
@@ -35,10 +34,8 @@ public abstract class MixinFarmBlock {
             ),
             require = 0
     )
-    private void cancelTurningToDirt(BlockState state, Level level, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
-        if (VDServer.getServer() == null) return;
-        if (GameruleHelper.getBool(Gamerules.CROP_TRAMPLING)) {
-            level.setBlockAndUpdate(pos, FarmBlock.pushEntitiesUp(state, Blocks.DIRT.defaultBlockState(), level, pos));
-        }
+    private boolean cancelTurningToDirt(BlockState state, Level level, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
+        if (VDServer.getServer() == null) return true;
+        return GameruleHelper.getBool(Gamerules.CROP_TRAMPLING);
     }
 }

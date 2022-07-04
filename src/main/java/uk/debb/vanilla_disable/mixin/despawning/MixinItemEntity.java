@@ -22,6 +22,7 @@ public abstract class MixinItemEntity extends Entity {
     private int age;
     @Shadow
     private int pickupDelay;
+
     public MixinItemEntity(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
     }

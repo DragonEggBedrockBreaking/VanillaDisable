@@ -1,11 +1,9 @@
 package uk.debb.vanilla_disable.mixin.misc;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -13,30 +11,30 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(CrossbowItem.class)
 public abstract class MixinCrossbowItem {
     /**
-     * @param itemStack the crossbow
-     * @param cir       the returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason make crossbows quickly charge
      */
-    @Inject(method = "getChargeDuration", at = @At("HEAD"), cancellable = true)
-    private static void lowerChargeDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getChargeDuration", at = @At("RETURN"))
+    private static int lowerChargeDuration(int original) {
+        if (VDServer.getServer() == null) return original;
         if (GameruleHelper.getBool(Gamerules.CROSSBOW_SPAMMING)) {
-            cir.setReturnValue(1);
+            return 1;
         }
+        return original;
     }
 
     /**
-     * @param itemStack the crossbow
-     * @param cir       the returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason make crossbows quickly shoot
      */
-    @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
-    private void lowerUseDuration(ItemStack itemStack, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
+    private int lowerUseDuration(int original) {
+        if (VDServer.getServer() == null) return original;
         if (GameruleHelper.getBool(Gamerules.CROSSBOW_SPAMMING)) {
-            cir.setReturnValue(2);
+            return 2;
         }
+        return original;
     }
 }

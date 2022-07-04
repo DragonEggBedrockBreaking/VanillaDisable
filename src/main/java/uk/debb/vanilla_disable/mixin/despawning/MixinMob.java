@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.despawning;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.entity.Entity;
@@ -19,8 +20,6 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -61,18 +60,20 @@ public abstract class MixinMob extends Entity {
     }
 
     /**
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason Change whether the mob despawns based on gamerules
      */
-    @Inject(method = "removeWhenFarAway", at = @At("HEAD"), cancellable = true)
-    private void cancelRemovalWhenFarAway(double distanceSquared, CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "removeWhenFarAway", at = @At("RETURN"))
+    private boolean cancelRemovalWhenFarAway(boolean original) {
+        if (VDServer.getServer() == null) return original;
         if (spawnGroupDespawnMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupDespawnMap.get(this.getClass());
         if (gameRule != null && !(((Object) this) instanceof AbstractVillager)) {
-            cir.setReturnValue(GameruleHelper.getBool(gameRule) && additionalRestrictionsMet());
+            return GameruleHelper.getBool(gameRule) && additionalRestrictionsMet();
         }
+        return original;
     }
 }

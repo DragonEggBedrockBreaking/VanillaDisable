@@ -39,6 +39,8 @@ public abstract class MixinPlayer {
     }
 
     /**
+     * @param damageSource the source of the damage
+     * @param cir          the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
      * @reason Removes damage sources
      */

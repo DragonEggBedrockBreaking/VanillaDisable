@@ -1,14 +1,13 @@
 package uk.debb.vanilla_disable.util;
 
-import net.minecraft.world.level.GameRules;
-import uk.debb.vanilla_disable.mixin.VanillaDisableMixinConfigPlugin;
+import uk.debb.vanilla_disable.mixin_plugins.CaffeineConfigMixinConfigPlugin;
 
 public class RegisterGamerules {
     /**
      * @author DragonEggBedrockBreaking
      */
     public static void registerGamerules() {
-        if (VanillaDisableMixinConfigPlugin.damage) {
+        if (CaffeineConfigMixinConfigPlugin.damage) {
             Gamerules.DAMAGE_ENABLED = GameruleHelper.register("damageEnabled", GameruleCategories.VD_DAMAGE, true);
             Gamerules.PROJECTILE_DAMAGE = GameruleHelper.register("projectileDamage", GameruleCategories.VD_DAMAGE, true);
             Gamerules.EXPLOSION_DAMAGE = GameruleHelper.register("explosionDamage", GameruleCategories.VD_DAMAGE, true);
@@ -28,7 +27,7 @@ public class RegisterGamerules {
             Gamerules.SWEET_BERRY_BUSH_DAMAGE = GameruleHelper.register("sweetBerryBushDamage", GameruleCategories.VD_DAMAGE, true);
             Gamerules.FALLING_STALACTITE_DAMAGE = GameruleHelper.register("fallingStalactiteDamage", GameruleCategories.VD_DAMAGE, true);
         }
-        if (VanillaDisableMixinConfigPlugin.knockback) {
+        if (CaffeineConfigMixinConfigPlugin.knockback) {
             Gamerules.KNOCKBACK_ENABLED = GameruleHelper.register("knockbackEnabled", GameruleCategories.VD_KNOCKBACK, true);
             Gamerules.FIREBALL_KNOCKBACK = GameruleHelper.register("fireballKnockback", GameruleCategories.VD_KNOCKBACK, true);
             Gamerules.WITHER_SKULL_KNOCKBACK = GameruleHelper.register("witherSkullKnockback", GameruleCategories.VD_KNOCKBACK, true);
@@ -41,7 +40,7 @@ public class RegisterGamerules {
             Gamerules.PLAYER_ATTACK_KNOCKBACK = GameruleHelper.register("playerAttackKnockback", GameruleCategories.VD_KNOCKBACK, true);
             Gamerules.EXPLOSION_KNOCKBACK = GameruleHelper.register("explosionKnockback", GameruleCategories.VD_KNOCKBACK, true);
         }
-        if (VanillaDisableMixinConfigPlugin.spawning) {
+        if (CaffeineConfigMixinConfigPlugin.spawning) {
             Gamerules.MONSTER_SPAWNING = GameruleHelper.register("monsterSpawning", GameruleCategories.VD_SPAWNING, true);
             Gamerules.CREATURE_SPAWNING = GameruleHelper.register("creatureSpawning", GameruleCategories.VD_SPAWNING, true);
             Gamerules.AMBIENT_SPAWNING = GameruleHelper.register("ambientSpawning", GameruleCategories.VD_SPAWNING, true);
@@ -61,7 +60,7 @@ public class RegisterGamerules {
             Gamerules.SPAWN_EGGS = GameruleHelper.register("spawnEggs", GameruleCategories.VD_SPAWNING, true);
             Gamerules.ANIMAL_BREEDING = GameruleHelper.register("animalBreeding", GameruleCategories.VD_SPAWNING, true);
         }
-        if (VanillaDisableMixinConfigPlugin.despawning) {
+        if (CaffeineConfigMixinConfigPlugin.despawning) {
             Gamerules.MIN_SPAWN_DISTANCE = GameruleHelper.register("minSpawnDistance", GameruleCategories.VD_SPAWNING, 24, 0, 512);
             Gamerules.MONSTERS_DESPAWN = GameruleHelper.register("monstersDespawn", GameruleCategories.VD_DESPAWNING, true);
             Gamerules.CREATURES_DESPAWN = GameruleHelper.register("creaturesDespawn", GameruleCategories.VD_DESPAWNING, false);
@@ -87,7 +86,7 @@ public class RegisterGamerules {
             Gamerules.ITEM_DESPAWN_TIME = GameruleHelper.register("itemDespawnTime", GameruleCategories.VD_DESPAWNING, 300, 0, Integer.MAX_VALUE);
             Gamerules.ENDER_PEARLS_DESPAWN_ON_DEATH = GameruleHelper.register("enderPearlsDespawnOnDeath", GameruleCategories.VD_DESPAWNING, true);
         }
-        if (VanillaDisableMixinConfigPlugin.spawn_limits) {
+        if (CaffeineConfigMixinConfigPlugin.spawn_limits) {
             Gamerules.MONSTER_MOBCAP = GameruleHelper.register("monsterMobCap", GameruleCategories.VD_SPAWN_LIMITS, 70, 0, Integer.MAX_VALUE);
             Gamerules.CREATURE_MOBCAP = GameruleHelper.register("creatureMobCap", GameruleCategories.VD_SPAWN_LIMITS, 10, 0, Integer.MAX_VALUE);
             Gamerules.AMBIENT_MOBCAP = GameruleHelper.register("ambientMobCap", GameruleCategories.VD_SPAWN_LIMITS, 15, 0, Integer.MAX_VALUE);
@@ -97,7 +96,7 @@ public class RegisterGamerules {
             Gamerules.WATER_AMBIENT_MOBCAP = GameruleHelper.register("waterAmbientMobCap", GameruleCategories.VD_SPAWN_LIMITS, 20, 0, Integer.MAX_VALUE);
             Gamerules.MONSTER_MAX_LIGHT_LEVEL = GameruleHelper.register("monsterMaxLightLevel", GameruleCategories.VD_SPAWN_LIMITS, 0, 0, 15);
         }
-        if (VanillaDisableMixinConfigPlugin.commands) {
+        if (CaffeineConfigMixinConfigPlugin.commands) {
             Gamerules.COMMANDS_ENABLED = GameruleHelper.register("commandsEnabled", GameruleCategories.VD_COMMANDS, true);
             Gamerules.ADVANCEMENT_COMMAND = GameruleHelper.register("advancementCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.ATTRIBUTE_COMMAND = GameruleHelper.register("attributeCommand", GameruleCategories.VD_COMMANDS, true);
@@ -168,7 +167,7 @@ public class RegisterGamerules {
             Gamerules.STOP_DEDICATED_COMMAND = GameruleHelper.register("stopDedicatedCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.WHITELIST_DEDICATED_COMMAND = GameruleHelper.register("whitelistDedicatedCommand", GameruleCategories.VD_COMMANDS, true);
         }
-        if (VanillaDisableMixinConfigPlugin.fluids) {
+        if (CaffeineConfigMixinConfigPlugin.fluids) {
             Gamerules.INFINITE_WATER = GameruleHelper.register("infiniteWater", GameruleCategories.VD_FLUIDS, true);
             Gamerules.INFINITE_LAVA = GameruleHelper.register("infiniteLava", GameruleCategories.VD_FLUIDS, false);
             Gamerules.WATER_REACHES_FAR = GameruleHelper.register("waterReachesFar", GameruleCategories.VD_FLUIDS, true);
@@ -180,7 +179,7 @@ public class RegisterGamerules {
             Gamerules.WATER_PLACEABLE_IN_NETHER = GameruleHelper.register("waterPlaceableInNether", GameruleCategories.VD_FLUIDS, false);
             Gamerules.BUBBLE_COLUMNS_ENABLED = GameruleHelper.register("bubbleColumnsEnabled", GameruleCategories.VD_FLUIDS, true);
         }
-        if (VanillaDisableMixinConfigPlugin.mob) {
+        if (CaffeineConfigMixinConfigPlugin.mob) {
             Gamerules.CURABLE_ZILLAGERS = GameruleHelper.register("curableZillagers", GameruleCategories.VD_MOBS, true);
             Gamerules.VILLAGERS_CONVERT_TO_ZILLAGERS = GameruleHelper.register("villagersConvertToZillagers", GameruleCategories.VD_MOBS, true);
             Gamerules.VILLAGERS_CONVERT_TO_WITCHES = GameruleHelper.register("villagersConvertToWitches", GameruleCategories.VD_MOBS, true);
@@ -198,7 +197,7 @@ public class RegisterGamerules {
             Gamerules.DRAGON_FIREBALLS = GameruleHelper.register("dragonFireballs", GameruleCategories.VD_MOBS, true);
             Gamerules.FIRE_ASPECT_IGNITES_CREEPERS = GameruleHelper.register("fireAspectIgnitesCreepers", GameruleCategories.VD_MOBS, false);
         }
-        if (VanillaDisableMixinConfigPlugin.mob_toggles) {
+        if (CaffeineConfigMixinConfigPlugin.mob_toggles) {
             Gamerules.ALLAYS_ENABLED = GameruleHelper.register("allaysEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
             Gamerules.BATS_ENABLED = GameruleHelper.register("batsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
             Gamerules.CATS_ENABLED = GameruleHelper.register("catsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
@@ -272,7 +271,7 @@ public class RegisterGamerules {
             Gamerules.DRAGONS_ENABLED = GameruleHelper.register("dragonsEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
             Gamerules.WITHERS_ENABLED = GameruleHelper.register("withersEnabled", GameruleCategories.VD_MOB_TOGGLES, true);
         }
-        if (VanillaDisableMixinConfigPlugin.effects) {
+        if (CaffeineConfigMixinConfigPlugin.effects) {
             Gamerules.EFFECTS_ENABLED = GameruleHelper.register("effectsEnabled", GameruleCategories.VD_EFFECTS, true);
             Gamerules.ABSORPTION_EFFECT = GameruleHelper.register("absorptionEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.BAD_OMEN_EFFECT = GameruleHelper.register("badOmenEffect", GameruleCategories.VD_EFFECTS, true);
@@ -308,7 +307,7 @@ public class RegisterGamerules {
             Gamerules.WITHER_EFFECT = GameruleHelper.register("witherEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.MILK_CLEARS_EFFECTS = GameruleHelper.register("milkClearsEffects", GameruleCategories.VD_EFFECTS, true);
         }
-        if (VanillaDisableMixinConfigPlugin.enchantments) {
+        if (CaffeineConfigMixinConfigPlugin.enchantments) {
             Gamerules.ENCHANTMENTS_ENABLED = GameruleHelper.register("enchantmentsEnabled", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.AQUA_AFFINITY_ENCHANTMENT = GameruleHelper.register("aquaAffinityEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.BANE_OF_ARTHROPODS_ENCHANTMENT = GameruleHelper.register("baneOfArthropodsEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
@@ -349,7 +348,7 @@ public class RegisterGamerules {
             Gamerules.UNBREAKING_ENCHANTMENT = GameruleHelper.register("unbreakingEnchantment", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.BINDING_CURSE = GameruleHelper.register("bindingCurse", GameruleCategories.VD_ENCHANTMENTS, true);
             Gamerules.VANISHING_CURSE = GameruleHelper.register("vanishingCurse", GameruleCategories.VD_ENCHANTMENTS, true);
-            if (VanillaDisableMixinConfigPlugin.enchantment_conflicts) {
+            if (CaffeineConfigMixinConfigPlugin.enchantment_conflicts) {
                 Gamerules.BOOT_ENCHANTMENT_CONFLICTS = GameruleHelper.register("bootEnchantmentConflicts", GameruleCategories.VD_ENCHANTMENTS, true);
                 Gamerules.BOW_ENCHANTMENT_CONFLICTS = GameruleHelper.register("bowEnchantmentConflicts", GameruleCategories.VD_ENCHANTMENTS, true);
                 Gamerules.CROSSBOW_ENCHANTMENT_CONFLICTS = GameruleHelper.register("crossbowEnchantmentConflicts", GameruleCategories.VD_ENCHANTMENTS, true);
@@ -359,7 +358,7 @@ public class RegisterGamerules {
                 Gamerules.TRIDENT_ENCHANTMENT_CONFLICTS = GameruleHelper.register("tridentEnchantmentConflicts", GameruleCategories.VD_ENCHANTMENTS, true);
             }
         }
-        if (VanillaDisableMixinConfigPlugin.worldgen) {
+        if (CaffeineConfigMixinConfigPlugin.worldgen) {
             Gamerules.ANCIENT_CITY_GENERATION = GameruleHelper.register("ancientCityGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.BASTION_REMNANT_GENERATION = GameruleHelper.register("bastionRemnantGeneration", GameruleCategories.VD_WORLDGEN, true);
             Gamerules.BURIED_TREASURE_GENERATION = GameruleHelper.register("buriedTreasureGeneration", GameruleCategories.VD_WORLDGEN, true);
@@ -407,7 +406,7 @@ public class RegisterGamerules {
             Gamerules.REMOVE_NETHER_BIOMES = GameruleHelper.register("removeNetherBiomes", GameruleCategories.VD_WORLDGEN, false);
             Gamerules.REMOVE_END_BIOMES = GameruleHelper.register("removeEndBiomes", GameruleCategories.VD_WORLDGEN, false);
         }
-        if (VanillaDisableMixinConfigPlugin.player) {
+        if (CaffeineConfigMixinConfigPlugin.player) {
             Gamerules.PLAYER_CAN_BE_ON_FIRE = GameruleHelper.register("playerCanBeOnFire", GameruleCategories.VD_PLAYER, true);
             Gamerules.PLAYER_CAN_SPRINT = GameruleHelper.register("playerCanSprint", GameruleCategories.VD_PLAYER, true);
             Gamerules.PLAYER_CAN_CROUCH = GameruleHelper.register("playerCanCrouch", GameruleCategories.VD_PLAYER, true);
@@ -415,7 +414,7 @@ public class RegisterGamerules {
             Gamerules.PLAYER_CAN_JUMP = GameruleHelper.register("playerCanJump", GameruleCategories.VD_PLAYER, true);
             Gamerules.PLAYER_CAN_BE_INVISIBLE = GameruleHelper.register("playerCanBeInvisible", GameruleCategories.VD_PLAYER, true);
         }
-        if (VanillaDisableMixinConfigPlugin.redstone) {
+        if (CaffeineConfigMixinConfigPlugin.redstone) {
             Gamerules.REPEATER_BASE_DELAY = GameruleHelper.register("repeaterBaseDelay", GameruleCategories.VD_REDSTONE, 2, 0);
             Gamerules.REPEATER_SIGNAL = GameruleHelper.register("repeaterSignal", GameruleCategories.VD_REDSTONE, 15, 0, 15);
             Gamerules.COMPARATOR_BASE_DELAY = GameruleHelper.register("comparatorBaseDelay", GameruleCategories.VD_REDSTONE, 2, 0);
@@ -440,7 +439,7 @@ public class RegisterGamerules {
             Gamerules.PISTON_ENABLED = GameruleHelper.register("pistonEnabled", GameruleCategories.VD_REDSTONE, true);
             Gamerules.SCULK_SENSOR_ENABLED = GameruleHelper.register("sculkSensorEnabled", GameruleCategories.VD_REDSTONE, true);
         }
-        if (VanillaDisableMixinConfigPlugin.ai) {
+        if (CaffeineConfigMixinConfigPlugin.ai) {
             Gamerules.BEE_AI = GameruleHelper.register("beeAi", GameruleCategories.VD_AI, true);
             Gamerules.BLAZE_AI = GameruleHelper.register("blazeAi", GameruleCategories.VD_AI, true);
             Gamerules.DOLPHIN_AI = GameruleHelper.register("dolphinAi", GameruleCategories.VD_AI, true);
@@ -463,8 +462,8 @@ public class RegisterGamerules {
             Gamerules.TURTLE_AI = GameruleHelper.register("turtleAi", GameruleCategories.VD_AI, true);
             Gamerules.VEX_AI = GameruleHelper.register("vexAi", GameruleCategories.VD_AI, true);
         }
-        if (VanillaDisableMixinConfigPlugin.blocks) {
-            if (VanillaDisableMixinConfigPlugin.blocks_container) {
+        if (CaffeineConfigMixinConfigPlugin.blocks) {
+            if (CaffeineConfigMixinConfigPlugin.blocks_container) {
                 Gamerules.CONTAINER_OPENING_BLOCKED = GameruleHelper.register("containerOpeningBlocked", GameruleCategories.VD_BLOCKS, true);
             }
             Gamerules.NETHER_PORTALS_ENABLED = GameruleHelper.register("netherPortalsEnabled", GameruleCategories.VD_BLOCKS, true);
@@ -478,8 +477,8 @@ public class RegisterGamerules {
             Gamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS = GameruleHelper.register("creativeSwordCanBreakBlocks", GameruleCategories.VD_BLOCKS, false);
             Gamerules.PUSHABLE_BUDDING_AMETHYST = GameruleHelper.register("pushableBuddingAmethyst", GameruleCategories.VD_BLOCKS, false);
         }
-        if (VanillaDisableMixinConfigPlugin.food) {
-            if (VanillaDisableMixinConfigPlugin.food_hunger) {
+        if (CaffeineConfigMixinConfigPlugin.food) {
+            if (CaffeineConfigMixinConfigPlugin.food_hunger) {
                 Gamerules.OLD_HUNGER = GameruleHelper.register("oldHunger", GameruleCategories.VD_MISC, false);
             }
             Gamerules.APPLE_NUTRITION = GameruleHelper.register("appleNutrition", GameruleCategories.VD_FOOD, 4, 0, 20);
@@ -563,7 +562,7 @@ public class RegisterGamerules {
             Gamerules.TROPICAL_FISH_NUTRITION = GameruleHelper.register("tropicalFishNutrition", GameruleCategories.VD_FOOD, 1, 0, 20);
             Gamerules.TROPICAL_FISH_SATURATION = GameruleHelper.register("tropicalFishSaturation", GameruleCategories.VD_FOOD, 1, 0, 99);
         }
-        if (VanillaDisableMixinConfigPlugin.potions) {
+        if (CaffeineConfigMixinConfigPlugin.potions) {
             Gamerules.POTIONS_ENABLED = GameruleHelper.register("potionsEnabled", GameruleCategories.VD_POTIONS, true);
             Gamerules.NORMAL_POTIONS_ENABLED = GameruleHelper.register("normalPotionsEnabled", GameruleCategories.VD_POTIONS, true);
             Gamerules.SPLASH_POTIONS_ENABLED = GameruleHelper.register("splashPotionsEnabled", GameruleCategories.VD_POTIONS, true);
@@ -585,7 +584,7 @@ public class RegisterGamerules {
             Gamerules.WATER_BREATHING_POTION = GameruleHelper.register("waterBreathingPotion", GameruleCategories.VD_POTIONS, true);
             Gamerules.WEAKNESS_POTION = GameruleHelper.register("weaknessPotion", GameruleCategories.VD_POTIONS, true);
         }
-        if (VanillaDisableMixinConfigPlugin.misc) {
+        if (CaffeineConfigMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.register("oldBoats", GameruleCategories.VD_MISC, false);
             Gamerules.TOTEMS_ENABLED = GameruleHelper.register("totemsEnabled", GameruleCategories.VD_MISC, true);
             Gamerules.BOW_SPAMMING = GameruleHelper.register("bowSpamming", GameruleCategories.VD_MISC, false);

@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.fluids;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.material.LavaFluid;
@@ -50,13 +51,13 @@ public abstract class MixinLavaFluid {
     }
 
     /**
-     * @param cir the returnable callback info (Boolean)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason modify whether the fluid can form infinite water sources
      */
-    @Inject(method = "canConvertToSource", at = @At("HEAD"), cancellable = true)
-    private void canLavaConvertToSource(CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
-        cir.setReturnValue(GameruleHelper.getBool(Gamerules.INFINITE_LAVA));
+    @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
+    private boolean canLavaConvertToSource(boolean original) {
+        if (VDServer.getServer() == null) return original;
+        return GameruleHelper.getBool(Gamerules.INFINITE_LAVA);
     }
 }

@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.ai;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -7,14 +8,11 @@ import net.minecraft.world.entity.ai.goal.LlamaFollowCaravanGoal;
 import net.minecraft.world.entity.ai.goal.OcelotAttackGoal;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.entity.npc.WanderingTrader;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -79,19 +77,20 @@ public abstract class MixinGoal {
     }
 
     /**
-     * @param cir the returnable callback info (Boolean)
+     * @param original the original value
      * @author DragonEggBedrockNreaking
      * @reason block some AIs based on gamerules
      */
-    @Inject(method = "canContinueToUse", at = @At("HEAD"), cancellable = true)
-    private void blockContinuance(CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "canContinueToUse", at = @At("RETURN"))
+    private boolean blockContinuance(boolean original) {
+        if (VDServer.getServer() == null) return original;
         if (goalMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = goalMap.get(this.getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
-            cir.setReturnValue(false);
+            return false;
         }
+        return original;
     }
 }

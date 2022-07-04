@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.spawn_limits;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.entity.MobCategory;
@@ -7,8 +8,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -33,19 +32,20 @@ public abstract class MixinMobCategory {
     }
 
     /**
-     * @param cir the returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason modify vanilla spawn caps
      */
-    @Inject(method = "getMaxInstancesPerChunk", at = @At("HEAD"), cancellable = true)
-    public void getMaxInstancesPerChunk(CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getMaxInstancesPerChunk", at = @At("RETURN"))
+    public int getMaxInstancesPerChunk(int original) {
+        if (VDServer.getServer() == null) return original;
         if (spawnGroupMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.IntegerValue> gameRule = spawnGroupMap.get(this);
         if (gameRule != null) {
-            cir.setReturnValue(GameruleHelper.getInt(gameRule));
+            return GameruleHelper.getInt(gameRule);
         }
+        return original;
     }
 }

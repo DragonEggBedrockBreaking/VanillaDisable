@@ -1,15 +1,10 @@
 package uk.debb.vanilla_disable.mixin.redstone;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.ObserverBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -17,37 +12,31 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(ObserverBlock.class)
 public abstract class MixinObserverBlock {
     /**
-     * @param blockState  the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos    the position of the block
-     * @param direction   the direction of the block
-     * @param cir         the returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
      */
-    @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
-    private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
+    private int modifySignal(int original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
-            cir.setReturnValue(0);
+            return 0;
         }
+        return original;
     }
 
     /**
-     * @param blockState  the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos    the position of the block
-     * @param direction   the direction of the block
-     * @param cir         the returnable callback info
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
      */
-    @Inject(method = "getDirectSignal", at = @At("HEAD"), cancellable = true)
-    private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
+    private int modifyDirectSignal(int original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
-            cir.setReturnValue(0);
+            return 0;
         }
+        return original;
     }
 
     /**

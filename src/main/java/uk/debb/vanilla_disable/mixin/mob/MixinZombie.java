@@ -1,13 +1,11 @@
 package uk.debb.vanilla_disable.mixin.mob;
 
-import net.minecraft.server.level.ServerLevel;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Zombie;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
@@ -16,29 +14,26 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(value = Zombie.class, priority = 1001)
 public abstract class MixinZombie {
     /**
-     * @param level       the level
-     * @param serverWorld the world
-     * @param other       the entity
+     * @param original the original value
      * @return the difficulty
      * @author DragonEggBedrockBreaking
      * @reason stop villagers from turning into zombie villagers
      */
-    @Redirect(
+    @ModifyExpressionValue(
             method = "wasKilled",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
             )
     )
-    public Difficulty getWrongDifficulty(ServerLevel level, ServerLevel serverWorld, LivingEntity other) {
+    private Difficulty getWrongDifficulty(Difficulty original) {
         if (VDServer.getServer() == null) {
-            return level.getDifficulty();
+            return original;
         }
-        if (GameruleHelper.getBool(Gamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
-            return level.getDifficulty();
-        } else {
+        if (!GameruleHelper.getBool(Gamerules.VILLAGERS_CONVERT_TO_ZILLAGERS)) {
             return Difficulty.PEACEFUL;
         }
+        return original;
     }
 
     /**

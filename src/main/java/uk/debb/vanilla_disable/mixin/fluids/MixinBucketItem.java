@@ -1,24 +1,21 @@
 package uk.debb.vanilla_disable.mixin.fluids;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
@@ -28,33 +25,29 @@ import uk.debb.vanilla_disable.util.VDServer;
 public abstract class MixinBucketItem {
     @Shadow
     @Final
-    private Fluid content;
+    Fluid content;
 
     /**
-     * @param type      the type of dimension
-     * @param player    the player placing the water
-     * @param level     the level
-     * @param pos       the position to place the water
-     * @param hitResult the result of using the water bucket
+     * @param original the original value
      * @return whether the biome should be counted as ultrawarm
      * @author DragonEggBedrockBreaking
      * @reason whether nether water evaporation should be considered
      */
-    @Redirect(
+    @ModifyExpressionValue(
             method = "emptyContents",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/level/dimension/DimensionType;ultraWarm()Z"
             )
     )
-    public boolean isNotUltraWarm(DimensionType type, @Nullable Player player, Level level, BlockPos pos, @Nullable BlockHitResult hitResult) {
+    private boolean isNotUltraWarm(boolean original) {
         if (VDServer.getServer() == null) {
-            return type.ultraWarm();
+            return original;
         }
-        if (GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER) && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER)) {
-            return false;
+        if (!GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER) && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER)) {
+            return original;
         }
-        return type.ultraWarm();
+        return false;
     }
 
     /**

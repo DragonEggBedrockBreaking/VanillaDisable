@@ -1,10 +1,10 @@
-package uk.debb.vanilla_disable.mixin;
+package uk.debb.vanilla_disable.mixin_plugins;
 
 import net.caffeinemc.caffeineconfig.AbstractCaffeineConfigMixinPlugin;
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
 import org.quiltmc.loader.api.QuiltLoader;
 
-public class VanillaDisableMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
+public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
     public static boolean ai;
     public static boolean blocks;
     public static boolean blocks_container;

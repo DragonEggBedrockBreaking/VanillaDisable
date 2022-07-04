@@ -1,10 +1,9 @@
 package uk.debb.vanilla_disable.mixin.mob;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.Mob;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -12,15 +11,16 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Mob.class)
 public abstract class MixinMob {
     /**
-     * @param cir the returnable callback info (Boolean)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason prevent zombies/skeletons from burning in sunlight
      */
-    @Inject(method = "isSunBurnTick", at = @At("HEAD"), cancellable = true)
-    private void stopBurning(CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "isSunBurnTick", at = @At("RETURN"))
+    private boolean stopBurning(boolean original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.MOBS_BURN_IN_SUNLIGHT)) {
-            cir.setReturnValue(false);
+            return false;
         }
+        return original;
     }
 }

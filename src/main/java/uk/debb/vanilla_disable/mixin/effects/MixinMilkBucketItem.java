@@ -1,10 +1,10 @@
 package uk.debb.vanilla_disable.mixin.effects;
 
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.MilkBucketItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -17,7 +17,7 @@ public class MixinMilkBucketItem {
      * @author DragonEggBedrockBreaking
      * @reason stop milk buckets from removing effects
      */
-    @Redirect(
+    @WrapWithCondition(
             method = "finishUsingItem",
             at = @At(
                     value = "INVOKE",
@@ -25,9 +25,7 @@ public class MixinMilkBucketItem {
             )
     )
     private boolean cancelRemovingEffects(LivingEntity livingEntity) {
-        if (VDServer.getServer() != null && GameruleHelper.getBool(Gamerules.MILK_CLEARS_EFFECTS)) {
-            return livingEntity.removeAllEffects();
-        }
-        return false;
+        if (VDServer.getServer() == null) return true;
+        return GameruleHelper.getBool(Gamerules.MILK_CLEARS_EFFECTS);
     }
 }

@@ -1,16 +1,11 @@
 package uk.debb.vanilla_disable.mixin.redstone;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -22,51 +17,45 @@ public abstract class MixinButtonBlock {
     private boolean sensitive;
 
     /**
-     * @param cir the returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason modify how long a button is held down for
      */
-    @Inject(method = "getPressDuration", at = @At("HEAD"), cancellable = true)
-    private void modifyPressDuration(CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getPressDuration", at = @At("RETURN"))
+    private int modifyPressDuration(int original) {
+        if (VDServer.getServer() == null) return original;
         if (this.sensitive) {
-            cir.setReturnValue(GameruleHelper.getInt(Gamerules.WOOD_BUTTON_PRESS_DURATION));
+            return GameruleHelper.getInt(Gamerules.WOOD_BUTTON_PRESS_DURATION);
         } else {
-            cir.setReturnValue(GameruleHelper.getInt(Gamerules.STONE_BUTTON_PRESS_DURATION));
+            return GameruleHelper.getInt(Gamerules.STONE_BUTTON_PRESS_DURATION);
         }
     }
 
     /**
-     * @param blockState  the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos    the position of the block
-     * @param direction   the direction of the block
-     * @param cir         the returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
      */
-    @Inject(method = "getSignal", at = @At("HEAD"), cancellable = true)
-    private void modifySignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
+    private int modifySignal(int original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.BUTTON_ENABLED)) {
-            cir.setReturnValue(0);
+            return 0;
         }
+        return original;
     }
 
     /**
-     * @param blockState  the state of the block
-     * @param blockGetter the block getter
-     * @param blockPos    the position of the block
-     * @param direction   the direction of the block
-     * @param cir         the returnable callback info (Integer)
+     * @param original the original value
      * @author DragonEggBedrockBreaking
      * @reason modify the signal outputted
      */
-    @Inject(method = "getDirectSignal", at = @At("HEAD"), cancellable = true)
-    private void modifyDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
+    private int modifyDirectSignal(int original) {
+        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.BUTTON_ENABLED)) {
-            cir.setReturnValue(0);
+            return 0;
         }
+        return original;
     }
 }
