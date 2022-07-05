@@ -1,15 +1,15 @@
 package uk.debb.vanilla_disable.mixin.worldgen;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.world.level.levelgen.feature.SpikeFeature;
+import net.minecraft.world.level.levelgen.feature.SpikeFeature.EndSpike;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Mixin(SpikeFeature.EndSpike.class)
-public abstract class MixinSpikeFeature$EndSpike {
+@Mixin(EndSpike.class)
+public abstract class MixinEndSpike {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking

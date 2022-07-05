@@ -110,9 +110,9 @@
     "spawning.MixinNaturalSpawner",
 
     "worldgen.MixinBiomeGenerationSettings",
+    "worldgen.MixinEndSpike",
     "worldgen.MixinMinecraftServer",
     "worldgen.MixinServerLevel",
-    "worldgen.MixinSpikeFeature$EndSpike",
     "worldgen.MixinStructureCheck"
   ],
   "injectors": {
