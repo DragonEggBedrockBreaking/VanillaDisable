@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
@@ -131,7 +130,7 @@ public abstract class MixinCommands {
         if ((!command.startsWith("/gamerule") && !GameruleHelper.getBool(Gamerules.COMMANDS_ENABLED)) ||
                 (commandGamerule != null && !GameruleHelper.getBool(commandGamerule)) ||
                 (source.getServer().isDedicatedServer() && dedicatedCommandGamerule != null && !GameruleHelper.getBool(dedicatedCommandGamerule))) {
-            source.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), ChatType.CHAT);
+            source.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), false);
             cir.setReturnValue(0);
         }
     }
