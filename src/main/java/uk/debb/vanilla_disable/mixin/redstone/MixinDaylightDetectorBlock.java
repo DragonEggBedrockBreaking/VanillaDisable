@@ -13,7 +13,6 @@ public abstract class MixinDaylightDetectorBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
      */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {

@@ -14,7 +14,6 @@ public abstract class MixinEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop players from being set on fire
      */
     @ModifyReturnValue(method = "isOnFire", at = @At("RETURN"))
     private boolean cannotBeOnFire(boolean original) {
@@ -28,7 +27,6 @@ public abstract class MixinEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop players from crouching under slabs
      */
     @ModifyReturnValue(method = "isShiftKeyDown", at = @At("RETURN"))
     private boolean cannotCrouch(boolean original) {
@@ -42,7 +40,6 @@ public abstract class MixinEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop players from sprinting
      */
     @ModifyReturnValue(method = "isSprinting", at = @At("RETURN"))
     private boolean cannotSprint(boolean original) {
@@ -56,7 +53,6 @@ public abstract class MixinEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop players from swimming
      */
     @ModifyReturnValue(method = "isSwimming", at = @At("RETURN"))
     private boolean cannotSwim(boolean original) {
@@ -70,7 +66,6 @@ public abstract class MixinEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop players from being invisible
      */
     @ModifyReturnValue(method = "isInvisible", at = @At("RETURN"))
     private boolean cannotBeInvisible(boolean original) {
@@ -84,7 +79,6 @@ public abstract class MixinEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop players from jumping
      */
     @ModifyReturnValue(method = "getBlockJumpFactor", at = @At("RETURN"))
     private float cannotJump(float original) {

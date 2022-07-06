@@ -13,17 +13,20 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
+import java.util.Objects;
+
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     /**
      * @author DragonEggBedrockBreaking
      * @reason increases your health when you eat food
      */
-    @Inject(method = "eat", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "eat", at = @At("HEAD"))
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (VDServer.getServer() == null) return;
         if (GameruleHelper.getBool(Gamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
-            ((LivingEntity) (Object) this).setHealth(((LivingEntity) (Object) this).getHealth() + stack.getItem().getFoodProperties().getNutrition());
+            ((LivingEntity) (Object) this).setHealth(((LivingEntity) (Object) this).getHealth() +
+                    Objects.requireNonNull(stack.getItem().getFoodProperties()).getNutrition());
         }
     }
 
@@ -31,7 +34,6 @@ public abstract class MixinPlayer {
      * @param original the original value
      * @return whether one can eat food
      * @author DragonEggBedrockBreaking
-     * @reason allows you to eat food with a full hunger bar
      */
     @ModifyExpressionValue(
             method = "canEat",

@@ -34,7 +34,6 @@ public abstract class MixinMobCategory {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify vanilla spawn caps
      */
     @ModifyReturnValue(method = "getMaxInstancesPerChunk", at = @At("RETURN"))
     public int getMaxInstancesPerChunk(int original) {

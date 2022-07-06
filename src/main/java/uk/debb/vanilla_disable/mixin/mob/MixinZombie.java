@@ -17,7 +17,6 @@ public abstract class MixinZombie {
      * @param original the original value
      * @return the difficulty
      * @author DragonEggBedrockBreaking
-     * @reason stop villagers from turning into zombie villagers
      */
     @ModifyExpressionValue(
             method = "wasKilled",

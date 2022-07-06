@@ -24,7 +24,6 @@ public abstract class MixinFarmBlock {
      * @param entity       the entity falling on the block
      * @param fallDistance how far the entity fell on the block
      * @author DragonEggBedrockBreaking
-     * @reason disable crop trampling
      */
     @WrapWithCondition(
             method = "fallOn",

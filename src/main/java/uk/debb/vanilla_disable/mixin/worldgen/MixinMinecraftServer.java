@@ -84,8 +84,7 @@ public abstract class MixinMinecraftServer {
                 return false;
         }
         if (!GameruleHelper.getBool(Gamerules.VILLAGE_GENERATION, this.worldData)) {
-            if (!createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure"))
-                return false;
+            return createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure");
         }
         return true;
     }

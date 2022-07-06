@@ -13,7 +13,6 @@ public abstract class MixinChestBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason prevent containers from being blocked
      */
     @ModifyReturnValue(method = "isChestBlockedAt", at = @At("RETURN"))
     private static boolean chestNotBlocked(boolean original) {

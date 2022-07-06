@@ -13,7 +13,6 @@ public abstract class MixinPressurePlateBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason edit the signal strength outputted by the redstone component
      */
     @ModifyReturnValue(method = "getSignalStrength", at = @At("RETURN"))
     private int modifySignalStrength(int original) {

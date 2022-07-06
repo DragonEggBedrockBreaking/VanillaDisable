@@ -14,7 +14,6 @@ public abstract class MixinZombieVillager {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop curing of zombie villagers
      */
     @ModifyReturnValue(method = "mobInteract", at = @At("RETURN"))
     private InteractionResult cureMob(InteractionResult original) {

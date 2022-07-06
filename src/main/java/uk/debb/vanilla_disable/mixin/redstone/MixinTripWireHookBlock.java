@@ -13,7 +13,6 @@ public abstract class MixinTripWireHookBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
      */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
@@ -27,7 +26,6 @@ public abstract class MixinTripWireHookBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
      */
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {

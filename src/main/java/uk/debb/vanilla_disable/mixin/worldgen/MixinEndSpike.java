@@ -13,7 +13,6 @@ public abstract class MixinEndSpike {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason remove cages on the two end pillars which have them
      */
     @ModifyReturnValue(method = "isGuarded", at = @At("RETURN"))
     private boolean notGuarded(boolean original) {

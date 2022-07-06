@@ -18,7 +18,6 @@ public abstract class MixinBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason change the friction of blocks to the default (stone)
      */
     @ModifyReturnValue(method = "getFriction", at = @At("RETURN"))
     private float cancelFriction(float original) {

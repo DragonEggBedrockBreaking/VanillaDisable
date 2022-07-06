@@ -13,7 +13,6 @@ public abstract class MixinComparatorBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason edit the delay of the redstone component
      */
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int modifyDelay(int original) {
@@ -24,7 +23,6 @@ public abstract class MixinComparatorBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason edit the signal that is outputted by the redstone component
      */
     @ModifyReturnValue(method = "getOutputSignal", at = @At("RETURN"))
     private int modifyOutputSignal(int original) {

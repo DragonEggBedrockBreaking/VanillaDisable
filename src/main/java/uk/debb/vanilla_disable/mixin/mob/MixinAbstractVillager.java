@@ -39,7 +39,6 @@ public abstract class MixinAbstractVillager {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop players from trading with villagers
      */
     @ModifyReturnValue(method = "getOffers", at = @At("RETURN"))
     private MerchantOffers clearOffers(MerchantOffers original) {

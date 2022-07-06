@@ -13,7 +13,6 @@ public abstract class MixinAbstractPiglin {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop piglins from zombifying
      */
     @ModifyReturnValue(method = "isImmuneToZombification", at = @At("RETURN"))
     private boolean setImmuneToZombification(boolean original) {

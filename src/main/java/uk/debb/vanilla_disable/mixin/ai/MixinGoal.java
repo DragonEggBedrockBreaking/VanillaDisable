@@ -79,7 +79,6 @@ public abstract class MixinGoal {
     /**
      * @param original the original value
      * @author DragonEggBedrockNreaking
-     * @reason block some AIs based on gamerules
      */
     @ModifyReturnValue(method = "canContinueToUse", at = @At("RETURN"))
     private boolean blockContinuance(boolean original) {
