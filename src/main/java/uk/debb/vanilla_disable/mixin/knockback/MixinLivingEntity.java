@@ -58,7 +58,7 @@ public abstract class MixinLivingEntity {
                 (knockbackGamerule != null && !GameruleHelper.getBool(knockbackGamerule))) {
             return true;
         }
-        if ((source instanceof Skeleton && !(source instanceof WitherSkeleton)) ||
+        if ((source instanceof AbstractSkeleton && !(source instanceof WitherSkeleton)) ||
                 (source instanceof Piglin && source.isHolding(Items.CROSSBOW)) ||
                 (source instanceof Pillager)) {
             return !GameruleHelper.getBool(Gamerules.ARROW_KNOCKBACK);
