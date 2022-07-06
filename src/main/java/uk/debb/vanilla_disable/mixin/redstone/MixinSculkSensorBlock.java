@@ -13,7 +13,6 @@ public abstract class MixinSculkSensorBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason prevent the sculk sensor from being activated at all
      */
     @ModifyReturnValue(method = "canActivate", at = @At("RETURN"))
     private static boolean cannotActivate(boolean original) {

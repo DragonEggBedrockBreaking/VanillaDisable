@@ -13,7 +13,6 @@ public abstract class MixinBowItem {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason make bows shoot with full power
      */
     @ModifyReturnValue(method = "getPowerForTime", at = @At("RETURN"))
     private static float modifyPower(float original) {
@@ -27,7 +26,6 @@ public abstract class MixinBowItem {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason make bows quickly shoot
      */
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int lowerUseDuration(int original) {

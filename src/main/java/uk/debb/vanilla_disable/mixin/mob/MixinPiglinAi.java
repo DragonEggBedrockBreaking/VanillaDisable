@@ -13,7 +13,6 @@ public abstract class MixinPiglinAi {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason don't allow bartering with any items
      */
     @ModifyReturnValue(method = "isBarterCurrency", at = @At("RETURN"))
     private static boolean cancelBarter(boolean original) {

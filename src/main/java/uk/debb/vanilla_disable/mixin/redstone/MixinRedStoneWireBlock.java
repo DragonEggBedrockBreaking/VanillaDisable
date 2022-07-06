@@ -13,7 +13,6 @@ public abstract class MixinRedStoneWireBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
      */
     @ModifyReturnValue(method = "getWireSignal", at = @At("RETURN"))
     private int modifySignal(int original) {

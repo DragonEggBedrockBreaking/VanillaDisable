@@ -19,7 +19,6 @@ public abstract class MixinButtonBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify how long a button is held down for
      */
     @ModifyReturnValue(method = "getPressDuration", at = @At("RETURN"))
     private int modifyPressDuration(int original) {
@@ -34,7 +33,6 @@ public abstract class MixinButtonBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
      */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
@@ -48,7 +46,6 @@ public abstract class MixinButtonBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify the signal outputted
      */
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {

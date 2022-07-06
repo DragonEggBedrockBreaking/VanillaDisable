@@ -13,7 +13,6 @@ public abstract class MixinTargetBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason edit the signal strength outputted by the redstone component
      */
     @ModifyReturnValue(method = "getRedstoneStrength", at = @At("RETURN"))
     private static int modifyRedstoneStrength(int original) {

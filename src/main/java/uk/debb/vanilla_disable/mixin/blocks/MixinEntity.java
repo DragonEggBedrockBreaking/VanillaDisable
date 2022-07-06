@@ -13,7 +13,6 @@ public abstract class MixinEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason change nether portal cooldown for entities
      */
     @ModifyReturnValue(method = "getDimensionChangingDelay", at = @At("RETURN"))
     private int modifyDimensionChangingDelay(int original) {

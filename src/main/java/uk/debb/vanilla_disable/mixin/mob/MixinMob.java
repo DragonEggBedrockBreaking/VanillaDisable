@@ -13,7 +13,6 @@ public abstract class MixinMob {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason prevent zombies/skeletons from burning in sunlight
      */
     @ModifyReturnValue(method = "isSunBurnTick", at = @At("RETURN"))
     private boolean stopBurning(boolean original) {

@@ -53,7 +53,6 @@ public abstract class MixinLavaFluid {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason modify whether the fluid can form infinite water sources
      */
     @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
     private boolean canLavaConvertToSource(boolean original) {

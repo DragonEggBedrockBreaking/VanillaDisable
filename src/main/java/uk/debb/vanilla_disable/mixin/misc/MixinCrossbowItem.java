@@ -13,7 +13,6 @@ public abstract class MixinCrossbowItem {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason make crossbows quickly charge
      */
     @ModifyReturnValue(method = "getChargeDuration", at = @At("RETURN"))
     private static int lowerChargeDuration(int original) {
@@ -27,7 +26,6 @@ public abstract class MixinCrossbowItem {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason make crossbows quickly shoot
      */
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int lowerUseDuration(int original) {

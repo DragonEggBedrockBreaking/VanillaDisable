@@ -47,7 +47,6 @@ public abstract class MixinMobCategory {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason edit immediate despawn range
      */
     @ModifyReturnValue(method = "getDespawnDistance", at = @At("RETURN"))
     public int editDespawnDistance(int original) {
@@ -65,7 +64,6 @@ public abstract class MixinMobCategory {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason edit immediate despawn range
      */
     @ModifyReturnValue(method = "getNoDespawnDistance", at = @At("RETURN"))
     public int editNoDespawnDistance(int original) {

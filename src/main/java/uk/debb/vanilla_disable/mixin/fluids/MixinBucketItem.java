@@ -25,13 +25,12 @@ import uk.debb.vanilla_disable.util.VDServer;
 public abstract class MixinBucketItem {
     @Shadow
     @Final
-    Fluid content;
+    private Fluid content;
 
     /**
      * @param original the original value
      * @return whether the biome should be counted as ultrawarm
      * @author DragonEggBedrockBreaking
-     * @reason whether nether water evaporation should be considered
      */
     @ModifyExpressionValue(
             method = "emptyContents",

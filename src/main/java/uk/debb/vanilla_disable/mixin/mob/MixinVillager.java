@@ -29,7 +29,6 @@ public abstract class MixinVillager extends Entity {
      * @param original the original difficulty
      * @return the difficulty
      * @author DragonEggBedrockBreaking
-     * @reason stop villagers from turning into witches
      */
     @ModifyExpressionValue(
             method = "thunderHit",
@@ -51,7 +50,6 @@ public abstract class MixinVillager extends Entity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason change how frequently villagers can restock
      */
     @ModifyReturnValue(method = "allowedToRestock", at = @At("RETURN"))
     private boolean editRestockFrequency(boolean original) {

@@ -13,7 +13,6 @@ public abstract class MixinLivingEntity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason prevent totems from activating
      */
     @ModifyReturnValue(method = "checkTotemDeathProtection", at = @At("RETURN"))
     private boolean totemsDoNotWork(boolean original) {

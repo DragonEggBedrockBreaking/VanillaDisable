@@ -13,7 +13,6 @@ public abstract class MixinSwordItem {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason make swords be able to break blocks in creative mode
      */
     @ModifyReturnValue(method = "canAttackBlock", at = @At("RETURN"))
     private boolean canAlwaysAttackBlock(boolean original) {

@@ -13,7 +13,6 @@ public abstract class MixinPistonBaseBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason stop pistons extending and retracting
      */
     @ModifyReturnValue(method = "triggerEvent", at = @At("RETURN"))
     private boolean cancelTriggeringEvent(boolean original) {

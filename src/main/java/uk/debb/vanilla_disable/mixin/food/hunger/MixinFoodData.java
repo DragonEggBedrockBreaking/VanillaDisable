@@ -16,7 +16,6 @@ public abstract class MixinFoodData {
      * @param original the original value
      * @return peaceful if old hunger enabled else the difficulty
      * @author DragonEggBedrockBreaking
-     * @reason stop hunger from reducing
      */
     @ModifyExpressionValue(
             method = "tick",

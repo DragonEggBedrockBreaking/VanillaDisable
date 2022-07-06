@@ -15,7 +15,6 @@ public class MixinMilkBucketItem {
      * @param livingEntity the entity drinking the milk bucket
      * @return whether the entity has had its effects removed
      * @author DragonEggBedrockBreaking
-     * @reason stop milk buckets from removing effects
      */
     @WrapWithCondition(
             method = "finishUsingItem",

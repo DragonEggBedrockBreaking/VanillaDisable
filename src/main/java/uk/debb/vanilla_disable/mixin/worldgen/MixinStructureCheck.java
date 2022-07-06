@@ -44,9 +44,9 @@ public abstract class MixinStructureCheck {
     }
 
     /**
-     * @param chunkPos the position of the structure
+     * @param chunkPos  the position of the structure
      * @param structure the structure that is generating
-     * @param cir the returnable callback info
+     * @param cir       the returnable callback info
      * @author DragonEggBedrockBreaking
      * @reason stop structures from generating
      */

@@ -62,7 +62,6 @@ public abstract class MixinMob extends Entity {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason Change whether the mob despawns based on gamerules
      */
     @ModifyReturnValue(method = "removeWhenFarAway", at = @At("RETURN"))
     private boolean cancelRemovalWhenFarAway(boolean original) {

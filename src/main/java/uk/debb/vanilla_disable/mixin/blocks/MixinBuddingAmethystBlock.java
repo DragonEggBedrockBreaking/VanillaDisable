@@ -14,7 +14,6 @@ public abstract class MixinBuddingAmethystBlock {
     /**
      * @param original the original value
      * @author DragonEggBedrockBreaking
-     * @reason allows pistons to push budding amethyst blocks
      */
     @ModifyReturnValue(method = "getPistonPushReaction", at = @At("RETURN"))
     private PushReaction pushableBuddingAmethyst(PushReaction original) {
