@@ -1,5 +1,5 @@
 public class Versions {
-    public static final String MINECRAFT_VERSION = "1.19.1-pre3";
+    public static final String MINECRAFT_VERSION = "1.19.1-pre4";
     public static final String QUILT_LOADER_VERSION = "0.17.1-beta.4";
     public static final String MOD_VERSION = "2.0.1";
     public static final int JAVA_VERSION = 17;
