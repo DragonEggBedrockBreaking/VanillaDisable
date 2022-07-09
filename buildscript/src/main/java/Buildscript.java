@@ -56,6 +56,7 @@ public class Buildscript extends SimpleQuiltProject {
         jij(d.addMaven("https://maven.flashyreese.me/", new MavenId("releases.net.caffeinemc", "mixin-config", Versions.CAFFEINE_CONFIG_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // MixinExtras
         jij(d.addMaven("https://jitpack.io/", new MavenId("com.github.LlamaLad7", "MixinExtras", Versions.MIXIN_EXTRAS_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
+        jij(d.addMaven("https://jitpack.io/", new MavenId("com.github.Fallen-Breath", "conditional-mixin", Versions.CONDITIONAL_MIXIN_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
         if (Versions.LAZYDFU_ENABLED)
             d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);

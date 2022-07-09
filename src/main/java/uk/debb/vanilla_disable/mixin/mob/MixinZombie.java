@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Mixin(value = Zombie.class, priority = 1001)
+@Mixin(Zombie.class)
 public abstract class MixinZombie {
     /**
      * @param original the original value
