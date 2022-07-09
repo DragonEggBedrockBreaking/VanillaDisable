@@ -7,7 +7,6 @@ import io.github.coolcrabs.brachyura.maven.Maven;
 import io.github.coolcrabs.brachyura.maven.MavenId;
 import io.github.coolcrabs.brachyura.minecraft.Minecraft;
 import io.github.coolcrabs.brachyura.minecraft.VersionMeta;
-import io.github.coolcrabs.brachyura.processing.ProcessorChain;
 import io.github.coolcrabs.brachyura.quilt.QuiltMaven;
 import io.github.coolcrabs.brachyura.quilt.SimpleQuiltProject;
 import net.fabricmc.mappingio.tree.MappingTree;
@@ -37,12 +36,6 @@ public class Buildscript extends SimpleQuiltProject {
     public String getModId() {
         // Mod Name
         return "vanilla_disable";
-    }
-
-    @Override
-    public String getVersion() {
-        // Mod Version
-        return Versions.MOD_VERSION;
     }
 
     @Override
@@ -78,11 +71,5 @@ public class Buildscript extends SimpleQuiltProject {
     public Path getBuildJarPath() {
         // Changes the jar file name
         return getBuildLibsDir().resolve(getModId() + "-" + "mc" + createMcVersion().version + "-" + getVersion() + "-quilt" + ".jar");
-    }
-
-    @Override
-    public ProcessorChain resourcesProcessingChain() {
-        // Patches version in quilt.mod.json
-        return new ProcessorChain(super.resourcesProcessingChain(), new QmjVersionPatcher());
     }
 }
