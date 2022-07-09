@@ -11,4 +11,5 @@ public class Versions {
     public static final String LAZYDFU_VERSION = "0.1.3";
     public static final boolean LAZYDFU_ENABLED = true;
     public static final String MIXIN_EXTRAS_VERSION = "0.0.11";
+    public static final String CONDITIONAL_MIXIN_VERSION = "v0.3.0";
 }
