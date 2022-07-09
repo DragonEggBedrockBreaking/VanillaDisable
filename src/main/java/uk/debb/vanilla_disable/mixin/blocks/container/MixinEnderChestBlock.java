@@ -8,7 +8,7 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Mixin(value = EnderChestBlock.class, priority = 1001)
+@Mixin(EnderChestBlock.class)
 public abstract class MixinEnderChestBlock {
     /**
      * @param original the original value

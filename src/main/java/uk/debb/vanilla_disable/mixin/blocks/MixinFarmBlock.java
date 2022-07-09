@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Mixin(value = FarmBlock.class, priority = 1001)
+@Mixin(FarmBlock.class)
 public abstract class MixinFarmBlock {
     /**
      * @param state        the state of the block
