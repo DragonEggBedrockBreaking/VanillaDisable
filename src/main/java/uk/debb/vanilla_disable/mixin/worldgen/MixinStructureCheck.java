@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.worldgen;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.level.ChunkPos;
@@ -10,8 +11,6 @@ import net.minecraft.world.level.levelgen.structure.structures.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -44,21 +43,21 @@ public abstract class MixinStructureCheck {
     }
 
     /**
+     * @param original  the original value
      * @param chunkPos  the position of the structure
      * @param structure the structure that is generating
-     * @param cir       the returnable callback info
      * @author DragonEggBedrockBreaking
-     * @reason stop structures from generating
      */
-    @Inject(method = "canCreateStructure", at = @At("HEAD"), cancellable = true)
-    private void cancelStructureGeneration(ChunkPos chunkPos, Structure structure, CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "canCreateStructure", at = @At("RETURN"))
+    private boolean cancelStructureGeneration(boolean original, ChunkPos chunkPos, Structure structure) {
+        if (VDServer.getServer() == null) return original;
         if (structureMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = structureMap.get(structure.getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
-            cir.setReturnValue(false);
+            return false;
         }
+        return original;
     }
 }

@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.worldgen;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.data.worldgen.placement.*;
@@ -9,8 +10,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -256,20 +255,20 @@ public abstract class MixinBiomeGenerationSettings {
     }
 
     /**
+     * @param original the original value
      * @param feature the feature that is being checked for
-     * @param cir     the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
-     * @reason don't allow disabled features
      */
-    @Inject(method = "hasFeature", at = @At("HEAD"), cancellable = true)
-    private void cancelHavingFeature(PlacedFeature feature, CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "hasFeature", at = @At("RETURN"))
+    private boolean cancelHavingFeature(boolean original, PlacedFeature feature) {
+        if (VDServer.getServer() == null) return original;
         if (featureToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = featureToGameruleMap.get(String.format("%s", feature));
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
-            cir.setReturnValue(false);
+            return false;
         }
+        return original;
     }
 }

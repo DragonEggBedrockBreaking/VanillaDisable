@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.potions;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,8 +13,6 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -70,32 +69,32 @@ public abstract class MixinPotionUtils {
     }
 
     /**
+     * @param original  the original value
      * @param itemStack the potion
-     * @param cir       the returnable callback info (java.util.List<net.minecraft.world.effect.MobEffectInstance>)
      * @author DragonEggBedrockBreaking
-     * @reason removes a potion's effects if gamerule disabled
      */
-    @Inject(method = "getMobEffects", at = @At("HEAD"), cancellable = true)
-    private static void removeMobEffects(ItemStack itemStack, CallbackInfoReturnable<List<MobEffectInstance>> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getMobEffects", at = @At("RETURN"))
+    private static List<MobEffectInstance> removeMobEffects(List<MobEffectInstance> original, ItemStack itemStack) {
+        if (VDServer.getServer() == null) return original;
         if (potionMap.isEmpty()) {
             addOptionsToMap();
         }
         Potion potion = PotionUtils.getPotion(itemStack);
         if (itemStack.getItem() instanceof SplashPotionItem) {
             if (!GameruleHelper.getBool(Gamerules.SPLASH_POTIONS_ENABLED)) {
-                cir.setReturnValue(new ArrayList<>());
+                return new ArrayList<>();
             }
         } else if (itemStack.getItem() instanceof LingeringPotionItem) {
             if (!GameruleHelper.getBool(Gamerules.LINGERING_POTIONS_ENABLED)) {
-                cir.setReturnValue(new ArrayList<>());
+                return new ArrayList<>();
             }
         } else if (!GameruleHelper.getBool(Gamerules.NORMAL_POTIONS_ENABLED)) {
-            cir.setReturnValue(new ArrayList<>());
+            return new ArrayList<>();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = potionMap.get(potion);
         if (!GameruleHelper.getBool(Gamerules.POTIONS_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
-            cir.setReturnValue(new ArrayList<>());
+            return new ArrayList<>();
         }
+        return original;
     }
 }
