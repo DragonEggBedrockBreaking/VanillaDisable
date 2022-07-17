@@ -16,60 +16,45 @@ import java.nio.file.Path;
 public class Buildscript extends SimpleQuiltProject {
     @Override
     public VersionMeta createMcVersion() {
-        // Minecraft Version
         return Minecraft.getVersion(Versions.MINECRAFT_VERSION);
     }
 
     @Override
     public MappingTree createMappings() {
-        // Uses Mojang Official Mappings
         return createMojmap();
     }
 
     @Override
     public FabricLoader getLoader() {
-        // Quilt Loader Version
         return new FabricLoader(QuiltMaven.URL, QuiltMaven.loader(Versions.QUILT_LOADER_VERSION));
     }
 
     @Override
-    public String getModId() {
-        // Mod Name
-        return "vanilla_disable";
-    }
-
-    @Override
     public void getModDependencies(ModDependencyCollector d) {
-        // Quilt Standard Libraries
-        if (Versions.JIJ_QFAPI)
-            jij(d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE));
-        else
-            d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        // Quilted Fabric API
+        d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
         jij(d.addMaven("https://maven.flashyreese.me/", new MavenId("releases.net.caffeinemc", "mixin-config", Versions.CAFFEINE_CONFIG_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // MixinExtras
         jij(d.addMaven("https://jitpack.io/", new MavenId("com.github.LlamaLad7", "MixinExtras", Versions.MIXIN_EXTRAS_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
+        // Conditional Mixin
         jij(d.addMaven("https://jitpack.io/", new MavenId("com.github.Fallen-Breath", "conditional-mixin", Versions.CONDITIONAL_MIXIN_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
-        if (Versions.LAZYDFU_ENABLED)
-            d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);
+        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);
     }
 
     @Override
     public int getJavaVersion() {
-        // Default is Java 8
         return Versions.JAVA_VERSION;
     }
 
     @Override
     public BrachyuraDecompiler decompiler() {
-        // Uses QuiltFlower instead of CFR
         return new FernflowerDecompiler(Maven.getMavenJarDep(QuiltMaven.URL, new MavenId("org.quiltmc", "quiltflower", Versions.QUILTFLOWER_VERSION)));
     }
 
     @Override
     public Path getBuildJarPath() {
-        // Changes the jar file name
         return getBuildLibsDir().resolve(getModId() + "-" + "mc" + createMcVersion().version + "-" + getVersion() + "-quilt" + ".jar");
     }
 }
