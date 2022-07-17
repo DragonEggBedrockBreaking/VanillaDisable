@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.damage;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.damagesource.DamageSource;
@@ -8,8 +9,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -39,32 +38,32 @@ public abstract class MixinPlayer {
     }
 
     /**
+     * @param original     the original value
      * @param damageSource the source of the damage
-     * @param cir          the returnable callback info (Boolean)
      * @author DragonEggBedrockBreaking
-     * @reason Removes damage sources
      */
-    @Inject(method = "isInvulnerableTo", at = @At(value = "HEAD"), cancellable = true)
-    private void isAlsoInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
+    private boolean isAlsoInvulnerableTo(boolean original, DamageSource damageSource) {
+        if (VDServer.getServer() == null) return original;
         if (damageSourceMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> damageGamerule = damageSourceMap.get(damageSource);
         if (!GameruleHelper.getBool(Gamerules.DAMAGE_ENABLED)) {
-            cir.setReturnValue(true);
+            return true;
         } else if (damageGamerule != null && !GameruleHelper.getBool(damageGamerule)) {
-            cir.setReturnValue(true);
+            return true;
         } else if (damageSource.isProjectile()) {
-            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.PROJECTILE_DAMAGE));
+            return !GameruleHelper.getBool(Gamerules.PROJECTILE_DAMAGE);
         } else if (damageSource.isExplosion()) {
-            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.EXPLOSION_DAMAGE));
+            return !GameruleHelper.getBool(Gamerules.EXPLOSION_DAMAGE);
         } else if (damageSource.isBypassInvul()) {
-            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.VOID_DAMAGE));
+            return !GameruleHelper.getBool(Gamerules.VOID_DAMAGE);
         } else if (damageSource.isMagic()) {
-            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.MAGIC_DAMAGE));
+            return !GameruleHelper.getBool(Gamerules.MAGIC_DAMAGE);
         } else if (damageSource.isCreativePlayer()) {
-            cir.setReturnValue(!GameruleHelper.getBool(Gamerules.CREATIVE_PLAYER_DAMAGE));
+            return !GameruleHelper.getBool(Gamerules.CREATIVE_PLAYER_DAMAGE);
         }
+        return original;
     }
 }

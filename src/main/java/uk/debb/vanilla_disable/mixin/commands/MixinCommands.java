@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.commands;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.ChatFormatting;
@@ -11,8 +12,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -110,15 +109,15 @@ public abstract class MixinCommands {
     }
 
     /**
-     * @param source  the source of the command
-     * @param command the command to be executed
-     * @param cir     the returnable callback info (Integer)
+     * @param original the original value
+     * @param source   the source of the command
+     * @param command  the command to be executed
      * @author LittleLily
      * @author DragonEggBedrockBreaking
      */
-    @Inject(method = "performCommand", at = @At(value = "HEAD"), cancellable = true)
-    private void performCommand(CommandSourceStack source, String command, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "performCommand", at = @At(value = "RETURN"))
+    private int performCommand(int original, CommandSourceStack source, String command) {
+        if (VDServer.getServer() == null) return original;
         String commandName = command.split(" ")[0].substring(1);
         if (commandNameGameruleMap.isEmpty()) {
             addOptionsToMap();
@@ -132,7 +131,8 @@ public abstract class MixinCommands {
                 (commandGamerule != null && !GameruleHelper.getBool(commandGamerule)) ||
                 (source.getServer().isDedicatedServer() && dedicatedCommandGamerule != null && !GameruleHelper.getBool(dedicatedCommandGamerule))) {
             source.getServer().getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), ChatType.CHAT);
-            cir.setReturnValue(0);
+            return 0;
         }
+        return original;
     }
 }

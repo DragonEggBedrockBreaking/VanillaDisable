@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.redstone;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.DiodeBlock;
@@ -9,8 +10,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -22,15 +21,14 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
     }
 
     /**
+     * @param original   the original value
      * @param blockState the state of the block
-     * @param cir        the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
-     * @reason edit the delay of the redstone component
      */
-    @Inject(method = "getDelay", at = @At("HEAD"), cancellable = true)
-    private void modifyDelay(BlockState blockState, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
-        cir.setReturnValue(blockState.getValue(BlockStateProperties.DELAY) * GameruleHelper.getInt(Gamerules.REPEATER_BASE_DELAY));
+    @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
+    private int modifyDelay(int original, BlockState blockState) {
+        if (VDServer.getServer() == null) return original;
+        return blockState.getValue(BlockStateProperties.DELAY) * GameruleHelper.getInt(Gamerules.REPEATER_BASE_DELAY);
     }
 
     /**

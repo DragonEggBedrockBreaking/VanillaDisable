@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.enchantments;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.item.ItemStack;
@@ -10,8 +11,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -68,22 +67,22 @@ public abstract class MixinEnchantmentHelper {
     }
 
     /**
+     * @param original    the original value
      * @param enchantment the enchantment on the item to disable
      * @param stack       the stack of items with that enchantment
-     * @param cir         the returnable callback info (Integer)
      * @author DragonEggBedrockBreaking
-     * @reason disable vanilla enchantments
      */
-    @Inject(method = "getItemEnchantmentLevel", at = @At("HEAD"), cancellable = true)
-    private static void removeEnchantmentLevel(Enchantment enchantment, ItemStack stack, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getItemEnchantmentLevel", at = @At("RETURN"))
+    private static int removeEnchantmentLevel(int original, Enchantment enchantment, ItemStack stack) {
+        if (VDServer.getServer() == null) return original;
         if (enchantmentMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = enchantmentMap.get(enchantment);
         if (!GameruleHelper.getBool(Gamerules.ENCHANTMENTS_ENABLED) ||
                 (gameRule != null && !GameruleHelper.getBool(gameRule))) {
-            cir.setReturnValue(0);
+            return 0;
         }
+        return original;
     }
 }

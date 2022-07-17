@@ -6,8 +6,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.material.WaterFluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -15,31 +13,31 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(WaterFluid.class)
 public abstract class MixinWaterFluid {
     /**
-     * @param world the world
-     * @param cir   the returnable callback info (Integer)
+     * @param original the original value
+     * @param world    the world
      * @author DragonEggBedrockBreaking
-     * @reason edit how far the fluid flows
      */
-    @Inject(method = "getDropOff", at = @At("HEAD"), cancellable = true)
-    private void getWaterDropOff(LevelReader world, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getDropOff", at = @At("RETURN"))
+    private int getWaterDropOff(int original, LevelReader world) {
+        if (VDServer.getServer() == null) return original;
         if (world instanceof Level) {
-            cir.setReturnValue(GameruleHelper.getBool(Gamerules.WATER_REACHES_FAR) ? 1 : 2);
+            return GameruleHelper.getBool(Gamerules.WATER_REACHES_FAR) ? 1 : 2;
         }
+        return original;
     }
 
     /**
-     * @param world the world
-     * @param cir   the returnable callback info (Integer)
+     * @param original the original value
+     * @param world    the world
      * @author DragonEggBedrockBreaking
-     * @reason edit how fast the fluid flows
      */
-    @Inject(method = "getTickDelay", at = @At("HEAD"), cancellable = true)
-    private void getWaterTickDelay(LevelReader world, CallbackInfoReturnable<Integer> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "getTickDelay", at = @At("RETURN"))
+    private int getWaterTickDelay(int original, LevelReader world) {
+        if (VDServer.getServer() == null) return original;
         if (world instanceof Level) {
-            cir.setReturnValue(GameruleHelper.getInt(Gamerules.WATER_FLOW_SPEED));
+            return GameruleHelper.getInt(Gamerules.WATER_FLOW_SPEED);
         }
+        return original;
     }
 
     /**

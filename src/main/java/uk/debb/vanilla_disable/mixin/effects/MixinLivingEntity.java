@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.effects;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,8 +12,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -62,14 +61,13 @@ public abstract class MixinLivingEntity {
     }
 
     /**
-     * @param effect the status effect
-     * @param cir    the returnable callback info (Boolean)
+     * @param original the original value
+     * @param effect   the status effect
      * @author DragonEggBedrockBreaking
-     * @reason disable vanilla effects
      */
-    @Inject(method = "canBeAffected", at = @At("HEAD"), cancellable = true)
-    private void canItBeAffected(MobEffectInstance effect, CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
+    private boolean canItBeAffected(boolean original, MobEffectInstance effect) {
+        if (VDServer.getServer() == null) return original;
         if (((Object) this) instanceof ServerPlayer) {
             MobEffect statusEffect = effect.getEffect();
             if (statusEffectMap.isEmpty()) {
@@ -78,8 +76,9 @@ public abstract class MixinLivingEntity {
             GameRules.Key<GameRules.BooleanValue> effectGamerule = statusEffectMap.get(statusEffect);
             if ((!GameruleHelper.getBool(Gamerules.EFFECTS_ENABLED)) ||
                     (effectGamerule != null && !GameruleHelper.getBool(effectGamerule))) {
-                cir.setReturnValue(false);
+                return false;
             }
         }
+        return original;
     }
 }

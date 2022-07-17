@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.mixin.mob;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.animal.Pig;
@@ -8,9 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -18,17 +17,17 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(Pig.class)
 public abstract class MixinPig {
     /**
-     * @param stack the stack of items that the player is holding
-     * @param cir   the returnable callback info (Boolean)
+     * @param original the original value
+     * @param stack    the stack of items that the player is holding
      * @author DragonEggBedrockBreaking
-     * @reason change the item which the pig cen breed with
      */
-    @Inject(method = "isFood", at = @At("HEAD"), cancellable = true)
-    private void changeFood(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (VDServer.getServer() == null) return;
+    @ModifyReturnValue(method = "isFood", at = @At("RETURN"))
+    private boolean changeFood(boolean original, ItemStack stack) {
+        if (VDServer.getServer() == null) return original;
         if (GameruleHelper.getBool(Gamerules.PIGS_BREED_WITH_WHEAT)) {
-            cir.setReturnValue(Ingredient.of(Items.WHEAT).test(stack));
+            return Ingredient.of(Items.WHEAT).test(stack);
         }
+        return original;
     }
 
     /**
