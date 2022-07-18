@@ -65,7 +65,8 @@
     "misc.MixinLivingEntity",
 
     "mob.MixinAbstractPiglin",
-    "mob.MixinAbstractVillager",
+    "mob.MixinAbstractVillager_InfiniteTrading",
+    "mob.MixinAbstractVillager_TradingEnabled",
     "mob.MixinDragonStrafePlayerPhase",
     "mob.MixinHoglin",
     "mob.MixinHusk",
