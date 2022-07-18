@@ -1,14 +1,15 @@
 package uk.debb.vanilla_disable.mixin.mob;
 
+import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
 import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
@@ -21,12 +22,10 @@ import uk.debb.vanilla_disable.util.VDServer;
 @Mixin(AbstractVillager.class)
 public abstract class MixinAbstractVillager {
     /**
-     * @param tradeOffer the trade offer
-     * @param offer      the trade offer
+     * @param receiver the original receiver
      * @author DragonEggBedrockBreaking
-     * @reason allow for infinite trading with villagers
      */
-    @Redirect(
+    @ModifyReceiver(
             method = "notifyTrade",
             at = @At(
                     value = "INVOKE",
@@ -34,13 +33,12 @@ public abstract class MixinAbstractVillager {
             ),
             require = 0
     )
-    private void cancelUses(MerchantOffer tradeOffer, MerchantOffer offer) {
-        if (VDServer.getServer() == null) return;
-        if (!GameruleHelper.getBool(Gamerules.INFINITE_TRADING)) {
-            offer.increaseUses();
-        } else {
-            offer.resetUses();
+    private MerchantOffer modifyUses(MerchantOffer receiver) {
+        if (VDServer.getServer() == null) return receiver;
+        if (GameruleHelper.getBool(Gamerules.INFINITE_TRADING)) {
+            return new MerchantOffer(new CompoundTag());
         }
+        return receiver;
     }
 
     /**
