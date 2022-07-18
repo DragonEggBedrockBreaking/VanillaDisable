@@ -2,8 +2,6 @@ package uk.debb.vanilla_disable.mixin.mob;
 
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -14,11 +12,6 @@ import uk.debb.vanilla_disable.util.GameruleHelper;
 import uk.debb.vanilla_disable.util.Gamerules;
 import uk.debb.vanilla_disable.util.VDServer;
 
-@Restriction(
-        conflict = {
-                @Condition("origins-classes")
-        }
-)
 @Mixin(AbstractVillager.class)
 public abstract class MixinAbstractVillager {
     /**
