@@ -418,6 +418,7 @@
     "gamerule.tripwireHookEnabled": "Toggle tripwire hooks being enabled",
     "gamerule.pistonEnabled": "Toggle pistons being enabled",
     "gamerule.sculkSensorEnabled": "Toggle sculk sensors being enabled",
+    "gamerule.pistonPushLimit": "Maximum number of blocks a piston can push",
 
     "gamerule.beeAi": "Toggle the AI of bees",
     "gamerule.blazeAi": "Toggle the AI of blazes",

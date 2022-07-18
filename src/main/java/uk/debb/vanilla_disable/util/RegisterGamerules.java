@@ -438,6 +438,7 @@ public class RegisterGamerules {
             Gamerules.TRIPWIRE_HOOK_ENABLED = GameruleHelper.register("tripwireHookEnabled", GameruleCategories.VD_REDSTONE, true);
             Gamerules.PISTON_ENABLED = GameruleHelper.register("pistonEnabled", GameruleCategories.VD_REDSTONE, true);
             Gamerules.SCULK_SENSOR_ENABLED = GameruleHelper.register("sculkSensorEnabled", GameruleCategories.VD_REDSTONE, true);
+            Gamerules.PISTON_PUSH_LIMIT = GameruleHelper.register("pistonPushLimit", GameruleCategories.VD_REDSTONE, 12, 0);
         }
         if (CaffeineConfigMixinConfigPlugin.ai) {
             Gamerules.BEE_AI = GameruleHelper.register("beeAi", GameruleCategories.VD_AI, true);

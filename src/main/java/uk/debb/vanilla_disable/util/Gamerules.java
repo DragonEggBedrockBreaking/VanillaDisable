@@ -422,6 +422,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> TRIPWIRE_HOOK_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> PISTON_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> SCULK_SENSOR_ENABLED;
+    public static GameRules.Key<GameRules.IntegerValue> PISTON_PUSH_LIMIT;
 
     public static GameRules.Key<GameRules.BooleanValue> BEE_AI;
     public static GameRules.Key<GameRules.BooleanValue> BLAZE_AI;

@@ -92,6 +92,7 @@
     "redstone.MixinLightningRodBlock",
     "redstone.MixinObserverBlock",
     "redstone.MixinPistonBaseBlock",
+    "redstone.MixinPistonStructureResolver",
     "redstone.MixinPressurePlateBlock",
     "redstone.MixinRedstoneTorchBlock",
     "redstone.MixinRedStoneWireBlock",
