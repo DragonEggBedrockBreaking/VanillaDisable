@@ -141,8 +141,11 @@ public class RegisterGamerules {
             Gamerules.SET_BLOCK_COMMAND = GameruleHelper.register("setBlockCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.SET_WORLD_SPAWN_COMMAND = GameruleHelper.register("setWorldSpawnCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.SPAWN_POINT_COMMAND = GameruleHelper.register("spawnPointCommand", GameruleCategories.VD_COMMANDS, true);
+            Gamerules.SPECTATE_COMMAND = GameruleHelper.register("spectateCommand", GameruleCategories.VD_COMMANDS, true);
+            Gamerules.SPREAD_PLAYERS_COMMAND = GameruleHelper.register("spreadPlayersCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.STOP_SOUND_COMMAND = GameruleHelper.register("stopSoundCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.SUMMON_COMMAND = GameruleHelper.register("summonCommand", GameruleCategories.VD_COMMANDS, true);
+            Gamerules.TAG_COMMAND = GameruleHelper.register("tagCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.TEAM_COMMAND = GameruleHelper.register("teamCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.TEAM_MSG_COMMAND = GameruleHelper.register("teamMsgCommand", GameruleCategories.VD_COMMANDS, true);
             Gamerules.TELEPORT_COMMAND = GameruleHelper.register("teleportCommand", GameruleCategories.VD_COMMANDS, true);

@@ -63,7 +63,7 @@ public abstract class MixinGoal {
         goalMap.put(Raider.RaiderMoveThroughVillageGoal.class, Gamerules.RAIDER_AI);
         goalMap.put(Shulker.ShulkerAttackGoal.class, Gamerules.SHULKER_AI);
         goalMap.put(Shulker.ShulkerPeekGoal.class, Gamerules.SHULKER_AI);
-        goalMap.put(Silverfish.SilverfishWakeUpFriendsGoal.class, Gamerules.SHULKER_AI);
+        goalMap.put(Silverfish.SilverfishWakeUpFriendsGoal.class, Gamerules.SILVERFISH_AI);
         goalMap.put(Slime.SlimeAttackGoal.class, Gamerules.SLIME_AI);
         goalMap.put(Slime.SlimeFloatGoal.class, Gamerules.SLIME_AI);
         goalMap.put(Slime.SlimeKeepOnJumpingGoal.class, Gamerules.SLIME_AI);

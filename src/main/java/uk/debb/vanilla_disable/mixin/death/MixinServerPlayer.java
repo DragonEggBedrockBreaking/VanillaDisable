@@ -40,7 +40,7 @@ public abstract class MixinServerPlayer {
         deathToGameruleMap.put("magic", Gamerules.MAGIC_DEATH);
         deathToGameruleMap.put("wither", Gamerules.WITHER_DEATH);
         deathToGameruleMap.put("anvil", Gamerules.ANVIL_DEATH);
-        deathToGameruleMap.put("fallingBlock", Gamerules.FALLING_DEATH);
+        deathToGameruleMap.put("fallingBlock", Gamerules.FALLING_BLOCK_DEATH);
         deathToGameruleMap.put("dragonBreath", Gamerules.DRAGON_BREATH_DEATH);
         deathToGameruleMap.put("sweetBerryBush", Gamerules.SWEET_BERRY_BUSH_DEATH);
         deathToGameruleMap.put("freeze", Gamerules.FREEZING_DEATH);

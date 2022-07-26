@@ -51,6 +51,7 @@ public abstract class MixinFoodData {
         nutritionMap.put(Foods.COOKED_RABBIT, Gamerules.COOKED_RABBIT_NUTRITION);
         nutritionMap.put(Foods.COOKED_SALMON, Gamerules.COOKED_SALMON_NUTRITION);
         nutritionMap.put(Foods.COOKIE, Gamerules.COOKIE_NUTRITION);
+        nutritionMap.put(Foods.DRIED_KELP, Gamerules.DRIED_KELP_NUTRITION);
         nutritionMap.put(Foods.ENCHANTED_GOLDEN_APPLE, Gamerules.ENCHANTED_GOLDEN_APPLE_NUTRITION);
         nutritionMap.put(Foods.GOLDEN_APPLE, Gamerules.GOLDEN_APPLE_NUTRITION);
         nutritionMap.put(Foods.GOLDEN_CARROT, Gamerules.GOLDEN_CARROT_NUTRITION);
@@ -91,6 +92,7 @@ public abstract class MixinFoodData {
         saturationMap.put(Foods.COOKED_RABBIT, Gamerules.COOKED_RABBIT_SATURATION);
         saturationMap.put(Foods.COOKED_SALMON, Gamerules.COOKED_SALMON_SATURATION);
         saturationMap.put(Foods.COOKIE, Gamerules.COOKIE_SATURATION);
+        saturationMap.put(Foods.DRIED_KELP, Gamerules.DRIED_KELP_SATURATION);
         saturationMap.put(Foods.ENCHANTED_GOLDEN_APPLE, Gamerules.ENCHANTED_GOLDEN_APPLE_SATURATION);
         saturationMap.put(Foods.GOLDEN_APPLE, Gamerules.GOLDEN_APPLE_SATURATION);
         saturationMap.put(Foods.GOLDEN_CARROT, Gamerules.GOLDEN_CARROT_SATURATION);
