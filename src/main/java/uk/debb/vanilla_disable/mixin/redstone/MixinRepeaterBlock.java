@@ -10,9 +10,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
-import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(RepeaterBlock.class)
 public abstract class MixinRepeaterBlock extends DiodeBlock {

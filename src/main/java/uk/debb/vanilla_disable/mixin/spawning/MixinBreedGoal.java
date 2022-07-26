@@ -4,9 +4,9 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
-import uk.debb.vanilla_disable.util.VDServer;
 
 @Mixin(BreedGoal.class)
 public abstract class MixinBreedGoal {
