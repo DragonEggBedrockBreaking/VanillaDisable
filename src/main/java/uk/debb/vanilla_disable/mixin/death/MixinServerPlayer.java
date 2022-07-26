@@ -57,7 +57,7 @@ public abstract class MixinServerPlayer {
 
     /**
      * @param damageSource the source of the damage causing the death
-     * @param ci the callback info
+     * @param ci           the callback info
      * @author DragonEggBedrockBreaking
      */
     @Inject(method = "die", at = @At("HEAD"), cancellable = true)
@@ -67,7 +67,7 @@ public abstract class MixinServerPlayer {
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = deathToGameruleMap.get(damageSource.getMsgId());
         if (!GameruleHelper.getBool(Gamerules.DEATH_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
-            ((Player)(Object)this).setHealth(((Player)(Object)this).getHealth() + 1);
+            ((Player) (Object) this).setHealth(((Player) (Object) this).getHealth() + 1);
             ci.cancel();
         }
     }

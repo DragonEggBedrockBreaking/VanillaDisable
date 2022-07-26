@@ -256,7 +256,7 @@ public abstract class MixinBiomeGenerationSettings {
 
     /**
      * @param original the original value
-     * @param feature the feature that is being checked for
+     * @param feature  the feature that is being checked for
      * @author DragonEggBedrockBreaking
      */
     @ModifyReturnValue(method = "hasFeature", at = @At("RETURN"))
