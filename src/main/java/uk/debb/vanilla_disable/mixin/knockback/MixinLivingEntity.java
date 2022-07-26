@@ -3,13 +3,14 @@ package uk.debb.vanilla_disable.mixin.knockback;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.piglin.Piglin;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
@@ -83,7 +84,7 @@ public abstract class MixinLivingEntity {
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(double strength, double x, double z, CallbackInfo ci) {
         if (VDServer.getServer() == null) return;
-        if ((Object) this instanceof Player && isInvulnerableToKnockback(this.lastHurtByMob)) {
+        if (((Entity)(Object) this).getType() == EntityType.PLAYER && isInvulnerableToKnockback(this.lastHurtByMob)) {
             ci.cancel();
         }
     }

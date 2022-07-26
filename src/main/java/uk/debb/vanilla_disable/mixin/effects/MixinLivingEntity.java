@@ -3,10 +3,11 @@ package uk.debb.vanilla_disable.mixin.effects;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
@@ -68,7 +69,7 @@ public abstract class MixinLivingEntity {
     @ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
     private boolean canItBeAffected(boolean original, MobEffectInstance effect) {
         if (VDServer.getServer() == null) return original;
-        if (((Object) this) instanceof ServerPlayer) {
+        if (((Entity)(Object) this).getType() == EntityType.PLAYER) {
             MobEffect statusEffect = effect.getEffect();
             if (statusEffectMap.isEmpty()) {
                 addOptionsToMap();

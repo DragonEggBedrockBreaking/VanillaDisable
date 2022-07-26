@@ -14,7 +14,6 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -70,7 +69,7 @@ public abstract class MixinMob extends Entity {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupDespawnMap.get(this.getClass());
-        if (gameRule != null && !(((Object) this) instanceof AbstractVillager)) {
+        if (gameRule != null && !(this.getType() == EntityType.VILLAGER)) {
             return GameruleHelper.getBool(gameRule) && additionalRestrictionsMet();
         }
         return original;
