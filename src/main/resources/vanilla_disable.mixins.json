@@ -25,6 +25,8 @@
 
     "damage.MixinPlayer",
 
+    "death.MixinServerPlayer",
+
     "despawning.MixinItemEntity",
     "despawning.MixinMob",
     "despawning.MixinMobCategory",

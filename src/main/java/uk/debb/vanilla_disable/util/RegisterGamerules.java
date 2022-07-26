@@ -585,6 +585,37 @@ public class RegisterGamerules {
             Gamerules.WATER_BREATHING_POTION = GameruleHelper.register("waterBreathingPotion", GameruleCategories.VD_POTIONS, true);
             Gamerules.WEAKNESS_POTION = GameruleHelper.register("weaknessPotion", GameruleCategories.VD_POTIONS, true);
         }
+        if (CaffeineConfigMixinConfigPlugin.death) {
+            Gamerules.DEATH_ENABLED = GameruleHelper.register("deathEnabled", GameruleCategories.VD_DEATH, true);
+            Gamerules.ANVIL_DEATH = GameruleHelper.register("anvilDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.CACTUS_DEATH = GameruleHelper.register("cactusDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.CRAMMING_DEATH = GameruleHelper.register("crammingDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.DRAGON_BREATH_DEATH = GameruleHelper.register("dragonBreathDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.DROWNING_DEATH = GameruleHelper.register("drowningDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.EXPLOSION_DEATH = GameruleHelper.register("explosionDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.FALLING_BLOCK_DEATH = GameruleHelper.register("fallingBlockDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.FALLING_DEATH = GameruleHelper.register("fallingDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.FALLING_STALACTITE_DEATH = GameruleHelper.register("fallingStalactiteDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.FLY_INTO_WALL_DEATH = GameruleHelper.register("flyIntoWallDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.FREEZING_DEATH = GameruleHelper.register("freezingDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.HOT_FLOOR_DEATH = GameruleHelper.register("hotFloorDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.IN_FIRE_DEATH = GameruleHelper.register("inFireDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.IN_WALL_DEATH = GameruleHelper.register("inWallDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.LAVA_DEATH = GameruleHelper.register("lavaDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.LIGHTNING_BOLT_DEATH = GameruleHelper.register("lightningBoltDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.MAGIC_DEATH = GameruleHelper.register("magicDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.MOB_DEATH = GameruleHelper.register("mobDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.ON_FIRE_DEATH = GameruleHelper.register("onFireDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.OUT_OF_WORLD_DEATH = GameruleHelper.register("outOfWorldDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.PLAYER_DEATH = GameruleHelper.register("playerDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.SONIC_BOOM_DEATH = GameruleHelper.register("sonicBoomDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.STALAGMITE_DEATH = GameruleHelper.register("stalagmiteDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.STARVATION_DEATH = GameruleHelper.register("starvationDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.STINGING_DEATH = GameruleHelper.register("stingingDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.SWEET_BERRY_BUSH_DEATH = GameruleHelper.register("sweetBerryBushDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.THORNS_DEATH = GameruleHelper.register("thornsDeath", GameruleCategories.VD_DEATH, true);
+            Gamerules.WITHER_DEATH = GameruleHelper.register("witherDeath", GameruleCategories.VD_DEATH, true);
+        }
         if (CaffeineConfigMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.register("oldBoats", GameruleCategories.VD_MISC, false);
             Gamerules.TOTEMS_ENABLED = GameruleHelper.register("totemsEnabled", GameruleCategories.VD_MISC, true);

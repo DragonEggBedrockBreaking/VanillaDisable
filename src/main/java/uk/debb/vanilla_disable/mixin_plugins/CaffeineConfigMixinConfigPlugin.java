@@ -10,6 +10,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
     public static boolean blocks_container;
     public static boolean commands;
     public static boolean damage;
+    public static boolean death;
     public static boolean despawning;
     public static boolean effects;
     public static boolean enchantments;
@@ -37,6 +38,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("blocks.container", true)
                 .addMixinOption("commands", true)
                 .addMixinOption("damage", true)
+                .addMixinOption("death", true)
                 .addMixinOption("despawning", true)
                 .addMixinOption("effects", true)
                 .addMixinOption("enchantments", true)
@@ -68,6 +70,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
         blocks_container = this.caffeineConfig.getEffectiveOptionForMixin("blocks.container.MixinChestBlock").isEnabled();
         commands = this.caffeineConfig.getEffectiveOptionForMixin("commands.MixinCommands").isEnabled();
         damage = this.caffeineConfig.getEffectiveOptionForMixin("damage.MixinPlayer").isEnabled();
+        death = this.caffeineConfig.getEffectiveOptionForMixin("death.MixinPlayer").isEnabled();
         despawning = this.caffeineConfig.getEffectiveOptionForMixin("despawning.MixinItemEntity").isEnabled();
         effects = this.caffeineConfig.getEffectiveOptionForMixin("effects.MixinLivingEntity").isEnabled();
         enchantments = this.caffeineConfig.getEffectiveOptionForMixin("enchantments.MixinEnchantmentHelper").isEnabled();

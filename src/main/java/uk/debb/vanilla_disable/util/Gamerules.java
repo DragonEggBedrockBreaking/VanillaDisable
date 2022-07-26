@@ -561,6 +561,36 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> WATER_BREATHING_POTION;
     public static GameRules.Key<GameRules.BooleanValue> WEAKNESS_POTION;
 
+    public static GameRules.Key<GameRules.BooleanValue> DEATH_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> ANVIL_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> CACTUS_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> CRAMMING_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> DRAGON_BREATH_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> DROWNING_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> EXPLOSION_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> FALLING_BLOCK_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> FALLING_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> FALLING_STALACTITE_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> FLY_INTO_WALL_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> FREEZING_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> HOT_FLOOR_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> IN_FIRE_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> IN_WALL_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> LAVA_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> LIGHTNING_BOLT_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> MAGIC_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> MOB_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> ON_FIRE_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> OUT_OF_WORLD_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> PLAYER_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> SONIC_BOOM_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> STALAGMITE_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> STARVATION_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> STINGING_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> SWEET_BERRY_BUSH_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> THORNS_DEATH;
+    public static GameRules.Key<GameRules.BooleanValue> WITHER_DEATH;
+
     public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
     public static GameRules.Key<GameRules.BooleanValue> TOTEMS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> BOW_SPAMMING;
