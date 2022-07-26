@@ -1,10 +1,11 @@
-package uk.debb.vanilla_disable.util;
+package uk.debb.vanilla_disable.util.gamerules;
 
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.storage.WorldData;
+import uk.debb.vanilla_disable.util.VDServer;
 
 public class GameruleHelper {
     /**

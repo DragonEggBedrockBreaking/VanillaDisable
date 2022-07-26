@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.util;
+package uk.debb.vanilla_disable.util.gamerules;
 
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.minecraft.ChatFormatting;

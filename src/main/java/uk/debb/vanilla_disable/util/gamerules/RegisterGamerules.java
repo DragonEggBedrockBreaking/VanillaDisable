@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.util;
+package uk.debb.vanilla_disable.util.gamerules;
 
 import uk.debb.vanilla_disable.mixin_plugins.CaffeineConfigMixinConfigPlugin;
 

@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.piston.PistonStructureResolver;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import uk.debb.vanilla_disable.util.GameruleHelper;
-import uk.debb.vanilla_disable.util.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Restriction(
         conflict = {
