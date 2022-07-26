@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.misc;
+package uk.debb.vanilla_disable.mixin.items;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.LivingEntity;

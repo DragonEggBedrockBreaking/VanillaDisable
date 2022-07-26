@@ -295,7 +295,6 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> WATER_BREATHING_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> WEAKNESS_EFFECT;
     public static GameRules.Key<GameRules.BooleanValue> WITHER_EFFECT;
-    public static GameRules.Key<GameRules.BooleanValue> MILK_CLEARS_EFFECTS;
 
     public static GameRules.Key<GameRules.BooleanValue> ENCHANTMENTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> AQUA_AFFINITY_ENCHANTMENT;
@@ -591,8 +590,51 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> THORNS_DEATH;
     public static GameRules.Key<GameRules.BooleanValue> WITHER_DEATH;
 
-    public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
+    public static GameRules.Key<GameRules.BooleanValue> BOATS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BOOKS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BOTTLES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BOWS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BUCKETS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BUNDLES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> CROSSBOWS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> EGGS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> ENDER_EYES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> ENDER_PEARLS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> EXPERIENCE_BOTTLES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> FIREWORKS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> FISHING_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> FOOD_ON_STICKS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> GOAT_HORNS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> MAPS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SHIELDS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SNOWBALLS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SPYGLASSES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> TRIDENTS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> AXES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> BONE_MEAL_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> COMPASSES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> END_CRYSTALS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> FIRE_CHARGES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> FLINT_AND_STEEL_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> HANGING_ENTITIES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> HOES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> HONEYCOMBS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> LEADS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> MINECARTS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> RECORDS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SHEARS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SHOVELS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> DYES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> NAMETAGS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SADDLES_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> CHORUS_FRUIT_EFFECTS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> HONEY_BOTTLE_EFFECTS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> MILK_BUCKET_EFFECTS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> SUSPICIOUS_STEW_EFFECTS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> TOTEMS_ENABLED;
     public static GameRules.Key<GameRules.BooleanValue> BOW_SPAMMING;
     public static GameRules.Key<GameRules.BooleanValue> CROSSBOW_SPAMMING;
+
+
+    public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
 }

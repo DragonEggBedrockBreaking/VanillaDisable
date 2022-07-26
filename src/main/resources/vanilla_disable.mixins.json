@@ -34,7 +34,6 @@
     "despawning.MixinThrownEnderpearl",
 
     "effects.MixinLivingEntity",
-    "effects.MixinMilkBucketItem",
 
     "enchantments.MixinEnchantmentHelper",
     "enchantments.enchantment_conflicts.MixinArrowInfiniteEnchantment",
@@ -58,13 +57,15 @@
     "fluids.MixinLavaFluid",
     "fluids.MixinWaterFluid",
 
+    "items.MixinBowItem",
+    "items.MixinCrossbowItem",
+    "items.MixinItemStack",
+    "items.MixinLivingEntity",
+
     "knockback.MixinLivingEntity",
     "knockback.MixinServerGamePacketListenerImpl",
 
-    "misc.MixinBowItem",
-    "misc.MixinCrossbowItem",
     "misc.MixinEntity",
-    "misc.MixinLivingEntity",
 
     "mob.MixinAbstractPiglin",
     "mob.MixinAbstractVillager",

@@ -305,7 +305,6 @@ public class RegisterGamerules {
             Gamerules.WATER_BREATHING_EFFECT = GameruleHelper.register("waterBreathingEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.WEAKNESS_EFFECT = GameruleHelper.register("weaknessEffect", GameruleCategories.VD_EFFECTS, true);
             Gamerules.WITHER_EFFECT = GameruleHelper.register("witherEffect", GameruleCategories.VD_EFFECTS, true);
-            Gamerules.MILK_CLEARS_EFFECTS = GameruleHelper.register("milkClearsEffects", GameruleCategories.VD_EFFECTS, true);
         }
         if (CaffeineConfigMixinConfigPlugin.enchantments) {
             Gamerules.ENCHANTMENTS_ENABLED = GameruleHelper.register("enchantmentsEnabled", GameruleCategories.VD_ENCHANTMENTS, true);
@@ -616,11 +615,54 @@ public class RegisterGamerules {
             Gamerules.THORNS_DEATH = GameruleHelper.register("thornsDeath", GameruleCategories.VD_DEATH, true);
             Gamerules.WITHER_DEATH = GameruleHelper.register("witherDeath", GameruleCategories.VD_DEATH, true);
         }
+        if (CaffeineConfigMixinConfigPlugin.items) {
+            Gamerules.BOATS_ENABLED = GameruleHelper.register("boatsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.BOOKS_ENABLED = GameruleHelper.register("booksEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.BOTTLES_ENABLED = GameruleHelper.register("bottlesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.BOWS_ENABLED = GameruleHelper.register("bowsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.BUCKETS_ENABLED = GameruleHelper.register("bucketsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.BUNDLES_ENABLED = GameruleHelper.register("bundlesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.CROSSBOWS_ENABLED = GameruleHelper.register("crossbowsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.EGGS_ENABLED = GameruleHelper.register("eggsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.ENDER_EYES_ENABLED = GameruleHelper.register("enderEyesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.ENDER_PEARLS_ENABLED = GameruleHelper.register("enderPearlsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.EXPERIENCE_BOTTLES_ENABLED = GameruleHelper.register("experienceBottlesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.FIREWORKS_ENABLED = GameruleHelper.register("fireworksEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.FISHING_ENABLED = GameruleHelper.register("fishingEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.FOOD_ON_STICKS_ENABLED = GameruleHelper.register("foodOnSticksEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.GOAT_HORNS_ENABLED = GameruleHelper.register("goatHornsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.MAPS_ENABLED = GameruleHelper.register("mapsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.SHIELDS_ENABLED = GameruleHelper.register("shieldsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.SNOWBALLS_ENABLED = GameruleHelper.register("snowballsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.SPYGLASSES_ENABLED = GameruleHelper.register("spyglassesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.TRIDENTS_ENABLED = GameruleHelper.register("tridentsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.AXES_ENABLED = GameruleHelper.register("axesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.BONE_MEAL_ENABLED = GameruleHelper.register("boneMealEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.COMPASSES_ENABLED = GameruleHelper.register("compassesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.END_CRYSTALS_ENABLED = GameruleHelper.register("endCrystalsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.FIRE_CHARGES_ENABLED = GameruleHelper.register("fireChargesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.FLINT_AND_STEEL_ENABLED = GameruleHelper.register("flintAndSteelEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.HANGING_ENTITIES_ENABLED = GameruleHelper.register("hangingEntitiesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.HOES_ENABLED = GameruleHelper.register("hoesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.HONEYCOMBS_ENABLED = GameruleHelper.register("honeycombsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.LEADS_ENABLED = GameruleHelper.register("leadsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.MINECARTS_ENABLED = GameruleHelper.register("minecartsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.RECORDS_ENABLED = GameruleHelper.register("recordsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.SHEARS_ENABLED = GameruleHelper.register("shearsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.SHOVELS_ENABLED = GameruleHelper.register("shovelsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.DYES_ENABLED = GameruleHelper.register("dyesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.NAMETAGS_ENABLED = GameruleHelper.register("nametagsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.SADDLES_ENABLED = GameruleHelper.register("saddlesEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.CHORUS_FRUIT_EFFECTS_ENABLED = GameruleHelper.register("chorusFruitEffectsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.HONEY_BOTTLE_EFFECTS_ENABLED = GameruleHelper.register("honeyBottleEffectsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.MILK_BUCKET_EFFECTS_ENABLED = GameruleHelper.register("milkBucketEffectsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.SUSPICIOUS_STEW_EFFECTS_ENABLED = GameruleHelper.register("suspiciousStewEffectsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.TOTEMS_ENABLED = GameruleHelper.register("totemsEnabled", GameruleCategories.VD_ITEMS, true);
+            Gamerules.BOW_SPAMMING = GameruleHelper.register("bowSpamming", GameruleCategories.VD_ITEMS, false);
+            Gamerules.CROSSBOW_SPAMMING = GameruleHelper.register("crossbowSpamming", GameruleCategories.VD_ITEMS, false);
+        }
         if (CaffeineConfigMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.register("oldBoats", GameruleCategories.VD_MISC, false);
-            Gamerules.TOTEMS_ENABLED = GameruleHelper.register("totemsEnabled", GameruleCategories.VD_MISC, true);
-            Gamerules.BOW_SPAMMING = GameruleHelper.register("bowSpamming", GameruleCategories.VD_MISC, false);
-            Gamerules.CROSSBOW_SPAMMING = GameruleHelper.register("crossbowSpamming", GameruleCategories.VD_MISC, false);
         }
     }
 }
