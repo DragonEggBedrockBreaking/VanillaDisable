@@ -27,7 +27,6 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
-
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
     @Shadow
