@@ -482,7 +482,7 @@ public class RegisterGamerules {
         }
         if (CaffeineConfigMixinConfigPlugin.food) {
             if (CaffeineConfigMixinConfigPlugin.food_hunger) {
-                Gamerules.OLD_HUNGER = GameruleHelper.registerBoolean("oldHunger", GameruleCategories.VD_MISC, Gamerules.OLD_HUNGER);
+                Gamerules.OLD_HUNGER = GameruleHelper.registerBoolean("oldHunger", GameruleCategories.VD_FOOD, Gamerules.OLD_HUNGER);
             }
             Gamerules.APPLE_NUTRITION = GameruleHelper.registerInt("appleNutrition", GameruleCategories.VD_FOOD, Gamerules.APPLE_NUTRITION, 0, 20);
             Gamerules.APPLE_SATURATION = GameruleHelper.registerInt("appleSaturation", GameruleCategories.VD_FOOD, Gamerules.APPLE_SATURATION, 0, 99);
