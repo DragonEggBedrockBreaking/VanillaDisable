@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -26,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Path;
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
@@ -38,12 +38,16 @@ public abstract class MixinMinecraftServer {
         return null;
     }
 
+    @Shadow public abstract Path getWorldPath(LevelResource arg);
+
+    @Shadow public abstract PackRepository getPackRepository();
+
     /**
      * @param name the name of the datapack
      * @author DragonEggBedrockBreaking
      */
     private boolean createDatapackDir(String name, String dirname) {
-        String dataPackPath = VDServer.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
+        String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
         File dataPackDir = new File(dataPackPath + "/" + name + "/data/minecraft/" + dirname + "/");
         return dataPackDir.getParentFile().mkdirs() && dataPackDir.mkdir();
     }
@@ -94,7 +98,7 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addMcmetaFile(String name, String content) throws IOException {
-        String dataPackPath = VDServer.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
+        String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
         File mcmetaFile = new File(dataPackPath + "/" + name + "/pack.mcmeta");
         FileWriter myWriter = new FileWriter(mcmetaFile.toString());
         myWriter.write(content);
@@ -146,7 +150,7 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void addJsonFile(String url, String name, String shortname, String dirname) throws IOException {
-        String dataPackPath = VDServer.getServer().getWorldPath(LevelResource.DATAPACK_DIR).toString();
+        String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
         FileOutputStream jsonFileDir = new FileOutputStream(dataPackPath + "/" + name + "/data/minecraft/" + dirname + "/" + shortname + ".json");
         URL URLToDownload = new URL(url);
         ReadableByteChannel readableByteChannel = Channels.newChannel(URLToDownload.openStream());
@@ -243,7 +247,7 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void enableDatapack(String name) {
-        PackRepository repo = VDServer.getServer().getPackRepository();
+        PackRepository repo = this.getPackRepository();
         DataPackConfig config = MixinMinecraftServer.getSelectedPacks(repo);
         ObjectList<String> enabledCopy = new ObjectArrayList<>();
         ObjectList<String> disabledCopy = new ObjectArrayList<>();
@@ -265,7 +269,7 @@ public abstract class MixinMinecraftServer {
      */
     @Unique
     private void disableDatapack(String name) {
-        PackRepository repo = VDServer.getServer().getPackRepository();
+        PackRepository repo = this.getPackRepository();
         DataPackConfig config = MixinMinecraftServer.getSelectedPacks(repo);
         ObjectList<String> enabledCopy = new ObjectArrayList<>();
         ObjectList<String> disabledCopy = new ObjectArrayList<>();

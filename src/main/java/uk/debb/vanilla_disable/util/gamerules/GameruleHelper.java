@@ -3,11 +3,19 @@ package uk.debb.vanilla_disable.util.gamerules;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.storage.WorldData;
-import uk.debb.vanilla_disable.util.VDServer;
 
 public class GameruleHelper implements GameruleDefaults {
+    private static MinecraftServer server;
+    public static void setServer(MinecraftServer serverArg) {
+        server = serverArg;
+    }
+    public static MinecraftServer getServer() {
+        return server;
+    }
+
     /**
      * @param name     the name of the gamerule
      * @param category the gamerule category
@@ -61,8 +69,8 @@ public class GameruleHelper implements GameruleDefaults {
      * @author DragonEggBedrockBreaking
      */
     public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key) {
-        if (VDServer.getServer() == null) return defaultBooleans.getBoolean(key);
-        return VDServer.getServer().getGameRules().getBoolean(key);
+        if (server == null) return defaultBooleans.getBoolean(key);
+        return server.getGameRules().getBoolean(key);
     }
 
     /**
@@ -81,8 +89,8 @@ public class GameruleHelper implements GameruleDefaults {
      * @author DragonEggBedrockBreaking
      */
     public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
-        if (VDServer.getServer() == null) return defaultInts.getInt(key);
-        return VDServer.getServer().getGameRules().getInt(key);
+        if (server == null) return defaultInts.getInt(key);
+        return server.getGameRules().getInt(key);
     }
 
     /**
@@ -91,6 +99,6 @@ public class GameruleHelper implements GameruleDefaults {
      * @author DragonEggBedrockBreaking
      */
     public static void setBool(GameRules.Key<GameRules.BooleanValue> key, boolean newValue) {
-        VDServer.getServer().getGameRules().getRule(key).set(newValue, VDServer.getServer());
+        server.getGameRules().getRule(key).set(newValue, server);
     }
 }

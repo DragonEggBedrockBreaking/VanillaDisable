@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
+import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
@@ -22,6 +22,6 @@ public abstract class MixinMinecraftServer {
             )
     )
     private void beforeServerSetup(CallbackInfo ci) {
-        VDServer.setServer((MinecraftServer) (Object) this);
+        GameruleHelper.setServer((MinecraftServer) (Object) this);
     }
 }
