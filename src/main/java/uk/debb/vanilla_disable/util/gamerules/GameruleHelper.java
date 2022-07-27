@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.storage.WorldData;
 
 public class GameruleHelper implements GameruleDefaults {
     private static MinecraftServer server;
@@ -71,16 +70,6 @@ public class GameruleHelper implements GameruleDefaults {
     public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key) {
         if (server == null) return defaultBooleans.getBoolean(key);
         return server.getGameRules().getBoolean(key);
-    }
-
-    /**
-     * @param key       the gamerule key
-     * @param worldData the world data
-     * @return the gamerule value (boolean)
-     * @author DragonEggBedrockBreaking
-     */
-    public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key, WorldData worldData) {
-        return worldData.getGameRules().getBoolean(key);
     }
 
     /**
