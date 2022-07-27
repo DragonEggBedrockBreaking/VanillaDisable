@@ -88,7 +88,6 @@ public class GameruleHelper implements GameruleDefaults {
      * @author DragonEggBedrockBreaking
      */
     public static void setBool(GameRules.Key<GameRules.BooleanValue> key, boolean newValue) {
-        System.out.println(defaultBooleans.keySet());
         server.getGameRules().getRule(key).set(newValue, server);
     }
 }
