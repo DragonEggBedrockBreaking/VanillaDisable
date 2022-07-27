@@ -429,7 +429,7 @@
     "gamerule.ghastAi": "Toggle the AI of ghasts",
     "gamerule.guardianAi": "Toggle the AI of guardians",
     "gamerule.llamaAi": "Toggle the AI of llamas",
-    "gamerule.ocelotAi": "Togglet the AI of ocelots",
+    "gamerule.ocelotAi": "Toggle the AI of ocelots",
     "gamerule.pandaAi": "Toggle the AI of pandas",
     "gamerule.phantomAi": "Toggle the AI of phantoms",
     "gamerule.pufferfishAi": "Toggle the AI of pufferfish",
@@ -653,6 +653,25 @@
     "gamerule.dispenserWatersMud": "Dispensers can create mud",
     "gamerule.dispenserWaxesCopper": "Dispensers can wax copper",
 
+    "gamerule.tippedArrowsEnabled": "Toggle tipped arrows",
+    "gamerule.fireResistanceTippedArrow": "Toggle fire resistance tipped arrows",
+    "gamerule.harmingTippedArrow": "Toggle harming tipped arrows",
+    "gamerule.healingTippedArrow": "Toggle healing tipped arrows",
+    "gamerule.invisibilityTippedArrow": "Toggle invisibility tipped arrows",
+    "gamerule.leapingTippedArrow": "Toggle leaping tipped arrows",
+    "gamerule.luckTippedArrow": "Toggle luck tipped arrows",
+    "gamerule.nightVisionTippedArrow": "Toggle night vision tipped arrows",
+    "gamerule.poisonTippedArrow": "Toggle poison tipped arrows",
+    "gamerule.regenerationTippedArrow": "Toggle regeneration tipped arrows",
+    "gamerule.slowFallingTippedArrow": "Toggle slow falling tipped arrows",
+    "gamerule.slownessTippedArrow": "Toggle slowness tipped arrows",
+    "gamerule.strengthTippedArrow": "Toggle strength tipped arrows",
+    "gamerule.swiftnessTippedArrow": "Toggle swiftness tipped arrows",
+    "gamerule.turtleMasterTippedArrow": "Toggle turtle master tipped arrows",
+    "gamerule.waterBreathingTippedArrow": "Toggle water breathing tipped arrows",
+    "gamerule.weaknessTippedArrow": "Toggle weakness tipped arrows",
+    "gamerule.spectralArrowsEnabled": "Toggle spectral arrows",
+
     "gamerule.oldBoats": "Toggle old (pre-1.9) boats",
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
@@ -674,8 +693,10 @@
     "gamerule.category.vd.food": "VanillaDisable Food",
     "gamerule.category.vd.potions": "VanillaDisable Potions",
     "gamerule.category.vd.death": "VanillaDisable Death",
-    "gamerule.category.vd.misc": "VanillaDisable Misc",
     "gamerule.category.vd.items": "VanillaDisable Items",
+    "gamerule.category.vd.dispenser": "VanillaDisable Dispensers",
+    "gamerule.category.vd.arrow": "VanillaDisable Arrow",
+    "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator"
 }
