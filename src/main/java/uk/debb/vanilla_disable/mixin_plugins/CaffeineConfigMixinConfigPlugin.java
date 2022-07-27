@@ -6,6 +6,7 @@ import org.quiltmc.loader.api.QuiltLoader;
 
 public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
     public static boolean ai;
+    public static boolean arrow;
     public static boolean blocks;
     public static boolean blocks_container;
     public static boolean commands;
@@ -36,6 +37,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
     protected CaffeineConfig createConfig() {
         CaffeineConfig localCaffeineConfig = CaffeineConfig.builder("VanillaDisable")
                 .addMixinOption("ai", true)
+                .addMixinOption("arrow", true)
                 .addMixinOption("blocks", true)
                 .addMixinOption("blocks.container", true)
                 .addMixinOption("commands", true)
@@ -70,6 +72,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
 
     private void updateData() {
         ai = this.caffeineConfig.getEffectiveOptionForMixin("ai.MixinGoal").isEnabled();
+        arrow = this.caffeineConfig.getEffectiveOptionForMixin("arrow.MixinArrow").isEnabled();
         blocks = this.caffeineConfig.getEffectiveOptionForMixin("blocks.MixinBeaconBlockEntity").isEnabled();
         blocks_container = this.caffeineConfig.getEffectiveOptionForMixin("blocks.container.MixinChestBlock").isEnabled();
         commands = this.caffeineConfig.getEffectiveOptionForMixin("commands.MixinCommands").isEnabled();

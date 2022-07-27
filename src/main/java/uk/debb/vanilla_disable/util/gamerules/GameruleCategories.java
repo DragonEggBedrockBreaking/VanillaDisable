@@ -27,6 +27,7 @@ public class GameruleCategories {
     public static final CustomGameRuleCategory VD_DEATH = createCustomGameRuleCategory("gamerule.category.vd.death");
     public static final CustomGameRuleCategory VD_ITEMS = createCustomGameRuleCategory("gamerule.category.vd.items");
     public static final CustomGameRuleCategory VD_DISPENSER = createCustomGameRuleCategory("gamerule.category.vd.dispenser");
+    public static final CustomGameRuleCategory VD_ARROW = createCustomGameRuleCategory("gamerule.category.vd.arrow");
     public static final CustomGameRuleCategory VD_MISC = createCustomGameRuleCategory("gamerule.category.vd.misc");
 
     /**

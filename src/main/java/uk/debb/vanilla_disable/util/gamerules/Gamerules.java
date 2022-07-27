@@ -656,5 +656,23 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> DISPENSER_WATERS_MUD;
     public static GameRules.Key<GameRules.BooleanValue> DISPENSER_WAXES_COPPER;
 
+    public static GameRules.Key<GameRules.BooleanValue> TIPPED_ARROWS_ENABLED;
+    public static GameRules.Key<GameRules.BooleanValue> FIRE_RESISTANCE_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> HARMING_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> HEALING_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> INVISIBILITY_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> LEAPING_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> LUCK_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> NIGHT_VISION_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> POISON_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> REGENERATION_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> SLOWNESS_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> SLOW_FALLING_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> STRENGTH_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> SWIFTNESS_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> TURTLE_MASTER_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> WATER_BREATHING_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> WEAKNESS_TIPPED_ARROW;
+
     public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
 }

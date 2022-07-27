@@ -686,6 +686,25 @@ public class RegisterGamerules {
             Gamerules.DISPENSER_WATERS_MUD = GameruleHelper.registerBoolean("dispenserWatersMud", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_WATERS_MUD);
             Gamerules.DISPENSER_WAXES_COPPER = GameruleHelper.registerBoolean("dispenserWaxesCopper", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_WAXES_COPPER);
         }
+        if (CaffeineConfigMixinConfigPlugin.arrow) {
+            Gamerules.TIPPED_ARROWS_ENABLED = GameruleHelper.registerBoolean("tippedArrowsEnabled", GameruleCategories.VD_ARROW, Gamerules.TIPPED_ARROWS_ENABLED);
+            Gamerules.FIRE_RESISTANCE_TIPPED_ARROW = GameruleHelper.registerBoolean("fireResistanceTippedArrow", GameruleCategories.VD_ARROW, Gamerules.FIRE_RESISTANCE_TIPPED_ARROW);
+            Gamerules.HARMING_TIPPED_ARROW = GameruleHelper.registerBoolean("harmingTippedArrow", GameruleCategories.VD_ARROW, Gamerules.HARMING_TIPPED_ARROW);
+            Gamerules.HEALING_TIPPED_ARROW = GameruleHelper.registerBoolean("healingTippedArrow", GameruleCategories.VD_ARROW, Gamerules.HEALING_TIPPED_ARROW);
+            Gamerules.INVISIBILITY_TIPPED_ARROW = GameruleHelper.registerBoolean("invisibilityTippedArrow", GameruleCategories.VD_ARROW, Gamerules.INVISIBILITY_TIPPED_ARROW);
+            Gamerules.LEAPING_TIPPED_ARROW = GameruleHelper.registerBoolean("leapingTippedArrow", GameruleCategories.VD_ARROW, Gamerules.LEAPING_TIPPED_ARROW);
+            Gamerules.LUCK_TIPPED_ARROW = GameruleHelper.registerBoolean("luckTippedArrow", GameruleCategories.VD_ARROW, Gamerules.LUCK_TIPPED_ARROW);
+            Gamerules.NIGHT_VISION_TIPPED_ARROW = GameruleHelper.registerBoolean("nightVisionTippedArrow", GameruleCategories.VD_ARROW, Gamerules.NIGHT_VISION_TIPPED_ARROW);
+            Gamerules.POISON_TIPPED_ARROW = GameruleHelper.registerBoolean("poisonTippedArrow", GameruleCategories.VD_ARROW, Gamerules.POISON_TIPPED_ARROW);
+            Gamerules.REGENERATION_TIPPED_ARROW = GameruleHelper.registerBoolean("regenerationTippedArrow", GameruleCategories.VD_ARROW, Gamerules.REGENERATION_TIPPED_ARROW);
+            Gamerules.SLOW_FALLING_TIPPED_ARROW = GameruleHelper.registerBoolean("slowFallingTippedArrow", GameruleCategories.VD_ARROW, Gamerules.SLOW_FALLING_TIPPED_ARROW);
+            Gamerules.SLOWNESS_TIPPED_ARROW = GameruleHelper.registerBoolean("slownessTippedArrow", GameruleCategories.VD_ARROW, Gamerules.SLOWNESS_TIPPED_ARROW);
+            Gamerules.STRENGTH_TIPPED_ARROW = GameruleHelper.registerBoolean("strengthTippedArrow", GameruleCategories.VD_ARROW, Gamerules.STRENGTH_TIPPED_ARROW);
+            Gamerules.SWIFTNESS_TIPPED_ARROW = GameruleHelper.registerBoolean("swiftnessTippedArrow", GameruleCategories.VD_ARROW, Gamerules.SWIFTNESS_TIPPED_ARROW);
+            Gamerules.TURTLE_MASTER_TIPPED_ARROW = GameruleHelper.registerBoolean("turtleMasterTippedArrow", GameruleCategories.VD_ARROW, Gamerules.TURTLE_MASTER_TIPPED_ARROW);
+            Gamerules.WATER_BREATHING_TIPPED_ARROW = GameruleHelper.registerBoolean("waterBreathingTippedArrow", GameruleCategories.VD_ARROW, Gamerules.WATER_BREATHING_TIPPED_ARROW);
+            Gamerules.WEAKNESS_TIPPED_ARROW = GameruleHelper.registerBoolean("weaknessTippedArrow", GameruleCategories.VD_ARROW, Gamerules.WEAKNESS_TIPPED_ARROW);
+        }
         if (CaffeineConfigMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.registerBoolean("oldBoats", GameruleCategories.VD_MISC, Gamerules.OLD_BOATS);
         }

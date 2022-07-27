@@ -542,6 +542,24 @@ public interface GameruleDefaults {
         put(Gamerules.DISPENSER_WATERS_MUD, true);
         put(Gamerules.DISPENSER_WAXES_COPPER, true);
 
+        put(Gamerules.TIPPED_ARROWS_ENABLED, true);
+        put(Gamerules.FIRE_RESISTANCE_TIPPED_ARROW, true);
+        put(Gamerules.HARMING_TIPPED_ARROW, true);
+        put(Gamerules.HEALING_TIPPED_ARROW, true);
+        put(Gamerules.INVISIBILITY_TIPPED_ARROW, true);
+        put(Gamerules.LEAPING_TIPPED_ARROW, true);
+        put(Gamerules.LUCK_TIPPED_ARROW, true);
+        put(Gamerules.NIGHT_VISION_TIPPED_ARROW, true);
+        put(Gamerules.POISON_TIPPED_ARROW, true);
+        put(Gamerules.REGENERATION_TIPPED_ARROW, true);
+        put(Gamerules.SLOWNESS_TIPPED_ARROW, true);
+        put(Gamerules.SLOW_FALLING_TIPPED_ARROW, true);
+        put(Gamerules.STRENGTH_TIPPED_ARROW, true);
+        put(Gamerules.SWIFTNESS_TIPPED_ARROW, true);
+        put(Gamerules.TURTLE_MASTER_TIPPED_ARROW, true);
+        put(Gamerules.WATER_BREATHING_TIPPED_ARROW, true);
+        put(Gamerules.WEAKNESS_TIPPED_ARROW, true);
+
         put(Gamerules.OLD_BOATS, false);
     }};
     Object2IntMap<GameRules.Key<GameRules.IntegerValue>> defaultInts = new Object2IntOpenHashMap<>() {{
