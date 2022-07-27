@@ -664,6 +664,28 @@ public class RegisterGamerules {
             Gamerules.BOW_SPAMMING = GameruleHelper.registerBoolean("bowSpamming", GameruleCategories.VD_ITEMS, Gamerules.BOW_SPAMMING);
             Gamerules.CROSSBOW_SPAMMING = GameruleHelper.registerBoolean("crossbowSpamming", GameruleCategories.VD_ITEMS, Gamerules.CROSSBOW_SPAMMING);
         }
+        if (CaffeineConfigMixinConfigPlugin.dispenser) {
+            Gamerules.DISPENSER_BONEMEALS_PLANTS = GameruleHelper.registerBoolean("dispenserBonemealsPlants", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_BONEMEALS_PLANTS);
+            Gamerules.DISPENSER_BUCKETS_ITEMS = GameruleHelper.registerBoolean("dispenserBucketsItems", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_BUCKETS_ITEMS);
+            Gamerules.DISPENSER_EQUIPS_ARMOUR = GameruleHelper.registerBoolean("dispenserEquipsArmour", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_EQUIPS_ARMOUR);
+            Gamerules.DISPENSER_FILLS_BOTTLES = GameruleHelper.registerBoolean("dispenserFillsBottles", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_FILLS_BOTTLES);
+            Gamerules.DISPENSER_FILLS_RESPAWN_ANCHOR = GameruleHelper.registerBoolean("dispenserFillsRespawnAnchor", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_FILLS_RESPAWN_ANCHOR);
+            Gamerules.DISPENSER_FIRES_PROJECTILES = GameruleHelper.registerBoolean("dispenserFiresProjectiles", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_FIRES_PROJECTILES);
+            Gamerules.DISPENSER_FIRES_TRIDENTS = GameruleHelper.registerBoolean("dispenserFiresTridents", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_FIRES_TRIDENTS);
+            Gamerules.DISPENSER_FLINTS_AND_STEELS = GameruleHelper.registerBoolean("dispenserFlintsAndSteels", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_FLINTS_AND_STEELS);
+            Gamerules.DISPENSER_LAUNCHES_FIREWORKS = GameruleHelper.registerBoolean("dispenserLaunchesFireworks", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_LAUNCHES_FIREWORKS);
+            Gamerules.DISPENSER_LAUNCHES_FIRE_CHARGES = GameruleHelper.registerBoolean("dispenserLaunchesFireCharges", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_LAUNCHES_FIRE_CHARGES);
+            Gamerules.DISPENSER_LIGHTS_TNT = GameruleHelper.registerBoolean("dispenserLightsTnt", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_LIGHTS_TNT);
+            Gamerules.DISPENSER_PLACES_ARMOUR_STANDS = GameruleHelper.registerBoolean("dispenserPlacesArmourStands", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_PLACES_ARMOUR_STANDS);
+            Gamerules.DISPENSER_PLACES_BOATS = GameruleHelper.registerBoolean("dispenserPlacesBoats", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_PLACES_BOATS);
+            Gamerules.DISPENSER_PLACES_HEADS = GameruleHelper.registerBoolean("dispenserPlacesHeads", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_PLACES_HEADS);
+            Gamerules.DISPENSER_PLACES_MINECARTS = GameruleHelper.registerBoolean("dispenserPlacesMinecarts", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_PLACES_MINECARTS);
+            Gamerules.DISPENSER_PLACES_SHULKER_BOXES = GameruleHelper.registerBoolean("dispenserPlacesShulkerBoxes", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_PLACES_SHULKER_BOXES);
+            Gamerules.DISPENSER_SHEARS_SHEEP = GameruleHelper.registerBoolean("dispenserShearsSheep", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_SHEARS_SHEEP);
+            Gamerules.DISPENSER_SPAWNS_MOBS = GameruleHelper.registerBoolean("dispenserSpawnsMobs", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_SPAWNS_MOBS);
+            Gamerules.DISPENSER_WATERS_MUD = GameruleHelper.registerBoolean("dispenserWatersMud", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_WATERS_MUD);
+            Gamerules.DISPENSER_WAXES_COPPER = GameruleHelper.registerBoolean("dispenserWaxesCopper", GameruleCategories.VD_DISPENSER, Gamerules.DISPENSER_WAXES_COPPER);
+        }
         if (CaffeineConfigMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.registerBoolean("oldBoats", GameruleCategories.VD_MISC, Gamerules.OLD_BOATS);
         }

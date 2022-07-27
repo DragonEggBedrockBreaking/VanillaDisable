@@ -521,6 +521,27 @@ public interface GameruleDefaults {
         put(Gamerules.BOW_SPAMMING, true);
         put(Gamerules.CROSSBOW_SPAMMING, true);
 
+        put(Gamerules.DISPENSER_BONEMEALS_PLANTS, true);
+        put(Gamerules.DISPENSER_BUCKETS_ITEMS, true);
+        put(Gamerules.DISPENSER_EQUIPS_ARMOUR, true);
+        put(Gamerules.DISPENSER_FILLS_BOTTLES, true);
+        put(Gamerules.DISPENSER_FILLS_RESPAWN_ANCHOR, true);
+        put(Gamerules.DISPENSER_FIRES_PROJECTILES, true);
+        put(Gamerules.DISPENSER_FIRES_TRIDENTS, true);
+        put(Gamerules.DISPENSER_FLINTS_AND_STEELS, true);
+        put(Gamerules.DISPENSER_LAUNCHES_FIREWORKS, true);
+        put(Gamerules.DISPENSER_LAUNCHES_FIRE_CHARGES, true);
+        put(Gamerules.DISPENSER_LIGHTS_TNT, true);
+        put(Gamerules.DISPENSER_PLACES_ARMOUR_STANDS, true);
+        put(Gamerules.DISPENSER_PLACES_BOATS, true);
+        put(Gamerules.DISPENSER_PLACES_HEADS, true);
+        put(Gamerules.DISPENSER_PLACES_MINECARTS, true);
+        put(Gamerules.DISPENSER_PLACES_SHULKER_BOXES, true);
+        put(Gamerules.DISPENSER_SHEARS_SHEEP, true);
+        put(Gamerules.DISPENSER_SPAWNS_MOBS, true);
+        put(Gamerules.DISPENSER_WATERS_MUD, true);
+        put(Gamerules.DISPENSER_WAXES_COPPER, true);
+
         put(Gamerules.OLD_BOATS, false);
     }};
     Object2IntMap<GameRules.Key<GameRules.IntegerValue>> defaultInts = new Object2IntOpenHashMap<>() {{

@@ -33,6 +33,8 @@
     "despawning.MixinNaturalSpawner",
     "despawning.MixinThrownEnderpearl",
 
+    "dispenser.MixinDispenserBlock",
+
     "effects.MixinLivingEntity",
 
     "enchantments.MixinEnchantmentHelper",

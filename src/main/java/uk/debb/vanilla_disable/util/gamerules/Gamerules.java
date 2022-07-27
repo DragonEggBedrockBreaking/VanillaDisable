@@ -635,6 +635,26 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> BOW_SPAMMING;
     public static GameRules.Key<GameRules.BooleanValue> CROSSBOW_SPAMMING;
 
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_BONEMEALS_PLANTS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_BUCKETS_ITEMS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_EQUIPS_ARMOUR;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_FILLS_BOTTLES;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_FILLS_RESPAWN_ANCHOR;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_FIRES_PROJECTILES;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_FIRES_TRIDENTS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_FLINTS_AND_STEELS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_LAUNCHES_FIREWORKS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_LAUNCHES_FIRE_CHARGES;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_LIGHTS_TNT;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_PLACES_ARMOUR_STANDS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_PLACES_BOATS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_PLACES_HEADS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_PLACES_MINECARTS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_PLACES_SHULKER_BOXES;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_SHEARS_SHEEP;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_SPAWNS_MOBS;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_WATERS_MUD;
+    public static GameRules.Key<GameRules.BooleanValue> DISPENSER_WAXES_COPPER;
 
     public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
 }
