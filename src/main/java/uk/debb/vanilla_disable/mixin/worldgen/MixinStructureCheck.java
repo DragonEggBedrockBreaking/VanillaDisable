@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.structure.structures.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -50,7 +49,6 @@ public abstract class MixinStructureCheck {
      */
     @ModifyReturnValue(method = "canCreateStructure", at = @At("RETURN"))
     private boolean cancelStructureGeneration(boolean original, ChunkPos chunkPos, Structure structure) {
-        if (VDServer.getServer() == null) return original;
         if (structureMap.isEmpty()) {
             addOptionsToMap();
         }

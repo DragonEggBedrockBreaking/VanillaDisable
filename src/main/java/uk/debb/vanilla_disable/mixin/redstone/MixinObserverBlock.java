@@ -5,7 +5,6 @@ import net.minecraft.world.level.block.ObserverBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -17,7 +16,6 @@ public abstract class MixinObserverBlock {
      */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
-        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
             return 0;
         }
@@ -30,7 +28,6 @@ public abstract class MixinObserverBlock {
      */
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
-        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
             return 0;
         }
@@ -52,7 +49,6 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDelay(int delay) {
-        if (VDServer.getServer() == null) return delay;
         return GameruleHelper.getInt(Gamerules.OBSERVER_DELAY);
     }
 
@@ -71,7 +67,6 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDuration(int duration) {
-        if (VDServer.getServer() == null) return duration;
         return GameruleHelper.getInt(Gamerules.OBSERVER_DURATION);
     }
 }

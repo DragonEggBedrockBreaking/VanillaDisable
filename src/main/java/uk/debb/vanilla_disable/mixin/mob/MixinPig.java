@@ -10,7 +10,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -23,7 +22,6 @@ public abstract class MixinPig {
      */
     @ModifyReturnValue(method = "isFood", at = @At("RETURN"))
     private boolean changeFood(boolean original, ItemStack stack) {
-        if (VDServer.getServer() == null) return original;
         if (GameruleHelper.getBool(Gamerules.PIGS_BREED_WITH_WHEAT)) {
             return Ingredient.of(Items.WHEAT).test(stack);
         }
@@ -46,7 +44,6 @@ public abstract class MixinPig {
             index = 1
     )
     private Goal modifyCarrotOnStickGoal(Goal goal) {
-        if (VDServer.getServer() == null) return goal;
         if (GameruleHelper.getBool(Gamerules.PIGS_BREED_WITH_WHEAT)) {
             return new TemptGoal((Pig) (Object) this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
@@ -69,7 +66,6 @@ public abstract class MixinPig {
             index = 1
     )
     private Goal modifyBreedItemsGoal(Goal goal) {
-        if (VDServer.getServer() == null) return goal;
         if (GameruleHelper.getBool(Gamerules.PIGS_BREED_WITH_WHEAT)) {
             return new TemptGoal((Pig) (Object) this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }

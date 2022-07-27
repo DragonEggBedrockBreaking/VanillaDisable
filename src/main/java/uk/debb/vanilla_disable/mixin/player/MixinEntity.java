@@ -21,8 +21,7 @@ public abstract class MixinEntity {
      */
     @ModifyReturnValue(method = "isOnFire", at = @At("RETURN"))
     private boolean cannotBeOnFire(boolean original) {
-        if (VDServer.getServer() == null) return original;
-        if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_BE_ON_FIRE)) {
+        if (VDServer.getServer() != null && this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_BE_ON_FIRE)) {
             return false;
         }
         return original;
@@ -34,8 +33,7 @@ public abstract class MixinEntity {
      */
     @ModifyReturnValue(method = "isShiftKeyDown", at = @At("RETURN"))
     private boolean cannotCrouch(boolean original) {
-        if (VDServer.getServer() == null) return original;
-        if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_CROUCH)) {
+        if (VDServer.getServer() != null && this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_CROUCH)) {
             return false;
         }
         return original;
@@ -47,8 +45,7 @@ public abstract class MixinEntity {
      */
     @ModifyReturnValue(method = "isSprinting", at = @At("RETURN"))
     private boolean cannotSprint(boolean original) {
-        if (VDServer.getServer() == null) return original;
-        if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_SPRINT)) {
+        if (VDServer.getServer() != null && this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_SPRINT)) {
             return true;
         }
         return original;
@@ -60,8 +57,7 @@ public abstract class MixinEntity {
      */
     @ModifyReturnValue(method = "isSwimming", at = @At("RETURN"))
     private boolean cannotSwim(boolean original) {
-        if (VDServer.getServer() == null) return original;
-        if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_SWIM)) {
+        if (VDServer.getServer() != null && this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_SWIM)) {
             return false;
         }
         return original;
@@ -73,8 +69,7 @@ public abstract class MixinEntity {
      */
     @ModifyReturnValue(method = "isInvisible", at = @At("RETURN"))
     private boolean cannotBeInvisible(boolean original) {
-        if (VDServer.getServer() == null) return original;
-        if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_BE_INVISIBLE)) {
+        if (VDServer.getServer() != null && this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_BE_INVISIBLE)) {
             return false;
         }
         return original;
@@ -86,8 +81,7 @@ public abstract class MixinEntity {
      */
     @ModifyReturnValue(method = "getBlockJumpFactor", at = @At("RETURN"))
     private float cannotJump(float original) {
-        if (VDServer.getServer() == null) return original;
-        if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_JUMP)) {
+        if (VDServer.getServer() != null && this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_JUMP)) {
             return 0.0F;
         }
         return original;

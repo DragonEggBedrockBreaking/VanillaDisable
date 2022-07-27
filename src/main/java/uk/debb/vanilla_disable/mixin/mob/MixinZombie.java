@@ -42,7 +42,6 @@ public abstract class MixinZombie {
      */
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelUnderWaterConversion(CallbackInfo ci) {
-        if (VDServer.getServer() == null) return;
         if (!GameruleHelper.getBool(Gamerules.ZOMBIES_CONVERT_TO_DROWNED)) {
             ci.cancel();
         }

@@ -8,7 +8,6 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -27,7 +26,6 @@ public abstract class MixinAbstractVillager {
             require = 0
     )
     private MerchantOffer modifyUses(MerchantOffer receiver) {
-        if (VDServer.getServer() == null) return receiver;
         if (GameruleHelper.getBool(Gamerules.INFINITE_TRADING)) {
             return new MerchantOffer(new CompoundTag());
         }
@@ -40,7 +38,6 @@ public abstract class MixinAbstractVillager {
      */
     @ModifyReturnValue(method = "getOffers", at = @At("RETURN"))
     private MerchantOffers clearOffers(MerchantOffers original) {
-        if (VDServer.getServer() == null) return original;
         if (!GameruleHelper.getBool(Gamerules.VILLAGER_TRADING_ENABLED)) {
             return new MerchantOffers();
         }

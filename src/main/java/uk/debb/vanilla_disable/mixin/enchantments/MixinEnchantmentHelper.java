@@ -11,7 +11,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -74,7 +73,6 @@ public abstract class MixinEnchantmentHelper {
      */
     @ModifyReturnValue(method = "getItemEnchantmentLevel", at = @At("RETURN"))
     private static int removeEnchantmentLevel(int original, Enchantment enchantment, ItemStack stack) {
-        if (VDServer.getServer() == null) return original;
         if (enchantmentMap.isEmpty()) {
             addOptionsToMap();
         }

@@ -13,7 +13,6 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -75,7 +74,6 @@ public abstract class MixinPotionUtils {
      */
     @ModifyReturnValue(method = "getMobEffects", at = @At("RETURN"))
     private static List<MobEffectInstance> removeMobEffects(List<MobEffectInstance> original, ItemStack itemStack) {
-        if (VDServer.getServer() == null) return original;
         if (potionMap.isEmpty()) {
             addOptionsToMap();
         }

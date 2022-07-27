@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.item.BowItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -16,7 +15,6 @@ public abstract class MixinBowItem {
      */
     @ModifyReturnValue(method = "getPowerForTime", at = @At("RETURN"))
     private static float modifyPower(float original) {
-        if (VDServer.getServer() == null) return original;
         if (GameruleHelper.getBool(Gamerules.BOW_SPAMMING)) {
             return 1.0F;
         }
@@ -29,7 +27,6 @@ public abstract class MixinBowItem {
      */
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int lowerUseDuration(int original) {
-        if (VDServer.getServer() == null) return original;
         if (GameruleHelper.getBool(Gamerules.BOW_SPAMMING)) {
             return 4;
         }

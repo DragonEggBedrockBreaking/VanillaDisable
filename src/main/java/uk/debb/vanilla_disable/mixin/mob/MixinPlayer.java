@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -22,7 +21,6 @@ public abstract class MixinPlayer {
      */
     @Inject(method = "attack", at = @At("RETURN"))
     private void igniteCreeper(Entity target, CallbackInfo ci) {
-        if (VDServer.getServer() == null) return;
         if (GameruleHelper.getBool(Gamerules.FIRE_ASPECT_IGNITES_CREEPERS) &&
                 target instanceof Creeper && EnchantmentHelper.getFireAspect((Player) (Object) this) > 0) {
             ((Creeper) target).ignite();

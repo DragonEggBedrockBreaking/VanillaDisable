@@ -23,7 +23,6 @@ public abstract class MixinPlayer {
      */
     @Inject(method = "eat", at = @At("HEAD"))
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        if (VDServer.getServer() == null) return;
         if (GameruleHelper.getBool(Gamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
             ((LivingEntity) (Object) this).setHealth(((LivingEntity) (Object) this).getHealth() +
                     Objects.requireNonNull(stack.getItem().getFoodProperties()).getNutrition());

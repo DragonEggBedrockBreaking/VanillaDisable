@@ -338,7 +338,6 @@ public abstract class MixinMinecraftServer {
      */
     @Inject(method = "createLevels", at = @At("HEAD"))
     private void onLevelLoad(CallbackInfo ci) throws IOException {
-        if (VDServer.getServer() == null) return;
         getBiomeDataPacks();
         getStructureDataPacks();
         toggleBiomeDataPacks();

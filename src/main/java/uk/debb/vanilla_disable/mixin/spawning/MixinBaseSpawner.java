@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -77,7 +76,6 @@ public abstract class MixinBaseSpawner {
             cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(ServerLevel level, BlockPos pos, CallbackInfo ci) {
-        if (VDServer.getServer() == null) return;
         if (spawnerMobMap.isEmpty()) {
             addOptionsToMap();
         }

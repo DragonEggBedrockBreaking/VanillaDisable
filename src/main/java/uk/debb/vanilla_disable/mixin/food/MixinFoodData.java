@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -125,7 +124,6 @@ public abstract class MixinFoodData {
      */
     @Inject(method = "eat(Lnet/minecraft/world/item/Item;Lnet/minecraft/world/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
     private void modifyNutrition(Item item, ItemStack itemStack, CallbackInfo ci) {
-        if (VDServer.getServer() == null) return;
         if (nutritionMap.isEmpty() || saturationMap.isEmpty()) {
             addOptionsToMap();
         }

@@ -7,49 +7,52 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.storage.WorldData;
 import uk.debb.vanilla_disable.util.VDServer;
 
-public class GameruleHelper {
+public class GameruleHelper implements GameruleDefaults {
     /**
-     * @param name         the name of the gamerule
-     * @param category     the gamerule category
-     * @param defaultValue the default value (a boolean)
+     * @param name     the name of the gamerule
+     * @param category the gamerule category
+     * @param gameRule the gamerule (boolean)
      * @return the gamerule key (boolean)
      * @author DragonEggBedrockBreaking
      */
-    public static GameRules.Key<GameRules.BooleanValue> register(String name, CustomGameRuleCategory category, boolean defaultValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createBooleanRule(defaultValue));
+    public static GameRules.Key<GameRules.BooleanValue> registerBoolean(String name, CustomGameRuleCategory category, GameRules.Key<GameRules.BooleanValue> gameRule) {
+        return GameRuleRegistry.register(name, category, GameRuleFactory.createBooleanRule(defaultBooleans.getBoolean(gameRule)));
     }
 
     /**
-     * @param name         the name of the gamerule
-     * @param category     the gamerule category
-     * @param defaultValue the default value (an integer)
+     * @param name     the name of the gamerule
+     * @param category the gamerule category
+     * @param gameRule the gamerule (int)
      * @return the gamerule key (int)
      * @author DragonEggBedrockBreaking
      */
-    public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue));
+    public static GameRules.Key<GameRules.IntegerValue> registerInt(String name, CustomGameRuleCategory category, GameRules.Key<GameRules.IntegerValue> gameRule) {
+        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultInts.getInt(gameRule)));
     }
 
     /**
-     * @param name         the name of the gamerule
-     * @param category     the gamerule category
-     * @param defaultValue the default value (an integer)
+     * @param name     the name of the gamerule
+     * @param category the gamerule category
+     * @param gameRule the gamerule (int)
+     * @param minValue the minimum possible value of the gamerule
      * @return the gamerule key (int)
      * @author DragonEggBedrockBreaking
      */
-    public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue, int minValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue, minValue));
+    public static GameRules.Key<GameRules.IntegerValue> registerInt(String name, CustomGameRuleCategory category, GameRules.Key<GameRules.IntegerValue> gameRule, int minValue) {
+        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultInts.getInt(gameRule), minValue));
     }
 
     /**
-     * @param name         the name of the gamerule
-     * @param category     the gamerule category
-     * @param defaultValue the default value (an integer)
+     * @param name     the name of the gamerule
+     * @param category the gamerule category
+     * @param gameRule the gamerule (int)
+     * @param minValue the minimum possible value of the gamerule
+     * @param maxValue the maximum possible value of the gamerule
      * @return the gamerule key (int)
      * @author DragonEggBedrockBreaking
      */
-    public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue, int minValue, int maxValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue, minValue, maxValue));
+    public static GameRules.Key<GameRules.IntegerValue> registerInt(String name, CustomGameRuleCategory category, GameRules.Key<GameRules.IntegerValue> gameRule, int minValue, int maxValue) {
+        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultInts.getInt(gameRule), minValue, maxValue));
     }
 
     /**
@@ -58,6 +61,7 @@ public class GameruleHelper {
      * @author DragonEggBedrockBreaking
      */
     public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key) {
+        if (VDServer.getServer() == null) return defaultBooleans.getBoolean(key);
         return VDServer.getServer().getGameRules().getBoolean(key);
     }
 
@@ -77,6 +81,7 @@ public class GameruleHelper {
      * @author DragonEggBedrockBreaking
      */
     public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
+        if (VDServer.getServer() == null) return defaultInts.getInt(key);
         return VDServer.getServer().getGameRules().getInt(key);
     }
 

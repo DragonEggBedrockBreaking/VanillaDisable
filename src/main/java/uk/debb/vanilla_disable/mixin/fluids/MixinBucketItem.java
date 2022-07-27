@@ -59,7 +59,6 @@ public abstract class MixinBucketItem {
      */
     @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
     protected void cancelPlayingEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
-        if (VDServer.getServer() == null) return;
         if (world.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&
                 GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER)) {
             world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);

@@ -10,7 +10,6 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -261,7 +260,6 @@ public abstract class MixinBiomeGenerationSettings {
      */
     @ModifyReturnValue(method = "hasFeature", at = @At("RETURN"))
     private boolean cancelHavingFeature(boolean original, PlacedFeature feature) {
-        if (VDServer.getServer() == null) return original;
         if (featureToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }

@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -37,7 +36,6 @@ public abstract class MixinEntity {
      */
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
     private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {
-        if (VDServer.getServer() == null) return;
         if (GameruleHelper.getBool(Gamerules.OLD_BOATS) && this.getType() == EntityType.BOAT) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));

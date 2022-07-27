@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -83,8 +82,7 @@ public abstract class MixinLivingEntity {
      */
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(double strength, double x, double z, CallbackInfo ci) {
-        if (VDServer.getServer() == null) return;
-        if (((Entity)(Object) this).getType() == EntityType.PLAYER && isInvulnerableToKnockback(this.lastHurtByMob)) {
+        if (((Entity) (Object) this).getType() == EntityType.PLAYER && isInvulnerableToKnockback(this.lastHurtByMob)) {
             ci.cancel();
         }
     }

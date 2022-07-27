@@ -5,7 +5,6 @@ import net.minecraft.world.level.block.BuddingAmethystBlock;
 import net.minecraft.world.level.material.PushReaction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -17,7 +16,6 @@ public abstract class MixinBuddingAmethystBlock {
      */
     @ModifyReturnValue(method = "getPistonPushReaction", at = @At("RETURN"))
     private PushReaction pushableBuddingAmethyst(PushReaction original) {
-        if (VDServer.getServer() == null) return original;
         if (GameruleHelper.getBool(Gamerules.PUSHABLE_BUDDING_AMETHYST)) {
             return PushReaction.PUSH_ONLY;
         }

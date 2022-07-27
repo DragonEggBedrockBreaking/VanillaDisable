@@ -13,7 +13,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -68,8 +67,7 @@ public abstract class MixinLivingEntity {
      */
     @ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
     private boolean canItBeAffected(boolean original, MobEffectInstance effect) {
-        if (VDServer.getServer() == null) return original;
-        if (((Entity)(Object) this).getType() == EntityType.PLAYER) {
+        if (((Entity) (Object) this).getType() == EntityType.PLAYER) {
             MobEffect statusEffect = effect.getEffect();
             if (statusEffectMap.isEmpty()) {
                 addOptionsToMap();

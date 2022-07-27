@@ -17,7 +17,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -90,7 +89,6 @@ public abstract class MixinItemStack {
      */
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void cancelUsage(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        if (VDServer.getServer() == null) return;
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
@@ -108,7 +106,6 @@ public abstract class MixinItemStack {
      */
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void cancelUsageOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
-        if (VDServer.getServer() == null) return;
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
@@ -128,7 +125,6 @@ public abstract class MixinItemStack {
      */
     @Inject(method = "interactLivingEntity", at = @At("HEAD"), cancellable = true)
     private void cancelLivingEntityInteraction(Player player, LivingEntity livingEntity, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (VDServer.getServer() == null) return;
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
@@ -147,7 +143,6 @@ public abstract class MixinItemStack {
      */
     @Inject(method = "finishUsingItem", at = @At("HEAD"), cancellable = true)
     private void cancelItemUseFinishing(Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
-        if (VDServer.getServer() == null) return;
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }

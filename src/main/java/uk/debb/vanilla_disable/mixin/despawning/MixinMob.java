@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.VDServer;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -64,7 +63,6 @@ public abstract class MixinMob extends Entity {
      */
     @ModifyReturnValue(method = "removeWhenFarAway", at = @At("RETURN"))
     private boolean cancelRemovalWhenFarAway(boolean original) {
-        if (VDServer.getServer() == null) return original;
         if (spawnGroupDespawnMap.isEmpty()) {
             addOptionsToMap();
         }
