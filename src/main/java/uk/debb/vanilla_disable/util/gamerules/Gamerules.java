@@ -673,6 +673,7 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> TURTLE_MASTER_TIPPED_ARROW;
     public static GameRules.Key<GameRules.BooleanValue> WATER_BREATHING_TIPPED_ARROW;
     public static GameRules.Key<GameRules.BooleanValue> WEAKNESS_TIPPED_ARROW;
+    public static GameRules.Key<GameRules.BooleanValue> SPECTRAL_ARROWS_ENABLED;
 
     public static GameRules.Key<GameRules.BooleanValue> OLD_BOATS;
 }

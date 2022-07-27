@@ -559,6 +559,7 @@ public interface GameruleDefaults {
         put(Gamerules.TURTLE_MASTER_TIPPED_ARROW, true);
         put(Gamerules.WATER_BREATHING_TIPPED_ARROW, true);
         put(Gamerules.WEAKNESS_TIPPED_ARROW, true);
+        put(Gamerules.SPECTRAL_ARROWS_ENABLED, true);
 
         put(Gamerules.OLD_BOATS, false);
     }};

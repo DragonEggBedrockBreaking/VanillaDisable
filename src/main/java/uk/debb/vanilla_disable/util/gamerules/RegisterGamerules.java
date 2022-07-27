@@ -704,6 +704,7 @@ public class RegisterGamerules {
             Gamerules.TURTLE_MASTER_TIPPED_ARROW = GameruleHelper.registerBoolean("turtleMasterTippedArrow", GameruleCategories.VD_ARROW, Gamerules.TURTLE_MASTER_TIPPED_ARROW);
             Gamerules.WATER_BREATHING_TIPPED_ARROW = GameruleHelper.registerBoolean("waterBreathingTippedArrow", GameruleCategories.VD_ARROW, Gamerules.WATER_BREATHING_TIPPED_ARROW);
             Gamerules.WEAKNESS_TIPPED_ARROW = GameruleHelper.registerBoolean("weaknessTippedArrow", GameruleCategories.VD_ARROW, Gamerules.WEAKNESS_TIPPED_ARROW);
+            Gamerules.SPECTRAL_ARROWS_ENABLED = GameruleHelper.registerBoolean("spectralArrowsEnabled", GameruleCategories.VD_ARROW, Gamerules.SPECTRAL_ARROWS_ENABLED);
         }
         if (CaffeineConfigMixinConfigPlugin.misc) {
             Gamerules.OLD_BOATS = GameruleHelper.registerBoolean("oldBoats", GameruleCategories.VD_MISC, Gamerules.OLD_BOATS);

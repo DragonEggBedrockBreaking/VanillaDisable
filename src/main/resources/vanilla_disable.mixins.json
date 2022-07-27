@@ -8,6 +8,7 @@
     "ai.MixinGoal",
 
     "arrow.MixinArrow",
+    "arrow.MixinSpectralArrow",
 
     "blocks.MixinBeaconBlockEntity",
     "blocks.MixinBlock",
