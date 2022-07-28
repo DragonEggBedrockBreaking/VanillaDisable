@@ -3,12 +3,12 @@ package uk.debb.vanilla_disable.mixin.mob_toggles;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
@@ -20,7 +20,7 @@ public abstract class MixinMob extends LivingEntity implements Maps {
 
     @Inject(method = "checkDespawn", at = @At("HEAD"))
     private void checkIfEnabled(CallbackInfo ci) {
-        GameRules.Key<GameRules.BooleanValue> gameRule = mobClassMapToggle.get(this.getClass());
+        BooleanGamerules gameRule = mobClassMapToggle.get(this.getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             this.discard();
         }

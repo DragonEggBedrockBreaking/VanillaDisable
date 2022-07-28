@@ -6,17 +6,14 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(ItemEntity.class)
 public abstract class MixinItemEntity extends Entity {
-    @Unique
-    final int MAX = GameruleHelper.getInt(Gamerules.ITEM_DESPAWN_TIME);
     @Shadow
     private int age;
     @Shadow
@@ -28,7 +25,7 @@ public abstract class MixinItemEntity extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void discardItem(CallbackInfo ci) {
-        if (this.age >= MAX * 20 && !(this.getLevel().isClientSide())) {
+        if (this.age >= GameruleHelper.getInt(IntegerGamerules.ITEM_DESPAWN_TIME) * 20 && !(this.getLevel().isClientSide())) {
             this.discard();
         }
     }
@@ -43,7 +40,7 @@ public abstract class MixinItemEntity extends Entity {
             cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (this.age < MAX * 20 &&
+        if (this.age < GameruleHelper.getInt(IntegerGamerules.ITEM_DESPAWN_TIME) * 20 &&
                 this.pickupDelay != Short.MAX_VALUE) {
             ci.cancel();
         }

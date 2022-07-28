@@ -6,8 +6,9 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.material.LavaFluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(LavaFluid.class)
 public abstract class MixinLavaFluid {
@@ -15,9 +16,9 @@ public abstract class MixinLavaFluid {
     private int getLavaDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return GameruleHelper.getBool(Gamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2;
+                return GameruleHelper.getBool(BooleanGamerules.LAVA_REACHES_FAR_IN_NETHER) ? 1 : 2;
             } else {
-                return GameruleHelper.getBool(Gamerules.LAVA_REACHES_FAR) ? 1 : 2;
+                return GameruleHelper.getBool(BooleanGamerules.LAVA_REACHES_FAR) ? 1 : 2;
             }
         }
         return original;
@@ -27,9 +28,9 @@ public abstract class MixinLavaFluid {
     private int getLavaTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return GameruleHelper.getInt(Gamerules.LAVA_FLOW_SPEED_NETHER);
+                return GameruleHelper.getInt(IntegerGamerules.LAVA_FLOW_SPEED_NETHER);
             } else {
-                return GameruleHelper.getInt(Gamerules.LAVA_FLOW_SPEED);
+                return GameruleHelper.getInt(IntegerGamerules.LAVA_FLOW_SPEED);
             }
         }
         return original;
@@ -37,6 +38,6 @@ public abstract class MixinLavaFluid {
 
     @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
     private boolean canLavaConvertToSource(boolean original) {
-        return GameruleHelper.getBool(Gamerules.INFINITE_LAVA);
+        return GameruleHelper.getBool(BooleanGamerules.INFINITE_LAVA);
     }
 }

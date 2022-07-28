@@ -10,7 +10,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,8 +17,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 import java.util.Set;
@@ -42,8 +41,8 @@ public abstract class MixinArrow extends AbstractArrow implements Maps {
     @Inject(method = "setEffectsFromItem", at = @At("HEAD"), cancellable = true)
     private void clearEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {
         if (itemStack.is(Items.TIPPED_ARROW)) {
-            GameRules.Key<GameRules.BooleanValue> gameRule = arrowPotionMap.get(PotionUtils.getPotion(itemStack));
-            if (!GameruleHelper.getBool(Gamerules.TIPPED_ARROWS_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
+            BooleanGamerules gameRule = arrowPotionMap.get(PotionUtils.getPotion(itemStack));
+            if (!GameruleHelper.getBool(BooleanGamerules.TIPPED_ARROWS_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
                 this.potion = Potions.EMPTY;
                 this.effects.clear();
                 this.entityData.set(ID_EFFECT_COLOR, -1);

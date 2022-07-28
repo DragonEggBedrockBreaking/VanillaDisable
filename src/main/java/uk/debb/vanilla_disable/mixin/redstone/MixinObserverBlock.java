@@ -5,14 +5,15 @@ import net.minecraft.world.level.block.ObserverBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(ObserverBlock.class)
 public abstract class MixinObserverBlock {
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
-        if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
+        if (!GameruleHelper.getBool(BooleanGamerules.OBSERVER_ENABLED)) {
             return 0;
         }
         return original;
@@ -20,7 +21,7 @@ public abstract class MixinObserverBlock {
 
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
-        if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
+        if (!GameruleHelper.getBool(BooleanGamerules.OBSERVER_ENABLED)) {
             return 0;
         }
         return original;
@@ -35,7 +36,7 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDelay(int delay) {
-        return GameruleHelper.getInt(Gamerules.OBSERVER_DELAY);
+        return GameruleHelper.getInt(IntegerGamerules.OBSERVER_DELAY);
     }
 
     @ModifyArg(
@@ -47,6 +48,6 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDuration(int duration) {
-        return GameruleHelper.getInt(Gamerules.OBSERVER_DURATION);
+        return GameruleHelper.getInt(IntegerGamerules.OBSERVER_DURATION);
     }
 }

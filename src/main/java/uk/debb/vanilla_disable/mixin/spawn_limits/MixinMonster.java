@@ -9,7 +9,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(Monster.class)
 public abstract class MixinMonster {
@@ -18,7 +18,7 @@ public abstract class MixinMonster {
         if (world.getBrightness(LightLayer.SKY, pos) > randomSource.nextInt(32)) {
             return false;
         }
-        if (world.getBrightness(LightLayer.BLOCK, pos) > GameruleHelper.getInt(Gamerules.MONSTER_MAX_LIGHT_LEVEL)) {
+        if (world.getBrightness(LightLayer.BLOCK, pos) > GameruleHelper.getInt(IntegerGamerules.MONSTER_MAX_LIGHT_LEVEL)) {
             return false;
         } else {
             if (!world.getLevel().isThundering()) {

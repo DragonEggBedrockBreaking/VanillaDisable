@@ -7,11 +7,11 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
@@ -22,7 +22,7 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "use", at = @At("RETURN"))
     private InteractionResultHolder<ItemStack> cancelUsage(InteractionResultHolder<ItemStack> original, Level level, Player player, InteractionHand interactionHand) {
-        GameRules.Key<GameRules.BooleanValue> gameRule = itemStackClassMap.get(this.getItem().getClass());
+        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
         }
@@ -31,7 +31,7 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "useOn", at = @At("RETURN"))
     private InteractionResult cancelUsageOn(InteractionResult original) {
-        GameRules.Key<GameRules.BooleanValue> gameRule = itemStackClassMap.get(this.getItem().getClass());
+        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             return InteractionResult.FAIL;
         }
@@ -40,7 +40,7 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "interactLivingEntity", at = @At("RETURN"))
     private InteractionResult cancelLivingEntityInteraction(InteractionResult original) {
-        GameRules.Key<GameRules.BooleanValue> gameRule = itemStackClassMap.get(this.getItem().getClass());
+        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             return InteractionResult.FAIL;
         }
@@ -49,7 +49,7 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "finishUsingItem", at = @At("RETURN"))
     private ItemStack cancelItemUseFinishing(ItemStack original) {
-        GameRules.Key<GameRules.BooleanValue> gameRule = itemStackClassMap.get(this.getItem().getClass());
+        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             return ItemStack.EMPTY;
         }

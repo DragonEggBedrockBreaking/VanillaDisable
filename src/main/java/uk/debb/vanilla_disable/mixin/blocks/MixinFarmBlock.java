@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(FarmBlock.class)
 public abstract class MixinFarmBlock {
@@ -22,6 +22,6 @@ public abstract class MixinFarmBlock {
             require = 0
     )
     private boolean cancelTurningToDirt(BlockState state, Level level, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
-        return GameruleHelper.getBool(Gamerules.CROP_TRAMPLING);
+        return GameruleHelper.getBool(BooleanGamerules.CROP_TRAMPLING);
     }
 }

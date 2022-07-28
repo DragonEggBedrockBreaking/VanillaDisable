@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Restriction(
         conflict = {
@@ -18,6 +18,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinPistonStructureResolver {
     @ModifyConstant(method = "addBlockLine", constant = @Constant(intValue = 12))
     private int pushLimit(int oldPushLimit) {
-        return GameruleHelper.getInt(Gamerules.PISTON_PUSH_LIMIT);
+        return GameruleHelper.getInt(IntegerGamerules.PISTON_PUSH_LIMIT);
     }
 }

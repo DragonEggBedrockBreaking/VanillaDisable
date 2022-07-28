@@ -1,12 +1,13 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
+import com.google.common.base.CaseFormat;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 
-public class GameruleHelper implements GameruleDefaults {
+public class GameruleHelper {
     private static MinecraftServer server;
 
     public static MinecraftServer getServer() {
@@ -17,30 +18,24 @@ public class GameruleHelper implements GameruleDefaults {
         server = serverArg;
     }
 
-    public static GameRules.Key<GameRules.BooleanValue> register(String name, CustomGameRuleCategory category, boolean defaultValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createBooleanRule(defaultValue));
+    public static void register(CustomGameRuleCategory category, BooleanGamerules rule) {
+        String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rule.name());
+        rule.setGameRule(GameRuleRegistry.register(ruleName, category, GameRuleFactory.createBooleanRule(rule.getDefaultBool())));
     }
 
-    public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue));
+    public static void register(CustomGameRuleCategory category, IntegerGamerules rule) {
+        String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rule.name());
+        rule.setGameRule(GameRuleRegistry.register(ruleName, category, GameRuleFactory.createIntRule(rule.getDefaultInt(), rule.getMinInt(), rule.getMaxInt())));
     }
 
-    public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue, int minValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue, minValue));
+    public static boolean getBool(BooleanGamerules key) {
+        if (server == null) return key.getDefaultBool();
+        return server.getGameRules().getBoolean(key.getGameRule());
     }
 
-    public static GameRules.Key<GameRules.IntegerValue> register(String name, CustomGameRuleCategory category, int defaultValue, int minValue, int maxValue) {
-        return GameRuleRegistry.register(name, category, GameRuleFactory.createIntRule(defaultValue, minValue, maxValue));
-    }
-
-    public static boolean getBool(GameRules.Key<GameRules.BooleanValue> key) {
-        if (server == null) return defaultBooleans.getBoolean(key);
-        return server.getGameRules().getBoolean(key);
-    }
-
-    public static int getInt(GameRules.Key<GameRules.IntegerValue> key) {
-        if (server == null) return defaultInts.getInt(key);
-        return server.getGameRules().getInt(key);
+    public static int getInt(IntegerGamerules key) {
+        if (server == null) return key.getDefaultInt();
+        return server.getGameRules().getInt(key.getGameRule());
     }
 
     public static void setBool(GameRules.Key<GameRules.BooleanValue> key, boolean newValue) {

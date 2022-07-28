@@ -2,15 +2,14 @@ package uk.debb.vanilla_disable.mixin.spawning;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BaseSpawner;
-import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(BaseSpawner.class)
@@ -40,8 +39,8 @@ public abstract class MixinBaseSpawner implements Maps {
             cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(CallbackInfo ci) {
-        GameRules.Key<GameRules.BooleanValue> gameRule = baseSpawnerClassMap.get(this.spawnedEntity.getClass());
-        if (!GameruleHelper.getBool(gameRule) || !GameruleHelper.getBool(Gamerules.SPAWNERS_ENABLED)) {
+        BooleanGamerules gameRule = baseSpawnerClassMap.get(this.spawnedEntity.getClass());
+        if (!GameruleHelper.getBool(gameRule) || !GameruleHelper.getBool(BooleanGamerules.SPAWNERS_ENABLED)) {
             ci.cancel();
         }
     }

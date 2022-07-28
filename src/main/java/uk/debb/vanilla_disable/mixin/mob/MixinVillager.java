@@ -10,8 +10,9 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(Villager.class)
 public abstract class MixinVillager extends Entity {
@@ -32,7 +33,7 @@ public abstract class MixinVillager extends Entity {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (!GameruleHelper.getBool(Gamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
+        if (!GameruleHelper.getBool(BooleanGamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
             return Difficulty.PEACEFUL;
         }
         return original;
@@ -40,7 +41,7 @@ public abstract class MixinVillager extends Entity {
 
     @ModifyReturnValue(method = "allowedToRestock", at = @At("RETURN"))
     private boolean editRestockFrequency(boolean original) {
-        int villagerDailyRestocks = GameruleHelper.getInt(Gamerules.VILLAGER_DAILY_RESTOCKS);
+        int villagerDailyRestocks = GameruleHelper.getInt(IntegerGamerules.VILLAGER_DAILY_RESTOCKS);
         if (villagerDailyRestocks == 0) return original;
         long restockTimeLimit = 4800L / villagerDailyRestocks;
         return this.numberOfRestocksToday == 0 | this.numberOfRestocksToday < 2 && this.level.getGameTime() > this.lastRestockGameTime + restockTimeLimit;

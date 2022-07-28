@@ -7,8 +7,8 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.WaterWalkerEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(WaterWalkerEnchantment.class)
 public abstract class MixinWaterWalkerEnchantment extends Enchantment {
@@ -18,7 +18,7 @@ public abstract class MixinWaterWalkerEnchantment extends Enchantment {
 
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
-        if (!GameruleHelper.getBool(Gamerules.BOOT_ENCHANTMENT_CONFLICTS)) {
+        if (!GameruleHelper.getBool(BooleanGamerules.BOOT_ENCHANTMENT_CONFLICTS)) {
             return super.checkCompatibility(enchantment);
         }
         return original;

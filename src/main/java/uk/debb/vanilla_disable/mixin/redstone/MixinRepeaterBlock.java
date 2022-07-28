@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
-import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(RepeaterBlock.class)
 public abstract class MixinRepeaterBlock extends DiodeBlock {
@@ -21,13 +21,13 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
 
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int modifyDelay(int original, BlockState blockState) {
-        return blockState.getValue(BlockStateProperties.DELAY) * GameruleHelper.getInt(Gamerules.REPEATER_BASE_DELAY);
+        return blockState.getValue(BlockStateProperties.DELAY) * GameruleHelper.getInt(IntegerGamerules.REPEATER_BASE_DELAY);
     }
 
     @Override
     protected int getOutputSignal(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
         if (blockState.getValue(BlockStateProperties.POWERED)) {
-            return GameruleHelper.getInt(Gamerules.REPEATER_SIGNAL);
+            return GameruleHelper.getInt(IntegerGamerules.REPEATER_SIGNAL);
         }
         return 0;
     }
