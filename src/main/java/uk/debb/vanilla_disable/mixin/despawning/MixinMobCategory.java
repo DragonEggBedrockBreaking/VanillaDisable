@@ -18,9 +18,6 @@ public abstract class MixinMobCategory {
     @Unique
     private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupStartMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addImmediateOptionsToMap() {
         spawnGroupImmediateMap.put(MobCategory.MONSTER, Gamerules.MONSTER_MAX_DESPAWN);
@@ -43,10 +40,6 @@ public abstract class MixinMobCategory {
         spawnGroupStartMap.put(MobCategory.WATER_CREATURE, Gamerules.WATER_CREATURE_MAX_DESPAWN);
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDespawnDistance", at = @At("RETURN"))
     public int editDespawnDistance(int original) {
         if (spawnGroupImmediateMap.isEmpty()) {
@@ -59,10 +52,6 @@ public abstract class MixinMobCategory {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getNoDespawnDistance", at = @At("RETURN"))
     public int editNoDespawnDistance(int original) {
         if (spawnGroupStartMap.isEmpty()) {

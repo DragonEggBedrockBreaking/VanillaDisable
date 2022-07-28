@@ -12,11 +12,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Zombie.class)
 public abstract class MixinZombie {
-    /**
-     * @param original the original value
-     * @return the difficulty
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyExpressionValue(
             method = "wasKilled",
             at = @At(
@@ -31,11 +26,6 @@ public abstract class MixinZombie {
         return original;
     }
 
-    /**
-     * @param ci the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason stop zombies from converting into drowned
-     */
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelUnderWaterConversion(CallbackInfo ci) {
         if (!GameruleHelper.getBool(Gamerules.ZOMBIES_CONVERT_TO_DROWNED)) {

@@ -12,9 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 public class LangFileManager {
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     public static void langFileFallback() throws IOException {
         if (!QuiltLoader.isModLoaded("quilt_resource_loader")) {
             File outerrpackdir = new File(QuiltLoader.getGameDir().toString() + "/resourcepacks/vdlangfile");

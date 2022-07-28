@@ -24,11 +24,6 @@ public abstract class MixinVillager extends Entity {
         super(entityType, level);
     }
 
-    /**
-     * @param original the original difficulty
-     * @return the difficulty
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyExpressionValue(
             method = "thunderHit",
             at = @At(
@@ -43,10 +38,6 @@ public abstract class MixinVillager extends Entity {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "allowedToRestock", at = @At("RETURN"))
     private boolean editRestockFrequency(boolean original) {
         int villagerDailyRestocks = GameruleHelper.getInt(Gamerules.VILLAGER_DAILY_RESTOCKS);

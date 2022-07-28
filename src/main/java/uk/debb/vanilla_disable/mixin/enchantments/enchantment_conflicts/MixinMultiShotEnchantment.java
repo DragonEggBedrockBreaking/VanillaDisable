@@ -16,11 +16,6 @@ public abstract class MixinMultiShotEnchantment extends Enchantment {
         super(rarity, EnchantmentCategory.CROSSBOW, equipmentSlots);
     }
 
-    /**
-     * @param original    the original value
-     * @param enchantment the enchantment to check compatibility with
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
         if (!GameruleHelper.getBool(Gamerules.CROSSBOW_ENCHANTMENT_CONFLICTS)) {

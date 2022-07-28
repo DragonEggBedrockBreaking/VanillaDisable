@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(DaylightDetectorBlock.class)
 public abstract class MixinDaylightDetectorBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.DAYLIGHT_SENSOR_ENABLED)) {

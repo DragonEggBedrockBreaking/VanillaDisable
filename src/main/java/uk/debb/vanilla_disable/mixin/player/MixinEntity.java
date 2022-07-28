@@ -14,10 +14,6 @@ public abstract class MixinEntity {
     @Shadow
     public abstract EntityType<?> getType();
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isOnFire", at = @At("RETURN"))
     private boolean cannotBeOnFire(boolean original) {
         if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_BE_ON_FIRE)) {
@@ -26,10 +22,6 @@ public abstract class MixinEntity {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isShiftKeyDown", at = @At("RETURN"))
     private boolean cannotCrouch(boolean original) {
         if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_CROUCH)) {
@@ -38,10 +30,6 @@ public abstract class MixinEntity {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isSprinting", at = @At("RETURN"))
     private boolean cannotSprint(boolean original) {
         if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_SPRINT)) {
@@ -50,10 +38,6 @@ public abstract class MixinEntity {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isSwimming", at = @At("RETURN"))
     private boolean cannotSwim(boolean original) {
         if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_SWIM)) {
@@ -62,10 +46,6 @@ public abstract class MixinEntity {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isInvisible", at = @At("RETURN"))
     private boolean cannotBeInvisible(boolean original) {
         if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_BE_INVISIBLE)) {
@@ -74,10 +54,6 @@ public abstract class MixinEntity {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getBlockJumpFactor", at = @At("RETURN"))
     private float cannotJump(float original) {
         if (this.getType() == EntityType.PLAYER && !GameruleHelper.getBool(Gamerules.PLAYER_CAN_JUMP)) {

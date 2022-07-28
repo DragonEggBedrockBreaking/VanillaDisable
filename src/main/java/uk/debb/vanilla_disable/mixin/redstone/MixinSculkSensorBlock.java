@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(SculkSensorBlock.class)
 public abstract class MixinSculkSensorBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canActivate", at = @At("RETURN"))
     private static boolean cannotActivate(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.SCULK_SENSOR_ENABLED)) {

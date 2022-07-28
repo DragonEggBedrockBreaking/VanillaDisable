@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Mob.class)
 public abstract class MixinMob {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isSunBurnTick", at = @At("RETURN"))
     private boolean stopBurning(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.MOBS_BURN_IN_SUNLIGHT)) {

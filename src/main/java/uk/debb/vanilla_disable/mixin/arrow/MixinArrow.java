@@ -39,9 +39,6 @@ public abstract class MixinArrow extends AbstractArrow {
     @Unique
     private static final Object2ObjectMap<Potion, GameRules.Key<GameRules.BooleanValue>> tippedArrowToGameruleMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         tippedArrowToGameruleMap.put(Potions.FIRE_RESISTANCE, Gamerules.FIRE_RESISTANCE_TIPPED_ARROW);
@@ -84,11 +81,6 @@ public abstract class MixinArrow extends AbstractArrow {
         tippedArrowToGameruleMap.put(Potions.LONG_WEAKNESS, Gamerules.WEAKNESS_TIPPED_ARROW);
     }
 
-    /**
-     * @param itemStack the stack the arrow is in
-     * @param ci the callback info
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(method = "setEffectsFromItem", at = @At("HEAD"), cancellable = true)
     private void clearEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {
         if (itemStack.is(Items.TIPPED_ARROW)) {

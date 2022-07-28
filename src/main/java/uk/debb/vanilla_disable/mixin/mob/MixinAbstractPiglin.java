@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(AbstractPiglin.class)
 public abstract class MixinAbstractPiglin {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isImmuneToZombification", at = @At("RETURN"))
     private boolean setImmuneToZombification(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.PIGLINS_CONVERT_TO_ZIGLINS)) {

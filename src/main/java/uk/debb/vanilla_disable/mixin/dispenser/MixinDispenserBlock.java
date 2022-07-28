@@ -20,9 +20,6 @@ public abstract class MixinDispenserBlock {
     @Unique
     private static final Object2ObjectMap<Item, GameRules.Key<GameRules.BooleanValue>> itemToGameruleMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         itemToGameruleMap.put(Items.ARROW, Gamerules.DISPENSER_FIRES_PROJECTILES);
@@ -111,11 +108,6 @@ public abstract class MixinDispenserBlock {
         itemToGameruleMap.put(Items.CARVED_PUMPKIN, Gamerules.DISPENSER_PLACES_HEADS);
     }
 
-    /**
-     * @param original the original value
-     * @param itemStack the item that will be shot from the dispenser
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDispenseMethod", at = @At("RETURN"))
     private DispenseItemBehavior modifyDispenseMethod(DispenseItemBehavior original, ItemStack itemStack) {
         if (itemToGameruleMap.isEmpty()) {

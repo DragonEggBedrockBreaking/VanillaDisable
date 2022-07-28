@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(CrossbowItem.class)
 public abstract class MixinCrossbowItem {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getChargeDuration", at = @At("RETURN"))
     private static int lowerChargeDuration(int original) {
         if (GameruleHelper.getBool(Gamerules.CROSSBOW_SPAMMING)) {
@@ -21,10 +17,6 @@ public abstract class MixinCrossbowItem {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int lowerUseDuration(int original) {
         if (GameruleHelper.getBool(Gamerules.CROSSBOW_SPAMMING)) {

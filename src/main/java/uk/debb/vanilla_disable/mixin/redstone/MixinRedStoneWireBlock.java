@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(RedStoneWireBlock.class)
 public abstract class MixinRedStoneWireBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getWireSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.REDSTONE_WIRE_ENABLED)) {

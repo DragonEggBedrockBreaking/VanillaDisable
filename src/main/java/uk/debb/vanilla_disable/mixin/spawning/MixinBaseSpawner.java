@@ -26,12 +26,6 @@ public abstract class MixinBaseSpawner {
     @Unique
     private Entity spawnedEntity;
 
-    /**
-     * @param entity the entity spawned
-     * @return the entity spawned
-     * @author FallenBreath (<a href="https://github.com/TISUnion/Carpet-TIS-Addition/blob/master/LICENSE">...</a>)
-     * @reason get entity
-     */
     @ModifyArg(
             method = "serverTick",
             at = @At(
@@ -45,9 +39,6 @@ public abstract class MixinBaseSpawner {
         return entity;
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         spawnerMobMap.put(Pig.class, Gamerules.PIG_SPAWNERS);
@@ -61,12 +52,6 @@ public abstract class MixinBaseSpawner {
         spawnerMobMap.put(MagmaCube.class, Gamerules.MAGMA_CUBE_SPAWNERS);
     }
 
-    /**
-     * @param level the level
-     * @param pos   the position
-     * @param ci    the callback info
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(
             method = "serverTick",
             at = @At(

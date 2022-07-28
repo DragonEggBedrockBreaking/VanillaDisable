@@ -27,9 +27,6 @@ public abstract class MixinFoodData {
     @Shadow
     public abstract void eat(int i, float f);
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         nutritionMap.put(Foods.APPLE, Gamerules.APPLE_NUTRITION);
@@ -115,13 +112,6 @@ public abstract class MixinFoodData {
         saturationMap.put(Foods.TROPICAL_FISH, Gamerules.TROPICAL_FISH_SATURATION);
     }
 
-    /**
-     * @param item      the food item
-     * @param itemStack the stack of the food item
-     * @param ci        the callback info
-     * @author DragonEggBEdrockBreaking
-     * @reason change the nutrition level of food
-     */
     @Inject(method = "eat(Lnet/minecraft/world/item/Item;Lnet/minecraft/world/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
     private void modifyNutrition(Item item, ItemStack itemStack, CallbackInfo ci) {
         if (nutritionMap.isEmpty() || saturationMap.isEmpty()) {

@@ -10,10 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(BuddingAmethystBlock.class)
 public abstract class MixinBuddingAmethystBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getPistonPushReaction", at = @At("RETURN"))
     private PushReaction pushableBuddingAmethyst(PushReaction original) {
         if (GameruleHelper.getBool(Gamerules.PUSHABLE_BUDDING_AMETHYST)) {

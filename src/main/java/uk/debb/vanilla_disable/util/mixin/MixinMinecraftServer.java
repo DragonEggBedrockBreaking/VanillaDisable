@@ -9,11 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
-    /**
-     * @param ci the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason write this ourselves instead of depending on an entire api
-     */
     @Inject(
             method = "runServer",
             at = @At(

@@ -10,12 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ServerLevel.class)
 public abstract class MixinServerLevel {
-    /**
-     * @param level the level
-     * @param ci    the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason disable generation of the end spawn platform
-     */
     @Inject(method = "makeObsidianPlatform", at = @At("HEAD"), cancellable = true)
     private static void cancelMakingObsidianPlatform(ServerLevel level, CallbackInfo ci) {
         if (!GameruleHelper.getBool(Gamerules.END_FEATURES_GENERATION)) {

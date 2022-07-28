@@ -11,11 +11,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(LavaFluid.class)
 public abstract class MixinLavaFluid {
-    /**
-     * @param original the original value
-     * @param world    the world
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDropOff", at = @At("RETURN"))
     private int getLavaDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
@@ -28,11 +23,6 @@ public abstract class MixinLavaFluid {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @param world    the world
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getTickDelay", at = @At("RETURN"))
     private int getLavaTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
@@ -45,10 +35,6 @@ public abstract class MixinLavaFluid {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
     private boolean canLavaConvertToSource(boolean original) {
         return GameruleHelper.getBool(Gamerules.INFINITE_LAVA);

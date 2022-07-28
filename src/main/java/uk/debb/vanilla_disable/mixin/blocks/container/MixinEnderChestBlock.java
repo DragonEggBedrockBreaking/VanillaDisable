@@ -9,11 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(EnderChestBlock.class)
 public abstract class MixinEnderChestBlock {
-    /**
-     * @param original the original value
-     * @return whether the player can open the echest
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyExpressionValue(
             method = "use",
             at = @At(

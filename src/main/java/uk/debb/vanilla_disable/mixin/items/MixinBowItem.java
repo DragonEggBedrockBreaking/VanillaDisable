@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(BowItem.class)
 public abstract class MixinBowItem {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getPowerForTime", at = @At("RETURN"))
     private static float modifyPower(float original) {
         if (GameruleHelper.getBool(Gamerules.BOW_SPAMMING)) {
@@ -21,10 +17,6 @@ public abstract class MixinBowItem {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int lowerUseDuration(int original) {
         if (GameruleHelper.getBool(Gamerules.BOW_SPAMMING)) {

@@ -16,12 +16,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 )
 @Mixin(PistonStructureResolver.class)
 public abstract class MixinPistonStructureResolver {
-    /**
-     * @param oldPushLimit 12; the vanilla push limit
-     * @return the push limit in our gamerules
-     * @author DragonEggBedrockBreaking
-     * @reason edit the piston push limit
-     */
     @ModifyConstant(method = "addBlockLine", constant = @Constant(intValue = 12))
     private int pushLimit(int oldPushLimit) {
         return GameruleHelper.getInt(Gamerules.PISTON_PUSH_LIMIT);

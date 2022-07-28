@@ -19,9 +19,6 @@ public abstract class MixinStructureCheck {
     @Unique
     private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> structureMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         structureMap.put(BuriedTreasureStructure.class, Gamerules.BURIED_TREASURE_GENERATION);
@@ -41,12 +38,6 @@ public abstract class MixinStructureCheck {
         structureMap.put(WoodlandMansionStructure.class, Gamerules.MANSION_GENERATION);
     }
 
-    /**
-     * @param original  the original value
-     * @param chunkPos  the position of the structure
-     * @param structure the structure that is generating
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canCreateStructure", at = @At("RETURN"))
     private boolean cancelStructureGeneration(boolean original, ChunkPos chunkPos, Structure structure) {
         if (structureMap.isEmpty()) {

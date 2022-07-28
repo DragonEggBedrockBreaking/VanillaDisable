@@ -19,9 +19,6 @@ public abstract class MixinServerPlayer {
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> deathToGameruleMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         deathToGameruleMap.put("inFire", Gamerules.IN_FIRE_DEATH);
@@ -55,11 +52,6 @@ public abstract class MixinServerPlayer {
         deathToGameruleMap.put("sonicBoom", Gamerules.SONIC_BOOM_DEATH);
     }
 
-    /**
-     * @param damageSource the source of the damage causing the death
-     * @param ci           the callback info
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(method = "die", at = @At("HEAD"), cancellable = true)
     private void cancelDeath(DamageSource damageSource, CallbackInfo ci) {
         if (deathToGameruleMap.isEmpty()) {

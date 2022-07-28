@@ -3,9 +3,6 @@ package uk.debb.vanilla_disable.util.gamerules;
 import uk.debb.vanilla_disable.mixin_plugins.CaffeineConfigMixinConfigPlugin;
 
 public class RegisterGamerules {
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     public static void registerGamerules() {
         if (CaffeineConfigMixinConfigPlugin.damage) {
             Gamerules.DAMAGE_ENABLED = GameruleHelper.register("damageEnabled", GameruleCategories.VD_DAMAGE, true);

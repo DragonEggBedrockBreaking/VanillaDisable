@@ -17,9 +17,6 @@ public abstract class MixinPlayer {
     @Unique
     private static final Object2ObjectMap<DamageSource, GameRules.Key<GameRules.BooleanValue>> damageSourceMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         damageSourceMap.put(DamageSource.LIGHTNING_BOLT, Gamerules.LIGHTNING_DAMAGE);
@@ -36,11 +33,6 @@ public abstract class MixinPlayer {
         damageSourceMap.put(DamageSource.FALLING_BLOCK, Gamerules.FALLING_BLOCK_DAMAGE);
     }
 
-    /**
-     * @param original     the original value
-     * @param damageSource the source of the damage
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
     private boolean isAlsoInvulnerableTo(boolean original, DamageSource damageSource) {
         if (damageSourceMap.isEmpty()) {

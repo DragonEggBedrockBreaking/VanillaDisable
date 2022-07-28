@@ -18,19 +18,11 @@ public abstract class MixinPlayerAdvancements {
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> advancementToGameruleMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @param string the advancement id
-     * @param gameRule the gamerule for the advancement
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private static void putInMap(String string, GameRules.Key<GameRules.BooleanValue> gameRule) {
         advancementToGameruleMap.put("advancements." + string + ".title", gameRule);
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private static void addOptionsToMap() {
         putInMap("adventure.root", Gamerules.ADVENTURE_ADVANCEMENT_ADVENTURE);
@@ -141,11 +133,6 @@ public abstract class MixinPlayerAdvancements {
         putInMap("end.dragon_egg", Gamerules.THE_END_ADVANCEMENT_NEXT_GENERATION);
     }
 
-    /**
-     * @param original the original value
-     * @param advancement the advancement
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getOrStartProgress", at = @At("RETURN"))
     private AdvancementProgress cancelPerformingCriterion(AdvancementProgress original, Advancement advancement) {
         if (advancementToGameruleMap.isEmpty()) {

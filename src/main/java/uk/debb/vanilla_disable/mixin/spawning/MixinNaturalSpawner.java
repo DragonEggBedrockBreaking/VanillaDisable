@@ -22,9 +22,6 @@ public class MixinNaturalSpawner {
     @Unique
     private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.BooleanValue>> spawnGroupMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private static void addOptionsToMap() {
         spawnGroupMap.put(MobCategory.MONSTER, Gamerules.MONSTER_SPAWNING);
@@ -36,15 +33,6 @@ public class MixinNaturalSpawner {
         spawnGroupMap.put(MobCategory.WATER_CREATURE, Gamerules.WATER_CREATURE_SPAWNING);
     }
 
-    /**
-     * @param group   the type of entity
-     * @param level   the level
-     * @param chunk   the chunk
-     * @param checker profiling/testing
-     * @param runner  profiling/testing
-     * @param ci      the callback info
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
     private static void cancelSpawningCategoryForChunk(MobCategory group, ServerLevel level, LevelChunk chunk, SpawnPredicate checker, AfterSpawnCallback runner, CallbackInfo ci) {
         if (spawnGroupMap.isEmpty()) {

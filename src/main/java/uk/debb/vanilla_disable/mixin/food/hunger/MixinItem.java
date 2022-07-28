@@ -10,11 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Item.class)
 public abstract class MixinItem {
-    /**
-     * @param original the original value
-     * @param stack    the stack of items that the player is holding
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int editUseDuration(int original, ItemStack stack) {
         if (GameruleHelper.getBool(Gamerules.OLD_HUNGER) && stack.getItem().isEdible()) {

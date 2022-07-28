@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(LeverBlock.class)
 public abstract class MixinLeverBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.LEVER_ENABLED)) {
@@ -21,10 +17,6 @@ public abstract class MixinLeverBlock {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.LEVER_ENABLED)) {

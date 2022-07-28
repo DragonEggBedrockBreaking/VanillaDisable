@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(TrappedChestBlock.class)
 public abstract class MixinTrappedChestBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.TRAPPED_CHEST_ENABLED)) {
@@ -21,10 +17,6 @@ public abstract class MixinTrappedChestBlock {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.TRAPPED_CHEST_ENABLED)) {

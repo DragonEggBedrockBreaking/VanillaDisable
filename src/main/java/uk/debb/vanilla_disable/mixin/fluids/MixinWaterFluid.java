@@ -11,11 +11,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(WaterFluid.class)
 public abstract class MixinWaterFluid {
-    /**
-     * @param original the original value
-     * @param world    the world
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDropOff", at = @At("RETURN"))
     private int getWaterDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
@@ -24,11 +19,6 @@ public abstract class MixinWaterFluid {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @param world    the world
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getTickDelay", at = @At("RETURN"))
     private int getWaterTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
@@ -37,10 +27,6 @@ public abstract class MixinWaterFluid {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
     private boolean canWaterConvertToSource(boolean original) {
         return GameruleHelper.getBool(Gamerules.INFINITE_WATER);

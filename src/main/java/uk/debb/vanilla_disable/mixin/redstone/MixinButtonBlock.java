@@ -15,10 +15,6 @@ public abstract class MixinButtonBlock {
     @Final
     private boolean sensitive;
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getPressDuration", at = @At("RETURN"))
     private int modifyPressDuration(int original) {
         if (this.sensitive) {
@@ -28,10 +24,6 @@ public abstract class MixinButtonBlock {
         }
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.BUTTON_ENABLED)) {
@@ -40,10 +32,6 @@ public abstract class MixinButtonBlock {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.BUTTON_ENABLED)) {

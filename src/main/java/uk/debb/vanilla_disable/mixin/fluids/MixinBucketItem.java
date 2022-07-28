@@ -26,11 +26,6 @@ public abstract class MixinBucketItem {
     @Final
     private Fluid content;
 
-    /**
-     * @param original the original value
-     * @return whether the biome should be counted as ultrawarm
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyExpressionValue(
             method = "emptyContents",
             at = @At(
@@ -45,14 +40,6 @@ public abstract class MixinBucketItem {
         return false;
     }
 
-    /**
-     * @param player the player placing the water
-     * @param world  the world
-     * @param pos    the position at which the water is being placed
-     * @param ci     the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason don't play bucket sound if placing in the nether
-     */
     @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
     protected void cancelPlayingEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
         if (world.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&

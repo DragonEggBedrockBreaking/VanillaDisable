@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(PressurePlateBlock.class)
 public abstract class MixinPressurePlateBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getSignalStrength", at = @At("RETURN"))
     private int modifySignalStrength(int original) {
         if (!GameruleHelper.getBool(Gamerules.PRESSURE_PLATE_ENABLED)) {

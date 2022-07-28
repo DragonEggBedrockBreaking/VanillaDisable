@@ -12,13 +12,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(DispenserBlock.class)
 public abstract class MixinDispenserBlock {
-    /**
-     * @param serverLevel the server level
-     * @param blockPos    the position of the block
-     * @param ci          the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason stop the block from being activated by redstone
-     */
     @Inject(method = "dispenseFrom", at = @At("HEAD"), cancellable = true)
     private void cancelDispensing(ServerLevel serverLevel, BlockPos blockPos, CallbackInfo ci) {
         if (!GameruleHelper.getBool(Gamerules.DISPENSER_ENABLED)) {

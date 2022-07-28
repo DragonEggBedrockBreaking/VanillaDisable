@@ -16,14 +16,6 @@ import java.util.Objects;
 
 @Mixin(NaturalSpawner.class)
 public abstract class MixinNaturalSpawner {
-    /**
-     * @param original        the original value
-     * @param level           the world to spawn in
-     * @param chunk           the chunk to spawn in
-     * @param pos             the position to spawn at
-     * @param squaredDistance the squared distance from the position
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isRightDistanceToPlayerAndSpawnPoint", at = @At("RETURN"))
     private static boolean mayMeRightDistanceToPlayerAndSpawnPoint(boolean original, ServerLevel level, ChunkAccess chunk, BlockPos.MutableBlockPos pos, double squaredDistance) {
         if (squaredDistance <= Math.pow(GameruleHelper.getInt(Gamerules.MIN_SPAWN_DISTANCE), 2)) {

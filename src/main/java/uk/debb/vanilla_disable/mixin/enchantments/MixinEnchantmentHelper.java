@@ -19,9 +19,6 @@ public abstract class MixinEnchantmentHelper {
     @Unique
     private static final Object2ObjectMap<Enchantment, GameRules.Key<GameRules.BooleanValue>> enchantmentMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private static void addOptionsToMap() {
         enchantmentMap.put(Enchantments.AQUA_AFFINITY, Gamerules.AQUA_AFFINITY_ENCHANTMENT);
@@ -65,12 +62,6 @@ public abstract class MixinEnchantmentHelper {
         enchantmentMap.put(Enchantments.VANISHING_CURSE, Gamerules.VANISHING_CURSE);
     }
 
-    /**
-     * @param original    the original value
-     * @param enchantment the enchantment on the item to disable
-     * @param stack       the stack of items with that enchantment
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getItemEnchantmentLevel", at = @At("RETURN"))
     private static int removeEnchantmentLevel(int original, Enchantment enchantment, ItemStack stack) {
         if (enchantmentMap.isEmpty()) {

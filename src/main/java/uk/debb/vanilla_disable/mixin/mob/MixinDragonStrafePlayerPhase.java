@@ -15,11 +15,6 @@ public abstract class MixinDragonStrafePlayerPhase extends AbstractDragonPhaseIn
         super(arg);
     }
 
-    /**
-     * @param original the original value
-     * @return whether to spawn the fireball
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyExpressionValue(
             method = "doServerTick",
             at = @At(

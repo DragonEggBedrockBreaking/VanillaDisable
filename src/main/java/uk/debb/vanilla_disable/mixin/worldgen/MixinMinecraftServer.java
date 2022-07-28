@@ -42,19 +42,12 @@ public abstract class MixinMinecraftServer {
 
     @Shadow public abstract PackRepository getPackRepository();
 
-    /**
-     * @param name the name of the datapack
-     * @author DragonEggBedrockBreaking
-     */
     private boolean createDatapackDir(String name, String dirname) {
         String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
         File dataPackDir = new File(dataPackPath + "/" + name + "/data/minecraft/" + dirname + "/");
         return dataPackDir.getParentFile().mkdirs() && dataPackDir.mkdir();
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private boolean createBiomeDatapackDirectories() {
         if (this.worldData.getGameRules().getBoolean(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
@@ -69,9 +62,6 @@ public abstract class MixinMinecraftServer {
         return true;
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private boolean createStructureDatapackDirectories() {
         if (!this.worldData.getGameRules().getBoolean(Gamerules.ANCIENT_CITY_GENERATION)) {
@@ -92,10 +82,6 @@ public abstract class MixinMinecraftServer {
         return true;
     }
 
-    /**
-     * @param name the name of the datapack
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addMcmetaFile(String name, String content) throws IOException {
         String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
@@ -105,9 +91,6 @@ public abstract class MixinMinecraftServer {
         myWriter.close();
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addBiomeMcmetaFiles() throws IOException {
         String content = "{\"pack\":{\"pack_format\":10,\"description\":\"Vanilla Disable Biomes\"}}";
@@ -122,9 +105,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addStructureMcmetaFiles() throws IOException {
         String content = "{\"pack\":{\"pack_format\":9,\"description\":\"Vanilla Disable Structures\"}}";
@@ -142,12 +122,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @param url       the url of the json files to download
-     * @param name      the name of the datapack
-     * @param shortname the name of the json file (without extension)
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addJsonFile(String url, String name, String shortname, String dirname) throws IOException {
         String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
@@ -158,9 +132,6 @@ public abstract class MixinMinecraftServer {
         jsonFileDir.close();
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addBiomeJsonFiles() throws IOException {
         if (this.worldData.getGameRules().getBoolean(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
@@ -180,9 +151,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addStructureJsonFiles() throws IOException {
         if (!this.worldData.getGameRules().getBoolean(Gamerules.ANCIENT_CITY_GENERATION)) {
@@ -219,9 +187,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void getBiomeDataPacks() throws IOException {
         if (createBiomeDatapackDirectories()) {
@@ -230,9 +195,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void getStructureDataPacks() throws IOException {
         if (createStructureDatapackDirectories()) {
@@ -241,10 +203,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @param name the name of the datapack to enable
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void enableDatapack(String name) {
         PackRepository repo = this.getPackRepository();
@@ -263,10 +221,6 @@ public abstract class MixinMinecraftServer {
                 name.replaceAll("vanilla_disable_", "")));
     }
 
-    /**
-     * @param name the name of the datapack to disable
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void disableDatapack(String name) {
         PackRepository repo = this.getPackRepository();
@@ -285,9 +239,6 @@ public abstract class MixinMinecraftServer {
                 name.replaceAll("vanilla_disable_", "")));
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void toggleBiomeDataPacks() {
         if (!this.worldData.getGameRules().getBoolean(Gamerules.REMOVE_OVERWORLD_BIOMES)) {
@@ -307,9 +258,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void toggleStructureDataPacks() {
         if (this.worldData.getGameRules().getBoolean(Gamerules.ANCIENT_CITY_GENERATION)) {
@@ -334,12 +282,6 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    /**
-     * @param ci the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason after the world is loaded, if first load, create datapacks and patch them
-     * @reason and always toggle them, on all loads
-     */
     @Inject(method = "createLevels", at = @At("HEAD"))
     private void onLevelLoad(CallbackInfo ci) throws IOException {
         getBiomeDataPacks();

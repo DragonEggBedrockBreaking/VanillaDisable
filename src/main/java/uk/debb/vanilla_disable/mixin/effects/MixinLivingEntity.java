@@ -21,9 +21,6 @@ public abstract class MixinLivingEntity {
     @Unique
     private static final Object2ObjectMap<MobEffect, GameRules.Key<GameRules.BooleanValue>> statusEffectMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         statusEffectMap.put(MobEffects.ABSORPTION, Gamerules.ABSORPTION_EFFECT);
@@ -60,11 +57,6 @@ public abstract class MixinLivingEntity {
         statusEffectMap.put(MobEffects.WITHER, Gamerules.WITHER_EFFECT);
     }
 
-    /**
-     * @param original the original value
-     * @param effect   the status effect
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
     private boolean canItBeAffected(boolean original, MobEffectInstance effect) {
         if (((Entity) (Object) this).getType() == EntityType.PLAYER) {

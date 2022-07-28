@@ -23,9 +23,6 @@ import java.util.List;
 public abstract class MixinPotionUtils {
     private static final Object2ObjectMap<Potion, GameRules.Key<GameRules.BooleanValue>> potionMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     private static void addOptionsToMap() {
         potionMap.put(Potions.FIRE_RESISTANCE, Gamerules.FIRE_RESISTANCE_POTION);
         potionMap.put(Potions.LONG_FIRE_RESISTANCE, Gamerules.FIRE_RESISTANCE_POTION);
@@ -67,11 +64,6 @@ public abstract class MixinPotionUtils {
         potionMap.put(Potions.LONG_WEAKNESS, Gamerules.WEAKNESS_POTION);
     }
 
-    /**
-     * @param original  the original value
-     * @param itemStack the potion
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getMobEffects", at = @At("RETURN"))
     private static List<MobEffectInstance> removeMobEffects(List<MobEffectInstance> original, ItemStack itemStack) {
         if (potionMap.isEmpty()) {

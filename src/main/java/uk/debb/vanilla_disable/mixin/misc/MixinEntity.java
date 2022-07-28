@@ -28,12 +28,6 @@ public abstract class MixinEntity {
     @Shadow
     public abstract EntityType<?> getType();
 
-    /**
-     * @param state the state of the block below the entity
-     * @param ci    the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason kills boats when they hit blocks
-     */
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
     private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {
         if (GameruleHelper.getBool(Gamerules.OLD_BOATS) && this.getType() == EntityType.BOAT) {

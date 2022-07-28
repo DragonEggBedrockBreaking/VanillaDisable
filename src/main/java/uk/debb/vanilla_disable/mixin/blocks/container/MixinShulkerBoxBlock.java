@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ShulkerBoxBlock.class)
 public abstract class MixinShulkerBoxBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canOpen", at = @At("RETURN"))
     private static boolean canAlwaysOpen(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.CONTAINER_OPENING_BLOCKED)) {

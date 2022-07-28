@@ -11,11 +11,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(FoodData.class)
 public abstract class MixinFoodData {
-    /**
-     * @param original the original value
-     * @return peaceful if old hunger enabled else the difficulty
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyExpressionValue(
             method = "tick",
             at = @At(

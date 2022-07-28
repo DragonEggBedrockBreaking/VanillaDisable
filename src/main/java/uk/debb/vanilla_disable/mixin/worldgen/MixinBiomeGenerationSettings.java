@@ -18,9 +18,6 @@ public abstract class MixinBiomeGenerationSettings {
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> featureToGameruleMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         featureToGameruleMap.put(AquaticPlacements.KELP_COLD.toString(), Gamerules.OCEAN_VEGETATION);
@@ -253,11 +250,6 @@ public abstract class MixinBiomeGenerationSettings {
         featureToGameruleMap.put(VegetationPlacements.MUSHROOM_ISLAND_VEGETATION.toString(), Gamerules.OVERWORLD_VEGETATION);
     }
 
-    /**
-     * @param original the original value
-     * @param feature  the feature that is being checked for
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "hasFeature", at = @At("RETURN"))
     private boolean cancelHavingFeature(boolean original, PlacedFeature feature) {
         if (featureToGameruleMap.isEmpty()) {

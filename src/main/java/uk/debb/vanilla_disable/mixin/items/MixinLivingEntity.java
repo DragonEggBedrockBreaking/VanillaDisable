@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "checkTotemDeathProtection", at = @At("RETURN"))
     private boolean totemsDoNotWork(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.TOTEMS_ENABLED)) {

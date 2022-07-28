@@ -10,10 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ZombieVillager.class)
 public abstract class MixinZombieVillager {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "mobInteract", at = @At("RETURN"))
     private InteractionResult cureMob(InteractionResult original) {
         if (!GameruleHelper.getBool(Gamerules.CURABLE_ZILLAGERS)) {

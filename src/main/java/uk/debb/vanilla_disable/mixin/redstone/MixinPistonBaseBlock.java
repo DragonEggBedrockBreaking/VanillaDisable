@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(PistonBaseBlock.class)
 public abstract class MixinPistonBaseBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "triggerEvent", at = @At("RETURN"))
     private boolean cancelTriggeringEvent(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.PISTON_ENABLED)) {

@@ -26,11 +26,6 @@ public abstract class MixinItemEntity extends Entity {
         super(entityType, level);
     }
 
-    /**
-     * @param ci callback info
-     * @author DragonEggBedrockBreaking
-     * @reason delete the item when necessary
-     */
     @Inject(method = "tick", at = @At("HEAD"))
     private void discardItem(CallbackInfo ci) {
         if (this.age >= MAX * 20 && !(this.getLevel().isClientSide())) {
@@ -38,11 +33,6 @@ public abstract class MixinItemEntity extends Entity {
         }
     }
 
-    /**
-     * @param ci callback info
-     * @author DragonEggBedrockBreaking
-     * @reason cancel deleting the item if too early
-     */
     @Inject(
             method = "tick",
             at = @At(

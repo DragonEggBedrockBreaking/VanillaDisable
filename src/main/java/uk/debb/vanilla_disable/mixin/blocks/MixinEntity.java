@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDimensionChangingDelay", at = @At("RETURN"))
     private int modifyDimensionChangingDelay(int original) {
         return GameruleHelper.getInt(Gamerules.NETHER_PORTAL_COOLDOWN);

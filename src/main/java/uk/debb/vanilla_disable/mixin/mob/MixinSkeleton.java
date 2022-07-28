@@ -10,11 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Skeleton.class)
 public abstract class MixinSkeleton {
-    /**
-     * @param ci the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason stop skeletons from converting into strays
-     */
     @Inject(method = "doFreezeConversion", at = @At("HEAD"), cancellable = true)
     private void cancelFreezeConversion(CallbackInfo ci) {
         if (!GameruleHelper.getBool(Gamerules.SKELETONS_CONVERT_TO_STRAYS)) {

@@ -28,9 +28,6 @@ public abstract class MixinItemStack {
     @Shadow
     public abstract Item getItem();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         itemToGameruleMap.put(BoatItem.class, Gamerules.BOATS_ENABLED);
@@ -80,13 +77,6 @@ public abstract class MixinItemStack {
         itemToGameruleMap.put(SuspiciousStewItem.class, Gamerules.SUSPICIOUS_STEW_EFFECTS_ENABLED);
     }
 
-    /**
-     * @param level           the level the usage was in
-     * @param player          the player that used the item
-     * @param interactionHand the hand that used it
-     * @param cir             the returnable callback info (net.minecraft.world.InteractionResultHolder<net.minecraft.world.item.ItemStack>>
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void cancelUsage(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
         if (itemToGameruleMap.isEmpty()) {
@@ -99,11 +89,6 @@ public abstract class MixinItemStack {
         }
     }
 
-    /**
-     * @param useOnContext the context that the item is used on
-     * @param cir          returnable callback info (net.minecraft.world.InteractionResult)
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void cancelUsageOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         if (itemToGameruleMap.isEmpty()) {
@@ -116,13 +101,6 @@ public abstract class MixinItemStack {
         }
     }
 
-    /**
-     * @param player          the player who right-clicked the item
-     * @param livingEntity    the animal that was right-clicked on
-     * @param interactionHand the hand that right-clicks on the entity
-     * @param cir             returnable callback info (net.minecraft.world.InteractionResult)
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(method = "interactLivingEntity", at = @At("HEAD"), cancellable = true)
     private void cancelLivingEntityInteraction(Player player, LivingEntity livingEntity, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
         if (itemToGameruleMap.isEmpty()) {
@@ -135,12 +113,6 @@ public abstract class MixinItemStack {
         }
     }
 
-    /**
-     * @param level        the level the item is being used in
-     * @param livingEntity the entity that is using the item
-     * @param cir          the returnable callback info (net.minecraft.world.item.ItemStack)
-     * @author DragonEggBedrockBreaking
-     */
     @Inject(method = "finishUsingItem", at = @At("HEAD"), cancellable = true)
     private void cancelItemUseFinishing(Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
         if (itemToGameruleMap.isEmpty()) {

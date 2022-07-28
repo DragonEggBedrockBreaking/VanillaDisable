@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ChestBlock.class)
 public abstract class MixinChestBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isChestBlockedAt", at = @At("RETURN"))
     private static boolean chestNotBlocked(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.CONTAINER_OPENING_BLOCKED)) {

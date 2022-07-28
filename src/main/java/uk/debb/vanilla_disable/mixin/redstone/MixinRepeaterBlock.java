@@ -19,23 +19,11 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
         super(properties);
     }
 
-    /**
-     * @param original   the original value
-     * @param blockState the state of the block
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int modifyDelay(int original, BlockState blockState) {
         return blockState.getValue(BlockStateProperties.DELAY) * GameruleHelper.getInt(Gamerules.REPEATER_BASE_DELAY);
     }
 
-    /**
-     * @param blockGetter the getter for the repeater
-     * @param blockPos    the position of the repeater
-     * @param blockState  the state of the repeater
-     * @return the signal outputted
-     * @author DragonEggBedrockBreaking
-     */
     @Override
     protected int getOutputSignal(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
         if (blockState.getValue(BlockStateProperties.POWERED)) {

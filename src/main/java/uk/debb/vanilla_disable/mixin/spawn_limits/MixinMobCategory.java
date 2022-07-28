@@ -16,9 +16,6 @@ public abstract class MixinMobCategory {
     @Unique
     private static final Object2ObjectMap<MobCategory, GameRules.Key<GameRules.IntegerValue>> spawnGroupMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         spawnGroupMap.put(MobCategory.MONSTER, Gamerules.MONSTER_MOBCAP);
@@ -30,10 +27,6 @@ public abstract class MixinMobCategory {
         spawnGroupMap.put(MobCategory.WATER_CREATURE, Gamerules.WATER_CREATURE_MOBCAP);
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getMaxInstancesPerChunk", at = @At("RETURN"))
     public int getMaxInstancesPerChunk(int original) {
         if (spawnGroupMap.isEmpty()) {

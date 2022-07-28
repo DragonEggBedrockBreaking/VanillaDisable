@@ -16,10 +16,6 @@ import java.util.Objects;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer {
-    /**
-     * @author DragonEggBedrockBreaking
-     * @reason increases your health when you eat food
-     */
     @Inject(method = "eat", at = @At("HEAD"))
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (GameruleHelper.getBool(Gamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
@@ -28,11 +24,6 @@ public abstract class MixinPlayer {
         }
     }
 
-    /**
-     * @param original the original value
-     * @return whether one can eat food
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyExpressionValue(
             method = "canEat",
             at = @At(

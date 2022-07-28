@@ -13,13 +13,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Monster.class)
 public abstract class MixinMonster {
-    /**
-     * @param original     the original value
-     * @param world        the access to ServerWorld
-     * @param pos          the position to spawn at
-     * @param randomSource the random number generator
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isDarkEnoughToSpawn", at = @At("RETURN"))
     private static boolean spawnIsDarkEnough(boolean original, ServerLevelAccessor world, BlockPos pos, RandomSource randomSource) {
         if (world.getBrightness(LightLayer.SKY, pos) > randomSource.nextInt(32)) {

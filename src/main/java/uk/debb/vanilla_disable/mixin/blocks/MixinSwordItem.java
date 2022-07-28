@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(SwordItem.class)
 public abstract class MixinSwordItem {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canAttackBlock", at = @At("RETURN"))
     private boolean canAlwaysAttackBlock(boolean original) {
         if (GameruleHelper.getBool(Gamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS)) {

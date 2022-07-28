@@ -13,11 +13,6 @@ import java.io.IOException;
 
 @Mixin(Bootstrap.class)
 public abstract class MixinBootstrap {
-    /**
-     * @param ci callback info
-     * @author DragonEggBedrockBreaking
-     * @reason manually run code on initialisation without base api
-     */
     @Inject(
             method = "bootStrap",
             at = @At(

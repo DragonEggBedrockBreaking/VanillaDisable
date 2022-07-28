@@ -14,14 +14,6 @@ import java.util.List;
 
 @Mixin(ConduitBlockEntity.class)
 public abstract class MixinConduitBlockEntity {
-    /**
-     * @param level    the level
-     * @param blockPos the block position
-     * @param list     the list of block positions
-     * @param ci       the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason prevent conduits from applying effects
-     */
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void cancelEffects(Level level, BlockPos blockPos, List<BlockPos> list, CallbackInfo ci) {
         if (!GameruleHelper.getBool(Gamerules.CONDUITS_ENABLED)) {

@@ -31,11 +31,6 @@ public class GameruleCategories {
     public static final CustomGameRuleCategory VD_ADVANCEMENT = createCustomGameRuleCategory("gamerule.category.vd.advancement");
     public static final CustomGameRuleCategory VD_MISC = createCustomGameRuleCategory("gamerule.category.vd.misc");
 
-    /**
-     * @param identifier the id for the gamerule category
-     * @return the gamerule category
-     * @author DragonEggBedrockBreaking
-     */
     private static CustomGameRuleCategory createCustomGameRuleCategory(String identifier) {
         return new CustomGameRuleCategory(
                 new ResourceLocation(identifier),

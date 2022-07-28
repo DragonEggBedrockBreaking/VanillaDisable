@@ -15,11 +15,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Pig.class)
 public abstract class MixinPig {
-    /**
-     * @param original the original value
-     * @param stack    the stack of items that the player is holding
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isFood", at = @At("RETURN"))
     private boolean changeFood(boolean original, ItemStack stack) {
         if (GameruleHelper.getBool(Gamerules.PIGS_BREED_WITH_WHEAT)) {
@@ -28,12 +23,6 @@ public abstract class MixinPig {
         return original;
     }
 
-    /**
-     * @param goal the original goal
-     * @return the goal to go to wheat instead
-     * @author DragonEggBedrockBreaking
-     * @reason stop pigs being attracted to carrots on sticks
-     */
     @ModifyArg(
             method = "registerGoals",
             at = @At(
@@ -50,12 +39,6 @@ public abstract class MixinPig {
         return goal;
     }
 
-    /**
-     * @param goal the original goal
-     * @return the goal to go to wheat instead
-     * @author DragonEggBedrockBreaking
-     * @reason stop pigs being attracted to carrots, potatoes, and beetroot
-     */
     @ModifyArg(
             method = "registerGoals",
             at = @At(

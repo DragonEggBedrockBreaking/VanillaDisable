@@ -9,19 +9,11 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ComparatorBlock.class)
 public abstract class MixinComparatorBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int modifyDelay(int original) {
         return GameruleHelper.getInt(Gamerules.COMPARATOR_BASE_DELAY);
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getOutputSignal", at = @At("RETURN"))
     private int modifyOutputSignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.COMPARATOR_ENABLED)) {

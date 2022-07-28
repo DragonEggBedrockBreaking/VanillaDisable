@@ -13,10 +13,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(AbstractVillager.class)
 public abstract class MixinAbstractVillager {
-    /**
-     * @param receiver the original receiver
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReceiver(
             method = "notifyTrade",
             at = @At(
@@ -32,10 +28,6 @@ public abstract class MixinAbstractVillager {
         return receiver;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getOffers", at = @At("RETURN"))
     private MerchantOffers clearOffers(MerchantOffers original) {
         if (!GameruleHelper.getBool(Gamerules.VILLAGER_TRADING_ENABLED)) {

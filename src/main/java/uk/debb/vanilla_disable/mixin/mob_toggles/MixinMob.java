@@ -40,9 +40,6 @@ public abstract class MixinMob extends LivingEntity {
         super(entityType, level);
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         mobTypeMap.put(Allay.class, Gamerules.ALLAYS_ENABLED);
@@ -119,11 +116,6 @@ public abstract class MixinMob extends LivingEntity {
         mobTypeMap.put(WitherBoss.class, Gamerules.WITHERS_ENABLED);
     }
 
-    /**
-     * @param ci the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason stops mobs from spawning if they are disabled
-     */
     @Inject(method = "checkDespawn", at = @At("HEAD"))
     private void checkIfEnabled(CallbackInfo ci) {
         if (mobTypeMap.isEmpty()) {

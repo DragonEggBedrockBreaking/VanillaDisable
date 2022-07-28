@@ -16,11 +16,6 @@ public abstract class MixinDamageEnchantment extends Enchantment {
         super(rarity, EnchantmentCategory.WEAPON, equipmentSlots);
     }
 
-    /**
-     * @param original    the original value
-     * @param enchantment the enchantment to check compatibility with
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
         if (!GameruleHelper.getBool(Gamerules.DAMAGE_ENCHANTMENT_CONFLICTS)) {

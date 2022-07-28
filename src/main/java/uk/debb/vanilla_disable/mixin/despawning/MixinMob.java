@@ -31,9 +31,6 @@ public abstract class MixinMob extends Entity {
         super(entityType, level);
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         spawnGroupDespawnMap.put(Monster.class, Gamerules.MONSTERS_DESPAWN);
@@ -45,10 +42,6 @@ public abstract class MixinMob extends Entity {
         spawnGroupDespawnMap.put(WaterAnimal.class, Gamerules.WATER_CREATURES_DESPAWN);
     }
 
-    /**
-     * @return Whether the additional restrictions are met
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private boolean additionalRestrictionsMet() {
         if (this instanceof Bucketable bucketable) {
@@ -57,10 +50,6 @@ public abstract class MixinMob extends Entity {
         return true;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "removeWhenFarAway", at = @At("RETURN"))
     private boolean cancelRemovalWhenFarAway(boolean original) {
         if (spawnGroupDespawnMap.isEmpty()) {

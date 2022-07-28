@@ -10,11 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ThrownEnderpearl.class)
 public abstract class MixinThrownEnderpearl {
-    /**
-     * @param ci callback info
-     * @author DragonEggBedrockBreaking
-     * @reason don't delete ender pearls on player death
-     */
     @Inject(
             method = "tick",
             at = @At(

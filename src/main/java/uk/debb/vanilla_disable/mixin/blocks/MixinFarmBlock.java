@@ -13,17 +13,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(FarmBlock.class)
 public abstract class MixinFarmBlock {
-    /**
-     * @param state        the state of the block
-     * @param level        the level
-     * @param pos          the position of the block
-     * @param theWorld     the world
-     * @param blockState   the state of the block
-     * @param blockPos     the position of the block
-     * @param entity       the entity falling on the block
-     * @param fallDistance how far the entity fell on the block
-     * @author DragonEggBedrockBreaking
-     */
     @WrapWithCondition(
             method = "fallOn",
             at = @At(

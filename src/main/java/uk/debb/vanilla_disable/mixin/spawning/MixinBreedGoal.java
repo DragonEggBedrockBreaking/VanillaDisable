@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(BreedGoal.class)
 public abstract class MixinBreedGoal {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canUse", at = @At(value = "RETURN"))
     private boolean cannotUse(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.ANIMAL_BREEDING)) {
@@ -21,10 +17,6 @@ public abstract class MixinBreedGoal {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "canContinueToUse", at = @At(value = "RETURN"))
     private boolean shouldContinueToUse(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.ANIMAL_BREEDING)) {

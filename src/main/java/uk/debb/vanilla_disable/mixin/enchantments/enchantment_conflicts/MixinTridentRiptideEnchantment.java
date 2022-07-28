@@ -16,11 +16,6 @@ public abstract class MixinTridentRiptideEnchantment extends Enchantment {
         super(rarity, EnchantmentCategory.TRIDENT, equipmentSlots);
     }
 
-    /**
-     * @param original    the original value
-     * @param enchantment the enchantment to check compatibility with
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
         if (!GameruleHelper.getBool(Gamerules.TRIDENT_ENCHANTMENT_CONFLICTS)) {

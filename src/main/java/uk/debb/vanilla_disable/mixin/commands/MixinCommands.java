@@ -22,9 +22,6 @@ public abstract class MixinCommands {
     @Unique
     private static final Object2ObjectMap<String, GameRules.Key<GameRules.BooleanValue>> dedicatedCommandNameGameruleMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         commandNameGameruleMap.put("advancement", Gamerules.ADVANCEMENT_COMMAND);
@@ -86,9 +83,6 @@ public abstract class MixinCommands {
         commandNameGameruleMap.put("worldborder", Gamerules.WORLD_BORDER_COMMAND);
     }
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addDedicatedOptionsToMap() {
         dedicatedCommandNameGameruleMap.put("ban", Gamerules.BAN_DEDICATED_COMMAND);
@@ -107,13 +101,6 @@ public abstract class MixinCommands {
         dedicatedCommandNameGameruleMap.put("whitelist", Gamerules.WHITELIST_DEDICATED_COMMAND);
     }
 
-    /**
-     * @param original the original value
-     * @param source   the source of the command
-     * @param command  the command to be executed
-     * @author LittleLily
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "performCommand", at = @At(value = "RETURN"))
     private int performCommand(int original, CommandSourceStack source, String command) {
         String commandName = command.split(" ")[0].substring(1);

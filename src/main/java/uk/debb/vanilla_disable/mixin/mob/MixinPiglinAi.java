@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(PiglinAi.class)
 public abstract class MixinPiglinAi {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "isBarterCurrency", at = @At("RETURN"))
     private static boolean cancelBarter(boolean original) {
         if (!GameruleHelper.getBool(Gamerules.PIGLIN_BARTERING_ENABLED)) {

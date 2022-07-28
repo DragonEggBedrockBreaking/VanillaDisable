@@ -14,10 +14,6 @@ public abstract class MixinBlock {
     @Shadow
     public abstract float getFriction();
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getFriction", at = @At("RETURN"))
     private float cancelFriction(float original) {
         if (GameruleHelper.getServer() == null) return original;

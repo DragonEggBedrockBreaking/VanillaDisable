@@ -16,11 +16,6 @@ public abstract class MixinProtectionEnchantment extends Enchantment {
         super(rarity, type == ProtectionEnchantment.Type.FALL ? EnchantmentCategory.ARMOR_FEET : EnchantmentCategory.ARMOR, equipmentSlots);
     }
 
-    /**
-     * @param original    the original value
-     * @param enchantment the enchantment to check compatibility with
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
         if (!GameruleHelper.getBool(Gamerules.PROTECTION_ENCHANTMENT_CONFLICTS)) {

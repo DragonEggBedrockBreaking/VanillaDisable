@@ -9,10 +9,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(TargetBlock.class)
 public abstract class MixinTargetBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getRedstoneStrength", at = @At("RETURN"))
     private static int modifyRedstoneStrength(int original) {
         if (!GameruleHelper.getBool(Gamerules.TARGET_BLOCK_ENABLED)) {

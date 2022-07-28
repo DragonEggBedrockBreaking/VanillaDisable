@@ -13,12 +13,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer {
-    /**
-     * @param target the entity the player is targeting
-     * @param ci     the callback info
-     * @author DragonEggBedrockBreaking
-     * @reason creepers ignite when clicked with flint and steel, fire aspect should be the same
-     */
     @Inject(method = "attack", at = @At("RETURN"))
     private void igniteCreeper(Entity target, CallbackInfo ci) {
         if (GameruleHelper.getBool(Gamerules.FIRE_ASPECT_IGNITES_CREEPERS) &&

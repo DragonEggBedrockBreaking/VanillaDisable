@@ -21,9 +21,6 @@ public abstract class MixinGoal {
     @Unique
     private static final Object2ObjectMap<Class<?>, GameRules.Key<GameRules.BooleanValue>> goalMap = new Object2ObjectOpenHashMap<>();
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         goalMap.put(Bee.BaseBeeGoal.class, Gamerules.BEE_AI);
@@ -75,10 +72,6 @@ public abstract class MixinGoal {
         goalMap.put(Vex.VexRandomMoveGoal.class, Gamerules.VEX_AI);
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockNreaking
-     */
     @ModifyReturnValue(method = "canContinueToUse", at = @At("RETURN"))
     private boolean blockContinuance(boolean original) {
         if (goalMap.isEmpty()) {

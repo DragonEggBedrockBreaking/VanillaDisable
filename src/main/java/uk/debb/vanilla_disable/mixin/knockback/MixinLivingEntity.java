@@ -29,9 +29,6 @@ public abstract class MixinLivingEntity {
     @Shadow
     private LivingEntity lastHurtByMob;
 
-    /**
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private void addOptionsToMap() {
         entityMap.put(Blaze.class, Gamerules.FIREBALL_KNOCKBACK);
@@ -43,11 +40,6 @@ public abstract class MixinLivingEntity {
         entityMap.put(ServerPlayer.class, Gamerules.PLAYER_ATTACK_KNOCKBACK);
     }
 
-    /**
-     * @param source The entity that caused the knockback
-     * @return the opposite of the gamerule
-     * @author DragonEggBedrockBreaking
-     */
     @Unique
     private boolean isInvulnerableToKnockback(LivingEntity source) {
         if (entityMap.isEmpty()) {
@@ -72,14 +64,6 @@ public abstract class MixinLivingEntity {
         return false;
     }
 
-    /**
-     * @param strength The strength of the knockback
-     * @param x        The x-coordinate of the knockback
-     * @param z        The z-coordinate of the knockback
-     * @param ci       The CallbackInfo
-     * @author DragonEggBedrockBreaking
-     * @reason Cancels knockback onto a player if the respective gamerule is disabled
-     */
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(double strength, double x, double z, CallbackInfo ci) {
         if (((Entity) (Object) this).getType() == EntityType.PLAYER && isInvulnerableToKnockback(this.lastHurtByMob)) {

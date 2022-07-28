@@ -10,10 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ObserverBlock.class)
 public abstract class MixinObserverBlock {
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
@@ -22,10 +18,6 @@ public abstract class MixinObserverBlock {
         return original;
     }
 
-    /**
-     * @param original the original value
-     * @author DragonEggBedrockBreaking
-     */
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
         if (!GameruleHelper.getBool(Gamerules.OBSERVER_ENABLED)) {
@@ -34,12 +26,6 @@ public abstract class MixinObserverBlock {
         return original;
     }
 
-    /**
-     * @param delay the original delay of the block
-     * @return the new delay that it will be changed to
-     * @author DragonEggBedrockBreaking
-     * @reason edit the delay of the redstone component
-     */
     @ModifyArg(
             method = "startSignal",
             at = @At(
@@ -52,12 +38,6 @@ public abstract class MixinObserverBlock {
         return GameruleHelper.getInt(Gamerules.OBSERVER_DELAY);
     }
 
-    /**
-     * @param duration the original duration of the redstone pulse
-     * @return the new duration that it will be changed to
-     * @author DragonEggBedrockBreaking
-     * @reason edit the duration of the redstone pulse
-     */
     @ModifyArg(
             method = "tick",
             at = @At(
