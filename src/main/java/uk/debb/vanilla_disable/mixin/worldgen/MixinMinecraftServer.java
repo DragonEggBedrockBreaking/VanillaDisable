@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 import java.io.File;
@@ -38,9 +37,11 @@ public abstract class MixinMinecraftServer {
         return null;
     }
 
-    @Shadow public abstract Path getWorldPath(LevelResource arg);
+    @Shadow
+    public abstract Path getWorldPath(LevelResource arg);
 
-    @Shadow public abstract PackRepository getPackRepository();
+    @Shadow
+    public abstract PackRepository getPackRepository();
 
     private boolean createDatapackDir(String name, String dirname) {
         String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();

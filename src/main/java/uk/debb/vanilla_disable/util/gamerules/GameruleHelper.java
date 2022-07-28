@@ -8,11 +8,13 @@ import net.minecraft.world.level.GameRules;
 
 public class GameruleHelper implements GameruleDefaults {
     private static MinecraftServer server;
-    public static void setServer(MinecraftServer serverArg) {
-        server = serverArg;
-    }
+
     public static MinecraftServer getServer() {
         return server;
+    }
+
+    public static void setServer(MinecraftServer serverArg) {
+        server = serverArg;
     }
 
     public static GameRules.Key<GameRules.BooleanValue> register(String name, CustomGameRuleCategory category, boolean defaultValue) {

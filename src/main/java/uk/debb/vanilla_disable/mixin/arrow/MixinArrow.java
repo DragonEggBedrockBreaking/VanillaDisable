@@ -28,16 +28,20 @@ import java.util.Set;
 
 @Mixin(Arrow.class)
 public abstract class MixinArrow extends AbstractArrow {
+    @Unique
+    private static final Object2ObjectMap<Potion, GameRules.Key<GameRules.BooleanValue>> tippedArrowToGameruleMap = new Object2ObjectOpenHashMap<>();
+    @Shadow
+    @Final
+    private static EntityDataAccessor<Integer> ID_EFFECT_COLOR;
+    @Shadow
+    private Potion potion;
+    @Shadow
+    @Final
+    private Set<MobEffectInstance> effects;
+
     public MixinArrow(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
     }
-
-    @Shadow private Potion potion;
-    @Shadow @Final private Set<MobEffectInstance> effects;
-    @Shadow @Final private static EntityDataAccessor<Integer> ID_EFFECT_COLOR;
-
-    @Unique
-    private static final Object2ObjectMap<Potion, GameRules.Key<GameRules.BooleanValue>> tippedArrowToGameruleMap = new Object2ObjectOpenHashMap<>();
 
     @Unique
     private void addOptionsToMap() {
