@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.LangFileManager;
 import uk.debb.vanilla_disable.util.gamerules.GameruleDefaults;
 import uk.debb.vanilla_disable.util.gamerules.RegisterGamerules;
+import uk.debb.vanilla_disable.util.maps.PopulateMaps;
 
 import java.io.IOException;
 
@@ -24,5 +25,6 @@ public abstract class MixinBootstrap {
         RegisterGamerules.registerGamerules();
         GameruleDefaults.addOptionsToMaps();
         LangFileManager.langFileFallback();
+        PopulateMaps.populateMaps();
     }
 }

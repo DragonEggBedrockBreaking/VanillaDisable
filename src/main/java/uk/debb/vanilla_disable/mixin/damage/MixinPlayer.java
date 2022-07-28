@@ -1,44 +1,20 @@
 package uk.debb.vanilla_disable.mixin.damage;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(Player.class)
-public abstract class MixinPlayer {
-    @Unique
-    private static final Object2ObjectMap<DamageSource, GameRules.Key<GameRules.BooleanValue>> damageSourceMap = new Object2ObjectOpenHashMap<>();
-
-    @Unique
-    private void addOptionsToMap() {
-        damageSourceMap.put(DamageSource.LIGHTNING_BOLT, Gamerules.LIGHTNING_DAMAGE);
-        damageSourceMap.put(DamageSource.IN_WALL, Gamerules.WALL_DAMAGE);
-        damageSourceMap.put(DamageSource.CRAMMING, Gamerules.CRAMMING_DAMAGE);
-        damageSourceMap.put(DamageSource.STARVE, Gamerules.STARVATION_DAMAGE);
-        damageSourceMap.put(DamageSource.CACTUS, Gamerules.CACTUS_DAMAGE);
-        damageSourceMap.put(DamageSource.FLY_INTO_WALL, Gamerules.FLY_INTO_WALL_DAMAGE);
-        damageSourceMap.put(DamageSource.WITHER, Gamerules.WITHER_DAMAGE);
-        damageSourceMap.put(DamageSource.ANVIL, Gamerules.ANVIL_DAMAGE);
-        damageSourceMap.put(DamageSource.DRAGON_BREATH, Gamerules.DRAGON_DAMAGE);
-        damageSourceMap.put(DamageSource.SWEET_BERRY_BUSH, Gamerules.SWEET_BERRY_BUSH_DAMAGE);
-        damageSourceMap.put(DamageSource.FALLING_STALACTITE, Gamerules.FALLING_STALACTITE_DAMAGE);
-        damageSourceMap.put(DamageSource.FALLING_BLOCK, Gamerules.FALLING_BLOCK_DAMAGE);
-    }
-
+public abstract class MixinPlayer implements Maps {
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
     private boolean isAlsoInvulnerableTo(boolean original, DamageSource damageSource) {
-        if (damageSourceMap.isEmpty()) {
-            addOptionsToMap();
-        }
-        GameRules.Key<GameRules.BooleanValue> damageGamerule = damageSourceMap.get(damageSource);
+        GameRules.Key<GameRules.BooleanValue> damageGamerule = playerDamageSourceMap.get(damageSource);
         if (!GameruleHelper.getBool(Gamerules.DAMAGE_ENABLED)) {
             return true;
         } else if (damageGamerule != null && !GameruleHelper.getBool(damageGamerule)) {
