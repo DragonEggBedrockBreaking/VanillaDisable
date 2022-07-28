@@ -1,22 +1,19 @@
 package uk.debb.vanilla_disable.mixin.items;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
@@ -77,51 +74,51 @@ public abstract class MixinItemStack {
         itemToGameruleMap.put(SuspiciousStewItem.class, Gamerules.SUSPICIOUS_STEW_EFFECTS_ENABLED);
     }
 
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void cancelUsage(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+    @ModifyReturnValue(method = "use", at = @At("RETURN"))
+    private InteractionResultHolder<ItemStack> cancelUsage(InteractionResultHolder<ItemStack> original, Level level, Player player, InteractionHand interactionHand) {
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = itemToGameruleMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
-            cir.setReturnValue(InteractionResultHolder.fail(player.getItemInHand(interactionHand)));
-            cir.cancel();
+            return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
         }
+        return original;
     }
 
-    @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
-    private void cancelUsageOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
+    @ModifyReturnValue(method = "useOn", at = @At("RETURN"))
+    private InteractionResult cancelUsageOn(InteractionResult original) {
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = itemToGameruleMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
-            cir.setReturnValue(InteractionResult.FAIL);
-            cir.cancel();
+            return InteractionResult.FAIL;
         }
+        return original;
     }
 
-    @Inject(method = "interactLivingEntity", at = @At("HEAD"), cancellable = true)
-    private void cancelLivingEntityInteraction(Player player, LivingEntity livingEntity, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
+    @ModifyReturnValue(method = "interactLivingEntity", at = @At("RETURN"))
+    private InteractionResult cancelLivingEntityInteraction(InteractionResult original) {
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = itemToGameruleMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
-            cir.setReturnValue(InteractionResult.FAIL);
-            cir.cancel();
+            return InteractionResult.FAIL;
         }
+        return original;
     }
 
-    @Inject(method = "finishUsingItem", at = @At("HEAD"), cancellable = true)
-    private void cancelItemUseFinishing(Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
+    @ModifyReturnValue(method = "finishUsingItem", at = @At("RETURN"))
+    private ItemStack cancelItemUseFinishing(ItemStack original) {
         if (itemToGameruleMap.isEmpty()) {
             addOptionsToMap();
         }
         GameRules.Key<GameRules.BooleanValue> gameRule = itemToGameruleMap.get(this.getItem().getClass());
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
-            cir.setReturnValue(ItemStack.EMPTY);
-            cir.cancel();
+            return ItemStack.EMPTY;
         }
+        return original;
     }
 }
