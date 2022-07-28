@@ -17,7 +17,7 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 public abstract class MixinCommands implements Maps {
     @ModifyReturnValue(method = "performCommand", at = @At(value = "RETURN"))
     private int performCommand(int original, CommandSourceStack source, String command) {
-        String commandName = command.split(" ")[0].substring(1);
+        String commandName = command.split(" ")[0];
         GameRules.Key<GameRules.BooleanValue> commandGamerule = commandsStringMap.get(commandName);
         GameRules.Key<GameRules.BooleanValue> dedicatedCommandGamerule = commandsStringMapDedicated.get(commandName);
         if ((!command.startsWith("/gamerule") && !GameruleHelper.getBool(Gamerules.COMMANDS_ENABLED)) ||
