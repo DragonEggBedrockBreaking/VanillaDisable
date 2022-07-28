@@ -88,7 +88,7 @@ public abstract class MixinArrow extends AbstractArrow {
                 addOptionsToMap();
             }
             GameRules.Key<GameRules.BooleanValue> gameRule = tippedArrowToGameruleMap.get(PotionUtils.getPotion(itemStack));
-            if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
+            if (!GameruleHelper.getBool(Gamerules.TIPPED_ARROWS_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
                 this.potion = Potions.EMPTY;
                 this.effects.clear();
                 this.entityData.set(ID_EFFECT_COLOR, -1);
