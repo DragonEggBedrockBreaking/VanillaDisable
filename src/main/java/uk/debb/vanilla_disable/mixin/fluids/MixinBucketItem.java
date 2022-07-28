@@ -41,12 +41,12 @@ public abstract class MixinBucketItem {
     }
 
     @Inject(method = "playEmptySound", at = @At(value = "HEAD"), cancellable = true)
-    protected void cancelPlayingEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos, CallbackInfo ci) {
-        if (world.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&
+    protected void cancelPlayingEmptySound(@Nullable Player player, LevelAccessor levelAccessor, BlockPos blockPos, CallbackInfo ci) {
+        if (levelAccessor.dimensionType().ultraWarm() && (this.content == Fluids.WATER || this.content == Fluids.FLOWING_WATER) &&
                 GameruleHelper.getBool(Gamerules.WATER_PLACEABLE_IN_NETHER)) {
-            world.playSound(player, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.8f);
+            levelAccessor.playSound(player, blockPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5f, 2.6f + (levelAccessor.getRandom().nextFloat() - levelAccessor.getRandom().nextFloat()) * 0.8f);
             for (int l = 0; l < 8; ++l) {
-                world.addParticle(ParticleTypes.SMOKE, (double) pos.getX() + Math.random(), (double) pos.getY() + Math.random(), (double) pos.getZ() + Math.random(), 0.0, 0.0, 0.0);
+                levelAccessor.addParticle(ParticleTypes.SMOKE, (double) blockPos.getX() + Math.random(), (double) blockPos.getY() + Math.random(), (double) blockPos.getZ() + Math.random(), 0.0, 0.0, 0.0);
             }
             ci.cancel();
         }

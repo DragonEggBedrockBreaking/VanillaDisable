@@ -58,7 +58,6 @@ public interface GameruleDefaults {
         defaultBooleans.put(Gamerules.BLAZE_SPAWNERS, true);
         defaultBooleans.put(Gamerules.SPIDER_SPAWNERS, true);
         defaultBooleans.put(Gamerules.MAGMA_CUBE_SPAWNERS, true);
-        defaultBooleans.put(Gamerules.SPAWN_EGGS, true);
         defaultBooleans.put(Gamerules.ANIMAL_BREEDING, true);
 
         defaultBooleans.put(Gamerules.MONSTERS_DESPAWN, true);

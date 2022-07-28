@@ -51,7 +51,6 @@ public class Gamerules {
     public static GameRules.Key<GameRules.BooleanValue> BLAZE_SPAWNERS;
     public static GameRules.Key<GameRules.BooleanValue> SPIDER_SPAWNERS;
     public static GameRules.Key<GameRules.BooleanValue> MAGMA_CUBE_SPAWNERS;
-    public static GameRules.Key<GameRules.BooleanValue> SPAWN_EGGS;
     public static GameRules.Key<GameRules.BooleanValue> ANIMAL_BREEDING;
 
     public static GameRules.Key<GameRules.IntegerValue> MIN_SPAWN_DISTANCE;

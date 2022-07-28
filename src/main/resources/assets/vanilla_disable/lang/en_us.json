@@ -46,7 +46,6 @@
     "gamerule.blazeSpawners": "Toggle blaze spawners",
     "gamerule.spiderSpawners": "Toggle spider spawners",
     "gamerule.magmaCubeSpawners": "Toggle magma cube spawners",
-    "gamerule.spawnEggs": "Toggle spawn eggs",
     "gamerule.animalBreeding": "Toggle animal breeding",
 
     "gamerule.minSpawnDistance": "How far away mobs can spawn",

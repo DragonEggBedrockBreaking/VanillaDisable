@@ -29,7 +29,7 @@ public abstract class MixinEntity {
     public abstract EntityType<?> getType();
 
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
-    private void killOnHorizontalCollision(BlockState state, CallbackInfo ci) {
+    private void killOnHorizontalCollision(CallbackInfo ci) {
         if (GameruleHelper.getBool(Gamerules.OLD_BOATS) && this.getType() == EntityType.BOAT) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));

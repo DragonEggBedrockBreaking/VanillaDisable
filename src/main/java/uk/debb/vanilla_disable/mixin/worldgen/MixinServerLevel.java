@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 @Mixin(ServerLevel.class)
 public abstract class MixinServerLevel {
     @Inject(method = "makeObsidianPlatform", at = @At("HEAD"), cancellable = true)
-    private static void cancelMakingObsidianPlatform(ServerLevel level, CallbackInfo ci) {
+    private static void cancelMakingObsidianPlatform(CallbackInfo ci) {
         if (!GameruleHelper.getBool(Gamerules.END_FEATURES_GENERATION)) {
             ci.cancel();
         }

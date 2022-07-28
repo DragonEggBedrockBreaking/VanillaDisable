@@ -54,7 +54,6 @@ public class RegisterGamerules {
             Gamerules.BLAZE_SPAWNERS = GameruleHelper.register("blazeSpawners", GameruleCategories.VD_SPAWNING, true);
             Gamerules.SPIDER_SPAWNERS = GameruleHelper.register("spiderSpawners", GameruleCategories.VD_SPAWNING, true);
             Gamerules.MAGMA_CUBE_SPAWNERS = GameruleHelper.register("magmaCubeSpawners", GameruleCategories.VD_SPAWNING, true);
-            Gamerules.SPAWN_EGGS = GameruleHelper.register("spawnEggs", GameruleCategories.VD_SPAWNING, true);
             Gamerules.ANIMAL_BREEDING = GameruleHelper.register("animalBreeding", GameruleCategories.VD_SPAWNING, true);
         }
         if (CaffeineConfigMixinConfigPlugin.despawning) {

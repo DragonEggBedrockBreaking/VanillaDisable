@@ -6,8 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.NaturalSpawner;
-import net.minecraft.world.level.NaturalSpawner.AfterSpawnCallback;
-import net.minecraft.world.level.NaturalSpawner.SpawnPredicate;
 import net.minecraft.world.level.chunk.LevelChunk;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -34,11 +32,11 @@ public class MixinNaturalSpawner {
     }
 
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
-    private static void cancelSpawningCategoryForChunk(MobCategory group, ServerLevel level, LevelChunk chunk, SpawnPredicate checker, AfterSpawnCallback runner, CallbackInfo ci) {
+    private static void cancelSpawningCategoryForChunk(MobCategory mobCategory, ServerLevel serverLevel, LevelChunk levelChunk, NaturalSpawner.SpawnPredicate spawnPredicate, NaturalSpawner.AfterSpawnCallback afterSpawnCallback, CallbackInfo ci) {
         if (spawnGroupMap.isEmpty()) {
             addOptionsToMap();
         }
-        GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupMap.get(group);
+        GameRules.Key<GameRules.BooleanValue> gameRule = spawnGroupMap.get(mobCategory);
         if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
             ci.cancel();
         }

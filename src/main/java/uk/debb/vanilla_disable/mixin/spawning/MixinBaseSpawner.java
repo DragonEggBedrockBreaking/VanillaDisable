@@ -2,8 +2,6 @@ package uk.debb.vanilla_disable.mixin.spawning;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Pig;
@@ -60,7 +58,7 @@ public abstract class MixinBaseSpawner {
             ),
             cancellable = true
     )
-    private void cancelSpawningNewEntityAndPassengers(ServerLevel level, BlockPos pos, CallbackInfo ci) {
+    private void cancelSpawningNewEntityAndPassengers(CallbackInfo ci) {
         if (spawnerMobMap.isEmpty()) {
             addOptionsToMap();
         }
