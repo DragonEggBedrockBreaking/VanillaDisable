@@ -10,14 +10,14 @@ import net.minecraft.world.level.GameRules;
 public class GameruleHelper {
     public static MinecraftServer server;
 
-    public static void register(CustomGameRuleCategory category, BooleanGamerules rule) {
+    public static void register(GameruleCategories category, BooleanGamerules rule) {
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rule.name());
-        rule.setGameRule(GameRuleRegistry.register(ruleName, category, GameRuleFactory.createBooleanRule(rule.getDefaultBool())));
+        rule.setGameRule(GameRuleRegistry.register(ruleName, category.get(), GameRuleFactory.createBooleanRule(rule.getDefaultBool())));
     }
 
-    public static void register(CustomGameRuleCategory category, IntegerGamerules rule) {
+    public static void register(GameruleCategories category, IntegerGamerules rule) {
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rule.name());
-        rule.setGameRule(GameRuleRegistry.register(ruleName, category, GameRuleFactory.createIntRule(rule.getDefaultInt(), rule.getMinInt(), rule.getMaxInt())));
+        rule.setGameRule(GameRuleRegistry.register(ruleName, category.get(), GameRuleFactory.createIntRule(rule.getDefaultInt(), rule.getMinInt(), rule.getMaxInt())));
     }
 
     public static boolean getBool(BooleanGamerules key) {

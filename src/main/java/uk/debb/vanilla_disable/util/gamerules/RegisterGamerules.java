@@ -2,9 +2,10 @@ package uk.debb.vanilla_disable.util.gamerules;
 
 import uk.debb.vanilla_disable.mixin_plugins.CaffeineConfigMixinConfigPlugin;
 import static uk.debb.vanilla_disable.util.gamerules.BooleanGamerules.*;
+import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 import static uk.debb.vanilla_disable.util.gamerules.IntegerGamerules.*;
 
-public class RegisterGamerules implements GameruleCategories {
+public class RegisterGamerules {
     public static void registerGamerules() {
         if (CaffeineConfigMixinConfigPlugin.damage) {
             GameruleHelper.register(VD_DAMAGE, DAMAGE_ENABLED);
