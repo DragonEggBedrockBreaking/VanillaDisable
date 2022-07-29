@@ -37,4 +37,5 @@ public interface Maps {
     Object2ObjectMap<Enchantment, BooleanGamerules> enchantmentHelperEnchantmentMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, BooleanGamerules> mobClassMapToggle = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, BooleanGamerules> playerAdvancementsStringMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Item, BooleanGamerules> abstractCauldronBlockItemMap = new Object2ObjectOpenHashMap<>();
 }

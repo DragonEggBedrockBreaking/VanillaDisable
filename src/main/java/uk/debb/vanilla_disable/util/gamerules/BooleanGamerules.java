@@ -424,6 +424,13 @@ public enum BooleanGamerules {
     PUSHABLE_BUDDING_AMETHYST(null, true),
     CONTAINER_OPENING_BLOCKED(null, true),
     OLD_TNT(null, false),
+    FILLING_CAULDRONS(null, true),
+    EMPTYING_CAULDRONS(null, true),
+    CAULDRONS_CLEAN_LEATHER_ARMOUR(null, true),
+    CAULDRONS_CLEAN_BANNERS(null, true),
+    CAULDRONS_CLEAN_SHULKER_BOXES(null, true),
+    DRIPSTONE_FILLS_CAULDRONS(null, true),
+    PRECIPITATION_FILLS_CAULDRONS(null, true),
 
     OLD_HUNGER(null, false),
 
@@ -563,8 +570,6 @@ public enum BooleanGamerules {
     WEAKNESS_TIPPED_ARROW(null, true),
     SPECTRAL_ARROWS_ENABLED(null, true),
 
-    OLD_BOATS(null, false),
-
     ADVANCEMENTS_ENABLED(null, true),
     ADVENTURE_ADVANCEMENT_ADVENTURE(null, true),
     ADVENTURE_ADVANCEMENT_SWEET_DREAMS(null, true),
@@ -666,7 +671,9 @@ public enum BooleanGamerules {
     THE_END_ADVANCEMENT_YOU_NEED_MINT(null, true),
     THE_END_ADVANCEMENT_GREAT_VIEW(null, true),
     THE_END_ADVANCEMENT_SKY_IS_LIMIT(null, true),
-    THE_END_ADVANCEMENT_NEXT_GENERATION(null, true);
+    THE_END_ADVANCEMENT_NEXT_GENERATION(null, true),
+
+    OLD_BOATS(null, false);
 
     private final boolean defaultBool;
     private GameRules.Key<GameRules.BooleanValue> gameRule;

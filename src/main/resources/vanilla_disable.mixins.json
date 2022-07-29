@@ -12,9 +12,11 @@
     "arrow.MixinArrow",
     "arrow.MixinSpectralArrow",
 
+    "blocks.MixinAbstractCauldronBlock",
     "blocks.MixinBeaconBlockEntity",
     "blocks.MixinBlock",
     "blocks.MixinBuddingAmethystBlock",
+    "blocks.MixinCauldronBlock",
     "blocks.MixinConduitBlockEntity",
     "blocks.MixinEndPortalBlock",
     "blocks.MixinEntity",

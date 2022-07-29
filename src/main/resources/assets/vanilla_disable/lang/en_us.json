@@ -929,6 +929,13 @@
     "gamerule.honeyBlockSpeed": "Honey block speed",
     "gamerule.defaultBlockJump": "Default block jump",
     "gamerule.honeyBlockJump": "Honey block jump",
+    "gamerule.fillingCauldrons": "Filling cauldrons",
+    "gamerule.emptyingCauldrons": "Emptying cauldrons",
+    "gamerule.cauldronsCleanLeatherArmour": "Cauldrons clean leather armour",
+    "gamerule.cauldronsCleanBanners": "Cauldrons clean banners",
+    "gamerule.cauldronsCleanShulkerBoxes": "Cauldrons clean shulker boxes",
+    "gamerule.dripstoneFillsCauldrons": "Dripstone fills cauldrons",
+    "gamerule.precipitationFillsCauldrons": "Precipitation fills cauldrons",
 
     "gamerule.netherPortalsEnabled.description": "Toggle nether portals",
     "gamerule.endPortalsEnabled.description": "Toggle end portals",
@@ -949,6 +956,13 @@
     "gamerule.honeyBlockSpeed.description": "The speed of walking on honey blocks",
     "gamerule.defaultBlockJump.description": "The default jump on blocks",
     "gamerule.honeyBlockJump.description": "The jump on honey blocks",
+    "gamerule.fillingCauldrons.description": "Toggle being able to fill cauldrons with water/lava/powdered snow, using buckets/bottles",
+    "gamerule.emptyingCauldrons.description": "Toggle being able to empty cauldrons using buckets/bottles",
+    "gamerule.cauldronsCleanLeatherArmour.description": "Toggle cauldrons cleaning dyed leather armour",
+    "gamerule.cauldronsCleanBanners.description": "Toggle cauldrons cleaning banners with patterns",
+    "gamerule.cauldronsCleanShulkerBoxes.description": "Toggle cauldrons cleaning dyed shulker boxes",
+    "gamerule.dripstoneFillsCauldrons.description": "Dripstone with lava/water fills cauldrons underneath",
+    "gamerule.precipitationFillsCauldrons.description": "Rain/snow fills cauldrons underneath",
 
 
     "gamerule.oldHunger": "Old (beta) hunger",

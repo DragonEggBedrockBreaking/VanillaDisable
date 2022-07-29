@@ -492,6 +492,13 @@ public class RegisterGamerules implements GameruleCategories {
             GameruleHelper.register(VD_BLOCKS, HONEY_BLOCK_SPEED);
             GameruleHelper.register(VD_BLOCKS, DEFAULT_BLOCK_JUMP);
             GameruleHelper.register(VD_BLOCKS, HONEY_BLOCK_JUMP);
+            GameruleHelper.register(VD_BLOCKS, FILLING_CAULDRONS);
+            GameruleHelper.register(VD_BLOCKS, EMPTYING_CAULDRONS);
+            GameruleHelper.register(VD_BLOCKS, CAULDRONS_CLEAN_LEATHER_ARMOUR);
+            GameruleHelper.register(VD_BLOCKS, CAULDRONS_CLEAN_BANNERS);
+            GameruleHelper.register(VD_BLOCKS, CAULDRONS_CLEAN_SHULKER_BOXES);
+            GameruleHelper.register(VD_BLOCKS, DRIPSTONE_FILLS_CAULDRONS);
+            GameruleHelper.register(VD_BLOCKS, PRECIPITATION_FILLS_CAULDRONS);
         }
         if (CaffeineConfigMixinConfigPlugin.food) {
             if (CaffeineConfigMixinConfigPlugin.food_hunger) {
