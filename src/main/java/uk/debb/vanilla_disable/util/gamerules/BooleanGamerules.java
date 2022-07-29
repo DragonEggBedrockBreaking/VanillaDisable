@@ -424,6 +424,7 @@ public enum BooleanGamerules {
     CREATIVE_SWORD_CAN_BREAK_BLOCKS(null, false),
     PUSHABLE_BUDDING_AMETHYST(null, true),
     CONTAINER_OPENING_BLOCKED(null, true),
+    OLD_TNT(null, false),
 
     OLD_HUNGER(null, false),
 

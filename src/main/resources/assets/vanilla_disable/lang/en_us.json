@@ -921,6 +921,7 @@
     "gamerule.creativeSwordCanBreakBlocks": "Creative sword can break blocks",
     "gamerule.pushableBuddingAmethyst": "Pushable budding amethyst",
     "gamerule.containerOpeningBlocked": "Container opening blocked",
+    "gamerule.oldTnt": "Old (alpha) tnt",
 
     "gamerule.netherPortalsEnabled.description": "Toggle nether portals",
     "gamerule.endPortalsEnabled.description": "Toggle end portals",
@@ -933,9 +934,10 @@
     "gamerule.creativeSwordCanBreakBlocks.description": "Toggle swords breaking blocks in creative",
     "gamerule.pushableBuddingAmethyst.description": "Toggle budding amethysts being pushable",
     "gamerule.containerOpeningBlocked.description": "Toggle blocks/cats blocking container opening",
+    "gamerule.oldTnt.description": "Toggle old (alpha) tnt, i.e. light it by punching it",
 
 
-    "gamerule.oldHunger": "Old hunger",
+    "gamerule.oldHunger": "Old (beta) hunger",
     "gamerule.appleNutrition": "Apple nutrition",
     "gamerule.appleSaturation": "Apple saturation",
     "gamerule.bakedPotatoNutrition": "Baked potato nutrition",

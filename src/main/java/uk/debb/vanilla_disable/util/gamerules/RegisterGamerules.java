@@ -482,6 +482,7 @@ public class RegisterGamerules implements GameruleCategories {
             GameruleHelper.register(VD_BLOCKS, BooleanGamerules.ICE_SLIDING);
             GameruleHelper.register(VD_BLOCKS, BooleanGamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS);
             GameruleHelper.register(VD_BLOCKS, BooleanGamerules.PUSHABLE_BUDDING_AMETHYST);
+            GameruleHelper.register(VD_BLOCKS, BooleanGamerules.OLD_TNT);
         }
         if (CaffeineConfigMixinConfigPlugin.food) {
             if (CaffeineConfigMixinConfigPlugin.food_hunger) {
