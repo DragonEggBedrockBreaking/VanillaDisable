@@ -445,21 +445,28 @@ public class RegisterGamerules implements GameruleCategories {
             GameruleHelper.register(VD_AI, BooleanGamerules.CAT_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.DROWNED_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.ENDERMAN_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.FISH_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.FOX_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.GHAST_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.GOLEM_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.GUARDIAN_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.LLAMA_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.OCELOT_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.PANDA_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.PHANTOM_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.POLAR_BEAR_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.PUFFERFISH_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.RABBIT_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.RAIDER_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.SHULKER_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.SILVERFISH_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.SLIME_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.SPIDER_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.SQUID_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.STRIDER_AI);
             GameruleHelper.register(VD_AI, BooleanGamerules.TURTLE_AI);
-            GameruleHelper.register(VD_AI, BooleanGamerules.VEX_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.WOLF_AI);
+            GameruleHelper.register(VD_AI, BooleanGamerules.ZOMBIE_AI);
         }
         if (CaffeineConfigMixinConfigPlugin.blocks) {
             if (CaffeineConfigMixinConfigPlugin.blocks_container) {
