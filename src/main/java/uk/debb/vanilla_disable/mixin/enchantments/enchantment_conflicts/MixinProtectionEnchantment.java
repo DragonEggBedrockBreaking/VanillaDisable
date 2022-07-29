@@ -13,7 +13,7 @@ import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 @Mixin(ProtectionEnchantment.class)
 public abstract class MixinProtectionEnchantment extends Enchantment {
     public MixinProtectionEnchantment(Enchantment.Rarity rarity, ProtectionEnchantment.Type type, EquipmentSlot... equipmentSlots) {
-        super(rarity, type == ProtectionEnchantment.Type.FALL ? EnchantmentCategory.ARMOR_FEET : EnchantmentCategory.ARMOR, equipmentSlots);
+        super(rarity, type.equals(ProtectionEnchantment.Type.FALL) ? EnchantmentCategory.ARMOR_FEET : EnchantmentCategory.ARMOR, equipmentSlots);
     }
 
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))

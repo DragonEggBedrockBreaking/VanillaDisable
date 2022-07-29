@@ -30,7 +30,7 @@ public abstract class MixinMob extends Entity implements Maps {
     @ModifyReturnValue(method = "removeWhenFarAway", at = @At("RETURN"))
     private boolean cancelRemovalWhenFarAway(boolean original) {
         BooleanGamerules gameRule = mobClassMapDespawn.get(this.getClass());
-        if (gameRule != null && !(this.getType() == EntityType.VILLAGER)) {
+        if (gameRule != null && !(this.getType().equals(EntityType.VILLAGER))) {
             return GameruleHelper.getBool(gameRule) && additionalRestrictionsMet();
         }
         return original;

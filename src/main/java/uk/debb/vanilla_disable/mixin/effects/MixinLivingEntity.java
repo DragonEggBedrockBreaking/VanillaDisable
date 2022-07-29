@@ -16,7 +16,7 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 public abstract class MixinLivingEntity implements Maps {
     @ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
     private boolean canItBeAffected(boolean original, MobEffectInstance effect) {
-        if (((Entity) (Object) this).getType() == EntityType.PLAYER) {
+        if (((Entity) (Object) this).getType().equals(EntityType.PLAYER)) {
             MobEffect statusEffect = effect.getEffect();
             BooleanGamerules gameRule = livingEntityMobEffectMap.get(statusEffect);
             if ((!GameruleHelper.getBool(BooleanGamerules.EFFECTS_ENABLED)) ||

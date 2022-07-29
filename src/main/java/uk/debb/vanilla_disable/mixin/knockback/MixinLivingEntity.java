@@ -47,7 +47,7 @@ public abstract class MixinLivingEntity implements Maps {
 
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void cancelKnockback(CallbackInfo ci) {
-        if (((Entity) (Object) this).getType() == EntityType.PLAYER && isInvulnerableToKnockback(this.lastHurtByMob)) {
+        if (((Entity) (Object) this).getType().equals(EntityType.PLAYER) && isInvulnerableToKnockback(this.lastHurtByMob)) {
             ci.cancel();
         }
     }
