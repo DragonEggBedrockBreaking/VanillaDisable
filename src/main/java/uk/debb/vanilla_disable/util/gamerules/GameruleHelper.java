@@ -1,7 +1,6 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
 import com.google.common.base.CaseFormat;
-import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.server.MinecraftServer;
@@ -10,14 +9,14 @@ import net.minecraft.world.level.GameRules;
 public class GameruleHelper {
     public static MinecraftServer server;
 
-    public static void register(GameruleCategories category, BooleanGamerules rule) {
+    public static void register(BooleanGamerules rule) {
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rule.name());
-        rule.setGameRule(GameRuleRegistry.register(ruleName, category.get(), GameRuleFactory.createBooleanRule(rule.getDefaultBool())));
+        rule.setGameRule(GameRuleRegistry.register(ruleName, rule.getCategory().get(), GameRuleFactory.createBooleanRule(rule.getDefaultBool())));
     }
 
-    public static void register(GameruleCategories category, IntegerGamerules rule) {
+    public static void register(IntegerGamerules rule) {
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rule.name());
-        rule.setGameRule(GameRuleRegistry.register(ruleName, category.get(), GameRuleFactory.createIntRule(rule.getDefaultInt(), rule.getMinInt(), rule.getMaxInt())));
+        rule.setGameRule(GameRuleRegistry.register(ruleName, rule.getCategory().get(), GameRuleFactory.createIntRule(rule.getDefaultInt(), rule.getMinInt(), rule.getMaxInt())));
     }
 
     public static boolean getBool(BooleanGamerules key) {
