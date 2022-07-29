@@ -8,15 +8,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 
 public class GameruleHelper {
-    private static MinecraftServer server;
-
-    public static MinecraftServer getServer() {
-        return server;
-    }
-
-    public static void setServer(MinecraftServer serverArg) {
-        server = serverArg;
-    }
+    public static MinecraftServer server;
 
     public static void register(CustomGameRuleCategory category, BooleanGamerules rule) {
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, rule.name());

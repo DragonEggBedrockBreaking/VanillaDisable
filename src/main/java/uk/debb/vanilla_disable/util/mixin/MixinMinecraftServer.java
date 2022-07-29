@@ -17,6 +17,6 @@ public abstract class MixinMinecraftServer {
             )
     )
     private void beforeServerSetup(CallbackInfo ci) {
-        GameruleHelper.setServer((MinecraftServer) (Object) this);
+        GameruleHelper.server = (MinecraftServer) (Object) this;
     }
 }
