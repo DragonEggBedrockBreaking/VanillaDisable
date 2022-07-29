@@ -2,11 +2,11 @@ package uk.debb.vanilla_disable.mixin.spawning;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BaseSpawner;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
@@ -14,21 +14,7 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(BaseSpawner.class)
 public abstract class MixinBaseSpawner implements Maps {
-    @Unique
-    private Entity spawnedEntity;
-
-    @ModifyArg(
-            method = "serverTick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/level/ServerLevel;tryAddFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)Z"
-            ),
-            index = 0
-    )
-    private Entity recordSpawnedEntity(Entity entity) {
-        this.spawnedEntity = entity;
-        return entity;
-    }
+    @Shadow private @Nullable Entity displayEntity;
 
     @Inject(
             method = "serverTick",
@@ -39,7 +25,7 @@ public abstract class MixinBaseSpawner implements Maps {
             cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(CallbackInfo ci) {
-        BooleanGamerules gameRule = baseSpawnerClassMap.get(this.spawnedEntity.getClass());
+        BooleanGamerules gameRule = baseSpawnerClassMap.get(this.displayEntity.getClass());
         if (!GameruleHelper.getBool(gameRule) || !GameruleHelper.getBool(BooleanGamerules.SPAWNERS_ENABLED)) {
             ci.cancel();
         }
