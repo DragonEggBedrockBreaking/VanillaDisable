@@ -19,41 +19,41 @@ public enum IntegerGamerules {
     GLOWSQUID_MIN_DESPAWN(null, 32, 0, 512),
     WATER_CREATURE_MIN_DESPAWN(null, 32, 0, 512),
     WATER_AMBIENT_MIN_DESPAWN(null, 32, 0, 512),
-    ITEM_DESPAWN_TIME(null, 300, 0, Integer.MAX_VALUE),
+    ITEM_DESPAWN_TIME(null, 300, 0),
 
-    MONSTER_MOBCAP(null, 70, 0, Integer.MAX_VALUE),
-    CREATURE_MOBCAP(null, 10, 0, Integer.MAX_VALUE),
-    AMBIENT_MOBCAP(null, 15, 0, Integer.MAX_VALUE),
-    AXOLOTL_MOBCAP(null, 5, 0, Integer.MAX_VALUE),
-    GLOWSQUID_MOBCAP(null, 5, 0, Integer.MAX_VALUE),
-    WATER_CREATURE_MOBCAP(null, 5, 0, Integer.MAX_VALUE),
-    WATER_AMBIENT_MOBCAP(null, 20, 0, Integer.MAX_VALUE),
+    MONSTER_MOBCAP(null, 70, 0),
+    CREATURE_MOBCAP(null, 10, 0),
+    AMBIENT_MOBCAP(null, 15, 0),
+    AXOLOTL_MOBCAP(null, 5, 0),
+    GLOWSQUID_MOBCAP(null, 5, 0),
+    WATER_CREATURE_MOBCAP(null, 5, 0),
+    WATER_AMBIENT_MOBCAP(null, 20, 0),
     MONSTER_MAX_LIGHT_LEVEL(null, 0, 0, 15),
 
     WATER_FLOW_SPEED(null, 5, 1, 128),
     LAVA_FLOW_SPEED(null, 30, 1, 128),
     LAVA_FLOW_SPEED_NETHER(null, 10, 1, 128),
 
-    VILLAGER_DAILY_RESTOCKS(null, 2, 0, Integer.MAX_VALUE),
+    VILLAGER_DAILY_RESTOCKS(null, 2, 0),
 
-    REPEATER_BASE_DELAY(null, 2, 0, Integer.MAX_VALUE),
+    REPEATER_BASE_DELAY(null, 2, 0),
     REPEATER_SIGNAL(null, 15, 0, 15),
-    COMPARATOR_BASE_DELAY(null, 2, 0, Integer.MAX_VALUE),
-    WOOD_BUTTON_PRESS_DURATION(null, 30, 0, Integer.MAX_VALUE),
-    STONE_BUTTON_PRESS_DURATION(null, 20, 0, Integer.MAX_VALUE),
-    OBSERVER_DELAY(null, 2, 0, Integer.MAX_VALUE),
-    OBSERVER_DURATION(null, 2, 0, Integer.MAX_VALUE),
-    PISTON_PUSH_LIMIT(null, 12, 0, Integer.MAX_VALUE),
+    COMPARATOR_BASE_DELAY(null, 2, 0),
+    WOOD_BUTTON_PRESS_DURATION(null, 30, 0),
+    STONE_BUTTON_PRESS_DURATION(null, 20, 0),
+    OBSERVER_DELAY(null, 2, 0),
+    OBSERVER_DURATION(null, 2, 0),
+    PISTON_PUSH_LIMIT(null, 12, 0),
 
-    NETHER_PORTAL_COOLDOWN(null, 300, 0, Integer.MAX_VALUE),
-    DEFAULT_BLOCK_FRICTION(null, 60, 0, Integer.MAX_VALUE),
-    ICE_FRICTION(null, 98, 0, Integer.MAX_VALUE),
-    SLIME_FRICTION(null, 80, 0, Integer.MAX_VALUE),
-    DEFAULT_BLOCK_SPEED(null, 100, 0, Integer.MAX_VALUE),
-    SOUL_SAND_SPEED(null, 40, 0, Integer.MAX_VALUE),
-    HONEY_BLOCK_SPEED(null, 40, 0, Integer.MAX_VALUE),
-    DEFAULT_BLOCK_JUMP(null, 100, 0, Integer.MAX_VALUE),
-    HONEY_BLOCK_JUMP(null, 50, 0, Integer.MAX_VALUE),
+    NETHER_PORTAL_COOLDOWN(null, 300, 0),
+    DEFAULT_BLOCK_FRICTION(null, 60, 0),
+    ICE_FRICTION(null, 98, 0),
+    SLIME_FRICTION(null, 80, 0),
+    DEFAULT_BLOCK_SPEED(null, 100, 0),
+    SOUL_SAND_SPEED(null, 40, 0),
+    HONEY_BLOCK_SPEED(null, 40, 0),
+    DEFAULT_BLOCK_JUMP(null, 100, 0),
+    HONEY_BLOCK_JUMP(null, 50, 0),
 
     APPLE_NUTRITION(null, 4, 0, 20),
     APPLE_SATURATION(null, 3, 0, 99),
@@ -146,6 +146,13 @@ public enum IntegerGamerules {
         this.defaultInt = defaultInt;
         this.minValue = minValue;
         this.maxValue = maxValue;
+    }
+
+    IntegerGamerules(GameRules.Key<GameRules.IntegerValue> gameRule, int defaultInt, int minValue) {
+        this.gameRule = gameRule;
+        this.defaultInt = defaultInt;
+        this.minValue = minValue;
+        this.maxValue = Integer.MAX_VALUE;
     }
 
     public GameRules.Key<GameRules.IntegerValue> getGameRule() {
