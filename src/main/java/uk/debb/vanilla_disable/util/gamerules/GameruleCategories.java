@@ -38,7 +38,7 @@ public enum GameruleCategories {
     }
 
     private CustomGameRuleCategory createCustomGameRuleCategory(String name) {
-        String identifier = "gamerule.category.vd." + name.split("_")[1].toLowerCase();
+        String identifier = "gamerule.category.vd." + name.substring(3).toLowerCase();
         return new CustomGameRuleCategory(
                 new ResourceLocation(identifier),
                 Component.translatable(identifier)
