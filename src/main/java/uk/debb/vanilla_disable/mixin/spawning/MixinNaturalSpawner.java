@@ -13,7 +13,7 @@ import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(NaturalSpawner.class)
-public class MixinNaturalSpawner implements Maps {
+public abstract class MixinNaturalSpawner implements Maps {
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
     private static void cancelSpawningCategoryForChunk(MobCategory mobCategory, ServerLevel serverLevel, LevelChunk levelChunk, NaturalSpawner.SpawnPredicate spawnPredicate, NaturalSpawner.AfterSpawnCallback afterSpawnCallback, CallbackInfo ci) {
         BooleanGamerules gameRule = naturalSpawnerMobCategoryMap.get(mobCategory);
