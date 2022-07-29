@@ -46,6 +46,14 @@ public enum IntegerGamerules {
     PISTON_PUSH_LIMIT(null, 12, 0, Integer.MAX_VALUE),
 
     NETHER_PORTAL_COOLDOWN(null, 300, 0, Integer.MAX_VALUE),
+    DEFAULT_BLOCK_FRICTION(null, 60, 0, Integer.MAX_VALUE),
+    ICE_FRICTION(null, 98, 0, Integer.MAX_VALUE),
+    SLIME_FRICTION(null, 80, 0, Integer.MAX_VALUE),
+    DEFAULT_BLOCK_SPEED(null, 100, 0, Integer.MAX_VALUE),
+    SOUL_SAND_SPEED(null, 40, 0, Integer.MAX_VALUE),
+    HONEY_BLOCK_SPEED(null, 40, 0, Integer.MAX_VALUE),
+    DEFAULT_BLOCK_JUMP(null, 100, 0, Integer.MAX_VALUE),
+    HONEY_BLOCK_JUMP(null, 50, 0, Integer.MAX_VALUE),
 
     APPLE_NUTRITION(null, 4, 0, 20),
     APPLE_SATURATION(null, 3, 0, 99),

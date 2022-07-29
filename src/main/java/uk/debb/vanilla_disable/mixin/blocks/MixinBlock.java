@@ -17,19 +17,45 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(Block.class)
 public abstract class MixinBlock {
-    @Shadow
-    public abstract float getFriction();
+    @Shadow public abstract BlockState defaultBlockState();
 
     @ModifyReturnValue(method = "getFriction", at = @At("RETURN"))
-    private float cancelFriction(float original) {
-        if (GameruleHelper.getServer() == null) return original;
-        if (!GameruleHelper.getBool(BooleanGamerules.ICE_SLIDING) && this.getFriction() == 0.98F) {
-            return Blocks.STONE.getFriction();
+    private float modifyFriction(float original) {
+        BlockState blockState = this.defaultBlockState();
+        if (blockState.is(Blocks.ICE) || blockState.is(Blocks.BLUE_ICE) ||
+            blockState.is(Blocks.FROSTED_ICE) || blockState.is(Blocks.PACKED_ICE)) {
+            return (float) GameruleHelper.getInt(IntegerGamerules.ICE_FRICTION) / 100;
+        } else if (blockState.is(Blocks.SLIME_BLOCK)) {
+            return (float) GameruleHelper.getInt(IntegerGamerules.SLIME_FRICTION) / 100;
+        } else {
+            return (float) GameruleHelper.getInt(IntegerGamerules.DEFAULT_BLOCK_FRICTION) / 100;
         }
-        return original;
+    }
+
+    @ModifyReturnValue(method = "getSpeedFactor", at = @At("RETURN"))
+    private float modifySpeedFactor(float original) {
+        BlockState blockState = this.defaultBlockState();
+        if (blockState.is(Blocks.SOUL_SAND)) {
+            return (float) GameruleHelper.getInt(IntegerGamerules.SOUL_SAND_SPEED) / 100;
+        } else if (blockState.is(Blocks.HONEY_BLOCK)) {
+            return (float) GameruleHelper.getInt(IntegerGamerules.HONEY_BLOCK_SPEED) / 100;
+        } else {
+            return (float) GameruleHelper.getInt(IntegerGamerules.DEFAULT_BLOCK_SPEED) / 100;
+        }
+    }
+
+    @ModifyReturnValue(method = "getJumpFactor", at = @At("RETURN"))
+    private float modifyJumpFactor(float original) {
+        BlockState blockState = this.defaultBlockState();
+        if (blockState.is(Blocks.HONEY_BLOCK)) {
+            return (float) GameruleHelper.getInt(IntegerGamerules.HONEY_BLOCK_JUMP) / 100;
+        } else {
+            return (float) GameruleHelper.getInt(IntegerGamerules.DEFAULT_BLOCK_JUMP) / 100;
+        }
     }
 
     @Inject(method = "playerDestroy", at = @At("HEAD"), cancellable = true)

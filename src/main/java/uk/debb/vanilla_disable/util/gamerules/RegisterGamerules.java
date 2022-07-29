@@ -481,10 +481,17 @@ public class RegisterGamerules implements GameruleCategories {
             GameruleHelper.register(VD_BLOCKS, CROP_TRAMPLING);
             GameruleHelper.register(VD_BLOCKS, BEACONS_ENABLED);
             GameruleHelper.register(VD_BLOCKS, CONDUITS_ENABLED);
-            GameruleHelper.register(VD_BLOCKS, ICE_SLIDING);
             GameruleHelper.register(VD_BLOCKS, CREATIVE_SWORD_CAN_BREAK_BLOCKS);
             GameruleHelper.register(VD_BLOCKS, PUSHABLE_BUDDING_AMETHYST);
             GameruleHelper.register(VD_BLOCKS, OLD_TNT);
+            GameruleHelper.register(VD_BLOCKS, DEFAULT_BLOCK_FRICTION);
+            GameruleHelper.register(VD_BLOCKS, ICE_FRICTION);
+            GameruleHelper.register(VD_BLOCKS, SLIME_FRICTION);
+            GameruleHelper.register(VD_BLOCKS, DEFAULT_BLOCK_SPEED);
+            GameruleHelper.register(VD_BLOCKS, SOUL_SAND_SPEED);
+            GameruleHelper.register(VD_BLOCKS, HONEY_BLOCK_SPEED);
+            GameruleHelper.register(VD_BLOCKS, DEFAULT_BLOCK_JUMP);
+            GameruleHelper.register(VD_BLOCKS, HONEY_BLOCK_JUMP);
         }
         if (CaffeineConfigMixinConfigPlugin.food) {
             if (CaffeineConfigMixinConfigPlugin.food_hunger) {

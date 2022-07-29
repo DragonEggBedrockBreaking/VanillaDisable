@@ -420,7 +420,6 @@ public enum BooleanGamerules {
     CROP_TRAMPLING(null, true),
     BEACONS_ENABLED(null, true),
     CONDUITS_ENABLED(null, true),
-    ICE_SLIDING(null, true),
     CREATIVE_SWORD_CAN_BREAK_BLOCKS(null, false),
     PUSHABLE_BUDDING_AMETHYST(null, true),
     CONTAINER_OPENING_BLOCKED(null, true),
