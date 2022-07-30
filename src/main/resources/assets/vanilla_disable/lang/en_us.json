@@ -936,6 +936,12 @@
     "gamerule.cauldronsCleanShulkerBoxes": "Cauldrons clean shulker boxes",
     "gamerule.dripstoneFillsCauldrons": "Dripstone fills cauldrons",
     "gamerule.precipitationFillsCauldrons": "Precipitation fills cauldrons",
+    "gamerule.dragonEggsFall": "Dragon eggs fall",
+    "gamerule.anvilsFall": "Anvils fall",
+    "gamerule.concretePowderFalls": "Concrete powder falls",
+    "gamerule.gravelFalls": "Gravel falls",
+    "gamerule.sandFalls": "Sand falls",
+    "gamerule.pointedDripstoneFalls": "Pointed dripstone falls",
 
     "gamerule.netherPortalsEnabled.description": "Toggle nether portals",
     "gamerule.endPortalsEnabled.description": "Toggle end portals",
@@ -963,6 +969,12 @@
     "gamerule.cauldronsCleanShulkerBoxes.description": "Toggle cauldrons cleaning dyed shulker boxes",
     "gamerule.dripstoneFillsCauldrons.description": "Dripstone with lava/water fills cauldrons underneath",
     "gamerule.precipitationFillsCauldrons.description": "Rain/snow fills cauldrons underneath",
+    "gamerule.dragonEggsFall.description": "Toggle dragon egg blocks being able to fall",
+    "gamerule.anvilsFall.description": "Toggle anvil blocks being able to fall",
+    "gamerule.concretePowderFalls.description": "Toggle concrete powder blocks being able to fall",
+    "gamerule.gravelFalls.description": "Toggle gravel blocks being able to fall",
+    "gamerule.sandFalls.description": "Toggle sand blocks being able to fall",
+    "gamerule.pointedDripstoneFalls.description": "Toggle pointed dripstone blocks being able to fall",
 
 
     "gamerule.oldHunger": "Old (beta) hunger",

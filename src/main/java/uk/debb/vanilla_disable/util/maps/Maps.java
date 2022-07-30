@@ -9,6 +9,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.block.Block;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
@@ -38,4 +39,5 @@ public interface Maps {
     Object2ObjectMap<Class<?>, BooleanGamerules> mobClassMapToggle = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, BooleanGamerules> playerAdvancementsStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Item, BooleanGamerules> abstractCauldronBlockItemMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Block, BooleanGamerules> fallingBlockBlockMap = new Object2ObjectOpenHashMap<>();
 }

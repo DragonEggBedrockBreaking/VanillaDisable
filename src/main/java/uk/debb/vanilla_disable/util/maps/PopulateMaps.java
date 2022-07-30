@@ -30,6 +30,7 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.levelgen.structure.structures.*;
 import static uk.debb.vanilla_disable.util.gamerules.BooleanGamerules.*;
@@ -1146,5 +1147,27 @@ public class PopulateMaps implements Maps {
         abstractCauldronBlockItemMap.put(Items.PURPLE_SHULKER_BOX, CAULDRONS_CLEAN_SHULKER_BOXES);
         abstractCauldronBlockItemMap.put(Items.RED_SHULKER_BOX, CAULDRONS_CLEAN_SHULKER_BOXES);
         abstractCauldronBlockItemMap.put(Items.YELLOW_SHULKER_BOX, CAULDRONS_CLEAN_SHULKER_BOXES);
+
+        fallingBlockBlockMap.put(Blocks.DRAGON_EGG, DRAGON_EGGS_FALL);
+        fallingBlockBlockMap.put(Blocks.ANVIL, ANVILS_FALL);
+        fallingBlockBlockMap.put(Blocks.BLACK_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.BLUE_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.BROWN_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.GRAY_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.GREEN_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.CYAN_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.LIGHT_BLUE_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.LIGHT_GRAY_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.LIME_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.MAGENTA_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.ORANGE_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.PINK_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.PURPLE_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.RED_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.WHITE_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.YELLOW_CONCRETE_POWDER, CONCRETE_POWDER_FALLS);
+        fallingBlockBlockMap.put(Blocks.GRAVEL, GRAVEL_FALLS);
+        fallingBlockBlockMap.put(Blocks.SAND, SAND_FALLS);
+        fallingBlockBlockMap.put(Blocks.RED_SAND, SAND_FALLS);
     }
 }
