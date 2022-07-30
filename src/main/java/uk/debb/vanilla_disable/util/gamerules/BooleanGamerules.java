@@ -674,7 +674,8 @@ public enum BooleanGamerules {
     THE_END_ADVANCEMENT_SKY_IS_LIMIT(VD_ADVANCEMENT, true),
     THE_END_ADVANCEMENT_NEXT_GENERATION(VD_ADVANCEMENT, true),
 
-    OLD_BOATS(VD_MISC, false);
+    OLD_BOATS(VD_MISC, false),
+    RECIPE_BOOK_ENABLED(VD_MISC, true);
 
     private final boolean defaultBool;
     private GameRules.Key<GameRules.BooleanValue> gameRule;

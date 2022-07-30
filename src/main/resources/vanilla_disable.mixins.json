@@ -75,6 +75,8 @@
     "knockback.MixinServerGamePacketListenerImpl",
 
     "misc.MixinEntity",
+    "misc.MixinServerRecipeBook",
+
     "mobs.MixinAbstractPiglin",
     "mobs.MixinAbstractVillager",
     "mobs.MixinDragonStrafePlayerPhase",
@@ -92,6 +94,7 @@
     "mob_toggles.MixinMob",
 
     "player.MixinEntity",
+
     "potions.MixinPotionUtils",
 
     "redstone.MixinButtonBlock",

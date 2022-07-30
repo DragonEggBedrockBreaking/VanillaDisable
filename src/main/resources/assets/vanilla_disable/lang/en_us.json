@@ -1617,8 +1617,10 @@
 
 
     "gamerule.oldBoats": "Old (pre-1.9) boats",
+    "gamerule.recipeBookEnabled": "Recipe book enabled",
 
     "gamerule.oldBoats.description": "Toggle old (pre-1.9) boats",
+    "gamerule.recipeBookEnabled.description": "Toggle the recipe book being enabled",
 
 
     "gamerule.category.vd.damage": "VanillaDisable Damage",
