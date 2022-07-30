@@ -121,20 +121,20 @@ public enum BooleanGamerules {
     TRIGGER_COMMAND(VD_COMMANDS, true),
     WEATHER_COMMAND(VD_COMMANDS, true),
     WORLD_BORDER_COMMAND(VD_COMMANDS, true),
-    BAN_DEDICATED_COMMAND(VD_COMMANDS, true),
-    BAN_IP_DEDICATED_COMMAND(VD_COMMANDS, true),
-    BAN_LIST_DEDICATED_COMMAND(VD_COMMANDS, true),
-    DE_OP_DEDICATED_COMMAND(VD_COMMANDS, true),
-    OP_DEDICATED_COMMAND(VD_COMMANDS, true),
-    PARDON_DEDICATED_COMMAND(VD_COMMANDS, true),
-    PARDON_IP_DEDICATED_COMMAND(VD_COMMANDS, true),
-    PERF_DEDICATED_COMMAND(VD_COMMANDS, true),
-    SAVE_ALL_DEDICATED_COMMAND(VD_COMMANDS, true),
-    SAVE_OFF_DEDICATED_COMMAND(VD_COMMANDS, true),
-    SAVE_ON_DEDICATED_COMMAND(VD_COMMANDS, true),
-    SET_IDLE_TIMEOUT_DEDICATED_COMMAND(VD_COMMANDS, true),
-    STOP_DEDICATED_COMMAND(VD_COMMANDS, true),
-    WHITELIST_DEDICATED_COMMAND(VD_COMMANDS, true),
+    BAN_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    BAN_IP_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    BAN_LIST_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    DE_OP_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    OP_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    PARDON_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    PARDON_IP_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    PERF_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    SAVE_ALL_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    SAVE_OFF_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    SAVE_ON_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    SET_IDLE_TIMEOUT_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    STOP_DEDICATED_COMMAND(VD_COMMANDS, true, false),
+    WHITELIST_DEDICATED_COMMAND(VD_COMMANDS, true, false),
 
     INFINITE_WATER(VD_FLUIDS, true),
     INFINITE_LAVA(VD_FLUIDS, false),
@@ -752,11 +752,17 @@ public enum BooleanGamerules {
 
     private final boolean defaultBool;
     private final GameruleCategories category;
+    private boolean allowedInSingleplayer = true;
     private GameRules.Key<GameRules.BooleanValue> gameRule;
 
     BooleanGamerules(GameruleCategories category, boolean defaultBool) {
         this.category = category;
         this.defaultBool = defaultBool;
+    }
+    BooleanGamerules(GameruleCategories category, boolean defaultBool, boolean allowedInSingleplayer) {
+        this.category = category;
+        this.defaultBool = defaultBool;
+        this.allowedInSingleplayer = allowedInSingleplayer;
     }
 
     public GameRules.Key<GameRules.BooleanValue> getGameRule() {
@@ -773,5 +779,8 @@ public enum BooleanGamerules {
 
     public boolean getDefaultBool() {
         return this.defaultBool;
+    }
+    public boolean isAllowedInSingleplayer() {
+        return this.allowedInSingleplayer;
     }
 }
