@@ -1,44 +1,46 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import uk.debb.vanilla_disable.mixin_plugins.CaffeineConfigMixinConfigPlugin;
 
+import java.io.IOException;
+
 public enum GameruleCategories {
-    VD_DAMAGE("MixinPlayer"),
-    VD_KNOCKBACK("MixinLivingEntity"),
-    VD_SPAWNING("MixinBaseSpawner"),
-    VD_DESPAWNING("MixinItemEntity"),
-    VD_SPAWN_LIMITS("MixinMobCategory"),
-    VD_COMMANDS("MixinCommands"),
-    VD_FLUIDS("MixinBucketItem"),
-    VD_MOBS("MixinAbstractPiglin"),
-    VD_MOB_TOGGLES("MixinMob"),
-    VD_EFFECTS("MixinLivingEntity"),
-    VD_ENCHANTMENTS("MixinEnchantmentHelper"),
-    VD_WORLDGEN("MixinBiomeGenerationSettings"),
-    VD_PLAYER("MixinEntity"),
-    VD_REDSTONE("MixinButtonBlock"),
-    VD_AI("MixinGoal"),
-    VD_BLOCKS("MixinBeaconBlockEntity"),
-    VD_FOOD("MixinFoodData"),
-    VD_POTIONS("MixinPotionUtils"),
-    VD_DEATH("MixinPlayer"),
-    VD_ITEMS("MixinBowItem"),
-    VD_DISPENSER("MixinDispenserBlock"),
-    VD_ARROW("MixinArrow"),
-    VD_ADVANCEMENT("MixinPlayerAdvancements"),
-    VD_MISC("MixinEntity");
+    VD_DAMAGE,
+    VD_KNOCKBACK,
+    VD_SPAWNING,
+    VD_DESPAWNING,
+    VD_SPAWN_LIMITS,
+    VD_COMMANDS,
+    VD_FLUIDS,
+    VD_MOBS,
+    VD_MOB_TOGGLES,
+    VD_EFFECTS,
+    VD_ENCHANTMENTS,
+    VD_WORLDGEN,
+    VD_PLAYER,
+    VD_REDSTONE,
+    VD_AI,
+    VD_BLOCKS,
+    VD_FOOD,
+    VD_POTIONS,
+    VD_DEATH,
+    VD_ITEMS,
+    VD_DISPENSER,
+    VD_ARROW,
+    VD_ADVANCEMENT,
+    VD_MISC;
 
     private final CustomGameRuleCategory category;
-    private final String mixin;
     private boolean enabled;
 
-    GameruleCategories(String mixin) {
+    GameruleCategories() {
         this.category = createCustomGameRuleCategory(this.name());
-        this.mixin = mixin;
     }
 
     private CustomGameRuleCategory createCustomGameRuleCategory(String name) {
@@ -50,9 +52,12 @@ public enum GameruleCategories {
                         .withStyle(ChatFormatting.DARK_GREEN)
         );
     }
-    public void toggle() {
+    public void toggle() throws IOException {
+        ClassPath cp = ClassPath.from(Thread.currentThread().getContextClassLoader());
+        String subpackage = this.name().substring(3).toLowerCase();
+        ImmutableSet<ClassPath.ClassInfo> set = cp.getTopLevelClasses("uk.debb.vanilla_disable.mixin." + subpackage);
         enabled = CaffeineConfigMixinConfigPlugin.caffeineConfig.getEffectiveOptionForMixin(
-                this.name().substring(3).toLowerCase() + "." + mixin
+                set.iterator().next().toString().split("mixin\\.")[1]
         ).isEnabled();
     }
 
