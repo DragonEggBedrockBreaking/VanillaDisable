@@ -12,6 +12,8 @@ import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
+import java.util.Objects;
+
 @Mixin(BaseSpawner.class)
 public abstract class MixinBaseSpawner implements Maps {
     @Shadow
@@ -26,7 +28,7 @@ public abstract class MixinBaseSpawner implements Maps {
             cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(CallbackInfo ci) {
-        BooleanGamerules gameRule = baseSpawnerClassMap.get(this.displayEntity.getClass());
+        BooleanGamerules gameRule = baseSpawnerClassMap.get(Objects.requireNonNull(this.displayEntity).getClass());
         if (!GameruleHelper.getBool(gameRule) || !GameruleHelper.getBool(BooleanGamerules.SPAWNERS_ENABLED)) {
             ci.cancel();
         }

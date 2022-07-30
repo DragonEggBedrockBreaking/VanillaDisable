@@ -17,7 +17,7 @@ import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 @Mixin(ServerPlayer.class)
 public abstract class MixinServerPlayer {
     @Unique
-    ObjectList<String> generalList = new ObjectArrayList<>() {{
+    private static final ObjectList<String> generalList = new ObjectArrayList<>() {{
         add("jump");
         add("drop");
         add("bred");

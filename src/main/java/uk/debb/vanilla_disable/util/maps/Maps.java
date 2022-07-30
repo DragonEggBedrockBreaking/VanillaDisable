@@ -24,7 +24,7 @@ public interface Maps {
     Object2ObjectMap<Item, BooleanGamerules> dispenserBlockItemMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Potion, BooleanGamerules> arrowPotionMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, BooleanGamerules> goalClassMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<StructureType, BooleanGamerules> structureCheckStructureTypeMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<StructureType<?>, BooleanGamerules> structureCheckStructureTypeMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, BooleanGamerules> structureCheckStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Potion, BooleanGamerules> potionUtilsPotionMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, BooleanGamerules> itemStackClassMap = new Object2ObjectOpenHashMap<>();
