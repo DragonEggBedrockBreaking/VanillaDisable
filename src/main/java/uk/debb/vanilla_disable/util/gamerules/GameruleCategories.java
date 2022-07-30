@@ -36,6 +36,7 @@ public enum GameruleCategories {
     VD_ADVANCEMENT,
     VD_STATS,
     VD_ENTITY,
+    VD_MERCHANT,
     VD_MISC;
 
     private final CustomGameRuleCategory category;

@@ -78,16 +78,20 @@
 
     "knockback.MixinLivingEntity",
     "knockback.MixinServerGamePacketListenerImpl",
+
+    "merchant.MixinAbstractVillager",
+    "merchant.MixinPiglinAi",
+    "merchant.MixinVillager",
+    "merchant.MixinVillagerData",
+
     "misc.MixinServerRecipeBook",
 
     "mobs.MixinAbstractPiglin",
-    "mobs.MixinAbstractVillager",
     "mobs.MixinDragonStrafePlayerPhase",
     "mobs.MixinHoglin",
     "mobs.MixinHusk",
     "mobs.MixinMob",
     "mobs.MixinPig",
-    "mobs.MixinPiglinAi",
     "mobs.MixinPlayer",
     "mobs.MixinSkeleton",
     "mobs.MixinVillager",

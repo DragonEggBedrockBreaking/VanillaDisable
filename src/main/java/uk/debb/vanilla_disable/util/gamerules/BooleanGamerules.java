@@ -1,8 +1,17 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.PoiTypeTags;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.block.Blocks;
+
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
 public enum BooleanGamerules {
@@ -153,9 +162,6 @@ public enum BooleanGamerules {
     HUSKS_CONVERT_TO_ZOMBIES(VD_MOBS, true),
     ZOMBIES_CONVERT_TO_DROWNED(VD_MOBS, true),
     SKELETONS_CONVERT_TO_STRAYS(VD_MOBS, true),
-    INFINITE_TRADING(VD_MOBS, false),
-    VILLAGER_TRADING_ENABLED(VD_MOBS, true),
-    PIGLIN_BARTERING_ENABLED(VD_MOBS, true),
     PIGS_BREED_WITH_WHEAT(VD_MOBS, true),
     MOBS_BURN_IN_SUNLIGHT(VD_MOBS, true),
     DRAGON_FIREBALLS(VD_MOBS, true),
@@ -725,6 +731,32 @@ public enum BooleanGamerules {
     WIND_PAINTING(VD_ENTITY, true),
     WITHER_PAINTING(VD_ENTITY, true),
     OLD_BOATS(VD_ENTITY, false),
+
+
+    INFINITE_TRADING(VD_MERCHANT, false),
+    VILLAGER_TRADING_ENABLED(VD_MERCHANT, true),
+    PIGLIN_BARTERING_ENABLED(VD_MERCHANT, true),
+    VILLAGER_TYPES_ENABLED(VD_MERCHANT, true),
+    DESERT_VILLAGER_TYPE(VD_MERCHANT, true),
+    JUNGLE_VILLAGER_TYPE(VD_MERCHANT, true),
+    SAVANNA_VILLAGER_TYPE(VD_MERCHANT, true),
+    SNOW_VILLAGER_TYPE(VD_MERCHANT, true),
+    SWAMP_VILLAGER_TYPE(VD_MERCHANT, true),
+    TAIGA_VILLAGER_TYPE(VD_MERCHANT, true),
+    VILLAGER_PROFESSIONS_ENABLED(VD_MERCHANT, true),
+    ARMOURER_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    BUTCHER_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    CARTOGRAPHER_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    CLERIC_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    FARMER_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    FISHERMAN_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    FLETCHER_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    LEATHERWORKER_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    LIBRARIAN_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    MASON_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    SHEPHERD_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    TOOLSMITH_VILLAGER_PROFESSION(VD_MERCHANT, true),
+    WEAPONSMITH_VILLAGER_PROFESSION(VD_MERCHANT, true),
 
     RECIPE_BOOK_ENABLED(VD_MISC, true);
 

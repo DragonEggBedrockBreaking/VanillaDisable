@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.mobs;
+package uk.debb.vanilla_disable.mixin.merchant;
 
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;

@@ -26,6 +26,8 @@ import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.entity.npc.WanderingTrader;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.food.Foods;
@@ -1210,5 +1212,26 @@ public class PopulateMaps implements Maps {
         paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WATER), WATER_PAINTING);
         paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WIND), WIND_PAINTING);
         paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WITHER), WITHER_PAINTING);
+
+        villagerDataVillagerTypeMap.put(VillagerType.DESERT, DESERT_VILLAGER_TYPE);
+        villagerDataVillagerTypeMap.put(VillagerType.JUNGLE, JUNGLE_VILLAGER_TYPE);
+        villagerDataVillagerTypeMap.put(VillagerType.SAVANNA, SAVANNA_VILLAGER_TYPE);
+        villagerDataVillagerTypeMap.put(VillagerType.SNOW, SNOW_VILLAGER_TYPE);
+        villagerDataVillagerTypeMap.put(VillagerType.SWAMP, SWAMP_VILLAGER_TYPE);
+        villagerDataVillagerTypeMap.put(VillagerType.TAIGA, TAIGA_VILLAGER_TYPE);
+
+        villagerDataVillagerProfessionMap.put(VillagerProfession.ARMORER, ARMOURER_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.BUTCHER, BUTCHER_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.CARTOGRAPHER, CARTOGRAPHER_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.CLERIC, CLERIC_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.FARMER, FARMER_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.FISHERMAN, FISHERMAN_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.FLETCHER, FLETCHER_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.LEATHERWORKER, LEATHERWORKER_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.LIBRARIAN, LIBRARIAN_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.MASON, MASON_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.SHEPHERD, SHEPHERD_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.TOOLSMITH, TOOLSMITH_VILLAGER_PROFESSION);
+        villagerDataVillagerProfessionMap.put(VillagerProfession.WEAPONSMITH, WEAPONSMITH_VILLAGER_PROFESSION);
     }
 }

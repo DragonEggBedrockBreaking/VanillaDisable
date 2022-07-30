@@ -8,6 +8,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -46,4 +48,6 @@ public interface Maps {
     Object2ObjectMap<Item, BooleanGamerules> abstractCauldronBlockItemMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Block, BooleanGamerules> fallingBlockBlockMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Holder<PaintingVariant>, BooleanGamerules> paintingHolderPaintingVariantMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<VillagerType, BooleanGamerules> villagerDataVillagerTypeMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<VillagerProfession, BooleanGamerules> villagerDataVillagerProfessionMap = new Object2ObjectOpenHashMap<>();
 }

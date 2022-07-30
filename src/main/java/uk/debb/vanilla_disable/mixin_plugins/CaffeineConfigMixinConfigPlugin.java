@@ -26,6 +26,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("food", true)
                 .addMixinOption("items", true)
                 .addMixinOption("knockback", true)
+                .addMixinOption("merchant", true)
                 .addMixinOption("misc", true)
                 .addMixinOption("mobs", true)
                 .addMixinOption("mob_toggles", true)
