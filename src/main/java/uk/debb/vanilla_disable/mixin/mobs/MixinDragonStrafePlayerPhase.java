@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.mob;
+package uk.debb.vanilla_disable.mixin.mobs;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;

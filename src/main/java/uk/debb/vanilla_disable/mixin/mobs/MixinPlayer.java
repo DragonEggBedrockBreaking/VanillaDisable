@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.mob;
+package uk.debb.vanilla_disable.mixin.mobs;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Creeper;
