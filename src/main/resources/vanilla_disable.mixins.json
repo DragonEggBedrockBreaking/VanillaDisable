@@ -131,7 +131,8 @@
     "worldgen.MixinEndSpike",
     "worldgen.MixinMinecraftServer",
     "worldgen.MixinServerLevel",
-    "worldgen.MixinStructureCheck"
+    "worldgen.MixinStructureCheck",
+    "worldgen.MixinStructureManager"
   ],
   "injectors": {
     "defaultRequire": 1

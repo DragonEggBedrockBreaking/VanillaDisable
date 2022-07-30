@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.structure.StructureType;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
@@ -19,7 +20,8 @@ public interface Maps {
     Object2ObjectMap<Item, BooleanGamerules> dispenserBlockItemMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Potion, BooleanGamerules> arrowPotionMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, BooleanGamerules> goalClassMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Class<?>, BooleanGamerules> structureCheckClassMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<StructureType, BooleanGamerules> structureCheckStructureTypeMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<String, BooleanGamerules> structureCheckStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Potion, BooleanGamerules> potionUtilsPotionMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, BooleanGamerules> itemStackClassMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, BooleanGamerules> serverPlayerStringMap = new Object2ObjectOpenHashMap<>();

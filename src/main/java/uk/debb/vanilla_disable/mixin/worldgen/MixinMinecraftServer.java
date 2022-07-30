@@ -43,42 +43,22 @@ public abstract class MixinMinecraftServer {
     @Shadow
     public abstract PackRepository getPackRepository();
 
-    private boolean createDatapackDir(String name, String dirname) {
+    private boolean createDatapackDir(String name) {
         String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
-        File dataPackDir = new File(dataPackPath + "/" + name + "/data/minecraft/" + dirname + "/");
+        File dataPackDir = new File(dataPackPath + "/" + name + "/data/minecraft/dimension/");
         return dataPackDir.getParentFile().mkdirs() && dataPackDir.mkdir();
     }
 
     @Unique
-    private boolean createBiomeDatapackDirectories() {
+    private boolean createDatapackDirectories() {
         if (this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_OVERWORLD_BIOMES.getGameRule())) {
-            if (!createDatapackDir("vanilla_disable_overworld_biomes", "dimension")) return false;
+            if (!createDatapackDir("vanilla_disable_overworld_biomes")) return false;
         }
         if (this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_NETHER_BIOMES.getGameRule())) {
-            if (!createDatapackDir("vanilla_disable_nether_biomes", "dimension")) return false;
+            if (!createDatapackDir("vanilla_disable_nether_biomes")) return false;
         }
         if (this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_END_BIOMES.getGameRule())) {
-            return createDatapackDir("vanilla_disable_end_biomes", "dimension");
-        }
-        return true;
-    }
-
-    @Unique
-    private boolean createStructureDatapackDirectories() {
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.ANCIENT_CITY_GENERATION.getGameRule())) {
-            if (!createDatapackDir("vanilla_disable_structures_ancient_city", "tags/worldgen/biome/has_structure"))
-                return false;
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.BASTION_REMNANT_GENERATION.getGameRule())) {
-            if (!createDatapackDir("vanilla_disable_structures_bastion_remnant", "tags/worldgen/biome/has_structure"))
-                return false;
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.PILLAGER_OUTPOST_GENERATION.getGameRule())) {
-            if (!createDatapackDir("vanilla_disable_structures_pillager_outpost", "tags/worldgen/biome/has_structure"))
-                return false;
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.VILLAGE_GENERATION.getGameRule())) {
-            return createDatapackDir("vanilla_disable_structures_village", "tags/worldgen/biome/has_structure");
+            return createDatapackDir("vanilla_disable_end_biomes");
         }
         return true;
     }
@@ -93,7 +73,7 @@ public abstract class MixinMinecraftServer {
     }
 
     @Unique
-    private void addBiomeMcmetaFiles() throws IOException {
+    private void addMcmetaFiles() throws IOException {
         String content = "{\"pack\":{\"pack_format\":10,\"description\":\"Vanilla Disable Biomes\"}}";
         if (this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_OVERWORLD_BIOMES.getGameRule())) {
             addMcmetaFile("vanilla_disable_overworld_biomes", content);
@@ -107,26 +87,9 @@ public abstract class MixinMinecraftServer {
     }
 
     @Unique
-    private void addStructureMcmetaFiles() throws IOException {
-        String content = "{\"pack\":{\"pack_format\":9,\"description\":\"Vanilla Disable Structures\"}}";
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.ANCIENT_CITY_GENERATION.getGameRule())) {
-            addMcmetaFile("vanilla_disable_structures_ancient_city", content);
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.BASTION_REMNANT_GENERATION.getGameRule())) {
-            addMcmetaFile("vanilla_disable_structures_bastion_remnant", content);
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.PILLAGER_OUTPOST_GENERATION.getGameRule())) {
-            addMcmetaFile("vanilla_disable_structures_pillager_outpost", content);
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.VILLAGE_GENERATION.getGameRule())) {
-            addMcmetaFile("vanilla_disable_structures_village", content);
-        }
-    }
-
-    @Unique
-    private void addJsonFile(String url, String name, String shortname, String dirname) throws IOException {
+    private void addJsonFile(String url, String name, String shortname) throws IOException {
         String dataPackPath = this.getWorldPath(LevelResource.DATAPACK_DIR).toString();
-        FileOutputStream jsonFileDir = new FileOutputStream(dataPackPath + "/" + name + "/data/minecraft/" + dirname + "/" + shortname + ".json");
+        FileOutputStream jsonFileDir = new FileOutputStream(dataPackPath + "/" + name + "/data/minecraft/dimension/" + shortname + ".json");
         URL URLToDownload = new URL(url);
         ReadableByteChannel readableByteChannel = Channels.newChannel(URLToDownload.openStream());
         jsonFileDir.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
@@ -134,73 +97,29 @@ public abstract class MixinMinecraftServer {
     }
 
     @Unique
-    private void addBiomeJsonFiles() throws IOException {
+    private void addJsonFiles() throws IOException {
         if (this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_OVERWORLD_BIOMES.getGameRule())) {
             addJsonFile(
                     "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/overworld.json",
-                    "vanilla_disable_overworld_biomes", "overworld", "dimension");
+                    "vanilla_disable_overworld_biomes", "overworld");
         }
         if (this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_NETHER_BIOMES.getGameRule())) {
             addJsonFile(
                     "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_nether.json",
-                    "vanilla_disable_nether_biomes", "the_nether", "dimension");
+                    "vanilla_disable_nether_biomes", "the_nether");
         }
         if (this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_END_BIOMES.getGameRule())) {
             addJsonFile(
                     "https://gist.githubusercontent.com/DragonEggBedrockBreaking/f79a7fd2405c5eeddb838e0cf91cd655/raw/655c530e27a1eee389ae088ef99eddea7b768169/the_end.json",
-                    "vanilla_disable_end_biomes", "the_end", "dimension");
+                    "vanilla_disable_end_biomes", "the_end");
         }
     }
 
     @Unique
-    private void addStructureJsonFiles() throws IOException {
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.ANCIENT_CITY_GENERATION.getGameRule())) {
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_ancient_city", "ancient_city", "tags/worldgen/biome/has_structure");
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.BASTION_REMNANT_GENERATION.getGameRule())) {
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_bastion_remnants", "bastion_remnant", "tags/worldgen/biome/has_structure");
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.PILLAGER_OUTPOST_GENERATION.getGameRule())) {
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_pillager_outpost", "pillager_outpost", "tags/worldgen/biome/has_structure");
-        }
-        if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.VILLAGE_GENERATION.getGameRule())) {
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_village", "village_desert", "tags/worldgen/biome/has_structure");
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_village", "village_plains", "tags/worldgen/biome/has_structure");
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_village", "village_savanna", "tags/worldgen/biome/has_structure");
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_village", "village_snowy", "tags/worldgen/biome/has_structure");
-            addJsonFile(
-                    "https://gist.githubusercontent.com/DragonEggBedrockBreaking/315016e5e1691f36a425bea70cbc209d/raw/30655b175d6e2122826ba34a4e38dc79f3e300d9/structure_template.json",
-                    "vanilla_disable_structures_village", "village_taiga", "tags/worldgen/biome/has_structure");
-        }
-    }
-
-    @Unique
-    private void getBiomeDataPacks() throws IOException {
-        if (createBiomeDatapackDirectories()) {
-            addBiomeMcmetaFiles();
-            addBiomeJsonFiles();
-        }
-    }
-
-    @Unique
-    private void getStructureDataPacks() throws IOException {
-        if (createStructureDatapackDirectories()) {
-            addStructureMcmetaFiles();
-            addStructureJsonFiles();
+    private void getDataPacks() throws IOException {
+        if (createDatapackDirectories()) {
+            addMcmetaFiles();
+            addJsonFiles();
         }
     }
 
@@ -241,7 +160,7 @@ public abstract class MixinMinecraftServer {
     }
 
     @Unique
-    private void toggleBiomeDataPacks() {
+    private void toggleDataPacks() {
         if (!this.worldData.getGameRules().getBoolean(BooleanGamerules.REMOVE_OVERWORLD_BIOMES.getGameRule())) {
             disableDatapack("vanilla_disable_overworld_biomes");
         } else {
@@ -259,35 +178,9 @@ public abstract class MixinMinecraftServer {
         }
     }
 
-    @Unique
-    private void toggleStructureDataPacks() {
-        if (this.worldData.getGameRules().getBoolean(BooleanGamerules.ANCIENT_CITY_GENERATION.getGameRule())) {
-            disableDatapack("vanilla_disable_structures_ancient_city");
-        } else {
-            enableDatapack("vanilla_disable_structures_ancient_city");
-        }
-        if (this.worldData.getGameRules().getBoolean(BooleanGamerules.BASTION_REMNANT_GENERATION.getGameRule())) {
-            disableDatapack("vanilla_disable_structures_bastion_remnant");
-        } else {
-            enableDatapack("vanilla_disable_structures_bastion_remnant");
-        }
-        if (this.worldData.getGameRules().getBoolean(BooleanGamerules.PILLAGER_OUTPOST_GENERATION.getGameRule())) {
-            disableDatapack("vanilla_disable_structures_pillager_outpost");
-        } else {
-            enableDatapack("vanilla_disable_structures_pillager_outpost");
-        }
-        if (this.worldData.getGameRules().getBoolean(BooleanGamerules.VILLAGE_GENERATION.getGameRule())) {
-            disableDatapack("vanilla_disable_structures_village");
-        } else {
-            enableDatapack("vanilla_disable_structures_village");
-        }
-    }
-
     @Inject(method = "createLevels", at = @At("HEAD"))
     private void onLevelLoad(CallbackInfo ci) throws IOException {
-        getBiomeDataPacks();
-        getStructureDataPacks();
-        toggleBiomeDataPacks();
-        toggleStructureDataPacks();
+        getDataPacks();
+        toggleDataPacks();
     }
 }

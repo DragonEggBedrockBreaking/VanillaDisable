@@ -32,7 +32,8 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.minecraft.world.level.levelgen.structure.structures.*;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+
 import static uk.debb.vanilla_disable.util.gamerules.BooleanGamerules.*;
 import static uk.debb.vanilla_disable.util.gamerules.IntegerGamerules.*;
 
@@ -529,23 +530,30 @@ public class PopulateMaps implements Maps {
         goalClassMap.put(Wolf.WolfPanicGoal.class, WOLF_AI);
         goalClassMap.put(ZombieAttackGoal.class, ZOMBIE_AI);
 
+        structureCheckStructureTypeMap.put(StructureType.BURIED_TREASURE, BURIED_TREASURE_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.DESERT_PYRAMID, DESERT_PYRAMID_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.END_CITY, END_CITY_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.IGLOO, IGLOO_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.JUNGLE_TEMPLE, JUNGLE_PYRAMID_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.MINESHAFT, MINESHAFT_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.FORTRESS, FORTRESS_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.NETHER_FOSSIL, NETHER_FOSSIL_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.OCEAN_MONUMENT, MONUMENT_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.OCEAN_RUIN, OCEAN_RUIN_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.RUINED_PORTAL, RUINED_PORTAL_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.SHIPWRECK, SHIPWRECK_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.STRONGHOLD, STRONGHOLD_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.SWAMP_HUT, SWAMP_HUT_GENERATION);
+        structureCheckStructureTypeMap.put(StructureType.WOODLAND_MANSION, MANSION_GENERATION);
 
-        structureCheckClassMap.put(BuriedTreasureStructure.class, BURIED_TREASURE_GENERATION);
-        structureCheckClassMap.put(DesertPyramidStructure.class, DESERT_PYRAMID_GENERATION);
-        structureCheckClassMap.put(EndCityStructure.class, END_CITY_GENERATION);
-        structureCheckClassMap.put(IglooStructure.class, IGLOO_GENERATION);
-        structureCheckClassMap.put(JungleTempleStructure.class, JUNGLE_PYRAMID_GENERATION);
-        structureCheckClassMap.put(MineshaftStructure.class, MINESHAFT_GENERATION);
-        structureCheckClassMap.put(NetherFortressStructure.class, FORTRESS_GENERATION);
-        structureCheckClassMap.put(NetherFossilStructure.class, NETHER_FOSSIL_GENERATION);
-        structureCheckClassMap.put(OceanMonumentStructure.class, MONUMENT_GENERATION);
-        structureCheckClassMap.put(OceanRuinStructure.class, OCEAN_RUIN_GENERATION);
-        structureCheckClassMap.put(RuinedPortalStructure.class, RUINED_PORTAL_GENERATION);
-        structureCheckClassMap.put(ShipwreckStructure.class, SHIPWRECK_GENERATION);
-        structureCheckClassMap.put(StrongholdStructure.class, STRONGHOLD_GENERATION);
-        structureCheckClassMap.put(SwampHutStructure.class, SWAMP_HUT_GENERATION);
-        structureCheckClassMap.put(WoodlandMansionStructure.class, MANSION_GENERATION);
-
+        structureCheckStringMap.put("minecraft:ancient_city/city_center", ANCIENT_CITY_GENERATION);
+        structureCheckStringMap.put("minecraft:bastion/starts", BASTION_REMNANT_GENERATION);
+        structureCheckStringMap.put("minecraft:pillager_outpost/base_plates", PILLAGER_OUTPOST_GENERATION);
+        structureCheckStringMap.put("minecraft:village/desert/town_centers", VILLAGE_GENERATION);
+        structureCheckStringMap.put("minecraft:village/plains/town_centers", VILLAGE_GENERATION);
+        structureCheckStringMap.put("minecraft:village/savanna/town_centers", VILLAGE_GENERATION);
+        structureCheckStringMap.put("minecraft:village/snowy/town_centers", VILLAGE_GENERATION);
+        structureCheckStringMap.put("minecraft:village/taiga/town_centers", VILLAGE_GENERATION);
 
         potionUtilsPotionMap.put(Potions.FIRE_RESISTANCE, FIRE_RESISTANCE_POTION);
         potionUtilsPotionMap.put(Potions.LONG_FIRE_RESISTANCE, FIRE_RESISTANCE_POTION);

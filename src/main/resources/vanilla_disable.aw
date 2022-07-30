@@ -110,3 +110,5 @@ accessible class net/minecraft/world/entity/animal/Wolf$WolfAvoidEntityGoal
 accessible class net/minecraft/world/entity/animal/Wolf$WolfPanicGoal
 
 accessible field net/minecraft/stats/Stat formatter Lnet/minecraft/stats/StatFormatter;
+
+accessible field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure startPool Lnet/minecraft/core/Holder;
