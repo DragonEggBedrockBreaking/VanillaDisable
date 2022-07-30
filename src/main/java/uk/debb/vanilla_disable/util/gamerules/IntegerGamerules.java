@@ -1,6 +1,7 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
 import net.minecraft.world.level.GameRules;
+
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
 public enum IntegerGamerules {
@@ -139,8 +140,8 @@ public enum IntegerGamerules {
     private final int defaultInt;
     private final int minValue;
     private final int maxValue;
-    private GameRules.Key<GameRules.IntegerValue> gameRule;
     private final GameruleCategories category;
+    private GameRules.Key<GameRules.IntegerValue> gameRule;
 
     IntegerGamerules(GameruleCategories category, int defaultInt, int minValue, int maxValue) {
         this.category = category;
@@ -148,6 +149,7 @@ public enum IntegerGamerules {
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
+
     IntegerGamerules(GameruleCategories category, int defaultInt, int minValue) {
         this.category = category;
         this.defaultInt = defaultInt;
@@ -158,18 +160,23 @@ public enum IntegerGamerules {
     public GameRules.Key<GameRules.IntegerValue> getGameRule() {
         return this.gameRule;
     }
+
     public void setGameRule(GameRules.Key<GameRules.IntegerValue> gameRule) {
         this.gameRule = gameRule;
     }
+
     public GameruleCategories getCategory() {
         return this.category;
     }
+
     public int getDefaultInt() {
         return this.defaultInt;
     }
+
     public int getMinInt() {
         return this.minValue;
     }
+
     public int getMaxInt() {
         return this.maxValue;
     }

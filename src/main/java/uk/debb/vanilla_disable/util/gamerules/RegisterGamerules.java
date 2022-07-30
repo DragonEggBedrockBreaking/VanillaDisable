@@ -8,6 +8,7 @@ public class RegisterGamerules {
             category.toggle();
         }
     }
+
     public static void registerGamerules() throws IOException {
         toggleCategories();
         for (BooleanGamerules rule : BooleanGamerules.values()) {

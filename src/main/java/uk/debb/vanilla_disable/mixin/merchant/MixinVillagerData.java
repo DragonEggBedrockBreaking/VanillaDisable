@@ -14,8 +14,12 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(VillagerData.class)
 public abstract class MixinVillagerData implements Maps {
-    @Shadow @Final private VillagerType type;
-    @Shadow @Final private VillagerProfession profession;
+    @Shadow
+    @Final
+    private VillagerType type;
+    @Shadow
+    @Final
+    private VillagerProfession profession;
 
     @ModifyReturnValue(method = "getType", at = @At("RETURN"))
     private VillagerType modifyType(VillagerType original) {

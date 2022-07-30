@@ -9,13 +9,13 @@ import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(CauldronBlock.class)
 public abstract class MixinCauldronBlock {
-    @ModifyReturnValue(method = "canReceiveStalactiteDrip", at = @At("RETURN"))
-    private boolean cannotReceiveStalactiteDrip(boolean original) {
-        return GameruleHelper.getBool(BooleanGamerules.DRIPSTONE_FILLS_CAULDRONS);
-    }
-
     @ModifyReturnValue(method = "shouldHandlePrecipitation", at = @At("RETURN"))
     private static boolean shouldNotHandlePrecipitation(boolean original) {
         return GameruleHelper.getBool(BooleanGamerules.PRECIPITATION_FILLS_CAULDRONS);
+    }
+
+    @ModifyReturnValue(method = "canReceiveStalactiteDrip", at = @At("RETURN"))
+    private boolean cannotReceiveStalactiteDrip(boolean original) {
+        return GameruleHelper.getBool(BooleanGamerules.DRIPSTONE_FILLS_CAULDRONS);
     }
 }

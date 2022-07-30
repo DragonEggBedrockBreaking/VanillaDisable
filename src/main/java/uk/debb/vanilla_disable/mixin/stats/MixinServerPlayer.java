@@ -25,6 +25,7 @@ public abstract class MixinServerPlayer {
         add("target_hit");
         add("trade");
     }};
+
     @Unique
     private boolean shouldCancelStat(Stat<?> stat) {
         if (!GameruleHelper.getBool(BooleanGamerules.STATS_ENABLED)) {

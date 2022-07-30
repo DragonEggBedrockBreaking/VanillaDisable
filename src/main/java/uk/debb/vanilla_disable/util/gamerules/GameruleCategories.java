@@ -55,6 +55,7 @@ public enum GameruleCategories {
                         .withStyle(ChatFormatting.DARK_GREEN)
         );
     }
+
     public void toggle() throws IOException {
         ClassPath cp = ClassPath.from(Thread.currentThread().getContextClassLoader());
         String subpackage = this.name().substring(3).toLowerCase();
@@ -67,6 +68,7 @@ public enum GameruleCategories {
     public CustomGameRuleCategory get() {
         return this.category;
     }
+
     public boolean isEnabled() {
         return this.enabled;
     }

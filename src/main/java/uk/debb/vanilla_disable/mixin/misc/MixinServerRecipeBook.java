@@ -16,6 +16,7 @@ public class MixinServerRecipeBook {
             ci.cancel();
         }
     }
+
     @Inject(method = "sendRecipes", at = @At("HEAD"), cancellable = true)
     private void cancelSendingRecipes(CallbackInfo ci) {
         if (!GameruleHelper.getBool(BooleanGamerules.RECIPE_BOOK_ENABLED)) {

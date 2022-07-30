@@ -21,13 +21,14 @@ import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(Block.class)
 public abstract class MixinBlock {
-    @Shadow public abstract BlockState defaultBlockState();
+    @Shadow
+    public abstract BlockState defaultBlockState();
 
     @ModifyReturnValue(method = "getFriction", at = @At("RETURN"))
     private float modifyFriction(float original) {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.ICE) || blockState.is(Blocks.BLUE_ICE) ||
-            blockState.is(Blocks.FROSTED_ICE) || blockState.is(Blocks.PACKED_ICE)) {
+                blockState.is(Blocks.FROSTED_ICE) || blockState.is(Blocks.PACKED_ICE)) {
             return (float) GameruleHelper.getInt(IntegerGamerules.ICE_FRICTION) / 100;
         } else if (blockState.is(Blocks.SLIME_BLOCK)) {
             return (float) GameruleHelper.getInt(IntegerGamerules.SLIME_FRICTION) / 100;

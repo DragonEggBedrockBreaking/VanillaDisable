@@ -1,16 +1,6 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
-import com.google.common.collect.ImmutableSet;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.PoiTypeTags;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
-import net.minecraft.world.entity.ai.village.poi.PoiTypes;
-import net.minecraft.world.entity.decoration.PaintingVariant;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.block.Blocks;
 
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
@@ -761,8 +751,8 @@ public enum BooleanGamerules {
     RECIPE_BOOK_ENABLED(VD_MISC, true);
 
     private final boolean defaultBool;
-    private GameRules.Key<GameRules.BooleanValue> gameRule;
     private final GameruleCategories category;
+    private GameRules.Key<GameRules.BooleanValue> gameRule;
 
     BooleanGamerules(GameruleCategories category, boolean defaultBool) {
         this.category = category;
@@ -772,12 +762,15 @@ public enum BooleanGamerules {
     public GameRules.Key<GameRules.BooleanValue> getGameRule() {
         return this.gameRule;
     }
+
     public void setGameRule(GameRules.Key<GameRules.BooleanValue> gameRule) {
         this.gameRule = gameRule;
     }
+
     public GameruleCategories getCategory() {
         return this.category;
     }
+
     public boolean getDefaultBool() {
         return this.defaultBool;
     }

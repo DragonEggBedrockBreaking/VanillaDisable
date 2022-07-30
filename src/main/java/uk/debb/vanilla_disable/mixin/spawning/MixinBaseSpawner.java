@@ -14,7 +14,8 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(BaseSpawner.class)
 public abstract class MixinBaseSpawner implements Maps {
-    @Shadow private @Nullable Entity displayEntity;
+    @Shadow
+    private @Nullable Entity displayEntity;
 
     @Inject(
             method = "serverTick",
