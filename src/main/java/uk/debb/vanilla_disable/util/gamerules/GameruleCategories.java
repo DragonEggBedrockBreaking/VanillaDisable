@@ -32,6 +32,7 @@ public enum GameruleCategories {
     VD_MISC;
 
     private final CustomGameRuleCategory category;
+    private boolean enabled;
 
     GameruleCategories() {
         this.category = createCustomGameRuleCategory(this.name());
@@ -49,5 +50,11 @@ public enum GameruleCategories {
 
     public CustomGameRuleCategory get() {
         return this.category;
+    }
+    public void toggle(boolean enabled) {
+        this.enabled = enabled;
+    }
+    public boolean isEnabled() {
+        return this.enabled;
     }
 }
