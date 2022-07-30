@@ -3,7 +3,6 @@ package uk.debb.vanilla_disable.mixin_plugins;
 import net.caffeinemc.caffeineconfig.AbstractCaffeineConfigMixinPlugin;
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
 import org.quiltmc.loader.api.QuiltLoader;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
 public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
@@ -16,7 +15,6 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("ai", true)
                 .addMixinOption("arrow", true)
                 .addMixinOption("blocks", true)
-                .addMixinOption("blocks.container", true)
                 .addMixinOption("commands", true)
                 .addMixinOption("damage", true)
                 .addMixinOption("death", true)
@@ -24,10 +22,8 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("dispenser", true)
                 .addMixinOption("effects", true)
                 .addMixinOption("enchantments", true)
-                .addMixinOption("enchantments.enchantment_conflicts", true)
                 .addMixinOption("fluids", true)
                 .addMixinOption("food", true)
-                .addMixinOption("food.hunger", true)
                 .addMixinOption("items", true)
                 .addMixinOption("knockback", true)
                 .addMixinOption("misc", true)
@@ -72,17 +68,6 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
         VD_SPAWNING.toggle(this.caffeineConfig.getEffectiveOptionForMixin("spawning.MixinBaseSpawner").isEnabled());
         VD_SPAWN_LIMITS.toggle(this.caffeineConfig.getEffectiveOptionForMixin("spawn_limits.MixinMobCategory").isEnabled());
         VD_WORLDGEN.toggle(this.caffeineConfig.getEffectiveOptionForMixin("worldgen.MixinBiomeGenerationSettings").isEnabled());
-
-        BooleanGamerules.CONTAINER_OPENING_BLOCKED.toggle(this.caffeineConfig.getEffectiveOptionForMixin("blocks.container.MixinChestBlock").isEnabled());
-        boolean enchantment_conflicts = this.caffeineConfig.getEffectiveOptionForMixin("enchantments.enchantment_conflicts.MixinDamageEnchantment").isEnabled();
-        BooleanGamerules.BOOT_ENCHANTMENT_CONFLICTS.toggle(enchantment_conflicts);
-        BooleanGamerules.BOW_ENCHANTMENT_CONFLICTS.toggle(enchantment_conflicts);
-        BooleanGamerules.CROSSBOW_ENCHANTMENT_CONFLICTS.toggle(enchantment_conflicts);
-        BooleanGamerules.DAMAGE_ENCHANTMENT_CONFLICTS.toggle(enchantment_conflicts);
-        BooleanGamerules.MINING_ENCHANTMENT_CONFLICTS.toggle(enchantment_conflicts);
-        BooleanGamerules.PROTECTION_ENCHANTMENT_CONFLICTS.toggle(enchantment_conflicts);
-        BooleanGamerules.TRIDENT_ENCHANTMENT_CONFLICTS.toggle(enchantment_conflicts);
-        BooleanGamerules.OLD_HUNGER.toggle(this.caffeineConfig.getEffectiveOptionForMixin("food.hunger.MixinFoodData").isEnabled());
     }
 
     @Override

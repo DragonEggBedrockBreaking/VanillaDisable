@@ -679,7 +679,6 @@ public enum BooleanGamerules {
     private final boolean defaultBool;
     private GameRules.Key<GameRules.BooleanValue> gameRule;
     private final GameruleCategories category;
-    private boolean enabled = true;
 
     BooleanGamerules(GameruleCategories category, boolean defaultBool) {
         this.category = category;
@@ -697,11 +696,5 @@ public enum BooleanGamerules {
     }
     public boolean getDefaultBool() {
         return this.defaultBool;
-    }
-    public void toggle(boolean enabled) {
-        this.enabled = enabled;
-    }
-    public boolean isEnabled() {
-        return this.enabled;
     }
 }
