@@ -2,7 +2,6 @@ package uk.debb.vanilla_disable.mixin.blocks;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,7 +20,7 @@ public abstract class MixinFarmBlock {
             ),
             require = 0
     )
-    private boolean cancelTurningToDirt(BlockState state, Level level, BlockPos pos, Level theWorld, BlockState blockState, BlockPos blockPos, Entity entity, float fallDistance) {
+    private boolean cancelTurningToDirt(BlockState blockState, Level level, BlockPos blockPos) {
         return GameruleHelper.getBool(BooleanGamerules.CROP_TRAMPLING);
     }
 }
