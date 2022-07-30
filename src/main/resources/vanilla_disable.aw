@@ -108,3 +108,5 @@ accessible class net/minecraft/world/entity/animal/Turtle$TurtleRandomStrollGoal
 accessible class net/minecraft/world/entity/animal/Turtle$TurtleTravelGoal
 accessible class net/minecraft/world/entity/animal/Wolf$WolfAvoidEntityGoal
 accessible class net/minecraft/world/entity/animal/Wolf$WolfPanicGoal
+
+accessible field net/minecraft/stats/Stat formatter Lnet/minecraft/stats/StatFormatter;

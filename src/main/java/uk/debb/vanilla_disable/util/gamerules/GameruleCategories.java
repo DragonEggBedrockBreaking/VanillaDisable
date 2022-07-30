@@ -34,6 +34,7 @@ public enum GameruleCategories {
     VD_DISPENSER,
     VD_ARROW,
     VD_ADVANCEMENT,
+    VD_STATS,
     VD_MISC;
 
     private final CustomGameRuleCategory category;

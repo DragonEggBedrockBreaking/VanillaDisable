@@ -123,6 +123,8 @@
     "spawning.MixinBreedGoal",
     "spawning.MixinNaturalSpawner",
 
+    "stats.MixinServerPlayer",
+
     "worldgen.MixinBiomeGenerationSettings",
     "worldgen.MixinEndSpike",
     "worldgen.MixinMinecraftServer",

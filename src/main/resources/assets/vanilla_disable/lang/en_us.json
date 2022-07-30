@@ -1616,6 +1616,29 @@
     "gamerule.theEndAdvancementNextGeneration.description": "Toggle the end advancement 'The Next Generation'",
 
 
+    "gamerule.statsEnabled": "Stats enabled",
+    "gamerule.blockStats": "Block stats",
+    "gamerule.itemStats": "Item stats",
+    "gamerule.entityKillStats": "Entity kill stats",
+    "gamerule.timeStats": "Time stats",
+    "gamerule.distanceStats": "Distance stats",
+    "gamerule.damageStats": "Damage stats",
+    "gamerule.guiBlockInteractionStats": "GUI block interaction stats",
+    "gamerule.generalBlockInteractionStats": "General block interaction stats",
+    "gamerule.generalStats": "General stats",
+
+    "gamerule.statsEnabled.description": "Toggle player statistics",
+    "gamerule.blockStats.description": "Toggle counting statistics from placing/mining blocks",
+    "gamerule.itemStats.description": "Toggle counting statistics from interactions with items",
+    "gamerule.entityKillStats.description": "Toggle counting statistics from killing/being killed by entities",
+    "gamerule.timeStats.description": "Toggle counting statistics related to time spent",
+    "gamerule.distanceStats.description": "Toggle counting statistics related to distance travelled",
+    "gamerule.damageStats.description": "Toggle counting statistics related to dealing damage",
+    "gamerule.guiBlockInteractionStats.description": "Toggle counting statistics from interacting with blocks' GUIs",
+    "gamerule.generalBlockInteractionStats.description": "Toggle counting statistics from interacting with blocks",
+    "gamerule.generalStats.description": "Toggle counting general statistics",
+
+
     "gamerule.oldBoats": "Old (pre-1.9) boats",
     "gamerule.recipeBookEnabled": "Recipe book enabled",
 
@@ -1646,6 +1669,7 @@
     "gamerule.category.vd.dispenser": "VanillaDisable Dispensers",
     "gamerule.category.vd.arrow": "VanillaDisable Arrow",
     "gamerule.category.vd.advancement": "VanillaDisable Advancement",
+    "gamerule.category.vd.stats": "VanillaDisable Stats",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator."

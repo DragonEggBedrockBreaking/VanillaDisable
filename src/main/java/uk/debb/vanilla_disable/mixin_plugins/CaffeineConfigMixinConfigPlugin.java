@@ -33,6 +33,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("redstone", true)
                 .addMixinOption("spawn_limits", true)
                 .addMixinOption("spawning", true)
+                .addMixinOption("stats", true)
                 .addMixinOption("worldgen", true)
                 .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
                 .build(QuiltLoader.getConfigDir().resolve("vanilla-disable-mixin.properties"));
