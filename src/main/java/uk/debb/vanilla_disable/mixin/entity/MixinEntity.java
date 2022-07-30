@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.misc;
+package uk.debb.vanilla_disable.mixin.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

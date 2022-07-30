@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.util.maps;
 
+import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.decoration.PaintingVariants;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.monster.piglin.Piglin;
@@ -1177,5 +1179,36 @@ public class PopulateMaps implements Maps {
         fallingBlockBlockMap.put(Blocks.GRAVEL, GRAVEL_FALLS);
         fallingBlockBlockMap.put(Blocks.SAND, SAND_FALLS);
         fallingBlockBlockMap.put(Blocks.RED_SAND, SAND_FALLS);
+
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.ALBAN), ALBAN_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.AZTEC2), AZTEC2_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.AZTEC), AZTEC_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.BOMB), BOMB_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.BURNING_SKULL), BURNING_SKULL_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.BUST), BUST_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.COURBET), COURBET_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.CREEBET), CREEBET_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.DONKEY_KONG), DONKEY_KONG_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.EARTH), EARTH_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.FIGHTERS), FIGHTERS_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.FIRE), FIRE_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.GRAHAM), GRAHAM_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.KEBAB), KEBAB_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.MATCH), MATCH_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.PIGSCENE), PIGSCENE_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.PLANT), PLANT_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.POINTER), POINTER_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.POOL), POOL_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.SEA), SEA_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.SKELETON), SKELETON_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.SKULL_AND_ROSES), SKULL_AND_ROSES_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.STAGE), STAGE_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.SUNSET), SUNSET_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.VOID), VOID_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WANDERER), WANDERER_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WASTELAND), WASTELAND_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WATER), WATER_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WIND), WIND_PAINTING);
+        paintingHolderPaintingVariantMap.put(Registry.PAINTING_VARIANT.getHolderOrThrow(PaintingVariants.WITHER), WITHER_PAINTING);
     }
 }

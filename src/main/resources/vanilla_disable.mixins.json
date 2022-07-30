@@ -58,6 +58,9 @@
     "enchantments.enchantment_conflicts.MixinUntouchingEnchantment",
     "enchantments.enchantment_conflicts.MixinWaterWalkerEnchantment",
 
+    "entity.MixinEntity",
+    "entity.MixinPainting",
+
     "food.MixinFoodData",
     "food.hunger.MixinFoodData",
     "food.hunger.MixinItem",
@@ -75,8 +78,6 @@
 
     "knockback.MixinLivingEntity",
     "knockback.MixinServerGamePacketListenerImpl",
-
-    "misc.MixinEntity",
     "misc.MixinServerRecipeBook",
 
     "mobs.MixinAbstractPiglin",

@@ -1,5 +1,7 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.level.GameRules;
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
@@ -691,7 +693,39 @@ public enum BooleanGamerules {
     GENERAL_BLOCK_INTERACTION_STATS(VD_STATS, true),
     GENERAL_STATS(VD_STATS, true),
 
-    OLD_BOATS(VD_MISC, false),
+    ALTERNATE_PAINTINGS_ENABLED(VD_ENTITY, true),
+    ALBAN_PAINTING(VD_ENTITY, true),
+    AZTEC2_PAINTING(VD_ENTITY, true),
+    AZTEC_PAINTING(VD_ENTITY, true),
+    BOMB_PAINTING(VD_ENTITY, true),
+    BURNING_SKULL_PAINTING(VD_ENTITY, true),
+    BUST_PAINTING(VD_ENTITY, true),
+    COURBET_PAINTING(VD_ENTITY, true),
+    CREEBET_PAINTING(VD_ENTITY, true),
+    DONKEY_KONG_PAINTING(VD_ENTITY, true),
+    EARTH_PAINTING(VD_ENTITY, true),
+    FIGHTERS_PAINTING(VD_ENTITY, true),
+    FIRE_PAINTING(VD_ENTITY, true),
+    GRAHAM_PAINTING(VD_ENTITY, true),
+    KEBAB_PAINTING(VD_ENTITY, true),
+    MATCH_PAINTING(VD_ENTITY, true),
+    PIGSCENE_PAINTING(VD_ENTITY, true),
+    PLANT_PAINTING(VD_ENTITY, true),
+    POINTER_PAINTING(VD_ENTITY, true),
+    POOL_PAINTING(VD_ENTITY, true),
+    SEA_PAINTING(VD_ENTITY, true),
+    SKELETON_PAINTING(VD_ENTITY, true),
+    SKULL_AND_ROSES_PAINTING(VD_ENTITY, true),
+    STAGE_PAINTING(VD_ENTITY, true),
+    SUNSET_PAINTING(VD_ENTITY, true),
+    VOID_PAINTING(VD_ENTITY, true),
+    WANDERER_PAINTING(VD_ENTITY, true),
+    WASTELAND_PAINTING(VD_ENTITY, true),
+    WATER_PAINTING(VD_ENTITY, true),
+    WIND_PAINTING(VD_ENTITY, true),
+    WITHER_PAINTING(VD_ENTITY, true),
+    OLD_BOATS(VD_ENTITY, false),
+
     RECIPE_BOOK_ENABLED(VD_MISC, true);
 
     private final boolean defaultBool;

@@ -21,6 +21,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("dispenser", true)
                 .addMixinOption("effects", true)
                 .addMixinOption("enchantments", true)
+                .addMixinOption("entity", true)
                 .addMixinOption("fluids", true)
                 .addMixinOption("food", true)
                 .addMixinOption("items", true)
