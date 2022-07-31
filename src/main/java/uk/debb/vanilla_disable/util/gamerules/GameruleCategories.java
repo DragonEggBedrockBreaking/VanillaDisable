@@ -1,7 +1,6 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.reflect.ClassPath;
+import com.google.gson.stream.JsonReader;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -9,6 +8,9 @@ import net.minecraft.resources.ResourceLocation;
 import uk.debb.vanilla_disable.mixin_plugins.CaffeineConfigMixinConfigPlugin;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 public enum GameruleCategories {
     VD_DAMAGE,
@@ -57,12 +59,30 @@ public enum GameruleCategories {
     }
 
     public void toggle() throws IOException {
-        ClassPath cp = ClassPath.from(Thread.currentThread().getContextClassLoader());
         String subpackage = this.name().substring(3).toLowerCase();
-        ImmutableSet<ClassPath.ClassInfo> set = cp.getTopLevelClasses("uk.debb.vanilla_disable.mixin." + subpackage);
-        enabled = CaffeineConfigMixinConfigPlugin.caffeineConfig.getEffectiveOptionForMixin(
-                set.iterator().next().toString().split("mixin\\.")[1]
-        ).isEnabled();
+        InputStream inputStream = GameruleCategories.class.getResourceAsStream("/vanilla_disable.mixins.json");
+        if (inputStream != null) {
+            Reader reader = new InputStreamReader(inputStream);
+            JsonReader jsonReader = new JsonReader(reader);
+            jsonReader.beginObject();
+            while (jsonReader.hasNext()) {
+                String name = jsonReader.nextName();
+                if (name.equals("mixins")) {
+                    jsonReader.beginArray();
+                    while (jsonReader.hasNext()) {
+                        String mixin = jsonReader.nextString();
+                        if (mixin.startsWith(subpackage + ".")) {
+                            enabled = CaffeineConfigMixinConfigPlugin.caffeineConfig.getEffectiveOptionForMixin(mixin).isEnabled();
+                            break;
+                        }
+                    }
+                    break;
+                } else {
+                    jsonReader.skipValue();
+                }
+            }
+            reader.close();
+        }
     }
 
     public CustomGameRuleCategory get() {
