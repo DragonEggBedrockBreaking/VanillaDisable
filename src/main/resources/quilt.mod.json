@@ -3,7 +3,7 @@
     "quilt_loader": {
         "group": "uk.debb",
         "id": "vanilla_disable",
-        "version": "2.0.1",
+        "version": "2.1.0",
         "intermediate_mappings": "net.fabricmc:intermediary",
         "metadata": {
             "name": "Vanilla Disable",
