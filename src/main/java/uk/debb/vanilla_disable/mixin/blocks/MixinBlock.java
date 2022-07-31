@@ -29,11 +29,11 @@ public abstract class MixinBlock {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.ICE) || blockState.is(Blocks.BLUE_ICE) ||
                 blockState.is(Blocks.FROSTED_ICE) || blockState.is(Blocks.PACKED_ICE)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.ICE_FRICTION);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.ICE_FRICTION_FACTOR);
         } else if (blockState.is(Blocks.SLIME_BLOCK)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.SLIME_FRICTION);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.SLIME_FRICTION_FACTOR);
         } else {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_FRICTION);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_FRICTION_FACTOR);
         }
     }
 
@@ -41,11 +41,11 @@ public abstract class MixinBlock {
     private float modifySpeedFactor(float original) {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.SOUL_SAND)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.SOUL_SAND_SPEED);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.SOUL_SAND_SPEED_FACTOR);
         } else if (blockState.is(Blocks.HONEY_BLOCK)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.HONEY_BLOCK_SPEED);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.HONEY_BLOCK_SPEED_FACTOR);
         } else {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_SPEED);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_SPEED_FACTOR);
         }
     }
 
@@ -53,9 +53,9 @@ public abstract class MixinBlock {
     private float modifyJumpFactor(float original) {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.HONEY_BLOCK)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.HONEY_BLOCK_JUMP);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.HONEY_BLOCK_JUMP_FACTOR);
         } else {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_JUMP);
+            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_JUMP_FACTOR);
         }
     }
 
