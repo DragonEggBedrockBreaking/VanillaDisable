@@ -6,14 +6,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(ObserverBlock.class)
 public abstract class MixinObserverBlock {
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
-        if (!GameruleHelper.getBool(BooleanGamerules.OBSERVER_ENABLED)) {
+        if (!BooleanGamerules.OBSERVER_ENABLED.getValue()) {
             return 0;
         }
         return original;
@@ -21,7 +20,7 @@ public abstract class MixinObserverBlock {
 
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
-        if (!GameruleHelper.getBool(BooleanGamerules.OBSERVER_ENABLED)) {
+        if (!BooleanGamerules.OBSERVER_ENABLED.getValue()) {
             return 0;
         }
         return original;
@@ -36,7 +35,7 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDelay(int delay) {
-        return GameruleHelper.getInt(IntegerGamerules.OBSERVER_DELAY);
+        return IntegerGamerules.OBSERVER_DELAY.getValue();
     }
 
     @ModifyArg(
@@ -48,6 +47,6 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDuration(int duration) {
-        return GameruleHelper.getInt(IntegerGamerules.OBSERVER_DURATION);
+        return IntegerGamerules.OBSERVER_DURATION.getValue();
     }
 }

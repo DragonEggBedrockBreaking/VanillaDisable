@@ -5,13 +5,12 @@ import net.minecraft.world.item.SwordItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(SwordItem.class)
 public abstract class MixinSwordItem {
     @ModifyReturnValue(method = "canAttackBlock", at = @At("RETURN"))
     private boolean canAlwaysAttackBlock(boolean original) {
-        if (GameruleHelper.getBool(BooleanGamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS)) {
+        if (BooleanGamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS.getValue()) {
             return true;
         }
         return original;

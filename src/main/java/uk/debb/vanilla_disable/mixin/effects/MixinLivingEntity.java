@@ -9,7 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(LivingEntity.class)
@@ -19,8 +18,8 @@ public abstract class MixinLivingEntity implements Maps {
         if (((Entity) (Object) this).getType().equals(EntityType.PLAYER)) {
             MobEffect statusEffect = effect.getEffect();
             BooleanGamerules gameRule = livingEntityMobEffectMap.get(statusEffect);
-            if ((!GameruleHelper.getBool(BooleanGamerules.EFFECTS_ENABLED)) ||
-                    (gameRule != null && !GameruleHelper.getBool(gameRule))) {
+            if ((!BooleanGamerules.EFFECTS_ENABLED.getValue()) ||
+                    (gameRule != null && !gameRule.getValue())) {
                 return false;
             }
         }

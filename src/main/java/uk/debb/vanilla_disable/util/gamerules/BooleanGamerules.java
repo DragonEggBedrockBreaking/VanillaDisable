@@ -1,5 +1,9 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
+import com.google.common.base.CaseFormat;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
@@ -782,6 +786,7 @@ public enum BooleanGamerules {
 
     RECIPE_BOOK_ENABLED(VD_MISC, true);
 
+    public static MinecraftServer server;
     private final boolean defaultBool;
     private final GameruleCategories category;
     private boolean allowedInSingleplayer = true;
@@ -798,20 +803,22 @@ public enum BooleanGamerules {
         this.allowedInSingleplayer = allowedInSingleplayer;
     }
 
-    public GameRules.Key<GameRules.BooleanValue> getGameRule() {
-        return this.gameRule;
+    public static void setValue(GameRules.Key<GameRules.BooleanValue> rule, boolean newValue) {
+        server.getGameRules().getRule(rule).set(newValue, server);
     }
 
-    public void setGameRule(GameRules.Key<GameRules.BooleanValue> gameRule) {
-        this.gameRule = gameRule;
+    public void register() {
+        String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.name());
+        this.gameRule = GameRuleRegistry.register(ruleName, this.getCategory().get(), GameRuleFactory.createBooleanRule(this.defaultBool));
+    }
+
+    public boolean getValue() {
+        if (server == null) return this.defaultBool;
+        return server.getWorldData().getGameRules().getBoolean(this.gameRule);
     }
 
     public GameruleCategories getCategory() {
         return this.category;
-    }
-
-    public boolean getDefaultBool() {
-        return this.defaultBool;
     }
 
     public boolean isAllowedInSingleplayer() {

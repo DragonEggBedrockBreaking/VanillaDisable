@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.DoubleGamerules;
 
 @Mixin(Block.class)
@@ -29,11 +28,11 @@ public abstract class MixinBlock {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.ICE) || blockState.is(Blocks.BLUE_ICE) ||
                 blockState.is(Blocks.FROSTED_ICE) || blockState.is(Blocks.PACKED_ICE)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.ICE_FRICTION_FACTOR);
+            return (float) DoubleGamerules.ICE_FRICTION_FACTOR.getValue();
         } else if (blockState.is(Blocks.SLIME_BLOCK)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.SLIME_FRICTION_FACTOR);
+            return (float) DoubleGamerules.SLIME_FRICTION_FACTOR.getValue();
         } else {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_FRICTION_FACTOR);
+            return (float) DoubleGamerules.DEFAULT_BLOCK_FRICTION_FACTOR.getValue();
         }
     }
 
@@ -41,11 +40,11 @@ public abstract class MixinBlock {
     private float modifySpeedFactor(float original) {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.SOUL_SAND)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.SOUL_SAND_SPEED_FACTOR);
+            return (float) DoubleGamerules.SOUL_SAND_SPEED_FACTOR.getValue();
         } else if (blockState.is(Blocks.HONEY_BLOCK)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.HONEY_BLOCK_SPEED_FACTOR);
+            return (float) DoubleGamerules.HONEY_BLOCK_SPEED_FACTOR.getValue();
         } else {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_SPEED_FACTOR);
+            return (float) DoubleGamerules.DEFAULT_BLOCK_SPEED_FACTOR.getValue();
         }
     }
 
@@ -53,15 +52,15 @@ public abstract class MixinBlock {
     private float modifyJumpFactor(float original) {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.HONEY_BLOCK)) {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.HONEY_BLOCK_JUMP_FACTOR);
+            return (float) DoubleGamerules.HONEY_BLOCK_JUMP_FACTOR.getValue();
         } else {
-            return (float) GameruleHelper.getDouble(DoubleGamerules.DEFAULT_BLOCK_JUMP_FACTOR);
+            return (float) DoubleGamerules.DEFAULT_BLOCK_JUMP_FACTOR.getValue();
         }
     }
 
     @Inject(method = "playerDestroy", at = @At("HEAD"), cancellable = true)
     private void cancelDestruction(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack itemStack, CallbackInfo ci) {
-        if (GameruleHelper.getBool(BooleanGamerules.OLD_TNT) && blockState.is(Blocks.TNT)) {
+        if (BooleanGamerules.OLD_TNT.getValue() && blockState.is(Blocks.TNT)) {
             TntBlock.explode(level, blockPos);
             ci.cancel();
         }

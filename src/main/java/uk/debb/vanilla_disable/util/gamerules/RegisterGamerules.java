@@ -19,17 +19,17 @@ public class RegisterGamerules {
                 continue;
             }
             if (rule.getCategory().isEnabled()) {
-                GameruleHelper.register(rule);
+                rule.register();
             }
         }
         for (IntegerGamerules rule : IntegerGamerules.values()) {
             if (rule.getCategory().isEnabled()) {
-                GameruleHelper.register(rule);
+                rule.register();
             }
         }
         for (DoubleGamerules rule : DoubleGamerules.values()) {
             if (rule.getCategory().isEnabled()) {
-                GameruleHelper.register(rule);
+                rule.register();
             }
         }
     }

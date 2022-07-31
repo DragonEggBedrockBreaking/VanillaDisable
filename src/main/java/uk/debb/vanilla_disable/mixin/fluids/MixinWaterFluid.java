@@ -7,7 +7,6 @@ import net.minecraft.world.level.material.WaterFluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(WaterFluid.class)
@@ -15,7 +14,7 @@ public abstract class MixinWaterFluid {
     @ModifyReturnValue(method = "getDropOff", at = @At("RETURN"))
     private int getWaterDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
-            return GameruleHelper.getBool(BooleanGamerules.WATER_REACHES_FAR) ? 1 : 2;
+            return BooleanGamerules.WATER_REACHES_FAR.getValue() ? 1 : 2;
         }
         return original;
     }
@@ -23,13 +22,13 @@ public abstract class MixinWaterFluid {
     @ModifyReturnValue(method = "getTickDelay", at = @At("RETURN"))
     private int getWaterTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
-            return GameruleHelper.getInt(IntegerGamerules.WATER_FLOW_SPEED);
+            return IntegerGamerules.WATER_FLOW_SPEED.getValue();
         }
         return original;
     }
 
     @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
     private boolean canWaterConvertToSource(boolean original) {
-        return GameruleHelper.getBool(BooleanGamerules.INFINITE_WATER);
+        return BooleanGamerules.INFINITE_WATER.getValue();
     }
 }

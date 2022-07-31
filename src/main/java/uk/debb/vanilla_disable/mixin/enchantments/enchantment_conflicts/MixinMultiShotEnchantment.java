@@ -8,7 +8,6 @@ import net.minecraft.world.item.enchantment.MultiShotEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(MultiShotEnchantment.class)
 public abstract class MixinMultiShotEnchantment extends Enchantment {
@@ -18,7 +17,7 @@ public abstract class MixinMultiShotEnchantment extends Enchantment {
 
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
-        if (!GameruleHelper.getBool(BooleanGamerules.CROSSBOW_ENCHANTMENT_CONFLICTS)) {
+        if (!BooleanGamerules.CROSSBOW_ENCHANTMENT_CONFLICTS.getValue()) {
             return super.checkCompatibility(enchantment);
         }
         return original;

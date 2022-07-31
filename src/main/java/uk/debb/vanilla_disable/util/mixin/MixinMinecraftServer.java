@@ -5,7 +5,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
+import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.DoubleGamerules;
+import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
@@ -17,6 +19,8 @@ public abstract class MixinMinecraftServer {
             )
     )
     private void beforeServerSetup(CallbackInfo ci) {
-        GameruleHelper.server = (MinecraftServer) (Object) this;
+        BooleanGamerules.server = (MinecraftServer) (Object) this;
+        DoubleGamerules.server = (MinecraftServer) (Object) this;
+        IntegerGamerules.server = (MinecraftServer) (Object) this;
     }
 }

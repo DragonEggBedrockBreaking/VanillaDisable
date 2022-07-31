@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 import java.util.Set;
@@ -42,7 +41,7 @@ public abstract class MixinArrow extends AbstractArrow implements Maps {
     private void clearEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {
         if (itemStack.is(Items.TIPPED_ARROW)) {
             BooleanGamerules gameRule = arrowPotionMap.get(PotionUtils.getPotion(itemStack));
-            if (!GameruleHelper.getBool(BooleanGamerules.TIPPED_ARROWS_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
+            if (!BooleanGamerules.TIPPED_ARROWS_ENABLED.getValue() || (gameRule != null && !gameRule.getValue())) {
                 this.potion = Potions.EMPTY;
                 this.effects.clear();
                 this.entityData.set(ID_EFFECT_COLOR, -1);

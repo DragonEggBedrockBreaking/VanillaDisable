@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ import java.util.Objects;
 public abstract class MixinPlayer {
     @Inject(method = "eat", at = @At("HEAD"))
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        if (GameruleHelper.getBool(BooleanGamerules.OLD_HUNGER) && stack.getItem().isEdible()) {
+        if (BooleanGamerules.OLD_HUNGER.getValue() && stack.getItem().isEdible()) {
             ((LivingEntity) (Object) this).setHealth(((LivingEntity) (Object) this).getHealth() +
                     Objects.requireNonNull(stack.getItem().getFoodProperties()).getNutrition());
         }
@@ -32,7 +31,7 @@ public abstract class MixinPlayer {
             )
     )
     private boolean alwaysNeedsFood(boolean original) {
-        if (GameruleHelper.getBool(BooleanGamerules.OLD_HUNGER)) {
+        if (BooleanGamerules.OLD_HUNGER.getValue()) {
             return ((LivingEntity) (Object) this).getHealth() < ((LivingEntity) (Object) this).getMaxHealth();
         }
         return original;

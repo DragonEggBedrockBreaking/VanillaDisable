@@ -5,7 +5,6 @@ import net.minecraft.world.level.block.EnderChestBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(EnderChestBlock.class)
 public abstract class MixinEnderChestBlock {
@@ -18,7 +17,7 @@ public abstract class MixinEnderChestBlock {
             require = 0
     )
     private boolean isFullBlock(boolean original) {
-        if (!GameruleHelper.getBool(BooleanGamerules.CONTAINER_OPENING_BLOCKED)) {
+        if (!BooleanGamerules.CONTAINER_OPENING_BLOCKED.getValue()) {
             return false;
         }
         return original;

@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(ThrownEnderpearl.class)
 public abstract class MixinThrownEnderpearl {
@@ -19,7 +18,7 @@ public abstract class MixinThrownEnderpearl {
             cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (!GameruleHelper.getBool(BooleanGamerules.ENDER_PEARLS_DESPAWN_ON_DEATH)) {
+        if (!BooleanGamerules.ENDER_PEARLS_DESPAWN_ON_DEATH.getValue()) {
             ci.cancel();
         }
     }

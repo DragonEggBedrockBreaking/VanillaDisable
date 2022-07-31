@@ -5,13 +5,12 @@ import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(PistonBaseBlock.class)
 public abstract class MixinPistonBaseBlock {
     @ModifyReturnValue(method = "triggerEvent", at = @At("RETURN"))
     private boolean cancelTriggeringEvent(boolean original) {
-        if (!GameruleHelper.getBool(BooleanGamerules.PISTON_ENABLED)) {
+        if (!BooleanGamerules.PISTON_ENABLED.getValue()) {
             return false;
         }
         return original;

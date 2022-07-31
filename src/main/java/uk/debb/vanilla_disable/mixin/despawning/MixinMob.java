@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(Mob.class)
@@ -31,7 +30,7 @@ public abstract class MixinMob extends Entity implements Maps {
     private boolean cancelRemovalWhenFarAway(boolean original) {
         BooleanGamerules gameRule = mobClassMapDespawn.get(this.getClass());
         if (gameRule != null && !(this.getType().equals(EntityType.VILLAGER))) {
-            return GameruleHelper.getBool(gameRule) && additionalRestrictionsMet();
+            return gameRule.getValue() && additionalRestrictionsMet();
         }
         return original;
     }

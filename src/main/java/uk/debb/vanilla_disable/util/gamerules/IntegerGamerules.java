@@ -1,5 +1,9 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
+import com.google.common.base.CaseFormat;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
@@ -89,6 +93,7 @@ public enum IntegerGamerules {
 
     VILLAGER_DAILY_RESTOCKS(VD_MOBS, 2);
 
+    public static MinecraftServer server;
     private final int defaultInt;
     private final int minValue;
     private final int maxValue;
@@ -109,27 +114,17 @@ public enum IntegerGamerules {
         this.maxValue = Integer.MAX_VALUE;
     }
 
-    public GameRules.Key<GameRules.IntegerValue> getGameRule() {
-        return this.gameRule;
+    public void register() {
+        String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.name());
+        this.gameRule = GameRuleRegistry.register(ruleName, this.getCategory().get(), GameRuleFactory.createIntRule(this.defaultInt, this.minValue, this.maxValue));
     }
 
-    public void setGameRule(GameRules.Key<GameRules.IntegerValue> gameRule) {
-        this.gameRule = gameRule;
+    public int getValue() {
+        if (server == null) return this.defaultInt;
+        return server.getWorldData().getGameRules().getInt(this.gameRule);
     }
 
     public GameruleCategories getCategory() {
         return this.category;
-    }
-
-    public int getDefaultInt() {
-        return this.defaultInt;
-    }
-
-    public int getMinInt() {
-        return this.minValue;
-    }
-
-    public int getMaxInt() {
-        return this.maxValue;
     }
 }

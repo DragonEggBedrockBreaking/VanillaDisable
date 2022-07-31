@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(NaturalSpawner.class)
@@ -17,7 +16,7 @@ public abstract class MixinNaturalSpawner implements Maps {
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
     private static void cancelSpawningCategoryForChunk(MobCategory mobCategory, ServerLevel serverLevel, LevelChunk levelChunk, NaturalSpawner.SpawnPredicate spawnPredicate, NaturalSpawner.AfterSpawnCallback afterSpawnCallback, CallbackInfo ci) {
         BooleanGamerules gameRule = naturalSpawnerMobCategoryMap.get(mobCategory);
-        if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
+        if (gameRule != null && !gameRule.getValue()) {
             ci.cancel();
         }
     }

@@ -1,9 +1,14 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
+import com.google.common.base.CaseFormat;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.gamerule.v1.rule.DoubleRule;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 
-import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
+import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.VD_BLOCKS;
+import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.VD_FOOD;
 
 public enum DoubleGamerules {
     DEFAULT_BLOCK_FRICTION_FACTOR(VD_BLOCKS, 0.6),
@@ -56,6 +61,7 @@ public enum DoubleGamerules {
     GLOW_BERRIES_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
     TROPICAL_FISH_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9);
 
+    public static MinecraftServer server;
     private final double defaultDouble;
     private final double maxValue;
     private final GameruleCategories category;
@@ -73,27 +79,17 @@ public enum DoubleGamerules {
         this.maxValue = Integer.MAX_VALUE;
     }
 
-    public GameRules.Key<DoubleRule> getGameRule() {
-        return this.gameRule;
+    public void register() {
+        String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.name());
+        this.gameRule = GameRuleRegistry.register(ruleName, this.getCategory().get(), GameRuleFactory.createDoubleRule(this.defaultDouble, 0.0, this.maxValue));
     }
 
-    public void setGameRule(GameRules.Key<DoubleRule> gameRule) {
-        this.gameRule = gameRule;
+    public double getValue() {
+        if (server == null) return this.defaultDouble;
+        return server.getWorldData().getGameRules().getRule(this.gameRule).get();
     }
 
     public GameruleCategories getCategory() {
         return this.category;
-    }
-
-    public double getDefaultDouble() {
-        return this.defaultDouble;
-    }
-
-    public double getMinDouble() {
-        return 0.0;
-    }
-
-    public double getMaxDouble() {
-        return this.maxValue;
     }
 }

@@ -5,13 +5,12 @@ import net.minecraft.world.level.block.TargetBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(TargetBlock.class)
 public abstract class MixinTargetBlock {
     @ModifyReturnValue(method = "getRedstoneStrength", at = @At("RETURN"))
     private static int modifyRedstoneStrength(int original) {
-        if (!GameruleHelper.getBool(BooleanGamerules.TARGET_BLOCK_ENABLED)) {
+        if (!BooleanGamerules.TARGET_BLOCK_ENABLED.getValue()) {
             return 0;
         }
         return original;

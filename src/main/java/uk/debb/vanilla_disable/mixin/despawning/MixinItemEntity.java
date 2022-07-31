@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 @Mixin(ItemEntity.class)
@@ -25,7 +24,7 @@ public abstract class MixinItemEntity extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void discardItem(CallbackInfo ci) {
-        if (this.age >= GameruleHelper.getInt(IntegerGamerules.ITEM_DESPAWN_TIME) * 20 && !(this.getLevel().isClientSide())) {
+        if (this.age >= IntegerGamerules.ITEM_DESPAWN_TIME.getValue() * 20 && !(this.getLevel().isClientSide())) {
             this.discard();
         }
     }
@@ -40,7 +39,7 @@ public abstract class MixinItemEntity extends Entity {
             cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (this.age < GameruleHelper.getInt(IntegerGamerules.ITEM_DESPAWN_TIME) * 20 &&
+        if (this.age < IntegerGamerules.ITEM_DESPAWN_TIME.getValue() * 20 &&
                 this.pickupDelay != Short.MAX_VALUE) {
             ci.cancel();
         }

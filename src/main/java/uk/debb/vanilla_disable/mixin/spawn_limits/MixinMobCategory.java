@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.MobCategory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
@@ -14,7 +13,7 @@ public abstract class MixinMobCategory implements Maps {
     public int getMaxInstancesPerChunk(int original) {
         IntegerGamerules gameRule = mobCategoryMobCategoryMapMobcap.get(this);
         if (gameRule != null) {
-            return GameruleHelper.getInt(gameRule);
+            return gameRule.getValue();
         }
         return original;
     }

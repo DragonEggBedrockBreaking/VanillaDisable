@@ -9,13 +9,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     @Inject(method = "attack", at = @At("RETURN"))
     private void igniteCreeper(Entity target, CallbackInfo ci) {
-        if (GameruleHelper.getBool(BooleanGamerules.FIRE_ASPECT_IGNITES_CREEPERS) &&
+        if (BooleanGamerules.FIRE_ASPECT_IGNITES_CREEPERS.getValue() &&
                 target instanceof Creeper && EnchantmentHelper.getFireAspect((Player) (Object) this) > 0) {
             ((Creeper) target).ignite();
         }

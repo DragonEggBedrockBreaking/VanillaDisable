@@ -11,13 +11,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(Pig.class)
 public abstract class MixinPig {
     @ModifyReturnValue(method = "isFood", at = @At("RETURN"))
     private boolean changeFood(boolean original, ItemStack stack) {
-        if (GameruleHelper.getBool(BooleanGamerules.PIGS_BREED_WITH_WHEAT)) {
+        if (BooleanGamerules.PIGS_BREED_WITH_WHEAT.getValue()) {
             return Ingredient.of(Items.WHEAT).test(stack);
         }
         return original;
@@ -33,7 +32,7 @@ public abstract class MixinPig {
             index = 1
     )
     private Goal modifyCarrotOnStickGoal(Goal goal) {
-        if (GameruleHelper.getBool(BooleanGamerules.PIGS_BREED_WITH_WHEAT)) {
+        if (BooleanGamerules.PIGS_BREED_WITH_WHEAT.getValue()) {
             return new TemptGoal((Pig) (Object) this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;
@@ -49,7 +48,7 @@ public abstract class MixinPig {
             index = 1
     )
     private Goal modifyBreedItemsGoal(Goal goal) {
-        if (GameruleHelper.getBool(BooleanGamerules.PIGS_BREED_WITH_WHEAT)) {
+        if (BooleanGamerules.PIGS_BREED_WITH_WHEAT.getValue()) {
             return new TemptGoal((Pig) (Object) this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;

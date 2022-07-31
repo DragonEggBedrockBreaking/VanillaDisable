@@ -7,7 +7,6 @@ import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(FoodData.class)
 public abstract class MixinFoodData {
@@ -19,8 +18,8 @@ public abstract class MixinFoodData {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (GameruleHelper.getBool(BooleanGamerules.OLD_HUNGER)) {
-            GameruleHelper.setBool(GameRules.RULE_NATURAL_REGENERATION, false);
+        if (BooleanGamerules.OLD_HUNGER.getValue()) {
+            BooleanGamerules.setValue(GameRules.RULE_NATURAL_REGENERATION, false);
             return Difficulty.PEACEFUL;
         }
         return original;

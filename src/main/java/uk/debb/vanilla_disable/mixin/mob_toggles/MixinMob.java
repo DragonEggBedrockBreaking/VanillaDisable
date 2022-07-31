@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(Mob.class)
@@ -21,7 +20,7 @@ public abstract class MixinMob extends LivingEntity implements Maps {
     @Inject(method = "checkDespawn", at = @At("HEAD"))
     private void checkIfEnabled(CallbackInfo ci) {
         BooleanGamerules gameRule = mobClassMapToggle.get(this.getClass());
-        if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
+        if (gameRule != null && !gameRule.getValue()) {
             this.discard();
         }
     }

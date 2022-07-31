@@ -6,7 +6,6 @@ import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(Villager.class)
 public abstract class MixinVillager {
@@ -18,7 +17,7 @@ public abstract class MixinVillager {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (!GameruleHelper.getBool(BooleanGamerules.VILLAGERS_CONVERT_TO_WITCHES)) {
+        if (!BooleanGamerules.VILLAGERS_CONVERT_TO_WITCHES.getValue()) {
             return Difficulty.PEACEFUL;
         }
         return original;

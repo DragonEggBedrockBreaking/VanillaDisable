@@ -5,13 +5,12 @@ import net.minecraft.world.level.block.PressurePlateBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 
 @Mixin(PressurePlateBlock.class)
 public abstract class MixinPressurePlateBlock {
     @ModifyReturnValue(method = "getSignalStrength", at = @At("RETURN"))
     private int modifySignalStrength(int original) {
-        if (!GameruleHelper.getBool(BooleanGamerules.PRESSURE_PLATE_ENABLED)) {
+        if (!BooleanGamerules.PRESSURE_PLATE_ENABLED.getValue()) {
             return 0;
         }
         return original;

@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(ServerPlayer.class)
@@ -16,7 +15,7 @@ public abstract class MixinServerPlayer implements Maps {
     @Inject(method = "die", at = @At("HEAD"), cancellable = true)
     private void cancelDeath(DamageSource damageSource, CallbackInfo ci) {
         BooleanGamerules gameRule = serverPlayerStringMap.get(damageSource.getMsgId());
-        if (!GameruleHelper.getBool(BooleanGamerules.DEATH_ENABLED) || (gameRule != null && !GameruleHelper.getBool(gameRule))) {
+        if (!BooleanGamerules.DEATH_ENABLED.getValue() || (gameRule != null && !gameRule.getValue())) {
             ((Player) (Object) this).setHealth(((Player) (Object) this).getHealth() + 1);
             ci.cancel();
         }
