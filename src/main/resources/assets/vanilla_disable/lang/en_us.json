@@ -930,12 +930,6 @@
     "gamerule.cauldronsCleanShulkerBoxes": "Cauldrons clean shulker boxes",
     "gamerule.dripstoneFillsCauldrons": "Dripstone fills cauldrons",
     "gamerule.precipitationFillsCauldrons": "Precipitation fills cauldrons",
-    "gamerule.dragonEggsFall": "Dragon eggs fall",
-    "gamerule.anvilsFall": "Anvils fall",
-    "gamerule.concretePowderFalls": "Concrete powder falls",
-    "gamerule.gravelFalls": "Gravel falls",
-    "gamerule.sandFalls": "Sand falls",
-    "gamerule.pointedDripstoneFalls": "Pointed dripstone falls",
 
     "gamerule.netherPortalsEnabled.description": "Toggle nether portals",
     "gamerule.endPortalsEnabled.description": "Toggle end portals",
@@ -963,12 +957,6 @@
     "gamerule.cauldronsCleanShulkerBoxes.description": "Toggle cauldrons cleaning dyed shulker boxes",
     "gamerule.dripstoneFillsCauldrons.description": "Dripstone with lava/water fills cauldrons underneath",
     "gamerule.precipitationFillsCauldrons.description": "Rain/snow fills cauldrons underneath",
-    "gamerule.dragonEggsFall.description": "Toggle dragon egg blocks being able to fall",
-    "gamerule.anvilsFall.description": "Toggle anvil blocks being able to fall",
-    "gamerule.concretePowderFalls.description": "Toggle concrete powder blocks being able to fall",
-    "gamerule.gravelFalls.description": "Toggle gravel blocks being able to fall",
-    "gamerule.sandFalls.description": "Toggle sand blocks being able to fall",
-    "gamerule.pointedDripstoneFalls.description": "Toggle pointed dripstone blocks being able to fall",
 
 
     "gamerule.oldHunger": "Old (beta) hunger",
@@ -1177,9 +1165,6 @@
     "gamerule.turtleMasterPotion.description": "Toggle turtle master potions being enabled",
     "gamerule.waterBreathingPotion.description": "Toggle water breathing potions being enabled",
     "gamerule.weaknessPotion.description": "Toggle weakness potions being enabled",
-
-
-
 
 
     "gamerule.deathEnabled":"Toggle deaths",
@@ -1677,6 +1662,12 @@
     "gamerule.windPainting": "Wind painting",
     "gamerule.witherPainting": "Wither painting",
     "gamerule.oldBoats": "Old (pre-1.9) boats",
+    "gamerule.dragonEggsFall": "Dragon eggs fall",
+    "gamerule.anvilsFall": "Anvils fall",
+    "gamerule.concretePowderFalls": "Concrete powder falls",
+    "gamerule.gravelFalls": "Gravel falls",
+    "gamerule.sandFalls": "Sand falls",
+    "gamerule.pointedDripstoneFalls": "Pointed dripstone falls",
 
     "gamerule.alternatePaintingsEnabled.description": "Toggle paintings being varied",
     "gamerule.albanPainting.description": "Toggle the painting variant 'alban' being enabled",
@@ -1710,6 +1701,12 @@
     "gamerule.windPainting.description": "Toggle the painting variant 'wind' being enabled",
     "gamerule.witherPainting.description": "Toggle the painting variant 'wither' being enabled",
     "gamerule.oldBoats.description": "Toggle old (pre-1.9) boats",
+    "gamerule.dragonEggsFall.description": "Toggle dragon egg blocks being able to fall",
+    "gamerule.anvilsFall.description": "Toggle anvil blocks being able to fall",
+    "gamerule.concretePowderFalls.description": "Toggle concrete powder blocks being able to fall",
+    "gamerule.gravelFalls.description": "Toggle gravel blocks being able to fall",
+    "gamerule.sandFalls.description": "Toggle sand blocks being able to fall",
+    "gamerule.pointedDripstoneFalls.description": "Toggle pointed dripstone blocks being able to fall",
 
 
     "gamerule.infiniteTrading": "Infinite trading",

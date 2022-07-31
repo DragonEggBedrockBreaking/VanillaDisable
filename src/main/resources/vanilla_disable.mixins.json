@@ -20,10 +20,8 @@
     "blocks.MixinConduitBlockEntity",
     "blocks.MixinEndPortalBlock",
     "blocks.MixinEntity",
-    "blocks.MixinFallingBlock",
     "blocks.MixinFarmBlock",
     "blocks.MixinNetherPortalBlock",
-    "blocks.MixinPointedDripstoneBlock",
     "blocks.MixinSwordItem",
     "blocks.MixinTheEndGatewayBlockEntity",
     "blocks.container.MixinChestBlock",
@@ -59,7 +57,9 @@
     "enchantments.enchantment_conflicts.MixinWaterWalkerEnchantment",
 
     "entity.MixinEntity",
+    "entity.MixinFallingBlock",
     "entity.MixinPainting",
+    "entity.MixinPointedDripstoneBlock",
 
     "food.MixinFoodData",
     "food.hunger.MixinFoodData",

@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.blocks;
+package uk.debb.vanilla_disable.mixin.entity;
 
 import net.minecraft.world.level.block.PointedDripstoneBlock;
 import org.spongepowered.asm.mixin.Mixin;
