@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.util.gamerules.DoubleGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
@@ -21,8 +22,8 @@ public abstract class MixinFoodData implements Maps {
     private void modifyNutrition(Item item, ItemStack itemStack, CallbackInfo ci) {
         if (item.isEdible()) {
             IntegerGamerules nutritionGamerule = foodDataFoodPropertiesMapNutrition.get(item.getFoodProperties());
-            IntegerGamerules saturationGamerule = foodDataFoodPropertiesMapSaturation.get(item.getFoodProperties());
-            this.eat(GameruleHelper.getInt(nutritionGamerule), (float) GameruleHelper.getInt(saturationGamerule) / 10);
+            DoubleGamerules saturationGamerule = foodDataFoodPropertiesMapSaturation.get(item.getFoodProperties());
+            this.eat(GameruleHelper.getInt(nutritionGamerule), (float) GameruleHelper.getDouble(saturationGamerule));
         }
         ci.cancel();
     }

@@ -27,5 +27,10 @@ public class RegisterGamerules {
                 GameruleHelper.register(rule);
             }
         }
+        for (DoubleGamerules rule : DoubleGamerules.values()) {
+            if (rule.getCategory().isEnabled()) {
+                GameruleHelper.register(rule);
+            }
+        }
     }
 }

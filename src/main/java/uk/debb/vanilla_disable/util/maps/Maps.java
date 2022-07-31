@@ -16,6 +16,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.DoubleGamerules;
 import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 
 public interface Maps {
@@ -35,7 +36,7 @@ public interface Maps {
     Object2ObjectMap<MobCategory, BooleanGamerules> naturalSpawnerMobCategoryMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<DamageSource, BooleanGamerules> playerDamageSourceMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<FoodProperties, IntegerGamerules> foodDataFoodPropertiesMapNutrition = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<FoodProperties, IntegerGamerules> foodDataFoodPropertiesMapSaturation = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<FoodProperties, DoubleGamerules> foodDataFoodPropertiesMapSaturation = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, BooleanGamerules> livingEntityClassMapKnockback = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, BooleanGamerules> mobClassMapDespawn = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<MobCategory, IntegerGamerules> mobCategoryMobCategoryMapMax = new Object2ObjectOpenHashMap<>();
