@@ -791,6 +791,7 @@ public enum BooleanGamerules {
         this.category = category;
         this.defaultBool = defaultBool;
     }
+
     BooleanGamerules(GameruleCategories category, boolean defaultBool, boolean allowedInSingleplayer) {
         this.category = category;
         this.defaultBool = defaultBool;
@@ -812,6 +813,7 @@ public enum BooleanGamerules {
     public boolean getDefaultBool() {
         return this.defaultBool;
     }
+
     public boolean isAllowedInSingleplayer() {
         return this.allowedInSingleplayer;
     }
