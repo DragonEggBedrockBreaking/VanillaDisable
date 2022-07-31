@@ -15,6 +15,7 @@
     "blocks.MixinAbstractCauldronBlock",
     "blocks.MixinBeaconBlockEntity",
     "blocks.MixinBlock",
+    "blocks.MixinBlockStateBase",
     "blocks.MixinBuddingAmethystBlock",
     "blocks.MixinCauldronBlock",
     "blocks.MixinConduitBlockEntity",

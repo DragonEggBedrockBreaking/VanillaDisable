@@ -49,4 +49,5 @@ public interface Maps {
     Object2ObjectMap<Holder<PaintingVariant>, BooleanGamerules> paintingHolderPaintingVariantMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<VillagerType, BooleanGamerules> villagerDataVillagerTypeMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<VillagerProfession, BooleanGamerules> villagerDataVillagerProfessionMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Block, BooleanGamerules> blockStateBaseBlockMap = new Object2ObjectOpenHashMap<>();
 }
