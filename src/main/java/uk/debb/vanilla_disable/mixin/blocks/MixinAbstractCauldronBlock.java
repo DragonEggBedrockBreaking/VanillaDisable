@@ -1,24 +1,24 @@
 package uk.debb.vanilla_disable.mixin.blocks;
 
-import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
 import uk.debb.vanilla_disable.util.gamerules.GameruleHelper;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(AbstractCauldronBlock.class)
 public abstract class MixinAbstractCauldronBlock implements Maps {
-    @ModifyReceiver(
+    /*@ModifyReceiver(
             method = "use",
             at = @At(
                     value = "INVOKE",
@@ -31,5 +31,13 @@ public abstract class MixinAbstractCauldronBlock implements Maps {
             return (arg, arg2, arg3, arg4, arg5, arg6) -> InteractionResult.FAIL;
         }
         return original;
+    }*/
+
+    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
+    private void cancelUse(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
+        BooleanGamerules gameRule = abstractCauldronBlockItemMap.get(player.getItemInHand(interactionHand).getItem());
+        if (gameRule != null && !GameruleHelper.getBool(gameRule)) {
+            cir.setReturnValue(InteractionResult.FAIL);
+        }
     }
 }
