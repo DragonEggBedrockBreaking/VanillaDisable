@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(LivingEntity.class)
@@ -25,21 +25,21 @@ public abstract class MixinLivingEntity implements Maps {
 
     @Unique
     private boolean isInvulnerableToKnockback(LivingEntity source) {
-        BooleanGamerules gameRule = livingEntityClassMapKnockback.get(this.getClass());
-        if ((!BooleanGamerules.KNOCKBACK_ENABLED.getValue()) ||
-                (gameRule != null && !gameRule.getValue())) {
+        Gamerules gameRule = livingEntityClassMapKnockback.get(this.getClass());
+        if ((!Gamerules.KNOCKBACK_ENABLED.getValue(Boolean::parseBoolean)) ||
+                (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
             return true;
         }
         if ((source instanceof AbstractSkeleton && !(source instanceof WitherSkeleton)) ||
                 (source instanceof Piglin && source.isHolding(Items.CROSSBOW)) ||
                 (source instanceof Pillager)) {
-            return !BooleanGamerules.ARROW_KNOCKBACK.getValue();
+            return !Gamerules.ARROW_KNOCKBACK.getValue(Boolean::parseBoolean);
         }
         if (source instanceof Drowned && source.isHolding(Items.TRIDENT)) {
-            return !BooleanGamerules.TRIDENT_KNOCKBACK.getValue();
+            return !Gamerules.TRIDENT_KNOCKBACK.getValue(Boolean::parseBoolean);
         }
         if (source != null) {
-            return !BooleanGamerules.MOB_ATTACK_KNOCKBACK.getValue();
+            return !Gamerules.MOB_ATTACK_KNOCKBACK.getValue(Boolean::parseBoolean);
         }
         return false;
     }

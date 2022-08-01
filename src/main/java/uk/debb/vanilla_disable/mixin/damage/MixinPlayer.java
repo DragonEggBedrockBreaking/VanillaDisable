@@ -5,28 +5,28 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer implements Maps {
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
     private boolean isAlsoInvulnerableTo(boolean original, DamageSource damageSource) {
-        BooleanGamerules gameRule = playerDamageSourceMap.get(damageSource);
-        if (!BooleanGamerules.DAMAGE_ENABLED.getValue()) {
+        Gamerules gameRule = playerDamageSourceMap.get(damageSource);
+        if (!Gamerules.DAMAGE_ENABLED.getValue(Boolean::parseBoolean)) {
             return true;
-        } else if (gameRule != null && !gameRule.getValue()) {
+        } else if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
             return true;
         } else if (damageSource.isProjectile()) {
-            return !BooleanGamerules.PROJECTILE_DAMAGE.getValue();
+            return !Gamerules.PROJECTILE_DAMAGE.getValue(Boolean::parseBoolean);
         } else if (damageSource.isExplosion()) {
-            return !BooleanGamerules.EXPLOSION_DAMAGE.getValue();
+            return !Gamerules.EXPLOSION_DAMAGE.getValue(Boolean::parseBoolean);
         } else if (damageSource.isBypassInvul()) {
-            return !BooleanGamerules.VOID_DAMAGE.getValue();
+            return !Gamerules.VOID_DAMAGE.getValue(Boolean::parseBoolean);
         } else if (damageSource.isMagic()) {
-            return !BooleanGamerules.MAGIC_DAMAGE.getValue();
+            return !Gamerules.MAGIC_DAMAGE.getValue(Boolean::parseBoolean);
         } else if (damageSource.isCreativePlayer()) {
-            return !BooleanGamerules.CREATIVE_PLAYER_DAMAGE.getValue();
+            return !Gamerules.CREATIVE_PLAYER_DAMAGE.getValue(Boolean::parseBoolean);
         }
         return original;
     }

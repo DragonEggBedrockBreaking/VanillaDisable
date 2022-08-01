@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Zombie.class)
 public abstract class MixinZombie {
@@ -19,7 +19,7 @@ public abstract class MixinZombie {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (!BooleanGamerules.VILLAGERS_CONVERT_TO_ZILLAGERS.getValue()) {
+        if (!Gamerules.VILLAGERS_CONVERT_TO_ZILLAGERS.getValue(Boolean::parseBoolean)) {
             return Difficulty.PEACEFUL;
         }
         return original;
@@ -27,7 +27,7 @@ public abstract class MixinZombie {
 
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelUnderWaterConversion(CallbackInfo ci) {
-        if (!BooleanGamerules.ZOMBIES_CONVERT_TO_DROWNED.getValue()) {
+        if (!Gamerules.ZOMBIES_CONVERT_TO_DROWNED.getValue(Boolean::parseBoolean)) {
             ci.cancel();
         }
     }

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
@@ -29,7 +29,7 @@ public abstract class MixinEntity {
 
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
     private void killOnHorizontalCollision(CallbackInfo ci) {
-        if (BooleanGamerules.OLD_BOATS.getValue() && this.getType().equals(EntityType.BOAT)) {
+        if (Gamerules.OLD_BOATS.getValue(Boolean::parseBoolean) && this.getType().equals(EntityType.BOAT)) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));
                 if (blockState.getMaterial().isSolid()) {

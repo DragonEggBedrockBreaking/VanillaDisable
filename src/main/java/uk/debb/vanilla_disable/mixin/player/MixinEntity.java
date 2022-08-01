@@ -6,7 +6,7 @@ import net.minecraft.world.entity.EntityType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
@@ -15,7 +15,7 @@ public abstract class MixinEntity {
 
     @ModifyReturnValue(method = "isOnFire", at = @At("RETURN"))
     private boolean cannotBeOnFire(boolean original) {
-        if (this.getType().equals(EntityType.PLAYER) && !BooleanGamerules.PLAYER_CAN_BE_ON_FIRE.getValue()) {
+        if (this.getType().equals(EntityType.PLAYER) && !Gamerules.PLAYER_CAN_BE_ON_FIRE.getValue(Boolean::parseBoolean)) {
             return false;
         }
         return original;
@@ -23,7 +23,7 @@ public abstract class MixinEntity {
 
     @ModifyReturnValue(method = "isShiftKeyDown", at = @At("RETURN"))
     private boolean cannotCrouch(boolean original) {
-        if (this.getType().equals(EntityType.PLAYER) && !BooleanGamerules.PLAYER_CAN_CROUCH.getValue()) {
+        if (this.getType().equals(EntityType.PLAYER) && !Gamerules.PLAYER_CAN_CROUCH.getValue(Boolean::parseBoolean)) {
             return false;
         }
         return original;
@@ -31,7 +31,7 @@ public abstract class MixinEntity {
 
     @ModifyReturnValue(method = "isSprinting", at = @At("RETURN"))
     private boolean cannotSprint(boolean original) {
-        if (this.getType().equals(EntityType.PLAYER) && !BooleanGamerules.PLAYER_CAN_SPRINT.getValue()) {
+        if (this.getType().equals(EntityType.PLAYER) && !Gamerules.PLAYER_CAN_SPRINT.getValue(Boolean::parseBoolean)) {
             return true;
         }
         return original;
@@ -39,7 +39,7 @@ public abstract class MixinEntity {
 
     @ModifyReturnValue(method = "isSwimming", at = @At("RETURN"))
     private boolean cannotSwim(boolean original) {
-        if (this.getType().equals(EntityType.PLAYER) && !BooleanGamerules.PLAYER_CAN_SWIM.getValue()) {
+        if (this.getType().equals(EntityType.PLAYER) && !Gamerules.PLAYER_CAN_SWIM.getValue(Boolean::parseBoolean)) {
             return false;
         }
         return original;
@@ -47,7 +47,7 @@ public abstract class MixinEntity {
 
     @ModifyReturnValue(method = "isInvisible", at = @At("RETURN"))
     private boolean cannotBeInvisible(boolean original) {
-        if (this.getType().equals(EntityType.PLAYER) && !BooleanGamerules.PLAYER_CAN_BE_INVISIBLE.getValue()) {
+        if (this.getType().equals(EntityType.PLAYER) && !Gamerules.PLAYER_CAN_BE_INVISIBLE.getValue(Boolean::parseBoolean)) {
             return false;
         }
         return original;
@@ -55,7 +55,7 @@ public abstract class MixinEntity {
 
     @ModifyReturnValue(method = "getBlockJumpFactor", at = @At("RETURN"))
     private float cannotJump(float original) {
-        if (this.getType().equals(EntityType.PLAYER) && !BooleanGamerules.PLAYER_CAN_JUMP.getValue()) {
+        if (this.getType().equals(EntityType.PLAYER) && !Gamerules.PLAYER_CAN_JUMP.getValue(Boolean::parseBoolean)) {
             return 0.0F;
         }
         return original;

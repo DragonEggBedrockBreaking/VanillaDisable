@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ArrowPiercingEnchantment.class)
 public abstract class MixinArrowPiercingEnchantment extends Enchantment {
@@ -17,7 +17,7 @@ public abstract class MixinArrowPiercingEnchantment extends Enchantment {
 
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
-        if (!BooleanGamerules.CROSSBOW_ENCHANTMENT_CONFLICTS.getValue()) {
+        if (!Gamerules.CROSSBOW_ENCHANTMENT_CONFLICTS.getValue(Boolean::parseBoolean)) {
             return super.checkCompatibility(enchantment);
         }
         return original;

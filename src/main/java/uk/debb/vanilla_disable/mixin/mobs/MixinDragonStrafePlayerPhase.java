@@ -6,7 +6,7 @@ import net.minecraft.world.entity.boss.enderdragon.phases.AbstractDragonPhaseIns
 import net.minecraft.world.entity.boss.enderdragon.phases.DragonStrafePlayerPhase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(DragonStrafePlayerPhase.class)
 public abstract class MixinDragonStrafePlayerPhase extends AbstractDragonPhaseInstance {
@@ -22,7 +22,7 @@ public abstract class MixinDragonStrafePlayerPhase extends AbstractDragonPhaseIn
             )
     )
     private boolean spawnFreshEntity(boolean original) {
-        if (!BooleanGamerules.DRAGON_FIREBALLS.getValue()) {
+        if (!Gamerules.DRAGON_FIREBALLS.getValue(Boolean::parseBoolean)) {
             return false;
         }
         return original;

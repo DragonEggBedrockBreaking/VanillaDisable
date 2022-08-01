@@ -38,9 +38,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
-import static uk.debb.vanilla_disable.util.gamerules.BooleanGamerules.*;
-import static uk.debb.vanilla_disable.util.gamerules.DoubleGamerules.*;
-import static uk.debb.vanilla_disable.util.gamerules.IntegerGamerules.*;
+import static uk.debb.vanilla_disable.util.gamerules.Gamerules.*;
 
 public class PopulateMaps implements Maps {
     public static void populateMaps() {

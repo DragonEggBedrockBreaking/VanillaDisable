@@ -6,7 +6,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.server.PlayerAdvancements;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(PlayerAdvancements.class)
@@ -14,8 +14,8 @@ public abstract class MixinPlayerAdvancements implements Maps {
     @ModifyReturnValue(method = "getOrStartProgress", at = @At("RETURN"))
     private AdvancementProgress cancelPerformingCriterion(AdvancementProgress original, Advancement advancement) {
         if (advancement.getDisplay() != null) {
-            BooleanGamerules gameRule = playerAdvancementsStringMap.get(advancement.getDisplay().getTitle().toString().split("'")[1]);
-            if (!BooleanGamerules.ADVANCEMENTS_ENABLED.getValue() || (gameRule != null && !gameRule.getValue())) {
+            Gamerules gameRule = playerAdvancementsStringMap.get(advancement.getDisplay().getTitle().toString().split("'")[1]);
+            if (!Gamerules.ADVANCEMENTS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
                 return new AdvancementProgress();
             }
         }

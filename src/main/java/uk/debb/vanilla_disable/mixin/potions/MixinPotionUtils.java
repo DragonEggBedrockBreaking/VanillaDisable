@@ -9,7 +9,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 import java.util.ArrayList;
@@ -21,18 +21,18 @@ public abstract class MixinPotionUtils implements Maps {
     private static List<MobEffectInstance> removeMobEffects(List<MobEffectInstance> original, ItemStack itemStack) {
         Potion potion = PotionUtils.getPotion(itemStack);
         if (itemStack.getItem() instanceof SplashPotionItem) {
-            if (!BooleanGamerules.SPLASH_POTIONS_ENABLED.getValue()) {
+            if (!Gamerules.SPLASH_POTIONS_ENABLED.getValue(Boolean::parseBoolean)) {
                 return new ArrayList<>();
             }
         } else if (itemStack.getItem() instanceof LingeringPotionItem) {
-            if (!BooleanGamerules.LINGERING_POTIONS_ENABLED.getValue()) {
+            if (!Gamerules.LINGERING_POTIONS_ENABLED.getValue(Boolean::parseBoolean)) {
                 return new ArrayList<>();
             }
-        } else if (!BooleanGamerules.NORMAL_POTIONS_ENABLED.getValue()) {
+        } else if (!Gamerules.NORMAL_POTIONS_ENABLED.getValue(Boolean::parseBoolean)) {
             return new ArrayList<>();
         }
-        BooleanGamerules gameRule = potionUtilsPotionMap.get(potion);
-        if (!BooleanGamerules.POTIONS_ENABLED.getValue() || (gameRule != null && !gameRule.getValue())) {
+        Gamerules gameRule = potionUtilsPotionMap.get(potion);
+        if (!Gamerules.POTIONS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
             return new ArrayList<>();
         }
         return original;

@@ -1,8 +1,5 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
-import net.fabricmc.api.EnvType;
-import org.quiltmc.loader.api.minecraft.MinecraftQuiltLoader;
-
 import java.io.IOException;
 
 public class RegisterGamerules {
@@ -14,23 +11,8 @@ public class RegisterGamerules {
 
     public static void registerGamerules() throws IOException {
         toggleCategories();
-        for (BooleanGamerules rule : BooleanGamerules.values()) {
-            if (!rule.isAllowedInSingleplayer() && MinecraftQuiltLoader.getEnvironmentType().equals(EnvType.CLIENT)) {
-                continue;
-            }
-            if (rule.getCategory().isEnabled()) {
-                rule.register();
-            }
-        }
-        for (IntegerGamerules rule : IntegerGamerules.values()) {
-            if (rule.getCategory().isEnabled()) {
-                rule.register();
-            }
-        }
-        for (DoubleGamerules rule : DoubleGamerules.values()) {
-            if (rule.getCategory().isEnabled()) {
-                rule.register();
-            }
+        for (Gamerules rule : Gamerules.values()) {
+            rule.register();
         }
     }
 }

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(VillagerData.class)
@@ -22,8 +22,8 @@ public abstract class MixinVillagerData implements Maps {
 
     @ModifyReturnValue(method = "getType", at = @At("RETURN"))
     private VillagerType modifyType(VillagerType original) {
-        BooleanGamerules gameRule = villagerDataVillagerTypeMap.get(this.type);
-        if (!BooleanGamerules.VILLAGER_TYPES_ENABLED.getValue() || (gameRule != null && !gameRule.getValue())) {
+        Gamerules gameRule = villagerDataVillagerTypeMap.get(this.type);
+        if (!Gamerules.VILLAGER_TYPES_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
             return VillagerType.PLAINS;
         }
         return original;
@@ -31,8 +31,8 @@ public abstract class MixinVillagerData implements Maps {
 
     @ModifyReturnValue(method = "getProfession", at = @At("RETURN"))
     private VillagerProfession modifyProfession(VillagerProfession original) {
-        BooleanGamerules gameRule = villagerDataVillagerProfessionMap.get(this.profession);
-        if (!BooleanGamerules.VILLAGER_PROFESSIONS_ENABLED.getValue() || (gameRule != null && !gameRule.getValue())) {
+        Gamerules gameRule = villagerDataVillagerProfessionMap.get(this.profession);
+        if (!Gamerules.VILLAGER_PROFESSIONS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
             return VillagerProfession.NONE;
         }
         return original;

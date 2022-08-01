@@ -9,15 +9,15 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(FallingBlock.class)
 public abstract class MixinFallingBlock implements Maps {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void neverFree(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
-        BooleanGamerules gameRule = fallingBlockBlockMap.get(blockState.getBlock());
-        if (gameRule != null && !gameRule.getValue()) {
+        Gamerules gameRule = fallingBlockBlockMap.get(blockState.getBlock());
+        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
             ci.cancel();
         }
     }

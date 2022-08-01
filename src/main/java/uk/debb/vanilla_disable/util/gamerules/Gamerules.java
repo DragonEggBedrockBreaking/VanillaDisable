@@ -1,14 +1,19 @@
 package uk.debb.vanilla_disable.util.gamerules;
 
 import com.google.common.base.CaseFormat;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.fabric.api.gamerule.v1.rule.DoubleRule;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
+import org.quiltmc.loader.api.minecraft.MinecraftQuiltLoader;
+
+import java.util.function.Function;
 
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
-public enum BooleanGamerules {
+public enum Gamerules {
     DAMAGE_ENABLED(VD_DAMAGE, true),
     PROJECTILE_DAMAGE(VD_DAMAGE, true),
     EXPLOSION_DAMAGE(VD_DAMAGE, true),
@@ -65,7 +70,32 @@ public enum BooleanGamerules {
     GLOWSQUIDS_DESPAWN(VD_DESPAWNING, true),
     WATER_CREATURES_DESPAWN(VD_DESPAWNING, true),
     WATER_AMBIENT_DESPAWN(VD_DESPAWNING, true),
+    MIN_SPAWN_DISTANCE(VD_DESPAWNING, 24, 0, 512),
+    MONSTER_MAX_DESPAWN(VD_DESPAWNING, 128, 0, 512),
+    CREATURE_MAX_DESPAWN(VD_DESPAWNING, 128, 0, 512),
+    AMBIENT_MAX_DESPAWN(VD_DESPAWNING, 128, 0, 512),
+    AXOLOTL_MAX_DESPAWN(VD_DESPAWNING, 128, 0, 512),
+    GLOWSQUID_MAX_DESPAWN(VD_DESPAWNING, 128, 0, 512),
+    WATER_CREATURE_MAX_DESPAWN(VD_DESPAWNING, 128, 0, 512),
+    WATER_AMBIENT_MAX_DESPAWN(VD_DESPAWNING, 64, 0, 512),
+    MONSTER_MIN_DESPAWN(VD_DESPAWNING, 32, 0, 512),
+    CREATURE_MIN_DESPAWN(VD_DESPAWNING, 32, 0, 512),
+    AMBIENT_MIN_DESPAWN(VD_DESPAWNING, 32, 0, 512),
+    AXOLOTL_MIN_DESPAWN(VD_DESPAWNING, 32, 0, 512),
+    GLOWSQUID_MIN_DESPAWN(VD_DESPAWNING, 32, 0, 512),
+    WATER_CREATURE_MIN_DESPAWN(VD_DESPAWNING, 32, 0, 512),
+    WATER_AMBIENT_MIN_DESPAWN(VD_DESPAWNING, 32, 0, 512),
+    ITEM_DESPAWN_TIME(VD_DESPAWNING, 300),
     ENDER_PEARLS_DESPAWN_ON_DEATH(VD_DESPAWNING, true),
+
+    MONSTER_MOBCAP(VD_SPAWN_LIMITS, 70),
+    CREATURE_MOBCAP(VD_SPAWN_LIMITS, 10),
+    AMBIENT_MOBCAP(VD_SPAWN_LIMITS, 15),
+    AXOLOTL_MOBCAP(VD_SPAWN_LIMITS, 5),
+    GLOWSQUID_MOBCAP(VD_SPAWN_LIMITS, 5),
+    WATER_CREATURE_MOBCAP(VD_SPAWN_LIMITS, 5),
+    WATER_AMBIENT_MOBCAP(VD_SPAWN_LIMITS, 20),
+    MONSTER_MAX_LIGHT_LEVEL(VD_SPAWN_LIMITS, 0, 0, 15),
 
     COMMANDS_ENABLED(VD_COMMANDS, true),
     ADVANCEMENT_COMMAND(VD_COMMANDS, true),
@@ -145,6 +175,9 @@ public enum BooleanGamerules {
     WATER_REACHES_FAR(VD_FLUIDS, true),
     LAVA_REACHES_FAR(VD_FLUIDS, false),
     LAVA_REACHES_FAR_IN_NETHER(VD_FLUIDS, true),
+    WATER_FLOW_SPEED(VD_FLUIDS, 5, 1, 128),
+    LAVA_FLOW_SPEED(VD_FLUIDS, 30, 1, 128),
+    LAVA_FLOW_SPEED_NETHER(VD_FLUIDS, 10, 1, 128),
     WATER_PLACEABLE_IN_NETHER(VD_FLUIDS, false),
     BUBBLE_COLUMNS_ENABLED(VD_FLUIDS, true),
 
@@ -370,15 +403,22 @@ public enum BooleanGamerules {
     PLAYER_CAN_JUMP(VD_PLAYER, true),
     PLAYER_CAN_BE_INVISIBLE(VD_PLAYER, true),
 
+    REPEATER_BASE_DELAY(VD_REDSTONE, 2),
+    REPEATER_SIGNAL(VD_REDSTONE, 15, 0, 15),
+    COMPARATOR_BASE_DELAY(VD_REDSTONE, 2),
     COMPARATOR_ENABLED(VD_REDSTONE, true),
     REDSTONE_TORCH_ENABLED(VD_REDSTONE, true),
     REDSTONE_WIRE_ENABLED(VD_REDSTONE, true),
     DROPPER_ENABLED(VD_REDSTONE, true),
     DISPENSER_ENABLED(VD_REDSTONE, true),
     DAYLIGHT_SENSOR_ENABLED(VD_REDSTONE, true),
+    WOOD_BUTTON_PRESS_DURATION(VD_REDSTONE, 30),
+    STONE_BUTTON_PRESS_DURATION(VD_REDSTONE, 20),
     BUTTON_ENABLED(VD_REDSTONE, true),
     LEVER_ENABLED(VD_REDSTONE, true),
     LIGHTNING_ROD_ENABLED(VD_REDSTONE, true),
+    OBSERVER_DELAY(VD_REDSTONE, 2),
+    OBSERVER_DURATION(VD_REDSTONE, 2),
     OBSERVER_ENABLED(VD_REDSTONE, true),
     PRESSURE_PLATE_ENABLED(VD_REDSTONE, true),
     TARGET_BLOCK_ENABLED(VD_REDSTONE, true),
@@ -386,6 +426,7 @@ public enum BooleanGamerules {
     TRIPWIRE_HOOK_ENABLED(VD_REDSTONE, true),
     PISTON_ENABLED(VD_REDSTONE, true),
     SCULK_SENSOR_ENABLED(VD_REDSTONE, true),
+    PISTON_PUSH_LIMIT(VD_REDSTONE, 12),
 
     BEE_AI(VD_AI, true),
     BLAZE_AI(VD_AI, true),
@@ -420,6 +461,7 @@ public enum BooleanGamerules {
     NETHER_PORTALS_ENABLED(VD_BLOCKS, true),
     END_PORTALS_ENABLED(VD_BLOCKS, true),
     END_GATEWAYS_ENABLED(VD_BLOCKS, true),
+    NETHER_PORTAL_COOLDOWN(VD_BLOCKS, 300),
     CROP_TRAMPLING(VD_BLOCKS, true),
     BEACONS_ENABLED(VD_BLOCKS, true),
     CONDUITS_ENABLED(VD_BLOCKS, true),
@@ -427,6 +469,14 @@ public enum BooleanGamerules {
     PUSHABLE_BUDDING_AMETHYST(VD_BLOCKS, true),
     CONTAINER_OPENING_BLOCKED(VD_BLOCKS, true),
     OLD_TNT(VD_BLOCKS, false),
+    DEFAULT_BLOCK_FRICTION_FACTOR(VD_BLOCKS, 0.6),
+    ICE_FRICTION_FACTOR(VD_BLOCKS, 0.98),
+    SLIME_FRICTION_FACTOR(VD_BLOCKS, 0.8),
+    DEFAULT_BLOCK_SPEED_FACTOR(VD_BLOCKS, 1.0),
+    SOUL_SAND_SPEED_FACTOR(VD_BLOCKS, 0.4),
+    HONEY_BLOCK_SPEED_FACTOR(VD_BLOCKS, 0.4),
+    DEFAULT_BLOCK_JUMP_FACTOR(VD_BLOCKS, 1.0),
+    HONEY_BLOCK_JUMP_FACTOR(VD_BLOCKS, 0.5),
     FILLING_CAULDRONS(VD_BLOCKS, true),
     EMPTYING_CAULDRONS(VD_BLOCKS, true),
     CAULDRONS_CLEAN_LEATHER_ARMOUR(VD_BLOCKS, true),
@@ -468,6 +518,86 @@ public enum BooleanGamerules {
     STRUCTURE_BLOCK_INTERACTIONS(VD_BLOCKS, true),
     TRAPDOOR_INTERACTIONS(VD_BLOCKS, true),
 
+    APPLE_NUTRITION(VD_FOOD, 4, 0, 20),
+    BAKED_POTATO_NUTRITION(VD_FOOD, 5, 0, 20),
+    BEEF_NUTRITION(VD_FOOD, 3, 0, 20),
+    BEETROOT_NUTRITION(VD_FOOD, 1, 0, 20),
+    BEETROOT_SOUP_NUTRITION(VD_FOOD, 6, 0, 20),
+    BREAD_NUTRITION(VD_FOOD, 5, 0, 20),
+    CARROT_NUTRITION(VD_FOOD, 3, 0, 20),
+    CHICKEN_NUTRITION(VD_FOOD, 2, 0, 20),
+    CHORUS_FRUIT_NUTRITION(VD_FOOD, 4, 0, 20),
+    COD_NUTRITION(VD_FOOD, 2, 0, 20),
+    COOKED_BEEF_NUTRITION(VD_FOOD, 8, 0, 20),
+    COOKED_CHICKEN_NUTRITION(VD_FOOD, 6, 0, 20),
+    COOKED_COD_NUTRITION(VD_FOOD, 5, 0, 20),
+    COOKED_MUTTON_NUTRITION(VD_FOOD, 6, 0, 20),
+    COOKED_PORKCHOP_NUTRITION(VD_FOOD, 8, 0, 20),
+    COOKED_RABBIT_NUTRITION(VD_FOOD, 5, 0, 20),
+    COOKED_SALMON_NUTRITION(VD_FOOD, 6, 0, 20),
+    COOKIE_NUTRITION(VD_FOOD, 2, 0, 20),
+    DRIED_KELP_NUTRITION(VD_FOOD, 1, 0, 20),
+    ENCHANTED_GOLDEN_APPLE_NUTRITION(VD_FOOD, 4, 0, 20),
+    GOLDEN_APPLE_NUTRITION(VD_FOOD, 4, 0, 20),
+    GOLDEN_CARROT_NUTRITION(VD_FOOD, 6, 0, 20),
+    HONEY_BOTTLE_NUTRITION(VD_FOOD, 6, 0, 20),
+    MELON_SLICE_NUTRITION(VD_FOOD, 2, 0, 20),
+    MUSHROOM_STEW_NUTRITION(VD_FOOD, 6, 0, 20),
+    MUTTON_NUTRITION(VD_FOOD, 2, 0, 20),
+    POISONOUS_POTATO_NUTRITION(VD_FOOD, 2, 0, 20),
+    PORKCHOP_NUTRITION(VD_FOOD, 3, 0, 20),
+    POTATO_NUTRITION(VD_FOOD, 1, 0, 20),
+    PUFFERFISH_NUTRITION(VD_FOOD, 1, 0, 20),
+    PUMPKIN_PIE_NUTRITION(VD_FOOD, 8, 0, 20),
+    RABBIT_NUTRITION(VD_FOOD, 3, 0, 20),
+    RABBIT_STEW_NUTRITION(VD_FOOD, 10, 0, 20),
+    ROTTEN_FLESH_NUTRITION(VD_FOOD, 4, 0, 20),
+    SALMON_NUTRITION(VD_FOOD, 2, 0, 20),
+    SPIDER_EYE_NUTRITION(VD_FOOD, 2, 0, 20),
+    SUSPICIOUS_STEW_NUTRITION(VD_FOOD, 6, 0, 20),
+    SWEET_BERRIES_NUTRITION(VD_FOOD, 2, 0, 20),
+    GLOW_BERRIES_NUTRITION(VD_FOOD, 2, 0, 20),
+    TROPICAL_FISH_NUTRITION(VD_FOOD, 1, 0, 20),
+    APPLE_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    BAKED_POTATO_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    BEEF_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    BEETROOT_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    BEETROOT_SOUP_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    BREAD_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    CARROT_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    CHICKEN_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    CHORUS_FRUIT_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    COD_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
+    COOKED_BEEF_SATURATION_MODIFIER(VD_FOOD, 0.8, 9.9),
+    COOKED_CHICKEN_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    COOKED_COD_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    COOKED_MUTTON_SATURATION_MODIFIER(VD_FOOD, 0.8, 9.9),
+    COOKED_PORKCHOP_SATURATION_MODIFIER(VD_FOOD, 0.8, 9.9),
+    COOKED_RABBIT_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    COOKED_SALMON_SATURATION_MODIFIER(VD_FOOD, 0.8, 9.9),
+    COOKIE_SATURATION_MODIFIER(VD_FOOD, 0.2, 9.9),
+    DRIED_KELP_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    ENCHANTED_GOLDEN_APPLE_SATURATION_MODIFIER(VD_FOOD, 0.12, 9.9),
+    GOLDEN_APPLE_SATURATION_MODIFIER(VD_FOOD, 0.12, 9.9),
+    GOLDEN_CARROT_SATURATION_MODIFIER(VD_FOOD, 0.12, 9.9),
+    HONEY_BOTTLE_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
+    MELON_SLICE_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    MUSHROOM_STEW_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    MUTTON_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    POISONOUS_POTATO_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    PORKCHOP_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    POTATO_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
+    PUFFERFISH_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    PUMPKIN_PIE_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    RABBIT_SATURATION_MODIFIER(VD_FOOD, 0.3, 9.9),
+    RABBIT_STEW_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    ROTTEN_FLESH_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
+    SALMON_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
+    SPIDER_EYE_SATURATION_MODIFIER(VD_FOOD, 0.8, 9.9),
+    SUSPICIOUS_STEW_SATURATION_MODIFIER(VD_FOOD, 0.6, 9.9),
+    SWEET_BERRIES_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
+    GLOW_BERRIES_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
+    TROPICAL_FISH_SATURATION_MODIFIER(VD_FOOD, 0.1, 9.9),
     OLD_HUNGER(VD_FOOD, false),
 
     POTIONS_ENABLED(VD_POTIONS, true),
@@ -759,6 +889,8 @@ public enum BooleanGamerules {
     SAND_FALLS(VD_ENTITY, true),
     POINTED_DRIPSTONE_FALLS(VD_ENTITY, true),
 
+
+    VILLAGER_DAILY_RESTOCKS(VD_MERCHANT, 2),
     INFINITE_TRADING(VD_MERCHANT, false),
     VILLAGER_TRADING_ENABLED(VD_MERCHANT, true),
     PIGLIN_BARTERING_ENABLED(VD_MERCHANT, true),
@@ -787,41 +919,101 @@ public enum BooleanGamerules {
     RECIPE_BOOK_ENABLED(VD_MISC, true);
 
     public static MinecraftServer server;
-    private final boolean defaultBool;
+
+    private boolean defaultBool;
+    private int defaultInt;
+    private double defaultDouble;
+
+    private int minInt;
+    private int maxInt;
+    private double maxDouble;
+
+    private final String type;
+
+    private GameRules.Key<GameRules.BooleanValue> booleanGamerule;
+    private GameRules.Key<GameRules.IntegerValue> integerGamerule;
+    private GameRules.Key<DoubleRule> doubleGamerule;
+
     private final GameruleCategories category;
     private boolean allowedInSingleplayer = true;
-    private GameRules.Key<GameRules.BooleanValue> gameRule;
 
-    BooleanGamerules(GameruleCategories category, boolean defaultBool) {
+    Gamerules(GameruleCategories category, boolean defaultBool) {
         this.category = category;
         this.defaultBool = defaultBool;
+        this.type = "boolean";
     }
 
-    BooleanGamerules(GameruleCategories category, boolean defaultBool, boolean allowedInSingleplayer) {
+    Gamerules(GameruleCategories category, boolean defaultBool, boolean allowedInSingleplayer) {
         this.category = category;
         this.defaultBool = defaultBool;
         this.allowedInSingleplayer = allowedInSingleplayer;
+        this.type = "boolean";
     }
 
-    public static void setValue(GameRules.Key<GameRules.BooleanValue> rule, boolean newValue) {
-        server.getGameRules().getRule(rule).set(newValue, server);
+    Gamerules(GameruleCategories category, int defaultInt) {
+        this.category = category;
+        this.defaultInt = defaultInt;
+        this.minInt = 0;
+        this.maxInt = Integer.MAX_VALUE;
+        this.type = "integer";
+    }
+
+    Gamerules(GameruleCategories category, int defaultInt, int minInt, int maxInt) {
+        this.category = category;
+        this.defaultInt = defaultInt;
+        this.minInt = minInt;
+        this.maxInt = maxInt;
+        this.type = "integer";
+    }
+
+    Gamerules(GameruleCategories category, double defaultDouble) {
+        this.category = category;
+        this.defaultDouble = defaultDouble;
+        this.maxDouble = Double.MAX_VALUE;
+        this.type = "double";
+    }
+
+    Gamerules(GameruleCategories category, double defaultDouble, double maxDouble) {
+        this.category = category;
+        this.defaultDouble = defaultDouble;
+        this.maxDouble = maxDouble;
+        this.type = "double";
     }
 
     public void register() {
+        if (!this.category.isEnabled() || (!this.allowedInSingleplayer && MinecraftQuiltLoader.getEnvironmentType().equals(EnvType.CLIENT))) {
+            return;
+        }
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.name());
-        this.gameRule = GameRuleRegistry.register(ruleName, this.getCategory().get(), GameRuleFactory.createBooleanRule(this.defaultBool));
+        switch (this.type) {
+            case "boolean" -> this.booleanGamerule = GameRuleRegistry.register(ruleName, this.category.get(),
+                    GameRuleFactory.createBooleanRule(this.defaultBool));
+            case "integer" -> this.integerGamerule = GameRuleRegistry.register(ruleName, this.category.get(),
+                    GameRuleFactory.createIntRule(this.defaultInt, this.minInt, this.maxInt));
+            case "double" -> this.doubleGamerule = GameRuleRegistry.register(ruleName, this.category.get(),
+                    GameRuleFactory.createDoubleRule(this.defaultDouble, 0.0, this.maxDouble));
+        }
     }
 
-    public boolean getValue() {
-        if (server == null) return this.defaultBool;
-        return server.getWorldData().getGameRules().getBoolean(this.gameRule);
+    public <R> R getValue(Function<String, R> function) {
+        switch (this.type) {
+            case "boolean" -> {
+                if (server == null) return function.apply(String.valueOf(this.defaultBool));
+                return function.apply(String.valueOf(server.getWorldData().getGameRules().getBoolean(this.booleanGamerule)));
+            }
+            case "integer" -> {
+                if (server == null) return function.apply(String.valueOf(this.defaultInt));
+                return function.apply(String.valueOf(server.getWorldData().getGameRules().getInt(this.integerGamerule)));
+            }
+            case "double" -> {
+                if (server == null) return function.apply(String.valueOf(this.defaultDouble));
+                return function.apply(String.valueOf(server.getWorldData().getGameRules().getRule(this.doubleGamerule).get()));
+            }
+        }
+        return function.apply("");
     }
 
-    public GameruleCategories getCategory() {
-        return this.category;
-    }
-
-    public boolean isAllowedInSingleplayer() {
-        return this.allowedInSingleplayer;
+    public static void setBoolean(GameRules.Key<GameRules.BooleanValue> rule, boolean newValue) {
+        server.getGameRules().getRule(rule).set(newValue, server);
     }
 }

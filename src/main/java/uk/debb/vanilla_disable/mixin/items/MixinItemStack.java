@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(ItemStack.class)
@@ -21,8 +21,8 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "use", at = @At("RETURN"))
     private InteractionResultHolder<ItemStack> cancelUsage(InteractionResultHolder<ItemStack> original, Level level, Player player, InteractionHand interactionHand) {
-        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue()) {
+        Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
+        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
             return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
         }
         return original;
@@ -30,8 +30,8 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "useOn", at = @At("RETURN"))
     private InteractionResult cancelUsageOn(InteractionResult original) {
-        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue()) {
+        Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
+        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
             return InteractionResult.FAIL;
         }
         return original;
@@ -39,8 +39,8 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "interactLivingEntity", at = @At("RETURN"))
     private InteractionResult cancelLivingEntityInteraction(InteractionResult original) {
-        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue()) {
+        Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
+        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
             return InteractionResult.FAIL;
         }
         return original;
@@ -48,8 +48,8 @@ public abstract class MixinItemStack implements Maps {
 
     @ModifyReturnValue(method = "finishUsingItem", at = @At("RETURN"))
     private ItemStack cancelItemUseFinishing(ItemStack original) {
-        BooleanGamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue()) {
+        Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
+        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
             return ItemStack.EMPTY;
         }
         return original;

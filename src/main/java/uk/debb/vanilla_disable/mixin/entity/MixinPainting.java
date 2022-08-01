@@ -7,7 +7,7 @@ import net.minecraft.world.entity.decoration.PaintingVariant;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(Painting.class)
@@ -19,8 +19,8 @@ public abstract class MixinPainting implements Maps {
 
     @ModifyReturnValue(method = "getVariant", at = @At("RETURN"))
     private Holder<PaintingVariant> modifyVariant(Holder<PaintingVariant> original) {
-        BooleanGamerules gameRule = paintingHolderPaintingVariantMap.get(original);
-        if (!BooleanGamerules.ALTERNATE_PAINTINGS_ENABLED.getValue() || (gameRule != null && !gameRule.getValue())) {
+        Gamerules gameRule = paintingHolderPaintingVariantMap.get(original);
+        if (!Gamerules.ALTERNATE_PAINTINGS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
             return getDefaultVariant();
         }
         return original;

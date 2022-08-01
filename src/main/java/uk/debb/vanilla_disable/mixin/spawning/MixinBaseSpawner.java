@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 import java.util.Objects;
@@ -27,8 +27,8 @@ public abstract class MixinBaseSpawner implements Maps {
             cancellable = true
     )
     private void cancelSpawningNewEntityAndPassengers(CallbackInfo ci) {
-        BooleanGamerules gameRule = baseSpawnerClassMap.get(Objects.requireNonNull(this.displayEntity).getClass());
-        if (!gameRule.getValue() || !BooleanGamerules.SPAWNERS_ENABLED.getValue()) {
+        Gamerules gameRule = baseSpawnerClassMap.get(Objects.requireNonNull(this.displayEntity).getClass());
+        if (!gameRule.getValue(Boolean::parseBoolean) || !Gamerules.SPAWNERS_ENABLED.getValue(Boolean::parseBoolean)) {
             ci.cancel();
         }
     }

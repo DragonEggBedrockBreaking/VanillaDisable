@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ServerPlayer.class)
 public abstract class MixinServerPlayer {
@@ -27,35 +27,35 @@ public abstract class MixinServerPlayer {
 
     @Unique
     private boolean shouldCancelStat(Stat<?> stat) {
-        if (!BooleanGamerules.STATS_ENABLED.getValue()) {
+        if (!Gamerules.STATS_ENABLED.getValue(Boolean::parseBoolean)) {
             return true;
         }
         Registry<?> registry = stat.getType().getRegistry();
         if (registry.equals(Registry.BLOCK)) {
-            return !BooleanGamerules.BLOCK_STATS.getValue();
+            return !Gamerules.BLOCK_STATS.getValue(Boolean::parseBoolean);
         } else if (registry.equals(Registry.ITEM)) {
-            return !BooleanGamerules.ITEM_STATS.getValue();
+            return !Gamerules.ITEM_STATS.getValue(Boolean::parseBoolean);
         } else if (registry.equals(Registry.ENTITY_TYPE)) {
-            return !BooleanGamerules.ENTITY_KILL_STATS.getValue();
+            return !Gamerules.ENTITY_KILL_STATS.getValue(Boolean::parseBoolean);
         }
         StatFormatter formatter = stat.formatter;
         if (formatter.equals(StatFormatter.TIME)) {
-            return !BooleanGamerules.TIME_STATS.getValue();
+            return !Gamerules.TIME_STATS.getValue(Boolean::parseBoolean);
         } else if (formatter.equals(StatFormatter.DISTANCE)) {
-            return !BooleanGamerules.DISTANCE_STATS.getValue();
+            return !Gamerules.DISTANCE_STATS.getValue(Boolean::parseBoolean);
         } else if (formatter.equals(StatFormatter.DIVIDE_BY_TEN)) {
-            return !BooleanGamerules.DAMAGE_STATS.getValue();
+            return !Gamerules.DAMAGE_STATS.getValue(Boolean::parseBoolean);
         }
         String string = stat.getName();
         if (string.contains("interact")) {
-            return !BooleanGamerules.GUI_BLOCK_INTERACTION_STATS.getValue();
+            return !Gamerules.GUI_BLOCK_INTERACTION_STATS.getValue(Boolean::parseBoolean);
         }
         for (String section : generalList) {
             if (string.contains(section)) {
-                return !BooleanGamerules.GENERAL_STATS.getValue();
+                return !Gamerules.GENERAL_STATS.getValue(Boolean::parseBoolean);
             }
         }
-        return !BooleanGamerules.GENERAL_BLOCK_INTERACTION_STATS.getValue();
+        return !Gamerules.GENERAL_BLOCK_INTERACTION_STATS.getValue(Boolean::parseBoolean);
     }
 
     @Inject(method = "awardStat", at = @At("HEAD"), cancellable = true)

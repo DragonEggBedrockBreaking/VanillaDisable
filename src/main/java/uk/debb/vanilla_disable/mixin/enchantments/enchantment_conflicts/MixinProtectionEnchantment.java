@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ProtectionEnchantment.class)
 public abstract class MixinProtectionEnchantment extends Enchantment {
@@ -17,7 +17,7 @@ public abstract class MixinProtectionEnchantment extends Enchantment {
 
     @ModifyReturnValue(method = "checkCompatibility", at = @At("RETURN"))
     private boolean cancelCompatibility(boolean original, Enchantment enchantment) {
-        if (!BooleanGamerules.PROTECTION_ENCHANTMENT_CONFLICTS.getValue()) {
+        if (!Gamerules.PROTECTION_ENCHANTMENT_CONFLICTS.getValue(Boolean::parseBoolean)) {
             return true;
         }
         return original;

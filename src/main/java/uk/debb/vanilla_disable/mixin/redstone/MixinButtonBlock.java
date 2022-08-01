@@ -6,8 +6,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
-import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ButtonBlock.class)
 public abstract class MixinButtonBlock {
@@ -18,15 +17,15 @@ public abstract class MixinButtonBlock {
     @ModifyReturnValue(method = "getPressDuration", at = @At("RETURN"))
     private int modifyPressDuration(int original) {
         if (this.sensitive) {
-            return IntegerGamerules.WOOD_BUTTON_PRESS_DURATION.getValue();
+            return Gamerules.WOOD_BUTTON_PRESS_DURATION.getValue(Integer::parseInt);
         } else {
-            return IntegerGamerules.STONE_BUTTON_PRESS_DURATION.getValue();
+            return Gamerules.STONE_BUTTON_PRESS_DURATION.getValue(Integer::parseInt);
         }
     }
 
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
-        if (!BooleanGamerules.BUTTON_ENABLED.getValue()) {
+        if (!Gamerules.BUTTON_ENABLED.getValue(Boolean::parseBoolean)) {
             return 0;
         }
         return original;
@@ -34,7 +33,7 @@ public abstract class MixinButtonBlock {
 
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
-        if (!BooleanGamerules.BUTTON_ENABLED.getValue()) {
+        if (!Gamerules.BUTTON_ENABLED.getValue(Boolean::parseBoolean)) {
             return 0;
         }
         return original;

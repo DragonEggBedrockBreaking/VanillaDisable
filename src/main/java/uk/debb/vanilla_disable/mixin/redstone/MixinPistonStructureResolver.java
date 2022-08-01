@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.piston.PistonStructureResolver;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Restriction(
         conflict = {
@@ -17,6 +17,6 @@ import uk.debb.vanilla_disable.util.gamerules.IntegerGamerules;
 public abstract class MixinPistonStructureResolver {
     @ModifyConstant(method = "addBlockLine", constant = @Constant(intValue = 12))
     private int pushLimit(int oldPushLimit) {
-        return IntegerGamerules.PISTON_PUSH_LIMIT.getValue();
+        return Gamerules.PISTON_PUSH_LIMIT.getValue(Integer::parseInt);
     }
 }

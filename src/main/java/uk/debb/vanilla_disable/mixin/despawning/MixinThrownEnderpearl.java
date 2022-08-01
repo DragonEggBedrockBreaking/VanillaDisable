@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.util.gamerules.BooleanGamerules;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ThrownEnderpearl.class)
 public abstract class MixinThrownEnderpearl {
@@ -18,7 +18,7 @@ public abstract class MixinThrownEnderpearl {
             cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (!BooleanGamerules.ENDER_PEARLS_DESPAWN_ON_DEATH.getValue()) {
+        if (!Gamerules.ENDER_PEARLS_DESPAWN_ON_DEATH.getValue(Boolean::parseBoolean)) {
             ci.cancel();
         }
     }
