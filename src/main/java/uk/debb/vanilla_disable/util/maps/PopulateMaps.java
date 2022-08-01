@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.util.maps;
 
+import it.unimi.dsi.fastutil.objects.ObjectObjectImmutablePair;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.*;
 import net.minecraft.server.level.ServerPlayer;
@@ -1310,5 +1311,25 @@ public class PopulateMaps implements Maps {
         blockStateBaseBlockMap.put(Blocks.MANGROVE_TRAPDOOR, TRAPDOOR_INTERACTIONS);
         blockStateBaseBlockMap.put(Blocks.SPRUCE_TRAPDOOR, TRAPDOOR_INTERACTIONS);
         blockStateBaseBlockMap.put(Blocks.WARPED_TRAPDOOR, TRAPDOOR_INTERACTIONS);
+
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.FROST_WALKER, Enchantments.DEPTH_STRIDER), BOOT_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.INFINITY_ARROWS, Enchantments.MENDING), BOW_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.MULTISHOT, Enchantments.PIERCING), CROSSBOW_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.SHARPNESS, Enchantments.SMITE), DAMAGE_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.SHARPNESS, Enchantments.BANE_OF_ARTHROPODS), DAMAGE_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.SMITE, Enchantments.BANE_OF_ARTHROPODS), DAMAGE_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.BLOCK_FORTUNE, Enchantments.SILK_TOUCH), MINING_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.ALL_DAMAGE_PROTECTION, Enchantments.BLAST_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.ALL_DAMAGE_PROTECTION, Enchantments.PROJECTILE_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.ALL_DAMAGE_PROTECTION, Enchantments.FALL_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.ALL_DAMAGE_PROTECTION, Enchantments.FIRE_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.BLAST_PROTECTION, Enchantments.PROJECTILE_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.BLAST_PROTECTION, Enchantments.FALL_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.BLAST_PROTECTION, Enchantments.FIRE_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.PROJECTILE_PROTECTION, Enchantments.FALL_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.PROJECTILE_PROTECTION, Enchantments.FIRE_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.FALL_PROTECTION, Enchantments.FIRE_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.RIPTIDE, Enchantments.LOYALTY), TRIDENT_ENCHANTMENT_CONFLICTS);
+        enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.RIPTIDE, Enchantments.CHANNELING), TRIDENT_ENCHANTMENT_CONFLICTS);
     }
 }

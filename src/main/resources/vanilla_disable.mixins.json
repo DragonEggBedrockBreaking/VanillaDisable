@@ -45,17 +45,8 @@
 
     "effects.MixinLivingEntity",
 
+    "enchantments.MixinEnchantment",
     "enchantments.MixinEnchantmentHelper",
-    "enchantments.enchantment_conflicts.MixinArrowInfiniteEnchantment",
-    "enchantments.enchantment_conflicts.MixinArrowPiercingEnchantment",
-    "enchantments.enchantment_conflicts.MixinDamageEnchantment",
-    "enchantments.enchantment_conflicts.MixinFrostWalkerEnchantment",
-    "enchantments.enchantment_conflicts.MixinLootBonusEnchantment",
-    "enchantments.enchantment_conflicts.MixinMultiShotEnchantment",
-    "enchantments.enchantment_conflicts.MixinProtectionEnchantment",
-    "enchantments.enchantment_conflicts.MixinTridentRiptideEnchantment",
-    "enchantments.enchantment_conflicts.MixinUntouchingEnchantment",
-    "enchantments.enchantment_conflicts.MixinWaterWalkerEnchantment",
 
     "entity.MixinEntity",
     "entity.MixinFallingBlock",

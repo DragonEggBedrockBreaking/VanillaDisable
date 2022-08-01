@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.util.maps;
 
+import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.Holder;
@@ -49,4 +50,5 @@ public interface Maps {
     Object2ObjectMap<VillagerType, Gamerules> villagerDataVillagerTypeMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<VillagerProfession, Gamerules> villagerDataVillagerProfessionMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Pair<Enchantment, Enchantment>, Gamerules> enchantmentPairEnchantmentMap = new Object2ObjectOpenHashMap<>();
 }
