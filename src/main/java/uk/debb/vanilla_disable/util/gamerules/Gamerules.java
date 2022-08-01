@@ -919,22 +919,17 @@ public enum Gamerules {
     RECIPE_BOOK_ENABLED(VD_MISC, true);
 
     public static MinecraftServer server;
-
+    private final String type;
+    private final GameruleCategories category;
     private boolean defaultBool;
     private int defaultInt;
     private double defaultDouble;
-
     private int minInt;
     private int maxInt;
     private double maxDouble;
-
-    private final String type;
-
     private GameRules.Key<GameRules.BooleanValue> booleanGamerule;
     private GameRules.Key<GameRules.IntegerValue> integerGamerule;
     private GameRules.Key<DoubleRule> doubleGamerule;
-
-    private final GameruleCategories category;
     private boolean allowedInSingleplayer = true;
 
     Gamerules(GameruleCategories category, boolean defaultBool) {
@@ -980,6 +975,10 @@ public enum Gamerules {
         this.type = "double";
     }
 
+    public static void setBoolean(GameRules.Key<GameRules.BooleanValue> rule, boolean newValue) {
+        server.getGameRules().getRule(rule).set(newValue, server);
+    }
+
     public void register() {
         if (!this.category.isEnabled() || (!this.allowedInSingleplayer && MinecraftQuiltLoader.getEnvironmentType().equals(EnvType.CLIENT))) {
             return;
@@ -1011,9 +1010,5 @@ public enum Gamerules {
             }
         }
         return function.apply("");
-    }
-
-    public static void setBoolean(GameRules.Key<GameRules.BooleanValue> rule, boolean newValue) {
-        server.getGameRules().getRule(rule).set(newValue, server);
     }
 }
