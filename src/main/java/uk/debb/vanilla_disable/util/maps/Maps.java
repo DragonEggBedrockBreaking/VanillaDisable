@@ -51,4 +51,5 @@ public interface Maps {
     Object2ObjectMap<VillagerProfession, Gamerules> villagerDataVillagerProfessionMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Pair<Enchantment, Enchantment>, Gamerules> enchantmentPairEnchantmentMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Block, Gamerules> blockStateBaseRedstoneBlocksMap = new Object2ObjectOpenHashMap<>();
 }

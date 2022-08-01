@@ -22,20 +22,4 @@ public abstract class MixinButtonBlock {
             return Gamerules.STONE_BUTTON_PRESS_DURATION.getValue(Integer::parseInt);
         }
     }
-
-    @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
-    private int modifySignal(int original) {
-        if (!Gamerules.BUTTON_ENABLED.getValue(Boolean::parseBoolean)) {
-            return 0;
-        }
-        return original;
-    }
-
-    @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
-    private int modifyDirectSignal(int original) {
-        if (!Gamerules.BUTTON_ENABLED.getValue(Boolean::parseBoolean)) {
-            return 0;
-        }
-        return original;
-    }
 }

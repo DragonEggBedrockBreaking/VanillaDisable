@@ -1331,5 +1331,36 @@ public class PopulateMaps implements Maps {
         enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.FALL_PROTECTION, Enchantments.FIRE_PROTECTION), PROTECTION_ENCHANTMENT_CONFLICTS);
         enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.RIPTIDE, Enchantments.LOYALTY), TRIDENT_ENCHANTMENT_CONFLICTS);
         enchantmentPairEnchantmentMap.put(new ObjectObjectImmutablePair<>(Enchantments.RIPTIDE, Enchantments.CHANNELING), TRIDENT_ENCHANTMENT_CONFLICTS);
+
+        blockStateBaseRedstoneBlocksMap.put(Blocks.WARPED_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.BIRCH_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.STONE_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.SPRUCE_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.OAK_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.POLISHED_BLACKSTONE_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.MANGROVE_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.DARK_OAK_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.JUNGLE_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.CRIMSON_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.ACACIA_BUTTON, BUTTON_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.DAYLIGHT_DETECTOR, DAYLIGHT_SENSOR_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.LEVER, LEVER_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.LIGHTNING_ROD, LIGHTNING_ROD_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.OBSERVER, OBSERVER_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.WARPED_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.BIRCH_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.STONE_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.SPRUCE_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.OAK_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.MANGROVE_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.DARK_OAK_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.JUNGLE_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.CRIMSON_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.ACACIA_PRESSURE_PLATE, PRESSURE_PLATE_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.REDSTONE_TORCH, REDSTONE_TORCH_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.TARGET, TARGET_BLOCK_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.TRAPPED_CHEST, TRAPPED_CHEST_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.TRIPWIRE_HOOK, TRIPWIRE_HOOK_ENABLED);
     }
 }
