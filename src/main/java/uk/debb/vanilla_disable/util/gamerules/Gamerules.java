@@ -9,8 +9,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 import org.quiltmc.loader.api.minecraft.MinecraftQuiltLoader;
 
-import java.util.function.Function;
-
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
 public enum Gamerules {
