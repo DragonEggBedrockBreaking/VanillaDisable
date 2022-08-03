@@ -1,6 +1,7 @@
 package uk.debb.vanilla_disable.mixin.mobs;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,6 +20,14 @@ public abstract class MixinVillager {
     private Difficulty getWrongDifficulty(Difficulty original) {
         if (!Gamerules.VILLAGERS_CONVERT_TO_WITCHES.getValue(Boolean::parseBoolean)) {
             return Difficulty.PEACEFUL;
+        }
+        return original;
+    }
+
+    @ModifyReturnValue(method = "wantsToSpawnGolem", at = @At("RETURN"))
+    private boolean doesNotWantToSpawnGolem(boolean original) {
+        if (!Gamerules.VILLAGERS_SPAWN_GOLEMS.getValue(Boolean::parseBoolean)) {
+            return false;
         }
         return original;
     }

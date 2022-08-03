@@ -359,6 +359,7 @@
     "gamerule.dragonFireballs": "Dragon fireballs",
     "gamerule.fireAspectIgnitesCreepers": "Fire aspect ignites creepers",
     "gamerule.villagersSpawnCats": "Villagers spawn cats",
+    "gamerule.villagersSpawnGolems": "Villagers spawn golems",
 
     "gamerule.curableZillagers.description": "Toggle zombie villager villager curing",
     "gamerule.villagersConvertToZillagers.description": "Toggle villager -> zombie villager conversion",
@@ -373,6 +374,7 @@
     "gamerule.dragonFireballs.description": "Toggle dragon fireballs",
     "gamerule.fireAspectIgnitesCreepers.description": "Toggle fire aspect igniting creepers",
     "gamerule.villagersSpawnCats.description": "Toggle villagers spawning cats in villages",
+    "gamerule.villagersSpawnGolems.description": "Toggle villagers spawning golems",
 
 
     "gamerule.allaysEnabled": "Allays enabled",
