@@ -1053,16 +1053,19 @@ public enum Gamerules {
 
     public boolean getBool() {
         if (server == null) return this.defaultBool;
+        if (server.getWorldData().getGameRules().getRule(this.booleanGamerule) == null) return this.defaultBool;
         return server.getWorldData().getGameRules().getBoolean(this.booleanGamerule);
     }
 
     public int getInt() {
         if (server == null) return this.defaultInt;
+        if (server.getWorldData().getGameRules().getRule(this.integerGamerule) == null) return this.defaultInt;
         return server.getWorldData().getGameRules().getInt(this.integerGamerule);
     }
 
     public float getFloat() {
         if (server == null) return (float) this.defaultDouble;
+        if (server.getWorldData().getGameRules().getRule(this.doubleGamerule) == null) return (float) this.defaultDouble;
         return (float) server.getWorldData().getGameRules().getRule(this.doubleGamerule).get();
     }
 
