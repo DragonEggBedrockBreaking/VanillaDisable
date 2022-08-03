@@ -79,6 +79,7 @@
     "misc.MixinServerRecipeBook",
 
     "mobs.MixinAbstractPiglin",
+    "mobs.MixinCatSpawner",
     "mobs.MixinDragonStrafePlayerPhase",
     "mobs.MixinHoglin",
     "mobs.MixinHusk",
