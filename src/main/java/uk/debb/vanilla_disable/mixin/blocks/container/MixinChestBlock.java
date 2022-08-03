@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinChestBlock {
     @ModifyReturnValue(method = "isChestBlockedAt", at = @At("RETURN"))
     private static boolean chestNotBlocked(boolean original) {
-        if (!Gamerules.CONTAINER_OPENING_BLOCKED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.CONTAINER_OPENING_BLOCKED.getBool()) {
             return false;
         }
         return original;

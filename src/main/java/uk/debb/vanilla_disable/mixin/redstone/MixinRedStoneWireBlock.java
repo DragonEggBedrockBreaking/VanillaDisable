@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinRedStoneWireBlock {
     @ModifyReturnValue(method = "getWireSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
-        if (!Gamerules.REDSTONE_WIRE_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.REDSTONE_WIRE_ENABLED.getBool()) {
             return 0;
         }
         return original;

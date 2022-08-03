@@ -17,7 +17,7 @@ public abstract class MixinBiomeManager implements Lists, Maps {
     @ModifyReturnValue(method = "getBiome", at = @At("RETURN"))
     private Holder<Biome> modifyBiome(Holder<Biome> original) {
         Gamerules gameRule = biomeSourceBiomeHolderMap.get(original);
-        if (!Gamerules.BIOMES_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if (!Gamerules.BIOMES_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
                 if (netherBiomes.contains(original)) {
                         return BuiltinRegistries.BIOME.getOrCreateHolderOrThrow(Biomes.NETHER_WASTES);
                     } else if (theEndBiomes.contains(original)) {

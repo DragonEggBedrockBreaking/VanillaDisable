@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinMob {
     @ModifyReturnValue(method = "isSunBurnTick", at = @At("RETURN"))
     private boolean stopBurning(boolean original) {
-        if (!Gamerules.MOBS_BURN_IN_SUNLIGHT.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.MOBS_BURN_IN_SUNLIGHT.getBool()) {
             return false;
         }
         return original;

@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinShulkerBoxBlock {
     @ModifyReturnValue(method = "canOpen", at = @At("RETURN"))
     private static boolean canAlwaysOpen(boolean original) {
-        if (!Gamerules.CONTAINER_OPENING_BLOCKED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.CONTAINER_OPENING_BLOCKED.getBool()) {
             return true;
         }
         return original;

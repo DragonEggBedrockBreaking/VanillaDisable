@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinSpectralArrow {
     @Inject(method = "doPostHurtEffects", at = @At("HEAD"), cancellable = true)
     private void cancelPostHurtEffects(CallbackInfo ci) {
-        if (!Gamerules.SPECTRAL_ARROWS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.SPECTRAL_ARROWS_ENABLED.getBool()) {
             ci.cancel();
         }
     }

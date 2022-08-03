@@ -1058,21 +1058,23 @@ public enum Gamerules {
         }
     }
 
-    public <R> R getValue(Function<String, R> function) {
-        switch (this.type) {
-            case "boolean" -> {
-                if (server == null) return function.apply(String.valueOf(this.defaultBool));
-                return function.apply(String.valueOf(server.getWorldData().getGameRules().getBoolean(this.booleanGamerule)));
-            }
-            case "integer" -> {
-                if (server == null) return function.apply(String.valueOf(this.defaultInt));
-                return function.apply(String.valueOf(server.getWorldData().getGameRules().getInt(this.integerGamerule)));
-            }
-            case "double" -> {
-                if (server == null) return function.apply(String.valueOf(this.defaultDouble));
-                return function.apply(String.valueOf(server.getWorldData().getGameRules().getRule(this.doubleGamerule).get()));
-            }
-        }
-        return function.apply("");
+    public boolean getBool() {
+        if (server == null) return this.defaultBool;
+        return server.getWorldData().getGameRules().getBoolean(this.booleanGamerule);
+    }
+
+    public int getInt() {
+        if (server == null) return this.defaultInt;
+        return server.getWorldData().getGameRules().getInt(this.integerGamerule);
+    }
+
+    public float getFloat() {
+        if (server == null) return (float) this.defaultDouble;
+        return (float) server.getWorldData().getGameRules().getRule(this.doubleGamerule).get();
+    }
+
+    public double getDouble() {
+        if (server == null) return this.defaultDouble;
+        return server.getWorldData().getGameRules().getRule(this.doubleGamerule).get();
     }
 }

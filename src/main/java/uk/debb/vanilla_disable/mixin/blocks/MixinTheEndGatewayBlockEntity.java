@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinTheEndGatewayBlockEntity {
     @Inject(method = "teleportEntity", at = @At("HEAD"), cancellable = true)
     private static void cancelTeleportingEntity(CallbackInfo ci) {
-        if (!Gamerules.END_GATEWAYS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.END_GATEWAYS_ENABLED.getBool()) {
             ci.cancel();
         }
     }

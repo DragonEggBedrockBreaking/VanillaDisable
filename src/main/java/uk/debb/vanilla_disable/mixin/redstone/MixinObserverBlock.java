@@ -17,7 +17,7 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDelay(int delay) {
-        return Gamerules.OBSERVER_DELAY.getValue(Integer::parseInt);
+        return Gamerules.OBSERVER_DELAY.getInt();
     }
 
     @ModifyArg(
@@ -29,6 +29,6 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDuration(int duration) {
-        return Gamerules.OBSERVER_DURATION.getValue(Integer::parseInt);
+        return Gamerules.OBSERVER_DURATION.getInt();
     }
 }

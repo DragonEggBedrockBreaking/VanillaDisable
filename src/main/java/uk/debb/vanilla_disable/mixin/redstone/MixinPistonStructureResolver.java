@@ -17,6 +17,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinPistonStructureResolver {
     @ModifyConstant(method = "addBlockLine", constant = @Constant(intValue = 12))
     private int pushLimit(int oldPushLimit) {
-        return Gamerules.PISTON_PUSH_LIMIT.getValue(Integer::parseInt);
+        return Gamerules.PISTON_PUSH_LIMIT.getInt();
     }
 }

@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinDropperBlock {
     @Inject(method = "dispenseFrom", at = @At("HEAD"), cancellable = true)
     private void cancelDispensing(CallbackInfo ci) {
-        if (!Gamerules.DROPPER_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.DROPPER_ENABLED.getBool()) {
             ci.cancel();
         }
     }

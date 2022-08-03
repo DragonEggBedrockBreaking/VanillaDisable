@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinSculkSensorBlock {
     @ModifyReturnValue(method = "canActivate", at = @At("RETURN"))
     private static boolean cannotActivate(boolean original) {
-        if (!Gamerules.SCULK_SENSOR_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.SCULK_SENSOR_ENABLED.getBool()) {
             return false;
         }
         return original;

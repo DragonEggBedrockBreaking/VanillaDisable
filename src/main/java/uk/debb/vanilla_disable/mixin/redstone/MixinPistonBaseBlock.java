@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinPistonBaseBlock {
     @ModifyReturnValue(method = "triggerEvent", at = @At("RETURN"))
     private boolean cancelTriggeringEvent(boolean original) {
-        if (!Gamerules.PISTON_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.PISTON_ENABLED.getBool()) {
             return false;
         }
         return original;

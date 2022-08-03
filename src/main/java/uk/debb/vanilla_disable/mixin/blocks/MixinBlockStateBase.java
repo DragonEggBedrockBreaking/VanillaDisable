@@ -19,7 +19,7 @@ public abstract class MixinBlockStateBase implements Maps {
     @ModifyReturnValue(method = "use", at = @At("RETURN"))
     private InteractionResult modifyUse(InteractionResult original) {
         Gamerules gameRule = blockStateBaseBlockMap.get(this.getBlock());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return InteractionResult.FAIL;
         }
         return original;
@@ -28,7 +28,7 @@ public abstract class MixinBlockStateBase implements Maps {
     @ModifyReturnValue(method = "getMenuProvider", at = @At("RETURN"))
     private MenuProvider modifyMenuProvider(MenuProvider original) {
         Gamerules gameRule = blockStateBaseBlockMap.get(this.getBlock());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return null;
         }
         return original;

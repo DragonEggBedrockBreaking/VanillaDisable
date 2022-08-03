@@ -21,7 +21,7 @@ public abstract class MixinFoodData implements Maps {
         if (item.isEdible()) {
             Gamerules nutritionGamerule = foodDataFoodPropertiesMapNutrition.get(item.getFoodProperties());
             Gamerules saturationGamerule = foodDataFoodPropertiesMapSaturation.get(item.getFoodProperties());
-            this.eat(nutritionGamerule.getValue(Integer::parseInt), saturationGamerule.getValue(Float::parseFloat));
+            this.eat(nutritionGamerule.getInt(), saturationGamerule.getFloat());
         }
         ci.cancel();
     }

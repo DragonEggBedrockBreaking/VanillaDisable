@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinConduitBlockEntity {
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void cancelEffects(CallbackInfo ci) {
-        if (!Gamerules.CONDUITS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.CONDUITS_ENABLED.getBool()) {
             ci.cancel();
         }
     }

@@ -15,12 +15,12 @@ public abstract class MixinEnchantment implements Maps {
     private boolean modifyEnchantmentCompatibility(boolean original, Enchantment arg) {
         Pair<Enchantment, Enchantment> pair = new ObjectObjectImmutablePair<>((Enchantment) (Object) this, arg);
         Gamerules gameRule = enchantmentPairEnchantmentMap.get(pair);
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return true;
         }
         Pair<Enchantment, Enchantment> reversedPair = new ObjectObjectImmutablePair<>(arg, (Enchantment) (Object) this);
         Gamerules reversedGameRule = enchantmentPairEnchantmentMap.get(reversedPair);
-        if (reversedGameRule != null && !reversedGameRule.getValue(Boolean::parseBoolean)) {
+        if (reversedGameRule != null && !reversedGameRule.getBool()) {
             return true;
         }
         return original;

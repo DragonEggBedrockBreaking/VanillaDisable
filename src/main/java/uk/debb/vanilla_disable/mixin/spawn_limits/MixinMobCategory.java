@@ -13,7 +13,7 @@ public abstract class MixinMobCategory implements Maps {
     public int getMaxInstancesPerChunk(int original) {
         Gamerules gameRule = mobCategoryMobCategoryMapMobcap.get(this);
         if (gameRule != null) {
-            return gameRule.getValue(Integer::parseInt);
+            return gameRule.getInt();
         }
         return original;
     }

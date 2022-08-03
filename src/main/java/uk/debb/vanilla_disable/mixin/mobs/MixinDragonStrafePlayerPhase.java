@@ -22,7 +22,7 @@ public abstract class MixinDragonStrafePlayerPhase extends AbstractDragonPhaseIn
             )
     )
     private boolean spawnFreshEntity(boolean original) {
-        if (!Gamerules.DRAGON_FIREBALLS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.DRAGON_FIREBALLS.getBool()) {
             return false;
         }
         return original;

@@ -15,7 +15,7 @@ public abstract class MixinServerPlayer implements Maps {
     @Inject(method = "die", at = @At("HEAD"), cancellable = true)
     private void cancelDeath(DamageSource damageSource, CallbackInfo ci) {
         Gamerules gameRule = serverPlayerStringMap.get(damageSource.getMsgId());
-        if (!Gamerules.DEATH_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if (!Gamerules.DEATH_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
             ((Player) (Object) this).setHealth(((Player) (Object) this).getHealth() + 1);
             ci.cancel();
         }

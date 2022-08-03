@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinPointedDripstoneBlock {
     @Inject(method = "spawnFallingStalactite", at = @At("HEAD"), cancellable = true)
     private static void cancelSpawningFallingStalactite(CallbackInfo ci) {
-        if (!Gamerules.POINTED_DRIPSTONE_FALLS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.POINTED_DRIPSTONE_FALLS.getBool()) {
             ci.cancel();
         }
     }

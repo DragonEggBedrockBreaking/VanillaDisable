@@ -13,7 +13,7 @@ public abstract class MixinBiomeGenerationSettings implements Maps {
     @ModifyReturnValue(method = "hasFeature", at = @At("RETURN"))
     private boolean cancelHavingFeature(boolean original, PlacedFeature feature) {
         Gamerules gameRule = biomeGenerationSettingsStringMap.get(String.format("%s", feature));
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return false;
         }
         return original;

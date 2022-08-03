@@ -18,8 +18,8 @@ public abstract class MixinLivingEntity implements Maps {
         if (((Entity) (Object) this).getType().equals(EntityType.PLAYER)) {
             MobEffect statusEffect = effect.getEffect();
             Gamerules gameRule = livingEntityMobEffectMap.get(statusEffect);
-            if ((!Gamerules.EFFECTS_ENABLED.getValue(Boolean::parseBoolean)) ||
-                    (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+            if ((!Gamerules.EFFECTS_ENABLED.getBool()) ||
+                    (gameRule != null && !gameRule.getBool())) {
                 return false;
             }
         }

@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinZombieVillager {
     @ModifyReturnValue(method = "mobInteract", at = @At("RETURN"))
     private InteractionResult cureMob(InteractionResult original) {
-        if (!Gamerules.CURABLE_ZILLAGERS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.CURABLE_ZILLAGERS.getBool()) {
             return InteractionResult.CONSUME;
         }
         return original;

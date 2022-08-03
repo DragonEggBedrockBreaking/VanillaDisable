@@ -18,7 +18,7 @@ public abstract class MixinVillager {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (!Gamerules.VILLAGERS_CONVERT_TO_WITCHES.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.VILLAGERS_CONVERT_TO_WITCHES.getBool()) {
             return Difficulty.PEACEFUL;
         }
         return original;
@@ -26,7 +26,7 @@ public abstract class MixinVillager {
 
     @ModifyReturnValue(method = "wantsToSpawnGolem", at = @At("RETURN"))
     private boolean doesNotWantToSpawnGolem(boolean original) {
-        if (!Gamerules.VILLAGERS_SPAWN_GOLEMS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.VILLAGERS_SPAWN_GOLEMS.getBool()) {
             return false;
         }
         return original;

@@ -13,7 +13,7 @@ public abstract class MixinMobCategory implements Maps {
     public int editDespawnDistance(int original) {
         Gamerules gameRule = mobCategoryMobCategoryMapMax.get(this);
         if (gameRule != null) {
-            return gameRule.getValue(Integer::parseInt);
+            return gameRule.getInt();
         }
         return original;
     }
@@ -22,7 +22,7 @@ public abstract class MixinMobCategory implements Maps {
     public int editNoDespawnDistance(int original) {
         Gamerules gameRule = mobCategoryMobCategoryMapMin.get(this);
         if (gameRule != null) {
-            return gameRule.getValue(Integer::parseInt);
+            return gameRule.getInt();
         }
         return original;
     }

@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinEndPortalBlock {
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
     private void cancelEntityInside(CallbackInfo ci) {
-        if (!Gamerules.END_PORTALS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.END_PORTALS_ENABLED.getBool()) {
             ci.cancel();
         }
     }

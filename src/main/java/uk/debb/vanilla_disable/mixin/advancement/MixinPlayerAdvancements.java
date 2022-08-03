@@ -15,7 +15,7 @@ public abstract class MixinPlayerAdvancements implements Maps {
     private AdvancementProgress cancelPerformingCriterion(AdvancementProgress original, Advancement advancement) {
         if (advancement.getDisplay() != null) {
             Gamerules gameRule = playerAdvancementsStringMap.get(advancement.getDisplay().getTitle().toString().split("'")[1]);
-            if (!Gamerules.ADVANCEMENTS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+            if (!Gamerules.ADVANCEMENTS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
                 return new AdvancementProgress();
             }
         }

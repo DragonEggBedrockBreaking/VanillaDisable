@@ -17,9 +17,9 @@ public abstract class MixinButtonBlock {
     @ModifyReturnValue(method = "getPressDuration", at = @At("RETURN"))
     private int modifyPressDuration(int original) {
         if (this.sensitive) {
-            return Gamerules.WOOD_BUTTON_PRESS_DURATION.getValue(Integer::parseInt);
+            return Gamerules.WOOD_BUTTON_PRESS_DURATION.getInt();
         } else {
-            return Gamerules.STONE_BUTTON_PRESS_DURATION.getValue(Integer::parseInt);
+            return Gamerules.STONE_BUTTON_PRESS_DURATION.getInt();
         }
     }
 }

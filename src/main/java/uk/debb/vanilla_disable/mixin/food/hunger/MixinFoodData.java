@@ -18,7 +18,7 @@ public abstract class MixinFoodData {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (Gamerules.OLD_HUNGER.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.OLD_HUNGER.getBool()) {
             Gamerules.setBoolean(GameRules.RULE_NATURAL_REGENERATION, false);
             return Difficulty.PEACEFUL;
         }

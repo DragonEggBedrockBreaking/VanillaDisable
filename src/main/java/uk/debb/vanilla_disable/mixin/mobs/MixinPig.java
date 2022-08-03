@@ -16,7 +16,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinPig {
     @ModifyReturnValue(method = "isFood", at = @At("RETURN"))
     private boolean changeFood(boolean original, ItemStack stack) {
-        if (Gamerules.PIGS_BREED_WITH_WHEAT.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.PIGS_BREED_WITH_WHEAT.getBool()) {
             return Ingredient.of(Items.WHEAT).test(stack);
         }
         return original;
@@ -32,7 +32,7 @@ public abstract class MixinPig {
             index = 1
     )
     private Goal modifyCarrotOnStickGoal(Goal goal) {
-        if (Gamerules.PIGS_BREED_WITH_WHEAT.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.PIGS_BREED_WITH_WHEAT.getBool()) {
             return new TemptGoal((Pig) (Object) this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;
@@ -48,7 +48,7 @@ public abstract class MixinPig {
             index = 1
     )
     private Goal modifyBreedItemsGoal(Goal goal) {
-        if (Gamerules.PIGS_BREED_WITH_WHEAT.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.PIGS_BREED_WITH_WHEAT.getBool()) {
             return new TemptGoal((Pig) (Object) this, 1.2D, Ingredient.of(Items.WHEAT), false);
         }
         return goal;

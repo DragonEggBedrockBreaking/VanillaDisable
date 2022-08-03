@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinBeaconBlockEntity {
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void cancelEffects(CallbackInfo ci) {
-        if (!Gamerules.BEACONS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.BEACONS_ENABLED.getBool()) {
             ci.cancel();
         }
     }

@@ -21,7 +21,7 @@ public abstract class MixinStructureCheck implements Maps {
         } else {
             gameRule = structureCheckStructureTypeMap.get(structure.type());
         }
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return StructureCheckResult.START_NOT_PRESENT;
         }
         return original;

@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinLivingEntity {
     @ModifyReturnValue(method = "checkTotemDeathProtection", at = @At("RETURN"))
     private boolean totemsDoNotWork(boolean original) {
-        if (!Gamerules.TOTEMS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.TOTEMS_ENABLED.getBool()) {
             return false;
         }
         return original;

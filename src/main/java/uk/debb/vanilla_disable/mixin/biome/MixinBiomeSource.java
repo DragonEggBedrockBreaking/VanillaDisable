@@ -17,7 +17,7 @@ public abstract class MixinBiomeSource implements Maps {
     private Set<Holder<Biome>> modifyPossibleBiomes(Set<Holder<Biome>> original) {
         for (Holder<Biome> biomeHolder : original) {
             Gamerules gameRule = biomeSourceBiomeHolderMap.get(biomeHolder);
-            if (!Gamerules.BIOMES_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+            if (!Gamerules.BIOMES_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
                 original.remove(biomeHolder);
             }
         }

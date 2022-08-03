@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinBuddingAmethystBlock {
     @ModifyReturnValue(method = "getPistonPushReaction", at = @At("RETURN"))
     private PushReaction pushableBuddingAmethyst(PushReaction original) {
-        if (Gamerules.PUSHABLE_BUDDING_AMETHYST.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.PUSHABLE_BUDDING_AMETHYST.getBool()) {
             return PushReaction.PUSH_ONLY;
         }
         return original;

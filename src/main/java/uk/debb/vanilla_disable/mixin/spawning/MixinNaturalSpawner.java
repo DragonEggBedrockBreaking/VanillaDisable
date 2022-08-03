@@ -16,7 +16,7 @@ public abstract class MixinNaturalSpawner implements Maps {
     @Inject(method = "spawnCategoryForChunk", at = @At(value = "HEAD"), cancellable = true)
     private static void cancelSpawningCategoryForChunk(MobCategory mobCategory, ServerLevel serverLevel, LevelChunk levelChunk, NaturalSpawner.SpawnPredicate spawnPredicate, NaturalSpawner.AfterSpawnCallback afterSpawnCallback, CallbackInfo ci) {
         Gamerules gameRule = naturalSpawnerMobCategoryMap.get(mobCategory);
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             ci.cancel();
         }
     }

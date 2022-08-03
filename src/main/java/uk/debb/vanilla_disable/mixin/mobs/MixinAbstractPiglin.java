@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinAbstractPiglin {
     @ModifyReturnValue(method = "isImmuneToZombification", at = @At("RETURN"))
     private boolean setImmuneToZombification(boolean original) {
-        if (!Gamerules.PIGLINS_CONVERT_TO_ZIGLINS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.PIGLINS_CONVERT_TO_ZIGLINS.getBool()) {
             return true;
         }
         return original;

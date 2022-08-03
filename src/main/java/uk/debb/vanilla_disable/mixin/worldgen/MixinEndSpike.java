@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinEndSpike {
     @ModifyReturnValue(method = "isGuarded", at = @At("RETURN"))
     private boolean notGuarded(boolean original) {
-        if (!Gamerules.END_PILLAR_CAGE_GENERATION.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.END_PILLAR_CAGE_GENERATION.getBool()) {
             return false;
         }
         return original;

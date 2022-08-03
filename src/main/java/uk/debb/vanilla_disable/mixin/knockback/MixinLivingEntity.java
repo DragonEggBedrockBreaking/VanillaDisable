@@ -26,20 +26,20 @@ public abstract class MixinLivingEntity implements Maps {
     @Unique
     private boolean isInvulnerableToKnockback(LivingEntity source) {
         Gamerules gameRule = livingEntityClassMapKnockback.get(this.getClass());
-        if ((!Gamerules.KNOCKBACK_ENABLED.getValue(Boolean::parseBoolean)) ||
-                (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if ((!Gamerules.KNOCKBACK_ENABLED.getBool()) ||
+                (gameRule != null && !gameRule.getBool())) {
             return true;
         }
         if ((source instanceof AbstractSkeleton && !(source instanceof WitherSkeleton)) ||
                 (source instanceof Piglin && source.isHolding(Items.CROSSBOW)) ||
                 (source instanceof Pillager)) {
-            return !Gamerules.ARROW_KNOCKBACK.getValue(Boolean::parseBoolean);
+            return !Gamerules.ARROW_KNOCKBACK.getBool();
         }
         if (source instanceof Drowned && source.isHolding(Items.TRIDENT)) {
-            return !Gamerules.TRIDENT_KNOCKBACK.getValue(Boolean::parseBoolean);
+            return !Gamerules.TRIDENT_KNOCKBACK.getBool();
         }
         if (source != null) {
-            return !Gamerules.MOB_ATTACK_KNOCKBACK.getValue(Boolean::parseBoolean);
+            return !Gamerules.MOB_ATTACK_KNOCKBACK.getBool();
         }
         return false;
     }

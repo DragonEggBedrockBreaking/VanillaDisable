@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinBowItem {
     @ModifyReturnValue(method = "getPowerForTime", at = @At("RETURN"))
     private static float modifyPower(float original) {
-        if (Gamerules.BOW_SPAMMING.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.BOW_SPAMMING.getBool()) {
             return 1.0F;
         }
         return original;
@@ -18,7 +18,7 @@ public abstract class MixinBowItem {
 
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int lowerUseDuration(int original) {
-        if (Gamerules.BOW_SPAMMING.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.BOW_SPAMMING.getBool()) {
             return 4;
         }
         return original;

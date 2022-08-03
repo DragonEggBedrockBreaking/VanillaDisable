@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinHoglin {
     @ModifyReturnValue(method = "isImmuneToZombification", at = @At("RETURN"))
     private boolean setImmuneToZombification(boolean original) {
-        if (!Gamerules.HOGLINS_CONVERT_TO_ZOGLINS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.HOGLINS_CONVERT_TO_ZOGLINS.getBool()) {
             return true;
         }
         return original;

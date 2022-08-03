@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinBreedGoal {
     @ModifyReturnValue(method = "canUse", at = @At(value = "RETURN"))
     private boolean cannotUse(boolean original) {
-        if (!Gamerules.ANIMAL_BREEDING.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.ANIMAL_BREEDING.getBool()) {
             return false;
         }
         return original;
@@ -18,7 +18,7 @@ public abstract class MixinBreedGoal {
 
     @ModifyReturnValue(method = "canContinueToUse", at = @At(value = "RETURN"))
     private boolean shouldContinueToUse(boolean original) {
-        if (!Gamerules.ANIMAL_BREEDING.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.ANIMAL_BREEDING.getBool()) {
             return false;
         }
         return original;

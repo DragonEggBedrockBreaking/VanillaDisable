@@ -27,11 +27,11 @@ public abstract class MixinBlock {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.ICE) || blockState.is(Blocks.BLUE_ICE) ||
                 blockState.is(Blocks.FROSTED_ICE) || blockState.is(Blocks.PACKED_ICE)) {
-            return Gamerules.ICE_FRICTION_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.ICE_FRICTION_FACTOR.getFloat();
         } else if (blockState.is(Blocks.SLIME_BLOCK)) {
-            return Gamerules.SLIME_FRICTION_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.SLIME_FRICTION_FACTOR.getFloat();
         } else {
-            return Gamerules.DEFAULT_BLOCK_FRICTION_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.DEFAULT_BLOCK_FRICTION_FACTOR.getFloat();
         }
     }
 
@@ -39,11 +39,11 @@ public abstract class MixinBlock {
     private float modifySpeedFactor(float original) {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.SOUL_SAND)) {
-            return Gamerules.SOUL_SAND_SPEED_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.SOUL_SAND_SPEED_FACTOR.getFloat();
         } else if (blockState.is(Blocks.HONEY_BLOCK)) {
-            return Gamerules.HONEY_BLOCK_SPEED_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.HONEY_BLOCK_SPEED_FACTOR.getFloat();
         } else {
-            return Gamerules.DEFAULT_BLOCK_SPEED_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.DEFAULT_BLOCK_SPEED_FACTOR.getFloat();
         }
     }
 
@@ -51,15 +51,15 @@ public abstract class MixinBlock {
     private float modifyJumpFactor(float original) {
         BlockState blockState = this.defaultBlockState();
         if (blockState.is(Blocks.HONEY_BLOCK)) {
-            return Gamerules.HONEY_BLOCK_JUMP_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.HONEY_BLOCK_JUMP_FACTOR.getFloat();
         } else {
-            return Gamerules.DEFAULT_BLOCK_JUMP_FACTOR.getValue(Float::parseFloat);
+            return Gamerules.DEFAULT_BLOCK_JUMP_FACTOR.getFloat();
         }
     }
 
     @Inject(method = "playerDestroy", at = @At("HEAD"), cancellable = true)
     private void cancelDestruction(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack itemStack, CallbackInfo ci) {
-        if (Gamerules.OLD_TNT.getValue(Boolean::parseBoolean) && blockState.is(Blocks.TNT)) {
+        if (Gamerules.OLD_TNT.getBool() && blockState.is(Blocks.TNT)) {
             TntBlock.explode(level, blockPos);
             ci.cancel();
         }

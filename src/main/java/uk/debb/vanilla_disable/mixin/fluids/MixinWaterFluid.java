@@ -13,7 +13,7 @@ public abstract class MixinWaterFluid {
     @ModifyReturnValue(method = "getDropOff", at = @At("RETURN"))
     private int getWaterDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
-            return Gamerules.WATER_REACHES_FAR.getValue(Boolean::parseBoolean) ? 1 : 2;
+            return Gamerules.WATER_REACHES_FAR.getBool() ? 1 : 2;
         }
         return original;
     }
@@ -21,13 +21,13 @@ public abstract class MixinWaterFluid {
     @ModifyReturnValue(method = "getTickDelay", at = @At("RETURN"))
     private int getWaterTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
-            return Gamerules.WATER_FLOW_SPEED.getValue(Integer::parseInt);
+            return Gamerules.WATER_FLOW_SPEED.getInt();
         }
         return original;
     }
 
     @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
     private boolean canWaterConvertToSource(boolean original) {
-        return Gamerules.INFINITE_WATER.getValue(Boolean::parseBoolean);
+        return Gamerules.INFINITE_WATER.getBool();
     }
 }

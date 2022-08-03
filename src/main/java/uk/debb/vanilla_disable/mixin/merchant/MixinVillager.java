@@ -23,7 +23,7 @@ public abstract class MixinVillager extends Entity {
 
     @ModifyReturnValue(method = "allowedToRestock", at = @At("RETURN"))
     private boolean editRestockFrequency(boolean original) {
-        int villagerDailyRestocks = Gamerules.VILLAGER_DAILY_RESTOCKS.getValue(Integer::parseInt);
+        int villagerDailyRestocks = Gamerules.VILLAGER_DAILY_RESTOCKS.getInt();
         if (villagerDailyRestocks == 0) return original;
         long restockTimeLimit = 4800L / villagerDailyRestocks;
         return this.numberOfRestocksToday == 0 | this.numberOfRestocksToday < 2 && this.level.getGameTime() > this.lastRestockGameTime + restockTimeLimit;

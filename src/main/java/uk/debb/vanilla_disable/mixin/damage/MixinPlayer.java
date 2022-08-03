@@ -13,20 +13,20 @@ public abstract class MixinPlayer implements Maps {
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
     private boolean isAlsoInvulnerableTo(boolean original, DamageSource damageSource) {
         Gamerules gameRule = playerDamageSourceMap.get(damageSource);
-        if (!Gamerules.DAMAGE_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.DAMAGE_ENABLED.getBool()) {
             return true;
-        } else if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        } else if (gameRule != null && !gameRule.getBool()) {
             return true;
         } else if (damageSource.isProjectile()) {
-            return !Gamerules.PROJECTILE_DAMAGE.getValue(Boolean::parseBoolean);
+            return !Gamerules.PROJECTILE_DAMAGE.getBool();
         } else if (damageSource.isExplosion()) {
-            return !Gamerules.EXPLOSION_DAMAGE.getValue(Boolean::parseBoolean);
+            return !Gamerules.EXPLOSION_DAMAGE.getBool();
         } else if (damageSource.isBypassInvul()) {
-            return !Gamerules.VOID_DAMAGE.getValue(Boolean::parseBoolean);
+            return !Gamerules.VOID_DAMAGE.getBool();
         } else if (damageSource.isMagic()) {
-            return !Gamerules.MAGIC_DAMAGE.getValue(Boolean::parseBoolean);
+            return !Gamerules.MAGIC_DAMAGE.getBool();
         } else if (damageSource.isCreativePlayer()) {
-            return !Gamerules.CREATIVE_PLAYER_DAMAGE.getValue(Boolean::parseBoolean);
+            return !Gamerules.CREATIVE_PLAYER_DAMAGE.getBool();
         }
         return original;
     }

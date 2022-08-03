@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinSwordItem {
     @ModifyReturnValue(method = "canAttackBlock", at = @At("RETURN"))
     private boolean canAlwaysAttackBlock(boolean original) {
-        if (Gamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.CREATIVE_SWORD_CAN_BREAK_BLOCKS.getBool()) {
             return true;
         }
         return original;

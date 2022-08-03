@@ -14,6 +14,6 @@ public abstract class MixinAbilities {
 
     @ModifyReturnValue(method = "getFlyingSpeed", at = @At("RETURN"))
     private float modifyFlyingSpeed(float original) {
-        return Gamerules.PLAYER_FLYING_SPEED.getValue(Float::parseFloat) / 0.05F * this.flyingSpeed;
+        return Gamerules.PLAYER_FLYING_SPEED.getFloat() / 0.05F * this.flyingSpeed;
     }
 }

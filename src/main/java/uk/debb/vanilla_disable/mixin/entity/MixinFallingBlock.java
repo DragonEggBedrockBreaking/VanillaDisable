@@ -17,7 +17,7 @@ public abstract class MixinFallingBlock implements Maps {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void neverFree(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
         Gamerules gameRule = fallingBlockBlockMap.get(blockState.getBlock());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             ci.cancel();
         }
     }

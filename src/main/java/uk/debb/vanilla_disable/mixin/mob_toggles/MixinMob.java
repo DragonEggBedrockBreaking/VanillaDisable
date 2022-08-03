@@ -20,7 +20,7 @@ public abstract class MixinMob extends LivingEntity implements Maps {
     @Inject(method = "checkDespawn", at = @At("HEAD"))
     private void checkIfEnabled(CallbackInfo ci) {
         Gamerules gameRule = mobClassMapToggle.get(this.getClass());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             this.discard();
         }
     }

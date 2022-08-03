@@ -23,7 +23,7 @@ public abstract class MixinVillagerData implements Maps {
     @ModifyReturnValue(method = "getType", at = @At("RETURN"))
     private VillagerType modifyType(VillagerType original) {
         Gamerules gameRule = villagerDataVillagerTypeMap.get(this.type);
-        if (!Gamerules.VILLAGER_TYPES_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if (!Gamerules.VILLAGER_TYPES_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
             return VillagerType.PLAINS;
         }
         return original;
@@ -32,7 +32,7 @@ public abstract class MixinVillagerData implements Maps {
     @ModifyReturnValue(method = "getProfession", at = @At("RETURN"))
     private VillagerProfession modifyProfession(VillagerProfession original) {
         Gamerules gameRule = villagerDataVillagerProfessionMap.get(this.profession);
-        if (!Gamerules.VILLAGER_PROFESSIONS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if (!Gamerules.VILLAGER_PROFESSIONS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
             return VillagerProfession.NONE;
         }
         return original;

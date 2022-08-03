@@ -20,7 +20,7 @@ public abstract class MixinPainting implements Maps {
     @ModifyReturnValue(method = "getVariant", at = @At("RETURN"))
     private Holder<PaintingVariant> modifyVariant(Holder<PaintingVariant> original) {
         Gamerules gameRule = paintingHolderPaintingVariantMap.get(original);
-        if (!Gamerules.ALTERNATE_PAINTINGS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if (!Gamerules.ALTERNATE_PAINTINGS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
             return getDefaultVariant();
         }
         return original;

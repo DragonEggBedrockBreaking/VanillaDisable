@@ -14,9 +14,9 @@ public abstract class MixinLavaFluid {
     private int getLavaDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return Gamerules.LAVA_REACHES_FAR_IN_NETHER.getValue(Boolean::parseBoolean) ? 1 : 2;
+                return Gamerules.LAVA_REACHES_FAR_IN_NETHER.getBool() ? 1 : 2;
             } else {
-                return Gamerules.LAVA_REACHES_FAR.getValue(Boolean::parseBoolean) ? 1 : 2;
+                return Gamerules.LAVA_REACHES_FAR.getBool() ? 1 : 2;
             }
         }
         return original;
@@ -26,9 +26,9 @@ public abstract class MixinLavaFluid {
     private int getLavaTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return Gamerules.LAVA_FLOW_SPEED_NETHER.getValue(Integer::parseInt);
+                return Gamerules.LAVA_FLOW_SPEED_NETHER.getInt();
             } else {
-                return Gamerules.LAVA_FLOW_SPEED.getValue(Integer::parseInt);
+                return Gamerules.LAVA_FLOW_SPEED.getInt();
             }
         }
         return original;
@@ -36,6 +36,6 @@ public abstract class MixinLavaFluid {
 
     @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
     private boolean canLavaConvertToSource(boolean original) {
-        return Gamerules.INFINITE_LAVA.getValue(Boolean::parseBoolean);
+        return Gamerules.INFINITE_LAVA.getBool();
     }
 }

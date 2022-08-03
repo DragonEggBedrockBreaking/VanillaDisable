@@ -10,6 +10,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinEntity {
     @ModifyReturnValue(method = "getDimensionChangingDelay", at = @At("RETURN"))
     private int modifyDimensionChangingDelay(int original) {
-        return Gamerules.NETHER_PORTAL_COOLDOWN.getValue(Integer::parseInt);
+        return Gamerules.NETHER_PORTAL_COOLDOWN.getInt();
     }
 }

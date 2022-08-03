@@ -18,7 +18,7 @@ public abstract class MixinThrownEnderpearl {
             cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (!Gamerules.ENDER_PEARLS_DESPAWN_ON_DEATH.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.ENDER_PEARLS_DESPAWN_ON_DEATH.getBool()) {
             ci.cancel();
         }
     }

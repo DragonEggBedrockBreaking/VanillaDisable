@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinSkeleton {
     @Inject(method = "doFreezeConversion", at = @At("HEAD"), cancellable = true)
     private void cancelFreezeConversion(CallbackInfo ci) {
-        if (!Gamerules.SKELETONS_CONVERT_TO_STRAYS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.SKELETONS_CONVERT_TO_STRAYS.getBool()) {
             ci.cancel();
         }
     }

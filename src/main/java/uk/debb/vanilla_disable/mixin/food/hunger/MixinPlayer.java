@@ -17,7 +17,7 @@ import java.util.Objects;
 public abstract class MixinPlayer {
     @Inject(method = "eat", at = @At("HEAD"))
     private void changeEating(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        if (Gamerules.OLD_HUNGER.getValue(Boolean::parseBoolean) && stack.getItem().isEdible()) {
+        if (Gamerules.OLD_HUNGER.getBool() && stack.getItem().isEdible()) {
             ((LivingEntity) (Object) this).setHealth(((LivingEntity) (Object) this).getHealth() +
                     Objects.requireNonNull(stack.getItem().getFoodProperties()).getNutrition());
         }
@@ -31,7 +31,7 @@ public abstract class MixinPlayer {
             )
     )
     private boolean alwaysNeedsFood(boolean original) {
-        if (Gamerules.OLD_HUNGER.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.OLD_HUNGER.getBool()) {
             return ((LivingEntity) (Object) this).getHealth() < ((LivingEntity) (Object) this).getMaxHealth();
         }
         return original;

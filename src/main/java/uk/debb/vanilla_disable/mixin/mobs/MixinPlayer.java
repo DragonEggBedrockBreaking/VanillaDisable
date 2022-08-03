@@ -14,7 +14,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinPlayer {
     @Inject(method = "attack", at = @At("RETURN"))
     private void igniteCreeper(Entity target, CallbackInfo ci) {
-        if (Gamerules.FIRE_ASPECT_IGNITES_CREEPERS.getValue(Boolean::parseBoolean) &&
+        if (Gamerules.FIRE_ASPECT_IGNITES_CREEPERS.getBool() &&
                 target instanceof Creeper && EnchantmentHelper.getFireAspect((Player) (Object) this) > 0) {
             ((Creeper) target).ignite();
         }

@@ -17,7 +17,7 @@ public abstract class MixinBlockStateBase implements Maps {
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
     private int modifySignal(int original) {
         Gamerules gameRule = blockStateBaseRedstoneBlocksMap.get(this.getBlock());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return 0;
         }
         return original;
@@ -26,7 +26,7 @@ public abstract class MixinBlockStateBase implements Maps {
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
     private int modifyDirectSignal(int original) {
         Gamerules gameRule = blockStateBaseRedstoneBlocksMap.get(this.getBlock());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return 0;
         }
         return original;

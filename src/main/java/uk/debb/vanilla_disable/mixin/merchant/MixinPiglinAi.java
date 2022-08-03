@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinPiglinAi {
     @ModifyReturnValue(method = "isBarterCurrency", at = @At("RETURN"))
     private static boolean cancelBarter(boolean original) {
-        if (!Gamerules.PIGLIN_BARTERING_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.PIGLIN_BARTERING_ENABLED.getBool()) {
             return false;
         }
         return original;

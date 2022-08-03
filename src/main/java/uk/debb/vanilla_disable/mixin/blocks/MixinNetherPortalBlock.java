@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinNetherPortalBlock {
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
     private void cancelInsideEntity(CallbackInfo ci) {
-        if (!Gamerules.NETHER_PORTALS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.NETHER_PORTALS_ENABLED.getBool()) {
             ci.cancel();
         }
     }

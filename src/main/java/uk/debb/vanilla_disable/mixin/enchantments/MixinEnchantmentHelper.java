@@ -14,8 +14,8 @@ public abstract class MixinEnchantmentHelper implements Maps {
     @ModifyReturnValue(method = "getItemEnchantmentLevel", at = @At("RETURN"))
     private static int removeEnchantmentLevel(int original, Enchantment enchantment, ItemStack stack) {
         Gamerules gameRule = enchantmentHelperEnchantmentMap.get(enchantment);
-        if (!Gamerules.ENCHANTMENTS_ENABLED.getValue(Boolean::parseBoolean) ||
-                (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if (!Gamerules.ENCHANTMENTS_ENABLED.getBool() ||
+                (gameRule != null && !gameRule.getBool())) {
             return 0;
         }
         return original;

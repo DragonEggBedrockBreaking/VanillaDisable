@@ -21,18 +21,18 @@ public abstract class MixinPotionUtils implements Maps {
     private static List<MobEffectInstance> removeMobEffects(List<MobEffectInstance> original, ItemStack itemStack) {
         Potion potion = PotionUtils.getPotion(itemStack);
         if (itemStack.getItem() instanceof SplashPotionItem) {
-            if (!Gamerules.SPLASH_POTIONS_ENABLED.getValue(Boolean::parseBoolean)) {
+            if (!Gamerules.SPLASH_POTIONS_ENABLED.getBool()) {
                 return new ArrayList<>();
             }
         } else if (itemStack.getItem() instanceof LingeringPotionItem) {
-            if (!Gamerules.LINGERING_POTIONS_ENABLED.getValue(Boolean::parseBoolean)) {
+            if (!Gamerules.LINGERING_POTIONS_ENABLED.getBool()) {
                 return new ArrayList<>();
             }
-        } else if (!Gamerules.NORMAL_POTIONS_ENABLED.getValue(Boolean::parseBoolean)) {
+        } else if (!Gamerules.NORMAL_POTIONS_ENABLED.getBool()) {
             return new ArrayList<>();
         }
         Gamerules gameRule = potionUtilsPotionMap.get(potion);
-        if (!Gamerules.POTIONS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+        if (!Gamerules.POTIONS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
             return new ArrayList<>();
         }
         return original;

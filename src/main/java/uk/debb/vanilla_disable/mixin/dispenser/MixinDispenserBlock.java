@@ -15,7 +15,7 @@ public abstract class MixinDispenserBlock implements Maps {
     @ModifyReturnValue(method = "getDispenseMethod", at = @At("RETURN"))
     private DispenseItemBehavior modifyDispenseMethod(DispenseItemBehavior original, ItemStack itemStack) {
         Gamerules gameRule = dispenserBlockItemMap.get(itemStack.getItem());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return new DefaultDispenseItemBehavior();
         }
         return original;

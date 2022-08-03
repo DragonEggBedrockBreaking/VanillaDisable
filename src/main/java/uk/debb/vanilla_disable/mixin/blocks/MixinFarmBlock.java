@@ -20,6 +20,6 @@ public abstract class MixinFarmBlock {
             require = 0
     )
     private boolean cancelTurningToDirt(BlockState blockState, Level level, BlockPos blockPos) {
-        return Gamerules.CROP_TRAMPLING.getValue(Boolean::parseBoolean);
+        return Gamerules.CROP_TRAMPLING.getBool();
     }
 }

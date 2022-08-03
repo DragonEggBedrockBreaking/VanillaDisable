@@ -28,7 +28,7 @@ public abstract class MixinBaseSpawner implements Maps {
     )
     private void cancelSpawningNewEntityAndPassengers(CallbackInfo ci) {
         Gamerules gameRule = baseSpawnerClassMap.get(Objects.requireNonNull(this.displayEntity).getClass());
-        if (!gameRule.getValue(Boolean::parseBoolean) || !Gamerules.SPAWNERS_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!gameRule.getBool() || !Gamerules.SPAWNERS_ENABLED.getBool()) {
             ci.cancel();
         }
     }

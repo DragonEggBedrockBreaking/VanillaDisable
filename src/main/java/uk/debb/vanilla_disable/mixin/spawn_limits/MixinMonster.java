@@ -17,7 +17,7 @@ public abstract class MixinMonster {
         if (world.getBrightness(LightLayer.SKY, pos) > randomSource.nextInt(32)) {
             return false;
         }
-        if (world.getBrightness(LightLayer.BLOCK, pos) > Gamerules.MONSTER_MAX_LIGHT_LEVEL.getValue(Integer::parseInt)) {
+        if (world.getBrightness(LightLayer.BLOCK, pos) > Gamerules.MONSTER_MAX_LIGHT_LEVEL.getInt()) {
             return false;
         } else {
             if (!world.getLevel().isThundering()) {

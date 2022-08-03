@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinItem {
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int editUseDuration(int original, ItemStack stack) {
-        if (Gamerules.OLD_HUNGER.getValue(Boolean::parseBoolean) && stack.getItem().isEdible()) {
+        if (Gamerules.OLD_HUNGER.getBool() && stack.getItem().isEdible()) {
             return 1;
         }
         return original;

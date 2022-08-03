@@ -22,7 +22,7 @@ public abstract class MixinItemStack implements Maps {
     @ModifyReturnValue(method = "use", at = @At("RETURN"))
     private InteractionResultHolder<ItemStack> cancelUsage(InteractionResultHolder<ItemStack> original, Level level, Player player, InteractionHand interactionHand) {
         Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return InteractionResultHolder.fail(player.getItemInHand(interactionHand));
         }
         return original;
@@ -31,7 +31,7 @@ public abstract class MixinItemStack implements Maps {
     @ModifyReturnValue(method = "useOn", at = @At("RETURN"))
     private InteractionResult cancelUsageOn(InteractionResult original) {
         Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return InteractionResult.FAIL;
         }
         return original;
@@ -40,7 +40,7 @@ public abstract class MixinItemStack implements Maps {
     @ModifyReturnValue(method = "interactLivingEntity", at = @At("RETURN"))
     private InteractionResult cancelLivingEntityInteraction(InteractionResult original) {
         Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return InteractionResult.FAIL;
         }
         return original;
@@ -49,7 +49,7 @@ public abstract class MixinItemStack implements Maps {
     @ModifyReturnValue(method = "finishUsingItem", at = @At("RETURN"))
     private ItemStack cancelItemUseFinishing(ItemStack original) {
         Gamerules gameRule = itemStackClassMap.get(this.getItem().getClass());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return ItemStack.EMPTY;
         }
         return original;

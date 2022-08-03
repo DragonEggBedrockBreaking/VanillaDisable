@@ -29,7 +29,7 @@ public abstract class MixinEntity {
 
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
     private void killOnHorizontalCollision(CallbackInfo ci) {
-        if (Gamerules.OLD_BOATS.getValue(Boolean::parseBoolean) && this.getType().equals(EntityType.BOAT)) {
+        if (Gamerules.OLD_BOATS.getBool() && this.getType().equals(EntityType.BOAT)) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));
                 if (blockState.getMaterial().isSolid()) {

@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinCrossbowItem {
     @ModifyReturnValue(method = "getChargeDuration", at = @At("RETURN"))
     private static int lowerChargeDuration(int original) {
-        if (Gamerules.CROSSBOW_SPAMMING.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.CROSSBOW_SPAMMING.getBool()) {
             return 1;
         }
         return original;
@@ -18,7 +18,7 @@ public abstract class MixinCrossbowItem {
 
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int lowerUseDuration(int original) {
-        if (Gamerules.CROSSBOW_SPAMMING.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.CROSSBOW_SPAMMING.getBool()) {
             return 2;
         }
         return original;

@@ -12,7 +12,7 @@ public abstract class MixinGoal implements Maps {
     @ModifyReturnValue(method = "canContinueToUse", at = @At("RETURN"))
     private boolean blockContinuance(boolean original) {
         Gamerules gameRule = goalClassMap.get(this.getClass());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return false;
         }
         return original;

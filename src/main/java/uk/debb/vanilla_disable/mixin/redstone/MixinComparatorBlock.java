@@ -10,12 +10,12 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 public abstract class MixinComparatorBlock {
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int modifyDelay(int original) {
-        return Gamerules.COMPARATOR_BASE_DELAY.getValue(Integer::parseInt);
+        return Gamerules.COMPARATOR_BASE_DELAY.getInt();
     }
 
     @ModifyReturnValue(method = "getOutputSignal", at = @At("RETURN"))
     private int modifyOutputSignal(int original) {
-        if (!Gamerules.COMPARATOR_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.COMPARATOR_ENABLED.getBool()) {
             return 0;
         }
         return original;

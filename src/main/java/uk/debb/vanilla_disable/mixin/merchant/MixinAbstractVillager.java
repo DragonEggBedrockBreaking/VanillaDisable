@@ -21,7 +21,7 @@ public abstract class MixinAbstractVillager {
             require = 0
     )
     private MerchantOffer modifyUses(MerchantOffer receiver) {
-        if (Gamerules.INFINITE_TRADING.getValue(Boolean::parseBoolean)) {
+        if (Gamerules.INFINITE_TRADING.getBool()) {
             return new MerchantOffer(new CompoundTag());
         }
         return receiver;
@@ -29,7 +29,7 @@ public abstract class MixinAbstractVillager {
 
     @ModifyReturnValue(method = "getOffers", at = @At("RETURN"))
     private MerchantOffers clearOffers(MerchantOffers original) {
-        if (!Gamerules.VILLAGER_TRADING_ENABLED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.VILLAGER_TRADING_ENABLED.getBool()) {
             return new MerchantOffers();
         }
         return original;

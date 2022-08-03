@@ -41,7 +41,7 @@ public abstract class MixinArrow extends AbstractArrow implements Maps {
     private void clearEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {
         if (itemStack.is(Items.TIPPED_ARROW)) {
             Gamerules gameRule = arrowPotionMap.get(PotionUtils.getPotion(itemStack));
-            if (!Gamerules.TIPPED_ARROWS_ENABLED.getValue(Boolean::parseBoolean) || (gameRule != null && !gameRule.getValue(Boolean::parseBoolean))) {
+            if (!Gamerules.TIPPED_ARROWS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
                 this.potion = Potions.EMPTY;
                 this.effects.clear();
                 this.entityData.set(ID_EFFECT_COLOR, -1);

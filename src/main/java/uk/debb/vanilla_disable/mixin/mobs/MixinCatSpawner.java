@@ -17,7 +17,7 @@ public abstract class MixinCatSpawner {
             )
     )
     private Entity cancelSpawningCat(Entity original) {
-        if (!Gamerules.VILLAGERS_SPAWN_CATS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.VILLAGERS_SPAWN_CATS.getBool()) {
             return null;
         }
         return original;

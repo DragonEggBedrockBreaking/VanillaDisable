@@ -19,7 +19,7 @@ public abstract class MixinZombie {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (!Gamerules.VILLAGERS_CONVERT_TO_ZILLAGERS.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.VILLAGERS_CONVERT_TO_ZILLAGERS.getBool()) {
             return Difficulty.PEACEFUL;
         }
         return original;
@@ -27,7 +27,7 @@ public abstract class MixinZombie {
 
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void cancelUnderWaterConversion(CallbackInfo ci) {
-        if (!Gamerules.ZOMBIES_CONVERT_TO_DROWNED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.ZOMBIES_CONVERT_TO_DROWNED.getBool()) {
             ci.cancel();
         }
     }

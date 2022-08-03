@@ -26,7 +26,7 @@ public abstract class MixinAbstractCauldronBlock implements Maps {
     )
     private CauldronInteraction modifyUse(CauldronInteraction original, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, ItemStack itemStack) {
         BooleanGamerules gameRule = abstractCauldronBlockItemMap.get(itemStack.getItem());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             return (arg, arg2, arg3, arg4, arg5, arg6) -> InteractionResult.FAIL;
         }
         return original;
@@ -35,7 +35,7 @@ public abstract class MixinAbstractCauldronBlock implements Maps {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void cancelUse(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> cir) {
         Gamerules gameRule = abstractCauldronBlockItemMap.get(player.getItemInHand(interactionHand).getItem());
-        if (gameRule != null && !gameRule.getValue(Boolean::parseBoolean)) {
+        if (gameRule != null && !gameRule.getBool()) {
             cir.setReturnValue(InteractionResult.FAIL);
         }
     }

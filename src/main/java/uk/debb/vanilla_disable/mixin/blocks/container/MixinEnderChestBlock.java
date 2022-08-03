@@ -17,7 +17,7 @@ public abstract class MixinEnderChestBlock {
             require = 0
     )
     private boolean isFullBlock(boolean original) {
-        if (!Gamerules.CONTAINER_OPENING_BLOCKED.getValue(Boolean::parseBoolean)) {
+        if (!Gamerules.CONTAINER_OPENING_BLOCKED.getBool()) {
             return false;
         }
         return original;

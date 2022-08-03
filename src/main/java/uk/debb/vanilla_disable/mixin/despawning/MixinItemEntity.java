@@ -24,7 +24,7 @@ public abstract class MixinItemEntity extends Entity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void discardItem(CallbackInfo ci) {
-        if (this.age >= Gamerules.ITEM_DESPAWN_TIME.getValue(Integer::parseInt) * 20 && !(this.getLevel().isClientSide())) {
+        if (this.age >= Gamerules.ITEM_DESPAWN_TIME.getInt() * 20 && !(this.getLevel().isClientSide())) {
             this.discard();
         }
     }
@@ -39,7 +39,7 @@ public abstract class MixinItemEntity extends Entity {
             cancellable = true
     )
     private void cancelDiscard(CallbackInfo ci) {
-        if (this.age < Gamerules.ITEM_DESPAWN_TIME.getValue(Integer::parseInt) * 20 &&
+        if (this.age < Gamerules.ITEM_DESPAWN_TIME.getInt() * 20 &&
                 this.pickupDelay != Short.MAX_VALUE) {
             ci.cancel();
         }

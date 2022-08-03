@@ -20,13 +20,13 @@ public abstract class MixinRepeaterBlock extends DiodeBlock {
 
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int modifyDelay(int original, BlockState blockState) {
-        return blockState.getValue(BlockStateProperties.DELAY) * Gamerules.REPEATER_BASE_DELAY.getValue(Integer::parseInt);
+        return blockState.getValue(BlockStateProperties.DELAY) * Gamerules.REPEATER_BASE_DELAY.getInt();
     }
 
     @Override
     protected int getOutputSignal(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
         if (blockState.getValue(BlockStateProperties.POWERED)) {
-            return Gamerules.REPEATER_SIGNAL.getValue(Integer::parseInt);
+            return Gamerules.REPEATER_SIGNAL.getInt();
         }
         return 0;
     }
