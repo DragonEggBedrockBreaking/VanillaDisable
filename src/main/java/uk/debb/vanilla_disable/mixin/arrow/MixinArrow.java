@@ -14,7 +14,8 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(Arrow.class)
 public abstract class MixinArrow implements Maps {
-    @Shadow public abstract void setEffectsFromItem(ItemStack arg);
+    @Shadow
+    public abstract void setEffectsFromItem(ItemStack arg);
 
     @Inject(method = "setEffectsFromItem", at = @At("HEAD"), cancellable = true)
     private void clearEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {
