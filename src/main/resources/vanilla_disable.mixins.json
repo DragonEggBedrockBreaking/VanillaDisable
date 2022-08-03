@@ -89,6 +89,7 @@
     "mobs.MixinMob",
     "mobs.MixinPig",
     "mobs.MixinPlayer",
+    "mobs.MixinRaid",
     "mobs.MixinSkeleton",
     "mobs.MixinVillager",
     "mobs.MixinZombie",

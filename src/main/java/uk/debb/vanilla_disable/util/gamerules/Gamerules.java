@@ -196,6 +196,9 @@ public enum Gamerules {
     FIRE_ASPECT_IGNITES_CREEPERS(VD_MOBS, false),
     VILLAGERS_SPAWN_CATS(VD_MOBS, true),
     VILLAGERS_SPAWN_GOLEMS(VD_MOBS, true),
+    RAID_WAVES_EASY(VD_MOBS, 4),
+    RAID_WAVES_NORMAL(VD_MOBS, 6),
+    RAID_WAVES_HARD(VD_MOBS, 8),
 
     ALLAYS_ENABLED(VD_MOB_TOGGLES, true),
     BATS_ENABLED(VD_MOB_TOGGLES, true),
@@ -1073,6 +1076,7 @@ public enum Gamerules {
 
     public double getDouble() {
         if (server == null) return this.defaultDouble;
+        if (server.getWorldData().getGameRules().getRule(this.doubleGamerule) == null) return this.defaultDouble;
         return server.getWorldData().getGameRules().getRule(this.doubleGamerule).get();
     }
 }

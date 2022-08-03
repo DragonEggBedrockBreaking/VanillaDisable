@@ -360,6 +360,9 @@
     "gamerule.fireAspectIgnitesCreepers": "Fire aspect ignites creepers",
     "gamerule.villagersSpawnCats": "Villagers spawn cats",
     "gamerule.villagersSpawnGolems": "Villagers spawn golems",
+    "gamerule.raidWavesEasy": "Raid waves easy",
+    "gamerule.raidWavesNormal": "Raid waves normal",
+    "gamerule.raidWavesHard": "Raid waves hard",
 
     "gamerule.curableZillagers.description": "Toggle zombie villager villager curing",
     "gamerule.villagersConvertToZillagers.description": "Toggle villager -> zombie villager conversion",
@@ -375,6 +378,9 @@
     "gamerule.fireAspectIgnitesCreepers.description": "Toggle fire aspect igniting creepers",
     "gamerule.villagersSpawnCats.description": "Toggle villagers spawning cats in villages",
     "gamerule.villagersSpawnGolems.description": "Toggle villagers spawning golems",
+    "gamerule.raidWavesEasy.description": "The number of raid waves that spawn on easy difficulty",
+    "gamerule.raidWavesNormal.description": "The number of raid waves that spawn on normal difficulty",
+    "gamerule.raidWavesHard.description": "The number of raid waves that spawn on hard difficulty",
 
 
     "gamerule.allaysEnabled": "Allays enabled",
