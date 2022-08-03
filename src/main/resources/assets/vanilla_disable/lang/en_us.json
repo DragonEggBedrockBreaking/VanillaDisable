@@ -1752,6 +1752,12 @@
     "gamerule.gravelFalls": "Gravel falls",
     "gamerule.sandFalls": "Sand falls",
     "gamerule.pointedDripstoneFalls": "Pointed dripstone falls",
+    "gamerule.blocksDropXp": "Blocks drop xp",
+    "gamerule.enderDragonsDropXp": "Ender dragons drop xp",
+    "gamerule.furnacesDropXp": "Furnaces drop xp",
+    "gamerule.grindstonesDropXp": "Grindstones drop xp",
+    "gamerule.mobsDropXp": "Mobs drop xp",
+    "gamerule.xpBottlesDropXp": "Xp bottles drop xp",
 
     "gamerule.alternatePaintingsEnabled.description": "Toggle paintings being varied",
     "gamerule.albanPainting.description": "Toggle the painting variant 'alban' being enabled",
@@ -1791,6 +1797,12 @@
     "gamerule.gravelFalls.description": "Toggle gravel blocks being able to fall",
     "gamerule.sandFalls.description": "Toggle sand blocks being able to fall",
     "gamerule.pointedDripstoneFalls.description": "Toggle pointed dripstone blocks being able to fall",
+    "gamerule.blocksDropXp.description": "Toggle blocks (e.g. ores) dropping experience orbs",
+    "gamerule.enderDragonsDropXp.description": "Toggle killing the ender dragon dropping experience orbs",
+    "gamerule.furnacesDropXp.description": "Toggle taking smelted items out of furnaces dropping experience orbs",
+    "gamerule.grindstonesDropXp.description": "Toggle taking items out of grindstones dropping experience orbs",
+    "gamerule.mobsDropXp.description": "Toggle killing mob dropping experience orbs",
+    "gamerule.xpBottlesDropXp.description": "Toggle throwing xp bottles dropping experience orbs",
 
 
     "gamerule.infiniteTrading": "Infinite trading",

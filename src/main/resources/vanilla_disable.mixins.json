@@ -51,10 +51,16 @@
     "enchantments.MixinEnchantment",
     "enchantments.MixinEnchantmentHelper",
 
+    "entity.MixinAbstractFurnaceBlockEntity",
+    "entity.MixinBlock",
+    "entity.MixinEnderDragon",
     "entity.MixinEntity",
     "entity.MixinFallingBlock",
+    "entity.MixinGrindstoneMenu",
+    "entity.MixinLivingEntity",
     "entity.MixinPainting",
     "entity.MixinPointedDripstoneBlock",
+    "entity.MixinThrownExperienceBottle",
 
     "food.MixinFoodData",
     "food.hunger.MixinFoodData",

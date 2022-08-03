@@ -892,7 +892,12 @@ public enum Gamerules {
     GRAVEL_FALLS(VD_ENTITY, true, true),
     SAND_FALLS(VD_ENTITY, true, true),
     POINTED_DRIPSTONE_FALLS(VD_ENTITY, true, true),
-
+    BLOCKS_DROP_XP(VD_ENTITY, true, true),
+    ENDER_DRAGONS_DROP_XP(VD_ENTITY, true, true),
+    FURNACES_DROP_XP(VD_ENTITY, true, true),
+    GRINDSTONES_DROP_XP(VD_ENTITY, true, true),
+    MOBS_DROP_XP(VD_ENTITY, true, true),
+    XP_BOTTLES_DROP_XP(VD_ENTITY, true, true),
 
     VILLAGER_DAILY_RESTOCKS(VD_MERCHANT, 2),
     INFINITE_TRADING(VD_MERCHANT, false, true),
