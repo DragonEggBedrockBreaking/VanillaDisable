@@ -1065,7 +1065,8 @@ public enum Gamerules {
 
     public float getFloat() {
         if (server == null) return (float) this.defaultDouble;
-        if (server.getWorldData().getGameRules().getRule(this.doubleGamerule) == null) return (float) this.defaultDouble;
+        if (server.getWorldData().getGameRules().getRule(this.doubleGamerule) == null)
+            return (float) this.defaultDouble;
         return (float) server.getWorldData().getGameRules().getRule(this.doubleGamerule).get();
     }
 
