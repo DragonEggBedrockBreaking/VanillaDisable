@@ -1871,6 +1871,7 @@
     "gamerule.category.vd.stats": "VanillaDisable Stats",
     "gamerule.category.vd.entity": "VanillaDisable Entity",
     "gamerule.category.vd.merchant": "VanillaDisable Merchant",
+    "gamerule.category.vd.biome": "VanillaDisable Biome",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator."
