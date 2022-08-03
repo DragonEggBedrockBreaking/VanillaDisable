@@ -9,11 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(DragonStrafePlayerPhase.class)
-public abstract class MixinDragonStrafePlayerPhase extends AbstractDragonPhaseInstance {
-    public MixinDragonStrafePlayerPhase(EnderDragon arg) {
-        super(arg);
-    }
-
+public abstract class MixinDragonStrafePlayerPhase {
     @ModifyExpressionValue(
             method = "doServerTick",
             at = @At(
