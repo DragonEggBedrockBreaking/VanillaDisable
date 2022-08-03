@@ -682,6 +682,8 @@ public class PopulateMaps implements Maps {
         commandsStringMap.put("clone", CLONE_COMMAND);
         commandsStringMap.put("datapack", DATAPACK_COMMAND);
         commandsStringMap.put("data", DATA_COMMAND);
+        commandsStringMap.put("debug", DEBUG_COMMAND);
+        commandsStringMap.put("defaultgamemode", DEFAULT_GAMEMODE_COMMAND);
         commandsStringMap.put("difficulty", DIFFICULTY_COMMAND);
         commandsStringMap.put("effect", EFFECT_COMMAND);
         commandsStringMap.put("enchant", ENCHANT_COMMAND);
@@ -729,6 +731,7 @@ public class PopulateMaps implements Maps {
         commandsStringMap.put("time", TIME_COMMAND);
         commandsStringMap.put("title", TITLE_COMMAND);
         commandsStringMap.put("trigger", TRIGGER_COMMAND);
+        commandsStringMap.put("warden_spawn_tracker", WARDEN_SPAWN_TRACKER_COMMAND);
         commandsStringMap.put("weather", WEATHER_COMMAND);
         commandsStringMap.put("worldborder", WORLD_BORDER_COMMAND);
 
