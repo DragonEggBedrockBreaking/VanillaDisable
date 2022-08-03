@@ -20,7 +20,7 @@ public abstract class MixinCommands implements Maps {
         Gamerules commandGamerule = commandsStringMap.get(commandName);
         Gamerules dedicatedCommandGamerule = commandsStringMapDedicated.get(commandName);
         MinecraftServer server = parseResults.getContext().getSource().getServer();
-        if ((!command.startsWith("/gamerule") && !Gamerules.COMMANDS_ENABLED.getValue(Boolean::parseBoolean)) ||
+        if ((!command.startsWith("gamerule") && !Gamerules.COMMANDS_ENABLED.getValue(Boolean::parseBoolean)) ||
                 (commandGamerule != null && !commandGamerule.getValue(Boolean::parseBoolean)) ||
                 (server.isDedicatedServer() && dedicatedCommandGamerule != null && !dedicatedCommandGamerule.getValue(Boolean::parseBoolean))) {
             server.getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), false);
