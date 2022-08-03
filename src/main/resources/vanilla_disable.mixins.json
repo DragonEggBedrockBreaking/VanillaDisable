@@ -93,6 +93,7 @@
 
     "mob_toggles.MixinMob",
 
+    "player.MixinAbilities",
     "player.MixinEntity",
 
     "potions.MixinPotionUtils",

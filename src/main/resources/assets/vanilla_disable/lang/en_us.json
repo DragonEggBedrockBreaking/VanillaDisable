@@ -793,6 +793,7 @@
     "gamerule.playerCanSwim": "Player can swim",
     "gamerule.playerCanJump": "Player can jump",
     "gamerule.playerCanBeInvisible": "Player can be invisible",
+    "gamerule.playerFlyingSpeed": "Player flying speed",
 
     "gamerule.playerCanBeOnFire.description": "Whether players can be on fire",
     "gamerule.playerCanSprint.description": "Whether players can sprint",
@@ -800,6 +801,7 @@
     "gamerule.playerCanSwim.description": "Whether players can swim",
     "gamerule.playerCanJump.description": "Whether players can jump",
     "gamerule.playerCanBeInvisible.description": "Whether players can be invisible",
+    "gamerule.playerFlyingSpeed.description": "How fast players can fly",
 
 
     "gamerule.repeaterBaseDelay": "Repeater base delay",
