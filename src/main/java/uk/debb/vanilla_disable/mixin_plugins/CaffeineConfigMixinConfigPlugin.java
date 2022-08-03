@@ -13,6 +13,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("advancement", true)
                 .addMixinOption("ai", true)
                 .addMixinOption("arrow", true)
+                .addMixinOption("biome", true)
                 .addMixinOption("blocks", true)
                 .addMixinOption("commands", true)
                 .addMixinOption("damage", true)

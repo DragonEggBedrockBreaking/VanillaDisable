@@ -14,6 +14,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
@@ -52,4 +53,5 @@ public interface Maps {
     Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Pair<Enchantment, Enchantment>, Gamerules> enchantmentPairEnchantmentMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Block, Gamerules> blockStateBaseRedstoneBlocksMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Holder<Biome>, Gamerules> biomeSourceBiomeHolderMap = new Object2ObjectOpenHashMap<>();
 }

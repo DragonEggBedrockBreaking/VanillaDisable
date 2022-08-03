@@ -1,7 +1,5 @@
 package uk.debb.vanilla_disable.mixin.stats;
 
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.core.Registry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stat;
@@ -12,19 +10,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.lists.Lists;
 
 @Mixin(ServerPlayer.class)
-public abstract class MixinServerPlayer {
-    @Unique
-    private static final ObjectList<String> generalList = new ObjectArrayList<>() {{
-        add("jump");
-        add("drop");
-        add("bred");
-        add("fish_caught");
-        add("target_hit");
-        add("trade");
-    }};
-
+public abstract class MixinServerPlayer implements Lists {
     @Unique
     private boolean shouldCancelStat(Stat<?> stat) {
         if (!Gamerules.STATS_ENABLED.getValue(Boolean::parseBoolean)) {
@@ -50,7 +39,7 @@ public abstract class MixinServerPlayer {
         if (string.contains("interact")) {
             return !Gamerules.GUI_BLOCK_INTERACTION_STATS.getValue(Boolean::parseBoolean);
         }
-        for (String section : generalList) {
+        for (String section : serverPlayerStringList) {
             if (string.contains(section)) {
                 return !Gamerules.GENERAL_STATS.getValue(Boolean::parseBoolean);
             }

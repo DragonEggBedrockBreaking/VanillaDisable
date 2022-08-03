@@ -12,6 +12,9 @@
     "arrow.MixinArrow",
     "arrow.MixinSpectralArrow",
 
+    "biome.MixinBiomeManager",
+    "biome.MixinBiomeSource",
+
     "blocks.MixinAbstractCauldronBlock",
     "blocks.MixinBeaconBlockEntity",
     "blocks.MixinBlock",
@@ -121,7 +124,6 @@
 
     "worldgen.MixinBiomeGenerationSettings",
     "worldgen.MixinEndSpike",
-    "worldgen.MixinMinecraftServer",
     "worldgen.MixinServerLevel",
     "worldgen.MixinStructureCheck",
     "worldgen.MixinStructureManager"
