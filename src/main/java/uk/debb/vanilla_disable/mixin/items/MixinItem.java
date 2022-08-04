@@ -15,6 +15,7 @@ public abstract class MixinItem implements Maps {
     @Shadow
     @Final
     private int maxDamage;
+
     @Shadow
     public abstract Item asItem();
 
