@@ -55,4 +55,5 @@ public interface Maps {
     Object2ObjectMap<Block, Gamerules> blockStateBaseRedstoneBlocksMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Holder<Biome>, Gamerules> biomeSourceBiomeHolderMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Item, Gamerules> itemItemMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMapPortals = new Object2ObjectOpenHashMap<>();
 }

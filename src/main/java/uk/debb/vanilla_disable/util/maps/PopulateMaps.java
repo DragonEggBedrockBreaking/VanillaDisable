@@ -1574,5 +1574,9 @@ public class PopulateMaps implements Maps {
         itemItemMap.put(Items.NETHERITE_LEGGINGS, NETHERITE_LEGGINGS_DURABILITY);
         itemItemMap.put(Items.NETHERITE_BOOTS, NETHERITE_BOOTS_DURABILITY);
         itemItemMap.put(Items.TURTLE_HELMET, TURTLE_HELMET_DURABILITY);
+
+        blockStateBaseBlockMapPortals.put(Blocks.NETHER_PORTAL, NETHER_PORTALS_ENABLED);
+        blockStateBaseBlockMapPortals.put(Blocks.END_PORTAL, END_PORTALS_ENABLED);
+        blockStateBaseBlockMapPortals.put(Blocks.END_GATEWAY, END_GATEWAYS_ENABLED);
     }
 }
