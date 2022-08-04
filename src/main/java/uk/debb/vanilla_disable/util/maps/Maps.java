@@ -28,7 +28,7 @@ public interface Maps {
     Object2ObjectMap<StructureType<?>, Gamerules> structureCheckStructureTypeMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, Gamerules> structureCheckStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Potion, Gamerules> potionUtilsPotionMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Class<?>, Gamerules> itemStackClassMap = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<Item, Gamerules> itemStackClassMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, Gamerules> serverPlayerStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, Gamerules> commandsStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, Gamerules> commandsStringMapDedicated = new Object2ObjectOpenHashMap<>();
