@@ -378,6 +378,12 @@ public class PopulateMaps implements Maps {
         dispenserBlockItemMap.put(Items.PLAYER_HEAD, DISPENSER_PLACES_HEADS);
         dispenserBlockItemMap.put(Items.WITHER_SKELETON_SKULL, DISPENSER_PLACES_HEADS);
         dispenserBlockItemMap.put(Items.CARVED_PUMPKIN, DISPENSER_PLACES_HEADS);
+        dispenserBlockItemMap.put(Items.MINECART, DISPENSER_PLACES_MINECARTS);
+        dispenserBlockItemMap.put(Items.COMMAND_BLOCK_MINECART, DISPENSER_PLACES_MINECARTS);
+        dispenserBlockItemMap.put(Items.CHEST_MINECART, DISPENSER_PLACES_MINECARTS);
+        dispenserBlockItemMap.put(Items.FURNACE_MINECART, DISPENSER_PLACES_MINECARTS);
+        dispenserBlockItemMap.put(Items.HOPPER_MINECART, DISPENSER_PLACES_MINECARTS);
+        dispenserBlockItemMap.put(Items.TNT_MINECART, DISPENSER_PLACES_MINECARTS);
 
         arrowPotionMap.put(Potions.FIRE_RESISTANCE, FIRE_RESISTANCE_TIPPED_ARROW);
         arrowPotionMap.put(Potions.LONG_FIRE_RESISTANCE, FIRE_RESISTANCE_TIPPED_ARROW);
