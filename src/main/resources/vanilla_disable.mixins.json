@@ -74,6 +74,7 @@
 
     "items.MixinBowItem",
     "items.MixinCrossbowItem",
+    "items.MixinItem",
     "items.MixinItemStack",
     "items.MixinLivingEntity",
 

@@ -699,6 +699,47 @@ public enum Gamerules {
     TOTEMS_ENABLED(VD_ITEMS, true, true),
     BOW_SPAMMING(VD_ITEMS, true, true),
     CROSSBOW_SPAMMING(VD_ITEMS, true, true),
+    BOW_DURABILITY(VD_ITEMS, 384),
+    CARROT_ON_STICK_DURABILITY(VD_ITEMS, 25),
+    CROSSBOW_DURABILITY(VD_ITEMS, 465),
+    ELYTRA_DURABILITY(VD_ITEMS, 432),
+    FISHING_ROD_DURABILITY(VD_ITEMS, 64),
+    FLINT_AND_STEEL_DURABILITY(VD_ITEMS, 64),
+    SHEARS_DURABILITY(VD_ITEMS, 238),
+    SHIELD_DURABILITY(VD_ITEMS, 336),
+    TRIDENT_DURABILITY(VD_ITEMS, 250),
+    WARPED_FUNGUS_ON_STICK_DURABILITY(VD_ITEMS, 100),
+    WOODEN_TOOL_DURABILITY(VD_ITEMS, 59),
+    STONE_TOOL_DURABILITY(VD_ITEMS, 131),
+    IRON_TOOL_DURABILITY(VD_ITEMS, 250),
+    GOLDEN_TOOL_DURABILITY(VD_ITEMS, 32),
+    DIAMOND_TOOL_DURABILITY(VD_ITEMS, 1561),
+    NETHERITE_TOOL_DURABILITY(VD_ITEMS, 2031),
+    LEATHER_HELMET_DURABILITY(VD_ITEMS, 55),
+    LEATHER_CHESTPLATE_DURABILITY(VD_ITEMS, 80),
+    LEATHER_LEGGINGS_DURABILITY(VD_ITEMS, 75),
+    LEATHER_BOOTS_DURABILITY(VD_ITEMS, 65),
+    CHAINMAIL_HELMET_DURABILITY(VD_ITEMS, 165),
+    CHAINMAIL_CHESTPLATE_DURABILITY(VD_ITEMS, 240),
+    CHAINMAIL_LEGGINGS_DURABILITY(VD_ITEMS, 225),
+    CHAINMAIL_BOOTS_DURABILITY(VD_ITEMS, 195),
+    IRON_HELMET_DURABILITY(VD_ITEMS, 165),
+    IRON_CHESTPLATE_DURABILITY(VD_ITEMS, 240),
+    IRON_LEGGINGS_DURABILITY(VD_ITEMS, 225),
+    IRON_BOOTS_DURABILITY(VD_ITEMS, 195),
+    GOLDEN_HELMET_DURABILITY(VD_ITEMS, 77),
+    GOLDEN_CHESTPLATE_DURABILITY(VD_ITEMS, 112),
+    GOLDEN_LEGGINGS_DURABILITY(VD_ITEMS, 105),
+    GOLDEN_BOOTS_DURABILITY(VD_ITEMS, 91),
+    DIAMOND_HELMET_DURABILITY(VD_ITEMS, 363),
+    DIAMOND_CHESTPLATE_DURABILITY(VD_ITEMS, 528),
+    DIAMOND_LEGGINGS_DURABILITY(VD_ITEMS, 495),
+    DIAMOND_BOOTS_DURABILITY(VD_ITEMS, 429),
+    NETHERITE_HELMET_DURABILITY(VD_ITEMS, 407),
+    NETHERITE_CHESTPLATE_DURABILITY(VD_ITEMS, 592),
+    NETHERITE_LEGGINGS_DURABILITY(VD_ITEMS, 555),
+    NETHERITE_BOOTS_DURABILITY(VD_ITEMS, 481),
+    TURTLE_HELMET_DURABILITY(VD_ITEMS, 275),
 
     DISPENSER_BONEMEALS_PLANTS(VD_DISPENSER, true, true),
     DISPENSER_BUCKETS_ITEMS(VD_DISPENSER, true, true),
@@ -1000,7 +1041,7 @@ public enum Gamerules {
     private GameRules.Key<GameRules.BooleanValue> booleanGamerule;
     private GameRules.Key<GameRules.IntegerValue> integerGamerule;
     private GameRules.Key<DoubleRule> doubleGamerule;
-    private boolean allowedInSingleplayer;
+    private boolean allowedInSingleplayer = true;
 
     Gamerules(GameruleCategories category, boolean defaultBool, boolean allowedInSingleplayer) {
         this.category = category;
@@ -1037,7 +1078,8 @@ public enum Gamerules {
     }
 
     public void register() {
-        if (!this.category.isEnabled() || (!this.allowedInSingleplayer && MinecraftQuiltLoader.getEnvironmentType().equals(EnvType.CLIENT))) {
+        if (!this.category.isEnabled() ||
+                (!this.allowedInSingleplayer && MinecraftQuiltLoader.getEnvironmentType().equals(EnvType.CLIENT) && this.type.equals("boolean"))) {
             return;
         }
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.name());
@@ -1074,5 +1116,9 @@ public enum Gamerules {
         if (server == null) return this.defaultDouble;
         if (server.getWorldData().getGameRules().getRule(this.doubleGamerule) == null) return this.defaultDouble;
         return server.getWorldData().getGameRules().getRule(this.doubleGamerule).get();
+    }
+
+    public int getDefaultInt() {
+        return this.defaultInt;
     }
 }
