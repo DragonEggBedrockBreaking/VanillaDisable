@@ -1396,6 +1396,7 @@
     "gamerule.netheriteLeggingsDurability": "Netherite leggings durability",
     "gamerule.netheriteBootsDurability": "Netherite boots durability",
     "gamerule.turtleHelmetDurability": "Turtle helmet durability",
+    "gamerule.netheriteBurns": "Netherite burns",
 
     "gamerule.boatsEnabled.description": "Toggle boats being placeable",
     "gamerule.booksEnabled.description": "Toggle books being writable/readable",
@@ -1482,6 +1483,7 @@
     "gamerule.netheriteLeggingsDurability.description": "The amount of durability on a netherite leggings (set to 0 to make it unbreakable)",
     "gamerule.netheriteBootsDurability.description": "The amount of durability on a netherite boots (set to 0 to make it unbreakable)",
     "gamerule.turtleHelmetDurability.description": "The amount of durability on a turtle helmet (set to 0 to make it unbreakable)",
+    "gamerule.netheriteBurns.description": "Toggle netherite blocks burning in fire",
 
 
     "gamerule.dispenserBonemealsPlants": "Dispenser bonemeals plants",

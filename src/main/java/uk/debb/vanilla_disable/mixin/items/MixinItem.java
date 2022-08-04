@@ -1,6 +1,7 @@
 package uk.debb.vanilla_disable.mixin.items;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,6 +32,22 @@ public abstract class MixinItem implements Maps {
         Gamerules gameRule = itemItemMap.get(this.asItem());
         if (gameRule != null && this.maxDamage == gameRule.getDefaultInt()) {
             return gameRule.getInt() > 0;
+        }
+        return original;
+    }
+
+    @ModifyReturnValue(method = "isFireResistant", at = @At("RETURN"))
+    private boolean modifyFireResistance(boolean original) {
+        if (original) {
+            return !Gamerules.NETHERITE_BURNS.getBool();
+        }
+        return false;
+    }
+
+    @ModifyReturnValue(method = "canBeHurtBy", at = @At("RETURN"))
+    private boolean modifyHurtingPotential(boolean original, DamageSource damageSource) {
+        if (!original && damageSource.isFire()) {
+            return Gamerules.NETHERITE_BURNS.getBool();
         }
         return original;
     }
