@@ -1,8 +1,8 @@
 import io.github.coolcrabs.brachyura.decompiler.BrachyuraDecompiler;
 import io.github.coolcrabs.brachyura.decompiler.fernflower.FernflowerDecompiler;
+import io.github.coolcrabs.brachyura.fabric.FabricContext;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyCollector;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyFlag;
-import io.github.coolcrabs.brachyura.fabric.FabricContext;
 import io.github.coolcrabs.brachyura.fabric.FabricLoader;
 import io.github.coolcrabs.brachyura.maven.Maven;
 import io.github.coolcrabs.brachyura.maven.MavenId;
@@ -48,7 +48,7 @@ public class Buildscript extends SimpleQuiltProject {
 
     @Override
     protected FabricContext createContext() {
-        return new SimpleQuiltContext(){
+        return new SimpleQuiltContext() {
             @Override
             public List<Path> getCompileDependencies() {
                 List<Path> paths = super.getCompileDependencies();
