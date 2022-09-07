@@ -7,6 +7,6 @@ public class Versions {
     public static final String QFAPI_VERSION = "4.0.0-beta.7+0.59.0-1.19.2";
     public static final String CAFFEINE_CONFIG_VERSION = "1.0.0";
     public static final String LAZYDFU_VERSION = "0.1.3";
-    public static final String MIXIN_EXTRAS_VERSION = "0.0.12";
+    public static final String MIXIN_EXTRAS_VERSION = "0.1.0-rc5";
     public static final String CONDITIONAL_MIXIN_VERSION = "v0.3.0";
 }
