@@ -33,15 +33,20 @@ public abstract class MixinGameRuleCommand {
                 new GameRules.GameRuleTypeVisitor() {
                     @Override
                     public <T extends GameRules.Value<T>> void visit(GameRules.Key<T> arg, GameRules.Type<T> arg2) {
+                        String id = arg.getId();
                         literalArgumentBuilder.then(
                                 Commands.literal("get")
-                                        .then(Commands.literal(arg.getId())
+                                        .then(Commands.literal(id)
                                                 .executes(commandContext -> queryRule(commandContext.getSource(), arg)))
                         ).then(
                                 Commands.literal("set")
-                                        .then(Commands.literal(arg.getId())
+                                        .then(Commands.literal(id)
                                                 .then(arg2.createArgument("value")
                                                         .executes(commandContext -> GameRuleCommand.setRule(commandContext, arg))))
+                        ).then(
+                                Commands.literal("reset")
+                                        .then(Commands.literal(id)
+                                                .executes(commandContext -> resetRule(commandContext.getSource(), arg)))
                         ).then(
                                 Commands.literal("list")
                                         .then(Commands.argument("name", StringArgumentType.string())
@@ -72,6 +77,23 @@ public abstract class MixinGameRuleCommand {
         String joined = String.join("\n", gamerules);
         joined = "Here are the gamerules for the category:\n\n" + joined;
         source.sendSuccess(Component.literal(joined), true);
+        return lv.getCommandResult();
+    }
+
+    @Unique
+    private static <T extends GameRules.Value<T>> int resetRule(CommandSourceStack arg, GameRules.Key<T> arg2) {
+        T lv = arg.getServer().getGameRules().getRule(arg2);
+        String id = arg2.getId();
+        if (Maps.stringToDefaultBooleanMap.containsKey(id)) {
+            boolean defaultBoolean = Maps.stringToDefaultBooleanMap.getBoolean(id);
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultBoolean));
+        } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
+            int defaultInt = Maps.stringToDefaultIntMap.getInt(id);
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultInt));
+        } else {
+            double defaultDouble = Maps.stringToDefaultDoubleMap.getDouble(id);
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultDouble));
+        }
         return lv.getCommandResult();
     }
 
