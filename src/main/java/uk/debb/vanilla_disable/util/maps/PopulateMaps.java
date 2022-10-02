@@ -42,6 +42,7 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.levelgen.structure.StructureType;
+import uk.debb.vanilla_disable.util.gamerules.GameruleCategories;
 
 import static uk.debb.vanilla_disable.util.gamerules.Gamerules.*;
 
@@ -1578,5 +1579,9 @@ public class PopulateMaps implements Maps {
         blockStateBaseBlockMapPortals.put(Blocks.NETHER_PORTAL, NETHER_PORTALS_ENABLED);
         blockStateBaseBlockMapPortals.put(Blocks.END_PORTAL, END_PORTALS_ENABLED);
         blockStateBaseBlockMapPortals.put(Blocks.END_GATEWAY, END_GATEWAYS_ENABLED);
+
+        for (GameruleCategories category : GameruleCategories.values()) {
+            stringToGameruleCategoryMap.put(category.toString().toLowerCase().substring(3), category);
+        }
     }
 }

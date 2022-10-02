@@ -1121,4 +1121,8 @@ public enum Gamerules {
     public int getDefaultInt() {
         return this.defaultInt;
     }
+
+    public GameruleCategories getCategory() {
+        return this.category;
+    }
 }

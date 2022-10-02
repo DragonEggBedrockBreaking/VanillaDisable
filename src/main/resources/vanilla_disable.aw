@@ -112,3 +112,6 @@ accessible class net/minecraft/world/entity/animal/Wolf$WolfPanicGoal
 accessible field net/minecraft/stats/Stat formatter Lnet/minecraft/stats/StatFormatter;
 
 accessible field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure startPool Lnet/minecraft/core/Holder;
+
+accessible method net/minecraft/server/commands/GameRuleCommand queryRule (Lnet/minecraft/commands/CommandSourceStack;Lnet/minecraft/world/level/GameRules$Key;)I
+accessible method net/minecraft/server/commands/GameRuleCommand setRule (Lcom/mojang/brigadier/context/CommandContext;Lnet/minecraft/world/level/GameRules$Key;)I

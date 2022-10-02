@@ -17,6 +17,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.StructureType;
+import uk.debb.vanilla_disable.util.gamerules.GameruleCategories;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 public interface Maps {
@@ -56,4 +57,5 @@ public interface Maps {
     Object2ObjectMap<Holder<Biome>, Gamerules> biomeSourceBiomeHolderMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Item, Gamerules> itemItemMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMapPortals = new Object2ObjectOpenHashMap<>();
+    Object2ObjectMap<String, GameruleCategories> stringToGameruleCategoryMap = new Object2ObjectOpenHashMap<>();
 }
