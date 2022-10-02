@@ -51,10 +51,15 @@ public abstract class MixinGameRuleCommand {
                                         .then(Commands.literal("category")
                                             .then(Commands.argument("name", StringArgumentType.string())
                                                 .executes(commandContext -> resetCategory(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
+                                        .then(Commands.literal("all")
+                                                .executes(commandContext -> resetCategory(commandContext.getSource(), arg, "all")))
                         ).then(
                                 Commands.literal("list")
-                                        .then(Commands.argument("name", StringArgumentType.string())
-                                                .executes(commandContext -> listGamerules(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name"))))
+                                        .then(Commands.literal("category")
+                                            .then(Commands.argument("name", StringArgumentType.string())
+                                                .executes(commandContext -> listGamerules(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
+                                        .then(Commands.literal("all")
+                                                .executes(commandContext -> listGamerules(commandContext.getSource(), arg, "all")))
                         );
                     }
                 }
