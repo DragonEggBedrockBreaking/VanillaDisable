@@ -45,8 +45,12 @@ public abstract class MixinGameRuleCommand {
                                                         .executes(commandContext -> GameRuleCommand.setRule(commandContext, arg))))
                         ).then(
                                 Commands.literal("reset")
-                                        .then(Commands.literal(id)
-                                                .executes(commandContext -> resetRule(commandContext.getSource(), arg)))
+                                        .then(Commands.literal("rule")
+                                            .then(Commands.literal(id)
+                                                    .executes(commandContext -> resetRule(commandContext.getSource(), arg))))
+                                        .then(Commands.literal("category")
+                                            .then(Commands.argument("name", StringArgumentType.string())
+                                                .executes(commandContext -> resetCategory(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
                         ).then(
                                 Commands.literal("list")
                                         .then(Commands.argument("name", StringArgumentType.string())
@@ -93,6 +97,37 @@ public abstract class MixinGameRuleCommand {
         } else {
             double defaultDouble = Maps.stringToDefaultDoubleMap.getDouble(id);
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultDouble));
+        }
+        return lv.getCommandResult();
+    }
+
+    @Unique
+    private static <T extends GameRules.Value<T>> int resetCategory(CommandSourceStack source, GameRules.Key<T> rule, String group) {
+        T lv = source.getServer().getGameRules().getRule(rule);
+        ObjectList<String> gamerules = new ObjectArrayList<>();
+        if (!group.equals("all")) {
+            GameruleCategories category = Maps.stringToGameruleCategoryMap.get(group);
+            for (Gamerules gamerule : Gamerules.values()) {
+                if (gamerule.getCategory().equals(category)) {
+                    gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
+                }
+            }
+        } else {
+            for (Gamerules gamerule : Gamerules.values()) {
+                gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
+            }
+        }
+        for (String gamerule : gamerules) {
+            if (Maps.stringToDefaultBooleanMap.containsKey(gamerule)) {
+                boolean defaultBoolean = Maps.stringToDefaultBooleanMap.getBoolean(gamerule);
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, defaultBoolean));
+            } else if (Maps.stringToDefaultIntMap.containsKey(gamerule)) {
+                int defaultInt = Maps.stringToDefaultIntMap.getInt(gamerule);
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, defaultInt));
+            } else {
+                double defaultDouble = Maps.stringToDefaultDoubleMap.getDouble(gamerule);
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, defaultDouble));
+            }
         }
         return lv.getCommandResult();
     }
