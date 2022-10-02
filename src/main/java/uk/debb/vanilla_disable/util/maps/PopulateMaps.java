@@ -43,6 +43,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import uk.debb.vanilla_disable.util.gamerules.GameruleCategories;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 import static uk.debb.vanilla_disable.util.gamerules.Gamerules.*;
 
@@ -1583,5 +1584,49 @@ public class PopulateMaps implements Maps {
         for (GameruleCategories category : GameruleCategories.values()) {
             stringToGameruleCategoryMap.put(category.toString().toLowerCase().substring(3), category);
         }
+
+        for (Gamerules gamerule : Gamerules.values()) {
+            switch (gamerule.getType()) {
+                case "boolean" -> stringToDefaultBooleanMap.put(gamerule.getRuleName(), gamerule.getDefaultBoolean());
+                case "integer" -> stringToDefaultIntMap.put(gamerule.getRuleName(), gamerule.getDefaultInt());
+                case "double" -> stringToDefaultDoubleMap.put(gamerule.getRuleName(), gamerule.getDefaultDouble());
+            }
+        }
+        stringToDefaultBooleanMap.put("doFireTick", true);
+        stringToDefaultBooleanMap.put("mobGriefing", true);
+        stringToDefaultBooleanMap.put("keepInventory", false);
+        stringToDefaultBooleanMap.put("doMobSpawning", true);
+        stringToDefaultBooleanMap.put("doMobLoot", true);
+        stringToDefaultBooleanMap.put("doTileDrops", true);
+        stringToDefaultBooleanMap.put("doEntityDrops", true);
+        stringToDefaultBooleanMap.put("commandBlockOutput", true);
+        stringToDefaultBooleanMap.put("naturalRegeneration", true);
+        stringToDefaultBooleanMap.put("doDaylightCycle", true);
+        stringToDefaultBooleanMap.put("logAdminCommands", true);
+        stringToDefaultBooleanMap.put("showDeathMessages", true);
+        stringToDefaultBooleanMap.put("sendCommandFeedback", true);
+        stringToDefaultBooleanMap.put("reducedDebugInfo", false);
+        stringToDefaultBooleanMap.put("spectatorsGenerateChunks", true);
+        stringToDefaultBooleanMap.put("disableElytraMovementCheck", false);
+        stringToDefaultBooleanMap.put("doWeatherCycle", true);
+        stringToDefaultBooleanMap.put("doLimitedCrafting", false);
+        stringToDefaultBooleanMap.put("announceAdvancements", true);
+        stringToDefaultBooleanMap.put("disableRaids", false);
+        stringToDefaultBooleanMap.put("doInsomnia", true);
+        stringToDefaultBooleanMap.put("doImmediateRespawn", false);
+        stringToDefaultBooleanMap.put("drowningDamage", true);
+        stringToDefaultBooleanMap.put("fallDamage", true);
+        stringToDefaultBooleanMap.put("fireDamage", true);
+        stringToDefaultBooleanMap.put("freezeDamage", true);
+        stringToDefaultBooleanMap.put("doPatrolSpawning", true);
+        stringToDefaultBooleanMap.put("doTraderSpawning", true);
+        stringToDefaultBooleanMap.put("doWardenSpawning", true);
+        stringToDefaultBooleanMap.put("forgiveDeadPlayers", true);
+        stringToDefaultBooleanMap.put("universalAnger", false);
+        stringToDefaultIntMap.put("randomTickSpeed", 3);
+        stringToDefaultIntMap.put("spawnRadius", 10);
+        stringToDefaultIntMap.put("maxEntityCramming", 24);
+        stringToDefaultIntMap.put("maxCommandChainLength", 65536);
+        stringToDefaultIntMap.put("playersSleepingPercentage", 100);
     }
 }

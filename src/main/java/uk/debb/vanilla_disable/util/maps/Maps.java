@@ -1,8 +1,7 @@
 package uk.debb.vanilla_disable.util.maps;
 
 import it.unimi.dsi.fastutil.Pair;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.Holder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -58,4 +57,7 @@ public interface Maps {
     Object2ObjectMap<Item, Gamerules> itemItemMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMapPortals = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, GameruleCategories> stringToGameruleCategoryMap = new Object2ObjectOpenHashMap<>();
+    Object2BooleanMap<String> stringToDefaultBooleanMap = new Object2BooleanOpenHashMap<>();
+    Object2IntMap<String> stringToDefaultIntMap = new Object2IntOpenHashMap<>();
+    Object2DoubleMap<String> stringToDefaultDoubleMap = new Object2DoubleOpenHashMap<>();
 }

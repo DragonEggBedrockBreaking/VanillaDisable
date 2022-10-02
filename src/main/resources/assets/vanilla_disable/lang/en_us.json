@@ -1997,7 +1997,7 @@
     "gamerule.endMidlandsBiome": "End midlands biome",
     "gamerule.smallEndIslandsBiome": "Small end islands biome",
 
-    "gamerule.biomesEnabled.description": "Toggle biomes being enableds generating (plains replaces it if disabled)",
+    "gamerule.biomesEnabled.description": "Toggle biomes being enabled generating (plains replaces it if disabled)",
     "gamerule.badlandsBiome.description": "Toggle badlands biomes generating (plains replaces it if disabled)",
     "gamerule.bambooJungleBiome.description": "Toggle bamboo jungle biomes generating (plains replaces it if disabled)",
     "gamerule.beachBiome.description": "Toggle beach biomes generating (plains replaces it if disabled)",
@@ -2093,5 +2093,6 @@
     "gamerule.category.vd.biome": "VanillaDisable Biome",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
-    "commands.disabled.by.vd": "This command has been disabled by an operator."
+    "commands.disabled.by.vd": "This command has been disabled by an operator.",
+    "commands.gamerule.default": "The default value is: %s"
 }

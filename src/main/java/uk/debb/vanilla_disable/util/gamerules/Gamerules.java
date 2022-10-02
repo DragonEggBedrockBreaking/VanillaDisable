@@ -1042,6 +1042,7 @@ public enum Gamerules {
     private GameRules.Key<GameRules.IntegerValue> integerGamerule;
     private GameRules.Key<DoubleRule> doubleGamerule;
     private boolean allowedInSingleplayer = true;
+    private String ruleName;
 
     Gamerules(GameruleCategories category, boolean defaultBool, boolean allowedInSingleplayer) {
         this.category = category;
@@ -1091,6 +1092,7 @@ public enum Gamerules {
             case "double" -> this.doubleGamerule = GameRuleRegistry.register(ruleName, this.category.get(),
                     GameRuleFactory.createDoubleRule(this.defaultDouble, 0.0, this.maxDouble));
         }
+        this.ruleName = ruleName;
     }
 
     public boolean getBool() {
@@ -1118,11 +1120,27 @@ public enum Gamerules {
         return server.getWorldData().getGameRules().getRule(this.doubleGamerule).get();
     }
 
+    public boolean getDefaultBoolean() {
+        return this.defaultBool;
+    }
+
     public int getDefaultInt() {
         return this.defaultInt;
     }
 
+    public double getDefaultDouble() {
+        return this.defaultDouble;
+    }
+
     public GameruleCategories getCategory() {
         return this.category;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public String getRuleName() {
+        return this.ruleName;
     }
 }
