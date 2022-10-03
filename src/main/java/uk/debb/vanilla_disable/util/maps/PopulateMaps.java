@@ -1628,5 +1628,15 @@ public class PopulateMaps implements Maps {
         stringToDefaultIntMap.put("maxEntityCramming", 24);
         stringToDefaultIntMap.put("maxCommandChainLength", 65536);
         stringToDefaultIntMap.put("playersSleepingPercentage", 100);
+
+        for (Gamerules gamerule : Gamerules.values()) {
+            switch (gamerule.getType()) {
+                case "integer" -> {
+                    stringToMinIntMap.put(gamerule.getRuleName(), gamerule.getMinInt());
+                    stringToMaxIntMap.put(gamerule.getRuleName(), gamerule.getMaxInt());
+                }
+                case "double" -> stringToMaxDoubleMap.put(gamerule.getRuleName(), gamerule.getMaxDouble());
+            }
+        }
     }
 }

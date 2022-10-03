@@ -1132,6 +1132,18 @@ public enum Gamerules {
         return this.defaultDouble;
     }
 
+    public int getMinInt() {
+        return this.minInt;
+    }
+
+    public int getMaxInt() {
+        return this.maxInt;
+    }
+
+    public double getMaxDouble() {
+        return this.maxDouble;
+    }
+
     public GameruleCategories getCategory() {
         return this.category;
     }

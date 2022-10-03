@@ -19,11 +19,14 @@ import uk.debb.vanilla_disable.util.gamerules.GameruleCategories;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
+import java.text.DecimalFormat;
+import java.util.Random;
+
 @Mixin(GameRuleCommand.class)
 public abstract class MixinGameRuleCommand {
     /**
-     * @author DragonEggBedrockBreaking
      * @param commandDispatcher the command dispatcher
+     * @author DragonEggBedrockBreaking
      * @reason Add an extra parameter
      */
     @Overwrite
@@ -46,20 +49,30 @@ public abstract class MixinGameRuleCommand {
                         ).then(
                                 Commands.literal("reset")
                                         .then(Commands.literal("rule")
-                                            .then(Commands.literal(id)
-                                                    .executes(commandContext -> resetRule(commandContext.getSource(), arg))))
+                                                .then(Commands.literal(id)
+                                                        .executes(commandContext -> resetRule(commandContext.getSource(), arg))))
                                         .then(Commands.literal("category")
-                                            .then(Commands.argument("name", StringArgumentType.string())
-                                                .executes(commandContext -> resetCategory(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
+                                                .then(Commands.argument("name", StringArgumentType.string())
+                                                        .executes(commandContext -> resetCategory(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
                                         .then(Commands.literal("all")
                                                 .executes(commandContext -> resetCategory(commandContext.getSource(), arg, "all")))
                         ).then(
                                 Commands.literal("list")
                                         .then(Commands.literal("category")
-                                            .then(Commands.argument("name", StringArgumentType.string())
-                                                .executes(commandContext -> listGamerules(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
+                                                .then(Commands.argument("name", StringArgumentType.string())
+                                                        .executes(commandContext -> listGamerules(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
                                         .then(Commands.literal("all")
                                                 .executes(commandContext -> listGamerules(commandContext.getSource(), arg, "all")))
+                        ).then(
+                                Commands.literal("randomise")
+                                        .then(Commands.literal("rule")
+                                                .then(Commands.literal(id)
+                                                        .executes(commandContext -> randomiseRule(commandContext.getSource(), arg))))
+                                        .then(Commands.literal("category")
+                                                .then(Commands.argument("name", StringArgumentType.string())
+                                                        .executes(commandContext -> randomiseCategory(commandContext.getSource(), arg, StringArgumentType.getString(commandContext, "name")))))
+                                        .then(Commands.literal("all")
+                                                .executes(commandContext -> randomiseCategory(commandContext.getSource(), arg, "all")))
                         );
                     }
                 }
@@ -155,6 +168,52 @@ public abstract class MixinGameRuleCommand {
             defaultVal = String.valueOf(Maps.stringToDefaultDoubleMap.getDouble(id));
         }
         arg.sendSuccess(Component.translatable("commands.gamerule.default", defaultVal), false);
+        return lv.getCommandResult();
+    }
+
+    @Unique
+    private static <T extends GameRules.Value<T>> int randomiseRule(CommandSourceStack arg, GameRules.Key<T> arg2) {
+        T lv = arg.getServer().getGameRules().getRule(arg2);
+        String id = arg2.getId();
+        Random random = new Random();
+        DecimalFormat formatter = new DecimalFormat("#.#");
+        if (Maps.stringToDefaultBooleanMap.containsKey(id)) {
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextBoolean()));
+        } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextInt(Maps.stringToMinIntMap.getOrDefault(id, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(id, Integer.MAX_VALUE) + 1)));
+        } else {
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, formatter.format(random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
+        }
+        return lv.getCommandResult();
+    }
+
+    @Unique
+    private static <T extends GameRules.Value<T>> int randomiseCategory(CommandSourceStack source, GameRules.Key<T> rule, String group) {
+        T lv = source.getServer().getGameRules().getRule(rule);
+        ObjectList<String> gamerules = new ObjectArrayList<>();
+        if (!group.equals("all")) {
+            GameruleCategories category = Maps.stringToGameruleCategoryMap.get(group);
+            for (Gamerules gamerule : Gamerules.values()) {
+                if (gamerule.getCategory().equals(category)) {
+                    gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
+                }
+            }
+        } else {
+            for (Gamerules gamerule : Gamerules.values()) {
+                gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
+            }
+        }
+        Random random = new Random();
+        DecimalFormat formatter = new DecimalFormat("#.#");
+        for (String gamerule : gamerules) {
+            if (Maps.stringToDefaultBooleanMap.containsKey(gamerule)) {
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextBoolean()));
+            } else if (Maps.stringToDefaultIntMap.containsKey(gamerule)) {
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextInt(Maps.stringToMinIntMap.getOrDefault(gamerule, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(gamerule, Integer.MAX_VALUE) + 1)));
+            } else {
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, formatter.format(random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(gamerule, Double.MAX_VALUE)))));
+            }
+        }
         return lv.getCommandResult();
     }
 }
