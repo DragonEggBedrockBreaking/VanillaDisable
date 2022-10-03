@@ -88,12 +88,16 @@ public abstract class MixinGameRuleCommand {
             GameruleCategories category = Maps.stringToGameruleCategoryMap.get(group);
             for (Gamerules gamerule : Gamerules.values()) {
                 if (gamerule.getCategory().equals(category)) {
-                    gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
+                    String fixed = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString());
+                    MutableComponent description = Component.translatable("gamerule." + fixed);
+                    gamerules.add("`" + fixed + "`: " + description.getString());
                 }
             }
         } else {
             for (Gamerules gamerule : Gamerules.values()) {
-                gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
+                String fixed = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString());
+                MutableComponent description = Component.translatable("gamerule." + fixed);
+                gamerules.add("`" + fixed + "`: " + description.getString());
             }
         }
         String joined = String.join("\n", gamerules);
