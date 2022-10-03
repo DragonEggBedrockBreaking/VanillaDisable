@@ -100,9 +100,13 @@ public abstract class MixinGameRuleCommand {
                 gamerules.add("`" + fixed + "`: " + description.getString());
             }
         }
-        String joined = String.join("\n", gamerules);
-        joined = "Here are the gamerules for the category:\n\n" + joined;
-        source.sendSuccess(Component.literal(joined), true);
+        if (!gamerules.isEmpty()) {
+            String joined = String.join("\n", gamerules);
+            joined = "Here are the gamerules for the category:\n\n" + joined;
+            source.sendSuccess(Component.literal(joined), true);
+        } else {
+            source.sendSuccess(Component.literal("Invalid gamerule category."), true);
+        }
         return lv.getCommandResult();
     }
 
