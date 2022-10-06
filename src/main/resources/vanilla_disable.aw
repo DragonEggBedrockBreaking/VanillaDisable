@@ -1,10 +1,5 @@
 accessWidener v2 named
 
-accessible field net/minecraft/world/level/DataPackConfig enabled Ljava/util/List;
-accessible field net/minecraft/world/level/DataPackConfig disabled Ljava/util/List;
-mutable field net/minecraft/world/level/DataPackConfig enabled Ljava/util/List;
-mutable field net/minecraft/world/level/DataPackConfig disabled Ljava/util/List;
-
 accessible class net/minecraft/world/entity/animal/Bee$BeeAttackGoal
 accessible class net/minecraft/world/entity/animal/Bee$BaseBeeGoal
 accessible class net/minecraft/world/entity/animal/Bee$BeeEnterHiveGoal
