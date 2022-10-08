@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
 import uk.debb.vanilla_disable.util.gamerules.GameruleCategories;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.util.lists.Lists;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 import java.text.DecimalFormat;
@@ -85,7 +86,14 @@ public abstract class MixinGameRuleCommand {
         T lv = source.getServer().getGameRules().getRule(rule);
         ObjectList<String> gamerules = new ObjectArrayList<>();
         if (!group.equals("all")) {
-            GameruleCategories category = Maps.stringToGameruleCategoryMap.get(group);
+            GameRules.Category vanilla_category = Maps.stringToVanillaGameruleCategoryMap.get(group);
+            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+                if (gamerule.getCategory().equals(vanilla_category)) {
+                    MutableComponent description = Component.translatable(gamerule.getDescriptionId());
+                    gamerules.add("`" + gamerule.getId() + "`: " + description.getString());
+                }
+            }
+            GameruleCategories category = Maps.stringToVanillaDisableGameruleCategoryMap.get(group);
             for (Gamerules gamerule : Gamerules.values()) {
                 if (gamerule.getCategory().equals(category)) {
                     String fixed = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString());
@@ -94,6 +102,10 @@ public abstract class MixinGameRuleCommand {
                 }
             }
         } else {
+            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+                MutableComponent description = Component.translatable(gamerule.getDescriptionId());
+                gamerules.add("`" + gamerule.getId() + "`: " + description.getString());
+            }
             for (Gamerules gamerule : Gamerules.values()) {
                 String fixed = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString());
                 MutableComponent description = Component.translatable("gamerule." + fixed);
@@ -132,13 +144,22 @@ public abstract class MixinGameRuleCommand {
         T lv = source.getServer().getGameRules().getRule(rule);
         ObjectList<String> gamerules = new ObjectArrayList<>();
         if (!group.equals("all")) {
-            GameruleCategories category = Maps.stringToGameruleCategoryMap.get(group);
+            GameRules.Category vanilla_category = Maps.stringToVanillaGameruleCategoryMap.get(group);
+            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+                if (gamerule.getCategory().equals(vanilla_category)) {
+                    gamerules.add(gamerule.getId());
+                }
+            }
+            GameruleCategories category = Maps.stringToVanillaDisableGameruleCategoryMap.get(group);
             for (Gamerules gamerule : Gamerules.values()) {
                 if (gamerule.getCategory().equals(category)) {
                     gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
                 }
             }
         } else {
+            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+                gamerules.add(gamerule.getId());
+            }
             for (Gamerules gamerule : Gamerules.values()) {
                 gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
             }
@@ -200,13 +221,22 @@ public abstract class MixinGameRuleCommand {
         T lv = source.getServer().getGameRules().getRule(rule);
         ObjectList<String> gamerules = new ObjectArrayList<>();
         if (!group.equals("all")) {
-            GameruleCategories category = Maps.stringToGameruleCategoryMap.get(group);
+            GameRules.Category vanilla_category = Maps.stringToVanillaGameruleCategoryMap.get(group);
+            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+                if (gamerule.getCategory().equals(vanilla_category)) {
+                    gamerules.add(gamerule.getId());
+                }
+            }
+            GameruleCategories category = Maps.stringToVanillaDisableGameruleCategoryMap.get(group);
             for (Gamerules gamerule : Gamerules.values()) {
                 if (gamerule.getCategory().equals(category)) {
                     gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
                 }
             }
         } else {
+            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+                gamerules.add(gamerule.getId());
+            }
             for (Gamerules gamerule : Gamerules.values()) {
                 gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
             }

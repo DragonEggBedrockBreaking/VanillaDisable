@@ -38,6 +38,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
@@ -1582,7 +1583,7 @@ public class PopulateMaps implements Maps {
         blockStateBaseBlockMapPortals.put(Blocks.END_GATEWAY, END_GATEWAYS_ENABLED);
 
         for (GameruleCategories category : GameruleCategories.values()) {
-            stringToGameruleCategoryMap.put(category.toString().toLowerCase().substring(3), category);
+            stringToVanillaDisableGameruleCategoryMap.put(category.toString().toLowerCase(), category);
         }
 
         for (Gamerules gamerule : Gamerules.values()) {
@@ -1638,5 +1639,13 @@ public class PopulateMaps implements Maps {
                 case "double" -> stringToMaxDoubleMap.put(gamerule.getRuleName(), gamerule.getMaxDouble());
             }
         }
+
+        stringToVanillaGameruleCategoryMap.put("vanilla_player", GameRules.Category.PLAYER);
+        stringToVanillaGameruleCategoryMap.put("vanilla_mobs", GameRules.Category.MOBS);
+        stringToVanillaGameruleCategoryMap.put("vanilla_spawning", GameRules.Category.SPAWNING);
+        stringToVanillaGameruleCategoryMap.put("vanilla_drops", GameRules.Category.DROPS);
+        stringToVanillaGameruleCategoryMap.put("vanilla_updates", GameRules.Category.UPDATES);
+        stringToVanillaGameruleCategoryMap.put("vanilla_chat", GameRules.Category.CHAT);
+        stringToVanillaGameruleCategoryMap.put("vanilla_misc", GameRules.Category.MISC);
     }
 }
