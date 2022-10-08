@@ -20,7 +20,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.lists.Lists;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 @Mixin(GameRuleCommand.class)
@@ -205,13 +204,12 @@ public abstract class MixinGameRuleCommand {
         T lv = arg.getServer().getGameRules().getRule(arg2);
         String id = arg2.getId();
         Random random = new Random();
-        DecimalFormat formatter = new DecimalFormat("#.#");
         if (Maps.stringToDefaultBooleanMap.containsKey(id)) {
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextBoolean()));
         } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextInt(Maps.stringToMinIntMap.getOrDefault(id, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(id, Integer.MAX_VALUE) + 1)));
         } else {
-            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, formatter.format(random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, String.format("%.2f", random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
         }
         return lv.getCommandResult();
     }
@@ -242,14 +240,13 @@ public abstract class MixinGameRuleCommand {
             }
         }
         Random random = new Random();
-        DecimalFormat formatter = new DecimalFormat("#.#");
         for (String gamerule : gamerules) {
             if (Maps.stringToDefaultBooleanMap.containsKey(gamerule)) {
                 source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextBoolean()));
             } else if (Maps.stringToDefaultIntMap.containsKey(gamerule)) {
                 source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextInt(Maps.stringToMinIntMap.getOrDefault(gamerule, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(gamerule, Integer.MAX_VALUE) + 1)));
             } else {
-                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, formatter.format(random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(gamerule, Double.MAX_VALUE)))));
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, String.format("%.2f", random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(gamerule, Double.MAX_VALUE)))));
             }
         }
         return lv.getCommandResult();
