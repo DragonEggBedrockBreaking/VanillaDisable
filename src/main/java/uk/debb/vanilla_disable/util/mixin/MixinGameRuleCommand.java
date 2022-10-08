@@ -116,7 +116,7 @@ public abstract class MixinGameRuleCommand {
             joined = "Here are the gamerules for the category:\n\n" + joined;
             source.sendSuccess(Component.literal(joined), true);
         } else {
-            source.sendSuccess(Component.literal("Invalid gamerule category."), true);
+            source.sendSuccess(Component.translatable("commands.gamerule.category.invalid"), true);
         }
         return lv.getCommandResult();
     }
@@ -135,9 +135,7 @@ public abstract class MixinGameRuleCommand {
             double defaultDouble = Maps.stringToDefaultDoubleMap.getDouble(id);
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultDouble));
         } else {
-            arg.sendFailure(Component.literal("Gamerule has not been registered using VanillaDisable's api." +
-                            "If this is a vanilla gamerule or a gamerule in VanillaDisable, this message is a bug. Please report it." +
-                            "If this is a gamerule from a mod other than VanillaDisable, you could ask the mod's author to use VanillaDisable's API."));
+            arg.sendFailure(Component.translatable("commands.gamerule.rule.not.registered"));
         }
         return lv.getCommandResult();
     }
@@ -217,9 +215,7 @@ public abstract class MixinGameRuleCommand {
         } else if (Maps.stringToDefaultDoubleMap.containsKey(id)){
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, String.format("%.2f", random.nextDouble(Maps.stringToMinDoubleMap.getOrDefault(id, Double.MIN_VALUE), Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
         } else {
-            arg.sendFailure(Component.literal("Gamerule has not been registered using VanillaDisable's api." +
-                    "If this is a vanilla gamerule or a gamerule in VanillaDisable, this message is a bug. Please report it." +
-                    "If this is a gamerule from a mod other than VanillaDisable, you could ask the mod's author to use VanillaDisable's API."));
+            arg.sendFailure(Component.translatable("commands.gamerule.rule.not.registered"));
         }
         return lv.getCommandResult();
     }
