@@ -27,7 +27,7 @@ public abstract class MixinGameRuleCommand {
     /**
      * @param commandDispatcher the command dispatcher
      * @author DragonEggBedrockBreaking
-     * @reason Add an extra parameter
+     * @reason Rewrite the command to be much more powerful
      */
     @Overwrite
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
