@@ -1636,7 +1636,10 @@ public class PopulateMaps implements Maps {
                     stringToMinIntMap.put(gamerule.getRuleName(), gamerule.getMinInt());
                     stringToMaxIntMap.put(gamerule.getRuleName(), gamerule.getMaxInt());
                 }
-                case "double" -> stringToMaxDoubleMap.put(gamerule.getRuleName(), gamerule.getMaxDouble());
+                case "double" -> {
+                    stringToMinDoubleMap.put(gamerule.getRuleName(), 0.0);
+                    stringToMaxDoubleMap.put(gamerule.getRuleName(), gamerule.getMaxDouble());
+                }
             }
         }
 

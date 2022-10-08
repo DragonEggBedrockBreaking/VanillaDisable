@@ -209,7 +209,7 @@ public abstract class MixinGameRuleCommand {
         } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextInt(Maps.stringToMinIntMap.getOrDefault(id, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(id, Integer.MAX_VALUE) + 1)));
         } else {
-            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, String.format("%.2f", random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, String.format("%.2f", random.nextDouble(Maps.stringToMinDoubleMap.getOrDefault(id, Double.MIN_VALUE), Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
         }
         return lv.getCommandResult();
     }
@@ -246,7 +246,7 @@ public abstract class MixinGameRuleCommand {
             } else if (Maps.stringToDefaultIntMap.containsKey(gamerule)) {
                 source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextInt(Maps.stringToMinIntMap.getOrDefault(gamerule, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(gamerule, Integer.MAX_VALUE) + 1)));
             } else {
-                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, String.format("%.2f", random.nextDouble(0.0, Maps.stringToMaxDoubleMap.getOrDefault(gamerule, Double.MAX_VALUE)))));
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, String.format("%.2f", random.nextDouble(Maps.stringToMinDoubleMap.getOrDefault(gamerule, Double.MIN_VALUE), Maps.stringToMaxDoubleMap.getOrDefault(gamerule, Double.MAX_VALUE)))));
             }
         }
         return lv.getCommandResult();

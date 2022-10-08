@@ -63,6 +63,7 @@ public interface Maps {
     Object2DoubleMap<String> stringToDefaultDoubleMap = new Object2DoubleOpenHashMap<>();
     Object2IntMap<String> stringToMinIntMap = new Object2IntOpenHashMap<>();
     Object2IntMap<String> stringToMaxIntMap = new Object2IntOpenHashMap<>();
+    Object2DoubleMap<String> stringToMinDoubleMap = new Object2DoubleOpenHashMap<>();
     Object2DoubleMap<String> stringToMaxDoubleMap = new Object2DoubleOpenHashMap<>();
     Object2ObjectMap<String, GameRules.Category> stringToVanillaGameruleCategoryMap = new Object2ObjectOpenHashMap<>();
 }
