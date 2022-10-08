@@ -131,9 +131,13 @@ public abstract class MixinGameRuleCommand {
         } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
             int defaultInt = Maps.stringToDefaultIntMap.getInt(id);
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultInt));
-        } else {
+        } else if (Maps.stringToDefaultDoubleMap.containsKey(id)) {
             double defaultDouble = Maps.stringToDefaultDoubleMap.getDouble(id);
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultDouble));
+        } else {
+            arg.sendFailure(Component.literal("Gamerule has not been registered using VanillaDisable's api." +
+                            "If this is a vanilla gamerule or a gamerule in VanillaDisable, this message is a bug. Please report it." +
+                            "If this is a gamerule from a mod other than VanillaDisable, you could ask the mod's author to use VanillaDisable's API."));
         }
         return lv.getCommandResult();
     }
@@ -182,19 +186,21 @@ public abstract class MixinGameRuleCommand {
     private static <T extends GameRules.Value<T>> int queryRule(CommandSourceStack arg, GameRules.Key<T> arg2) {
         T lv = arg.getServer().getGameRules().getRule(arg2);
         MutableComponent description = Component.translatable(arg2.getDescriptionId() + ".description");
-        if (!description.getString().equals(arg2.getDescriptionId() + ".description")) {
-            arg.sendSuccess(description, false);
-        }
         String id = arg2.getId();
-        arg.sendSuccess(Component.translatable("commands.gamerule.query", id, lv.toString()), false);
         String defaultVal;
         if (Maps.stringToDefaultBooleanMap.containsKey(id)) {
             defaultVal = String.valueOf(Maps.stringToDefaultBooleanMap.getBoolean(id));
         } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
             defaultVal = String.valueOf(Maps.stringToDefaultIntMap.getInt(id));
-        } else {
+        } else if (Maps.stringToDefaultDoubleMap.containsKey(id)){
             defaultVal = String.valueOf(Maps.stringToDefaultDoubleMap.getDouble(id));
+        } else {
+            return GameRuleCommand.queryRule(arg, arg2);
         }
+        if (!description.getString().equals(arg2.getDescriptionId() + ".description")) {
+            arg.sendSuccess(description, false);
+        }
+        arg.sendSuccess(Component.translatable("commands.gamerule.query", id, lv.toString()), false);
         arg.sendSuccess(Component.translatable("commands.gamerule.default", defaultVal), false);
         return lv.getCommandResult();
     }
@@ -208,8 +214,12 @@ public abstract class MixinGameRuleCommand {
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextBoolean()));
         } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextInt(Maps.stringToMinIntMap.getOrDefault(id, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(id, Integer.MAX_VALUE) + 1)));
-        } else {
+        } else if (Maps.stringToDefaultDoubleMap.containsKey(id)){
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, String.format("%.2f", random.nextDouble(Maps.stringToMinDoubleMap.getOrDefault(id, Double.MIN_VALUE), Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
+        } else {
+            arg.sendFailure(Component.literal("Gamerule has not been registered using VanillaDisable's api." +
+                    "If this is a vanilla gamerule or a gamerule in VanillaDisable, this message is a bug. Please report it." +
+                    "If this is a gamerule from a mod other than VanillaDisable, you could ask the mod's author to use VanillaDisable's API."));
         }
         return lv.getCommandResult();
     }
