@@ -4,19 +4,20 @@ import io.github.coolcrabs.brachyura.fabric.FabricContext;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyCollector;
 import io.github.coolcrabs.brachyura.fabric.FabricContext.ModDependencyFlag;
 import io.github.coolcrabs.brachyura.fabric.FabricLoader;
+import io.github.coolcrabs.brachyura.fabric.FabricMaven;
+import io.github.coolcrabs.brachyura.fabric.SimpleFabricProject;
 import io.github.coolcrabs.brachyura.maven.Maven;
 import io.github.coolcrabs.brachyura.maven.MavenId;
 import io.github.coolcrabs.brachyura.minecraft.Minecraft;
 import io.github.coolcrabs.brachyura.minecraft.VersionMeta;
 import io.github.coolcrabs.brachyura.quilt.QuiltMaven;
-import io.github.coolcrabs.brachyura.quilt.SimpleQuiltProject;
 import net.fabricmc.mappingio.tree.MappingTree;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Buildscript extends SimpleQuiltProject {
+public class Buildscript extends SimpleFabricProject {
     @Override
     public VersionMeta createMcVersion() {
         return Minecraft.getVersion(Versions.MINECRAFT_VERSION);
@@ -29,13 +30,13 @@ public class Buildscript extends SimpleQuiltProject {
 
     @Override
     public FabricLoader getLoader() {
-        return new FabricLoader(QuiltMaven.URL, QuiltMaven.loader(Versions.QUILT_LOADER_VERSION));
+        return new FabricLoader(FabricMaven.URL, FabricMaven.loader(Versions.FABRIC_LOADER_VERSION));
     }
 
     @Override
     public void getModDependencies(ModDependencyCollector d) {
-        // Quilted Fabric API
-        d.addMaven(QuiltMaven.URL, new MavenId(QuiltMaven.GROUP_ID + ".quilted-fabric-api", "fabric-game-rule-api-v1", Versions.QFAPI_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
+        // Fabric API
+        d.addMaven(FabricMaven.URL, new MavenId(FabricMaven.GROUP_ID + ".fabric-api", "fabric-game-rule-api-v1", Versions.FABRIC_GAMERULE_API_VERSION), ModDependencyFlag.RUNTIME, ModDependencyFlag.COMPILE);
         // CaffeineConfig
         jij(d.addMaven("https://maven.flashyreese.me/", new MavenId("releases.net.caffeinemc", "mixin-config", Versions.CAFFEINE_CONFIG_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // MixinExtras
@@ -48,7 +49,7 @@ public class Buildscript extends SimpleQuiltProject {
 
     @Override
     protected FabricContext createContext() {
-        return new SimpleQuiltContext() {
+        return new SimpleFabricContext() {
             @Override
             public List<Path> getCompileDependencies() {
                 List<Path> paths = super.getCompileDependencies();
@@ -79,6 +80,6 @@ public class Buildscript extends SimpleQuiltProject {
 
     @Override
     public Path getBuildJarPath() {
-        return getBuildLibsDir().resolve(getModId() + "-" + "mc" + createMcVersion().version + "-" + getVersion() + "-quilt" + ".jar");
+        return getBuildLibsDir().resolve(getModId() + "-" + "mc" + createMcVersion().version + "-" + getVersion() + ".jar");
     }
 }

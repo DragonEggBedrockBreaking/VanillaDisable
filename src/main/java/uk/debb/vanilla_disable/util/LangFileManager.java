@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.util;
 
+import net.fabricmc.loader.api.FabricLoader;
 import org.apache.commons.io.FileUtils;
-import org.quiltmc.loader.api.QuiltLoader;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,10 +13,10 @@ import java.nio.file.StandardCopyOption;
 
 public class LangFileManager {
     public static void langFileFallback() throws IOException {
-        if (!QuiltLoader.isModLoaded("quilt_resource_loader")) {
-            File outerrpackdir = new File(QuiltLoader.getGameDir().toString() + "/resourcepacks/vdlangfile");
+        if (!FabricLoader.getInstance().isModLoaded("fabric-resource-loader-v0")) {
+            File outerrpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile");
             FileUtils.deleteDirectory(outerrpackdir);
-            File rpackdir = new File(QuiltLoader.getGameDir().toString() + "/resourcepacks/vdlangfile/assets/vanilladisablelangfile/lang");
+            File rpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile/assets/vanilladisablelangfile/lang");
             if (!rpackdir.mkdirs()) return;
             InputStream inputUrl = LangFileManager.class.getResourceAsStream("/assets/vanilla_disable/lang/en_us.json");
             Path dest = new File(rpackdir + "/en_us.json").toPath();

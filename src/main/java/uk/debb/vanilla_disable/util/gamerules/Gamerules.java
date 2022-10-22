@@ -5,9 +5,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.gamerule.v1.rule.DoubleRule;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
-import org.quiltmc.loader.api.minecraft.MinecraftQuiltLoader;
 
 import static uk.debb.vanilla_disable.util.gamerules.GameruleCategories.*;
 
@@ -1080,7 +1080,7 @@ public enum Gamerules {
 
     public void register() {
         if (!this.category.isEnabled() ||
-                (!this.allowedInSingleplayer && MinecraftQuiltLoader.getEnvironmentType().equals(EnvType.CLIENT) && this.type.equals("boolean"))) {
+                (!this.allowedInSingleplayer && FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT) && this.type.equals("boolean"))) {
             return;
         }
         String ruleName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this.name());

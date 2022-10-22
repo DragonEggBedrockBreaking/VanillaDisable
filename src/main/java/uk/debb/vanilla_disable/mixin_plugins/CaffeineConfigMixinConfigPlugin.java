@@ -2,7 +2,7 @@ package uk.debb.vanilla_disable.mixin_plugins;
 
 import net.caffeinemc.caffeineconfig.AbstractCaffeineConfigMixinPlugin;
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
-import org.quiltmc.loader.api.QuiltLoader;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
     public static CaffeineConfig caffeineConfig;
@@ -39,7 +39,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("stats", true)
                 .addMixinOption("worldgen", true)
                 .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
-                .build(QuiltLoader.getConfigDir().resolve("vanilla-disable-mixin.properties"));
+                .build(FabricLoader.getInstance().getConfigDir().resolve("vanilla-disable-mixin.properties"));
 
         return caffeineConfig;
     }
