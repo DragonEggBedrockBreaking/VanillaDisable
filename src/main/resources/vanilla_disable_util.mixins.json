@@ -4,7 +4,6 @@
     "package": "uk.debb.vanilla_disable.util.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-        "MixinBootstrap",
         "MixinGameRuleCommand",
         "MixinMinecraftServer"
     ],

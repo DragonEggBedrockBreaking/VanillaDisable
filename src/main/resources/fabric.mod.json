@@ -21,6 +21,11 @@
   "license": "MPL-2.0",
   "icon": "assets/vanilla_disable/icon.png",
   "environment": "*",
+  "entrypoints": {
+    "main": [
+      "uk.debb.vanilla_disable.util.VanillaDisable"
+    ]
+  },
   "mixins": [
     "vanilla_disable.mixins.json",
     "vanilla_disable_util.mixins.json"
