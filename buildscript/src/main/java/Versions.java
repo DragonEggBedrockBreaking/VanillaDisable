@@ -1,9 +1,9 @@
 public class Versions {
     public static final String MINECRAFT_VERSION = "1.19.2";
-    public static final String QUILT_LOADER_VERSION = "0.17.5-beta.3";
+    public static final String QUILT_LOADER_VERSION = "0.17.5-beta.10";
     public static final int JAVA_VERSION = 17;
     public static final String QUILTFLOWER_VERSION = "1.8.1";
-    public static final String QFAPI_VERSION = "4.0.0-beta.13+0.62.0-1.19.2";
+    public static final String QFAPI_VERSION = "4.0.0-beta.16+0.64.0-1.19.2";
     public static final String CAFFEINE_CONFIG_VERSION = "1.0.0";
     public static final String LAZYDFU_VERSION = "0.1.3";
     public static final String MIXIN_EXTRAS_VERSION = "0.1.0-rc5";
