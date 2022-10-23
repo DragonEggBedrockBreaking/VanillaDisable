@@ -114,7 +114,6 @@
     "redstone.MixinDropperBlock",
     "redstone.MixinObserverBlock",
     "redstone.MixinPistonBaseBlock",
-    "redstone.MixinPistonStructureResolver",
     "redstone.MixinRedStoneWireBlock",
     "redstone.MixinRepeaterBlock",
     "redstone.MixinSculkSensorBlock",

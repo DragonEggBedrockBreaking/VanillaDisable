@@ -430,7 +430,6 @@ public enum Gamerules {
     TRIPWIRE_HOOK_ENABLED(VD_REDSTONE, true, true),
     PISTON_ENABLED(VD_REDSTONE, true, true),
     SCULK_SENSOR_ENABLED(VD_REDSTONE, true, true),
-    PISTON_PUSH_LIMIT(VD_REDSTONE, 12),
 
     BEE_AI(VD_AI, true, true),
     BLAZE_AI(VD_AI, true, true),
