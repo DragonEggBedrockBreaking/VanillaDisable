@@ -2094,6 +2094,7 @@
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator.",
+    "commands.gamerule.already_default": "This is the default value",
     "commands.gamerule.default": "The default value is: %s",
     "commands.gamerule.category.invalid": "Invalid gamerule category.",
     "commands.gamerule.rule.not.registered": "Gamerule has not been registered using VanillaDisable's api. If this is a vanilla gamerule or a gamerule in VanillaDisable, this message is a bug; please report it. If this is a gamerule from a mod other than VanillaDisable, you could ask the mod's author to use VanillaDisable's API."

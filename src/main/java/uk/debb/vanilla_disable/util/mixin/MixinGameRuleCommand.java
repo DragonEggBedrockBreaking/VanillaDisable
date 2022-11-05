@@ -199,7 +199,11 @@ public abstract class MixinGameRuleCommand {
             arg.sendSuccess(description, false);
         }
         arg.sendSuccess(Component.translatable("commands.gamerule.query", id, lv.toString()), false);
-        arg.sendSuccess(Component.translatable("commands.gamerule.default", defaultVal), false);
+        if (lv.toString().equals(defaultVal)) {
+            arg.sendSuccess(Component.translatable("commands.gamerule.already_default"), false);
+        } else {
+            arg.sendSuccess(Component.translatable("commands.gamerule.default",defaultVal),false);
+        }
         return lv.getCommandResult();
     }
 
