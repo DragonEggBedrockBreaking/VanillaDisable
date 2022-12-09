@@ -1,6 +1,7 @@
 package uk.debb.vanilla_disable.mixin.stats;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatFormatter;
@@ -19,28 +20,26 @@ public abstract class MixinServerPlayer implements Lists {
         if (!Gamerules.STATS_ENABLED.getBool()) {
             return true;
         }
-        Registry<?> registry = stat.getType().getRegistry();
-        if (registry.equals(Registry.BLOCK)) {
-            return !Gamerules.BLOCK_STATS.getBool();
-        } else if (registry.equals(Registry.ITEM)) {
+        if (stat.getType().getRegistry().equals(BuiltInRegistries.ITEM)) {
             return !Gamerules.ITEM_STATS.getBool();
-        } else if (registry.equals(Registry.ENTITY_TYPE)) {
-            return !Gamerules.ENTITY_KILL_STATS.getBool();
         }
-        StatFormatter formatter = stat.formatter;
-        if (formatter.equals(StatFormatter.TIME)) {
+        if (stat.formatter.equals(StatFormatter.TIME)) {
             return !Gamerules.TIME_STATS.getBool();
-        } else if (formatter.equals(StatFormatter.DISTANCE)) {
+        }
+        if (stat.formatter.equals(StatFormatter.DISTANCE)) {
             return !Gamerules.DISTANCE_STATS.getBool();
-        } else if (formatter.equals(StatFormatter.DIVIDE_BY_TEN)) {
+        }
+        if (stat.formatter.equals(StatFormatter.DIVIDE_BY_TEN)) {
             return !Gamerules.DAMAGE_STATS.getBool();
         }
-        String string = stat.getName();
-        if (string.contains("interact")) {
+        if (stat.getName().contains("interact")) {
             return !Gamerules.GUI_BLOCK_INTERACTION_STATS.getBool();
         }
+        if (stat.getName().contains("mob")) {
+            return !Gamerules.ENTITY_KILL_STATS.getBool();
+        }
         for (String section : serverPlayerStringList) {
-            if (string.contains(section)) {
+            if (stat.getName().contains(section)) {
                 return !Gamerules.GENERAL_STATS.getBool();
             }
         }

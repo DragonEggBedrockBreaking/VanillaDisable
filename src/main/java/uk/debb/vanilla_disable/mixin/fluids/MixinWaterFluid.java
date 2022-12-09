@@ -25,9 +25,4 @@ public abstract class MixinWaterFluid {
         }
         return original;
     }
-
-    @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
-    private boolean canWaterConvertToSource(boolean original) {
-        return Gamerules.INFINITE_WATER.getBool();
-    }
 }

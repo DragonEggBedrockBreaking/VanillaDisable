@@ -34,7 +34,7 @@
   "depends": {
     "fabricloader": ">=0.14.9",
     "fabric-game-rule-api-v1": ">=1.0.22",
-    "minecraft": ">=1.19.1",
+    "minecraft": ">=1.19.3",
     "java": ">=17"
   },
   "suggests": {

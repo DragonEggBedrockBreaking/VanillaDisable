@@ -2,7 +2,8 @@ package uk.debb.vanilla_disable.mixin.biome;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.core.Holder;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.biome.Biomes;
@@ -16,14 +17,15 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 public abstract class MixinBiomeManager implements Lists, Maps {
     @ModifyReturnValue(method = "getBiome", at = @At("RETURN"))
     private Holder<Biome> modifyBiome(Holder<Biome> original) {
+        Registry<Biome> biomeRegistry = Gamerules.server.registryAccess().registryOrThrow(Registries.BIOME);
         Gamerules gameRule = biomeSourceBiomeHolderMap.get(original);
         if (!Gamerules.BIOMES_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
             if (netherBiomes.contains(original)) {
-                return BuiltinRegistries.BIOME.getOrCreateHolderOrThrow(Biomes.NETHER_WASTES);
+                return biomeRegistry.getHolderOrThrow(Biomes.NETHER_WASTES);
             } else if (theEndBiomes.contains(original)) {
-                return BuiltinRegistries.BIOME.getOrCreateHolderOrThrow(Biomes.THE_END);
+                return biomeRegistry.getHolderOrThrow(Biomes.THE_END);
             } else {
-                return BuiltinRegistries.BIOME.getOrCreateHolderOrThrow(Biomes.PLAINS);
+                return biomeRegistry.getHolderOrThrow(Biomes.PLAINS);
             }
         }
         return original;

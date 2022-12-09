@@ -1,8 +1,11 @@
 package uk.debb.vanilla_disable.util.lists;
 
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 public class PopulateLists implements Lists {
     public static void populateLists() {
@@ -12,16 +15,6 @@ public class PopulateLists implements Lists {
         serverPlayerStringList.add("fish_caught");
         serverPlayerStringList.add("target_hit");
         serverPlayerStringList.add("trade");
-
-        netherBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.BASALT_DELTAS));
-        netherBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.CRIMSON_FOREST));
-        netherBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.SOUL_SAND_VALLEY));
-        netherBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.WARPED_FOREST));
-
-        theEndBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.END_BARRENS));
-        theEndBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.END_HIGHLANDS));
-        theEndBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.END_MIDLANDS));
-        theEndBiomes.add(BuiltinRegistries.BIOME.getHolderOrThrow(Biomes.SMALL_END_ISLANDS));
 
         vanillaGamerules.add(GameRules.RULE_DOFIRETICK);
         vanillaGamerules.add(GameRules.RULE_MOBGRIEFING);
@@ -59,5 +52,22 @@ public class PopulateLists implements Lists {
         vanillaGamerules.add(GameRules.RULE_MAX_ENTITY_CRAMMING);
         vanillaGamerules.add(GameRules.RULE_MAX_COMMAND_CHAIN_LENGTH);
         vanillaGamerules.add(GameRules.RULE_PLAYERS_SLEEPING_PERCENTAGE);
+    }
+
+    public static void populateBiomeLists() {
+        netherBiomes.clear();
+        theEndBiomes.clear();
+
+        Registry<Biome> biomeRegistry = Gamerules.server.registryAccess().registryOrThrow(Registries.BIOME);
+
+        netherBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.BASALT_DELTAS));
+        netherBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.CRIMSON_FOREST));
+        netherBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.SOUL_SAND_VALLEY));
+        netherBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.WARPED_FOREST));
+
+        theEndBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.END_BARRENS));
+        theEndBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.END_HIGHLANDS));
+        theEndBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.END_MIDLANDS));
+        theEndBiomes.add(biomeRegistry.getHolderOrThrow(Biomes.SMALL_END_ISLANDS));
     }
 }

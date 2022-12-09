@@ -1,25 +1,40 @@
 package uk.debb.vanilla_disable.mixin.redstone;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.ButtonBlock;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(ButtonBlock.class)
 public abstract class MixinButtonBlock {
-    @Shadow
-    @Final
-    private boolean sensitive;
-
-    @ModifyReturnValue(method = "getPressDuration", at = @At("RETURN"))
-    private int modifyPressDuration(int original) {
-        if (this.sensitive) {
-            return Gamerules.WOOD_BUTTON_PRESS_DURATION.getInt();
-        } else {
+    @ModifyArg(
+            method = "press",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"
+            ),
+            index = 2
+    )
+    private int editButtonPressDuration(int original) {
+        if (original == 20) {
             return Gamerules.STONE_BUTTON_PRESS_DURATION.getInt();
         }
+        return Gamerules.WOOD_BUTTON_PRESS_DURATION.getInt();
+    }
+
+    @ModifyArg(
+            method = "checkPressed",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"
+            ),
+            index = 2
+    )
+    private int modifyButtonPressDuration(int original) {
+        if (original == 20) {
+            return Gamerules.STONE_BUTTON_PRESS_DURATION.getInt();
+        }
+        return Gamerules.WOOD_BUTTON_PRESS_DURATION.getInt();
     }
 }

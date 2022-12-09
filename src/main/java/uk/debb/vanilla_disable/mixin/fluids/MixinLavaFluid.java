@@ -33,9 +33,4 @@ public abstract class MixinLavaFluid {
         }
         return original;
     }
-
-    @ModifyReturnValue(method = "canConvertToSource", at = @At("RETURN"))
-    private boolean canLavaConvertToSource(boolean original) {
-        return Gamerules.INFINITE_LAVA.getBool();
-    }
 }

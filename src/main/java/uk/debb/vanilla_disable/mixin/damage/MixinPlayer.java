@@ -2,6 +2,7 @@ package uk.debb.vanilla_disable.mixin.damage;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,6 +28,8 @@ public abstract class MixinPlayer implements Maps {
             return !Gamerules.MAGIC_DAMAGE.getBool();
         } else if (damageSource.isCreativePlayer()) {
             return !Gamerules.CREATIVE_PLAYER_DAMAGE.getBool();
+        } else if (damageSource instanceof EntityDamageSource) {
+            return !Gamerules.ENTITY_DAMAGE.getBool();
         }
         return original;
     }
