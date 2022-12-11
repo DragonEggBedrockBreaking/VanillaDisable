@@ -34,4 +34,3 @@ jobs:
           modrinth-id: udzOW1ID
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          loaders: quilt
