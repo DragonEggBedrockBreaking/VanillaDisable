@@ -12,6 +12,7 @@ public class VanillaDisableApi implements Lists, Maps {
         stringToDefaultBooleanMap.put(gamerule.getId(), defaultVal);
         vanillaGamerules.add(gamerule);
     }
+
     @Api
     public static void setupRule(GameRules.Key<GameRules.IntegerValue> gamerule, int defaultVal, int minVal, int maxVal) {
         stringToDefaultIntMap.put(gamerule.getId(), defaultVal);
@@ -19,6 +20,7 @@ public class VanillaDisableApi implements Lists, Maps {
         stringToMaxIntMap.put(gamerule.getId(), maxVal);
         vanillaGamerules.add(gamerule);
     }
+
     @Api
     public static void setupRule(GameRules.Key<DoubleRule> gamerule, double defaultVal, double minVal, double maxVal) {
         stringToDefaultDoubleMap.put(gamerule.getId(), defaultVal);

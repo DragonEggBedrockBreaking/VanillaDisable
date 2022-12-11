@@ -23,7 +23,7 @@ import uk.debb.vanilla_disable.util.maps.Maps;
 import java.util.Random;
 
 @Mixin(GameRuleCommand.class)
-public abstract class MixinGameRuleCommand {
+public abstract class MixinGameRuleCommand implements Lists, Maps {
     /**
      * @param commandDispatcher the command dispatcher
      * @author DragonEggBedrockBreaking
@@ -85,14 +85,14 @@ public abstract class MixinGameRuleCommand {
         T lv = source.getServer().getGameRules().getRule(rule);
         ObjectList<String> gamerules = new ObjectArrayList<>();
         if (!group.equals("all")) {
-            GameRules.Category vanilla_category = Maps.stringToVanillaGameruleCategoryMap.get(group);
-            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+            GameRules.Category vanilla_category = stringToVanillaGameruleCategoryMap.get(group);
+            for (GameRules.Key<?> gamerule : vanillaGamerules) {
                 if (gamerule.getCategory().equals(vanilla_category)) {
                     MutableComponent description = Component.translatable(gamerule.getDescriptionId());
                     gamerules.add("`" + gamerule.getId() + "`: " + description.getString());
                 }
             }
-            GameruleCategories category = Maps.stringToVanillaDisableGameruleCategoryMap.get(group);
+            GameruleCategories category = stringToVanillaDisableGameruleCategoryMap.get(group);
             for (Gamerules gamerule : Gamerules.values()) {
                 if (gamerule.getCategory().equals(category)) {
                     String fixed = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString());
@@ -101,7 +101,7 @@ public abstract class MixinGameRuleCommand {
                 }
             }
         } else {
-            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+            for (GameRules.Key<?> gamerule : vanillaGamerules) {
                 MutableComponent description = Component.translatable(gamerule.getDescriptionId());
                 gamerules.add("`" + gamerule.getId() + "`: " + description.getString());
             }
@@ -125,14 +125,14 @@ public abstract class MixinGameRuleCommand {
     private static <T extends GameRules.Value<T>> int resetRule(CommandSourceStack arg, GameRules.Key<T> arg2) {
         T lv = arg.getServer().getGameRules().getRule(arg2);
         String id = arg2.getId();
-        if (Maps.stringToDefaultBooleanMap.containsKey(id)) {
-            boolean defaultBoolean = Maps.stringToDefaultBooleanMap.getBoolean(id);
+        if (stringToDefaultBooleanMap.containsKey(id)) {
+            boolean defaultBoolean = stringToDefaultBooleanMap.getBoolean(id);
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultBoolean));
-        } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
-            int defaultInt = Maps.stringToDefaultIntMap.getInt(id);
+        } else if (stringToDefaultIntMap.containsKey(id)) {
+            int defaultInt = stringToDefaultIntMap.getInt(id);
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultInt));
-        } else if (Maps.stringToDefaultDoubleMap.containsKey(id)) {
-            double defaultDouble = Maps.stringToDefaultDoubleMap.getDouble(id);
+        } else if (stringToDefaultDoubleMap.containsKey(id)) {
+            double defaultDouble = stringToDefaultDoubleMap.getDouble(id);
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, defaultDouble));
         } else {
             arg.sendFailure(Component.translatable("commands.gamerule.rule.not.registered"));
@@ -145,20 +145,20 @@ public abstract class MixinGameRuleCommand {
         T lv = source.getServer().getGameRules().getRule(rule);
         ObjectList<String> gamerules = new ObjectArrayList<>();
         if (!group.equals("all")) {
-            GameRules.Category vanilla_category = Maps.stringToVanillaGameruleCategoryMap.get(group);
-            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+            GameRules.Category vanilla_category = stringToVanillaGameruleCategoryMap.get(group);
+            for (GameRules.Key<?> gamerule : vanillaGamerules) {
                 if (gamerule.getCategory().equals(vanilla_category)) {
                     gamerules.add(gamerule.getId());
                 }
             }
-            GameruleCategories category = Maps.stringToVanillaDisableGameruleCategoryMap.get(group);
+            GameruleCategories category = stringToVanillaDisableGameruleCategoryMap.get(group);
             for (Gamerules gamerule : Gamerules.values()) {
                 if (gamerule.getCategory().equals(category)) {
                     gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
                 }
             }
         } else {
-            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+            for (GameRules.Key<?> gamerule : vanillaGamerules) {
                 gamerules.add(gamerule.getId());
             }
             for (Gamerules gamerule : Gamerules.values()) {
@@ -166,14 +166,14 @@ public abstract class MixinGameRuleCommand {
             }
         }
         for (String gamerule : gamerules) {
-            if (Maps.stringToDefaultBooleanMap.containsKey(gamerule)) {
-                boolean defaultBoolean = Maps.stringToDefaultBooleanMap.getBoolean(gamerule);
+            if (stringToDefaultBooleanMap.containsKey(gamerule)) {
+                boolean defaultBoolean = stringToDefaultBooleanMap.getBoolean(gamerule);
                 source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, defaultBoolean));
-            } else if (Maps.stringToDefaultIntMap.containsKey(gamerule)) {
-                int defaultInt = Maps.stringToDefaultIntMap.getInt(gamerule);
+            } else if (stringToDefaultIntMap.containsKey(gamerule)) {
+                int defaultInt = stringToDefaultIntMap.getInt(gamerule);
                 source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, defaultInt));
             } else {
-                double defaultDouble = Maps.stringToDefaultDoubleMap.getDouble(gamerule);
+                double defaultDouble = stringToDefaultDoubleMap.getDouble(gamerule);
                 source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, defaultDouble));
             }
         }
@@ -186,12 +186,12 @@ public abstract class MixinGameRuleCommand {
         MutableComponent description = Component.translatable(arg2.getDescriptionId() + ".description");
         String id = arg2.getId();
         String defaultVal;
-        if (Maps.stringToDefaultBooleanMap.containsKey(id)) {
-            defaultVal = String.valueOf(Maps.stringToDefaultBooleanMap.getBoolean(id));
-        } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
-            defaultVal = String.valueOf(Maps.stringToDefaultIntMap.getInt(id));
-        } else if (Maps.stringToDefaultDoubleMap.containsKey(id)){
-            defaultVal = String.valueOf(Maps.stringToDefaultDoubleMap.getDouble(id));
+        if (stringToDefaultBooleanMap.containsKey(id)) {
+            defaultVal = String.valueOf(stringToDefaultBooleanMap.getBoolean(id));
+        } else if (stringToDefaultIntMap.containsKey(id)) {
+            defaultVal = String.valueOf(stringToDefaultIntMap.getInt(id));
+        } else if (stringToDefaultDoubleMap.containsKey(id)) {
+            defaultVal = String.valueOf(stringToDefaultDoubleMap.getDouble(id));
         } else {
             return GameRuleCommand.queryRule(arg, arg2);
         }
@@ -202,7 +202,7 @@ public abstract class MixinGameRuleCommand {
         if (lv.toString().equals(defaultVal)) {
             arg.sendSuccess(Component.translatable("commands.gamerule.already_default"), false);
         } else {
-            arg.sendSuccess(Component.translatable("commands.gamerule.default",defaultVal),false);
+            arg.sendSuccess(Component.translatable("commands.gamerule.default", defaultVal), false);
         }
         return lv.getCommandResult();
     }
@@ -212,12 +212,12 @@ public abstract class MixinGameRuleCommand {
         T lv = arg.getServer().getGameRules().getRule(arg2);
         String id = arg2.getId();
         Random random = new Random();
-        if (Maps.stringToDefaultBooleanMap.containsKey(id)) {
+        if (stringToDefaultBooleanMap.containsKey(id)) {
             arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextBoolean()));
-        } else if (Maps.stringToDefaultIntMap.containsKey(id)) {
-            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextInt(Maps.stringToMinIntMap.getOrDefault(id, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(id, Integer.MAX_VALUE) + 1)));
-        } else if (Maps.stringToDefaultDoubleMap.containsKey(id)){
-            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, String.format("%.2f", random.nextDouble(Maps.stringToMinDoubleMap.getOrDefault(id, Double.MIN_VALUE), Maps.stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
+        } else if (stringToDefaultIntMap.containsKey(id)) {
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, random.nextInt(stringToMinIntMap.getOrDefault(id, Integer.MIN_VALUE), stringToMaxIntMap.getOrDefault(id, Integer.MAX_VALUE) + 1)));
+        } else if (stringToDefaultDoubleMap.containsKey(id)) {
+            arg.getServer().getCommands().performPrefixedCommand(arg, String.format("/gamerule set %s %s", id, String.format("%.2f", random.nextDouble(stringToMinDoubleMap.getOrDefault(id, Double.MIN_VALUE), stringToMaxDoubleMap.getOrDefault(id, Double.MAX_VALUE)))));
         } else {
             arg.sendFailure(Component.translatable("commands.gamerule.rule.not.registered"));
         }
@@ -229,20 +229,20 @@ public abstract class MixinGameRuleCommand {
         T lv = source.getServer().getGameRules().getRule(rule);
         ObjectList<String> gamerules = new ObjectArrayList<>();
         if (!group.equals("all")) {
-            GameRules.Category vanilla_category = Maps.stringToVanillaGameruleCategoryMap.get(group);
-            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+            GameRules.Category vanilla_category = stringToVanillaGameruleCategoryMap.get(group);
+            for (GameRules.Key<?> gamerule : vanillaGamerules) {
                 if (gamerule.getCategory().equals(vanilla_category)) {
                     gamerules.add(gamerule.getId());
                 }
             }
-            GameruleCategories category = Maps.stringToVanillaDisableGameruleCategoryMap.get(group);
+            GameruleCategories category = stringToVanillaDisableGameruleCategoryMap.get(group);
             for (Gamerules gamerule : Gamerules.values()) {
                 if (gamerule.getCategory().equals(category)) {
                     gamerules.add(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, gamerule.toString()));
                 }
             }
         } else {
-            for (GameRules.Key<?> gamerule : Lists.vanillaGamerules) {
+            for (GameRules.Key<?> gamerule : vanillaGamerules) {
                 gamerules.add(gamerule.getId());
             }
             for (Gamerules gamerule : Gamerules.values()) {
@@ -251,12 +251,12 @@ public abstract class MixinGameRuleCommand {
         }
         Random random = new Random();
         for (String gamerule : gamerules) {
-            if (Maps.stringToDefaultBooleanMap.containsKey(gamerule)) {
+            if (stringToDefaultBooleanMap.containsKey(gamerule)) {
                 source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextBoolean()));
-            } else if (Maps.stringToDefaultIntMap.containsKey(gamerule)) {
-                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextInt(Maps.stringToMinIntMap.getOrDefault(gamerule, Integer.MIN_VALUE), Maps.stringToMaxIntMap.getOrDefault(gamerule, Integer.MAX_VALUE) + 1)));
+            } else if (stringToDefaultIntMap.containsKey(gamerule)) {
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, random.nextInt(stringToMinIntMap.getOrDefault(gamerule, Integer.MIN_VALUE), stringToMaxIntMap.getOrDefault(gamerule, Integer.MAX_VALUE) + 1)));
             } else {
-                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, String.format("%.2f", random.nextDouble(Maps.stringToMinDoubleMap.getOrDefault(gamerule, Double.MIN_VALUE), Maps.stringToMaxDoubleMap.getOrDefault(gamerule, Double.MAX_VALUE)))));
+                source.getServer().getCommands().performPrefixedCommand(source, String.format("/gamerule set %s %s", gamerule, String.format("%.2f", random.nextDouble(stringToMinDoubleMap.getOrDefault(gamerule, Double.MIN_VALUE), stringToMaxDoubleMap.getOrDefault(gamerule, Double.MAX_VALUE)))));
             }
         }
         return lv.getCommandResult();

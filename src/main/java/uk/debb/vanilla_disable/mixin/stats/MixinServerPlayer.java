@@ -1,6 +1,5 @@
 package uk.debb.vanilla_disable.mixin.stats;
 
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stat;
