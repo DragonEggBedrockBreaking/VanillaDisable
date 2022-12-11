@@ -2,7 +2,6 @@
     "gamerule.damageEnabled": "Damage enabled",
     "gamerule.projectileDamage": "Projectile damage",
     "gamerule.explosionDamage": "Explosion damage",
-    "gamerule.fallingBlockDamage": "Falling block damage",
     "gamerule.voidDamage": "Void damage",
     "gamerule.magicDamage": "Magic damage",
     "gamerule.creativePlayerDamage": "Creative player damage",
@@ -13,15 +12,13 @@
     "gamerule.cactusDamage": "Cactus damage",
     "gamerule.flyIntoWallDamage": "Fly into wall damage",
     "gamerule.witherDamage": "Wither damage",
-    "gamerule.anvilDamage": "Anvil damage",
     "gamerule.dragonDamage": "Dragon damage",
     "gamerule.sweetBerryBushDamage": "Sweet berry bush damage",
-    "gamerule.fallingStalactiteDamage": "Falling stalactite damage",
+    "gamerule.entityDamage": "Entity damage",
 
     "gamerule.damageEnabled.description": "Deal damage",
     "gamerule.projectileDamage.description": "Deal damage from projectiles",
     "gamerule.explosionDamage.description": "Deal damage from explosions",
-    "gamerule.fallingBlockDamage.description": "Deal damage from falling blocks",
     "gamerule.voidDamage.description": "Deal damage from the void",
     "gamerule.magicDamage.description": "Deal damage from magic",
     "gamerule.creativePlayerDamage.description": "Deal damage from creative players",
@@ -32,10 +29,9 @@
     "gamerule.cactusDamage.description": "Deal damage from cacti",
     "gamerule.flyIntoWallDamage.description": "Deal damage from flying into walls",
     "gamerule.witherDamage.description": "Deal damage from withers",
-    "gamerule.anvilDamage.description": "Deal damage from anvils",
     "gamerule.dragonDamage.description": "Deal damage from dragons",
     "gamerule.sweetBerryBushDamage.description": "Deal damage from sweet berry bushes",
-    "gamerule.fallingStalactiteDamage.description": "Deal damage from falling stalactites",
+    "gamerule.entityDamage.description": "Deal damage from entities, e.g. anvils, falling stalactites, etc.",
 
 
     "gamerule.knockbackEnabled": "Knockback enabled",
@@ -187,6 +183,7 @@
     "gamerule.executeCommand": "Execute command",
     "gamerule.experienceCommand": "Experience command",
     "gamerule.fillCommand": "Fill command",
+    "gamerule.fillBiomeCommand": "Fillbiome command",
     "gamerule.forceLoadCommand": "Force load command",
     "gamerule.functionCommand": "Function command",
     "gamerule.gameModeCommand": "Game mode command",
@@ -263,6 +260,7 @@
     "gamerule.executeCommand.description": "Toggle the /execute command",
     "gamerule.experienceCommand.description": "Toggle the /experience command",
     "gamerule.fillCommand.description": "Toggle the /fill command",
+    "gamerule.fillBiomeCommand.description": ""
     "gamerule.forceLoadCommand.description": "Toggle the /forceload command",
     "gamerule.functionCommand.description": "Toggle the /function command",
     "gamerule.gameModeCommand.description": "Toggle the /gamemode command",
@@ -323,8 +321,6 @@
     "gamerule.whitelistDedicatedCommand.description": "Toggle the /whitelist command on dedicated servers",
 
 
-    "gamerule.infiniteWater": "Infinite water",
-    "gamerule.infiniteLava": "Infinite lava",
     "gamerule.waterReachesFar": "Water reaches far",
     "gamerule.lavaReachesFar": "Lava reaches far",
     "gamerule.lavaReachesFarInNether": "Lava reaches far in nether",
@@ -334,8 +330,6 @@
     "gamerule.waterPlaceableInNether": "Water placeable in nether",
     "gamerule.bubbleColumnsEnabled": "Bubble columns enabled",
 
-    "gamerule.infiniteWater.description": "Toggle infinite water",
-    "gamerule.infiniteLava.description": "Toggle infinite lava",
     "gamerule.waterReachesFar.description": "Whether water flows for 4 blocks or 8",
     "gamerule.lavaReachesFar.description": "Whether lava flows for 4 blocks or 8",
     "gamerule.lavaReachesFarInNether.description": "Whether lava flows for 4 blocks or 8 in the nether",
@@ -827,7 +821,6 @@
     "gamerule.tripwireHookEnabled": "Tripwire hook enabled",
     "gamerule.pistonEnabled": "Piston enabled",
     "gamerule.sculkSensorEnabled": "Sculk sensor enabled",
-    "gamerule.pistonPushLimit": "Piston push limit",
 
     "gamerule.repeaterBaseDelay.description": "Delay of a repeater per level",
     "gamerule.repeaterSignal.description": "Signal strength of a repeater",
@@ -852,7 +845,6 @@
     "gamerule.tripwireHookEnabled.description": "Toggle tripwire hooks being enabled",
     "gamerule.pistonEnabled.description": "Toggle pistons being enabled",
     "gamerule.sculkSensorEnabled.description": "Toggle sculk sensors being enabled",
-    "gamerule.pistonPushLimit.description": "The maximum number of blocks a piston can push",
 
 
     "gamerule.beeAi": "Bee ai",
@@ -1770,7 +1762,6 @@
 
 
     "gamerule.statsEnabled": "Stats enabled",
-    "gamerule.blockStats": "Block stats",
     "gamerule.itemStats": "Item stats",
     "gamerule.entityKillStats": "Entity kill stats",
     "gamerule.timeStats": "Time stats",
@@ -1781,7 +1772,6 @@
     "gamerule.generalStats": "General stats",
 
     "gamerule.statsEnabled.description": "Toggle player statistics",
-    "gamerule.blockStats.description": "Toggle counting statistics from placing/mining blocks",
     "gamerule.itemStats.description": "Toggle counting statistics from interactions with items",
     "gamerule.entityKillStats.description": "Toggle counting statistics from killing/being killed by entities",
     "gamerule.timeStats.description": "Toggle counting statistics related to time spent",
