@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
-@Mixin(ButtonBlock.class)
+@Mixin(value = ButtonBlock.class, priority = 999)
 public abstract class MixinButtonBlock {
     @ModifyArg(
             method = "press",

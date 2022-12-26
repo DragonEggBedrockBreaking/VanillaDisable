@@ -260,7 +260,7 @@
     "gamerule.executeCommand.description": "Toggle the /execute command",
     "gamerule.experienceCommand.description": "Toggle the /experience command",
     "gamerule.fillCommand.description": "Toggle the /fill command",
-    "gamerule.fillBiomeCommand.description": ""
+    "gamerule.fillBiomeCommand.description": "Toggle the /fillbiome command",
     "gamerule.forceLoadCommand.description": "Toggle the /forceload command",
     "gamerule.functionCommand.description": "Toggle the /function command",
     "gamerule.gameModeCommand.description": "Toggle the /gamemode command",
