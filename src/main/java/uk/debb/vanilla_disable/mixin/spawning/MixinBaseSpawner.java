@@ -1,35 +1,41 @@
 package uk.debb.vanilla_disable.mixin.spawning;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BaseSpawner;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.SpawnData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
-import java.util.Objects;
+import java.util.function.Function;
 
 @Mixin(BaseSpawner.class)
 public abstract class MixinBaseSpawner implements Maps {
-    @Shadow
-    private @Nullable Entity displayEntity;
+    @Shadow private SpawnData nextSpawnData;
 
-    @Inject(
+    @ModifyExpressionValue(
             method = "serverTick",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/server/level/ServerLevel;tryAddFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)Z"
-            ),
-            cancellable = true
+                    target = "Lnet/minecraft/world/level/BaseSpawner;isNearPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"
+            )
     )
-    private void cancelSpawningNewEntityAndPassengers(CallbackInfo ci) {
-        Gamerules gameRule = baseSpawnerClassMap.get(Objects.requireNonNull(this.displayEntity).getClass());
-        if (!gameRule.getBool() || !Gamerules.SPAWNERS_ENABLED.getBool()) {
-            ci.cancel();
+    private boolean cancelSpawningNewEntityAndPassengers(boolean original, ServerLevel level, BlockPos blockPos) {
+        CompoundTag compoundTag = this.nextSpawnData.getEntityToSpawn();
+        Entity entity = EntityType.loadEntityRecursive(compoundTag, level, Function.identity());
+        if (entity != null) {
+            Gamerules gameRule = baseSpawnerClassMap.get(entity.getClass());
+            if (!gameRule.getBool() || !Gamerules.SPAWNERS_ENABLED.getBool()) {
+                return false;
+            }
         }
+        return original;
     }
 }
