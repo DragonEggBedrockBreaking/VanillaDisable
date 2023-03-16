@@ -33,7 +33,6 @@ public abstract class MixinBaseSpawner implements Maps {
     private boolean cancelSpawningNewEntityAndPassengers(boolean original, ServerLevel level, BlockPos blockPos) {
         CompoundTag compoundTag = this.getOrCreateNextSpawnData(level, level.getRandom(), blockPos).getEntityToSpawn();
         Entity entity = EntityType.loadEntityRecursive(compoundTag, level, Function.identity());
-        System.out.println(entity);
         if (entity != null) {
             Gamerules gameRule = baseSpawnerClassMap.get(entity.getClass());
             if (!gameRule.getBool() || !Gamerules.SPAWNERS_ENABLED.getBool()) {
