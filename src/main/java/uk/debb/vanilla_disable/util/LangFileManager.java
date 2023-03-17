@@ -23,7 +23,7 @@ public class LangFileManager {
             if (inputUrl != null) {
                 Files.copy(inputUrl, dest, StandardCopyOption.REPLACE_EXISTING);
             }
-            String content = "{\"pack\":{\"pack_format\":12,\"description\":\"Vanilla Disable Language File\"}}";
+            String content = "{\"pack\":{\"pack_format\":13,\"description\":\"Vanilla Disable Language File\"}}";
             String mcmetaPath = new File(outerrpackdir + "/pack.mcmeta").toString();
             FileWriter mcmetaWriter = new FileWriter(mcmetaPath);
             mcmetaWriter.write(content);

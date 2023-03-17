@@ -6,8 +6,8 @@ out/
 classes/
 
 # brachyura
-
-.brachyura/
+.brachyura
+.brachyura-old/
 buildscript/build/
 
 # eclipse

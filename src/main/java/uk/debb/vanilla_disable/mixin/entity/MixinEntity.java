@@ -33,7 +33,7 @@ public abstract class MixinEntity {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));
                 if (blockState.getMaterial().isSolid()) {
-                    if (!this.hurt(DamageSource.GENERIC, Float.MAX_VALUE)) return;
+                    if (!this.hurt(level.damageSources().generic(), Float.MAX_VALUE)) return;
                 }
             }
         }

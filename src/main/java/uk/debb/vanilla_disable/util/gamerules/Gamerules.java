@@ -100,6 +100,7 @@ public enum Gamerules {
     CHASE_COMMAND(VD_COMMANDS, true, true),
     CLEAR_COMMAND(VD_COMMANDS, true, true),
     CLONE_COMMAND(VD_COMMANDS, true, true),
+    DAMAGE_COMMAND(VD_COMMANDS, true, true),
     DATAPACK_COMMAND(VD_COMMANDS, true, true),
     DATA_COMMAND(VD_COMMANDS, true, true),
     DEBUG_COMMAND(VD_COMMANDS, true, true),
@@ -133,6 +134,7 @@ public enum Gamerules {
     RECIPE_COMMAND(VD_COMMANDS, true, true),
     RELOAD_COMMAND(VD_COMMANDS, true, true),
     RESET_CHUNKS_COMMAND(VD_COMMANDS, true, true),
+    RIDE_COMMAND(VD_COMMANDS, true, true),
     SAY_COMMAND(VD_COMMANDS, true, true),
     SCHEDULE_COMMAND(VD_COMMANDS, true, true),
     SCOREBOARD_COMMAND(VD_COMMANDS, true, true),
@@ -427,6 +429,7 @@ public enum Gamerules {
     TRIPWIRE_HOOK_ENABLED(VD_REDSTONE, true, true),
     PISTON_ENABLED(VD_REDSTONE, true, true),
     SCULK_SENSOR_ENABLED(VD_REDSTONE, true, true),
+    JUKEBOX_EMITS_REDSTONE(VD_REDSTONE, true, true),
 
     BEE_AI(VD_AI, true, true),
     BLAZE_AI(VD_AI, true, true),

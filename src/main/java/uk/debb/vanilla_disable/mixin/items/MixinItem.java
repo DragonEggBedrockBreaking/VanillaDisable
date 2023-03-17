@@ -1,6 +1,7 @@
 package uk.debb.vanilla_disable.mixin.items;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Final;
@@ -47,7 +48,7 @@ public abstract class MixinItem implements Maps {
 
     @ModifyReturnValue(method = "canBeHurtBy", at = @At("RETURN"))
     private boolean modifyHurtingPotential(boolean original, DamageSource damageSource) {
-        if (!original && damageSource.isFire()) {
+        if (!original && damageSource.is(DamageTypeTags.IS_FIRE)) {
             return Gamerules.NETHERITE_BURNS.getBool();
         }
         return original;

@@ -6,7 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.*;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.MobCategory;
@@ -768,6 +768,7 @@ public class PopulateMaps implements Maps {
         commandsStringMap.put("chase", CHASE_COMMAND);
         commandsStringMap.put("clear", CLEAR_COMMAND);
         commandsStringMap.put("clone", CLONE_COMMAND);
+        commandsStringMap.put("damage", DAMAGE_COMMAND);
         commandsStringMap.put("datapack", DATAPACK_COMMAND);
         commandsStringMap.put("data", DATA_COMMAND);
         commandsStringMap.put("debug", DEBUG_COMMAND);
@@ -801,6 +802,7 @@ public class PopulateMaps implements Maps {
         commandsStringMap.put("recipe", RECIPE_COMMAND);
         commandsStringMap.put("reload", RELOAD_COMMAND);
         commandsStringMap.put("resetchunks", RESET_CHUNKS_COMMAND);
+        commandsStringMap.put("ride", RIDE_COMMAND);
         commandsStringMap.put("say", SAY_COMMAND);
         commandsStringMap.put("schedule", SCHEDULE_COMMAND);
         commandsStringMap.put("scoreboard", SCOREBOARD_COMMAND);
@@ -856,16 +858,6 @@ public class PopulateMaps implements Maps {
         naturalSpawnerMobCategoryMap.put(MobCategory.UNDERGROUND_WATER_CREATURE, GLOWSQUID_SPAWNING);
         naturalSpawnerMobCategoryMap.put(MobCategory.WATER_AMBIENT, WATER_AMBIENT_SPAWNING);
         naturalSpawnerMobCategoryMap.put(MobCategory.WATER_CREATURE, WATER_CREATURE_SPAWNING);
-
-        playerDamageSourceMap.put(DamageSource.LIGHTNING_BOLT, LIGHTNING_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.IN_WALL, WALL_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.CRAMMING, CRAMMING_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.STARVE, STARVATION_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.CACTUS, CACTUS_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.FLY_INTO_WALL, FLY_INTO_WALL_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.WITHER, WITHER_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.DRAGON_BREATH, DRAGON_DAMAGE);
-        playerDamageSourceMap.put(DamageSource.SWEET_BERRY_BUSH, SWEET_BERRY_BUSH_DAMAGE);
 
         foodDataFoodPropertiesMapNutrition.put(Foods.APPLE, APPLE_NUTRITION);
         foodDataFoodPropertiesMapNutrition.put(Foods.BAKED_POTATO, BAKED_POTATO_NUTRITION);
@@ -1451,6 +1443,7 @@ public class PopulateMaps implements Maps {
         blockStateBaseRedstoneBlocksMap.put(Blocks.TARGET, TARGET_BLOCK_ENABLED);
         blockStateBaseRedstoneBlocksMap.put(Blocks.TRAPPED_CHEST, TRAPPED_CHEST_ENABLED);
         blockStateBaseRedstoneBlocksMap.put(Blocks.TRIPWIRE_HOOK, TRIPWIRE_HOOK_ENABLED);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.JUKEBOX, JUKEBOX_EMITS_REDSTONE);
 
         itemItemMap.put(Items.BOW, BOW_DURABILITY);
         itemItemMap.put(Items.CARROT_ON_A_STICK, CARROT_ON_STICK_DURABILITY);
@@ -1653,5 +1646,18 @@ public class PopulateMaps implements Maps {
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.END_HIGHLANDS), END_HIGHLANDS_BIOME);
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.END_MIDLANDS), END_MIDLANDS_BIOME);
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.SMALL_END_ISLANDS), SMALL_END_ISLANDS_BIOME);
+    }
+
+    public static void populateMapsPostServer() {
+        DamageSources damageSources = server.overworld().damageSources();
+        playerDamageSourceMap.put(damageSources.lightningBolt(), LIGHTNING_DAMAGE);
+        playerDamageSourceMap.put(damageSources.inWall(), WALL_DAMAGE);
+        playerDamageSourceMap.put(damageSources.cramming(), CRAMMING_DAMAGE);
+        playerDamageSourceMap.put(damageSources.starve(), STARVATION_DAMAGE);
+        playerDamageSourceMap.put(damageSources.cactus(), CACTUS_DAMAGE);
+        playerDamageSourceMap.put(damageSources.flyIntoWall(), FLY_INTO_WALL_DAMAGE);
+        playerDamageSourceMap.put(damageSources.wither(), WITHER_DAMAGE);
+        playerDamageSourceMap.put(damageSources.dragonBreath(), DRAGON_DAMAGE);
+        playerDamageSourceMap.put(damageSources.sweetBerryBush(), SWEET_BERRY_BUSH_DAMAGE);
     }
 }

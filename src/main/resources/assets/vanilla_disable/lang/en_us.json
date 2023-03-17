@@ -173,6 +173,7 @@
     "gamerule.chaseCommand": "Chase command",
     "gamerule.clearCommand": "Clear command",
     "gamerule.cloneCommand": "Clone command",
+    "gamerule.damageCommand": "Damage command",
     "gamerule.datapackCommand": "Datapack command",
     "gamerule.dataCommand": "Data command",
     "gamerule.debugCommand": "Debug command",
@@ -206,6 +207,7 @@
     "gamerule.recipeCommand": "Recipe command",
     "gamerule.reloadCommand": "Reload command",
     "gamerule.resetChunksCommand": "Reset chunks command",
+    "gamerule.rideCommand": "Ride command",
     "gamerule.sayCommand": "Say command",
     "gamerule.scheduleCommand": "Schedule command",
     "gamerule.scoreboardCommand": "Scoreboard command",
@@ -250,6 +252,7 @@
     "gamerule.chaseCommand.description": "Toggle the /chase command",
     "gamerule.clearCommand.description": "Toggle the /clear command",
     "gamerule.cloneCommand.description": "Toggle the /clone command",
+    "gamerule.damageCommand.description": "Toggle the /damage command",
     "gamerule.datapackCommand.description": "Toggle the /datapack command",
     "gamerule.dataCommand.description": "Toggle the /data command",
     "gamerule.debugCommand.description": "Toggle the /debug command",
@@ -283,6 +286,7 @@
     "gamerule.recipeCommand.description": "Toggle the /recipe command",
     "gamerule.reloadCommand.description": "Toggle the /reload command",
     "gamerule.resetChunksCommand.description": "Toggle the /resetchunks command",
+    "gamerule.rideCommand.description": "Toggle the /ride command",
     "gamerule.sayCommand.description": "Toggle the /say command",
     "gamerule.scheduleCommand.description": "Toggle the /schedule command",
     "gamerule.scoreboardCommand.description": "Toggle the /scoreboard command",
@@ -821,6 +825,7 @@
     "gamerule.tripwireHookEnabled": "Tripwire hook enabled",
     "gamerule.pistonEnabled": "Piston enabled",
     "gamerule.sculkSensorEnabled": "Sculk sensor enabled",
+    "gamerule.jukeboxEmitsRedstone": "Jukebox emits redstone",
 
     "gamerule.repeaterBaseDelay.description": "Delay of a repeater per level",
     "gamerule.repeaterSignal.description": "Signal strength of a repeater",
@@ -845,6 +850,7 @@
     "gamerule.tripwireHookEnabled.description": "Toggle tripwire hooks being enabled",
     "gamerule.pistonEnabled.description": "Toggle pistons being enabled",
     "gamerule.sculkSensorEnabled.description": "Toggle sculk sensors being enabled",
+    "gamerule.jukeboxEmitsRedstone.description": "Jukeboxes emit a redstone signal when playing a disk",
 
 
     "gamerule.beeAi": "Bee ai",

@@ -2,6 +2,7 @@ package uk.debb.vanilla_disable.mixin.blocks;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,11 +16,11 @@ public abstract class MixinFarmBlock {
             method = "fallOn",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/block/FarmBlock;turnToDirt(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
+                    target = "Lnet/minecraft/world/level/block/FarmBlock;turnToDirt(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V"
             ),
             require = 0
     )
-    private boolean cancelTurningToDirt(BlockState blockState, Level level, BlockPos blockPos) {
+    private boolean cancelTurningToDirt(Entity entity, BlockState blockState, Level level, BlockPos blockPos, Level level2, BlockState blockState2, BlockPos blockPos2, Entity entity2, float f) {
         return Gamerules.CROP_TRAMPLING.getBool();
     }
 }
