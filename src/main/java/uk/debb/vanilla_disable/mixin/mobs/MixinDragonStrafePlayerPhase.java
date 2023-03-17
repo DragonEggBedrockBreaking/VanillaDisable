@@ -1,24 +1,26 @@
 package uk.debb.vanilla_disable.mixin.mobs;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.boss.enderdragon.phases.DragonStrafePlayerPhase;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(DragonStrafePlayerPhase.class)
 public abstract class MixinDragonStrafePlayerPhase {
-    @ModifyExpressionValue(
+    @Redirect(
             method = "doServerTick",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"
             )
     )
-    private boolean spawnFreshEntity(boolean original) {
+    private boolean spawnFreshEntity(Level instance, Entity entity) {
         if (!Gamerules.DRAGON_FIREBALLS.getBool()) {
             return false;
         }
-        return original;
+        return instance.addFreshEntity(entity);
     }
 }

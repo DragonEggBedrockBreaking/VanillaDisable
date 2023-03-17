@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
@@ -18,13 +19,12 @@ public abstract class MixinBlockStateBase implements Maps {
     @Shadow
     public abstract Block getBlock();
 
-    @ModifyReturnValue(method = "use", at = @At("RETURN"))
-    private InteractionResult modifyUse(InteractionResult original) {
+    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
+    private void modifyUse(CallbackInfoReturnable<InteractionResult> cir) {
         Gamerules gameRule = blockStateBaseBlockMap.get(this.getBlock());
         if (gameRule != null && !gameRule.getBool()) {
-            return InteractionResult.FAIL;
+            cir.setReturnValue(InteractionResult.FAIL);
         }
-        return original;
     }
 
     @ModifyReturnValue(method = "getMenuProvider", at = @At("RETURN"))

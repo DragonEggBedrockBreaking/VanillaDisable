@@ -1,18 +1,18 @@
 package uk.debb.vanilla_disable.mixin.redstone;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 
 @Mixin(PistonBaseBlock.class)
 public abstract class MixinPistonBaseBlock {
-    @ModifyReturnValue(method = "triggerEvent", at = @At("RETURN"))
-    private boolean cancelTriggeringEvent(boolean original) {
+    @Inject(method = "triggerEvent", at = @At("HEAD"), cancellable = true)
+    private void cancelTriggeringEvent(CallbackInfoReturnable<Boolean> cir) {
         if (!Gamerules.PISTON_ENABLED.getBool()) {
-            return false;
+            cir.setReturnValue(false);
         }
-        return original;
     }
 }
