@@ -28,7 +28,8 @@
   },
   "mixins": [
     "vanilla_disable.mixins.json",
-    "vanilla_disable_util.mixins.json"
+    "vanilla_disable_util.mixins.json",
+    "vanilla_disable_command.mixins.json"
   ],
   "accessWidener": "vanilla_disable.aw",
   "depends": {

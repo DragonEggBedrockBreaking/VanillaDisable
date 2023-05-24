@@ -41,8 +41,8 @@ public class Buildscript extends SimpleFabricProject {
         jij(d.addMaven("https://maven.flashyreese.me/", new MavenId("releases.net.caffeinemc", "mixin-config", Versions.CAFFEINE_CONFIG_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // MixinExtras
         jij(d.addMaven("https://jitpack.io/", new MavenId("com.github.LlamaLad7", "MixinExtras", Versions.MIXIN_EXTRAS_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
-        // Conditional Mixin
-        jij(d.addMaven("https://jitpack.io/", new MavenId("com.github.Fallen-Breath", "conditional-mixin", Versions.CONDITIONAL_MIXIN_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
+        // Xerial SQLite JDBC
+        jij(d.addMaven(Maven.MAVEN_CENTRAL, new MavenId("org.xerial", "sqlite-jdbc", Versions.XERIAL_SQLITE_JDBC_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
     }
 

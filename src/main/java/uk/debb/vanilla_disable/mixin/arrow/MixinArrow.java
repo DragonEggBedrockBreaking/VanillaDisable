@@ -13,7 +13,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 import uk.debb.vanilla_disable.util.maps.Maps;
 
 @Mixin(Arrow.class)
-public abstract class MixinArrow implements Maps {
+public abstract class MixinArrow implements Maps { 
     @Shadow
     public abstract void setEffectsFromItem(ItemStack arg);
 

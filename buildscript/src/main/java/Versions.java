@@ -6,5 +6,5 @@ public class Versions {
     public static final String FABRIC_GAMERULE_API_VERSION = "1.0.38+b04edc7a27";
     public static final String CAFFEINE_CONFIG_VERSION = "1.0.0";
     public static final String MIXIN_EXTRAS_VERSION = "0.2.0-beta.4";
-    public static final String CONDITIONAL_MIXIN_VERSION = "v0.3.2";
+    public static final String XERIAL_SQLITE_JDBC_VERSION = "3.41.0.0";
 }

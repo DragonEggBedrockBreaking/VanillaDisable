@@ -10,13 +10,11 @@ import java.util.Set;
 
 public class VanillaDisableMixinConfigPlugin implements IMixinConfigPlugin {
     private static final CaffeineConfigMixinConfigPlugin caffeineConfigMixinConfigPlugin = new CaffeineConfigMixinConfigPlugin();
-    private static final ConditionalMixinMixinConfigPlugin conditionalMixinMixinConfigPlugin = new ConditionalMixinMixinConfigPlugin();
 
     @Override
     public void onLoad(String mixinPackage) {
         MixinExtrasBootstrap.init();
         caffeineConfigMixinConfigPlugin.onLoad(mixinPackage);
-        conditionalMixinMixinConfigPlugin.onLoad(mixinPackage);
     }
 
     @Override
@@ -26,8 +24,7 @@ public class VanillaDisableMixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return caffeineConfigMixinConfigPlugin.shouldApplyMixin(targetClassName, mixinClassName) &&
-                conditionalMixinMixinConfigPlugin.shouldApplyMixin(targetClassName, mixinClassName);
+        return caffeineConfigMixinConfigPlugin.shouldApplyMixin(targetClassName, mixinClassName);
     }
 
     @Override
@@ -43,12 +40,10 @@ public class VanillaDisableMixinConfigPlugin implements IMixinConfigPlugin {
     @Override
     public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mi) {
         caffeineConfigMixinConfigPlugin.preApply(targetClassName, targetClass, mixinClassName, mi);
-        conditionalMixinMixinConfigPlugin.preApply(targetClassName, targetClass, mixinClassName, mi);
     }
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mi) {
         caffeineConfigMixinConfigPlugin.postApply(targetClassName, targetClass, mixinClassName, mi);
-        conditionalMixinMixinConfigPlugin.postApply(targetClassName, targetClass, mixinClassName, mi);
     }
 }
