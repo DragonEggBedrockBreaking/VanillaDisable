@@ -17,8 +17,9 @@ public class MixinMinecraftServer {
             )
     )
     private void beforeServerSetup(CallbackInfo ci) {
-        MinecraftServer server = (MinecraftServer) (Object) this;
-        DataHandler.handleDatabase(server);
+        DataHandler.server = (MinecraftServer) (Object) this;
+        DataHandler.populate();
+        DataHandler.handleDatabase();
     }
 
     @Inject(method = "stopServer", at = @At("TAIL"))

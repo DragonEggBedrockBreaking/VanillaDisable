@@ -8,10 +8,12 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.advancements.AdvancementList;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.packs.VanillaHusbandryAdvancements;
+import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -31,163 +33,163 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DataHandler {
+    public static MinecraftServer server;
+
     private static Connection connection;
     private static Statement statement;
 
-    private static final Object2ObjectMap<String, ObjectList<String>> cols = new Object2ObjectOpenHashMap<>();
-    private static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> entities = new Object2ObjectOpenHashMap<>();
-    private static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> blocks = new Object2ObjectOpenHashMap<>();
-    private static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> items = new Object2ObjectOpenHashMap<>();
-    private static final ObjectList<String> others = new ObjectArrayList<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> cols = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> entities = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> blocks = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> items = new Object2ObjectOpenHashMap<>();
+    public static final ObjectSet<String> others = new ObjectArraySet<>();
 
-    private static String processData(Object data) {
-        String truncated = data.toString().replace("minecraft:", "").replace("{", "").replace("}", "").replace("Block", "");
+    public static String processColumnData(Object data) {
+        String truncated = data.toString().replace("minecraft:", "");
         if (truncated.contains(".")) {
             return truncated.split("\\.")[2];
         }
         return truncated;
     }
 
-    private static void populate(MinecraftServer server) {
+    public static void populate() {
         RegistryAccess registryAccess = server.registryAccess();
-        cols.put("entities", new ObjectArrayList<>() {{
-            add("can_be_on_fire BOOLEAN");
-            add("can_sprint BOOLEAN");
-            add("can_crouch BOOLEAN");
-            add("can_swim BOOLEAN");
-            add("can_jump BOOLEAN");
-            add("can_be_invisible BOOLEAN");
-            add("flying_speed REAL");
+        cols.put("entities", new Object2ObjectOpenHashMap<>() {{
+            put("can_be_on_fire", "BOOLEAN");
+            put("can_sprint", "BOOLEAN");
+            put("can_crouch", "BOOLEAN");
+            put("can_swim", "BOOLEAN");
+            put("can_jump", "BOOLEAN");
+            put("can_be_invisible", "BOOLEAN");
+            put("flying_speed", "REAL");
 
-            add("item_stats BOOLEAN");
-            add("entity_stats BOOLEAN");
-            add("time_stats BOOLEAN");
-            add("distance_stats BOOLEAN");
-            add("damage_stats BOOLEAN");
-            add("block_gui_interaction_stats BOOLEAN");
-            add("block_general_interaction_stats BOOLEAN");
-            add("general_stats BOOLEAN");
+            put("item_stats", "BOOLEAN");
+            put("entity_stats", "BOOLEAN");
+            put("time_stats", "BOOLEAN");
+            put("distance_stats", "BOOLEAN");
+            put("damage_stats", "BOOLEAN");
+            put("block_gui_interaction_stats", "BOOLEAN");
+            put("block_general_interaction_stats", "BOOLEAN");
+            put("general_stats", "BOOLEAN");
 
             registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
-                    add(processData(damageType) + "_damage BOOLEAN"));
+                    put(processColumnData(damageType) + "_damage", "BOOLEAN"));
 
-            add("fireball_knockback BOOLEAN");
-            add("wither_skull_knockback BOOLEAN");
-            add("dragon_knockback BOOLEAN");
-            add("arrow_knockback BOOLEAN");
-            add("trident_knockback BOOLEAN");
-            add("llama_spit_knockback BOOLEAN");
-            add("shulker_bullet_knockback BOOLEAN");
-            add("mob_attack_knockback BOOLEAN");
-            add("player_attack_knockback BOOLEAN");
-            add("explosion_knockback BOOLEAN");
+            put("fireball_knockback", "BOOLEAN");
+            put("wither_skull_knockback", "BOOLEAN");
+            put("dragon_knockback", "BOOLEAN");
+            put("arrow_knockback", "BOOLEAN");
+            put("trident_knockback", "BOOLEAN");
+            put("llama_spit_knockback", "BOOLEAN");
+            put("shulker_bullet_knockback", "BOOLEAN");
+            put("mob_attack_knockback", "BOOLEAN");
+            put("player_attack_knockback", "BOOLEAN");
+            put("explosion_knockback", "BOOLEAN");
 
             registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
-                    add(processData(mobEffect) + "_effect BOOLEAN"));
+                    put(processColumnData(mobEffect) + "_effect", "BOOLEAN"));
 
-            add("anvil_death BOOLEAN");
-            add("cactus_death BOOLEAN");
-            add("cramming_death BOOLEAN");
-            add("dragon_breath_death BOOLEAN");
-            add("drowning_death BOOLEAN");
-            add("explosion_death BOOLEAN");
-            add("falling_block_death BOOLEAN");
-            add("falling_death BOOLEAN");
-            add("falling_stalactite_death BOOLEAN");
-            add("fly_into_wall_death BOOLEAN");
-            add("freezing_death BOOLEAN");
-            add("hot_floor_death BOOLEAN");
-            add("in_fire_death BOOLEAN");
-            add("in_wall_death BOOLEAN");
-            add("lava_death BOOLEAN");
-            add("lightning_bolt_death BOOLEAN");
-            add("magic_death BOOLEAN");
-            add("mob_death BOOLEAN");
-            add("on_fire_death BOOLEAN");
-            add("out_of_world_death BOOLEAN");
-            add("player_death BOOLEAN");
-            add("sonic_boom_death BOOLEAN");
-            add("stalagmite_death BOOLEAN");
-            add("starvation_death BOOLEAN");
-            add("stinging_death BOOLEAN");
-            add("sweet_berry_bush_death BOOLEAN");
-            add("thorns_death BOOLEAN");
-            add("wither_death BOOLEAN");
+            put("anvil_death", "BOOLEAN");
+            put("cactus_death", "BOOLEAN");
+            put("cramming_death", "BOOLEAN");
+            put("dragon_breath_death", "BOOLEAN");
+            put("drowning_death", "BOOLEAN");
+            put("explosion_death", "BOOLEAN");
+            put("falling_block_death", "BOOLEAN");
+            put("falling_death", "BOOLEAN");
+            put("falling_stalactite_death", "BOOLEAN");
+            put("fly_into_wall_death", "BOOLEAN");
+            put("freezing_death", "BOOLEAN");
+            put("hot_floor_death", "BOOLEAN");
+            put("in_fire_death", "BOOLEAN");
+            put("in_wall_death", "BOOLEAN");
+            put("lava_death", "BOOLEAN");
+            put("lightning_bolt_death", "BOOLEAN");
+            put("magic_death", "BOOLEAN");
+            put("mob_death", "BOOLEAN");
+            put("on_fire_death", "BOOLEAN");
+            put("out_of_world_death", "BOOLEAN");
+            put("player_death", "BOOLEAN");
+            put("sonic_boom_death", "BOOLEAN");
+            put("stalagmite_death", "BOOLEAN");
+            put("starvation_death", "BOOLEAN");
+            put("stinging_death", "BOOLEAN");
+            put("sweet_berry_bush_death", "BOOLEAN");
+            put("thorns_death", "BOOLEAN");
+            put("wither_death", "BOOLEAN");
 
             registryAccess.registryOrThrow(Registries.PAINTING_VARIANT).keySet().forEach(painting ->
-                    add(processData(painting) + "_painting BOOLEAN"));
+                    put(processColumnData(painting) + "_painting", "BOOLEAN"));
 
             registryAccess.registryOrThrow(Registries.VILLAGER_PROFESSION).keySet().forEach(profession ->
-                    add(processData(profession) + "_profession BOOLEAN"));
+                    put(processColumnData(profession) + "_profession", "BOOLEAN"));
             registryAccess.registryOrThrow(Registries.VILLAGER_TYPE).keySet().forEach(type ->
-                    add(processData(type) + "_type BOOLEAN"));
+                    put(processColumnData(type) + "_type", "BOOLEAN"));
 
-            add("can_despawn BOOLEAN");
-            add("despawn_time INTEGER");
-            add("min_despawn_distance INTEGER");
-            add("max_despawn_distance INTEGER");
-            add("mobcap INTEGER");
+            put("can_despawn", "BOOLEAN");
+            put("despawn_time", "INTEGER");
 
-            add("can_spawn BOOLEAN");
-            add("spawn_egg BOOLEAN");
-            add("spawner BOOLEAN");
-            add("can_breed BOOLEAN");
-            add("can_exist BOOLEAN");
-            add("can_be_cured BOOLEAN");
-            add("can_be_converted_to BOOLEAN");
-            add("burns_in_sunlight BOOLEAN");
-            add("spawned_by_villagers BOOLEAN");
-            add("can_drop_xp BOOLEAN");
-            add("ai BOOLEAN");
-            add("can_trade BOOLEAN");
-            add("daily_restocks INTEGER");
+            put("can_spawn", "BOOLEAN");
+            put("spawn_egg", "BOOLEAN");
+            put("spawner", "BOOLEAN");
+            put("can_breed", "BOOLEAN");
+            put("can_exist", "BOOLEAN");
+            put("can_be_cured", "BOOLEAN");
+            put("can_be_converted_to", "BOOLEAN");
+            put("burns_in_sunlight", "BOOLEAN");
+            put("spawned_by_villagers", "BOOLEAN");
+            put("can_drop_xp", "BOOLEAN");
+            put("ai", "BOOLEAN");
+            put("can_trade", "BOOLEAN");
+            put("daily_restocks", "INTEGER");
         }});
-        cols.put("blocks", new ObjectArrayList<>() {{
-            add("can_place_in_overworld BOOLEAN");
-            add("can_place_in_nether BOOLEAN");
-            add("can_place_in_end BOOLEAN");
-            add("can_break BOOLEAN");
-            add("can_interact BOOLEAN");
-            add("works BOOLEAN");
-            add("friction_factor REAL");
-            add("speed_factor REAL");
-            add("jump_factor REAL");
-            add("can_be_filled_by_dripstone BOOLEAN");
-            add("fluid_reaches_far BOOLEAN");
-            add("fluid_reaches_far_in_nether BOOLEAN");
-            add("fluid_speed INTEGER");
-            add("fluid_speed_in_nether INTEGER");
-            add("redstone_delay INTEGER");
-            add("redstone_duration INTEGER");
-            add("can_drop_xp INTEGER");
-            add("dispenser_interaction BOOLEAN");
-            add("can_fall BOOLEAN");
+        cols.put("blocks", new Object2ObjectOpenHashMap<>() {{
+            put("can_place_in_overworld", "BOOLEAN");
+            put("can_place_in_nether", "BOOLEAN");
+            put("can_place_in_end", "BOOLEAN");
+            put("can_break", "BOOLEAN");
+            put("can_interact", "BOOLEAN");
+            put("works", "BOOLEAN");
+            put("friction_factor", "REAL");
+            put("speed_factor", "REAL");
+            put("jump_factor", "REAL");
+            put("can_be_filled_by_dripstone", "BOOLEAN");
+            put("fluid_reaches_far", "BOOLEAN");
+            put("fluid_reaches_far_in_nether", "BOOLEAN");
+            put("fluid_speed", "INTEGER");
+            put("fluid_speed_in_nether", "INTEGER");
+            put("redstone_delay", "INTEGER");
+            put("redstone_duration", "INTEGER");
+            put("can_drop_xp", "INTEGER");
+            put("dispenser_interaction", "BOOLEAN");
+            put("can_fall", "BOOLEAN");
         }});
-        cols.put("items", new ObjectArrayList<>() {{
-            add("can_use BOOLEAN");
-            add("durability INTEGER");
-            add("burns BOOLEAN");
-            add("can_spam BOOLEAN");
-            add("nutrition REAL");
-            add("saturation REAL");
+        cols.put("items", new Object2ObjectOpenHashMap<>() {{
+            put("can_use", "BOOLEAN");
+            put("durability", "INTEGER");
+            put("burns", "BOOLEAN");
+            put("can_spam", "BOOLEAN");
+            put("nutrition", "REAL");
+            put("saturation", "REAL");
 
             registryAccess.registryOrThrow(Registries.ENCHANTMENT).keySet().forEach(enchantment ->
-                    add(processData(enchantment) + "_enchantment BOOLEAN"));
+                    put(processColumnData(enchantment) + "_enchantment", "BOOLEAN"));
 
-            add("boot_enchantment_conflicts BOOLEAN");
-            add("bow_enchantment_conflicts BOOLEAN");
-            add("crossbow_enchantment_conflicts BOOLEAN");
-            add("damage_enchantment_conflicts BOOLEAN");
-            add("mining_enchantment_conflicts BOOLEAN");
-            add("protection_enchantment_conflicts BOOLEAN");
-            add("trident_enchantment_conflicts BOOLEAN");
+            put("boot_enchantment_conflicts", "BOOLEAN");
+            put("bow_enchantment_conflicts", "BOOLEAN");
+            put("crossbow_enchantment_conflicts", "BOOLEAN");
+            put("damage_enchantment_conflicts", "BOOLEAN");
+            put("mining_enchantment_conflicts", "BOOLEAN");
+            put("protection_enchantment_conflicts", "BOOLEAN");
+            put("trident_enchantment_conflicts", "BOOLEAN");
 
             registryAccess.registryOrThrow(Registries.POTION).keySet().forEach(potion ->
-                    add(processData(potion) + "_effect BOOLEAN"));
+                    put(processColumnData(potion) + "_effect", "BOOLEAN"));
 
-            add("dispenser_interaction BOOLEAN");
+            put("dispenser_interaction", "BOOLEAN");
         }});
 
         BuiltInRegistries.ENTITY_TYPE.forEach((entityType) -> {
@@ -231,7 +233,7 @@ public class DataHandler {
             if (!entityType.getCategory().equals(MobCategory.MISC) || entityType.equals(EntityType.VILLAGER) ||
                     entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.SNOW_GOLEM)) {
                 registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
-                    col.add(processData(damageType) + "_damage");
+                    col.add(processColumnData(damageType) + "_damage");
                     val.add("true");
                 });
 
@@ -257,7 +259,7 @@ public class DataHandler {
                 val.add("true");
 
                 registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect -> {
-                    col.add(processData(mobEffect) + "_effect");
+                    col.add(processColumnData(mobEffect) + "_effect");
                     val.add("true");
                 });
 
@@ -320,41 +322,6 @@ public class DataHandler {
 
                 col.add("can_despawn");
                 val.add("true");
-                col.add("min_despawn_distance");
-                val.add("32");
-
-                switch (entityType.getCategory()) {
-                    case MONSTER -> {
-                        col.add("max_despawn_distance");
-                        val.add("128");
-                        col.add("mobcap");
-                        val.add("70");
-                    }
-                    case CREATURE -> {
-                        col.add("max_despawn_distance");
-                        val.add("128");
-                        col.add("mobcap");
-                        val.add("10");
-                    }
-                    case AMBIENT -> {
-                        col.add("max_despawn_distance");
-                        val.add("128");
-                        col.add("mobcap");
-                        val.add("15");
-                    }
-                    case AXOLOTLS, UNDERGROUND_WATER_CREATURE, WATER_CREATURE -> {
-                        col.add("max_despawn_distance");
-                        val.add("128");
-                        col.add("mobcap");
-                        val.add("5");
-                    }
-                    case WATER_AMBIENT -> {
-                        col.add("max_despawn_distance");
-                        val.add("64");
-                        col.add("mobcap");
-                        val.add("20");
-                    }
-                }
 
                 col.add("can_spawn");
                 val.add("true");
@@ -370,18 +337,18 @@ public class DataHandler {
 
             if (entityType.equals(EntityType.PAINTING)) {
                 BuiltInRegistries.PAINTING_VARIANT.keySet().forEach(painting -> {
-                    col.add(processData(painting) + "_painting");
+                    col.add(processColumnData(painting) + "_painting");
                     val.add("true");
                 });
             }
 
             if (entityType.equals(EntityType.VILLAGER)) {
                 BuiltInRegistries.VILLAGER_PROFESSION.keySet().forEach(profession -> {
-                    col.add(processData(profession) + "_profession");
+                    col.add(processColumnData(profession) + "_profession");
                     val.add("true");
                 });
                 BuiltInRegistries.VILLAGER_TYPE.keySet().forEach(type -> {
-                    col.add(processData(type) + "_type");
+                    col.add(processColumnData(type) + "_type");
                     val.add("true");
                 });
             }
@@ -431,7 +398,7 @@ public class DataHandler {
             col.add("can_exist");
             val.add("true");
 
-            entities.put(processData(entityType), new ObjectObjectImmutablePair<>(col, val));
+            entities.put(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).toString(), new ObjectObjectImmutablePair<>(col, val));
         });
 
         BuiltInRegistries.BLOCK.forEach((block) -> {
@@ -467,7 +434,7 @@ public class DataHandler {
                 col.add("speed_factor");
                 val.add("0.4");
             } else {
-                col.add("speed_factor ");
+                col.add("speed_factor");
                 val.add("1.0");
             }
 
@@ -533,7 +500,7 @@ public class DataHandler {
                 val.add("true");
             }
 
-            blocks.put(processData(block), new ObjectObjectImmutablePair<>(col, val));
+            blocks.put(BuiltInRegistries.BLOCK.getKey(block).toString(), new ObjectObjectImmutablePair<>(col, val));
         });
 
         BuiltInRegistries.ITEM.forEach((item) -> {
@@ -564,7 +531,7 @@ public class DataHandler {
                     val.add(String.valueOf(item.getMaxDamage()));
                     BuiltInRegistries.ENCHANTMENT.forEach((enchantment) -> {
                         if (enchantment.canEnchant(new ItemStack(item))) {
-                            col.add(processData(enchantment.getDescriptionId()) + "_enchantment");
+                            col.add(processColumnData(enchantment.getDescriptionId()) + "_enchantment");
                             val.add("true");
                         }
                     });
@@ -616,7 +583,7 @@ public class DataHandler {
                 if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
                         item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
                     BuiltInRegistries.POTION.forEach((potion) -> {
-                        col.add(processData(BuiltInRegistries.POTION.getKey(potion)) + "_effect");
+                        col.add(processColumnData(BuiltInRegistries.POTION.getKey(potion)) + "_effect");
                         val.add("true");
                     });
                 }
@@ -627,24 +594,26 @@ public class DataHandler {
                 val.add("true");
             }
 
-            items.put(processData(item), new ObjectObjectImmutablePair<>(col, val));
+            items.put(BuiltInRegistries.ITEM.getKey(item).toString(), new ObjectObjectImmutablePair<>(col, val));
         });
 
-        others.addAll(new AdvancementList().getAllAdvancements()
-                .stream().map(a -> a.getId().toString()).toList());
-        others.addAll(new CommandDispatcher<CommandSourceStack>().getRoot().getChildren()
-                .stream().map(CommandNode::getName).toList());
-        others.addAll(registryAccess.registryOrThrow(Registries.STRUCTURE_TYPE).keySet()
-                .stream().map(DataHandler::processData).toList());
+        others.addAll(server.getAdvancements().getAllAdvancements()
+                .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).toList());
+        others.addAll(new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup()))
+                .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).toList());
+        others.addAll(BuiltInRegistries.STRUCTURE_TYPE.keySet()
+                .stream().map(Object::toString).toList());
+        others.addAll(registryAccess.registryOrThrow(Registries.STRUCTURE).keySet()
+                .stream().map(Object::toString).toList());
         others.addAll(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet()
-                .stream().map(DataHandler::processData).toList());
-        others.addAll(registryAccess.registryOrThrow(Registries.FEATURE).keySet()
-                .stream().map(DataHandler::processData).toList());
+                .stream().map(Object::toString).toList());
+        others.addAll(BuiltInRegistries.FEATURE.keySet()
+                .stream().map(Object::toString).toList());
         others.addAll(registryAccess.registryOrThrow(Registries.BIOME).keySet()
-                .stream().map(DataHandler::processData).toList());
+                .stream().map(Object::toString).toList());
     }
 
-    public static void handleDatabase(MinecraftServer server) {
+    public static void handleDatabase() {
         String path = server.getWorldPath(LevelResource.ROOT) + "/vanilla_disable.db";
 
         try {
@@ -657,15 +626,19 @@ public class DataHandler {
 
             Path pPath = Paths.get(path);
             if (!Files.exists(pPath) || Files.size(pPath) == 0) {
-                populate(server);
-
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS meta (id STRING NOT NULL, version STRING);");
                 statement.executeUpdate("INSERT INTO meta (id, version) VALUES ('minecraft_version', '" + MINECRAFT_VERSION + "');");
                 statement.executeUpdate("INSERT INTO meta (id, version) VALUES ('mod_version', '" + MOD_VERSION + "');");
 
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS entities(id STRING NOT NULL, " + String.join(", ", cols.get("entities")) + ");");
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS blocks(id STRING NOT NULL, " + String.join(", ", cols.get("blocks")) + ");");
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS items(id STRING NOT NULL, " + String.join(", ", cols.get("items")) + ");");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS entities(id STRING NOT NULL, " +
+                        cols.get("entities").entrySet().stream().map(entry -> entry.getKey() + " " + entry.getValue())
+                                .collect(Collectors.joining(", ")) + ");");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS blocks(id STRING NOT NULL, " +
+                        cols.get("blocks").entrySet().stream().map(entry -> entry.getKey() + " " + entry.getValue())
+                                .collect(Collectors.joining(", ")) + ");");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS items(id STRING NOT NULL, " +
+                        cols.get("items").entrySet().stream().map(entry -> entry.getKey() + " " + entry.getValue())
+                                .collect(Collectors.joining(", "))+ ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS others(id STRING NOT NULL, enabled BOOLEAN);");
 
                 entities.forEach((key, value) -> {
@@ -691,13 +664,13 @@ public class DataHandler {
                 });
                 others.forEach((key) -> {
                     try {
+                        System.out.println(key);
                         statement.executeUpdate("INSERT INTO others (id, enabled) VALUES ('" + key + "', true);");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 });
             } else {
-                populate(server);
                 ObjectList<String> updated_entity_cols = new ObjectArrayList<>();
                 ObjectList<String> updated_block_cols = new ObjectArrayList<>();
                 ObjectList<String> updated_item_cols = new ObjectArrayList<>();
@@ -708,23 +681,23 @@ public class DataHandler {
                 resultSet.next();
                 String mod_ver = resultSet.getString("version");
                 if (!mc_ver.equals(MINECRAFT_VERSION) || !mod_ver.equals(MOD_VERSION)) {
-                    cols.get("entities").forEach((col) -> {
+                    cols.get("entities").forEach((col, type) -> {
                         try {
-                            statement.executeUpdate("ALTER TABLE entities ADD COLUMN " + col + " BOOLEAN;");
+                            statement.executeUpdate("ALTER TABLE entities ADD COLUMN " + col + " " + type + ";");
                             updated_entity_cols.add(col);
                         } catch (SQLException ignored) {
                         }
                     });
-                    cols.get("blocks").forEach((col) -> {
+                    cols.get("blocks").forEach((col, type) -> {
                         try {
-                            statement.executeUpdate("ALTER TABLE blocks ADD COLUMN " + col + " BOOLEAN;");
+                            statement.executeUpdate("ALTER TABLE blocks ADD COLUMN " + col + " " + type + ";");
                             updated_block_cols.add(col);
                         } catch (SQLException ignored) {
                         }
                     });
-                    cols.get("items").forEach((col) -> {
+                    cols.get("items").forEach((col, type) -> {
                         try {
-                            statement.executeUpdate("ALTER TABLE items ADD COLUMN " + col + " BOOLEAN;");
+                            statement.executeUpdate("ALTER TABLE items ADD COLUMN " + col + " " + type + ";");
                             updated_item_cols.add(col);
                         } catch (SQLException ignored) {
                         }
@@ -761,7 +734,7 @@ public class DataHandler {
 
                     entities.forEach((key, value) -> updated_entity_cols.forEach((col) -> {
                         try {
-                            statement.executeUpdate("UPDATE entities SET " + col.split(" ")[0] + " = " + value.right().get(value.left().indexOf(col.split(" ")[0])) + " WHERE id = '" + key + "';");
+                            statement.executeUpdate("UPDATE entities SET " + col + " = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IndexOutOfBoundsException ignored) {
@@ -801,39 +774,46 @@ public class DataHandler {
         }
     }
 
-    public static void setValue(String table, String row, String columns, String value) {
+    public static boolean setValue(String table, String row, String column, String value) {
         try {
-            statement.executeUpdate("UPDATE " + table + " SET " + columns + " = " + value + " WHERE id = '" + row + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
+            resultSet.next();
+            resultSet.getString(column);
+            if (resultSet.wasNull()) {
+                return false;
+            }
+            statement.executeUpdate("UPDATE " + table + " SET " + column + " = " + value + " WHERE id = '" + row + "';");
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static boolean getBoolean(String table, String row, String columns) {
+    public static boolean getBoolean(String table, String row, String column) {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT " + columns + " FROM " + table + " WHERE id = '" + row + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
-            return resultSet.getBoolean(columns);
+            return resultSet.getBoolean(column);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     
-    public static int getInt(String table, String row, String columns) {
+    public static int getInt(String table, String row, String column) {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT " + columns + " FROM " + table + " WHERE id = '" + row + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
-            return resultSet.getInt(columns);
+            return resultSet.getInt(column);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     
-    public static double getDouble(String table, String row, String columns) {
+    public static double getDouble(String table, String row, String column) {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT " + columns + " FROM " + table + " WHERE id = '" + row + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
-            return resultSet.getDouble(columns);
+            return resultSet.getDouble(column);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
