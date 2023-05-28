@@ -63,9 +63,12 @@ public abstract class CommandsMixin {
                     properties.forEach((property) -> {
                         LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
                         switch (DataHandler.cols.get("entities").get(property.first())) {
-                            case "BOOLEAN" -> executeBool(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "INTEGER" -> executeInt(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "REAL" -> executeDouble(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "BOOLEAN" ->
+                                    executeBool(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "INTEGER" ->
+                                    executeInt(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "REAL" ->
+                                    executeDouble(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
                         }
                         groupBuilder.then(propertyBuilder);
                     });
@@ -84,9 +87,12 @@ public abstract class CommandsMixin {
                     properties.forEach((property) -> {
                         LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
                         switch (DataHandler.cols.get("blocks").get(property.first())) {
-                            case "BOOLEAN" -> executeBool(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "INTEGER" -> executeInt(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "REAL" -> executeDouble(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "BOOLEAN" ->
+                                    executeBool(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "INTEGER" ->
+                                    executeInt(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "REAL" ->
+                                    executeDouble(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
                         }
                         groupBuilder.then(propertyBuilder);
                     });
@@ -105,9 +111,12 @@ public abstract class CommandsMixin {
                     properties.forEach((property) -> {
                         LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
                         switch (DataHandler.cols.get("items").get(property.first())) {
-                            case "BOOLEAN" -> executeBool(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "INTEGER" -> executeInt(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "REAL" -> executeDouble(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "BOOLEAN" ->
+                                    executeBool(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "INTEGER" ->
+                                    executeInt(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                            case "REAL" ->
+                                    executeDouble(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
                         }
                         groupBuilder.then(propertyBuilder);
                     });
