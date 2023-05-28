@@ -8,6 +8,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import it.unimi.dsi.fastutil.Pair;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -72,6 +73,7 @@ public abstract class CommandsMixin {
                         }
                         groupBuilder.then(propertyBuilder);
                     });
+                    allCols(groupBuilder, "entities", entity, group, info, pair.first());
                     entityBuilder.then(groupBuilder);
                 });
                 overallEntityBuilder.then(entityBuilder);
@@ -96,6 +98,7 @@ public abstract class CommandsMixin {
                         }
                         groupBuilder.then(propertyBuilder);
                     });
+                    allCols(groupBuilder, "blocks", block, group, info, pair.first());
                     blockBuilder.then(groupBuilder);
                 });
                 overallBlockBuilder.then(blockBuilder);
@@ -120,6 +123,7 @@ public abstract class CommandsMixin {
                         }
                         groupBuilder.then(propertyBuilder);
                     });
+                    allCols(groupBuilder, "items", item, group, info, pair.first());
                     itemBuilder.then(groupBuilder);
                 });
                 overallItemBuilder.then(itemBuilder);
@@ -249,5 +253,18 @@ public abstract class CommandsMixin {
                     return 1;
                 })
         );
+    }
+
+    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, ObjectList<Pair<String, String>> info, ObjectList<String> possible) {
+        groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
+            String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
+            info.stream().map(Pair::first).filter(possible::contains).forEach((groupProperty ->
+                    DataHandler.setValue(table, row, groupProperty, value)));
+            context.getSource().sendSuccess(
+                    Component.literal("Successfully set the value of all " +  group + " properties to " + value + "."),
+                    false
+            );
+            return 1;
+        })));
     }
 }
