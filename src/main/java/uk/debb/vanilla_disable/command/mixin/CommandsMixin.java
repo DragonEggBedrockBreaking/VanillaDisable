@@ -199,7 +199,7 @@ public abstract class CommandsMixin {
                     }
                     groupBuilder.then(propertyBuilder);
                 });
-                if (includeOverall) {
+                if (includeOverall && !group.equals("others")) {
                     allCols(groupBuilder, table, row, group, info, pair.first());
                 }
                 rowBuilder.then(groupBuilder);
