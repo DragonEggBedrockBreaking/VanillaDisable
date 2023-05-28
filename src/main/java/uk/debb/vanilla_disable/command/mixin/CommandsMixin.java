@@ -8,6 +8,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import it.unimi.dsi.fastutil.Pair;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -25,6 +26,7 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 @Mixin(Commands.class)
 public abstract class CommandsMixin {
@@ -55,120 +57,30 @@ public abstract class CommandsMixin {
             RegistryAccess registryAccess = DataHandler.server.registryAccess();
 
             LiteralArgumentBuilder<CommandSourceStack> overallEntityBuilder = literal("entity");
-            DataHandler.entities.forEach((entity, pair) -> {
-                LiteralArgumentBuilder<CommandSourceStack> entityBuilder = literal(entity);
-                DataHandler.entityData.forEach((group, info) -> {
-                    List<Pair<String, String>> properties = info.stream().filter(p -> pair.first().contains(p.first())).toList();
-                    if (properties.isEmpty()) return;
-                    LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
-                    properties.forEach((property) -> {
-                        LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
-                        switch (DataHandler.cols.get("entities").get(property.first())) {
-                            case "BOOLEAN" ->
-                                    executeBool(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "INTEGER" ->
-                                    executeInt(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "REAL" ->
-                                    executeDouble(propertyBuilder, "entities", entity, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                        }
-                        groupBuilder.then(propertyBuilder);
-                    });
-                    allCols(groupBuilder, "entities", entity, group, info, pair.first());
-                    entityBuilder.then(groupBuilder);
-                });
-                overallEntityBuilder.then(entityBuilder);
-            });
+            majorBuilder(overallEntityBuilder, DataHandler.entities, DataHandler.entityData, "entities", true);
 
             LiteralArgumentBuilder<CommandSourceStack> overallBlockBuilder = literal("block");
-            DataHandler.blocks.forEach((block, pair) -> {
-                LiteralArgumentBuilder<CommandSourceStack> blockBuilder = literal(block);
-                DataHandler.blockData.forEach((group, info) -> {
-                    List<Pair<String, String>> properties = info.stream().filter(p -> pair.first().contains(p.first())).toList();
-                    if (properties.isEmpty()) return;
-                    LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
-                    properties.forEach((property) -> {
-                        LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
-                        switch (DataHandler.cols.get("blocks").get(property.first())) {
-                            case "BOOLEAN" ->
-                                    executeBool(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "INTEGER" ->
-                                    executeInt(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "REAL" ->
-                                    executeDouble(propertyBuilder, "blocks", block, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                        }
-                        groupBuilder.then(propertyBuilder);
-                    });
-                    allCols(groupBuilder, "blocks", block, group, info, pair.first());
-                    blockBuilder.then(groupBuilder);
-                });
-                overallBlockBuilder.then(blockBuilder);
-            });
+            majorBuilder(overallBlockBuilder, DataHandler.blocks, DataHandler.blockData, "blocks", false);
 
             LiteralArgumentBuilder<CommandSourceStack> overallItemBuilder = literal("item");
-            DataHandler.items.forEach((item, pair) -> {
-                LiteralArgumentBuilder<CommandSourceStack> itemBuilder = literal(item);
-                DataHandler.itemData.forEach((group, info) -> {
-                    List<Pair<String, String>> properties = info.stream().filter(p -> pair.first().contains(p.first())).toList();
-                    if (properties.isEmpty()) return;
-                    LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
-                    properties.forEach((property) -> {
-                        LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
-                        switch (DataHandler.cols.get("items").get(property.first())) {
-                            case "BOOLEAN" ->
-                                    executeBool(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "INTEGER" ->
-                                    executeInt(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                            case "REAL" ->
-                                    executeDouble(propertyBuilder, "items", item, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                        }
-                        groupBuilder.then(propertyBuilder);
-                    });
-                    allCols(groupBuilder, "items", item, group, info, pair.first());
-                    itemBuilder.then(groupBuilder);
-                });
-                overallItemBuilder.then(itemBuilder);
-            });
+            majorBuilder(overallItemBuilder, DataHandler.items, DataHandler.itemData, "items", true);
 
             LiteralArgumentBuilder<CommandSourceStack> overallAdvancementBuilder = literal("advancement");
-            DataHandler.server.getAdvancements().getAllAdvancements()
-                    .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).forEach((advancement) -> {
-                        LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                        executeBool(temp, "others", advancement, "enabled", DataHandler.otherData.get(advancement), "true");
-                        overallAdvancementBuilder.then(literal(advancement).then(temp));
-                    });
+            minorBuilder(overallAdvancementBuilder, DataHandler.server.getAdvancements().getAllAdvancements()
+                    .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")));
 
             LiteralArgumentBuilder<CommandSourceStack> overallCommandBuilder = literal("command");
-            this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).forEach((command) -> {
-                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                executeBool(temp, "others", command, "enabled", DataHandler.otherData.get(command), "true");
-                overallCommandBuilder.then(literal(command).then(temp));
-            });
+            minorBuilder(overallCommandBuilder, this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()));
 
             LiteralArgumentBuilder<CommandSourceStack> overallBiomeBuilder = literal("biome");
-            registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString).forEach((biome) -> {
-                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                executeBool(temp, "others", biome, "enabled", DataHandler.otherData.get(biome), "true");
-                overallBiomeBuilder.then(literal(biome).then(temp));
-            });
+            minorBuilder(overallBiomeBuilder, registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString));
 
             LiteralArgumentBuilder<CommandSourceStack> overallStructureBuilder = literal("structure");
-            registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString).forEach((structure) -> {
-                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                executeBool(temp, "others", structure, "enabled", DataHandler.otherData.get(structure), "true");
-                overallStructureBuilder.then(literal(structure).then(temp));
-            });
+            minorBuilder(overallStructureBuilder, registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString));
 
             LiteralArgumentBuilder<CommandSourceStack> overallFeatureBuilder = literal("feature");
-            BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString).forEach((feature) -> {
-                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                executeBool(temp, "others", feature, "enabled", DataHandler.otherData.get(feature), "true");
-                overallFeatureBuilder.then(literal(feature).then(temp));
-            });
-            registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString).forEach((placedFeature -> {
-                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                executeBool(temp, "others", placedFeature, "enabled", DataHandler.otherData.get(placedFeature), "true");
-                overallFeatureBuilder.then(literal(placedFeature).then(temp));
-            }));
+            minorBuilder(overallFeatureBuilder, BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
+            minorBuilder(overallFeatureBuilder, registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
 
             LiteralArgumentBuilder<CommandSourceStack> forceUpdateDB = literal("forceUpdateDB").executes(context -> {
                 DataHandler.forceUpdateDB();
@@ -266,5 +178,41 @@ public abstract class CommandsMixin {
             );
             return 1;
         })));
+    }
+
+    private void majorBuilder(LiteralArgumentBuilder<CommandSourceStack> overallBuilder, Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> data, Object2ObjectMap<String, ObjectList<Pair<String, String>>> otherData, String table, boolean includeOverall) {
+        data.forEach((row, pair) -> {
+            LiteralArgumentBuilder<CommandSourceStack> rowBuilder = literal(row);
+            otherData.forEach((group, info) -> {
+                List<Pair<String, String>> properties = info.stream().filter(p -> pair.first().contains(p.first())).toList();
+                if (properties.isEmpty()) return;
+                LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
+                properties.forEach((property) -> {
+                    LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
+                    switch (DataHandler.cols.get(table).get(property.first())) {
+                        case "BOOLEAN" ->
+                                executeBool(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                        case "INTEGER" ->
+                                executeInt(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                        case "REAL" ->
+                                executeDouble(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
+                    }
+                    groupBuilder.then(propertyBuilder);
+                });
+                if (includeOverall) {
+                    allCols(groupBuilder, table, row, group, info, pair.first());
+                }
+                rowBuilder.then(groupBuilder);
+            });
+            overallBuilder.then(rowBuilder);
+        });
+    }
+
+    private void minorBuilder(LiteralArgumentBuilder<CommandSourceStack> overallBuilder, Stream<String> stream) {
+        stream.forEach((property) -> {
+            LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
+            executeBool(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true");
+            overallBuilder.then(literal(property).then(temp));
+        });
     }
 }
