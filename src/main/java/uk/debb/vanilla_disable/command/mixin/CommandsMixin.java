@@ -218,7 +218,7 @@ public abstract class CommandsMixin {
             );
             return 1;
         }).then(
-                argument("value", IntegerArgumentType.integer()).executes(context -> {
+                argument("value", IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE))).executes(context -> {
                     String value = String.valueOf(IntegerArgumentType.getInteger(context, "value"));
                     DataHandler.setValue(table, row, col, value);
                     context.getSource().sendSuccess(
@@ -239,7 +239,7 @@ public abstract class CommandsMixin {
             );
             return 1;
         }).then(
-                argument("value", DoubleArgumentType.doubleArg()).executes(context -> {
+                argument("value", DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE))).executes(context -> {
                     String value = String.valueOf(DoubleArgumentType.getDouble(context, "value"));
                     DataHandler.setValue(table, row, col, value);
                     context.getSource().sendSuccess(

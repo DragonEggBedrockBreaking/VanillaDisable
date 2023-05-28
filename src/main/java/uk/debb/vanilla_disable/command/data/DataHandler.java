@@ -43,6 +43,9 @@ public class DataHandler {
     public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> itemData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, String> otherData = new Object2ObjectOpenHashMap<>();
 
+    public static final Object2IntMap<String> intRowMaximums = new Object2IntArrayMap<>();
+    public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
+
     public static MinecraftServer server;
     private static Connection connection;
     private static Statement statement;
@@ -139,7 +142,7 @@ public class DataHandler {
             put("fluid_speed_in_nether", "INTEGER");
             put("redstone_delay", "INTEGER");
             put("redstone_duration", "INTEGER");
-            put("can_drop_xp", "INTEGER");
+            put("can_drop_xp", "BOOLEAN");
             put("dispenser_interaction", "BOOLEAN");
             put("can_fall", "BOOLEAN");
         }});
@@ -148,7 +151,7 @@ public class DataHandler {
             put("durability", "INTEGER");
             put("burns", "BOOLEAN");
             put("can_spam", "BOOLEAN");
-            put("nutrition", "REAL");
+            put("nutrition", "INTEGER");
             put("saturation", "REAL");
 
             registryAccess.registryOrThrow(Registries.ENCHANTMENT).keySet().forEach(enchantment ->
@@ -669,6 +672,9 @@ public class DataHandler {
                 otherData.put(feature.toString(), "Toggle the " + cleanup(feature) + " feature being able to be generated."));
         registryAccess.registryOrThrow(Registries.BIOME).keySet().forEach(biome ->
                 otherData.put(biome.toString(), "Toggle the " + cleanup(biome) + " biome being able to be generated."));
+
+        intRowMaximums.put("nutrition", 20);
+        doubleRowMaximums.put("saturation", 9.9);
     }
 
     public static void handleDatabase() {
