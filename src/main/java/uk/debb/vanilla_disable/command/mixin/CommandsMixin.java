@@ -9,6 +9,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -56,32 +57,6 @@ public abstract class CommandsMixin {
 
             RegistryAccess registryAccess = DataHandler.server.registryAccess();
 
-            LiteralArgumentBuilder<CommandSourceStack> overallEntityBuilder = literal("entity");
-            majorBuilder(overallEntityBuilder, DataHandler.entities, DataHandler.entityData, "entities", true);
-
-            LiteralArgumentBuilder<CommandSourceStack> overallBlockBuilder = literal("block");
-            majorBuilder(overallBlockBuilder, DataHandler.blocks, DataHandler.blockData, "blocks", false);
-
-            LiteralArgumentBuilder<CommandSourceStack> overallItemBuilder = literal("item");
-            majorBuilder(overallItemBuilder, DataHandler.items, DataHandler.itemData, "items", true);
-
-            LiteralArgumentBuilder<CommandSourceStack> overallAdvancementBuilder = literal("advancement");
-            minorBuilder(overallAdvancementBuilder, DataHandler.server.getAdvancements().getAllAdvancements()
-                    .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")));
-
-            LiteralArgumentBuilder<CommandSourceStack> overallCommandBuilder = literal("command");
-            minorBuilder(overallCommandBuilder, this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()));
-
-            LiteralArgumentBuilder<CommandSourceStack> overallBiomeBuilder = literal("biome");
-            minorBuilder(overallBiomeBuilder, registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString));
-
-            LiteralArgumentBuilder<CommandSourceStack> overallStructureBuilder = literal("structure");
-            minorBuilder(overallStructureBuilder, registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString));
-
-            LiteralArgumentBuilder<CommandSourceStack> overallFeatureBuilder = literal("feature");
-            minorBuilder(overallFeatureBuilder, BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
-            minorBuilder(overallFeatureBuilder, registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
-
             LiteralArgumentBuilder<CommandSourceStack> forceUpdateDB = literal("forceUpdateDB").executes(context -> {
                 DataHandler.forceUpdateDB();
                 context.getSource().sendSuccess(
@@ -99,7 +74,21 @@ public abstract class CommandsMixin {
                 return 1;
             }));
 
-            this.getDispatcher().register(literal("vd").then(overallEntityBuilder).then(overallBlockBuilder).then(overallItemBuilder).then(overallAdvancementBuilder).then(overallCommandBuilder).then(overallBiomeBuilder).then(overallStructureBuilder).then(overallFeatureBuilder).then(forceUpdateDB));
+            this.getDispatcher().register(literal("vd")
+                    .then(majorBuilder("entity", DataHandler.entities, DataHandler.entityData, "entities", true))
+                    .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks", false))
+                    .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items", true))
+                    .then(minorBuilder("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
+                            .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe"))))
+                    .then(minorBuilder("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName())))
+                    .then(minorBuilder("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
+                    .then(minorBuilder("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
+                    .then(minorBuilder("feature", new ObjectArrayList<>() {{
+                        add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
+                        add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
+                    }}))
+                    .then(forceUpdateDB)
+            );
         });
         t.start();
     }
@@ -180,7 +169,8 @@ public abstract class CommandsMixin {
         })));
     }
 
-    private void majorBuilder(LiteralArgumentBuilder<CommandSourceStack> overallBuilder, Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> data, Object2ObjectMap<String, ObjectList<Pair<String, String>>> otherData, String table, boolean includeOverall) {
+    private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> data, Object2ObjectMap<String, ObjectList<Pair<String, String>>> otherData, String table, boolean includeOverall) {
+        LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         data.forEach((row, pair) -> {
             LiteralArgumentBuilder<CommandSourceStack> rowBuilder = literal(row);
             otherData.forEach((group, info) -> {
@@ -206,13 +196,28 @@ public abstract class CommandsMixin {
             });
             overallBuilder.then(rowBuilder);
         });
+        return overallBuilder;
     }
 
-    private void minorBuilder(LiteralArgumentBuilder<CommandSourceStack> overallBuilder, Stream<String> stream) {
+    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, Stream<String> stream) {
+        LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         stream.forEach((property) -> {
             LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
             executeBool(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true");
             overallBuilder.then(literal(property).then(temp));
         });
+        return overallBuilder;
+    }
+
+    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, ObjectList<Stream<String>> streams) {
+        LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
+        streams.forEach(stream -> {
+            stream.forEach((property) -> {
+                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
+                executeBool(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true");
+                overallBuilder.then(literal(property).then(temp));
+            });
+        });
+        return overallBuilder;
     }
 }
