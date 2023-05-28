@@ -740,21 +740,21 @@ public class DataHandler {
                 if (!mc_ver.equals(MINECRAFT_VERSION) || !mod_ver.equals(MOD_VERSION)) {
                     cols.get("entities").forEach((col, type) -> {
                         try {
-                            statement.executeUpdate("ALTER TABLE entities ADD COLUMN " + col + " " + type + ";");
+                            statement.executeUpdate("ALTER TABLE entities ADD COLUMN `" + col + "` " + type + ";");
                             updated_entity_cols.add(col);
                         } catch (SQLException ignored) {
                         }
                     });
                     cols.get("blocks").forEach((col, type) -> {
                         try {
-                            statement.executeUpdate("ALTER TABLE blocks ADD COLUMN " + col + " " + type + ";");
+                            statement.executeUpdate("ALTER TABLE blocks ADD COLUMN `" + col + "` " + type + ";");
                             updated_block_cols.add(col);
                         } catch (SQLException ignored) {
                         }
                     });
                     cols.get("items").forEach((col, type) -> {
                         try {
-                            statement.executeUpdate("ALTER TABLE items ADD COLUMN " + col + " " + type + ";");
+                            statement.executeUpdate("ALTER TABLE items ADD COLUMN `" + col + "` " + type + ";");
                             updated_item_cols.add(col);
                         } catch (SQLException ignored) {
                         }
@@ -762,21 +762,21 @@ public class DataHandler {
 
                     entities.forEach((key, value) -> {
                         try {
-                            statement.executeUpdate("INSERT INTO entities (id, " + String.join(", ", value.left()) + ") SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM entities WHERE id = '" + key + "');");
+                            statement.executeUpdate("INSERT INTO entities (id, `" + String.join("`, `", value.left()) + "`) SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM entities WHERE id = '" + key + "');");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
                     });
                     blocks.forEach((key, value) -> {
                         try {
-                            statement.executeUpdate("INSERT INTO blocks (id, " + String.join(", ", value.left()) + ") SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM blocks WHERE id = '" + key + "');");
+                            statement.executeUpdate("INSERT INTO blocks (id, `" + String.join("`, `", value.left()) + "`) SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM blocks WHERE id = '" + key + "');");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
                     });
                     items.forEach((key, value) -> {
                         try {
-                            statement.executeUpdate("INSERT INTO items (id, " + String.join(", ", value.left()) + ") SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM items WHERE id = '" + key + "');");
+                            statement.executeUpdate("INSERT INTO items (id, `" + String.join("`, `", value.left()) + "`) SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM items WHERE id = '" + key + "');");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
@@ -791,7 +791,7 @@ public class DataHandler {
 
                     entities.forEach((key, value) -> updated_entity_cols.forEach((col) -> {
                         try {
-                            statement.executeUpdate("UPDATE entities SET " + col + " = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
+                            statement.executeUpdate("UPDATE entities SET `" + col + "` = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IndexOutOfBoundsException ignored) {
@@ -799,7 +799,7 @@ public class DataHandler {
                     }));
                     blocks.forEach((key, value) -> updated_block_cols.forEach((col) -> {
                         try {
-                            statement.executeUpdate("UPDATE blocks SET " + col + " = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
+                            statement.executeUpdate("UPDATE blocks SET `" + col + "` = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IndexOutOfBoundsException ignored) {
@@ -807,7 +807,7 @@ public class DataHandler {
                     }));
                     items.forEach((key, value) -> updated_item_cols.forEach((col) -> {
                         try {
-                            statement.executeUpdate("UPDATE items SET " + col + " = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
+                            statement.executeUpdate("UPDATE items SET `" + col + "` = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IndexOutOfBoundsException ignored) {
@@ -864,6 +864,26 @@ public class DataHandler {
             ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
             return resultSet.getDouble(column);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void forceUpdateDB() {
+        try {
+            statement.executeUpdate("UPDATE meta SET version = 'FORCE_UPDATE'");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void resetDBMeta() {
+        try {
+            String MINECRAFT_VERSION = server.getServerVersion();
+            Optional<ModContainer> MOD = FabricLoader.getInstance().getModContainer("vanilla_disable");
+            String MOD_VERSION = MOD.orElseThrow().getMetadata().getVersion().toString();
+            statement.executeUpdate("UPDATE meta SET version = '" + MINECRAFT_VERSION + "' WHERE id = 'minecraft_version';");
+            statement.executeUpdate("UPDATE meta SET version = '" + MOD_VERSION + "' WHERE id = 'mod_version';");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

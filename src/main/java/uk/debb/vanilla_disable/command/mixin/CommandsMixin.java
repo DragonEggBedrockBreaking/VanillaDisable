@@ -1,7 +1,10 @@
 package uk.debb.vanilla_disable.command.mixin;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.*;
+import com.mojang.brigadier.arguments.ArgumentType;
+import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import it.unimi.dsi.fastutil.Pair;
@@ -163,7 +166,24 @@ public abstract class CommandsMixin {
                 overallFeatureBuilder.then(literal(placedFeature).then(temp));
             }));
 
-            this.getDispatcher().register(literal("vd").then(overallEntityBuilder).then(overallBlockBuilder).then(overallItemBuilder).then(overallAdvancementBuilder).then(overallCommandBuilder).then(overallBiomeBuilder).then(overallStructureBuilder).then(overallFeatureBuilder));
+            LiteralArgumentBuilder<CommandSourceStack> forceUpdateDB = literal("forceUpdateDB").executes(context -> {
+                DataHandler.forceUpdateDB();
+                context.getSource().sendSuccess(
+                        Component.literal("Close and re-open the world. The database will be forcefully updated. Run this if you added/updated other mods and want changes to be reflected. You can cancel this with \"/vd forceUpdateDB cancel\"."),
+                        false
+                );
+                return 1;
+            });
+            forceUpdateDB.then(literal("cancel").executes(context -> {
+                DataHandler.resetDBMeta();
+                context.getSource().sendSuccess(
+                        Component.literal("The force update has been cancelled."),
+                        false
+                );
+                return 1;
+            }));
+
+            this.getDispatcher().register(literal("vd").then(overallEntityBuilder).then(overallBlockBuilder).then(overallItemBuilder).then(overallAdvancementBuilder).then(overallCommandBuilder).then(overallBiomeBuilder).then(overallStructureBuilder).then(overallFeatureBuilder).then(forceUpdateDB));
         });
         t.start();
     }
