@@ -1,10 +1,7 @@
 package uk.debb.vanilla_disable.command.mixin;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.ArgumentType;
-import com.mojang.brigadier.arguments.DoubleArgumentType;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.arguments.*;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import it.unimi.dsi.fastutil.Pair;
@@ -180,15 +177,11 @@ public abstract class CommandsMixin {
             );
             return 1;
         }).then(
-                argument("value", StringArgumentType.string()).suggests((context, builder) -> {
-                    builder.suggest("true");
-                    builder.suggest("false");
-                    return builder.buildFuture();
-                }).executes(context -> {
-                    String value = StringArgumentType.getString(context, "value");
+                argument("value", BoolArgumentType.bool()).executes(context -> {
+                    String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
                     DataHandler.setValue(table, row, col, value);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value),
+                            Component.literal("Successfully set the value to " + value + "."),
                             false
                     );
                     return 1;
@@ -209,7 +202,7 @@ public abstract class CommandsMixin {
                     String value = String.valueOf(IntegerArgumentType.getInteger(context, "value"));
                     DataHandler.setValue(table, row, col, value);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value),
+                            Component.literal("Successfully set the value to " + value + "."),
                             false
                     );
                     return 1;
@@ -230,7 +223,7 @@ public abstract class CommandsMixin {
                     String value = String.valueOf(DoubleArgumentType.getDouble(context, "value"));
                     DataHandler.setValue(table, row, col, value);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value),
+                            Component.literal("Successfully set the value to " + value + "."),
                             false
                     );
                     return 1;
