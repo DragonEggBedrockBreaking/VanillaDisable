@@ -37,16 +37,25 @@ public class DataHandler {
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> blocks = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> items = new Object2ObjectOpenHashMap<>();
     public static final ObjectSet<String> others = new ObjectArraySet<>();
+
+    public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> entityData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> blockData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> itemData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, String> otherData = new Object2ObjectOpenHashMap<>();
+
     public static MinecraftServer server;
     private static Connection connection;
     private static Statement statement;
 
-    public static String processColumnData(Object data) {
-        String truncated = data.toString().replace("minecraft:", "");
-        if (truncated.contains(".")) {
-            return truncated.split("\\.")[2];
+    private static String cleanup(Object o) {
+        String s = o.toString().replace("_", " ");
+        if (s.contains(":")) {
+            s = s.split(":")[1];
         }
-        return truncated;
+        if (s.contains("/")) {
+            s = s.split("/")[1];
+        }
+        return s;
     }
 
     public static void populate() {
@@ -69,8 +78,10 @@ public class DataHandler {
             put("block_general_interaction_stats", "BOOLEAN");
             put("general_stats", "BOOLEAN");
 
-            registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
-                    put(processColumnData(damageType) + "_damage", "BOOLEAN"));
+            registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
+                put(damageType + "_damage", "BOOLEAN");
+                put(damageType + "_death", "BOOLEAN");
+            });
 
             put("fireball_knockback", "BOOLEAN");
             put("wither_skull_knockback", "BOOLEAN");
@@ -84,44 +95,15 @@ public class DataHandler {
             put("explosion_knockback", "BOOLEAN");
 
             registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
-                    put(processColumnData(mobEffect) + "_effect", "BOOLEAN"));
-
-            put("anvil_death", "BOOLEAN");
-            put("cactus_death", "BOOLEAN");
-            put("cramming_death", "BOOLEAN");
-            put("dragon_breath_death", "BOOLEAN");
-            put("drowning_death", "BOOLEAN");
-            put("explosion_death", "BOOLEAN");
-            put("falling_block_death", "BOOLEAN");
-            put("falling_death", "BOOLEAN");
-            put("falling_stalactite_death", "BOOLEAN");
-            put("fly_into_wall_death", "BOOLEAN");
-            put("freezing_death", "BOOLEAN");
-            put("hot_floor_death", "BOOLEAN");
-            put("in_fire_death", "BOOLEAN");
-            put("in_wall_death", "BOOLEAN");
-            put("lava_death", "BOOLEAN");
-            put("lightning_bolt_death", "BOOLEAN");
-            put("magic_death", "BOOLEAN");
-            put("mob_death", "BOOLEAN");
-            put("on_fire_death", "BOOLEAN");
-            put("out_of_world_death", "BOOLEAN");
-            put("player_death", "BOOLEAN");
-            put("sonic_boom_death", "BOOLEAN");
-            put("stalagmite_death", "BOOLEAN");
-            put("starvation_death", "BOOLEAN");
-            put("stinging_death", "BOOLEAN");
-            put("sweet_berry_bush_death", "BOOLEAN");
-            put("thorns_death", "BOOLEAN");
-            put("wither_death", "BOOLEAN");
+                    put(mobEffect + "_effect", "BOOLEAN"));
 
             registryAccess.registryOrThrow(Registries.PAINTING_VARIANT).keySet().forEach(painting ->
-                    put(processColumnData(painting) + "_painting", "BOOLEAN"));
+                    put(painting + "_painting", "BOOLEAN"));
 
             registryAccess.registryOrThrow(Registries.VILLAGER_PROFESSION).keySet().forEach(profession ->
-                    put(processColumnData(profession) + "_profession", "BOOLEAN"));
+                    put(profession + "_profession", "BOOLEAN"));
             registryAccess.registryOrThrow(Registries.VILLAGER_TYPE).keySet().forEach(type ->
-                    put(processColumnData(type) + "_type", "BOOLEAN"));
+                    put(type + "_type", "BOOLEAN"));
 
             put("can_despawn", "BOOLEAN");
             put("despawn_time", "INTEGER");
@@ -170,7 +152,7 @@ public class DataHandler {
             put("saturation", "REAL");
 
             registryAccess.registryOrThrow(Registries.ENCHANTMENT).keySet().forEach(enchantment ->
-                    put(processColumnData(enchantment) + "_enchantment", "BOOLEAN"));
+                    put(enchantment + "_enchantment", "BOOLEAN"));
 
             put("boot_enchantment_conflicts", "BOOLEAN");
             put("bow_enchantment_conflicts", "BOOLEAN");
@@ -181,7 +163,7 @@ public class DataHandler {
             put("trident_enchantment_conflicts", "BOOLEAN");
 
             registryAccess.registryOrThrow(Registries.POTION).keySet().forEach(potion ->
-                    put(processColumnData(potion) + "_effect", "BOOLEAN"));
+                    put(potion + "_effect", "BOOLEAN"));
 
             put("dispenser_interaction", "BOOLEAN");
         }});
@@ -225,9 +207,12 @@ public class DataHandler {
             }
 
             if (!entityType.getCategory().equals(MobCategory.MISC) || entityType.equals(EntityType.VILLAGER) ||
-                    entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.SNOW_GOLEM)) {
+                    entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.SNOW_GOLEM) ||
+                    entityType.equals(EntityType.PLAYER)) {
                 registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
-                    col.add(processColumnData(damageType) + "_damage");
+                    col.add(damageType + "_damage");
+                    val.add("true");
+                    col.add(damageType + "_death");
                     val.add("true");
                 });
 
@@ -253,66 +238,9 @@ public class DataHandler {
                 val.add("true");
 
                 registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect -> {
-                    col.add(processColumnData(mobEffect) + "_effect");
+                    col.add(mobEffect + "_effect");
                     val.add("true");
                 });
-
-                col.add("anvil_death");
-                val.add("true");
-                col.add("cactus_death");
-                val.add("true");
-                col.add("cramming_death");
-                val.add("true");
-                col.add("dragon_breath_death");
-                val.add("true");
-                col.add("drowning_death");
-                val.add("true");
-                col.add("explosion_death");
-                val.add("true");
-                col.add("falling_block_death");
-                val.add("true");
-                col.add("falling_death");
-                val.add("true");
-                col.add("falling_stalactite_death");
-                val.add("true");
-                col.add("fly_into_wall_death");
-                val.add("true");
-                col.add("freezing_death");
-                val.add("true");
-                col.add("hot_floor_death");
-                val.add("true");
-                col.add("in_fire_death");
-                val.add("true");
-                col.add("in_wall_death");
-                val.add("true");
-                col.add("lava_death");
-                val.add("true");
-                col.add("lightning_bolt_death");
-                val.add("true");
-                col.add("magic_death");
-                val.add("true");
-                col.add("mob_death");
-                val.add("true");
-                col.add("on_fire_death");
-                val.add("true");
-                col.add("out_of_world_death");
-                val.add("true");
-                col.add("player_death");
-                val.add("true");
-                col.add("sonic_boom_death");
-                val.add("true");
-                col.add("stalagmite_death");
-                val.add("true");
-                col.add("starvation_death");
-                val.add("true");
-                col.add("stinging_death");
-                val.add("true");
-                col.add("sweet_berry_bush_death");
-                val.add("true");
-                col.add("thorns_death");
-                val.add("true");
-                col.add("wither_death");
-                val.add("true");
 
                 col.add("can_despawn");
                 val.add("true");
@@ -331,18 +259,18 @@ public class DataHandler {
 
             if (entityType.equals(EntityType.PAINTING)) {
                 BuiltInRegistries.PAINTING_VARIANT.keySet().forEach(painting -> {
-                    col.add(processColumnData(painting) + "_painting");
+                    col.add(painting + "_painting");
                     val.add("true");
                 });
             }
 
             if (entityType.equals(EntityType.VILLAGER)) {
                 BuiltInRegistries.VILLAGER_PROFESSION.keySet().forEach(profession -> {
-                    col.add(processColumnData(profession) + "_profession");
+                    col.add(profession + "_profession");
                     val.add("true");
                 });
                 BuiltInRegistries.VILLAGER_TYPE.keySet().forEach(type -> {
-                    col.add(processColumnData(type) + "_type");
+                    col.add(type + "_type");
                     val.add("true");
                 });
             }
@@ -525,7 +453,7 @@ public class DataHandler {
                     val.add(String.valueOf(item.getMaxDamage()));
                     BuiltInRegistries.ENCHANTMENT.forEach((enchantment) -> {
                         if (enchantment.canEnchant(new ItemStack(item))) {
-                            col.add(processColumnData(enchantment.getDescriptionId()) + "_enchantment");
+                            col.add(BuiltInRegistries.ENCHANTMENT.getKey(enchantment) + "_enchantment");
                             val.add("true");
                         }
                     });
@@ -576,8 +504,8 @@ public class DataHandler {
 
                 if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
                         item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
-                    BuiltInRegistries.POTION.forEach((potion) -> {
-                        col.add(processColumnData(BuiltInRegistries.POTION.getKey(potion)) + "_effect");
+                    BuiltInRegistries.POTION.keySet().forEach((potion) -> {
+                        col.add(potion + "_effect");
                         val.add("true");
                     });
                 }
@@ -605,6 +533,142 @@ public class DataHandler {
                 .stream().map(Object::toString).toList());
         others.addAll(registryAccess.registryOrThrow(Registries.BIOME).keySet()
                 .stream().map(Object::toString).toList());
+
+        entityData.put("stats", new ObjectArrayList<>() {{
+            add(new ObjectObjectImmutablePair<>("item_stats", "Collect statistics related to items."));
+            add(new ObjectObjectImmutablePair<>("entity_stats", "Collect statistics related to entities."));
+            add(new ObjectObjectImmutablePair<>("time_stats", "Collect statistics related to time."));
+            add(new ObjectObjectImmutablePair<>("distance_stats", "Collect statistics related to distance."));
+            add(new ObjectObjectImmutablePair<>("damage_stats", "Collect statistics related to damage."));
+            add(new ObjectObjectImmutablePair<>("block_gui_interaction_stats", "Collect statistics related to block GUIs."));
+            add(new ObjectObjectImmutablePair<>("block_general_interaction_stats", "Collect statistics related to blocks."));
+            add(new ObjectObjectImmutablePair<>("general_stats", "Collect general statistics."));
+        }});
+        entityData.put("damage", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
+                    add(new ObjectObjectImmutablePair<>(damageType + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the mob.")));
+        }});
+        entityData.put("knockback", new ObjectArrayList<>() {{
+            add(new ObjectObjectImmutablePair<>("fireball_knockback", "Toggles fireballs knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("wither_skull_knockback", "Toggles wither skulls knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("dragon_knockback", "Toggles the ender dragon knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("arrow_knockback", "Toggles arrows knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("trident_knockback", "Toggles tridents knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("llama_spit_knockback", "Toggles llama spit knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("shulker_bullet_knockback", "Toggles shulker bullets knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("mob_attack_knockback", "Toggles mob attacks knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("player_attack_knockback", "Toggles player attacks knocking back the entity."));
+            add(new ObjectObjectImmutablePair<>("explosion_knockback", "Toggles explosions knocking back the entity."));
+        }});
+        entityData.put("effects", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
+                    add(new ObjectObjectImmutablePair<>(mobEffect.toString(), "Toggles " + cleanup(mobEffect) + " affecting the mob.")));
+        }});
+        entityData.put("death", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
+                    add(new ObjectObjectImmutablePair<>(damageType + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the mob.")));
+        }});
+        entityData.put("painting", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.PAINTING_VARIANT).keySet().forEach(painting ->
+                    add(new ObjectObjectImmutablePair<>(painting + "_painting", "Toggles the " + cleanup(painting) + " design being able to show on paintings.")));
+        }});
+        entityData.put("villager_type", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.VILLAGER_TYPE).keySet().forEach(villagerType ->
+                    add(new ObjectObjectImmutablePair<>(villagerType + "_type", "Toggles villagers being able to be of the " + cleanup(villagerType) + " type.")));
+        }});
+        entityData.put("villager_profession", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.VILLAGER_PROFESSION).keySet().forEach(villagerProfession ->
+                    add(new ObjectObjectImmutablePair<>(villagerProfession + "_profession", "Toggles villagers being able to have the " + cleanup(villagerProfession) + " profession.")));
+        }});
+        entityData.put("other", new ObjectArrayList<>() {{
+            add(new ObjectObjectImmutablePair<>("can_be_on_fire", "Toggle the player being able to be on fire."));
+            add(new ObjectObjectImmutablePair<>("can_sprint", "Toggle the player being able to sprint."));
+            add(new ObjectObjectImmutablePair<>("can_crouch", "Toggle the player being able to crouch."));
+            add(new ObjectObjectImmutablePair<>("can_swim", "Toggle the player being able to swim."));
+            add(new ObjectObjectImmutablePair<>("can_jump", "Toggle the player being able to jump."));
+            add(new ObjectObjectImmutablePair<>("can_be_invisible", "Toggle the player being able to be invisible."));
+            add(new ObjectObjectImmutablePair<>("flying_speed", "Control the player's flying speed."));
+            add(new ObjectObjectImmutablePair<>("can_despawn", "Toggle the mob being able to despawn."));
+            add(new ObjectObjectImmutablePair<>("despawn_time", "Controls how long it takes for an entity to despawn."));
+            add(new ObjectObjectImmutablePair<>("can_spawn", "Toggle the mob being able to spawn."));
+            add(new ObjectObjectImmutablePair<>("spawn_egg", "Toggle the mob being able to be spawned by a spawn egg."));
+            add(new ObjectObjectImmutablePair<>("spawner", "Toggle the mob being able to be spawned by a spawner."));
+            add(new ObjectObjectImmutablePair<>("can_breed", "Toggle the mob being able to breed."));
+            add(new ObjectObjectImmutablePair<>("can_exist", "Toggle the entity being able to exist."));
+            add(new ObjectObjectImmutablePair<>("can_be_cured", "Toggle the mob being able to be cured."));
+            add(new ObjectObjectImmutablePair<>("can_be_converted_to", "Toggle the mob being able to convert to another mob."));
+            add(new ObjectObjectImmutablePair<>("burns_in_sunlight", "Toggle the mob being able to burn in sunlight."));
+            add(new ObjectObjectImmutablePair<>("spawned_by_villagers", "Toggle the mob being able to be spawned by villagers."));
+            add(new ObjectObjectImmutablePair<>("can_drop_xp", "Toggle the mob being able to drop XP."));
+            add(new ObjectObjectImmutablePair<>("ai", "Toggle the mob's AI."));
+            add(new ObjectObjectImmutablePair<>("can_trade", "Toggle the mob being able to trade."));
+            add(new ObjectObjectImmutablePair<>("daily_restocks", "Control the number of times per day a villager restocks."));
+        }});
+
+        blockData.put("fluid", new ObjectArrayList<>() {{
+            add(new ObjectObjectImmutablePair<>("fluid_reaches_far", "Toggle whether the fluid can travel 8 blocks or only 4 in the overworld or end."));
+            add(new ObjectObjectImmutablePair<>("fluid_reaches_far_in_nether", "Toggle whether the fluid can travel 8 blocks or only 4 in the nether."));
+            add(new ObjectObjectImmutablePair<>("fluid_speed", "Control how fast the fluid flows in the overworld or end."));
+            add(new ObjectObjectImmutablePair<>("fluid_speed_in_nether", "Control how fast the fluid flows in the nether."));
+        }});
+        blockData.put("other", new ObjectArrayList<>() {{
+            add(new ObjectObjectImmutablePair<>("can_place_in_overworld", "Toggle being able to place the block in the overworld."));
+            add(new ObjectObjectImmutablePair<>("can_place_in_nether", "Toggle being able to place the block in the nether."));
+            add(new ObjectObjectImmutablePair<>("can_place_in_end", "Toggle being able to place the block in the end."));
+            add(new ObjectObjectImmutablePair<>("can_break", "Toggle being able to break the block."));
+            add(new ObjectObjectImmutablePair<>("can_interact", "Toggle being able to interact with the block."));
+            add(new ObjectObjectImmutablePair<>("works", "Toggle the block being able to carry out its function."));
+            add(new ObjectObjectImmutablePair<>("friction_factor", "Control how much friction is applied to entities on the block."));
+            add(new ObjectObjectImmutablePair<>("speed_factor", "Control how fast entities can travel on the block relative to others."));
+            add(new ObjectObjectImmutablePair<>("jump_factor", "Control how high entities can jump on the block relative to others."));
+            add(new ObjectObjectImmutablePair<>("can_be_filled_by_dripstone", "Toggle the block being able to be filled by dripstone."));
+            add(new ObjectObjectImmutablePair<>("redstone_delay", "Control the redstone delay of the block."));
+            add(new ObjectObjectImmutablePair<>("redstone_duration", "Control the redstone duration of the block."));
+            add(new ObjectObjectImmutablePair<>("can_drop_xp", "Toggle the block being able to drop XP."));
+            add(new ObjectObjectImmutablePair<>("dispenser_interaction", "Toggle the block having a special interaction with a dispenser."));
+            add(new ObjectObjectImmutablePair<>("can_fall", "Toggle the block being able to fall."));
+        }});
+
+        itemData.put("enchantment", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.ENCHANTMENT).keySet().forEach(enchantment ->
+                    add(new ObjectObjectImmutablePair<>(enchantment + "_enchantment", "Toggle the " + cleanup(enchantment) + " enchantment being able to be applied to the item.")));
+
+            add(new ObjectObjectImmutablePair<>("boot_enchantment_conflicts", "Toggle the frost walker and depth strider enchantments being incompatible with each other."));
+            add(new ObjectObjectImmutablePair<>("bow_enchantment_conflicts", "Toggle the infinity and mending enchantments being incompatible with each other."));
+            add(new ObjectObjectImmutablePair<>("crossbow_enchantment_conflicts", "Toggle the multishot and piercing enchantments being incompatible with each other."));
+            add(new ObjectObjectImmutablePair<>("damage_enchantment_conflicts", "Toggle the sharpness, smite, and bane of arthropods enchantments being incompatible with each other."));
+            add(new ObjectObjectImmutablePair<>("mining_enchantment_conflicts", "Toggle the fortune and silk touch enchantments being incompatible with each other."));
+            add(new ObjectObjectImmutablePair<>("protection_enchantment_conflicts", "Toggle the protection, fire protection, blast protection, and projectile protection enchantments being incompatible with each other."));
+            add(new ObjectObjectImmutablePair<>("trident_enchantment_conflicts", "Toggle the loyalty and channeling enchantments being incompatible with the riptide enchantment."));
+        }});
+        itemData.put("potion", new ObjectArrayList<>() {{
+            registryAccess.registryOrThrow(Registries.POTION).keySet().forEach(potion ->
+                    add(new ObjectObjectImmutablePair<>(potion + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item.")));
+        }});
+        itemData.put("other", new ObjectArrayList<>() {{
+            add(new ObjectObjectImmutablePair<>("can_use", "Toggle being able to use the item for its purpose."));
+            add(new ObjectObjectImmutablePair<>("durability", "Control the durability of the item."));
+            add(new ObjectObjectImmutablePair<>("burns", "Toggle the item being able to burn in fire or lava."));
+            add(new ObjectObjectImmutablePair<>("can_spam", "Toggle being able to spam the bow/crossbow"));
+            add(new ObjectObjectImmutablePair<>("nutrition", "Control the nutrition of the item."));
+            add(new ObjectObjectImmutablePair<>("saturation", "Control the saturation of the item."));
+            add(new ObjectObjectImmutablePair<>("dispenser_interaction", "Toggle the item having a special interaction with a dispenser."));
+        }});
+
+        server.getAdvancements().getAllAdvancements()
+                .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).forEach(advancement ->
+                        otherData.put(advancement, "Toggle the " + cleanup(advancement) + " advancement being obtainable."));
+        new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup()))
+                .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).forEach(command ->
+                        otherData.put(command, "Toggle the /" + cleanup(command) + " command being usable."));
+        registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().forEach(structure ->
+                otherData.put(structure.toString(), "Toggle the " + cleanup(structure) + " structure being able to be generated."));
+        registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().forEach(placedFeature ->
+                otherData.put(placedFeature.toString(), "Toggle the " + cleanup(placedFeature) + " feature being able to be generated."));
+        BuiltInRegistries.FEATURE.keySet().forEach(feature ->
+                otherData.put(feature.toString(), "Toggle the " + cleanup(feature) + " feature being able to be generated."));
+        registryAccess.registryOrThrow(Registries.BIOME).keySet().forEach(biome ->
+                otherData.put(biome.toString(), "Toggle the " + cleanup(biome) + " biome being able to be generated."));
     }
 
     public static void handleDatabase() {
@@ -625,40 +689,39 @@ public class DataHandler {
                 statement.executeUpdate("INSERT INTO meta (id, version) VALUES ('mod_version', '" + MOD_VERSION + "');");
 
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS entities(id STRING NOT NULL, " +
-                        cols.get("entities").entrySet().stream().map(entry -> entry.getKey() + " " + entry.getValue())
+                        cols.get("entities").entrySet().stream().map(entry -> "`" + entry.getKey() + "` " + entry.getValue())
                                 .collect(Collectors.joining(", ")) + ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS blocks(id STRING NOT NULL, " +
-                        cols.get("blocks").entrySet().stream().map(entry -> entry.getKey() + " " + entry.getValue())
+                        cols.get("blocks").entrySet().stream().map(entry -> "`" + entry.getKey() + "` " + entry.getValue())
                                 .collect(Collectors.joining(", ")) + ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS items(id STRING NOT NULL, " +
-                        cols.get("items").entrySet().stream().map(entry -> entry.getKey() + " " + entry.getValue())
+                        cols.get("items").entrySet().stream().map(entry -> "`" + entry.getKey() + "` " + entry.getValue())
                                 .collect(Collectors.joining(", ")) + ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS others(id STRING NOT NULL, enabled BOOLEAN);");
 
                 entities.forEach((key, value) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO entities (id, " + String.join(", ", value.left()) + ") VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
+                        statement.executeUpdate("INSERT INTO entities (id, `" + String.join("`, `", value.left()) + "`) VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 });
                 blocks.forEach((key, value) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO blocks (id, " + String.join(", ", value.left()) + ") VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
+                        statement.executeUpdate("INSERT INTO blocks (id, `" + String.join("`, `", value.left()) + "`) VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 });
                 items.forEach((key, value) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO items (id, " + String.join(", ", value.left()) + ") VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
+                        statement.executeUpdate("INSERT INTO items (id, `" + String.join("`, `", value.left()) + "`) VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 });
                 others.forEach((key) -> {
                     try {
-                        System.out.println(key);
                         statement.executeUpdate("INSERT INTO others (id, enabled) VALUES ('" + key + "', true);");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -768,16 +831,9 @@ public class DataHandler {
         }
     }
 
-    public static boolean setValue(String table, String row, String column, String value) {
+    public static void setValue(String table, String row, String column, String value) {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
-            resultSet.next();
-            resultSet.getString(column);
-            if (resultSet.wasNull()) {
-                return false;
-            }
-            statement.executeUpdate("UPDATE " + table + " SET " + column + " = " + value + " WHERE id = '" + row + "';");
-            return true;
+            statement.executeUpdate("UPDATE " + table + " SET `" + column + "` = " + value + " WHERE id = '" + row + "';");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -785,7 +841,7 @@ public class DataHandler {
 
     public static boolean getBoolean(String table, String row, String column) {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
             return resultSet.getBoolean(column);
         } catch (SQLException e) {
@@ -795,7 +851,7 @@ public class DataHandler {
 
     public static int getInt(String table, String row, String column) {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
             return resultSet.getInt(column);
         } catch (SQLException e) {
@@ -805,7 +861,7 @@ public class DataHandler {
 
     public static double getDouble(String table, String row, String column) {
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
             return resultSet.getDouble(column);
         } catch (SQLException e) {
