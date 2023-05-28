@@ -1,13 +1,9 @@
 package uk.debb.vanilla_disable.command.data;
 
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.tree.CommandNode;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.advancements.AdvancementList;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,16 +32,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class DataHandler {
-    public static MinecraftServer server;
-
-    private static Connection connection;
-    private static Statement statement;
-
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> cols = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> entities = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> blocks = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> items = new Object2ObjectOpenHashMap<>();
     public static final ObjectSet<String> others = new ObjectArraySet<>();
+    public static MinecraftServer server;
+    private static Connection connection;
+    private static Statement statement;
 
     public static String processColumnData(Object data) {
         String truncated = data.toString().replace("minecraft:", "");
@@ -638,7 +632,7 @@ public class DataHandler {
                                 .collect(Collectors.joining(", ")) + ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS items(id STRING NOT NULL, " +
                         cols.get("items").entrySet().stream().map(entry -> entry.getKey() + " " + entry.getValue())
-                                .collect(Collectors.joining(", "))+ ");");
+                                .collect(Collectors.joining(", ")) + ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS others(id STRING NOT NULL, enabled BOOLEAN);");
 
                 entities.forEach((key, value) -> {
@@ -798,7 +792,7 @@ public class DataHandler {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static int getInt(String table, String row, String column) {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");
@@ -808,7 +802,7 @@ public class DataHandler {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static double getDouble(String table, String row, String column) {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT " + column + " FROM " + table + " WHERE id = '" + row + "';");

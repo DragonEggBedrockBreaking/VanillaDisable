@@ -7,7 +7,6 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import net.minecraft.advancements.AdvancementList;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -36,9 +35,10 @@ public abstract class CommandsMixin {
         return null;
     }
 
-    @Shadow public abstract CommandDispatcher<CommandSourceStack> getDispatcher();
+    @Shadow
+    public abstract CommandDispatcher<CommandSourceStack> getDispatcher();
 
-    @Inject(method="<init>", at=@At("RETURN"))
+    @Inject(method = "<init>", at = @At("RETURN"))
     private void onRegister(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {
         Thread t = new Thread(() -> {
             while (DataHandler.server == null) {
@@ -99,10 +99,10 @@ public abstract class CommandsMixin {
             LiteralArgumentBuilder<CommandSourceStack> overallAdvancementBuilder = literal("advancement");
             DataHandler.server.getAdvancements().getAllAdvancements()
                     .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).forEach((advancement) -> {
-                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                executeBool(temp, "others", advancement, "enabled");
-                overallAdvancementBuilder.then(literal(advancement).then(temp));
-            });
+                        LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
+                        executeBool(temp, "others", advancement, "enabled");
+                        overallAdvancementBuilder.then(literal(advancement).then(temp));
+                    });
 
             LiteralArgumentBuilder<CommandSourceStack> overallCommandBuilder = literal("command");
             this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).forEach((command) -> {
@@ -151,25 +151,25 @@ public abstract class CommandsMixin {
             );
             return 1;
         }).then(
-            argument("value", StringArgumentType.string()).suggests((context, builder) -> {
-                builder.suggest("true");
-                builder.suggest("false");
-                return builder.buildFuture();
-            }).executes(context -> {
-                String value = StringArgumentType.getString(context, "value");
-                if (DataHandler.setValue(table, row, col, value)) {
-                    context.getSource().sendSuccess(
-                            Component.literal("success"),
-                            false
-                    );
-                    return 1;
-                } else {
-                    context.getSource().sendFailure(
-                            Component.literal("failure")
-                    );
-                    return 0;
-                }
-            })
+                argument("value", StringArgumentType.string()).suggests((context, builder) -> {
+                    builder.suggest("true");
+                    builder.suggest("false");
+                    return builder.buildFuture();
+                }).executes(context -> {
+                    String value = StringArgumentType.getString(context, "value");
+                    if (DataHandler.setValue(table, row, col, value)) {
+                        context.getSource().sendSuccess(
+                                Component.literal("success"),
+                                false
+                        );
+                        return 1;
+                    } else {
+                        context.getSource().sendFailure(
+                                Component.literal("failure")
+                        );
+                        return 0;
+                    }
+                })
         );
     }
 
@@ -182,21 +182,21 @@ public abstract class CommandsMixin {
             );
             return 1;
         }).then(
-            argument("value", IntegerArgumentType.integer()).executes(context -> {
-                String value = String.valueOf(IntegerArgumentType.getInteger(context, "value"));
-                if (DataHandler.setValue(table, row, col, value)) {
-                    context.getSource().sendSuccess(
-                            Component.literal("success"),
-                            false
-                    );
-                    return 1;
-                } else {
-                    context.getSource().sendFailure(
-                            Component.literal("failure")
-                    );
-                    return 0;
-                }
-            })
+                argument("value", IntegerArgumentType.integer()).executes(context -> {
+                    String value = String.valueOf(IntegerArgumentType.getInteger(context, "value"));
+                    if (DataHandler.setValue(table, row, col, value)) {
+                        context.getSource().sendSuccess(
+                                Component.literal("success"),
+                                false
+                        );
+                        return 1;
+                    } else {
+                        context.getSource().sendFailure(
+                                Component.literal("failure")
+                        );
+                        return 0;
+                    }
+                })
         );
     }
 
@@ -209,21 +209,21 @@ public abstract class CommandsMixin {
             );
             return 1;
         }).then(
-            argument("value", DoubleArgumentType.doubleArg()).executes(context -> {
-                String value = String.valueOf(DoubleArgumentType.getDouble(context, "value"));
-                if (DataHandler.setValue("entities", row, col, value)) {
-                    context.getSource().sendSuccess(
-                            Component.literal("success"),
-                            false
-                    );
-                    return 1;
-                } else {
-                    context.getSource().sendFailure(
-                            Component.literal("failure")
-                    );
-                    return 0;
-                }
-            })
+                argument("value", DoubleArgumentType.doubleArg()).executes(context -> {
+                    String value = String.valueOf(DoubleArgumentType.getDouble(context, "value"));
+                    if (DataHandler.setValue("entities", row, col, value)) {
+                        context.getSource().sendSuccess(
+                                Component.literal("success"),
+                                false
+                        );
+                        return 1;
+                    } else {
+                        context.getSource().sendFailure(
+                                Component.literal("failure")
+                        );
+                        return 0;
+                    }
+                })
         );
     }
 }
