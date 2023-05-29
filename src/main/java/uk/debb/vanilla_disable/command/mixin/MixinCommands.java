@@ -91,14 +91,17 @@ public abstract class MixinCommands {
         t.start();
     }
 
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
-        ArgumentType<?> argumentType = switch (type) {
+    ArgumentType<?> getArgumentTypeForType(DataType type, String col) {
+        return switch (type) {
             case BOOLEAN -> BoolArgumentType.bool();
             case INTEGER ->
                     IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
             case REAL ->
                     DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
         };
+    }
+
+    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
         literalArgumentBuilder.executes(context -> {
             String value = switch (type) {
                 case BOOLEAN -> String.valueOf(DataHandler.getBoolean(table, row, col));
@@ -111,7 +114,7 @@ public abstract class MixinCommands {
             );
             return 1;
         }).then(
-                argument("value", argumentType).executes(context -> {
+                argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = switch (type) {
                         case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
                         case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
@@ -128,15 +131,8 @@ public abstract class MixinCommands {
     }
 
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type) {
-        ArgumentType<?> argumentType = switch (type) {
-            case BOOLEAN -> BoolArgumentType.bool();
-            case INTEGER ->
-                    IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
-            case REAL ->
-                    DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
-        };
         literalArgumentBuilder.then(
-                argument("value", argumentType).executes(context -> {
+                argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = switch (type) {
                         case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
                         case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
