@@ -788,23 +788,31 @@ public class DataHandler {
         }
     }
 
-    public static void forceUpdateDB() {
+    public static void updateDB() {
         try {
             statement.executeUpdate("UPDATE meta SET version = 'FORCE_UPDATE'");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        handleDatabase();
     }
 
-    public static void resetDBMeta() {
+    public static void resetAll() {
+        resetOne("entities", false);
+        resetOne("blocks", false);
+        resetOne("items", false);
+        resetOne("others", true);
+    }
+
+    public static void resetOne(String db, boolean handle) {
         try {
-            String MINECRAFT_VERSION = server.getServerVersion();
-            Optional<ModContainer> MOD = FabricLoader.getInstance().getModContainer("vanilla_disable");
-            String MOD_VERSION = MOD.orElseThrow().getMetadata().getVersion().toString();
-            statement.executeUpdate("UPDATE meta SET version = '" + MINECRAFT_VERSION + "' WHERE id = 'minecraft_version';");
-            statement.executeUpdate("UPDATE meta SET version = '" + MOD_VERSION + "' WHERE id = 'mod_version';");
+            statement.executeUpdate("DELETE FROM " + db + ";");
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+        if (handle) {
+            updateDB();
+            handleDatabase();
         }
     }
 }

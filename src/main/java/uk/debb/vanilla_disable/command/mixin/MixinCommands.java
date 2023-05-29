@@ -54,37 +54,52 @@ public abstract class MixinCommands {
 
             RegistryAccess registryAccess = DataHandler.server.registryAccess();
 
-            LiteralArgumentBuilder<CommandSourceStack> forceUpdateDB = literal("forceUpdateDB").executes(context -> {
-                DataHandler.forceUpdateDB();
+            LiteralArgumentBuilder<CommandSourceStack> updateDB = literal("updateDB").executes(context -> {
+                DataHandler.updateDB();
                 context.getSource().sendSuccess(
-                        Component.literal("Close and re-open the world. The database will be forcefully updated. Run this if you added/updated other mods and want changes to be reflected. You can cancel this with \"/vd forceUpdateDB cancel\"."),
+                        Component.literal("The database has been updated;"),
                         false
                 );
                 return 1;
             });
-            forceUpdateDB.then(literal("cancel").executes(context -> {
-                DataHandler.resetDBMeta();
+
+            LiteralArgumentBuilder<CommandSourceStack> overallResetDBBuilder = literal("reset");
+            LiteralArgumentBuilder<CommandSourceStack> resetDBBuilder = literal("all").executes(context -> {
+                DataHandler.resetAll();
                 context.getSource().sendSuccess(
-                        Component.literal("The force update has been cancelled."),
+                        Component.literal("All databases have been reset."),
                         false
                 );
                 return 1;
-            }));
+            });
+            overallResetDBBuilder.then(resetDBBuilder);
+            Stream.of("entities", "blocks", "items", "others").forEach(table -> {
+                overallResetDBBuilder.then(literal(table).executes(context -> {
+                    DataHandler.resetOne(table, true);
+                    context.getSource().sendSuccess(
+                            Component.literal("The " + table + " table has been reset."),
+                            false
+                    );
+                    return 1;
+                }));
+            });
 
-            this.getDispatcher().register(literal("vd")
-                    .then(majorBuilder("entity", DataHandler.entities, DataHandler.entityData, "entities", true))
-                    .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks", false))
-                    .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items", true))
-                    .then(minorBuilderComplex("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
-                            .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
-                    .then(minorBuilderComplex("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
-                    .then(minorBuilderSimple("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
-                    .then(minorBuilderSimple("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
-                    .then(minorBuilder(new ObjectArrayList<>() {{
-                        add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
-                        add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
-                    }}))
-                    .then(forceUpdateDB)
+            this.getDispatcher().register(literal("vd").then(literal("rule")
+                            .then(majorBuilder("entity", DataHandler.entities, DataHandler.entityData, "entities", true))
+                            .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks", false))
+                            .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items", true))
+                            .then(literal("other")
+                                .then(minorBuilderComplex("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
+                                        .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
+                                .then(minorBuilderComplex("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
+                                .then(minorBuilderSimple("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
+                                .then(minorBuilderSimple("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
+                                .then(minorBuilder(new ObjectArrayList<>() {{
+                                    add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
+                                    add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
+                                }}))
+                            )
+                    ).then(overallResetDBBuilder).then(updateDB)
             );
         });
         t.start();
