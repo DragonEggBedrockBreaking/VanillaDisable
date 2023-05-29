@@ -54,7 +54,6 @@ public abstract class MixinCommands {
 
             RegistryAccess registryAccess = DataHandler.server.registryAccess();
 
-            assert literal("forceUpdateDB") != null;
             LiteralArgumentBuilder<CommandSourceStack> forceUpdateDB = literal("forceUpdateDB").executes(context -> {
                 DataHandler.forceUpdateDB();
                 context.getSource().sendSuccess(
