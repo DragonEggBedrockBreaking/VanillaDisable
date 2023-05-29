@@ -89,15 +89,15 @@ public abstract class MixinCommands {
                             .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks", false))
                             .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items", true))
                             .then(literal("other")
-                                .then(minorBuilderComplex("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
-                                        .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
-                                .then(minorBuilderComplex("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
-                                .then(minorBuilderSimple("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
-                                .then(minorBuilderSimple("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
-                                .then(minorBuilder(new ObjectArrayList<>() {{
-                                    add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
-                                    add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
-                                }}))
+                                    .then(minorBuilderComplex("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
+                                            .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
+                                    .then(minorBuilderComplex("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
+                                    .then(minorBuilderSimple("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
+                                    .then(minorBuilderSimple("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
+                                    .then(minorBuilder(new ObjectArrayList<>() {{
+                                        add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
+                                        add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
+                                    }}))
                             )
                     ).then(overallResetDBBuilder).then(updateDB)
             );
