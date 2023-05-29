@@ -31,8 +31,10 @@ import java.sql.*;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static uk.debb.vanilla_disable.command.data.DataType.*;
+
 public class DataHandler {
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> cols = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, DataType>> cols = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> entities = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> blocks = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> items = new Object2ObjectOpenHashMap<>();
@@ -64,111 +66,111 @@ public class DataHandler {
     public static void populate() {
         RegistryAccess registryAccess = server.registryAccess();
         cols.put("entities", new Object2ObjectOpenHashMap<>() {{
-            put("can_be_on_fire", "BOOLEAN");
-            put("can_sprint", "BOOLEAN");
-            put("can_crouch", "BOOLEAN");
-            put("can_swim", "BOOLEAN");
-            put("can_jump", "BOOLEAN");
-            put("can_be_invisible", "BOOLEAN");
-            put("flying_speed", "REAL");
+            put("can_be_on_fire", BOOLEAN);
+            put("can_sprint", BOOLEAN);
+            put("can_crouch", BOOLEAN);
+            put("can_swim", BOOLEAN);
+            put("can_jump", BOOLEAN);
+            put("can_be_invisible", BOOLEAN);
+            put("flying_speed", REAL);
 
-            put("item_stats", "BOOLEAN");
-            put("entity_stats", "BOOLEAN");
-            put("time_stats", "BOOLEAN");
-            put("distance_stats", "BOOLEAN");
-            put("damage_stats", "BOOLEAN");
-            put("block_gui_interaction_stats", "BOOLEAN");
-            put("block_general_interaction_stats", "BOOLEAN");
-            put("general_stats", "BOOLEAN");
+            put("item_stats", BOOLEAN);
+            put("entity_stats", BOOLEAN);
+            put("time_stats", BOOLEAN);
+            put("distance_stats", BOOLEAN);
+            put("damage_stats", BOOLEAN);
+            put("block_gui_interaction_stats", BOOLEAN);
+            put("block_general_interaction_stats", BOOLEAN);
+            put("general_stats", BOOLEAN);
 
             registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
-                put(damageType + "_damage", "BOOLEAN");
-                put(damageType + "_death", "BOOLEAN");
+                put(damageType + "_damage", BOOLEAN);
+                put(damageType + "_death", BOOLEAN);
             });
 
-            put("fireball_knockback", "BOOLEAN");
-            put("wither_skull_knockback", "BOOLEAN");
-            put("dragon_knockback", "BOOLEAN");
-            put("arrow_knockback", "BOOLEAN");
-            put("trident_knockback", "BOOLEAN");
-            put("llama_spit_knockback", "BOOLEAN");
-            put("shulker_bullet_knockback", "BOOLEAN");
-            put("mob_attack_knockback", "BOOLEAN");
-            put("player_attack_knockback", "BOOLEAN");
-            put("explosion_knockback", "BOOLEAN");
+            put("fireball_knockback", BOOLEAN);
+            put("wither_skull_knockback", BOOLEAN);
+            put("dragon_knockback", BOOLEAN);
+            put("arrow_knockback", BOOLEAN);
+            put("trident_knockback", BOOLEAN);
+            put("llama_spit_knockback", BOOLEAN);
+            put("shulker_bullet_knockback", BOOLEAN);
+            put("mob_attack_knockback", BOOLEAN);
+            put("player_attack_knockback", BOOLEAN);
+            put("explosion_knockback", BOOLEAN);
 
             registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
-                    put(mobEffect + "_effect", "BOOLEAN"));
+                    put(mobEffect + "_effect", BOOLEAN));
 
             registryAccess.registryOrThrow(Registries.PAINTING_VARIANT).keySet().forEach(painting ->
-                    put(painting + "_painting", "BOOLEAN"));
+                    put(painting + "_painting", BOOLEAN));
 
             registryAccess.registryOrThrow(Registries.VILLAGER_PROFESSION).keySet().forEach(profession ->
-                    put(profession + "_profession", "BOOLEAN"));
+                    put(profession + "_profession", BOOLEAN));
             registryAccess.registryOrThrow(Registries.VILLAGER_TYPE).keySet().forEach(type ->
-                    put(type + "_type", "BOOLEAN"));
+                    put(type + "_type", BOOLEAN));
 
-            put("can_despawn", "BOOLEAN");
-            put("despawn_time", "INTEGER");
+            put("can_despawn", BOOLEAN);
+            put("despawn_time", INTEGER);
 
-            put("can_spawn", "BOOLEAN");
-            put("spawn_egg", "BOOLEAN");
-            put("spawner", "BOOLEAN");
-            put("can_breed", "BOOLEAN");
-            put("can_exist", "BOOLEAN");
-            put("can_be_cured", "BOOLEAN");
-            put("can_be_converted_to", "BOOLEAN");
-            put("burns_in_sunlight", "BOOLEAN");
-            put("spawned_by_villagers", "BOOLEAN");
-            put("can_drop_xp", "BOOLEAN");
-            put("ai", "BOOLEAN");
-            put("can_trade", "BOOLEAN");
-            put("daily_restocks", "INTEGER");
+            put("can_spawn", BOOLEAN);
+            put("spawn_egg", BOOLEAN);
+            put("spawner", BOOLEAN);
+            put("can_breed", BOOLEAN);
+            put("can_exist", BOOLEAN);
+            put("can_be_cured", BOOLEAN);
+            put("can_be_converted_to", BOOLEAN);
+            put("burns_in_sunlight", BOOLEAN);
+            put("spawned_by_villagers", BOOLEAN);
+            put("can_drop_xp", BOOLEAN);
+            put("ai", BOOLEAN);
+            put("can_trade", BOOLEAN);
+            put("daily_restocks", INTEGER);
         }});
         cols.put("blocks", new Object2ObjectOpenHashMap<>() {{
-            put("can_place_in_overworld", "BOOLEAN");
-            put("can_place_in_nether", "BOOLEAN");
-            put("can_place_in_end", "BOOLEAN");
-            put("can_break", "BOOLEAN");
-            put("can_interact", "BOOLEAN");
-            put("works", "BOOLEAN");
-            put("friction_factor", "REAL");
-            put("speed_factor", "REAL");
-            put("jump_factor", "REAL");
-            put("can_be_filled_by_dripstone", "BOOLEAN");
-            put("fluid_reaches_far", "BOOLEAN");
-            put("fluid_reaches_far_in_nether", "BOOLEAN");
-            put("fluid_speed", "INTEGER");
-            put("fluid_speed_in_nether", "INTEGER");
-            put("redstone_delay", "INTEGER");
-            put("redstone_duration", "INTEGER");
-            put("can_drop_xp", "BOOLEAN");
-            put("dispenser_interaction", "BOOLEAN");
-            put("can_fall", "BOOLEAN");
+            put("can_place_in_overworld", BOOLEAN);
+            put("can_place_in_nether", BOOLEAN);
+            put("can_place_in_end", BOOLEAN);
+            put("can_break", BOOLEAN);
+            put("can_interact", BOOLEAN);
+            put("works", BOOLEAN);
+            put("friction_factor", REAL);
+            put("speed_factor", REAL);
+            put("jump_factor", REAL);
+            put("can_be_filled_by_dripstone", BOOLEAN);
+            put("fluid_reaches_far", BOOLEAN);
+            put("fluid_reaches_far_in_nether", BOOLEAN);
+            put("fluid_speed", INTEGER);
+            put("fluid_speed_in_nether", INTEGER);
+            put("redstone_delay", INTEGER);
+            put("redstone_duration", INTEGER);
+            put("can_drop_xp", BOOLEAN);
+            put("dispenser_interaction", BOOLEAN);
+            put("can_fall", BOOLEAN);
         }});
         cols.put("items", new Object2ObjectOpenHashMap<>() {{
-            put("can_use", "BOOLEAN");
-            put("durability", "INTEGER");
-            put("burns", "BOOLEAN");
-            put("can_spam", "BOOLEAN");
-            put("nutrition", "INTEGER");
-            put("saturation", "REAL");
+            put("can_use", BOOLEAN);
+            put("durability", INTEGER);
+            put("burns", BOOLEAN);
+            put("can_spam", BOOLEAN);
+            put("nutrition", INTEGER);
+            put("saturation", REAL);
 
             registryAccess.registryOrThrow(Registries.ENCHANTMENT).keySet().forEach(enchantment ->
-                    put(enchantment + "_enchantment", "BOOLEAN"));
+                    put(enchantment + "_enchantment", BOOLEAN));
 
-            put("boot_enchantment_conflicts", "BOOLEAN");
-            put("bow_enchantment_conflicts", "BOOLEAN");
-            put("crossbow_enchantment_conflicts", "BOOLEAN");
-            put("damage_enchantment_conflicts", "BOOLEAN");
-            put("mining_enchantment_conflicts", "BOOLEAN");
-            put("protection_enchantment_conflicts", "BOOLEAN");
-            put("trident_enchantment_conflicts", "BOOLEAN");
+            put("boot_enchantment_conflicts", BOOLEAN);
+            put("bow_enchantment_conflicts", BOOLEAN);
+            put("crossbow_enchantment_conflicts", BOOLEAN);
+            put("damage_enchantment_conflicts", BOOLEAN);
+            put("mining_enchantment_conflicts", BOOLEAN);
+            put("protection_enchantment_conflicts", BOOLEAN);
+            put("trident_enchantment_conflicts", BOOLEAN);
 
             registryAccess.registryOrThrow(Registries.POTION).keySet().forEach(potion ->
-                    put(potion + "_effect", "BOOLEAN"));
+                    put(potion + "_effect", BOOLEAN));
 
-            put("dispenser_interaction", "BOOLEAN");
+            put("dispenser_interaction", BOOLEAN);
         }});
 
         BuiltInRegistries.ENTITY_TYPE.forEach((entityType) -> {

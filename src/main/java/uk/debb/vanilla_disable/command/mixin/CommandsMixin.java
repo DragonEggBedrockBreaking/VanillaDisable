@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.DataType;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -93,21 +94,19 @@ public abstract class CommandsMixin {
         t.start();
     }
 
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, String type) {
+    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
         ArgumentType<?> argumentType = switch (type) {
-            case "BOOLEAN" -> BoolArgumentType.bool();
-            case "INTEGER" ->
+            case BOOLEAN -> BoolArgumentType.bool();
+            case INTEGER ->
                     IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
-            case "REAL" ->
+            case REAL ->
                     DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
-            default -> null;
         };
         literalArgumentBuilder.executes(context -> {
             String value = switch (type) {
-                case "BOOLEAN" -> String.valueOf(DataHandler.getBoolean(table, row, col));
-                case "INTEGER" -> String.valueOf(DataHandler.getInt(table, row, col));
-                case "REAL" -> String.valueOf(DataHandler.getDouble(table, row, col));
-                default -> "";
+                case BOOLEAN -> String.valueOf(DataHandler.getBoolean(table, row, col));
+                case INTEGER -> String.valueOf(DataHandler.getInt(table, row, col));
+                case REAL -> String.valueOf(DataHandler.getDouble(table, row, col));
             };
             context.getSource().sendSuccess(
                     Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue),
@@ -117,10 +116,9 @@ public abstract class CommandsMixin {
         }).then(
                 argument("value", argumentType).executes(context -> {
                     String value = switch (type) {
-                        case "BOOLEAN" -> String.valueOf(BoolArgumentType.getBool(context, "value"));
-                        case "INTEGER" -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
-                        case "REAL" -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
-                        default -> "";
+                        case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
+                        case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
+                        case REAL -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
                     };
                     DataHandler.setValue(table, row, col, value);
                     context.getSource().sendSuccess(
@@ -173,7 +171,7 @@ public abstract class CommandsMixin {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         stream.forEach((property) -> {
             LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", "BOOLEAN");
+            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
             overallBuilder.then(literal(property).then(temp));
         });
         return overallBuilder;
@@ -184,7 +182,7 @@ public abstract class CommandsMixin {
         streams.forEach(stream -> {
             stream.forEach((property) -> {
                 LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", "BOOLEAN");
+                execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
                 overallBuilder.then(literal(property).then(temp));
             });
         });
