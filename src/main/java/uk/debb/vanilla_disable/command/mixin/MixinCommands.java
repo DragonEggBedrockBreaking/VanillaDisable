@@ -136,7 +136,7 @@ public abstract class MixinCommands {
             info.stream().map(Pair::first).filter(possible::contains).forEach((groupProperty ->
                     DataHandler.setValue(table, row, groupProperty, value)));
             context.getSource().sendSuccess(
-                    Component.literal("Successfully set the value of all " +  group + " properties to " + value + "."),
+                    Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
                     false
             );
             return 1;
