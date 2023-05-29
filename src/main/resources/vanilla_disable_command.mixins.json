@@ -4,7 +4,7 @@
   "package": "uk.debb.vanilla_disable.command.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "CommandsMixin",
+    "MixinCommands",
     "MixinMinecraftServer"
   ],
   "injectors": {

@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 @Mixin(Commands.class)
-public abstract class CommandsMixin {
+public abstract class MixinCommands {
     @Shadow
     public static LiteralArgumentBuilder<CommandSourceStack> literal(String pString0) {
         return null;
