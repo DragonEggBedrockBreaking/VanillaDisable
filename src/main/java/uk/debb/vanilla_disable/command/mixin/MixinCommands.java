@@ -111,19 +111,19 @@ public abstract class MixinCommands {
             );
             return 1;
         }).then(
-            argument("value", argumentType).executes(context -> {
-                String value = switch (type) {
-                    case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
-                    case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
-                    case REAL -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
-                };
-                DataHandler.setValue(table, row, col, value);
-                context.getSource().sendSuccess(
-                        Component.literal("Successfully set the value to " + value + "."),
-                        false
-                );
-                return 1;
-            })
+                argument("value", argumentType).executes(context -> {
+                    String value = switch (type) {
+                        case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
+                        case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
+                        case REAL -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
+                    };
+                    DataHandler.setValue(table, row, col, value);
+                    context.getSource().sendSuccess(
+                            Component.literal("Successfully set the value to " + value + "."),
+                            false
+                    );
+                    return 1;
+                })
         );
     }
 

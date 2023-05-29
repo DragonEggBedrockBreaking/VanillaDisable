@@ -48,9 +48,9 @@ public class DataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
 
     public static MinecraftServer server;
+    public static boolean populationDone = false;
     private static Connection connection;
     private static Statement statement;
-    public static boolean populationDone = false;
 
     private static String cleanup(Object o) {
         String s = o.toString().replace("_", " ");
@@ -175,177 +175,177 @@ public class DataHandler {
 
         BuiltInRegistries.ENTITY_TYPE.forEach((entityType) ->
                 entities.put(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).toString(), new Object2ObjectOpenHashMap<>() {{
-            if (entityType.equals(EntityType.PLAYER)) {
-                put("can_be_on_fire", "true");
-                put("can_sprint", "true");
-                put("can_crouch", "true");
-                put("can_swim", "true");
-                put("can_jump", "true");
-                put("can_be_invisible", "true");
-                put("flying_speed", "0.05");
+                    if (entityType.equals(EntityType.PLAYER)) {
+                        put("can_be_on_fire", "true");
+                        put("can_sprint", "true");
+                        put("can_crouch", "true");
+                        put("can_swim", "true");
+                        put("can_jump", "true");
+                        put("can_be_invisible", "true");
+                        put("flying_speed", "0.05");
 
-                put("item_stats", "true");
-                put("entity_stats", "true");
-                put("time_stats", "true");
-                put("distance_stats", "true");
-                put("damage_stats", "true");
-                put("block_gui_interaction_stats", "true");
-                put("block_general_interaction_stats", "true");
-                put("general_stats", "true");
-            }
+                        put("item_stats", "true");
+                        put("entity_stats", "true");
+                        put("time_stats", "true");
+                        put("distance_stats", "true");
+                        put("damage_stats", "true");
+                        put("block_gui_interaction_stats", "true");
+                        put("block_general_interaction_stats", "true");
+                        put("general_stats", "true");
+                    }
 
-            if (!entityType.getCategory().equals(MobCategory.MISC) || entityType.equals(EntityType.VILLAGER) ||
-                    entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.SNOW_GOLEM) ||
-                    entityType.equals(EntityType.PLAYER)) {
-                registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
-                    put(damageType + "_damage", "true");
-                    put(damageType + "_death", "true");
-                });
+                    if (!entityType.getCategory().equals(MobCategory.MISC) || entityType.equals(EntityType.VILLAGER) ||
+                            entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.SNOW_GOLEM) ||
+                            entityType.equals(EntityType.PLAYER)) {
+                        registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
+                            put(damageType + "_damage", "true");
+                            put(damageType + "_death", "true");
+                        });
 
-                put("fireball_knockback", "true");
-                put("wither_skull_knockback", "true");
-                put("dragon_knockback", "true");
-                put("arrow_knockback", "true");
-                put("trident_knockback", "true");
-                put("llama_spit_knockback", "true");
-                put("shulker_bullet_knockback", "true");
-                put("mob_attack_knockback", "true");
-                put("player_attack_knockback", "true");
-                put("explosion_knockback", "true");
+                        put("fireball_knockback", "true");
+                        put("wither_skull_knockback", "true");
+                        put("dragon_knockback", "true");
+                        put("arrow_knockback", "true");
+                        put("trident_knockback", "true");
+                        put("llama_spit_knockback", "true");
+                        put("shulker_bullet_knockback", "true");
+                        put("mob_attack_knockback", "true");
+                        put("player_attack_knockback", "true");
+                        put("explosion_knockback", "true");
 
-                registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
-                        put(mobEffect + "_effect", "true"));
+                        registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
+                                put(mobEffect + "_effect", "true"));
 
-                put("can_despawn", "true");
+                        put("can_despawn", "true");
 
-                put("can_spawn", "true");
-                put("spawn_egg", "true");
-                put("spawner", "true");
-                put("can_drop_xp", "true");
-                put("ai", "true");
-            }
+                        put("can_spawn", "true");
+                        put("spawn_egg", "true");
+                        put("spawner", "true");
+                        put("can_drop_xp", "true");
+                        put("ai", "true");
+                    }
 
-            if (entityType.equals(EntityType.PAINTING)) {
-                BuiltInRegistries.PAINTING_VARIANT.keySet().forEach(painting ->
-                        put(painting + "_painting", "true"));
-            }
+                    if (entityType.equals(EntityType.PAINTING)) {
+                        BuiltInRegistries.PAINTING_VARIANT.keySet().forEach(painting ->
+                                put(painting + "_painting", "true"));
+                    }
 
-            if (entityType.equals(EntityType.VILLAGER)) {
-                BuiltInRegistries.VILLAGER_PROFESSION.keySet().forEach(profession ->
-                        put(profession + "_profession", "true"));
-                BuiltInRegistries.VILLAGER_TYPE.keySet().forEach(type -> put(type + "_type", "true"));
-            }
+                    if (entityType.equals(EntityType.VILLAGER)) {
+                        BuiltInRegistries.VILLAGER_PROFESSION.keySet().forEach(profession ->
+                                put(profession + "_profession", "true"));
+                        BuiltInRegistries.VILLAGER_TYPE.keySet().forEach(type -> put(type + "_type", "true"));
+                    }
 
-            if (VanillaHusbandryAdvancements.BREEDABLE_ANIMALS.contains(entityType) ||
-                    VanillaHusbandryAdvancements.INDIRECTLY_BREEDABLE_ANIMALS.contains(entityType) ||
-                    entityType.equals(EntityType.VILLAGER)) {
-                put("can_breed", "true");
-            }
+                    if (VanillaHusbandryAdvancements.BREEDABLE_ANIMALS.contains(entityType) ||
+                            VanillaHusbandryAdvancements.INDIRECTLY_BREEDABLE_ANIMALS.contains(entityType) ||
+                            entityType.equals(EntityType.VILLAGER)) {
+                        put("can_breed", "true");
+                    }
 
-            if (entityType.equals(EntityType.ZOMBIE_VILLAGER)) {
-                put("can_be_cured", "true");
-            }
+                    if (entityType.equals(EntityType.ZOMBIE_VILLAGER)) {
+                        put("can_be_cured", "true");
+                    }
 
-            if (entityType.equals(EntityType.ZOMBIE_VILLAGER) || entityType.equals(EntityType.WITCH) ||
-                    entityType.equals(EntityType.ZOMBIFIED_PIGLIN) || entityType.equals(EntityType.ZOGLIN) ||
-                    entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.STRAY)) {
-                put("can_be_converted_to", "true");
-            }
+                    if (entityType.equals(EntityType.ZOMBIE_VILLAGER) || entityType.equals(EntityType.WITCH) ||
+                            entityType.equals(EntityType.ZOMBIFIED_PIGLIN) || entityType.equals(EntityType.ZOGLIN) ||
+                            entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.STRAY)) {
+                        put("can_be_converted_to", "true");
+                    }
 
-            if (entityType.equals(EntityType.SKELETON) || entityType.equals(EntityType.ZOMBIE) ||
-                    entityType.equals(EntityType.PHANTOM) || entityType.equals(EntityType.STRAY) ||
-                    entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.ZOMBIE_VILLAGER)) {
-                put("burns_in_sunlight", "true");
-            }
+                    if (entityType.equals(EntityType.SKELETON) || entityType.equals(EntityType.ZOMBIE) ||
+                            entityType.equals(EntityType.PHANTOM) || entityType.equals(EntityType.STRAY) ||
+                            entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.ZOMBIE_VILLAGER)) {
+                        put("burns_in_sunlight", "true");
+                    }
 
-            if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER) ||
-                    entityType.equals(EntityType.PIGLIN)) {
-                put("can_trade", "true");
-            }
+                    if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER) ||
+                            entityType.equals(EntityType.PIGLIN)) {
+                        put("can_trade", "true");
+                    }
 
-            if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER)) {
-                put("daily_restocks", "true");
-            }
+                    if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER)) {
+                        put("daily_restocks", "true");
+                    }
 
-            if (entityType.equals(EntityType.ITEM)) {
-                put("despawn_time", "6000");
-            }
+                    if (entityType.equals(EntityType.ITEM)) {
+                        put("despawn_time", "6000");
+                    }
 
-            put("can_exist", "true");
-        }}));
+                    put("can_exist", "true");
+                }}));
 
         BuiltInRegistries.BLOCK.forEach((block) ->
                 blocks.put(BuiltInRegistries.BLOCK.getKey(block).toString(), new Object2ObjectOpenHashMap<>() {{
-            put("can_place_in_overworld", "true");
-            put("can_place_in_nether", "true");
-            put("can_place_in_end", "true");
-            put("can_break", "true");
-            put("can_interact", "true");
-            put("works", "true");
+                    put("can_place_in_overworld", "true");
+                    put("can_place_in_nether", "true");
+                    put("can_place_in_end", "true");
+                    put("can_break", "true");
+                    put("can_interact", "true");
+                    put("works", "true");
 
-            if (block.toString().equals(Blocks.ICE.toString()) || block.toString().equals(Blocks.PACKED_ICE.toString()) ||
-                    block.toString().equals(Blocks.BLUE_ICE.toString())) {
-                put("friction_factor", "0.98");
-            } else if (block.toString().equals(Blocks.SLIME_BLOCK.toString())) {
-                put("friction_factor", "0.8");
-            } else {
-                put("friction_factor", "0.6");
-            }
+                    if (block.toString().equals(Blocks.ICE.toString()) || block.toString().equals(Blocks.PACKED_ICE.toString()) ||
+                            block.toString().equals(Blocks.BLUE_ICE.toString())) {
+                        put("friction_factor", "0.98");
+                    } else if (block.toString().equals(Blocks.SLIME_BLOCK.toString())) {
+                        put("friction_factor", "0.8");
+                    } else {
+                        put("friction_factor", "0.6");
+                    }
 
-            boolean isHoneyBlock = block.toString().equals(Blocks.HONEY_BLOCK.toString());
-            if (block.toString().equals(Blocks.SOUL_SAND.toString()) || isHoneyBlock) {
-                put("speed_factor", "0.4");
-            } else {
-                put("speed_factor", "1.0");
-            }
+                    boolean isHoneyBlock = block.toString().equals(Blocks.HONEY_BLOCK.toString());
+                    if (block.toString().equals(Blocks.SOUL_SAND.toString()) || isHoneyBlock) {
+                        put("speed_factor", "0.4");
+                    } else {
+                        put("speed_factor", "1.0");
+                    }
 
-            if (isHoneyBlock) {
-                put("jump_factor", "0.5");
-            } else {
-                put("jump_factor", "1.0");
-            }
+                    if (isHoneyBlock) {
+                        put("jump_factor", "0.5");
+                    } else {
+                        put("jump_factor", "1.0");
+                    }
 
-            if (block.toString().equals(Blocks.CAULDRON.toString())) {
-                put("can_be_filled_by_dripstone", "true");
-            }
+                    if (block.toString().equals(Blocks.CAULDRON.toString())) {
+                        put("can_be_filled_by_dripstone", "true");
+                    }
 
-            if (block.toString().equals(Blocks.WATER.toString())) {
-                put("fluid_reaches_far", "true");
-                put("fluid_reaches_far_in_nether", "true");
-                put("fluid_speed", "5");
-                put("fluid_speed_in_nether", "5");
-            }
+                    if (block.toString().equals(Blocks.WATER.toString())) {
+                        put("fluid_reaches_far", "true");
+                        put("fluid_reaches_far_in_nether", "true");
+                        put("fluid_speed", "5");
+                        put("fluid_speed_in_nether", "5");
+                    }
 
-            if (block.toString().equals(Blocks.LAVA.toString())) {
-                put("fluid_reaches_far", "false");
-                put("fluid_reaches_far_in_nether", "true");
-                put("fluid_speed", "30");
-                put("fluid_speed_in_nether", "10");
-            }
+                    if (block.toString().equals(Blocks.LAVA.toString())) {
+                        put("fluid_reaches_far", "false");
+                        put("fluid_reaches_far_in_nether", "true");
+                        put("fluid_speed", "30");
+                        put("fluid_speed_in_nether", "10");
+                    }
 
-            boolean isObserver = block.toString().equals(Blocks.OBSERVER.toString());
-            if (block.toString().equals(Blocks.REPEATER.toString()) || block.toString().equals(Blocks.COMPARATOR.toString()) || isObserver) {
-                put("redstone_delay", "2");
-            }
+                    boolean isObserver = block.toString().equals(Blocks.OBSERVER.toString());
+                    if (block.toString().equals(Blocks.REPEATER.toString()) || block.toString().equals(Blocks.COMPARATOR.toString()) || isObserver) {
+                        put("redstone_delay", "2");
+                    }
 
-            if (isObserver) {
-                put("redstone_duration", "2");
-            }
+                    if (isObserver) {
+                        put("redstone_duration", "2");
+                    }
 
-            if (block.toString().endsWith("_ore") || block.toString().equals(Blocks.SPAWNER.toString()) ||
-                    block.toString().equals(Blocks.SCULK_SENSOR.toString()) || block.toString().equals(Blocks.SCULK_CATALYST.toString()) ||
-                    block.toString().equals(Blocks.SCULK_SHRIEKER.toString()) || block.toString().equals(Blocks.SCULK.toString())) {
-                put("can_drop_xp", "true");
-            }
+                    if (block.toString().endsWith("_ore") || block.toString().equals(Blocks.SPAWNER.toString()) ||
+                            block.toString().equals(Blocks.SCULK_SENSOR.toString()) || block.toString().equals(Blocks.SCULK_CATALYST.toString()) ||
+                            block.toString().equals(Blocks.SCULK_SHRIEKER.toString()) || block.toString().equals(Blocks.SCULK.toString())) {
+                        put("can_drop_xp", "true");
+                    }
 
-            if (DispenserBlock.DISPENSER_REGISTRY.containsKey(block.asItem())) {
-                put("dispenser_interaction", "true");
-            }
+                    if (DispenserBlock.DISPENSER_REGISTRY.containsKey(block.asItem())) {
+                        put("dispenser_interaction", "true");
+                    }
 
-            if (block instanceof FallingBlock) {
-                put("can_fall", "true");
-            }
-        }}));
+                    if (block instanceof FallingBlock) {
+                        put("can_fall", "true");
+                    }
+                }}));
 
         BuiltInRegistries.ITEM.forEach((item) -> {
             if (BuiltInRegistries.BLOCK.stream().map(Block::asItem).toList().contains(item)) return;
