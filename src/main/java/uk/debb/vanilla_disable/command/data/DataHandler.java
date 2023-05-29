@@ -1,6 +1,5 @@
 package uk.debb.vanilla_disable.command.data;
 
-import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -40,9 +39,9 @@ public class DataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> items = new Object2ObjectOpenHashMap<>();
     public static final ObjectSet<String> others = new ObjectArraySet<>();
 
-    public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> entityData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> blockData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> itemData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entityData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blockData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> itemData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, String> otherData = new Object2ObjectOpenHashMap<>();
 
     public static final Object2IntMap<String> intRowMaximums = new Object2IntArrayMap<>();
@@ -51,6 +50,7 @@ public class DataHandler {
     public static MinecraftServer server;
     private static Connection connection;
     private static Statement statement;
+    public static boolean populationDone = false;
 
     private static String cleanup(Object o) {
         String s = o.toString().replace("_", " ");
@@ -434,125 +434,125 @@ public class DataHandler {
         others.addAll(registryAccess.registryOrThrow(Registries.BIOME).keySet()
                 .stream().map(Object::toString).toList());
 
-        entityData.put("stats", new ObjectArrayList<>() {{
-            add(new ObjectObjectImmutablePair<>("item_stats", "Collect statistics related to items."));
-            add(new ObjectObjectImmutablePair<>("entity_stats", "Collect statistics related to entities."));
-            add(new ObjectObjectImmutablePair<>("time_stats", "Collect statistics related to time."));
-            add(new ObjectObjectImmutablePair<>("distance_stats", "Collect statistics related to distance."));
-            add(new ObjectObjectImmutablePair<>("damage_stats", "Collect statistics related to damage."));
-            add(new ObjectObjectImmutablePair<>("block_gui_interaction_stats", "Collect statistics related to block GUIs."));
-            add(new ObjectObjectImmutablePair<>("block_general_interaction_stats", "Collect statistics related to blocks."));
-            add(new ObjectObjectImmutablePair<>("general_stats", "Collect general statistics."));
+        entityData.put("stats", new Object2ObjectOpenHashMap<>() {{
+            put("item_stats", "Collect statistics related to items.");
+            put("entity_stats", "Collect statistics related to entities.");
+            put("time_stats", "Collect statistics related to time.");
+            put("distance_stats", "Collect statistics related to distance.");
+            put("damage_stats", "Collect statistics related to damage.");
+            put("block_gui_interaction_stats", "Collect statistics related to block GUIs.");
+            put("block_general_interaction_stats", "Collect statistics related to blocks.");
+            put("general_stats", "Collect general statistics.");
         }});
-        entityData.put("damage", new ObjectArrayList<>() {{
+        entityData.put("damage", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
-                    add(new ObjectObjectImmutablePair<>(damageType + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the mob.")));
+                    put(damageType + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the mob."));
         }});
-        entityData.put("knockback", new ObjectArrayList<>() {{
-            add(new ObjectObjectImmutablePair<>("fireball_knockback", "Toggles fireballs knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("wither_skull_knockback", "Toggles wither skulls knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("dragon_knockback", "Toggles the ender dragon knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("arrow_knockback", "Toggles arrows knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("trident_knockback", "Toggles tridents knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("llama_spit_knockback", "Toggles llama spit knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("shulker_bullet_knockback", "Toggles shulker bullets knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("mob_attack_knockback", "Toggles mob attacks knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("player_attack_knockback", "Toggles player attacks knocking back the entity."));
-            add(new ObjectObjectImmutablePair<>("explosion_knockback", "Toggles explosions knocking back the entity."));
+        entityData.put("knockback", new Object2ObjectOpenHashMap<>() {{
+            put("fireball_knockback", "Toggles fireballs knocking back the entity.");
+            put("wither_skull_knockback", "Toggles wither skulls knocking back the entity.");
+            put("dragon_knockback", "Toggles the ender dragon knocking back the entity.");
+            put("arrow_knockback", "Toggles arrows knocking back the entity.");
+            put("trident_knockback", "Toggles tridents knocking back the entity.");
+            put("llama_spit_knockback", "Toggles llama spit knocking back the entity.");
+            put("shulker_bullet_knockback", "Toggles shulker bullets knocking back the entity.");
+            put("mob_attack_knockback", "Toggles mob attacks knocking back the entity.");
+            put("player_attack_knockback", "Toggles player attacks knocking back the entity.");
+            put("explosion_knockback", "Toggles explosions knocking back the entity.");
         }});
-        entityData.put("effects", new ObjectArrayList<>() {{
+        entityData.put("effects", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
-                    add(new ObjectObjectImmutablePair<>(mobEffect.toString(), "Toggles " + cleanup(mobEffect) + " affecting the mob.")));
+                    put(mobEffect.toString(), "Toggles " + cleanup(mobEffect) + " affecting the mob."));
         }});
-        entityData.put("death", new ObjectArrayList<>() {{
+        entityData.put("death", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
-                    add(new ObjectObjectImmutablePair<>(damageType + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the mob.")));
+                    put(damageType + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the mob."));
         }});
-        entityData.put("painting", new ObjectArrayList<>() {{
+        entityData.put("painting", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.PAINTING_VARIANT).keySet().forEach(painting ->
-                    add(new ObjectObjectImmutablePair<>(painting + "_painting", "Toggles the " + cleanup(painting) + " design being able to show on paintings.")));
+                    put(painting + "_painting", "Toggles the " + cleanup(painting) + " design being able to show on paintings."));
         }});
-        entityData.put("villager_type", new ObjectArrayList<>() {{
+        entityData.put("villager_type", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.VILLAGER_TYPE).keySet().forEach(villagerType ->
-                    add(new ObjectObjectImmutablePair<>(villagerType + "_type", "Toggles villagers being able to be of the " + cleanup(villagerType) + " type.")));
+                    put(villagerType + "_type", "Toggles villagers being able to be of the " + cleanup(villagerType) + " type."));
         }});
-        entityData.put("villager_profession", new ObjectArrayList<>() {{
+        entityData.put("villager_profession", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.VILLAGER_PROFESSION).keySet().forEach(villagerProfession ->
-                    add(new ObjectObjectImmutablePair<>(villagerProfession + "_profession", "Toggles villagers being able to have the " + cleanup(villagerProfession) + " profession.")));
+                    put(villagerProfession + "_profession", "Toggles villagers being able to have the " + cleanup(villagerProfession) + " profession."));
         }});
-        entityData.put("other", new ObjectArrayList<>() {{
-            add(new ObjectObjectImmutablePair<>("can_be_on_fire", "Toggle the player being able to be on fire."));
-            add(new ObjectObjectImmutablePair<>("can_sprint", "Toggle the player being able to sprint."));
-            add(new ObjectObjectImmutablePair<>("can_crouch", "Toggle the player being able to crouch."));
-            add(new ObjectObjectImmutablePair<>("can_swim", "Toggle the player being able to swim."));
-            add(new ObjectObjectImmutablePair<>("can_jump", "Toggle the player being able to jump."));
-            add(new ObjectObjectImmutablePair<>("can_be_invisible", "Toggle the player being able to be invisible."));
-            add(new ObjectObjectImmutablePair<>("flying_speed", "Control the player's flying speed."));
-            add(new ObjectObjectImmutablePair<>("can_despawn", "Toggle the mob being able to despawn."));
-            add(new ObjectObjectImmutablePair<>("despawn_time", "Controls how long it takes for an entity to despawn."));
-            add(new ObjectObjectImmutablePair<>("can_spawn", "Toggle the mob being able to spawn."));
-            add(new ObjectObjectImmutablePair<>("spawn_egg", "Toggle the mob being able to be spawned by a spawn egg."));
-            add(new ObjectObjectImmutablePair<>("spawner", "Toggle the mob being able to be spawned by a spawner."));
-            add(new ObjectObjectImmutablePair<>("can_breed", "Toggle the mob being able to breed."));
-            add(new ObjectObjectImmutablePair<>("can_exist", "Toggle the entity being able to exist."));
-            add(new ObjectObjectImmutablePair<>("can_be_cured", "Toggle the mob being able to be cured."));
-            add(new ObjectObjectImmutablePair<>("can_be_converted_to", "Toggle the mob being able to convert to another mob."));
-            add(new ObjectObjectImmutablePair<>("burns_in_sunlight", "Toggle the mob being able to burn in sunlight."));
-            add(new ObjectObjectImmutablePair<>("spawned_by_villagers", "Toggle the mob being able to be spawned by villagers."));
-            add(new ObjectObjectImmutablePair<>("can_drop_xp", "Toggle the mob being able to drop XP."));
-            add(new ObjectObjectImmutablePair<>("ai", "Toggle the mob's AI."));
-            add(new ObjectObjectImmutablePair<>("can_trade", "Toggle the mob being able to trade."));
-            add(new ObjectObjectImmutablePair<>("daily_restocks", "Control the number of times per day a villager restocks."));
-        }});
-
-        blockData.put("fluid", new ObjectArrayList<>() {{
-            add(new ObjectObjectImmutablePair<>("fluid_reaches_far", "Toggle whether the fluid can travel 8 blocks or only 4 in the overworld or end."));
-            add(new ObjectObjectImmutablePair<>("fluid_reaches_far_in_nether", "Toggle whether the fluid can travel 8 blocks or only 4 in the nether."));
-            add(new ObjectObjectImmutablePair<>("fluid_speed", "Control how fast the fluid flows in the overworld or end."));
-            add(new ObjectObjectImmutablePair<>("fluid_speed_in_nether", "Control how fast the fluid flows in the nether."));
-        }});
-        blockData.put("other", new ObjectArrayList<>() {{
-            add(new ObjectObjectImmutablePair<>("can_place_in_overworld", "Toggle being able to place the block in the overworld."));
-            add(new ObjectObjectImmutablePair<>("can_place_in_nether", "Toggle being able to place the block in the nether."));
-            add(new ObjectObjectImmutablePair<>("can_place_in_end", "Toggle being able to place the block in the end."));
-            add(new ObjectObjectImmutablePair<>("can_break", "Toggle being able to break the block."));
-            add(new ObjectObjectImmutablePair<>("can_interact", "Toggle being able to interact with the block."));
-            add(new ObjectObjectImmutablePair<>("works", "Toggle the block being able to carry out its function."));
-            add(new ObjectObjectImmutablePair<>("friction_factor", "Control how much friction is applied to entities on the block."));
-            add(new ObjectObjectImmutablePair<>("speed_factor", "Control how fast entities can travel on the block relative to others."));
-            add(new ObjectObjectImmutablePair<>("jump_factor", "Control how high entities can jump on the block relative to others."));
-            add(new ObjectObjectImmutablePair<>("can_be_filled_by_dripstone", "Toggle the block being able to be filled by dripstone."));
-            add(new ObjectObjectImmutablePair<>("redstone_delay", "Control the redstone delay of the block."));
-            add(new ObjectObjectImmutablePair<>("redstone_duration", "Control the redstone duration of the block."));
-            add(new ObjectObjectImmutablePair<>("can_drop_xp", "Toggle the block being able to drop XP."));
-            add(new ObjectObjectImmutablePair<>("dispenser_interaction", "Toggle the block having a special interaction with a dispenser."));
-            add(new ObjectObjectImmutablePair<>("can_fall", "Toggle the block being able to fall."));
+        entityData.put("other", new Object2ObjectOpenHashMap<>() {{
+            put("can_be_on_fire", "Toggle the player being able to be on fire.");
+            put("can_sprint", "Toggle the player being able to sprint.");
+            put("can_crouch", "Toggle the player being able to crouch.");
+            put("can_swim", "Toggle the player being able to swim.");
+            put("can_jump", "Toggle the player being able to jump.");
+            put("can_be_invisible", "Toggle the player being able to be invisible.");
+            put("flying_speed", "Control the player's flying speed.");
+            put("can_despawn", "Toggle the mob being able to despawn.");
+            put("despawn_time", "Controls how long it takes for an entity to despawn.");
+            put("can_spawn", "Toggle the mob being able to spawn.");
+            put("spawn_egg", "Toggle the mob being able to be spawned by a spawn egg.");
+            put("spawner", "Toggle the mob being able to be spawned by a spawner.");
+            put("can_breed", "Toggle the mob being able to breed.");
+            put("can_exist", "Toggle the entity being able to exist.");
+            put("can_be_cured", "Toggle the mob being able to be cured.");
+            put("can_be_converted_to", "Toggle the mob being able to convert to another mob.");
+            put("burns_in_sunlight", "Toggle the mob being able to burn in sunlight.");
+            put("spawned_by_villagers", "Toggle the mob being able to be spawned by villagers.");
+            put("can_drop_xp", "Toggle the mob being able to drop XP.");
+            put("ai", "Toggle the mob's AI.");
+            put("can_trade", "Toggle the mob being able to trade.");
+            put("daily_restocks", "Control the number of times per day a villager restocks.");
         }});
 
-        itemData.put("enchantment", new ObjectArrayList<>() {{
+        blockData.put("fluid", new Object2ObjectOpenHashMap<>() {{
+            put("fluid_reaches_far", "Toggle whether the fluid can travel 8 blocks or only 4 in the overworld or end.");
+            put("fluid_reaches_far_in_nether", "Toggle whether the fluid can travel 8 blocks or only 4 in the nether.");
+            put("fluid_speed", "Control how fast the fluid flows in the overworld or end.");
+            put("fluid_speed_in_nether", "Control how fast the fluid flows in the nether.");
+        }});
+        blockData.put("other", new Object2ObjectOpenHashMap<>() {{
+            put("can_place_in_overworld", "Toggle being able to place the block in the overworld.");
+            put("can_place_in_nether", "Toggle being able to place the block in the nether.");
+            put("can_place_in_end", "Toggle being able to place the block in the end.");
+            put("can_break", "Toggle being able to break the block.");
+            put("can_interact", "Toggle being able to interact with the block.");
+            put("works", "Toggle the block being able to carry out its function.");
+            put("friction_factor", "Control how much friction is applied to entities on the block.");
+            put("speed_factor", "Control how fast entities can travel on the block relative to others.");
+            put("jump_factor", "Control how high entities can jump on the block relative to others.");
+            put("can_be_filled_by_dripstone", "Toggle the block being able to be filled by dripstone.");
+            put("redstone_delay", "Control the redstone delay of the block.");
+            put("redstone_duration", "Control the redstone duration of the block.");
+            put("can_drop_xp", "Toggle the block being able to drop XP.");
+            put("dispenser_interaction", "Toggle the block having a special interaction with a dispenser.");
+            put("can_fall", "Toggle the block being able to fall.");
+        }});
+
+        itemData.put("enchantment", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.ENCHANTMENT).keySet().forEach(enchantment ->
-                    add(new ObjectObjectImmutablePair<>(enchantment + "_enchantment", "Toggle the " + cleanup(enchantment) + " enchantment being able to be applied to the item.")));
+                    put(enchantment + "_enchantment", "Toggle the " + cleanup(enchantment) + " enchantment being able to be applied to the item."));
 
-            add(new ObjectObjectImmutablePair<>("boot_enchantment_conflicts", "Toggle the frost walker and depth strider enchantments being incompatible with each other."));
-            add(new ObjectObjectImmutablePair<>("bow_enchantment_conflicts", "Toggle the infinity and mending enchantments being incompatible with each other."));
-            add(new ObjectObjectImmutablePair<>("crossbow_enchantment_conflicts", "Toggle the multishot and piercing enchantments being incompatible with each other."));
-            add(new ObjectObjectImmutablePair<>("damage_enchantment_conflicts", "Toggle the sharpness, smite, and bane of arthropods enchantments being incompatible with each other."));
-            add(new ObjectObjectImmutablePair<>("mining_enchantment_conflicts", "Toggle the fortune and silk touch enchantments being incompatible with each other."));
-            add(new ObjectObjectImmutablePair<>("protection_enchantment_conflicts", "Toggle the protection, fire protection, blast protection, and projectile protection enchantments being incompatible with each other."));
-            add(new ObjectObjectImmutablePair<>("trident_enchantment_conflicts", "Toggle the loyalty and channeling enchantments being incompatible with the riptide enchantment."));
+            put("boot_enchantment_conflicts", "Toggle the frost walker and depth strider enchantments being incompatible with each other.");
+            put("bow_enchantment_conflicts", "Toggle the infinity and mending enchantments being incompatible with each other.");
+            put("crossbow_enchantment_conflicts", "Toggle the multishot and piercing enchantments being incompatible with each other.");
+            put("damage_enchantment_conflicts", "Toggle the sharpness, smite, and bane of arthropods enchantments being incompatible with each other.");
+            put("mining_enchantment_conflicts", "Toggle the fortune and silk touch enchantments being incompatible with each other.");
+            put("protection_enchantment_conflicts", "Toggle the protection, fire protection, blast protection, and projectile protection enchantments being incompatible with each other.");
+            put("trident_enchantment_conflicts", "Toggle the loyalty and channeling enchantments being incompatible with the riptide enchantment.");
         }});
-        itemData.put("potion", new ObjectArrayList<>() {{
+        itemData.put("potion", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.POTION).keySet().forEach(potion ->
-                    add(new ObjectObjectImmutablePair<>(potion + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item.")));
+                    put(potion + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item."));
         }});
-        itemData.put("other", new ObjectArrayList<>() {{
-            add(new ObjectObjectImmutablePair<>("can_use", "Toggle being able to use the item for its purpose."));
-            add(new ObjectObjectImmutablePair<>("durability", "Control the durability of the item."));
-            add(new ObjectObjectImmutablePair<>("burns", "Toggle the item being able to burn in fire or lava."));
-            add(new ObjectObjectImmutablePair<>("can_spam", "Toggle being able to spam the bow/crossbow"));
-            add(new ObjectObjectImmutablePair<>("nutrition", "Control the nutrition of the item."));
-            add(new ObjectObjectImmutablePair<>("saturation", "Control the saturation of the item."));
-            add(new ObjectObjectImmutablePair<>("dispenser_interaction", "Toggle the item having a special interaction with a dispenser."));
+        itemData.put("other", new Object2ObjectOpenHashMap<>() {{
+            put("can_use", "Toggle being able to use the item for its purpose.");
+            put("durability", "Control the durability of the item.");
+            put("burns", "Toggle the item being able to burn in fire or lava.");
+            put("can_spam", "Toggle being able to spam the bow/crossbow");
+            put("nutrition", "Control the nutrition of the item.");
+            put("saturation", "Control the saturation of the item.");
+            put("dispenser_interaction", "Toggle the item having a special interaction with a dispenser.");
         }});
 
         server.getAdvancements().getAllAdvancements()
@@ -572,6 +572,8 @@ public class DataHandler {
 
         intRowMaximums.put("nutrition", 20);
         doubleRowMaximums.put("saturation", 9.9);
+
+        populationDone = true;
     }
 
     public static void handleDatabase() {

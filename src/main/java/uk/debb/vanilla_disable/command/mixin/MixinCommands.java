@@ -7,11 +7,7 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import it.unimi.dsi.fastutil.Pair;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectList;
-import it.unimi.dsi.fastutil.objects.ObjectSet;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -27,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.command.data.DataHandler;
 import uk.debb.vanilla_disable.command.data.DataType;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
@@ -49,7 +44,7 @@ public abstract class MixinCommands {
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onRegister(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {
         Thread t = new Thread(() -> {
-            while (DataHandler.otherData.isEmpty()) {
+            while (!DataHandler.populationDone) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (InterruptedException e) {
@@ -132,10 +127,10 @@ public abstract class MixinCommands {
         );
     }
 
-    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, ObjectList<Pair<String, String>> info, ObjectSet<String> possible) {
+    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, Object2ObjectMap<String, String> info, ObjectSet<String> possible) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
-            info.stream().map(Pair::first).filter(possible::contains).forEach((groupProperty ->
+            info.keySet().stream().filter(possible::contains).forEach((groupProperty ->
                     DataHandler.setValue(table, row, groupProperty, value)));
             context.getSource().sendSuccess(
                     Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
@@ -145,18 +140,20 @@ public abstract class MixinCommands {
         })));
     }
 
-    private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, ObjectList<Pair<String, String>>> otherData, String table, boolean includeOverall) {
+    private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, Object2ObjectMap<String, String>> otherData, String table, boolean includeOverall) {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         data.forEach((row, map) -> {
             LiteralArgumentBuilder<CommandSourceStack> rowBuilder = literal(row);
             otherData.forEach((group, info) -> {
-                List<Pair<String, String>> properties = info.stream().filter(p -> map.containsKey(p.first())).toList();
+                //List<Pair<String, String>> properties = info.stream().filter(p -> map.containsKey(p.first())).toList();
+                Object2ObjectMap<String, String> properties = info.entrySet().stream().filter(entry -> map.containsKey(entry.getKey()))
+                        .collect(Object2ObjectOpenHashMap::new, (m, entry) -> m.put(entry.getKey(), entry.getValue()), Object2ObjectOpenHashMap::putAll);
                 if (properties.isEmpty()) return;
                 LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
-                properties.forEach((property) -> {
-                    LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
-                    execute(propertyBuilder, table, row, property.first(), property.second(), map.get(property.first()),
-                            DataHandler.cols.get(table).get(property.first()));
+                properties.forEach((key, value) -> {
+                    LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(key);
+                    execute(propertyBuilder, table, row, key, value, map.get(key),
+                            DataHandler.cols.get(table).get(key));
                     groupBuilder.then(propertyBuilder);
                 });
                 if (includeOverall && !group.equals("other")) {
