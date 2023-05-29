@@ -93,59 +93,35 @@ public abstract class CommandsMixin {
         t.start();
     }
 
-    private void executeBool(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue) {
+    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, String type) {
+        ArgumentType<?> argumentType = switch (type) {
+            case "BOOLEAN" -> BoolArgumentType.bool();
+            case "INTEGER" ->
+                    IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
+            case "REAL" ->
+                    DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
+            default -> null;
+        };
         literalArgumentBuilder.executes(context -> {
-            boolean value = DataHandler.getBoolean(table, row, col);
+            String value = switch (type) {
+                case "BOOLEAN" -> String.valueOf(DataHandler.getBoolean(table, row, col));
+                case "INTEGER" -> String.valueOf(DataHandler.getInt(table, row, col));
+                case "REAL" -> String.valueOf(DataHandler.getDouble(table, row, col));
+                default -> "";
+            };
             context.getSource().sendSuccess(
                     Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue),
                     false
             );
             return 1;
         }).then(
-                argument("value", BoolArgumentType.bool()).executes(context -> {
-                    String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
-                    DataHandler.setValue(table, row, col, value);
-                    context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value + "."),
-                            false
-                    );
-                    return 1;
-                })
-        );
-    }
-
-    private void executeInt(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue) {
-        literalArgumentBuilder.executes(context -> {
-            int value = DataHandler.getInt(table, row, col);
-            context.getSource().sendSuccess(
-                    Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue),
-                    false
-            );
-            return 1;
-        }).then(
-                argument("value", IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE))).executes(context -> {
-                    String value = String.valueOf(IntegerArgumentType.getInteger(context, "value"));
-                    DataHandler.setValue(table, row, col, value);
-                    context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value + "."),
-                            false
-                    );
-                    return 1;
-                })
-        );
-    }
-
-    private void executeDouble(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue) {
-        literalArgumentBuilder.executes(context -> {
-            double value = DataHandler.getDouble(table, row, col);
-            context.getSource().sendSuccess(
-                    Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue),
-                    false
-            );
-            return 1;
-        }).then(
-                argument("value", DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE))).executes(context -> {
-                    String value = String.valueOf(DoubleArgumentType.getDouble(context, "value"));
+                argument("value", argumentType).executes(context -> {
+                    String value = switch (type) {
+                        case "BOOLEAN" -> String.valueOf(BoolArgumentType.getBool(context, "value"));
+                        case "INTEGER" -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
+                        case "REAL" -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
+                        default -> "";
+                    };
                     DataHandler.setValue(table, row, col, value);
                     context.getSource().sendSuccess(
                             Component.literal("Successfully set the value to " + value + "."),
@@ -179,17 +155,11 @@ public abstract class CommandsMixin {
                 LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
                 properties.forEach((property) -> {
                     LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
-                    switch (DataHandler.cols.get(table).get(property.first())) {
-                        case "BOOLEAN" ->
-                                executeBool(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                        case "INTEGER" ->
-                                executeInt(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                        case "REAL" ->
-                                executeDouble(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())));
-                    }
+                    execute(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())),
+                            DataHandler.cols.get(table).get(property.first()));
                     groupBuilder.then(propertyBuilder);
                 });
-                if (includeOverall && !group.equals("others")) {
+                if (includeOverall && !group.equals("other")) {
                     allCols(groupBuilder, table, row, group, info, pair.first());
                 }
                 rowBuilder.then(groupBuilder);
@@ -203,7 +173,7 @@ public abstract class CommandsMixin {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         stream.forEach((property) -> {
             LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            executeBool(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true");
+            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", "BOOLEAN");
             overallBuilder.then(literal(property).then(temp));
         });
         return overallBuilder;
@@ -214,7 +184,7 @@ public abstract class CommandsMixin {
         streams.forEach(stream -> {
             stream.forEach((property) -> {
                 LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                executeBool(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true");
+                execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", "BOOLEAN");
                 overallBuilder.then(literal(property).then(temp));
             });
         });
