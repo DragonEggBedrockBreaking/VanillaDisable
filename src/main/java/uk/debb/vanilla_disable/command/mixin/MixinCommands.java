@@ -11,6 +11,7 @@ import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -48,7 +49,7 @@ public abstract class MixinCommands {
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onRegister(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {
         Thread t = new Thread(() -> {
-            while (DataHandler.itemData.isEmpty()) {
+            while (DataHandler.otherData.isEmpty()) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (InterruptedException e) {
@@ -131,7 +132,7 @@ public abstract class MixinCommands {
         );
     }
 
-    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, ObjectList<Pair<String, String>> info, ObjectList<String> possible) {
+    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, ObjectList<Pair<String, String>> info, ObjectSet<String> possible) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
             info.stream().map(Pair::first).filter(possible::contains).forEach((groupProperty ->
@@ -144,22 +145,22 @@ public abstract class MixinCommands {
         })));
     }
 
-    private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> data, Object2ObjectMap<String, ObjectList<Pair<String, String>>> otherData, String table, boolean includeOverall) {
+    private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, ObjectList<Pair<String, String>>> otherData, String table, boolean includeOverall) {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
-        data.forEach((row, pair) -> {
+        data.forEach((row, map) -> {
             LiteralArgumentBuilder<CommandSourceStack> rowBuilder = literal(row);
             otherData.forEach((group, info) -> {
-                List<Pair<String, String>> properties = info.stream().filter(p -> pair.first().contains(p.first())).toList();
+                List<Pair<String, String>> properties = info.stream().filter(p -> map.containsKey(p.first())).toList();
                 if (properties.isEmpty()) return;
                 LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
                 properties.forEach((property) -> {
                     LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property.first());
-                    execute(propertyBuilder, table, row, property.first(), property.second(), pair.second().get(pair.first().indexOf(property.first())),
+                    execute(propertyBuilder, table, row, property.first(), property.second(), map.get(property.first()),
                             DataHandler.cols.get(table).get(property.first()));
                     groupBuilder.then(propertyBuilder);
                 });
                 if (includeOverall && !group.equals("other")) {
-                    allCols(groupBuilder, table, row, group, info, pair.first());
+                    allCols(groupBuilder, table, row, group, info, map.keySet());
                 }
                 rowBuilder.then(groupBuilder);
             });

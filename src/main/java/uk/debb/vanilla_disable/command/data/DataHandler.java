@@ -35,9 +35,9 @@ import static uk.debb.vanilla_disable.command.data.DataType.*;
 
 public class DataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, DataType>> cols = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> entities = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> blocks = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Pair<ObjectList<String>, ObjectList<String>>> items = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entities = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blocks = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> items = new Object2ObjectOpenHashMap<>();
     public static final ObjectSet<String> others = new ObjectArraySet<>();
 
     public static final Object2ObjectMap<String, ObjectList<Pair<String, String>>> entityData = new Object2ObjectOpenHashMap<>();
@@ -173,355 +173,250 @@ public class DataHandler {
             put("dispenser_interaction", BOOLEAN);
         }});
 
-        BuiltInRegistries.ENTITY_TYPE.forEach((entityType) -> {
-            ObjectList<String> col = new ObjectArrayList<>();
-            ObjectList<String> val = new ObjectArrayList<>();
-
+        BuiltInRegistries.ENTITY_TYPE.forEach((entityType) ->
+                entities.put(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).toString(), new Object2ObjectOpenHashMap<>() {{
             if (entityType.equals(EntityType.PLAYER)) {
-                col.add("can_be_on_fire");
-                val.add("true");
-                col.add("can_sprint");
-                val.add("true");
-                col.add("can_crouch");
-                val.add("true");
-                col.add("can_swim");
-                val.add("true");
-                col.add("can_jump");
-                val.add("true");
-                col.add("can_be_invisible");
-                val.add("true");
-                col.add("flying_speed");
-                val.add("0.05");
+                put("can_be_on_fire", "true");
+                put("can_sprint", "true");
+                put("can_crouch", "true");
+                put("can_swim", "true");
+                put("can_jump", "true");
+                put("can_be_invisible", "true");
+                put("flying_speed", "0.05");
 
-                col.add("item_stats");
-                val.add("true");
-                col.add("entity_stats");
-                val.add("true");
-                col.add("time_stats");
-                val.add("true");
-                col.add("distance_stats");
-                val.add("true");
-                col.add("damage_stats");
-                val.add("true");
-                col.add("block_gui_interaction_stats");
-                val.add("true");
-                col.add("block_general_interaction_stats");
-                val.add("true");
-                col.add("general_stats");
-                val.add("true");
+                put("item_stats", "true");
+                put("entity_stats", "true");
+                put("time_stats", "true");
+                put("distance_stats", "true");
+                put("damage_stats", "true");
+                put("block_gui_interaction_stats", "true");
+                put("block_general_interaction_stats", "true");
+                put("general_stats", "true");
             }
 
             if (!entityType.getCategory().equals(MobCategory.MISC) || entityType.equals(EntityType.VILLAGER) ||
                     entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.SNOW_GOLEM) ||
                     entityType.equals(EntityType.PLAYER)) {
                 registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
-                    col.add(damageType + "_damage");
-                    val.add("true");
-                    col.add(damageType + "_death");
-                    val.add("true");
+                    put(damageType + "_damage", "true");
+                    put(damageType + "_death", "true");
                 });
 
-                col.add("fireball_knockback");
-                val.add("true");
-                col.add("wither_skull_knockback");
-                val.add("true");
-                col.add("dragon_knockback");
-                val.add("true");
-                col.add("arrow_knockback");
-                val.add("true");
-                col.add("trident_knockback");
-                val.add("true");
-                col.add("llama_spit_knockback");
-                val.add("true");
-                col.add("shulker_bullet_knockback");
-                val.add("true");
-                col.add("mob_attack_knockback");
-                val.add("true");
-                col.add("player_attack_knockback");
-                val.add("true");
-                col.add("explosion_knockback");
-                val.add("true");
+                put("fireball_knockback", "true");
+                put("wither_skull_knockback", "true");
+                put("dragon_knockback", "true");
+                put("arrow_knockback", "true");
+                put("trident_knockback", "true");
+                put("llama_spit_knockback", "true");
+                put("shulker_bullet_knockback", "true");
+                put("mob_attack_knockback", "true");
+                put("player_attack_knockback", "true");
+                put("explosion_knockback", "true");
 
-                registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect -> {
-                    col.add(mobEffect + "_effect");
-                    val.add("true");
-                });
+                registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
+                        put(mobEffect + "_effect", "true"));
 
-                col.add("can_despawn");
-                val.add("true");
+                put("can_despawn", "true");
 
-                col.add("can_spawn");
-                val.add("true");
-                col.add("spawn_egg");
-                val.add("true");
-                col.add("spawner");
-                val.add("true");
-                col.add("can_drop_xp");
-                val.add("true");
-                col.add("ai");
-                val.add("true");
+                put("can_spawn", "true");
+                put("spawn_egg", "true");
+                put("spawner", "true");
+                put("can_drop_xp", "true");
+                put("ai", "true");
             }
 
             if (entityType.equals(EntityType.PAINTING)) {
-                BuiltInRegistries.PAINTING_VARIANT.keySet().forEach(painting -> {
-                    col.add(painting + "_painting");
-                    val.add("true");
-                });
+                BuiltInRegistries.PAINTING_VARIANT.keySet().forEach(painting ->
+                        put(painting + "_painting", "true"));
             }
 
             if (entityType.equals(EntityType.VILLAGER)) {
-                BuiltInRegistries.VILLAGER_PROFESSION.keySet().forEach(profession -> {
-                    col.add(profession + "_profession");
-                    val.add("true");
-                });
-                BuiltInRegistries.VILLAGER_TYPE.keySet().forEach(type -> {
-                    col.add(type + "_type");
-                    val.add("true");
-                });
+                BuiltInRegistries.VILLAGER_PROFESSION.keySet().forEach(profession ->
+                        put(profession + "_profession", "true"));
+                BuiltInRegistries.VILLAGER_TYPE.keySet().forEach(type -> put(type + "_type", "true"));
             }
 
             if (VanillaHusbandryAdvancements.BREEDABLE_ANIMALS.contains(entityType) ||
                     VanillaHusbandryAdvancements.INDIRECTLY_BREEDABLE_ANIMALS.contains(entityType) ||
                     entityType.equals(EntityType.VILLAGER)) {
-                col.add("can_breed");
-                val.add("true");
+                put("can_breed", "true");
             }
 
             if (entityType.equals(EntityType.ZOMBIE_VILLAGER)) {
-                col.add("can_be_cured");
-                val.add("true");
+                put("can_be_cured", "true");
             }
 
             if (entityType.equals(EntityType.ZOMBIE_VILLAGER) || entityType.equals(EntityType.WITCH) ||
                     entityType.equals(EntityType.ZOMBIFIED_PIGLIN) || entityType.equals(EntityType.ZOGLIN) ||
                     entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.STRAY)) {
-                col.add("can_be_converted_to");
-                val.add("true");
+                put("can_be_converted_to", "true");
             }
 
             if (entityType.equals(EntityType.SKELETON) || entityType.equals(EntityType.ZOMBIE) ||
                     entityType.equals(EntityType.PHANTOM) || entityType.equals(EntityType.STRAY) ||
                     entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.ZOMBIE_VILLAGER)) {
-                col.add("burns_in_sunlight");
-                val.add("true");
+                put("burns_in_sunlight", "true");
             }
 
             if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER) ||
                     entityType.equals(EntityType.PIGLIN)) {
-                col.add("can_trade");
-                val.add("true");
+                put("can_trade", "true");
             }
 
             if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER)) {
-                col.add("daily_restocks");
-                val.add("true");
+                put("daily_restocks", "true");
             }
 
             if (entityType.equals(EntityType.ITEM)) {
-                col.add("despawn_time");
-                val.add("6000");
+                put("despawn_time", "6000");
             }
 
-            col.add("can_exist");
-            val.add("true");
+            put("can_exist", "true");
+        }}));
 
-            entities.put(BuiltInRegistries.ENTITY_TYPE.getKey(entityType).toString(), new ObjectObjectImmutablePair<>(col, val));
-        });
-
-        BuiltInRegistries.BLOCK.forEach((block) -> {
-            ObjectList<String> col = new ObjectArrayList<>();
-            ObjectList<String> val = new ObjectArrayList<>();
-
-            col.add("can_place_in_overworld");
-            val.add("true");
-            col.add("can_place_in_nether");
-            val.add("true");
-            col.add("can_place_in_end");
-            val.add("true");
-            col.add("can_break");
-            val.add("true");
-            col.add("can_interact");
-            val.add("true");
-            col.add("works");
-            val.add("true");
+        BuiltInRegistries.BLOCK.forEach((block) ->
+                blocks.put(BuiltInRegistries.BLOCK.getKey(block).toString(), new Object2ObjectOpenHashMap<>() {{
+            put("can_place_in_overworld", "true");
+            put("can_place_in_nether", "true");
+            put("can_place_in_end", "true");
+            put("can_break", "true");
+            put("can_interact", "true");
+            put("works", "true");
 
             if (block.toString().equals(Blocks.ICE.toString()) || block.toString().equals(Blocks.PACKED_ICE.toString()) ||
                     block.toString().equals(Blocks.BLUE_ICE.toString())) {
-                col.add("friction_factor");
-                val.add("0.98");
+                put("friction_factor", "0.98");
             } else if (block.toString().equals(Blocks.SLIME_BLOCK.toString())) {
-                col.add("friction_factor");
-                val.add("0.8");
+                put("friction_factor", "0.8");
             } else {
-                col.add("friction_factor");
-                val.add("0.6");
+                put("friction_factor", "0.6");
             }
 
             boolean isHoneyBlock = block.toString().equals(Blocks.HONEY_BLOCK.toString());
-            col.add("speed_factor");
             if (block.toString().equals(Blocks.SOUL_SAND.toString()) || isHoneyBlock) {
-                val.add("0.4");
+                put("speed_factor", "0.4");
             } else {
-                val.add("1.0");
+                put("speed_factor", "1.0");
             }
 
-            col.add("jump_factor");
             if (isHoneyBlock) {
-                val.add("0.5");
+                put("jump_factor", "0.5");
             } else {
-                val.add("1.0");
+                put("jump_factor", "1.0");
             }
 
             if (block.toString().equals(Blocks.CAULDRON.toString())) {
-                col.add("can_be_filled_by_dripstone");
-                val.add("true");
+                put("can_be_filled_by_dripstone", "true");
             }
 
             if (block.toString().equals(Blocks.WATER.toString())) {
-                col.add("fluid_reaches_far");
-                val.add("true");
-                col.add("fluid_reaches_far_in_nether");
-                val.add("true");
-                col.add("fluid_speed");
-                val.add("5");
-                col.add("fluid_speed_in_nether");
-                val.add("5");
+                put("fluid_reaches_far", "true");
+                put("fluid_reaches_far_in_nether", "true");
+                put("fluid_speed", "5");
+                put("fluid_speed_in_nether", "5");
             }
 
             if (block.toString().equals(Blocks.LAVA.toString())) {
-                col.add("fluid_reaches_far");
-                val.add("false");
-                col.add("fluid_reaches_far_in_nether");
-                val.add("true");
-                col.add("fluid_speed");
-                val.add("30");
-                col.add("fluid_speed_in_nether");
-                val.add("10");
+                put("fluid_reaches_far", "false");
+                put("fluid_reaches_far_in_nether", "true");
+                put("fluid_speed", "30");
+                put("fluid_speed_in_nether", "10");
             }
 
             boolean isObserver = block.toString().equals(Blocks.OBSERVER.toString());
             if (block.toString().equals(Blocks.REPEATER.toString()) || block.toString().equals(Blocks.COMPARATOR.toString()) || isObserver) {
-                col.add("redstone_delay");
-                val.add("2");
+                put("redstone_delay", "2");
             }
 
             if (isObserver) {
-                col.add("redstone_duration");
-                val.add("2");
+                put("redstone_duration", "2");
             }
 
             if (block.toString().endsWith("_ore") || block.toString().equals(Blocks.SPAWNER.toString()) ||
                     block.toString().equals(Blocks.SCULK_SENSOR.toString()) || block.toString().equals(Blocks.SCULK_CATALYST.toString()) ||
                     block.toString().equals(Blocks.SCULK_SHRIEKER.toString()) || block.toString().equals(Blocks.SCULK.toString())) {
-                col.add("can_drop_xp");
-                val.add("true");
+                put("can_drop_xp", "true");
             }
 
             if (DispenserBlock.DISPENSER_REGISTRY.containsKey(block.asItem())) {
-                col.add("dispenser_interaction");
-                val.add("true");
+                put("dispenser_interaction", "true");
             }
 
             if (block instanceof FallingBlock) {
-                col.add("can_fall");
-                val.add("true");
+                put("can_fall", "true");
             }
-
-            blocks.put(BuiltInRegistries.BLOCK.getKey(block).toString(), new ObjectObjectImmutablePair<>(col, val));
-        });
+        }}));
 
         BuiltInRegistries.ITEM.forEach((item) -> {
             if (BuiltInRegistries.BLOCK.stream().map(Block::asItem).toList().contains(item)) return;
 
-            ObjectList<String> col = new ObjectArrayList<>();
-            ObjectList<String> val = new ObjectArrayList<>();
+            items.put(BuiltInRegistries.ITEM.getKey(item).toString(), new Object2ObjectOpenHashMap<>() {{
+                if (!BuiltInRegistries.BLOCK.stream().map(Block::toString).toList().contains(item.toString())) {
+                    put("can_use", "true");
 
-            if (!BuiltInRegistries.BLOCK.stream().map(Block::toString).toList().contains(item.toString())) {
-                col.add("can_use");
-                val.add("true");
+                    if (item.toString().contains("netherite")) {
+                        put("burns", "false");
+                    } else {
+                        put("burns", "true");
+                    }
 
-                if (item.toString().contains("netherite")) {
-                    col.add("burns");
-                    val.add("false");
-                } else {
-                    col.add("burns");
-                    val.add("true");
+                    if (item.equals(Items.BOW) || item.equals(Items.CROSSBOW)) {
+                        put("can_spam", "true");
+                    }
+
+                    if (item.canBeDepleted()) {
+                        put("durability", String.valueOf(item.getMaxDamage()));
+                        BuiltInRegistries.ENCHANTMENT.forEach((enchantment) -> {
+                            if (enchantment.canEnchant(new ItemStack(item))) {
+                                put(BuiltInRegistries.ENCHANTMENT.getKey(enchantment) + "_enchantment", "true");
+                            }
+                        });
+                    }
+
+                    FoodProperties foodProperties = item.getFoodProperties();
+                    if (foodProperties != null) {
+                        put("nutrition", String.valueOf(foodProperties.getNutrition()));
+                        put("saturation", String.valueOf(foodProperties.getSaturationModifier()));
+                    }
+
+                    if (Enchantments.FROST_WALKER.canEnchant(new ItemStack(item))) {
+                        put("boot_enchantment_conflicts", "true");
+                    }
+
+                    if (Enchantments.INFINITY_ARROWS.canEnchant(new ItemStack(item))) {
+                        put("bow_enchantment_conflicts", "true");
+                    }
+
+                    if (Enchantments.MULTISHOT.canEnchant(new ItemStack(item))) {
+                        put("crossbow_enchantment_conflicts", "true");
+                    }
+
+                    if (Enchantments.SHARPNESS.canEnchant(new ItemStack(item))) {
+                        put("damage_enchantment_conflicts", "true");
+                    }
+
+                    if (Enchantments.BLOCK_FORTUNE.canEnchant(new ItemStack(item))) {
+                        put("mining_enchantment_conflicts", "true");
+                    }
+
+                    if (Enchantments.PROJECTILE_PROTECTION.canEnchant(new ItemStack(item))) {
+                        put("protection_enchantment_conflicts", "true");
+                    }
+
+                    if (Enchantments.RIPTIDE.canEnchant(new ItemStack(item))) {
+                        put("trident_enchantment_conflicts", "true");
+                    }
+
+                    if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
+                            item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
+                        BuiltInRegistries.POTION.keySet().forEach((potion) -> put(potion + "_effect", "true"));
+                    }
                 }
 
-                if (item.equals(Items.BOW) || item.equals(Items.CROSSBOW)) {
-                    col.add("can_spam");
-                    val.add("true");
+                if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
+                    put("dispenser_interaction", "true");
                 }
-
-                if (item.canBeDepleted()) {
-                    col.add("durability");
-                    val.add(String.valueOf(item.getMaxDamage()));
-                    BuiltInRegistries.ENCHANTMENT.forEach((enchantment) -> {
-                        if (enchantment.canEnchant(new ItemStack(item))) {
-                            col.add(BuiltInRegistries.ENCHANTMENT.getKey(enchantment) + "_enchantment");
-                            val.add("true");
-                        }
-                    });
-                }
-
-                FoodProperties foodProperties = item.getFoodProperties();
-                if (foodProperties != null) {
-                    col.add("nutrition");
-                    val.add(String.valueOf(foodProperties.getNutrition()));
-                    col.add("saturation");
-                    val.add(String.valueOf(foodProperties.getSaturationModifier()));
-                }
-
-                if (Enchantments.FROST_WALKER.canEnchant(new ItemStack(item))) {
-                    col.add("boot_enchantment_conflicts");
-                    val.add("true");
-                }
-
-                if (Enchantments.INFINITY_ARROWS.canEnchant(new ItemStack(item))) {
-                    col.add("bow_enchantment_conflicts");
-                    val.add("true");
-                }
-
-                if (Enchantments.MULTISHOT.canEnchant(new ItemStack(item))) {
-                    col.add("crossbow_enchantment_conflicts");
-                    val.add("true");
-                }
-
-                if (Enchantments.SHARPNESS.canEnchant(new ItemStack(item))) {
-                    col.add("damage_enchantment_conflicts");
-                    val.add("true");
-                }
-
-                if (Enchantments.BLOCK_FORTUNE.canEnchant(new ItemStack(item))) {
-                    col.add("mining_enchantment_conflicts");
-                    val.add("true");
-                }
-
-                if (Enchantments.PROJECTILE_PROTECTION.canEnchant(new ItemStack(item))) {
-                    col.add("protection_enchantment_conflicts");
-                    val.add("true");
-                }
-
-                if (Enchantments.RIPTIDE.canEnchant(new ItemStack(item))) {
-                    col.add("trident_enchantment_conflicts");
-                    val.add("true");
-                }
-
-                if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
-                        item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
-                    BuiltInRegistries.POTION.keySet().forEach((potion) -> {
-                        col.add(potion + "_effect");
-                        val.add("true");
-                    });
-                }
-            }
-
-            if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
-                col.add("dispenser_interaction");
-                val.add("true");
-            }
-
-            items.put(BuiltInRegistries.ITEM.getKey(item).toString(), new ObjectObjectImmutablePair<>(col, val));
+            }});
         });
 
         others.addAll(server.getAdvancements().getAllAdvancements()
@@ -709,21 +604,21 @@ public class DataHandler {
 
                 entities.forEach((key, value) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO entities (id, `" + String.join("`, `", value.left()) + "`) VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
+                        statement.executeUpdate("INSERT INTO entities (id, `" + String.join("`, `", value.keySet()) + "`) VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 });
                 blocks.forEach((key, value) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO blocks (id, `" + String.join("`, `", value.left()) + "`) VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
+                        statement.executeUpdate("INSERT INTO blocks (id, `" + String.join("`, `", value.keySet()) + "`) VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 });
                 items.forEach((key, value) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO items (id, `" + String.join("`, `", value.left()) + "`) VALUES ('" + key + "', " + String.join(", ", value.right()) + ");");
+                        statement.executeUpdate("INSERT INTO items (id, `" + String.join("`, `", value.keySet()) + "`) VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -770,21 +665,21 @@ public class DataHandler {
 
                     entities.forEach((key, value) -> {
                         try {
-                            statement.executeUpdate("INSERT INTO entities (id, `" + String.join("`, `", value.left()) + "`) SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM entities WHERE id = '" + key + "');");
+                            statement.executeUpdate("INSERT INTO entities (id, `" + String.join("`, `", value.keySet()) + "`) SELECT '" + key + "', " + String.join(", ", value.values()) + " WHERE NOT EXISTS(SELECT 1 FROM entities WHERE id = '" + key + "');");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
                     });
                     blocks.forEach((key, value) -> {
                         try {
-                            statement.executeUpdate("INSERT INTO blocks (id, `" + String.join("`, `", value.left()) + "`) SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM blocks WHERE id = '" + key + "');");
+                            statement.executeUpdate("INSERT INTO blocks (id, `" + String.join("`, `", value.keySet()) + "`) SELECT '" + key + "', " + String.join(", ", value.values()) + " WHERE NOT EXISTS(SELECT 1 FROM blocks WHERE id = '" + key + "');");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
                     });
                     items.forEach((key, value) -> {
                         try {
-                            statement.executeUpdate("INSERT INTO items (id, `" + String.join("`, `", value.left()) + "`) SELECT '" + key + "', " + String.join(", ", value.right()) + " WHERE NOT EXISTS(SELECT 1 FROM items WHERE id = '" + key + "');");
+                            statement.executeUpdate("INSERT INTO items (id, `" + String.join("`, `", value.keySet()) + "`) SELECT '" + key + "', " + String.join(", ", value.values()) + " WHERE NOT EXISTS(SELECT 1 FROM items WHERE id = '" + key + "');");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         }
@@ -799,7 +694,7 @@ public class DataHandler {
 
                     entities.forEach((key, value) -> updated_entity_cols.forEach((col) -> {
                         try {
-                            statement.executeUpdate("UPDATE entities SET `" + col + "` = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
+                            statement.executeUpdate("UPDATE entities SET `" + col + "` = " + value.get(col) + " WHERE id = '" + key + "';");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IndexOutOfBoundsException ignored) {
@@ -807,7 +702,7 @@ public class DataHandler {
                     }));
                     blocks.forEach((key, value) -> updated_block_cols.forEach((col) -> {
                         try {
-                            statement.executeUpdate("UPDATE blocks SET `" + col + "` = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
+                            statement.executeUpdate("UPDATE blocks SET `" + col + "` = " + value.get(col) + " WHERE id = '" + key + "';");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IndexOutOfBoundsException ignored) {
@@ -815,7 +710,7 @@ public class DataHandler {
                     }));
                     items.forEach((key, value) -> updated_item_cols.forEach((col) -> {
                         try {
-                            statement.executeUpdate("UPDATE items SET `" + col + "` = " + value.right().get(value.left().indexOf(col)) + " WHERE id = '" + key + "';");
+                            statement.executeUpdate("UPDATE items SET `" + col + "` = " + value.get(col) + " WHERE id = '" + key + "';");
                         } catch (SQLException e) {
                             throw new RuntimeException(e);
                         } catch (IndexOutOfBoundsException ignored) {
