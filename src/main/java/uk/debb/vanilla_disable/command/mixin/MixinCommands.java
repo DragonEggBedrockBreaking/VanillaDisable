@@ -76,11 +76,11 @@ public abstract class MixinCommands {
                     .then(majorBuilder("entity", DataHandler.entities, DataHandler.entityData, "entities", true))
                     .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks", false))
                     .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items", true))
-                    .then(minorBuilder("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
-                            .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe"))))
-                    .then(minorBuilder("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName())))
-                    .then(minorBuilder("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
-                    .then(minorBuilder("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
+                    .then(minorBuilderComplex("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
+                            .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
+                    .then(minorBuilderComplex("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
+                    .then(minorBuilderSimple("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
+                    .then(minorBuilderSimple("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
                     .then(minorBuilder(new ObjectArrayList<>() {{
                         add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
                         add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
@@ -111,15 +111,54 @@ public abstract class MixinCommands {
             );
             return 1;
         }).then(
+            argument("value", argumentType).executes(context -> {
+                String value = switch (type) {
+                    case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
+                    case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
+                    case REAL -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
+                };
+                DataHandler.setValue(table, row, col, value);
+                context.getSource().sendSuccess(
+                        Component.literal("Successfully set the value to " + value + "."),
+                        false
+                );
+                return 1;
+            })
+        );
+    }
+
+    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type) {
+        ArgumentType<?> argumentType = switch (type) {
+            case BOOLEAN -> BoolArgumentType.bool();
+            case INTEGER ->
+                    IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
+            case REAL ->
+                    DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
+        };
+        literalArgumentBuilder.then(
                 argument("value", argumentType).executes(context -> {
                     String value = switch (type) {
                         case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
                         case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
                         case REAL -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
                     };
-                    DataHandler.setValue(table, row, col, value);
+                    DataHandler.setAll(table, col, value);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value + "."),
+                            Component.literal("Successfully set the values to " + value + "."),
+                            false
+                    );
+                    return 1;
+                })
+        );
+    }
+
+    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String condition) {
+        literalArgumentBuilder.then(
+                argument("value", BoolArgumentType.bool()).executes(context -> {
+                    String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
+                    DataHandler.setWithCondition(value, condition);
+                    context.getSource().sendSuccess(
+                            Component.literal("Successfully set the values to " + value + "."),
                             false
                     );
                     return 1;
@@ -145,7 +184,6 @@ public abstract class MixinCommands {
         data.forEach((row, map) -> {
             LiteralArgumentBuilder<CommandSourceStack> rowBuilder = literal(row);
             otherData.forEach((group, info) -> {
-                //List<Pair<String, String>> properties = info.stream().filter(p -> map.containsKey(p.first())).toList();
                 Object2ObjectMap<String, String> properties = info.entrySet().stream().filter(entry -> map.containsKey(entry.getKey()))
                         .collect(Object2ObjectOpenHashMap::new, (m, entry) -> m.put(entry.getKey(), entry.getValue()), Object2ObjectOpenHashMap::putAll);
                 if (properties.isEmpty()) return;
@@ -163,16 +201,42 @@ public abstract class MixinCommands {
             });
             overallBuilder.then(rowBuilder);
         });
+
+        LiteralArgumentBuilder<CommandSourceStack> allBuilder = literal("all");
+        otherData.forEach((group, info) -> {
+            LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
+            info.keySet().forEach((property) -> {
+                LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property);
+                execute(propertyBuilder, table, property, DataHandler.cols.get(table).get(property));
+                groupBuilder.then(propertyBuilder);
+                allBuilder.then(groupBuilder);
+            });
+        });
+        overallBuilder.then(allBuilder);
+
         return overallBuilder;
     }
 
-    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, Stream<String> stream) {
+    private LiteralArgumentBuilder<CommandSourceStack> minorBuilderComplex(String base, Stream<String> stream, String condition) {
+        return minorBuilder(base, stream, condition, "");
+    }
+
+    private LiteralArgumentBuilder<CommandSourceStack> minorBuilderSimple(String base, Stream<String> stream) {
+        return minorBuilder(base, stream, "%_" + base, "_" + base);
+    }
+
+    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, Stream<String> stream, String condition, String ending) {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         stream.forEach((property) -> {
             LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
+            execute(temp, "others", property + ending, "enabled", DataHandler.otherData.get(property + ending), "true", DataType.BOOLEAN);
             overallBuilder.then(literal(property).then(temp));
         });
+
+        LiteralArgumentBuilder<CommandSourceStack> allBuilder = literal("enabled");
+        execute(allBuilder, condition);
+        overallBuilder.then(literal("all").then(allBuilder));
+
         return overallBuilder;
     }
 
@@ -180,9 +244,14 @@ public abstract class MixinCommands {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal("feature");
         streams.forEach(stream -> stream.forEach((property) -> {
             LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
+            execute(temp, "others", property + "_feature", "enabled", DataHandler.otherData.get(property + "_feature"), "true", DataType.BOOLEAN);
             overallBuilder.then(literal(property).then(temp));
         }));
+
+        LiteralArgumentBuilder<CommandSourceStack> allBuilder = literal("all");
+        execute(allBuilder, "%_feature");
+        overallBuilder.then(allBuilder);
+
         return overallBuilder;
     }
 }

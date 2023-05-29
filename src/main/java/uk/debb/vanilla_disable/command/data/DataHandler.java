@@ -423,16 +423,14 @@ public class DataHandler {
                 .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).toList());
         others.addAll(new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup()))
                 .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).toList());
-        others.addAll(BuiltInRegistries.STRUCTURE_TYPE.keySet()
-                .stream().map(Object::toString).toList());
         others.addAll(registryAccess.registryOrThrow(Registries.STRUCTURE).keySet()
-                .stream().map(Object::toString).toList());
+                .stream().map(s -> s + "_structure").toList());
         others.addAll(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet()
-                .stream().map(Object::toString).toList());
+                .stream().map(s -> s + "_feature").toList());
         others.addAll(BuiltInRegistries.FEATURE.keySet()
-                .stream().map(Object::toString).toList());
+                .stream().map(s -> s + "_feature").toList());
         others.addAll(registryAccess.registryOrThrow(Registries.BIOME).keySet()
-                .stream().map(Object::toString).toList());
+                .stream().map(s -> s + "_biome").toList());
 
         entityData.put("stats", new Object2ObjectOpenHashMap<>() {{
             put("item_stats", "Collect statistics related to items.");
@@ -462,7 +460,7 @@ public class DataHandler {
         }});
         entityData.put("effects", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
-                    put(mobEffect.toString(), "Toggles " + cleanup(mobEffect) + " affecting the mob."));
+                    put(mobEffect + "_effect", "Toggles " + cleanup(mobEffect) + " affecting the mob."));
         }});
         entityData.put("death", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
@@ -562,13 +560,13 @@ public class DataHandler {
                 .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).forEach(command ->
                         otherData.put(command, "Toggle the /" + cleanup(command) + " command being usable."));
         registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().forEach(structure ->
-                otherData.put(structure.toString(), "Toggle the " + cleanup(structure) + " structure being able to be generated."));
+                otherData.put(structure + "_structure", "Toggle the " + cleanup(structure) + " structure being able to be generated."));
         registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().forEach(placedFeature ->
-                otherData.put(placedFeature.toString(), "Toggle the " + cleanup(placedFeature) + " feature being able to be generated."));
+                otherData.put(placedFeature + "_feature", "Toggle the " + cleanup(placedFeature) + " feature being able to be generated."));
         BuiltInRegistries.FEATURE.keySet().forEach(feature ->
-                otherData.put(feature.toString(), "Toggle the " + cleanup(feature) + " feature being able to be generated."));
+                otherData.put(feature + "_feature", "Toggle the " + cleanup(feature) + " feature being able to be generated."));
         registryAccess.registryOrThrow(Registries.BIOME).keySet().forEach(biome ->
-                otherData.put(biome.toString(), "Toggle the " + cleanup(biome) + " biome being able to be generated."));
+                otherData.put(biome + "_biome", "Toggle the " + cleanup(biome) + " biome being able to be generated."));
 
         intRowMaximums.put("nutrition", 20);
         doubleRowMaximums.put("saturation", 9.9);
@@ -739,6 +737,22 @@ public class DataHandler {
     public static void setValue(String table, String row, String column, String value) {
         try {
             statement.executeUpdate("UPDATE " + table + " SET `" + column + "` = " + value + " WHERE id = '" + row + "';");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void setAll(String table, String column, String value) {
+        try {
+            statement.executeUpdate("UPDATE " + table + " SET `" + column + "` = " + value + " WHERE " + column + " IS NOT NULL;");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void setWithCondition(String value, String condition) {
+        try {
+            statement.executeUpdate("UPDATE others SET enabled = " + value + " WHERE id LIKE '" + condition + "';");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
