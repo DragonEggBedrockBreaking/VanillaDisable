@@ -58,6 +58,7 @@ public abstract class MixinCommands {
 
             RegistryAccess registryAccess = DataHandler.server.registryAccess();
 
+            assert literal("forceUpdateDB") != null;
             LiteralArgumentBuilder<CommandSourceStack> forceUpdateDB = literal("forceUpdateDB").executes(context -> {
                 DataHandler.forceUpdateDB();
                 context.getSource().sendSuccess(
@@ -84,7 +85,7 @@ public abstract class MixinCommands {
                     .then(minorBuilder("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName())))
                     .then(minorBuilder("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
                     .then(minorBuilder("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
-                    .then(minorBuilder("feature", new ObjectArrayList<>() {{
+                    .then(minorBuilder(new ObjectArrayList<>() {{
                         add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
                         add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
                     }}))
@@ -177,15 +178,13 @@ public abstract class MixinCommands {
         return overallBuilder;
     }
 
-    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, ObjectList<Stream<String>> streams) {
-        LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
-        streams.forEach(stream -> {
-            stream.forEach((property) -> {
-                LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-                execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
-                overallBuilder.then(literal(property).then(temp));
-            });
-        });
+    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(ObjectList<Stream<String>> streams) {
+        LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal("feature");
+        streams.forEach(stream -> stream.forEach((property) -> {
+            LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
+            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
+            overallBuilder.then(literal(property).then(temp));
+        }));
         return overallBuilder;
     }
 }

@@ -357,19 +357,18 @@ public class DataHandler {
                 val.add("0.6");
             }
 
-            if (block.toString().equals(Blocks.SOUL_SAND.toString()) || block.toString().equals(Blocks.HONEY_BLOCK.toString())) {
-                col.add("speed_factor");
+            boolean isHoneyBlock = block.toString().equals(Blocks.HONEY_BLOCK.toString());
+            col.add("speed_factor");
+            if (block.toString().equals(Blocks.SOUL_SAND.toString()) || isHoneyBlock) {
                 val.add("0.4");
             } else {
-                col.add("speed_factor");
                 val.add("1.0");
             }
 
-            if (block.toString().equals(Blocks.HONEY_BLOCK.toString())) {
-                col.add("jump_factor");
+            col.add("jump_factor");
+            if (isHoneyBlock) {
                 val.add("0.5");
             } else {
-                col.add("jump_factor");
                 val.add("1.0");
             }
 
@@ -400,12 +399,13 @@ public class DataHandler {
                 val.add("10");
             }
 
-            if (block.toString().equals(Blocks.REPEATER.toString()) || block.toString().equals(Blocks.COMPARATOR.toString()) || block.toString().equals(Blocks.OBSERVER.toString())) {
+            boolean isObserver = block.toString().equals(Blocks.OBSERVER.toString());
+            if (block.toString().equals(Blocks.REPEATER.toString()) || block.toString().equals(Blocks.COMPARATOR.toString()) || isObserver) {
                 col.add("redstone_delay");
                 val.add("2");
             }
 
-            if (block.toString().equals(Blocks.OBSERVER.toString())) {
+            if (isObserver) {
                 col.add("redstone_duration");
                 val.add("2");
             }
