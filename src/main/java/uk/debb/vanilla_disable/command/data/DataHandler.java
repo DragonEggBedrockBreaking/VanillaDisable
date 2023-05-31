@@ -879,7 +879,7 @@ public class DataHandler {
             value = "'" + value + "'";
         }
         try {
-            statement.executeUpdate("UPDATE " + table + " SET `" + column + "` = " + value + " WHERE " + column + " IS NOT NULL;");
+            statement.executeUpdate("UPDATE " + table + " SET `" + column + "` = " + value + " WHERE `" + column + "` IS NOT NULL;");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

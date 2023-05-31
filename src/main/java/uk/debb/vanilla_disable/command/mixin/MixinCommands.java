@@ -263,6 +263,19 @@ public abstract class MixinCommands {
         })));
     }
 
+    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, String> info) {
+        groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
+            String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
+            info.keySet().forEach((groupProperty ->
+                    DataHandler.setAll(table, groupProperty, value, false)));
+            context.getSource().sendSuccess(
+                    Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
+                    false
+            );
+            return 1;
+        })));
+    }
+
     private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, Object2ObjectMap<String, String>> otherData, String table) {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         data.forEach((row, map) -> {
@@ -301,8 +314,11 @@ public abstract class MixinCommands {
                     execute(propertyBuilder, table, property, DataHandler.cols.get(table).get(property));
                 }
                 groupBuilder.then(propertyBuilder);
-                allBuilder.then(groupBuilder);
             });
+            if (!DataHandler.differentDataTypes.contains(group)) {
+                allCols(groupBuilder, table, group, info);
+            }
+            allBuilder.then(groupBuilder);
         });
         overallBuilder.then(allBuilder);
 
