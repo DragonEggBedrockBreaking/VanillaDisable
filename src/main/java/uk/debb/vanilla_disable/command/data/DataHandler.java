@@ -261,7 +261,14 @@ public class DataHandler {
                         put("min_spawn_distance", "24");
                         put("min_despawn_distance", String.valueOf(entityType.getCategory().getNoDespawnDistance()));
                         put("instant_despawn_distance", String.valueOf(entityType.getCategory().getDespawnDistance()));
-                        put("possible_biomes", "''");  // TODO: add content
+                        String possible_biomes = registryAccess.registryOrThrow(Registries.BIOME).stream()
+                                .filter(biome -> biome.getMobSettings().getMobs(entityType.getCategory()).unwrap()
+                                        .stream().anyMatch(entry -> entry.type.equals(entityType)))
+                                .map(biome -> registryAccess.registryOrThrow(Registries.BIOME).getKey(biome).toString())
+                                .collect(Collectors.joining(","));
+                        if (possible_biomes.length() != 0) {
+                            put("possible_biomes", "'" + possible_biomes + "'");
+                        }
                     }
 
                     if (entityType.equals(EntityType.PAINTING)) {
