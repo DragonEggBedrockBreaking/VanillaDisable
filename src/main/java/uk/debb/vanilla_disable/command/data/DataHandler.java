@@ -967,4 +967,16 @@ public class DataHandler {
             handleDatabase();
         }
     }
+
+    public static void resetPartial(String db, ObjectSet<String> cols) {
+        cols.forEach((col) -> {
+            try {
+                statement.executeUpdate("ALTER TABLE " + db + " DROP COLUMN `" + col + "`;");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        updateDB();
+        handleDatabase();
+    }
 }

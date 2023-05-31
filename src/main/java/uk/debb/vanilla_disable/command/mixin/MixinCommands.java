@@ -75,14 +75,33 @@ public abstract class MixinCommands {
                 return 1;
             });
             overallResetDBBuilder.then(resetDBBuilder);
-            Stream.of("entities", "blocks", "items", "others").forEach(table -> overallResetDBBuilder.then(literal(table).executes(context -> {
-                DataHandler.resetOne(table, true);
-                context.getSource().sendSuccess(
-                        Component.literal("The " + table + " table has been reset."),
-                        false
-                );
-                return 1;
-            })));
+            Stream.of("entities", "blocks", "items", "others").forEach(table -> {
+                LiteralArgumentBuilder<CommandSourceStack> tableBuilder = literal(table).executes(context -> {
+                    DataHandler.resetOne(table, true);
+                    context.getSource().sendSuccess(
+                            Component.literal("The " + table + " table has been reset."),
+                            false
+                    );
+                    return 1;
+                });
+                Object2ObjectMap<String, Object2ObjectMap<String, String>> groups = switch (table) {
+                    case "entities" -> DataHandler.entityData;
+                    case "blocks" -> DataHandler.blockData;
+                    case "items" -> DataHandler.itemData;
+                    default -> new Object2ObjectOpenHashMap<>();
+                };
+                groups.forEach((group, data) -> {
+                    tableBuilder.then(literal(group).executes(context -> {
+                        DataHandler.resetPartial(table, data.keySet());
+                        context.getSource().sendSuccess(
+                                Component.literal("The " + group + " group in the " + table + " table has been reset."),
+                                false
+                        );
+                        return 1;
+                    }));
+                });
+                overallResetDBBuilder.then(tableBuilder);
+            });
 
             this.getDispatcher().register(literal("vd").then(literal("rule")
                             .then(majorBuilder("entity", DataHandler.entities, DataHandler.entityData, "entities"))
