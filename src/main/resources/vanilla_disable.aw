@@ -112,3 +112,4 @@ accessible method net/minecraft/server/commands/GameRuleCommand setRule (Lcom/mo
 accessible method net/minecraft/server/commands/GameRuleCommand queryRule (Lnet/minecraft/commands/CommandSourceStack;Lnet/minecraft/world/level/GameRules$Key;)I
 
 accessible field net/minecraft/world/level/block/DispenserBlock DISPENSER_REGISTRY Ljava/util/Map;
+accessible field net/minecraft/world/entity/npc/Villager WANTED_ITEMS Ljava/util/Set;
