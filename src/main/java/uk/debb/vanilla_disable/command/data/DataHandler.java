@@ -42,6 +42,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static uk.debb.vanilla_disable.command.data.DataType.*;
+import static uk.debb.vanilla_disable.command.data.RegistryType.*;
 
 public class DataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, DataType>> cols = new Object2ObjectOpenHashMap<>();
@@ -60,11 +61,13 @@ public class DataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
     public static final Object2ObjectMap<String, List<String>> stringColSuggestions = new Object2ObjectOpenHashMap<>();
     public static final ObjectList<String> differentDataTypes = new ObjectArrayList<>();
+    public static final Object2ObjectMap<String, RegistryType> possibleListOptions = new Object2ObjectOpenHashMap<>();
 
     public static MinecraftServer server;
     public static boolean populationDone = false;
     private static Connection connection;
     private static Statement statement;
+    public static RegistryAccess registryAccess;
 
     private static String cleanup(Object o) {
         String s = o.toString().replace("_", " ");
@@ -78,7 +81,8 @@ public class DataHandler {
     }
 
     public static void populate() {
-        RegistryAccess registryAccess = server.registryAccess();
+        registryAccess = server.registryAccess();
+
         cols.put("entities", new Object2ObjectOpenHashMap<>() {{
             put("can_be_on_fire", BOOLEAN);
             put("can_sprint", BOOLEAN);
@@ -706,6 +710,8 @@ public class DataHandler {
         differentDataTypes.add("spawning");
         differentDataTypes.add("fluid");
         differentDataTypes.add("other");
+        possibleListOptions.put("breeding_ingredient", ITEM);
+        possibleListOptions.put("possible_biomes", BIOME);
 
         populationDone = true;
     }

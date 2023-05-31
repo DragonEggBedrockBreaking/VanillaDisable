@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.command.data.DataHandler;
 import uk.debb.vanilla_disable.command.data.DataType;
+import uk.debb.vanilla_disable.command.data.RegistryType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -90,16 +91,14 @@ public abstract class MixinCommands {
                     case "items" -> DataHandler.itemData;
                     default -> new Object2ObjectOpenHashMap<>();
                 };
-                groups.forEach((group, data) -> {
-                    tableBuilder.then(literal(group).executes(context -> {
-                        DataHandler.resetPartial(table, data.keySet());
-                        context.getSource().sendSuccess(
-                                Component.literal("The " + group + " group in the " + table + " table has been reset."),
-                                false
-                        );
-                        return 1;
-                    }));
-                });
+                groups.forEach((group, data) -> tableBuilder.then(literal(group).executes(context -> {
+                    DataHandler.resetPartial(table, data.keySet());
+                    context.getSource().sendSuccess(
+                            Component.literal("The " + group + " group in the " + table + " table has been reset."),
+                            false
+                    );
+                    return 1;
+                })));
                 overallResetDBBuilder.then(tableBuilder);
             });
 
@@ -124,7 +123,7 @@ public abstract class MixinCommands {
         t.start();
     }
 
-    ArgumentType<?> getArgumentTypeForType(DataType type, String col) {
+    private ArgumentType<?> getArgumentTypeForType(DataType type, String col) {
         return switch (type) {
             case BOOLEAN -> BoolArgumentType.bool();
             case INTEGER ->
@@ -135,7 +134,7 @@ public abstract class MixinCommands {
         };
     }
 
-    String getArgumentValueForType(DataType type, CommandContext<?> context) {
+    private String getArgumentValueForType(DataType type, CommandContext<?> context) {
         return switch (type) {
             case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
             case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
@@ -144,9 +143,13 @@ public abstract class MixinCommands {
         };
     }
 
-    String validateItemList(String value) {
-        List<String> items = BuiltInRegistries.ITEM.keySet().stream().map(Object::toString).toList();
-        return String.join(",", Arrays.stream(value.replace(" ", "").split(",")).filter(items::contains).collect(Collectors.toSet()));
+    private String validateList(String value, RegistryType type, DataType dataType) {
+        if (!dataType.equals(DataType.STRING)) return value;
+        List<String> ls = switch (type) {
+            case ITEM -> BuiltInRegistries.ITEM.keySet().stream().map(Object::toString).toList();
+            case BIOME -> DataHandler.registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString).toList();
+        };
+        return String.join(",", Arrays.stream(value.replace(" ", "").split(",")).filter(ls::contains).collect(Collectors.toSet()));
     }
 
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
@@ -165,9 +168,7 @@ public abstract class MixinCommands {
         }).then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    if (type.equals(DataType.STRING)) {
-                        value = validateItemList(value);
-                    }
+                    value = validateList(value, DataHandler.possibleListOptions.get(col), type);
                     if (value.equals("")) {
                         context.getSource().sendSuccess(
                                 Component.literal("The format or the values are invalid."),
@@ -215,9 +216,7 @@ public abstract class MixinCommands {
         literalArgumentBuilder.then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    if (type.equals(DataType.STRING)) {
-                        value = validateItemList(value);
-                    }
+                    value = validateList(value, DataHandler.possibleListOptions.get(col), type);
                     if (value.equals("")) {
                         context.getSource().sendSuccess(
                                 Component.literal("The format or the values are invalid."),
