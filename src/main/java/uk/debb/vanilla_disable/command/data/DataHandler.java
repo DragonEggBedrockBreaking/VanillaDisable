@@ -262,8 +262,8 @@ public class DataHandler {
                         put("min_despawn_distance", String.valueOf(entityType.getCategory().getNoDespawnDistance()));
                         put("instant_despawn_distance", String.valueOf(entityType.getCategory().getDespawnDistance()));
                         String possible_biomes = registryAccess.registryOrThrow(Registries.BIOME).stream()
-                                .filter(biome -> biome.getMobSettings().getMobs(entityType.getCategory()).unwrap()
-                                        .stream().anyMatch(entry -> entry.type.equals(entityType)))
+                                .filter(biome -> biome.getMobSettings().spawners.values().stream().anyMatch(ls ->
+                                        ls.unwrap().stream().anyMatch(entry -> entry.type.equals(entityType))))
                                 .map(biome -> registryAccess.registryOrThrow(Registries.BIOME).getKey(biome).toString())
                                 .collect(Collectors.joining(","));
                         if (possible_biomes.length() != 0) {
