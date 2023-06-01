@@ -239,14 +239,14 @@ public class DataHandler {
                         put("block_gui_interaction_stats", "true");
                         put("block_general_interaction_stats", "true");
                         put("general_stats", "true");
-                    }
 
-                    if (entity instanceof LivingEntity || entityType.equals(EntityType.PLAYER)) {
                         registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType -> {
                             put(damageType + "_damage", "true");
                             put(damageType + "_death", "true");
                         });
+                    }
 
+                    if (entity instanceof LivingEntity || entityType.equals(EntityType.PLAYER)) {
                         put("fireball_knockback", "true");
                         put("wither_skull_knockback", "true");
                         put("dragon_knockback", "true");
@@ -567,7 +567,7 @@ public class DataHandler {
         }});
         entityData.put("damage", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
-                    put(damageType + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the mob."));
+                    put(damageType + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the player."));
         }});
         entityData.put("knockback", new Object2ObjectOpenHashMap<>() {{
             put("fireball_knockback", "Toggles fireballs knocking back the entity.");
@@ -587,7 +587,7 @@ public class DataHandler {
         }});
         entityData.put("death", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.DAMAGE_TYPE).keySet().forEach(damageType ->
-                    put(damageType + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the mob."));
+                    put(damageType + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the player."));
         }});
         entityData.put("painting", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.PAINTING_VARIANT).keySet().forEach(painting ->
