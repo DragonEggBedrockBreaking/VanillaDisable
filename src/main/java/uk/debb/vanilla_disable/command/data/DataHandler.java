@@ -69,6 +69,11 @@ public class DataHandler {
     private static Statement statement;
     public static RegistryAccess registryAccess;
 
+    /**
+     * Cleans up data for display (removes underscores, 'namespace:' prefixes, 'group/' prefixes)
+     * @param o The object to be cleaned up
+     * @return The cleaned up object as a string
+     */
     private static String cleanup(Object o) {
         String s = o.toString().replace("_", " ");
         if (s.contains(":")) {
@@ -80,6 +85,10 @@ public class DataHandler {
         return s;
     }
 
+    /**
+     * Populates the data maps with the data dynamically pulled from registries, and custom data.
+     * This includes names of columns corresponding to data type, default value for each row, and descriptions.
+     */
     public static void populate() {
         registryAccess = server.registryAccess();
 
@@ -716,6 +725,9 @@ public class DataHandler {
         populationDone = true;
     }
 
+    /**
+     * Inserts default values into the database the first time, updates the database between versions.
+     */
     public static void handleDatabase() {
         String path = server.getWorldPath(LevelResource.ROOT) + "/vanilla_disable.db";
 
@@ -868,6 +880,9 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Shuts down the database connection when necessary.
+     */
     public static void closeConnection() {
         try {
             connection.close();
@@ -876,6 +891,14 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Sets a single row-column pair to a value.
+     * @param table The table in which to set the value.
+     * @param row The row in which to set the value.
+     * @param column The column in which to set the value.
+     * @param value The value to set.
+     * @param isString Whether the value is a string.
+     */
     public static void setValue(String table, String row, String column, String value, boolean isString) {
         if (isString) {
             value = "'" + value + "'";
@@ -887,6 +910,13 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Sets all rows in a column to a value.
+     * @param table The table in which to set the value.
+     * @param column The column in which to set the value.
+     * @param value The value to set.
+     * @param isString Whether the value is a string.
+     */
     public static void setAll(String table, String column, String value, boolean isString) {
         if (isString) {
             value = "'" + value + "'";
@@ -898,6 +928,31 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Sets all rows which match a pattern in a column to a value.
+     * @param table The table in which to set the value.
+     * @param column The column in which to set the value.
+     * @param value The value to set.
+     * @param isString Whether the value is a string.
+     * @param pattern The pattern to match.
+     */
+    public static void setMatching(String table, String column, String value, boolean isString, String pattern) {
+        if (isString) {
+            value = "'" + value + "'";
+        }
+        try {
+            statement.executeUpdate("UPDATE " + table + " SET `" + column + "` = " + value + " WHERE `" + column + "` IS NOT NULL AND id LIKE '" + pattern + "';");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Set all rows in a column to a value if they match a condition.
+     * Used for the 'others' table where different groups are handled differently.
+     * @param value The value to set.
+     * @param condition The condition for which to check when checking whether to set a row.
+     */
     public static void setWithCondition(String value, String condition) {
         try {
             statement.executeUpdate("UPDATE others SET enabled = " + value + " WHERE id LIKE '" + condition + "';");
@@ -906,6 +961,13 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Get a boolean value from the database.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
     public static boolean getBoolean(String table, String row, String column) {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
@@ -916,6 +978,13 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Get an integer value from the database.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
     public static int getInt(String table, String row, String column) {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
@@ -926,6 +995,13 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Get a double value from the database.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
     public static double getDouble(String table, String row, String column) {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
@@ -936,6 +1012,13 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Get a string value from the database.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
     public static String getString(String table, String row, String column) {
         try {
             ResultSet resultSet = statement.executeQuery("SELECT `" + column + "` FROM " + table + " WHERE id = '" + row + "';");
@@ -946,6 +1029,9 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Force an update of the database by mangling the meta to trigger the detectors.
+     */
     public static void updateDB() {
         try {
             statement.executeUpdate("UPDATE meta SET version = 'FORCE_UPDATE'");
@@ -955,6 +1041,9 @@ public class DataHandler {
         handleDatabase();
     }
 
+    /**
+     * Reset all tables in the database.
+     */
     public static void resetAll() {
         resetOne("entities", false);
         resetOne("blocks", false);
@@ -962,6 +1051,11 @@ public class DataHandler {
         resetOne("others", true);
     }
 
+    /**
+     * Reset a single table in the database by deleting all its data and forcing an update.
+     * @param db The table to reset.
+     * @param handle Whether to update the database after deletion (this is also called in resetAll()).
+     */
     public static void resetOne(String db, boolean handle) {
         try {
             statement.executeUpdate("DELETE FROM " + db + ";");
@@ -974,6 +1068,11 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Reset some columns in a database by deleting them and forcing an update.
+     * @param db The table to reset.
+     * @param cols The columns to reset.
+     */
     public static void resetPartial(String db, ObjectSet<String> cols) {
         cols.forEach((col) -> {
             try {
