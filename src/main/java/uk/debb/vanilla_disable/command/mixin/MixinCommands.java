@@ -21,12 +21,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.command.data.DataHandler;
 import uk.debb.vanilla_disable.command.data.DataType;
-import uk.debb.vanilla_disable.command.data.RegistryType;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Mixin(Commands.class)
@@ -156,22 +153,6 @@ public abstract class MixinCommands {
     }
 
     /**
-     * This method edits a list of values for a string to ensure that all items are valid and to avoid duplicates.
-     * @param value The value to edit
-     * @param type The registry type that the value refers to
-     * @param dataType The data type of the value
-     * @return The edited value
-     */
-    private String validateList(String value, RegistryType type, DataType dataType) {
-        if (!dataType.equals(DataType.STRING)) return value;
-        List<String> ls = switch (type) {
-            case ITEM -> BuiltInRegistries.ITEM.keySet().stream().map(Object::toString).toList();
-            case BIOME -> DataHandler.registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString).toList();
-        };
-        return String.join(",", Arrays.stream(value.replace(" ", "").split(",")).filter(ls::contains).collect(Collectors.toSet()));
-    }
-
-    /**
      * This method creates a standard command that sets a row-column value in a table.
      * @param literalArgumentBuilder The command builder
      * @param table The table to update
@@ -187,7 +168,7 @@ public abstract class MixinCommands {
                 case BOOLEAN -> String.valueOf(DataHandler.getBoolean(table, row, col));
                 case INTEGER -> String.valueOf(DataHandler.getInt(table, row, col));
                 case REAL -> String.valueOf(DataHandler.getDouble(table, row, col));
-                case STRING -> DataHandler.getString(table, row, col);
+                case STRING -> "";
             };
             context.getSource().sendSuccess(
                     Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue.replace("'", "")),
@@ -197,14 +178,6 @@ public abstract class MixinCommands {
         }).then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    value = validateList(value, DataHandler.possibleListOptions.get(col), type);
-                    if (value.equals("")) {
-                        context.getSource().sendSuccess(
-                                Component.literal("The format or the values are invalid."),
-                                false
-                        );
-                        return 0;
-                    }
                     DataHandler.setValue(table, row, col, value, type.equals(DataType.STRING));
                     context.getSource().sendSuccess(
                             Component.literal("Successfully set the value to " + value + "."),
@@ -262,14 +235,6 @@ public abstract class MixinCommands {
         literalArgumentBuilder.then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    value = validateList(value, DataHandler.possibleListOptions.get(col), type);
-                    if (value.equals("")) {
-                        context.getSource().sendSuccess(
-                                Component.literal("The format or the values are invalid."),
-                                false
-                        );
-                        return 0;
-                    }
                     DataHandler.setAll(table, col, value, type.equals(DataType.STRING));
                     context.getSource().sendSuccess(
                             Component.literal("Successfully set the values to " + value + "."),
@@ -338,14 +303,6 @@ public abstract class MixinCommands {
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
                     String pattern = StringArgumentType.getString(context, argumentName);
-                    value = validateList(value, DataHandler.possibleListOptions.get(col), type);
-                    if (value.equals("")) {
-                        context.getSource().sendSuccess(
-                                Component.literal("The format or the values are invalid."),
-                                false
-                        );
-                        return 0;
-                    }
                     DataHandler.setMatching(table, col, value, type.equals(DataType.STRING), pattern);
                     context.getSource().sendSuccess(
                             Component.literal("Successfully set the values to " + value + "."),

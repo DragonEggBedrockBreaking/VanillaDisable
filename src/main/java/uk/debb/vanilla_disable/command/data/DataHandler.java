@@ -42,7 +42,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static uk.debb.vanilla_disable.command.data.DataType.*;
-import static uk.debb.vanilla_disable.command.data.RegistryType.*;
 
 public class DataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, DataType>> cols = new Object2ObjectOpenHashMap<>();
@@ -61,7 +60,6 @@ public class DataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
     public static final Object2ObjectMap<String, List<String>> stringColSuggestions = new Object2ObjectOpenHashMap<>();
     public static final ObjectList<String> differentDataTypes = new ObjectArrayList<>();
-    public static final Object2ObjectMap<String, RegistryType> possibleListOptions = new Object2ObjectOpenHashMap<>();
 
     public static MinecraftServer server;
     public static boolean populationDone = false;
@@ -81,6 +79,19 @@ public class DataHandler {
         }
         if (s.contains("/")) {
             s = s.split("/")[1];
+        }
+        return s;
+    }
+
+    /**
+     * Cleans up data for display (removes 'namespace:' prefixes)
+     * @param o The object to be cleaned up
+     * @return The cleaned up object as a string
+     */
+    private static String lightCleanup(Object o) {
+        String s = o.toString();
+        if (s.contains(":")) {
+            s = s.split(":")[1];
         }
         return s;
     }
@@ -116,15 +127,8 @@ public class DataHandler {
                 put(damageType + "_death", BOOLEAN);
             });
 
-            put("fireball_knockback", BOOLEAN);
-            put("wither_skull_knockback", BOOLEAN);
-            put("dragon_knockback", BOOLEAN);
-            put("arrow_knockback", BOOLEAN);
-            put("trident_knockback", BOOLEAN);
-            put("llama_spit_knockback", BOOLEAN);
-            put("shulker_bullet_knockback", BOOLEAN);
-            put("mob_attack_knockback", BOOLEAN);
-            put("player_attack_knockback", BOOLEAN);
+            BuiltInRegistries.ENTITY_TYPE.keySet().forEach(entityType ->
+                    put(lightCleanup(entityType) + "_knockback", BOOLEAN));
             put("explosion_knockback", BOOLEAN);
 
             registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
@@ -156,11 +160,15 @@ public class DataHandler {
             put("daily_restocks", INTEGER);
             put("can_be_lit", BOOLEAN);
             put("despawn_on_player_death", BOOLEAN);
-            put("breeding_ingredient", STRING);
             put("min_spawn_distance", INTEGER);
             put("min_despawn_distance", INTEGER);
             put("instant_despawn_distance", INTEGER);
-            put("possible_biomes", STRING);
+
+            BuiltInRegistries.ITEM.keySet().forEach(item ->
+                    put("can_breed_with_" + lightCleanup(item), BOOLEAN));
+
+            registryAccess.registryOrThrow(Registries.BIOME).keySet().forEach(biome ->
+                    put("can_spawn_in_" + lightCleanup(biome), BOOLEAN));
         }});
         cols.put("blocks", new Object2ObjectOpenHashMap<>() {{
             put("can_place_in_overworld", BOOLEAN);
@@ -247,15 +255,8 @@ public class DataHandler {
                     }
 
                     if (entity instanceof LivingEntity || entityType.equals(EntityType.PLAYER)) {
-                        put("fireball_knockback", "true");
-                        put("wither_skull_knockback", "true");
-                        put("dragon_knockback", "true");
-                        put("arrow_knockback", "true");
-                        put("trident_knockback", "true");
-                        put("llama_spit_knockback", "true");
-                        put("shulker_bullet_knockback", "true");
-                        put("mob_attack_knockback", "true");
-                        put("player_attack_knockback", "true");
+                        BuiltInRegistries.ENTITY_TYPE.keySet().forEach(entityType ->
+                                put(lightCleanup(entityType) + "_knockback", "true"));
                         put("explosion_knockback", "true");
 
                         registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
@@ -274,14 +275,13 @@ public class DataHandler {
                         put("min_spawn_distance", "24");
                         put("min_despawn_distance", String.valueOf(entityType.getCategory().getNoDespawnDistance()));
                         put("instant_despawn_distance", String.valueOf(entityType.getCategory().getDespawnDistance()));
-                        String possible_biomes = registryAccess.registryOrThrow(Registries.BIOME).stream()
-                                .filter(biome -> biome.getMobSettings().spawners.values().stream().anyMatch(ls ->
-                                        ls.unwrap().stream().anyMatch(entry -> entry.type.equals(entityType))))
-                                .map(biome -> registryAccess.registryOrThrow(Registries.BIOME).getKey(biome).toString())
-                                .collect(Collectors.joining(","));
-                        if (possible_biomes.length() != 0) {
-                            put("possible_biomes", "'" + possible_biomes + "'");
-                        }
+
+                        registryAccess.registryOrThrow(Registries.BIOME).forEach(biome -> {
+                            String biomeString = registryAccess.registryOrThrow(Registries.BIOME).getKey(biome).toString();
+                            boolean canSpawnIn = biome.getMobSettings().spawners.values().stream().anyMatch(ls ->
+                                    ls.unwrap().stream().anyMatch(entry -> entry.type.equals(entityType)));
+                            put("can_spawn_in_" + lightCleanup(biomeString), String.valueOf(canSpawnIn));
+                        });
                     }
 
                     if (entityType.equals(EntityType.PAINTING)) {
@@ -294,8 +294,10 @@ public class DataHandler {
                                 put(profession + "_profession", "true"));
                         BuiltInRegistries.VILLAGER_TYPE.keySet().forEach(type -> put(type + "_type", "true"));
                         put("can_breed", "true");
-                        put("breeding_ingredient", "'" + Villager.WANTED_ITEMS.stream().map(item ->
-                                BuiltInRegistries.ITEM.getKey(item).toString()).collect(Collectors.joining(",")) + "'");
+                        BuiltInRegistries.ITEM.forEach(item -> {
+                            boolean villagerWants = Villager.WANTED_ITEMS.contains(item);
+                            put("can_breed_with_" + lightCleanup(BuiltInRegistries.ITEM.getKey(item).toString()), String.valueOf(villagerWants));
+                        });
                     }
 
                     if (VanillaHusbandryAdvancements.BREEDABLE_ANIMALS.contains(entityType) ||
@@ -304,17 +306,14 @@ public class DataHandler {
                         try {
                             Class<?> animalClass = entity.getClass();
                             Method isFood = animalClass.getMethod("isFood", ItemStack.class);
-
-                            put("breeding_ingredient", "'" + BuiltInRegistries.ITEM.stream()
-                                    .filter(item -> {
-                                        try {
-                                            return (boolean) isFood.invoke(entity, new ItemStack(item));
-                                        } catch (IllegalAccessException | InvocationTargetException e) {
-                                            throw new RuntimeException(e);
-                                        }
-                                    })
-                                    .map(item -> BuiltInRegistries.ITEM.getKey(item).toString())
-                                    .collect(Collectors.joining(",")) + "'");
+                            BuiltInRegistries.ITEM.stream().forEach(item -> {
+                                try {
+                                    boolean itemIsFood = (boolean) isFood.invoke(entity, new ItemStack(item));
+                                    put("can_breed_with_" + lightCleanup(BuiltInRegistries.ITEM.getKey(item).toString()), String.valueOf(itemIsFood));
+                                } catch (InvocationTargetException | IllegalAccessException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            });
                         } catch (NoSuchMethodException e) {
                             throw new RuntimeException(e);
                         }
@@ -570,16 +569,9 @@ public class DataHandler {
                     put(damageType + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the player."));
         }});
         entityData.put("knockback", new Object2ObjectOpenHashMap<>() {{
-            put("fireball_knockback", "Toggles fireballs knocking back the entity.");
-            put("wither_skull_knockback", "Toggles wither skulls knocking back the entity.");
-            put("dragon_knockback", "Toggles the ender dragon knocking back the entity.");
-            put("arrow_knockback", "Toggles arrows knocking back the entity.");
-            put("trident_knockback", "Toggles tridents knocking back the entity.");
-            put("llama_spit_knockback", "Toggles llama spit knocking back the entity.");
-            put("shulker_bullet_knockback", "Toggles shulker bullets knocking back the entity.");
-            put("mob_attack_knockback", "Toggles mob attacks knocking back the entity.");
-            put("player_attack_knockback", "Toggles player attacks knocking back the entity.");
-            put("explosion_knockback", "Toggles explosions knocking back the entity.");
+            BuiltInRegistries.ENTITY_TYPE.keySet().forEach(entityType ->
+                    put(lightCleanup(entityType) + "_knockback", "Toggles knockback from " + cleanup(entityType) + " affecting the mob."));
+            put("explosion_knockback", "Toggles knockback from explosions affecting the entity.");
         }});
         entityData.put("effects", new Object2ObjectOpenHashMap<>() {{
             registryAccess.registryOrThrow(Registries.MOB_EFFECT).keySet().forEach(mobEffect ->
@@ -618,13 +610,19 @@ public class DataHandler {
             put("spawn_egg", "Toggle the mob being able to be spawned by a spawn egg.");
             put("spawner", "Toggle the mob being able to be spawned by a spawner.");
             put("despawn_on_player_death", "Toggle the ender pearl despawning when the player dies (fixes MC-199344).");
-            put("breeding_ingredient", "The ingredients that can be used to breed a mob.");
             put("can_breed", "Toggle the mob being able to breed.");
             put("spawned_by_villagers", "Toggle the mob being able to be spawned by villagers.");
             put("min_spawn_distance", "Control the minimum distance away from the player where the entity can spawn.");
             put("min_despawn_distance", "Control the minimum distance away from the player where the entity can despawn.");
             put("instant_despawn_distance", "Control the distance away from the player where the entity will instantly despawn.");
-            put("possible_biomes", "Control the biomes where the entity can spawn.");
+        }});
+        entityData.put("breeding_ingredient", new Object2ObjectOpenHashMap<>() {{
+            registryAccess.registryOrThrow(Registries.ITEM).keySet().forEach(item ->
+                    put("can_breed_with_" + lightCleanup(item), "Toggles the mob being able to be bred with " + cleanup(item) + "."));
+        }});
+        entityData.put("possible_biomes", new Object2ObjectOpenHashMap<>() {{
+            registryAccess.registryOrThrow(Registries.BIOME).keySet().forEach(biome ->
+                    put("can_spawn_in_" + lightCleanup(biome), "Toggle the mob being able to spawn in the " + cleanup(biome) + " biome."));
         }});
         entityData.put("other", new Object2ObjectOpenHashMap<>() {{
             put("can_exist", "Toggle the entity being able to exist.");
@@ -719,8 +717,6 @@ public class DataHandler {
         differentDataTypes.add("spawning");
         differentDataTypes.add("fluid");
         differentDataTypes.add("other");
-        possibleListOptions.put("breeding_ingredient", ITEM);
-        possibleListOptions.put("possible_biomes", BIOME);
 
         populationDone = true;
     }
