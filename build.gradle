@@ -1,0 +1,53 @@
+plugins {
+	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'io.github.juuxel.loom-quiltflower' version '1.9.0'
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/vanilla_disable.aw")
+}
+
+repositories {
+	maven {
+		url "https://maven.flashyreese.me/releases"
+	}
+	maven {
+		url "https://jitpack.io"
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
+	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
+	include(modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version)))
+	include(modImplementation("net.caffeinemc:mixin-config:${project.caffeine_config_version}"))
+	include(modImplementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"))
+	include(modImplementation("org.xerial:sqlite-jdbc:${project.xerial_sqlite_jdbc_version}"))
+}
+
+base {
+	archivesName = project.archives_base_name + "-mc" + project.minecraft_version + "-" + project.mod_version
+}
+
+processResources {
+	inputs.property "version", project.mod_version
+	filesMatching("fabric.mod.json") {
+		expand "version": project.mod_version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
