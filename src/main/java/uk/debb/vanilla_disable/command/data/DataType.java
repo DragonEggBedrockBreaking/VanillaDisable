@@ -4,5 +4,5 @@ public enum DataType {
     BOOLEAN,
     INTEGER,
     REAL,
-    STRING
+    CLOB
 }

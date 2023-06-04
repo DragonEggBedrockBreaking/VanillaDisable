@@ -133,7 +133,7 @@ public abstract class MixinCommands {
                     IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
             case REAL ->
                     DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
-            case STRING -> StringArgumentType.greedyString();
+            case CLOB -> StringArgumentType.greedyString();
         };
     }
 
@@ -148,7 +148,7 @@ public abstract class MixinCommands {
             case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
             case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
             case REAL -> String.valueOf(DoubleArgumentType.getDouble(context, "value"));
-            case STRING -> StringArgumentType.getString(context, "value");
+            case CLOB -> StringArgumentType.getString(context, "value");
         };
     }
 
@@ -168,7 +168,7 @@ public abstract class MixinCommands {
                 case BOOLEAN -> String.valueOf(DataHandler.getBoolean(table, row, col));
                 case INTEGER -> String.valueOf(DataHandler.getInt(table, row, col));
                 case REAL -> String.valueOf(DataHandler.getDouble(table, row, col));
-                case STRING -> "";
+                case CLOB -> "";
             };
             context.getSource().sendSuccess(
                     Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue.replace("'", "")),
@@ -178,7 +178,7 @@ public abstract class MixinCommands {
         }).then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    DataHandler.setValue(table, row, col, value, type.equals(DataType.STRING));
+                    DataHandler.setValue(table, row, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
                             Component.literal("Successfully set the value to " + value + "."),
                             false
@@ -235,7 +235,7 @@ public abstract class MixinCommands {
         literalArgumentBuilder.then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    DataHandler.setAll(table, col, value, type.equals(DataType.STRING));
+                    DataHandler.setAll(table, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
                             Component.literal("Successfully set the values to " + value + "."),
                             false
@@ -303,7 +303,7 @@ public abstract class MixinCommands {
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
                     String pattern = StringArgumentType.getString(context, argumentName);
-                    DataHandler.setMatching(table, col, value, type.equals(DataType.STRING), pattern);
+                    DataHandler.setMatching(table, col, value, type.equals(DataType.CLOB), pattern);
                     context.getSource().sendSuccess(
                             Component.literal("Successfully set the values to " + value + "."),
                             false

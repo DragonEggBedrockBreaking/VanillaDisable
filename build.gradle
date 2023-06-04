@@ -23,7 +23,7 @@ dependencies {
 	include(modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version)))
 	include(modImplementation("net.caffeinemc:mixin-config:${project.caffeine_config_version}"))
 	include(modImplementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"))
-	include(modImplementation("org.xerial:sqlite-jdbc:${project.xerial_sqlite_jdbc_version}"))
+	include(modImplementation("com.h2database:h2:${project.h2_version}"))
 }
 
 base {
