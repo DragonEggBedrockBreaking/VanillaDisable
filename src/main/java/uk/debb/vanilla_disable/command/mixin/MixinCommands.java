@@ -57,7 +57,7 @@ public abstract class MixinCommands {
             LiteralArgumentBuilder<CommandSourceStack> updateDB = literal("updateDB").executes(context -> {
                 DataHandler.updateDB();
                 context.getSource().sendSuccess(
-                        Component.literal("The database has been updated."),
+                        () -> Component.literal("The database has been updated."),
                         false
                 );
                 return 1;
@@ -67,7 +67,7 @@ public abstract class MixinCommands {
             LiteralArgumentBuilder<CommandSourceStack> resetDBBuilder = literal("all").executes(context -> {
                 DataHandler.resetAll();
                 context.getSource().sendSuccess(
-                        Component.literal("All databases have been reset."),
+                        () -> Component.literal("All databases have been reset."),
                         false
                 );
                 return 1;
@@ -77,7 +77,7 @@ public abstract class MixinCommands {
                 LiteralArgumentBuilder<CommandSourceStack> tableBuilder = literal(table).executes(context -> {
                     DataHandler.resetOne(table, true);
                     context.getSource().sendSuccess(
-                            Component.literal("The " + table + " table has been reset."),
+                            () -> Component.literal("The " + table + " table has been reset."),
                             false
                     );
                     return 1;
@@ -91,7 +91,7 @@ public abstract class MixinCommands {
                 groups.forEach((group, data) -> tableBuilder.then(literal(group).executes(context -> {
                     DataHandler.resetPartial(table, data.keySet());
                     context.getSource().sendSuccess(
-                            Component.literal("The " + group + " group in the " + table + " table has been reset."),
+                            () -> Component.literal("The " + group + " group in the " + table + " table has been reset."),
                             false
                     );
                     return 1;
@@ -171,7 +171,7 @@ public abstract class MixinCommands {
                 case CLOB -> "";
             };
             context.getSource().sendSuccess(
-                    Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue.replace("'", "")),
+                    () -> Component.literal(description + "\nThe current value is: " + value + "\nThe default value is: " + defaultValue.replace("'", "")),
                     false
             );
             return 1;
@@ -180,7 +180,7 @@ public abstract class MixinCommands {
                     String value = getArgumentValueForType(type, context);
                     DataHandler.setValue(table, row, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value + "."),
+                            () -> Component.literal("Successfully set the value to " + value + "."),
                             false
                     );
                     return 1;
@@ -201,7 +201,7 @@ public abstract class MixinCommands {
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, List<String> options) {
         literalArgumentBuilder.executes(context -> {
             context.getSource().sendSuccess(
-                    Component.literal(description + "\nThe current value is: " + DataHandler.getString(table, row, col) + "\nThe default value is: " + defaultValue.replace("'", "")),
+                    () -> Component.literal(description + "\nThe current value is: " + DataHandler.getString(table, row, col) + "\nThe default value is: " + defaultValue.replace("'", "")),
                     false
             );
             return 1;
@@ -216,7 +216,7 @@ public abstract class MixinCommands {
                     }
                     DataHandler.setValue(table, row, col, value, true);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the value to " + value + "."),
+                            () -> Component.literal("Successfully set the value to " + value + "."),
                             false
                     );
                     return 1;
@@ -237,7 +237,7 @@ public abstract class MixinCommands {
                     String value = getArgumentValueForType(type, context);
                     DataHandler.setAll(table, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the values to " + value + "."),
+                            () -> Component.literal("Successfully set the values to " + value + "."),
                             false
                     );
                     return 1;
@@ -264,7 +264,7 @@ public abstract class MixinCommands {
                     }
                     DataHandler.setAll(table, col, value, true);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the values to " + value + "."),
+                            () -> Component.literal("Successfully set the values to " + value + "."),
                             false
                     );
                     return 1;
@@ -283,7 +283,7 @@ public abstract class MixinCommands {
                     String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
                     DataHandler.setWithCondition(value, condition);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the values to " + value + "."),
+                            () -> Component.literal("Successfully set the values to " + value + "."),
                             false
                     );
                     return 1;
@@ -305,7 +305,7 @@ public abstract class MixinCommands {
                     String pattern = StringArgumentType.getString(context, argumentName);
                     DataHandler.setMatching(table, col, value, type.equals(DataType.CLOB), pattern);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the values to " + value + "."),
+                            () -> Component.literal("Successfully set the values to " + value + "."),
                             false
                     );
                     return 1;
@@ -333,7 +333,7 @@ public abstract class MixinCommands {
                     }
                     DataHandler.setMatching(table, col, value, true, pattern);
                     context.getSource().sendSuccess(
-                            Component.literal("Successfully set the values to " + value + "."),
+                            () -> Component.literal("Successfully set the values to " + value + "."),
                             false
                     );
                     return 1;
@@ -356,7 +356,7 @@ public abstract class MixinCommands {
             info.keySet().stream().filter(possible::contains).forEach((groupProperty ->
                     DataHandler.setValue(table, row, groupProperty, value, false)));
             context.getSource().sendSuccess(
-                    Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
+                    () -> Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
                     false
             );
             return 1;
@@ -376,7 +376,7 @@ public abstract class MixinCommands {
             info.keySet().forEach((groupProperty ->
                     DataHandler.setAll(table, groupProperty, value, false)));
             context.getSource().sendSuccess(
-                    Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
+                    () -> Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
                     false
             );
             return 1;
@@ -398,7 +398,7 @@ public abstract class MixinCommands {
             info.keySet().forEach((groupProperty ->
                     DataHandler.setMatching(table, groupProperty, value, false, pattern)));
             context.getSource().sendSuccess(
-                    Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
+                    () -> Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
                     false
             );
             return 1;
