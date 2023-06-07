@@ -17,8 +17,6 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 @Mixin(Entity.class)
 public abstract class MixinEntity {
     @Shadow
-    public Level level;
-    @Shadow
     private BlockPos blockPosition;
 
     @Shadow
@@ -27,13 +25,15 @@ public abstract class MixinEntity {
     @Shadow
     public abstract EntityType<?> getType();
 
+    @Shadow public abstract Level level();
+
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
     private void killOnHorizontalCollision(CallbackInfo ci) {
         if (Gamerules.OLD_BOATS.getBool() && this.getType().equals(EntityType.BOAT)) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
-                BlockState blockState = this.level.getBlockState(this.blockPosition.relative(direction));
-                if (blockState.getMaterial().isSolid()) {
-                    if (!this.hurt(level.damageSources().generic(), Float.MAX_VALUE)) return;
+                BlockState blockState = this.level().getBlockState(this.blockPosition.relative(direction));
+                if (blockState.isSolid()) {
+                    if (!this.hurt(this.level().damageSources().generic(), Float.MAX_VALUE)) return;
                 }
             }
         }

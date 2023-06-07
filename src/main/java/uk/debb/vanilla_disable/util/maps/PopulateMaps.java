@@ -16,10 +16,12 @@ import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.frog.Tadpole;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.animal.horse.*;
+import net.minecraft.world.entity.animal.sniffer.Sniffer;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.decoration.PaintingVariants;
@@ -185,6 +187,8 @@ public class PopulateMaps implements Maps {
         biomeGenerationSettingsStringMap.put(TreePlacements.FANCY_OAK_BEES.toString(), TREE_GENERATION);
         biomeGenerationSettingsStringMap.put(TreePlacements.MANGROVE_CHECKED.toString(), TREE_GENERATION);
         biomeGenerationSettingsStringMap.put(TreePlacements.TALL_MANGROVE_CHECKED.toString(), TREE_GENERATION);
+        biomeGenerationSettingsStringMap.put(TreePlacements.CHERRY_BEES_005.toString(), TREE_GENERATION);
+        biomeGenerationSettingsStringMap.put(TreePlacements.CHERRY_CHECKED.toString(), TREE_GENERATION);
         biomeGenerationSettingsStringMap.put(VillagePlacements.PILE_HAY_VILLAGE.toString(), VILLAGE_GENERATION);
         biomeGenerationSettingsStringMap.put(VillagePlacements.PILE_ICE_VILLAGE.toString(), VILLAGE_GENERATION);
         biomeGenerationSettingsStringMap.put(VillagePlacements.PILE_MELON_VILLAGE.toString(), VILLAGE_GENERATION);
@@ -568,6 +572,7 @@ public class PopulateMaps implements Maps {
         structureCheckStringMap.put("minecraft:ancient_city/city_center", ANCIENT_CITY_GENERATION);
         structureCheckStringMap.put("minecraft:bastion/starts", BASTION_REMNANT_GENERATION);
         structureCheckStringMap.put("minecraft:pillager_outpost/base_plates", PILLAGER_OUTPOST_GENERATION);
+        structureCheckStringMap.put("minecraft:trail_ruins/tower", TRAIL_RUINS_GENERATION);
         structureCheckStringMap.put("minecraft:village/desert/town_centers", VILLAGE_GENERATION);
         structureCheckStringMap.put("minecraft:village/plains/town_centers", VILLAGE_GENERATION);
         structureCheckStringMap.put("minecraft:village/savanna/town_centers", VILLAGE_GENERATION);
@@ -802,6 +807,7 @@ public class PopulateMaps implements Maps {
         commandsStringMap.put("recipe", RECIPE_COMMAND);
         commandsStringMap.put("reload", RELOAD_COMMAND);
         commandsStringMap.put("resetchunks", RESET_CHUNKS_COMMAND);
+        commandsStringMap.put("return", RETURN_COMMAND);
         commandsStringMap.put("ride", RIDE_COMMAND);
         commandsStringMap.put("say", SAY_COMMAND);
         commandsStringMap.put("schedule", SCHEDULE_COMMAND);
@@ -1024,6 +1030,7 @@ public class PopulateMaps implements Maps {
         mobClassMapToggle.put(Allay.class, ALLAYS_ENABLED);
         mobClassMapToggle.put(Bat.class, BATS_ENABLED);
         mobClassMapToggle.put(Cat.class, CATS_ENABLED);
+        mobClassMapToggle.put(Camel.class, CAMELS_ENABLED);
         mobClassMapToggle.put(Chicken.class, CHICKENS_ENABLED);
         mobClassMapToggle.put(Cod.class, CODS_ENABLED);
         mobClassMapToggle.put(Cow.class, COWS_ENABLED);
@@ -1082,6 +1089,7 @@ public class PopulateMaps implements Maps {
         mobClassMapToggle.put(Silverfish.class, SILVERFISH_ENABLED);
         mobClassMapToggle.put(Skeleton.class, SKELETONS_ENABLED);
         mobClassMapToggle.put(Slime.class, SLIMES_ENABLED);
+        mobClassMapToggle.put(Sniffer.class, SNIFFERS_ENABLED);
         mobClassMapToggle.put(Stray.class, STRAYS_ENABLED);
         mobClassMapToggle.put(Vex.class, VEXES_ENABLED);
         mobClassMapToggle.put(Vindicator.class, VINDICATORS_ENABLED);
@@ -1124,6 +1132,9 @@ public class PopulateMaps implements Maps {
         playerAdvancementsStringMap.put("advancements.adventure.fall_from_world_height.title", ADVENTURE_ADVANCEMENT_CAVES_AND_CLIFFS);
         playerAdvancementsStringMap.put("advancements.adventure.kill_mob_near_sculk_catalyst.title", ADVENTURE_ADVANCEMENT_IT_SPREADS);
         playerAdvancementsStringMap.put("advancements.adventure.avoid_vibration.title", ADVENTURE_ADVANCEMENT_SNEAK_100);
+        playerAdvancementsStringMap.put("advancements.adventure.salvage_sherd.title", ADVENTURE_ADVANCEMENT_RESPECTING_THE_REMNANTS);
+        playerAdvancementsStringMap.put("advancements.adventure.craft_decorated_pot_using_only_sherds.title", ADVENTURE_ADVANCEMENT_CAREEFUL_RESTORATION);
+        playerAdvancementsStringMap.put("advancements.adventure.read_power_from_chiseled_bookshelf.title", ADVENTURE_ADVANCEMENT_THE_POWER_OF_BOOKS);
         playerAdvancementsStringMap.put("advancements.husbandry.root.title", HUSBANDRY_ADVANCEMENT_HUSBANDRY);
         playerAdvancementsStringMap.put("advancements.husbandry.plant_seed.title", HUSBANDRY_ADVANCEMENT_SEEDY_PLACE);
         playerAdvancementsStringMap.put("advancements.husbandry.breed_an_animal.title", HUSBANDRY_ADVANCEMENT_PARROTS_AND_BATS);
@@ -1147,6 +1158,11 @@ public class PopulateMaps implements Maps {
         playerAdvancementsStringMap.put("advancements.husbandry.make_a_sign_glow.title", HUSBANDRY_ADVANCEMENT_GLOW_AND_BEHOLD);
         playerAdvancementsStringMap.put("advancements.husbandry.allay_deliver_item_to_player.title", HUSBANDRY_ADVANCEMENT_FRIEND_IN_ME);
         playerAdvancementsStringMap.put("advancements.husbandry.allay_deliver_cake_to_note_block.title", HUSBANDRY_ADVANCEMENT_BIRTHDAY_SONG);
+        playerAdvancementsStringMap.put("advancements.husbandry.obtain_sniffer_egg.title", HUSBANDRY_ADVANCEMENT_SMELLS_FUNNY);
+        playerAdvancementsStringMap.put("advancements.husbandry.feed_snifflet.title", HUSBANDRY_ADVANCEMENT_LITTLE_SNIFFS);
+        playerAdvancementsStringMap.put("advancements.husbandry.plant_any_sniffer_seed.title", HUSBANDRY_ADVANCEMENT_PLANTING_THE_PAST);
+        playerAdvancementsStringMap.put("advancements.adventure.trim_with_any_armor_pattern.title", HUSBANDRY_ADVANCEMENT_CRAFTING_A_NEW_LOOK);
+        playerAdvancementsStringMap.put("advancements.adventure.trim_with_all_exclusive_armor_patterns.title", HUSBANDRY_ADVANCEMENT_SMITHING_WITH_STYLE);
         playerAdvancementsStringMap.put("advancements.nether.root.title", NETHER_ADVANCEMENT_NETHER);
         playerAdvancementsStringMap.put("advancements.nether.return_to_sender.title", NETHER_ADVANCEMENT_RETURN_TO_SENDER);
         playerAdvancementsStringMap.put("advancements.nether.find_fortress.title", NETHER_ADVANCEMENT_TERRIBLE_FORTRESS);
@@ -1444,6 +1460,7 @@ public class PopulateMaps implements Maps {
         blockStateBaseRedstoneBlocksMap.put(Blocks.TRAPPED_CHEST, TRAPPED_CHEST_ENABLED);
         blockStateBaseRedstoneBlocksMap.put(Blocks.TRIPWIRE_HOOK, TRIPWIRE_HOOK_ENABLED);
         blockStateBaseRedstoneBlocksMap.put(Blocks.JUKEBOX, JUKEBOX_EMITS_REDSTONE);
+        blockStateBaseRedstoneBlocksMap.put(Blocks.CHISELED_BOOKSHELF, CHISELED_BOOKSHELF_EMITS_REDSTONE);
 
         itemItemMap.put(Items.BOW, BOW_DURABILITY);
         itemItemMap.put(Items.CARROT_ON_A_STICK, CARROT_ON_STICK_DURABILITY);
@@ -1591,6 +1608,7 @@ public class PopulateMaps implements Maps {
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.BAMBOO_JUNGLE), BAMBOO_JUNGLE_BIOME);
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.BEACH), BEACH_BIOME);
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.BIRCH_FOREST), BIRCH_FOREST_BIOME);
+        biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.CHERRY_GROVE), CHERRY_GROVE_BIOME);
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.COLD_OCEAN), COLD_OCEAN_BIOME);
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.DARK_FOREST), DARK_FOREST_BIOME);
         biomeSourceBiomeHolderMap.put(biomeRegistry.getHolderOrThrow(Biomes.DEEP_COLD_OCEAN), DEEP_COLD_OCEAN_BIOME);

@@ -20,6 +20,6 @@ public abstract class MixinVillager {
         int villagerDailyRestocks = Gamerules.VILLAGER_DAILY_RESTOCKS.getInt();
         if (villagerDailyRestocks == 0) return original;
         long restockTimeLimit = 4800L / villagerDailyRestocks;
-        return this.numberOfRestocksToday == 0 | this.numberOfRestocksToday < 2 && ((Entity) (Object) this).level.getGameTime() > this.lastRestockGameTime + restockTimeLimit;
+        return this.numberOfRestocksToday == 0 | this.numberOfRestocksToday < 2 && ((Entity) (Object) this).level().getGameTime() > this.lastRestockGameTime + restockTimeLimit;
     }
 }

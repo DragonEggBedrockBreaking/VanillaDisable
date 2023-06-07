@@ -114,9 +114,10 @@ public abstract class MixinGameRuleCommand implements Lists, Maps {
         if (!gamerules.isEmpty()) {
             String joined = String.join("\n", gamerules);
             joined = "Here are the gamerules for the category:\n\n" + joined;
-            source.sendSuccess(Component.literal(joined), true);
+            String finalJoined = joined;
+            source.sendSuccess(() -> Component.literal(finalJoined), true);
         } else {
-            source.sendSuccess(Component.translatable("commands.gamerule.category.invalid"), true);
+            source.sendSuccess(() -> Component.translatable("commands.gamerule.category.invalid"), true);
         }
         return lv.getCommandResult();
     }
@@ -196,13 +197,13 @@ public abstract class MixinGameRuleCommand implements Lists, Maps {
             return GameRuleCommand.queryRule(arg, arg2);
         }
         if (!description.getString().equals(arg2.getDescriptionId() + ".description")) {
-            arg.sendSuccess(description, false);
+            arg.sendSuccess(() -> description, false);
         }
-        arg.sendSuccess(Component.translatable("commands.gamerule.query", id, lv.toString()), false);
+        arg.sendSuccess(() -> Component.translatable("commands.gamerule.query", id, lv.toString()), false);
         if (lv.toString().equals(defaultVal)) {
-            arg.sendSuccess(Component.translatable("commands.gamerule.already_default"), false);
+            arg.sendSuccess(() -> Component.translatable("commands.gamerule.already_default"), false);
         } else {
-            arg.sendSuccess(Component.translatable("commands.gamerule.default", defaultVal), false);
+            arg.sendSuccess(() -> Component.translatable("commands.gamerule.default", defaultVal), false);
         }
         return lv.getCommandResult();
     }

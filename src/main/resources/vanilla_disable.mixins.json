@@ -19,7 +19,6 @@
     "blocks.MixinBeaconBlockEntity",
     "blocks.MixinBlock",
     "blocks.MixinBlockStateBase",
-    "blocks.MixinBuddingAmethystBlock",
     "blocks.MixinCauldronBlock",
     "blocks.MixinConduitBlockEntity",
     "blocks.MixinEntity",

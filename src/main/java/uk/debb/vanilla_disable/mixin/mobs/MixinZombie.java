@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.util.gamerules.Gamerules;
 @Mixin(Zombie.class)
 public abstract class MixinZombie {
     @ModifyExpressionValue(
-            method = "wasKilled",
+            method = "killedEntity",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"

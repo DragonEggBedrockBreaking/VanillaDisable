@@ -18,7 +18,7 @@ public abstract class MixinItemEntity {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void discardItem(CallbackInfo ci) {
-        if (this.age >= Gamerules.ITEM_DESPAWN_TIME.getInt() * 20 && !(((Entity) (Object) this).getLevel().isClientSide())) {
+        if (this.age >= Gamerules.ITEM_DESPAWN_TIME.getInt() * 20 && !(((Entity) (Object) this).level().isClientSide())) {
             ((Entity) (Object) this).discard();
         }
     }

@@ -33,11 +33,8 @@
   "accessWidener": "vanilla_disable.aw",
   "depends": {
     "fabricloader": ">=0.14.9",
-    "fabric-game-rule-api-v1": ">=1.0.22",
-    "minecraft": ">=1.19.3",
+    "fabric-game-rule-api-v1": ">=1.0.38",
+    "minecraft": "1.20.*",
     "java": ">=17"
-  },
-  "suggests": {
-    "quilt_loader": "*"
   }
 }

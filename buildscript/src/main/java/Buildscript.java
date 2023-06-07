@@ -44,7 +44,6 @@ public class Buildscript extends SimpleFabricProject {
         // Conditional Mixin
         jij(d.addMaven("https://jitpack.io/", new MavenId("com.github.Fallen-Breath", "conditional-mixin", Versions.CONDITIONAL_MIXIN_VERSION), ModDependencyFlag.COMPILE, ModDependencyFlag.RUNTIME));
         // LazyDFU
-        d.addMaven("https://api.modrinth.com/maven/", new MavenId("maven.modrinth", "lazydfu", Versions.LAZYDFU_VERSION), ModDependencyFlag.RUNTIME);
     }
 
     @Override
