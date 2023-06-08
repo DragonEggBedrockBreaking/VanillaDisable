@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.LevelResource;
 
@@ -200,6 +201,11 @@ public class DataHandler {
             put("cooldown", BOOLEAN);
             put("push_behaviour", CLOB);
             put("cauldron_interaction", BOOLEAN);
+            put("ignited_by_lava", BOOLEAN);
+            put("destroy_speed", REAL);
+            put("requires_correct_tool_for_drops", BOOLEAN);
+            put("is_redstone_conductor", BOOLEAN);
+            put("is_suffocating", BOOLEAN);
         }});
         cols.put("items", new Object2ObjectOpenHashMap<>() {{
             put("can_use", BOOLEAN);
@@ -367,6 +373,7 @@ public class DataHandler {
                 blocks.put(BuiltInRegistries.BLOCK.getKey(block).toString(), new Object2ObjectOpenHashMap<>() {{
                     String name = block.toString();
                     Item item = block.asItem();
+                    BlockState blockState = block.defaultBlockState();
 
                     put("can_place_in_overworld", "true");
                     put("can_place_in_nether", "true");
@@ -456,13 +463,21 @@ public class DataHandler {
                     }
 
                     if (!BuiltInRegistries.BLOCK_ENTITY_TYPE.containsKey(BuiltInRegistries.BLOCK.getKey(block))) {
-                        put("push_behaviour", "'" + block.defaultBlockState().getPistonPushReaction() + "'");
+                        put("push_behaviour", "'" + blockState.getPistonPushReaction() + "'");
                     }
 
                     if (CauldronInteraction.EMPTY.containsKey(item) || CauldronInteraction.WATER.containsKey(item) ||
                             CauldronInteraction.LAVA.containsKey(item) || CauldronInteraction.POWDER_SNOW.containsKey(item)) {
                         put("cauldron_interaction", "true");
                     }
+
+                    put("ignited_by_lava", String.valueOf(blockState.ignitedByLava()));
+                    put("destroy_speed", String.valueOf(blockState.getDestroySpeed(null, null)));
+                    put("requires_correct_tool_for_drops", String.valueOf(blockState.requiresCorrectToolForDrops()));
+                    put("is_redstone_conductor", String.valueOf(blockState.isRedstoneConductor(null, null)));
+                    try {
+                        put("is_suffocating", String.valueOf(blockState.isSuffocating(null, null)));
+                    } catch (NullPointerException ignored) {}
                 }}));
 
         BuiltInRegistries.ITEM.forEach((item) -> {
@@ -668,6 +683,11 @@ public class DataHandler {
             put("cooldown", "Control the cooldown of the portal.");
             put("push_behaviour", "Control the behaviour of the block being pushed by a piston.");
             put("cauldron_interaction", "Toggle the block having a special interaction with a cauldron.");
+            put("ignited_by_lava", "Toggle the block being able to be ignited by lava.");
+            put("destroy_speed", "Control how fast the block is destroyed.");
+            put("requires_correct_tool_for_drops", "Toggle whether the block requires the correct tool to drop its drops.");
+            put("is_redstone_conductor", "Toggle whether the block conducts redstone.");
+            put("is_suffocating", "Toggle whether the block suffocates entities.");
         }});
 
         itemData.put("enchantment", new Object2ObjectOpenHashMap<>() {{
