@@ -14,10 +14,12 @@ public abstract class MixinPlayerAdvancements implements Maps {
     @ModifyReturnValue(method = "getOrStartProgress", at = @At("RETURN"))
     private AdvancementProgress cancelPerformingCriterion(AdvancementProgress original, Advancement advancement) {
         if (advancement.getDisplay() != null) {
-            Gamerules gameRule = playerAdvancementsStringMap.get(advancement.getDisplay().getTitle().toString().split("'")[1]);
-            if (!Gamerules.ADVANCEMENTS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
-                return new AdvancementProgress();
-            }
+            try {
+                Gamerules gameRule = playerAdvancementsStringMap.get(advancement.getDisplay().getTitle().toString().split("'")[1]);
+                if (!Gamerules.ADVANCEMENTS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
+                    return new AdvancementProgress();
+                }
+            } catch (ArrayIndexOutOfBoundsException ignored) {}
         }
         return original;
     }
