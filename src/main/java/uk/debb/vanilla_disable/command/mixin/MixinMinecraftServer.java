@@ -9,13 +9,12 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
-    @Inject(
-            method = "createLevels",
-            at = @At("RETURN")
-    )
+    @Inject(method = "createLevels", at = @At("RETURN"))
     private void afterLevelCreation(CallbackInfo ci) {
         DataHandler.server = (MinecraftServer) (Object) this;
-        DataHandler.populate();
+        if (!DataHandler.populationDone) {
+            DataHandler.populate();
+        }
         DataHandler.handleDatabase();
     }
 
