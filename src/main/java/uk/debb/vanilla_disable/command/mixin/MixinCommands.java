@@ -54,15 +54,6 @@ public abstract class MixinCommands {
 
             RegistryAccess registryAccess = DataHandler.server.registryAccess();
 
-            LiteralArgumentBuilder<CommandSourceStack> updateDB = literal("updateDB").executes(context -> {
-                DataHandler.updateDB();
-                context.getSource().sendSuccess(
-                        () -> Component.literal("The database has been updated."),
-                        false
-                );
-                return 1;
-            });
-
             LiteralArgumentBuilder<CommandSourceStack> overallResetDBBuilder = literal("reset");
             LiteralArgumentBuilder<CommandSourceStack> resetDBBuilder = literal("all").executes(context -> {
                 DataHandler.resetAll();
@@ -75,7 +66,7 @@ public abstract class MixinCommands {
             overallResetDBBuilder.then(resetDBBuilder);
             Stream.of("entities", "blocks", "items", "others").forEach(table -> {
                 LiteralArgumentBuilder<CommandSourceStack> tableBuilder = literal(table).executes(context -> {
-                    DataHandler.resetOne(table, true);
+                    DataHandler.resetOne(table);
                     context.getSource().sendSuccess(
                             () -> Component.literal("The " + table + " table has been reset."),
                             false
@@ -114,7 +105,7 @@ public abstract class MixinCommands {
                                         add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
                                     }}))
                             )
-                    ).then(overallResetDBBuilder).then(updateDB)
+                    ).then(overallResetDBBuilder)
             );
         });
         t.start();
