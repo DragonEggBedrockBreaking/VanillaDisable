@@ -23,13 +23,14 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "uk.debb.vanilla_disable.util.VanillaDisable"
+      "uk.debb.vanilla_disable.gamerules.util.GameruleInitializer",
+      "uk.debb.vanilla_disable.common.VanillaDisable"
     ]
   },
   "mixins": [
-    "vanilla_disable.mixins.json",
-    "vanilla_disable_util.mixins.json",
-    "vanilla_disable_command.mixins.json"
+    "vanilla_disable_gamerules.mixins.json",
+    "vanilla_disable_gamerules_util.mixins.json",
+    "vanilla_disable_commands_util.mixins.json"
   ],
   "accessWidener": "vanilla_disable.aw",
   "depends": {
