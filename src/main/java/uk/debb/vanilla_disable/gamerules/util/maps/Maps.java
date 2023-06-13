@@ -23,7 +23,6 @@ import uk.debb.vanilla_disable.gamerules.util.gamerules.Gamerules;
 public interface Maps {
     Object2ObjectMap<MobEffect, Gamerules> livingEntityMobEffectMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, Gamerules> biomeGenerationSettingsStringMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Item, Gamerules> dispenserBlockItemMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Potion, Gamerules> arrowPotionMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, Gamerules> goalClassMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<StructureType<?>, Gamerules> structureCheckStructureTypeMap = new Object2ObjectOpenHashMap<>();
@@ -46,17 +45,12 @@ public interface Maps {
     Object2ObjectMap<Enchantment, Gamerules> enchantmentHelperEnchantmentMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Class<?>, Gamerules> mobClassMapToggle = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, Gamerules> playerAdvancementsStringMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Item, Gamerules> abstractCauldronBlockItemMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Block, Gamerules> fallingBlockBlockMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Holder<PaintingVariant>, Gamerules> paintingHolderPaintingVariantMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<VillagerType, Gamerules> villagerDataVillagerTypeMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<VillagerProfession, Gamerules> villagerDataVillagerProfessionMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Pair<Enchantment, Enchantment>, Gamerules> enchantmentPairEnchantmentMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Block, Gamerules> blockStateBaseRedstoneBlocksMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Holder<Biome>, Gamerules> biomeSourceBiomeHolderMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Item, Gamerules> itemItemMap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<Block, Gamerules> blockStateBaseBlockMapPortals = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, GameruleCategories> stringToVanillaDisableGameruleCategoryMap = new Object2ObjectOpenHashMap<>();
     Object2BooleanMap<String> stringToDefaultBooleanMap = new Object2BooleanOpenHashMap<>();
     Object2IntMap<String> stringToDefaultIntMap = new Object2IntOpenHashMap<>();

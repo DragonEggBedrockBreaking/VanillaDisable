@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8.5",
-  "plugin": "uk.debb.vanilla_disable.gamerules.mixin_plugins.VanillaDisableMixinConfigPlugin",
+  "plugin": "uk.debb.vanilla_disable.gamerules.mixin_plugins.CaffeineConfigMixinConfigPlugin",
   "package": "uk.debb.vanilla_disable.gamerules.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
@@ -15,18 +15,7 @@
     "biome.MixinBiomeManager",
     "biome.MixinBiomeSource",
 
-    "blocks.MixinAbstractCauldronBlock",
-    "blocks.MixinBeaconBlockEntity",
-    "blocks.MixinBlock",
-    "blocks.MixinBlockStateBase",
-    "blocks.MixinCauldronBlock",
-    "blocks.MixinConduitBlockEntity",
-    "blocks.MixinEntity",
-    "blocks.MixinFarmBlock",
     "blocks.MixinSwordItem",
-    "blocks.container.MixinChestBlock",
-    "blocks.container.MixinEnderChestBlock",
-    "blocks.container.MixinShulkerBoxBlock",
 
     "commands.MixinCommands",
 
@@ -40,22 +29,15 @@
     "despawning.MixinNaturalSpawner",
     "despawning.MixinThrownEnderpearl",
 
-    "dispenser.MixinDispenserBlock",
-
     "effects.MixinLivingEntity",
 
     "enchantments.MixinEnchantment",
     "enchantments.MixinEnchantmentHelper",
 
-    "entity.MixinAbstractFurnaceBlockEntity",
-    "entity.MixinBlock",
     "entity.MixinEnderDragon",
     "entity.MixinEntity",
-    "entity.MixinFallingBlock",
-    "entity.MixinGrindstoneMenu",
     "entity.MixinLivingEntity",
     "entity.MixinPainting",
-    "entity.MixinPointedDripstoneBlock",
     "entity.MixinThrownExperienceBottle",
 
     "food.MixinFoodData",
@@ -63,10 +45,7 @@
     "food.hunger.MixinItem",
     "food.hunger.MixinPlayer",
 
-    "fluids.MixinBucketItem",
     "fluids.MixinEntity",
-    "fluids.MixinLavaFluid",
-    "fluids.MixinWaterFluid",
 
     "items.MixinBowItem",
     "items.MixinCrossbowItem",
@@ -104,18 +83,6 @@
     "player.MixinEntity",
 
     "potions.MixinPotionUtils",
-
-    "redstone.MixinBlockStateBase",
-    "redstone.MixinButtonBlock",
-    "redstone.MixinComparatorBlock",
-    "redstone.MixinDiodeBlock",
-    "redstone.MixinDispenserBlock",
-    "redstone.MixinDropperBlock",
-    "redstone.MixinObserverBlock",
-    "redstone.MixinPistonBaseBlock",
-    "redstone.MixinRedStoneWireBlock",
-    "redstone.MixinRepeaterBlock",
-    "redstone.MixinSculkSensorBlock",
 
     "spawn_limits.MixinMobCategory",
     "spawn_limits.MixinMonster",

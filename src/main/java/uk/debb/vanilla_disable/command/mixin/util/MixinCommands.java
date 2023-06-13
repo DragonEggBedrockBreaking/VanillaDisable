@@ -10,9 +10,6 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -51,8 +48,6 @@ public abstract class MixinCommands {
                     e.printStackTrace();
                 }
             }
-
-            RegistryAccess registryAccess = DataHandler.server.registryAccess();
 
             LiteralArgumentBuilder<CommandSourceStack> overallResetDBBuilder = literal("reset");
             LiteralArgumentBuilder<CommandSourceStack> resetDBBuilder = literal("all").executes(context -> {
@@ -98,11 +93,11 @@ public abstract class MixinCommands {
                                     .then(minorBuilderComplex("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
                                             .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
                                     .then(minorBuilderComplex("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
-                                    .then(minorBuilderSimple("biome", registryAccess.registryOrThrow(Registries.BIOME).keySet().stream().map(Object::toString)))
-                                    .then(minorBuilderSimple("structure", registryAccess.registryOrThrow(Registries.STRUCTURE).keySet().stream().map(Object::toString)))
+                                    .then(minorBuilderSimple("biome", DataHandler.biomeRegistry.keySet().stream().map(Object::toString)))
+                                    .then(minorBuilderSimple("structure", DataHandler.structureRegistry.keySet().stream().map(Object::toString)))
                                     .then(minorBuilder(new ObjectArrayList<>() {{
-                                        add(BuiltInRegistries.FEATURE.keySet().stream().map(Object::toString));
-                                        add(registryAccess.registryOrThrow(Registries.PLACED_FEATURE).keySet().stream().map(Object::toString));
+                                        add(DataHandler.featureRegistry.keySet().stream().map(Object::toString));
+                                        add(DataHandler.placedFeatureRegistry.keySet().stream().map(Object::toString));
                                     }}))
                             )
                     ).then(overallResetDBBuilder)

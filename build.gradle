@@ -22,7 +22,7 @@ dependencies {
 	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 	include(modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version)))
 	include(modImplementation("net.caffeinemc:mixin-config:${project.caffeine_config_version}"))
-	include(modImplementation("com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"))
+	include(modImplementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixin_extras_version}")))
 	include(modImplementation("com.h2database:h2:${project.h2_version}"))
 }
 

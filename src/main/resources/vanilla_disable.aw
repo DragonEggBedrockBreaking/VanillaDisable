@@ -114,3 +114,7 @@ accessible method net/minecraft/server/commands/GameRuleCommand queryRule (Lnet/
 accessible field net/minecraft/world/level/block/DispenserBlock DISPENSER_REGISTRY Ljava/util/Map;
 accessible field net/minecraft/world/entity/npc/Villager WANTED_ITEMS Ljava/util/Set;
 accessible field net/minecraft/world/level/biome/MobSpawnSettings spawners Ljava/util/Map;
+
+accessible field net/minecraft/world/item/BucketItem content Lnet/minecraft/world/level/material/Fluid;
+accessible method net/minecraft/world/level/block/BasePressurePlateBlock getPressedTime ()I
+accessible field net/minecraft/world/inventory/ItemCombinerMenu access Lnet/minecraft/world/inventory/ContainerLevelAccess;
