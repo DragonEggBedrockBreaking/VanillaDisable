@@ -1,7 +1,6 @@
 package uk.debb.vanilla_disable.command.mixin.rule.item.creative_breaking;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,7 +13,6 @@ public abstract class MixinItem {
 
     @ModifyReturnValue(method = "canAttackBlock", at = @At("RETURN"))
     private boolean canAttackBlock(boolean original) {
-        if (this.asItem() instanceof BlockItem) return original;
         String name = DataHandler.getKeyFromItemRegistry(this.asItem());
         return DataHandler.getBoolean("items", name, "can_break_blocks_in_creative");
     }

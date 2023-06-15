@@ -19,7 +19,6 @@ public abstract class MixinItemStack {
             )
     )
     private Item getItem(Item original) {
-        if (original instanceof BlockItem) return original;
         String item = DataHandler.getKeyFromItemRegistry(original);
         if (!DataHandler.getBoolean("items", item, "works")) {
             return Items.AIR;

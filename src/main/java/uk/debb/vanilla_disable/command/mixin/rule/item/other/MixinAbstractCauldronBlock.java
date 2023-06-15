@@ -1,7 +1,6 @@
 package uk.debb.vanilla_disable.command.mixin.rule.item.other;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,11 +17,9 @@ public abstract class MixinAbstractCauldronBlock {
             )
     )
     private ItemStack getItemInHand(ItemStack original) {
-        if (!(original.getItem() instanceof BlockItem)) {
-            String name = DataHandler.getKeyFromItemRegistry(original.getItem());
-            if (!DataHandler.getBoolean("items", name, "cauldron_interaction")) {
-                return ItemStack.EMPTY;
-            }
+        String name = DataHandler.getKeyFromItemRegistry(original.getItem());
+        if (!DataHandler.getBoolean("items", name, "cauldron_interaction")) {
+            return ItemStack.EMPTY;
         }
         return original;
     }

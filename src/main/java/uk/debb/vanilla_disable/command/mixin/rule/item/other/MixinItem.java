@@ -17,7 +17,6 @@ public abstract class MixinItem {
     @ModifyReturnValue(method = "getMaxDamage", at = @At("RETURN"))
     private int getMaxDamage(int original) {
         if (DataHandler.isConnectionNull()) return original;
-        if (this.asItem() instanceof BlockItem) return original;
         if (!this.asItem().canBeDepleted()) return original;
         String item = DataHandler.getKeyFromItemRegistry(this.asItem());
         return DataHandler.getInt("items", item, "durability");
@@ -25,14 +24,12 @@ public abstract class MixinItem {
 
     @ModifyReturnValue(method = "isFireResistant", at = @At("RETURN"))
     private boolean isFireResistant(boolean original) {
-        if (this.asItem() instanceof BlockItem) return original;
         String item = DataHandler.getKeyFromItemRegistry(this.asItem());
         return !DataHandler.getBoolean("items", item, "burns");
     }
 
     @ModifyReturnValue(method = "canBeHurtBy", at = @At("RETURN"))
     private boolean canBeHurtBy(boolean original, DamageSource damageSource) {
-        if (this.asItem() instanceof BlockItem) return original;
         String item = DataHandler.getKeyFromItemRegistry(this.asItem());
         if (damageSource.is(DamageTypeTags.IS_FIRE)) {
             return DataHandler.getBoolean("items", item, "burns");

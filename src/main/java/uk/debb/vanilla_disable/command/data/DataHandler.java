@@ -225,22 +225,17 @@ public class DataHandler {
             put("redstone_delay", INTEGER);
             put("redstone_duration", INTEGER);
             put("can_drop_xp", BOOLEAN);
-            put("dispenser_interaction", BOOLEAN);
             put("can_fall", BOOLEAN);
             put("can_be_trampled", BOOLEAN);
             put("alpha_behaviour", BOOLEAN);
             put("opening_blockable", BOOLEAN);
             put("cooldown", INTEGER);
             put("push_behaviour", CLOB);
-            put("cauldron_interaction", BOOLEAN);
             put("ignited_by_lava", BOOLEAN);
             put("destroy_speed", REAL);
             put("requires_correct_tool_for_drops", BOOLEAN);
-            put("fuel_duration", INTEGER);
-            put("burns_as_item", BOOLEAN);
             put("burn_odds", INTEGER);
             put("ignite_odds", INTEGER);
-            put("item_can_break_blocks_in_creative", BOOLEAN);
         }});
         cols.put("items", new Object2ObjectOpenHashMap<>() {{
             put("works", BOOLEAN);
@@ -476,10 +471,6 @@ public class DataHandler {
                         put("can_drop_xp", "true");
                     }
 
-                    if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
-                        put("dispenser_interaction", "true");
-                    }
-
                     if (block instanceof FallingBlock || block.equals(Blocks.POINTED_DRIPSTONE)) {
                         put("can_fall", "true");
                     }
@@ -509,79 +500,63 @@ public class DataHandler {
                         }
                     }
 
-                    if (CauldronInteraction.EMPTY.containsKey(item) || CauldronInteraction.WATER.containsKey(item) ||
-                            CauldronInteraction.LAVA.containsKey(item) || CauldronInteraction.POWDER_SNOW.containsKey(item)) {
-                        put("cauldron_interaction", "true");
-                    }
-
                     put("ignited_by_lava", String.valueOf(blockState.ignitedByLava()));
                     put("destroy_speed", String.valueOf(blockState.getDestroySpeed(null, null)));
                     put("requires_correct_tool_for_drops", String.valueOf(blockState.requiresCorrectToolForDrops()));
-
-                    Map<Item, Integer> fuels = AbstractFurnaceBlockEntity.getFuel();
-                    if (fuels.containsKey(item)) {
-                        put("fuel_duration", String.valueOf(fuels.get(item)));
-                    }
-
-                    put("burns_as_item", String.valueOf(!(name.contains("netherite") || name.contains("debris"))));
                     put("burn_odds", String.valueOf(((FireBlock)Blocks.FIRE).getBurnOdds(block.defaultBlockState())));
                     put("ignite_odds", String.valueOf(((FireBlock)Blocks.FIRE).getIgniteOdds(block.defaultBlockState())));
-                    put("item_can_break_blocks_in_creative", "true");
                 }}));
 
-        itemRegistry.forEach((item) -> {
-            if (item instanceof BlockItem) return;
+        itemRegistry.forEach((item) ->
+                items.put(Objects.requireNonNull(itemRegistry.getKey(item)).toString(), new Object2ObjectOpenHashMap<>() {{
+                    if (!blockRegistry.stream().map(Block::toString).toList().contains(item.toString())) {
+                        String name = item.toString();
 
-            items.put(Objects.requireNonNull(itemRegistry.getKey(item)).toString(), new Object2ObjectOpenHashMap<>() {{
-                if (!blockRegistry.stream().map(Block::toString).toList().contains(item.toString())) {
-                    String name = item.toString();
+                        put("works", "true");
 
-                    put("works", "true");
+                        put("burns", String.valueOf(!(name.contains("netherite") || name.contains("debris"))));
 
-                    put("burns", String.valueOf(!(name.contains("netherite") || name.contains("debris"))));
+                        if (item.equals(Items.BOW) || item.equals(Items.CROSSBOW)) {
+                            put("can_spam", "false");
+                        }
 
-                    if (item.equals(Items.BOW) || item.equals(Items.CROSSBOW)) {
-                        put("can_spam", "false");
+                        if (item.canBeDepleted()) {
+                            put("durability", String.valueOf(item.getMaxDamage()));
+                            enchantmentRegistry.forEach((enchantment) -> {
+                                if (enchantment.canEnchant(new ItemStack(item))) {
+                                    put(enchantmentRegistry.getKey(enchantment) + "_enchantment", "true");
+                                }
+                            });
+                        }
+
+                        FoodProperties foodProperties = item.getFoodProperties();
+                        if (foodProperties != null) {
+                            put("nutrition", String.valueOf(foodProperties.getNutrition()));
+                            put("saturation", String.valueOf(foodProperties.getSaturationModifier()));
+                        }
+
+                        if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
+                                item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
+                            potionRegistry.keySet().forEach((potion) -> put(potion + "_effect", "true"));
+                        }
+
+                        if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
+                            put("dispenser_interaction", "true");
+                        }
+
+                        if (CauldronInteraction.EMPTY.containsKey(item) || CauldronInteraction.WATER.containsKey(item) ||
+                                CauldronInteraction.LAVA.containsKey(item) || CauldronInteraction.POWDER_SNOW.containsKey(item)) {
+                            put("cauldron_interaction", "true");
+                        }
+
+                        Map<Item, Integer> fuels = AbstractFurnaceBlockEntity.getFuel();
+                        if (fuels.containsKey(item)) {
+                            put("fuel_duration", String.valueOf(fuels.get(item)));
+                        }
+
+                        put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
                     }
-
-                    if (item.canBeDepleted()) {
-                        put("durability", String.valueOf(item.getMaxDamage()));
-                        enchantmentRegistry.forEach((enchantment) -> {
-                            if (enchantment.canEnchant(new ItemStack(item))) {
-                                put(enchantmentRegistry.getKey(enchantment) + "_enchantment", "true");
-                            }
-                        });
-                    }
-
-                    FoodProperties foodProperties = item.getFoodProperties();
-                    if (foodProperties != null) {
-                        put("nutrition", String.valueOf(foodProperties.getNutrition()));
-                        put("saturation", String.valueOf(foodProperties.getSaturationModifier()));
-                    }
-
-                    if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
-                            item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
-                        potionRegistry.keySet().forEach((potion) -> put(potion + "_effect", "true"));
-                    }
-
-                    if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
-                        put("dispenser_interaction", "true");
-                    }
-
-                    if (CauldronInteraction.EMPTY.containsKey(item) || CauldronInteraction.WATER.containsKey(item) ||
-                            CauldronInteraction.LAVA.containsKey(item) || CauldronInteraction.POWDER_SNOW.containsKey(item)) {
-                        put("cauldron_interaction", "true");
-                    }
-
-                    Map<Item, Integer> fuels = AbstractFurnaceBlockEntity.getFuel();
-                    if (fuels.containsKey(item)) {
-                        put("fuel_duration", String.valueOf(fuels.get(item)));
-                    }
-
-                    put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
-                }
-            }});
-        });
+                }}));
 
         others.addAll(server.getAdvancements().getAllAdvancements()
                 .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).toList());
@@ -698,22 +673,17 @@ public class DataHandler {
             put("redstone_delay", "Control the redstone delay of the block.");
             put("redstone_duration", "Control the redstone duration of the block.");
             put("can_drop_xp", "Toggle the block being able to drop XP.");
-            put("dispenser_interaction", "Toggle the block having a special interaction with a dispenser.");
             put("can_fall", "Toggle the block being able to fall.");
             put("can_be_trampled", "Toggle farmland being able to be trampled by the player.");
             put("alpha_behaviour", "Toggle tnt behaving like it did in alpha.");
             put("opening_blockable", "Toggle solid blocks or cats blocking the opening of the container.");
             put("cooldown", "Control the cooldown of the portal.");
             put("push_behaviour", "Control the behaviour of the block being pushed by a piston.");
-            put("cauldron_interaction", "Toggle the block having a special interaction with a cauldron.");
             put("ignited_by_lava", "Toggle the block being able to be ignited by lava.");
             put("destroy_speed", "Control how fast the block is destroyed.");
             put("requires_correct_tool_for_drops", "Toggle whether the block requires the correct tool to drop its drops.");
-            put("fuel_duration", "Controls how long a fuel lasts in a furnace, blast furnace, or smoker.");
-            put("burns_as_item", "Toggle the block being able to burn in fire or lava as an item.");
             put("burn_odds", "Control the chance that the block will burn.");
             put("ignite_odds", "Control the chance that the block will ignite.");
-            put("item_can_break_blocks_in_creative", "Toggle whether the block's item can be used to break blocks in creative mode.");
         }});
 
         itemData.put("enchantment", new Object2ObjectOpenHashMap<>() {{
@@ -993,7 +963,6 @@ public class DataHandler {
      * @return The value.
      */
     public static String getDefault(String table, String row, String column) {
-        System.out.println(table + " " + row + " " + column);
         return switch (table) {
             case "blocks" -> blocks.get(row).get(column);
             case "entities" -> entities.get(row).get(column);
