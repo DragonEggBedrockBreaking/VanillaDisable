@@ -35,27 +35,21 @@ public abstract class MixinBlockStateBase {
 
     @ModifyReturnValue(method = "ignitedByLava", at = @At("RETURN"))
     private boolean ignitedByLava(boolean original) {
-        if (DataHandler.isConnectionNull()) {
-            return original;
-        }
+        if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
         return DataHandler.getBoolean("blocks", block, "ignited_by_lava");
     }
 
     @ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
     private float getDestroySpeed(float original) {
-        if (DataHandler.isConnectionNull()) {
-            return original;
-        }
+        if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
         return (float) DataHandler.getDouble("blocks", block, "destroy_speed");
     }
 
     @ModifyReturnValue(method = "requiresCorrectToolForDrops", at = @At("RETURN"))
     private boolean requiresCorrectToolForDrops(boolean original) {
-        if (DataHandler.isConnectionNull()) {
-            return original;
-        }
+        if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
         return DataHandler.getBoolean("blocks", block, "requires_correct_tool_for_drops");
     }

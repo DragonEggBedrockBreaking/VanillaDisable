@@ -1,27 +1,29 @@
-package uk.debb.vanilla_disable.gamerules.mixin.arrow;
+package uk.debb.vanilla_disable.command.mixin.rule.item.potion;
 
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.gamerules.util.gamerules.Gamerules;
-import uk.debb.vanilla_disable.gamerules.util.maps.Maps;
+import uk.debb.vanilla_disable.command.data.DataHandler;
+
+import java.util.Objects;
 
 @Mixin(Arrow.class)
-public abstract class MixinArrow implements Maps { 
-    @Shadow
-    public abstract void setEffectsFromItem(ItemStack arg);
+public abstract class MixinArrow {
+    @Shadow public abstract void setEffectsFromItem(ItemStack itemStack);
 
     @Inject(method = "setEffectsFromItem", at = @At("HEAD"), cancellable = true)
-    private void clearEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {
+    private void setEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {
         if (itemStack.is(Items.TIPPED_ARROW)) {
-            Gamerules gameRule = arrowPotionMap.get(PotionUtils.getPotion(itemStack));
-            if (!Gamerules.TIPPED_ARROWS_ENABLED.getBool() || (gameRule != null && !gameRule.getBool())) {
+            String item = DataHandler.getKeyFromItemRegistry(itemStack.getItem());
+            String potion = Objects.requireNonNull(DataHandler.potionRegistry.getKey(PotionUtils.getPotion(itemStack))) + "_effect";
+            if (!DataHandler.getBoolean("items", item, potion)) {
                 this.setEffectsFromItem(new ItemStack(Items.ARROW));
                 ci.cancel();
             }

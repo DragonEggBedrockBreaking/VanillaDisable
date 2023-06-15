@@ -1,18 +1,15 @@
-package uk.debb.vanilla_disable.gamerules.mixin.items;
+package uk.debb.vanilla_disable.command.mixin.rule.item.function;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.gamerules.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.command.data.DataHandler;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
     @ModifyReturnValue(method = "checkTotemDeathProtection", at = @At("RETURN"))
-    private boolean totemsDoNotWork(boolean original) {
-        if (!Gamerules.TOTEMS_ENABLED.getBool()) {
-            return false;
-        }
-        return original;
+    private boolean checkTotemDeathProtection(boolean original) {
+        return original && DataHandler.getBoolean("items", "minecraft:totem_of_undying", "works");
     }
 }

@@ -20,13 +20,9 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
@@ -83,8 +79,8 @@ public class DataHandler {
     private static Registry<VillagerProfession> villagerProfessionRegistry;
     private static Registry<VillagerType> villagerTypeRegistry;
     private static Registry<BlockEntityType<?>> blockEntityRegistry;
-    private static Registry<Enchantment> enchantmentRegistry;
-    private static Registry<Potion> potionRegistry;
+    public static Registry<Enchantment> enchantmentRegistry;
+    public static Registry<Potion> potionRegistry;
     public static Registry<Feature<?>> featureRegistry;
     private static Registry<DamageType> damageTypeRegistry;
     private static Registry<MobEffect> mobEffectRegistry;
@@ -241,27 +237,22 @@ public class DataHandler {
             put("destroy_speed", REAL);
             put("requires_correct_tool_for_drops", BOOLEAN);
             put("fuel_duration", INTEGER);
+            put("burns_as_item", BOOLEAN);
+            put("burn_odds", INTEGER);
+            put("ignite_odds", INTEGER);
+            put("item_can_break_blocks_in_creative", BOOLEAN);
         }});
         cols.put("items", new Object2ObjectOpenHashMap<>() {{
-            put("can_use", BOOLEAN);
+            put("works", BOOLEAN);
             put("durability", INTEGER);
             put("burns", BOOLEAN);
             put("can_spam", BOOLEAN);
             put("nutrition", INTEGER);
             put("saturation", REAL);
-            put("stack_size", INTEGER);
             put("can_break_blocks_in_creative", BOOLEAN);
 
             enchantmentRegistry.keySet().forEach(enchantment ->
                     put(enchantment + "_enchantment", BOOLEAN));
-
-            put("boot_enchantment_conflicts", BOOLEAN);
-            put("bow_enchantment_conflicts", BOOLEAN);
-            put("crossbow_enchantment_conflicts", BOOLEAN);
-            put("damage_enchantment_conflicts", BOOLEAN);
-            put("mining_enchantment_conflicts", BOOLEAN);
-            put("protection_enchantment_conflicts", BOOLEAN);
-            put("trident_enchantment_conflicts", BOOLEAN);
 
             potionRegistry.keySet().forEach(potion ->
                     put(potion + "_effect", BOOLEAN));
@@ -512,7 +503,7 @@ public class DataHandler {
                     if (!blockEntityRegistry.containsKey(blockRegistry.getKey(block))) {
                         if (block.equals(Blocks.OBSIDIAN) || block.equals(Blocks.CRYING_OBSIDIAN) ||
                                 block.equals(Blocks.REINFORCED_DEEPSLATE) || block.equals(Blocks.RESPAWN_ANCHOR)) {
-                            put("push_behaviour", "'" + PushReaction.BLOCK.toString() + "'");
+                            put("push_behaviour", "'" + PushReaction.BLOCK + "'");
                         } else {
                             put("push_behaviour", "'" + blockState.getPistonPushReaction() + "'");
                         }
@@ -531,23 +522,26 @@ public class DataHandler {
                     if (fuels.containsKey(item)) {
                         put("fuel_duration", String.valueOf(fuels.get(item)));
                     }
+
+                    put("burns_as_item", String.valueOf(!(name.contains("netherite") || name.contains("debris"))));
+                    put("burn_odds", String.valueOf(((FireBlock)Blocks.FIRE).getBurnOdds(block.defaultBlockState())));
+                    put("ignite_odds", String.valueOf(((FireBlock)Blocks.FIRE).getIgniteOdds(block.defaultBlockState())));
+                    put("item_can_break_blocks_in_creative", "true");
                 }}));
 
         itemRegistry.forEach((item) -> {
-            if (blockRegistry.stream().map(Block::asItem).toList().contains(item)) return;
+            if (item instanceof BlockItem) return;
 
             items.put(Objects.requireNonNull(itemRegistry.getKey(item)).toString(), new Object2ObjectOpenHashMap<>() {{
                 if (!blockRegistry.stream().map(Block::toString).toList().contains(item.toString())) {
-                    put("can_use", "true");
+                    String name = item.toString();
 
-                    if (item.toString().contains("netherite")) {
-                        put("burns", "false");
-                    } else {
-                        put("burns", "true");
-                    }
+                    put("works", "true");
+
+                    put("burns", String.valueOf(!(name.contains("netherite") || name.contains("debris"))));
 
                     if (item.equals(Items.BOW) || item.equals(Items.CROSSBOW)) {
-                        put("can_spam", "true");
+                        put("can_spam", "false");
                     }
 
                     if (item.canBeDepleted()) {
@@ -565,34 +559,6 @@ public class DataHandler {
                         put("saturation", String.valueOf(foodProperties.getSaturationModifier()));
                     }
 
-                    if (Enchantments.FROST_WALKER.canEnchant(new ItemStack(item))) {
-                        put("boot_enchantment_conflicts", "true");
-                    }
-
-                    if (Enchantments.INFINITY_ARROWS.canEnchant(new ItemStack(item))) {
-                        put("bow_enchantment_conflicts", "true");
-                    }
-
-                    if (Enchantments.MULTISHOT.canEnchant(new ItemStack(item))) {
-                        put("crossbow_enchantment_conflicts", "true");
-                    }
-
-                    if (Enchantments.SHARPNESS.canEnchant(new ItemStack(item))) {
-                        put("damage_enchantment_conflicts", "true");
-                    }
-
-                    if (Enchantments.BLOCK_FORTUNE.canEnchant(new ItemStack(item))) {
-                        put("mining_enchantment_conflicts", "true");
-                    }
-
-                    if (Enchantments.PROJECTILE_PROTECTION.canEnchant(new ItemStack(item))) {
-                        put("protection_enchantment_conflicts", "true");
-                    }
-
-                    if (Enchantments.RIPTIDE.canEnchant(new ItemStack(item))) {
-                        put("trident_enchantment_conflicts", "true");
-                    }
-
                     if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
                             item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
                         potionRegistry.keySet().forEach((potion) -> put(potion + "_effect", "true"));
@@ -607,13 +573,12 @@ public class DataHandler {
                         put("cauldron_interaction", "true");
                     }
 
-                    put("stack_size", String.valueOf(item.getMaxStackSize()));
-                    put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
-
                     Map<Item, Integer> fuels = AbstractFurnaceBlockEntity.getFuel();
                     if (fuels.containsKey(item)) {
                         put("fuel_duration", String.valueOf(fuels.get(item)));
                     }
+
+                    put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
                 }
             }});
         });
@@ -745,32 +710,27 @@ public class DataHandler {
             put("destroy_speed", "Control how fast the block is destroyed.");
             put("requires_correct_tool_for_drops", "Toggle whether the block requires the correct tool to drop its drops.");
             put("fuel_duration", "Controls how long a fuel lasts in a furnace, blast furnace, or smoker.");
+            put("burns_as_item", "Toggle the block being able to burn in fire or lava as an item.");
+            put("burn_odds", "Control the chance that the block will burn.");
+            put("ignite_odds", "Control the chance that the block will ignite.");
+            put("item_can_break_blocks_in_creative", "Toggle whether the block's item can be used to break blocks in creative mode.");
         }});
 
         itemData.put("enchantment", new Object2ObjectOpenHashMap<>() {{
             enchantmentRegistry.keySet().forEach(enchantment ->
                     put(enchantment + "_enchantment", "Toggle the " + cleanup(enchantment) + " enchantment being able to be applied to the item."));
-
-            put("boot_enchantment_conflicts", "Toggle the frost walker and depth strider enchantments being incompatible with each other.");
-            put("bow_enchantment_conflicts", "Toggle the infinity and mending enchantments being incompatible with each other.");
-            put("crossbow_enchantment_conflicts", "Toggle the multishot and piercing enchantments being incompatible with each other.");
-            put("damage_enchantment_conflicts", "Toggle the sharpness, smite, and bane of arthropods enchantments being incompatible with each other.");
-            put("mining_enchantment_conflicts", "Toggle the fortune and silk touch enchantments being incompatible with each other.");
-            put("protection_enchantment_conflicts", "Toggle the protection, fire protection, blast protection, and projectile protection enchantments being incompatible with each other.");
-            put("trident_enchantment_conflicts", "Toggle the loyalty and channeling enchantments being incompatible with the riptide enchantment.");
         }});
         itemData.put("potion", new Object2ObjectOpenHashMap<>() {{
             potionRegistry.keySet().forEach(potion ->
                     put(potion + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item."));
         }});
         itemData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("can_use", "Toggle being able to use the item for its purpose.");
+            put("works", "Toggle the item being able to carry out its purpose.");
             put("durability", "Control the durability of the item.");
             put("burns", "Toggle the item being able to burn in fire or lava.");
             put("can_spam", "Toggle being able to spam the bow/crossbow");
             put("nutrition", "Control the nutrition of the item.");
             put("saturation", "Control the saturation of the item.");
-            put("stack_size", "Control the maximum number of the item in a stack.");
             put("can_break_blocks_in_creative", "Toggle whether the item can be used to break blocks in creative mode.");
             put("dispenser_interaction", "Toggle the item having a special interaction with a dispenser.");
             put("cauldron_interaction", "Toggle the item having a special interaction with a cauldron.");
@@ -810,6 +770,15 @@ public class DataHandler {
      */
     public static String getKeyFromBlockRegistry(Block block) {
         return Objects.requireNonNull(blockRegistry.getKey(block)).toString();
+    }
+
+    /**
+     * Get the name of an item from the registry.
+     * @param item The item to get the name of.
+     * @return The name of the block.
+     */
+    public static String getKeyFromItemRegistry(Item item) {
+        return Objects.requireNonNull(itemRegistry.getKey(item)).toString();
     }
 
     /**
@@ -1024,6 +993,7 @@ public class DataHandler {
      * @return The value.
      */
     public static String getDefault(String table, String row, String column) {
+        System.out.println(table + " " + row + " " + column);
         return switch (table) {
             case "blocks" -> blocks.get(row).get(column);
             case "entities" -> entities.get(row).get(column);
@@ -1046,7 +1016,7 @@ public class DataHandler {
             boolean bool = resultSet.getBoolean(column);
             resultSet.close();
             return bool;
-        } catch (SQLException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {}
         return Boolean.parseBoolean(getDefault(table, row, column));
     }
 
@@ -1064,7 +1034,7 @@ public class DataHandler {
             int integer = resultSet.getInt(column);
             resultSet.close();
             return integer;
-        } catch (SQLException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {}
         return Integer.parseInt(getDefault(table, row, column));
     }
 
@@ -1082,7 +1052,7 @@ public class DataHandler {
             double dbl = resultSet.getDouble(column);
             resultSet.close();
             return dbl;
-        } catch (SQLException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {}
         return Double.parseDouble(getDefault(table, row, column));
     }
 
@@ -1101,7 +1071,7 @@ public class DataHandler {
             String str = resultSet.getString(column);
             resultSet.close();
             return str;
-        } catch (SQLException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {}
         return getDefault(table, row, column);
     }
 

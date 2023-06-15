@@ -9,13 +9,8 @@
 
     "ai.MixinGoal",
 
-    "arrow.MixinArrow",
-    "arrow.MixinSpectralArrow",
-
     "biome.MixinBiomeManager",
     "biome.MixinBiomeSource",
-
-    "blocks.MixinSwordItem",
 
     "commands.MixinCommands",
 
@@ -32,7 +27,6 @@
     "effects.MixinLivingEntity",
 
     "enchantments.MixinEnchantment",
-    "enchantments.MixinEnchantmentHelper",
 
     "entity.MixinEnderDragon",
     "entity.MixinEntity",
@@ -40,18 +34,9 @@
     "entity.MixinPainting",
     "entity.MixinThrownExperienceBottle",
 
-    "food.MixinFoodData",
     "food.hunger.MixinFoodData",
     "food.hunger.MixinItem",
     "food.hunger.MixinPlayer",
-
-    "fluids.MixinEntity",
-
-    "items.MixinBowItem",
-    "items.MixinCrossbowItem",
-    "items.MixinItem",
-    "items.MixinItemStack",
-    "items.MixinLivingEntity",
 
     "knockback.MixinLivingEntity",
     "knockback.MixinServerGamePacketListenerImpl",
@@ -81,8 +66,6 @@
 
     "player.MixinAbilities",
     "player.MixinEntity",
-
-    "potions.MixinPotionUtils",
 
     "spawn_limits.MixinMobCategory",
     "spawn_limits.MixinMonster",

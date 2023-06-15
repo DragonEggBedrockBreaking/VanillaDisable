@@ -118,3 +118,5 @@ accessible field net/minecraft/world/level/biome/MobSpawnSettings spawners Ljava
 accessible field net/minecraft/world/item/BucketItem content Lnet/minecraft/world/level/material/Fluid;
 accessible method net/minecraft/world/level/block/BasePressurePlateBlock getPressedTime ()I
 accessible field net/minecraft/world/inventory/ItemCombinerMenu access Lnet/minecraft/world/inventory/ContainerLevelAccess;
+accessible method net/minecraft/world/level/block/FireBlock getBurnOdds (Lnet/minecraft/world/level/block/state/BlockState;)I
+accessible method net/minecraft/world/level/block/FireBlock getIgniteOdds (Lnet/minecraft/world/level/block/state/BlockState;)I
