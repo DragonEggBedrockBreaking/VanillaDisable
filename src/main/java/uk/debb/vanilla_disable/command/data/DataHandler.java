@@ -398,7 +398,6 @@ public class DataHandler {
         blockRegistry.forEach((block) ->
                 blocks.put(Objects.requireNonNull(blockRegistry.getKey(block)).toString(), new Object2ObjectOpenHashMap<>() {{
                     String name = block.toString();
-                    Item item = block.asItem();
                     BlockState blockState = block.defaultBlockState();
 
                     put("can_place_in_overworld", "true");
@@ -520,13 +519,12 @@ public class DataHandler {
                             put("can_spam", "false");
                         }
 
-                        if (item.canBeDepleted()) {
+                        if (enchantmentRegistry.stream().anyMatch(enchantment -> enchantment.canEnchant(item.getDefaultInstance())) ||
+                                item.equals(Items.ENCHANTED_BOOK)) {
                             put("durability", String.valueOf(item.getMaxDamage()));
-                            enchantmentRegistry.forEach((enchantment) -> {
-                                if (enchantment.canEnchant(new ItemStack(item))) {
-                                    put(enchantmentRegistry.getKey(enchantment) + "_enchantment", "true");
-                                }
-                            });
+                            enchantmentRegistry.forEach((enchantment) ->
+                                    put(enchantmentRegistry.getKey(enchantment) + "_enchantment",
+                                            String.valueOf(enchantment.canEnchant(item.getDefaultInstance()) || item.equals(Items.ENCHANTED_BOOK))));
                         }
 
                         FoodProperties foodProperties = item.getFoodProperties();

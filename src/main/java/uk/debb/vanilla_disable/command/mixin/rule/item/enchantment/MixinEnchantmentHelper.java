@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.command.mixin.rule.item.other;
+package uk.debb.vanilla_disable.command.mixin.rule.item.enchantment;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.item.ItemStack;
