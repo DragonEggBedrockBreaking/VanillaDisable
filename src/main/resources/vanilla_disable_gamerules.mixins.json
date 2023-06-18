@@ -7,74 +7,19 @@
   "mixins": [
     "advancement.MixinPlayerAdvancements",
 
-    "ai.MixinGoal",
-
     "biome.MixinBiomeManager",
     "biome.MixinBiomeSource",
 
     "commands.MixinCommands",
 
-    "damage.MixinPlayer",
-
-    "death.MixinServerPlayer",
-
-    "despawning.MixinItemEntity",
-    "despawning.MixinMob",
-    "despawning.MixinMobCategory",
-    "despawning.MixinNaturalSpawner",
-    "despawning.MixinThrownEnderpearl",
-
-    "effects.MixinLivingEntity",
-
     "enchantments.MixinEnchantment",
-
-    "entity.MixinEnderDragon",
-    "entity.MixinEntity",
-    "entity.MixinLivingEntity",
-    "entity.MixinPainting",
-    "entity.MixinThrownExperienceBottle",
-
-    "food.hunger.MixinFoodData",
-    "food.hunger.MixinItem",
-    "food.hunger.MixinPlayer",
-
-    "knockback.MixinLivingEntity",
-    "knockback.MixinServerGamePacketListenerImpl",
-
-    "merchant.MixinAbstractVillager",
-    "merchant.MixinPiglinAi",
-    "merchant.MixinVillager",
-    "merchant.MixinVillagerData",
 
     "misc.MixinServerRecipeBook",
 
-    "mobs.MixinAbstractPiglin",
-    "mobs.MixinCatSpawner",
-    "mobs.MixinDragonStrafePlayerPhase",
-    "mobs.MixinHoglin",
-    "mobs.MixinHusk",
-    "mobs.MixinMob",
-    "mobs.MixinPig",
-    "mobs.MixinPlayer",
     "mobs.MixinRaid",
-    "mobs.MixinSkeleton",
-    "mobs.MixinVillager",
-    "mobs.MixinZombie",
-    "mobs.MixinZombieVillager",
-
-    "mob_toggles.MixinMob",
-
-    "player.MixinAbilities",
-    "player.MixinEntity",
 
     "spawn_limits.MixinMobCategory",
     "spawn_limits.MixinMonster",
-
-    "spawning.MixinBaseSpawner",
-    "spawning.MixinBreedGoal",
-    "spawning.MixinNaturalSpawner",
-
-    "stats.MixinServerPlayer",
 
     "worldgen.MixinBiomeGenerationSettings",
     "worldgen.MixinEndSpike",

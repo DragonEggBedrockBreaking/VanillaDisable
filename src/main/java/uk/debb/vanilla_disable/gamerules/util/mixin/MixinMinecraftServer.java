@@ -23,17 +23,4 @@ public abstract class MixinMinecraftServer {
         PopulateMaps.populateBiomeMap();
         PopulateLists.populateBiomeLists();
     }
-
-    @Inject(
-            method = "runServer",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/MinecraftServer;buildServerStatus()Lnet/minecraft/network/protocol/status/ServerStatus;",
-                    ordinal = 0,
-                    shift = At.Shift.AFTER
-            )
-    )
-    private void afterServerSetup(CallbackInfo ci) {
-        PopulateMaps.populateMapsPostServer();
-    }
 }

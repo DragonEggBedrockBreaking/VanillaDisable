@@ -8,9 +8,13 @@ import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.packs.VanillaHusbandryAdvancements;
 import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.stats.StatType;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +26,7 @@ import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.*;
@@ -71,22 +76,25 @@ public class DataHandler {
     private static Statement statement;
     public static RegistryAccess registryAccess;
     private static String PATH;
+    private static ObjectList<EntityType<?>> undeadMobs;
 
     private static Registry<Block> blockRegistry;
     private static Registry<Item> itemRegistry;
     private static Registry<EntityType<?>> entityTypeRegistry;
-    private static Registry<PaintingVariant> paintingVariantRegistry;
-    private static Registry<VillagerProfession> villagerProfessionRegistry;
-    private static Registry<VillagerType> villagerTypeRegistry;
+    public static Registry<PaintingVariant> paintingVariantRegistry;
+    public static Registry<VillagerProfession> villagerProfessionRegistry;
+    public static Registry<VillagerType> villagerTypeRegistry;
     private static Registry<BlockEntityType<?>> blockEntityRegistry;
     public static Registry<Enchantment> enchantmentRegistry;
     public static Registry<Potion> potionRegistry;
     public static Registry<Feature<?>> featureRegistry;
-    private static Registry<DamageType> damageTypeRegistry;
-    private static Registry<MobEffect> mobEffectRegistry;
+    public static Registry<DamageType> damageTypeRegistry;
+    public static Registry<MobEffect> mobEffectRegistry;
     public static Registry<Biome> biomeRegistry;
     public static Registry<PlacedFeature> placedFeatureRegistry;
     public static Registry<Structure> structureRegistry;
+    public static Registry<StatType<?>> statTypeRegistry;
+    private static Registry<ResourceLocation> customStatRegistry;
 
     /**
      * Cleans up data for display (removes underscores, 'namespace:' prefixes, 'group/' prefixes)
@@ -109,7 +117,7 @@ public class DataHandler {
      * @param o The object to be cleaned up
      * @return The cleaned up object as a string
      */
-    private static String lightCleanup(Object o) {
+    public static String lightCleanup(Object o) {
         String s = o.toString();
         if (s.contains(":")) {
             s = s.split(":")[1];
@@ -122,6 +130,8 @@ public class DataHandler {
      * This includes names of columns corresponding to data type, default value for each row, and descriptions.
      */
     public static void populate() {
+        undeadMobs = ObjectList.of(EntityType.SKELETON_HORSE, EntityType.ZOMBIE_HORSE, EntityType.SKELETON, EntityType.PHANTOM, EntityType.WITHER, EntityType.ZOGLIN, EntityType.ZOMBIE);
+
         registryAccess = server.registryAccess();
         blockRegistry = registryAccess.registryOrThrow(Registries.BLOCK);
         itemRegistry = registryAccess.registryOrThrow(Registries.ITEM);
@@ -138,9 +148,10 @@ public class DataHandler {
         biomeRegistry = registryAccess.registryOrThrow(Registries.BIOME);
         placedFeatureRegistry = registryAccess.registryOrThrow(Registries.PLACED_FEATURE);
         structureRegistry = registryAccess.registryOrThrow(Registries.STRUCTURE);
+        statTypeRegistry = registryAccess.registryOrThrow(Registries.STAT_TYPE);
+        customStatRegistry = registryAccess.registryOrThrow(Registries.CUSTOM_STAT);
 
         cols.put("entities", new Object2ObjectOpenHashMap<>() {{
-
             put("can_be_on_fire", BOOLEAN);
             put("can_sprint", BOOLEAN);
             put("can_crouch", BOOLEAN);
@@ -150,62 +161,51 @@ public class DataHandler {
             put("flying_speed", REAL);
             put("beta_hunger", BOOLEAN);
 
-            put("item_stats", BOOLEAN);
-            put("entity_stats", BOOLEAN);
-            put("time_stats", BOOLEAN);
-            put("distance_stats", BOOLEAN);
-            put("damage_stats", BOOLEAN);
-            put("block_gui_interaction_stats", BOOLEAN);
-            put("block_general_interaction_stats", BOOLEAN);
-            put("general_stats", BOOLEAN);
+            statTypeRegistry.forEach(statType -> {
+                if (statType.equals(Stats.CUSTOM)) return;
+                put(Objects.requireNonNull(statTypeRegistry.getKey(statType)) + "_stat_type", BOOLEAN);
+            });
+            customStatRegistry.keySet().forEach(customStat -> put(customStat + "_custom_stat", BOOLEAN));
 
             damageTypeRegistry.keySet().forEach(damageType -> {
                 put(damageType + "_damage", BOOLEAN);
                 put(damageType + "_death", BOOLEAN);
             });
 
-            entityTypeRegistry.keySet().forEach(entityType ->
-                    put(lightCleanup(entityType) + "_knockback", BOOLEAN));
+            entityTypeRegistry.keySet().forEach(entityType -> put(entityType + "_knockback", BOOLEAN));
             put("explosion_knockback", BOOLEAN);
 
-            mobEffectRegistry.keySet().forEach(mobEffect ->
-                    put(mobEffect + "_effect", BOOLEAN));
-
-            paintingVariantRegistry.keySet().forEach(painting ->
-                    put(painting + "_painting", BOOLEAN));
-
-            villagerProfessionRegistry.keySet().forEach(profession ->
-                    put(profession + "_profession", BOOLEAN));
-            villagerTypeRegistry.keySet().forEach(type ->
-                    put(type + "_type", BOOLEAN));
+            mobEffectRegistry.keySet().forEach(mobEffect -> put(mobEffect + "_effect", BOOLEAN));
+            paintingVariantRegistry.keySet().forEach(painting -> put(painting + "_painting", BOOLEAN));
+            villagerProfessionRegistry.keySet().forEach(profession -> put(profession + "_profession", BOOLEAN));
+            villagerTypeRegistry.keySet().forEach(type -> put(type + "_type", BOOLEAN));
 
             put("can_despawn", BOOLEAN);
             put("despawn_time", INTEGER);
-
             put("can_spawn", BOOLEAN);
             put("spawn_egg", BOOLEAN);
             put("spawner", BOOLEAN);
             put("can_breed", BOOLEAN);
             put("can_exist", BOOLEAN);
-            put("can_be_cured", BOOLEAN);
             put("can_be_converted_to", BOOLEAN);
             put("burns_in_sunlight", BOOLEAN);
             put("spawned_by_villagers", BOOLEAN);
             put("can_drop_xp", BOOLEAN);
             put("ai", BOOLEAN);
             put("can_trade", BOOLEAN);
+            put("can_infinitely_trade", BOOLEAN);
             put("daily_restocks", INTEGER);
-            put("can_be_lit", BOOLEAN);
+            put("can_player_interact", BOOLEAN);
+            put("can_be_lit_by_fire_aspect", BOOLEAN);
             put("despawn_on_player_death", BOOLEAN);
-            put("min_spawn_distance", INTEGER);
             put("min_despawn_distance", INTEGER);
             put("instant_despawn_distance", INTEGER);
 
             itemRegistry.keySet().forEach(item ->
                     put("can_breed_with_" + lightCleanup(item), BOOLEAN));
 
-            biomeRegistry.keySet().forEach(biome ->
-                    put("can_spawn_in_" + lightCleanup(biome), BOOLEAN));
+            put("alpha_behaviour", BOOLEAN);
+            put("can_shoot_fireballs", BOOLEAN);
         }});
         cols.put("blocks", new Object2ObjectOpenHashMap<>() {{
             put("can_place_in_overworld", BOOLEAN);
@@ -261,6 +261,8 @@ public class DataHandler {
                 entities.put(Objects.requireNonNull(entityTypeRegistry.getKey(entityType)).toString(), new Object2ObjectOpenHashMap<>() {{
                     Entity entity = entityType.create(server.overworld());
 
+                    put("can_player_interact", "true");
+
                     if (entityType.equals(EntityType.PLAYER)) {
                         put("can_be_on_fire", "true");
                         put("can_sprint", "true");
@@ -271,31 +273,34 @@ public class DataHandler {
                         put("flying_speed", "0.05");
                         put("beta_hunger", "false");
 
-                        put("item_stats", "true");
-                        put("entity_stats", "true");
-                        put("time_stats", "true");
-                        put("distance_stats", "true");
-                        put("damage_stats", "true");
-                        put("block_gui_interaction_stats", "true");
-                        put("block_general_interaction_stats", "true");
-                        put("general_stats", "true");
+                        statTypeRegistry.forEach(statType -> {
+                            if (statType.equals(Stats.CUSTOM)) return;
+                            put(Objects.requireNonNull(statTypeRegistry.getKey(statType)) + "_stat_type", "true");
+                        });
+                        customStatRegistry.keySet().forEach(customStat -> put(customStat + "_custom_stat", "true"));
 
                         damageTypeRegistry.keySet().forEach(damageType -> {
                             put(damageType + "_damage", "true");
                             put(damageType + "_death", "true");
                         });
+
+                        put("explosion_knockback", "true");
                     }
 
                     if (entity instanceof LivingEntity || entityType.equals(EntityType.PLAYER)) {
                         entityTypeRegistry.keySet().forEach(entityType ->
-                                put(lightCleanup(entityType) + "_knockback", "true"));
-                        put("explosion_knockback", "true");
+                                put(entityType + "_knockback", "true"));
 
-                        mobEffectRegistry.keySet().forEach(mobEffect ->
-                                put(mobEffect + "_effect", "true"));
+                        mobEffectRegistry.forEach(mobEffect ->
+                                put(mobEffectRegistry.getKey(mobEffect) + "_effect", String.valueOf(
+                                        !((mobEffect.equals(MobEffects.WITHER) &&
+                                                (entityType.equals(EntityType.WITHER) || entityType.equals(EntityType.WITHER_SKELETON))) ||
+                                                (mobEffect.equals(MobEffects.POISON) && entityType.equals(EntityType.SPIDER)) ||
+                                                ((mobEffect.equals(MobEffects.REGENERATION) || mobEffect.equals(MobEffects.POISON)) &&
+                                                        undeadMobs.contains(entityType)))
+                                )));
 
                         put("can_despawn", String.valueOf(!entityType.getCategory().isPersistent()));
-
                         put("can_spawn", "true");
                         put("spawn_egg", "true");
                         put("spawner", "true");
@@ -303,17 +308,13 @@ public class DataHandler {
                         put("ai", "true");
                     }
 
+                    if (entityType.equals(EntityType.EXPERIENCE_BOTTLE)) {
+                        put("can_drop_xp", "true");
+                    }
+
                     if (!entityType.getCategory().equals(MobCategory.MISC)) {
-                        put("min_spawn_distance", "24");
                         put("min_despawn_distance", String.valueOf(entityType.getCategory().getNoDespawnDistance()));
                         put("instant_despawn_distance", String.valueOf(entityType.getCategory().getDespawnDistance()));
-
-                        biomeRegistry.forEach(biome -> {
-                            String biomeString = Objects.requireNonNull(biomeRegistry.getKey(biome)).toString();
-                            boolean canSpawnIn = biome.getMobSettings().spawners.values().stream().anyMatch(ls ->
-                                    ls.unwrap().stream().anyMatch(entry -> entry.type.equals(entityType)));
-                            put("can_spawn_in_" + lightCleanup(biomeString), String.valueOf(canSpawnIn));
-                        });
                     }
 
                     if (entityType.equals(EntityType.PAINTING)) {
@@ -337,31 +338,36 @@ public class DataHandler {
                     if (VanillaHusbandryAdvancements.BREEDABLE_ANIMALS.contains(entityType) ||
                             VanillaHusbandryAdvancements.INDIRECTLY_BREEDABLE_ANIMALS.contains(entityType)) {
                         put("can_breed", "true");
-                        try {
+                        if (entity != null) {
                             Class<?> animalClass = entity.getClass();
-                            Method isFood = animalClass.getMethod("isFood", ItemStack.class);
+                            Method isFood;
+                            try {
+                                isFood = animalClass.getMethod("method_6481", ItemStack.class);
+                            } catch (NoSuchMethodException ignored) {
+                                try {
+                                    isFood = animalClass.getMethod("isFood", ItemStack.class);
+                                }  catch (NoSuchMethodException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            Method finalIsFood = isFood;
                             itemRegistry.stream().forEach(item -> {
                                 try {
-                                    boolean itemIsFood = (boolean) isFood.invoke(entity, new ItemStack(item));
+                                    boolean itemIsFood = (boolean) finalIsFood.invoke(entity, new ItemStack(item));
                                     put("can_breed_with_" +
-                                            lightCleanup(Objects.requireNonNull(itemRegistry.getKey(item)).toString()),
+                                                    lightCleanup(Objects.requireNonNull(itemRegistry.getKey(item)).toString()),
                                             String.valueOf(itemIsFood));
                                 } catch (InvocationTargetException | IllegalAccessException e) {
                                     throw new RuntimeException(e);
                                 }
                             });
-                        } catch (NoSuchMethodException e) {
-                            throw new RuntimeException(e);
                         }
-                    }
-
-                    if (entityType.equals(EntityType.ZOMBIE_VILLAGER)) {
-                        put("can_be_cured", "true");
                     }
 
                     if (entityType.equals(EntityType.ZOMBIE_VILLAGER) || entityType.equals(EntityType.WITCH) ||
                             entityType.equals(EntityType.ZOMBIFIED_PIGLIN) || entityType.equals(EntityType.ZOGLIN) ||
-                            entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.STRAY)) {
+                            entityType.equals(EntityType.DROWNED) || entityType.equals(EntityType.STRAY) ||
+                            entityType.equals(EntityType.VILLAGER)) {
                         put("can_be_converted_to", "true");
                     }
 
@@ -377,7 +383,8 @@ public class DataHandler {
                     }
 
                     if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER)) {
-                        put("daily_restocks", "true");
+                        put("can_infinitely_trade", "false");
+                        put("daily_restocks", "2");
                     }
 
                     if (entityType.equals(EntityType.ITEM)) {
@@ -385,7 +392,7 @@ public class DataHandler {
                     }
 
                     if (entityType.equals(EntityType.CREEPER)) {
-                        put("can_be_lit", "true");
+                        put("can_be_lit_by_fire_aspect", "false");
                     }
 
                     if (entityType.equals(EntityType.ENDER_PEARL)) {
@@ -393,6 +400,18 @@ public class DataHandler {
                     }
 
                     put("can_exist", "true");
+
+                    if (entityType.equals(EntityType.BOAT)) {
+                        put("alpha_behaviour", "false");
+                    }
+
+                    if (entityType.equals(EntityType.ENDER_DRAGON)) {
+                        put("can_shoot_fireballs", "true");
+                    }
+
+                    if (entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.CAT)) {
+                        put("spawned_by_villagers", "true");
+                    }
                 }}));
 
         blockRegistry.forEach((block) ->
@@ -570,14 +589,13 @@ public class DataHandler {
                 .stream().map(s -> s + "_biome").toList());
 
         entityData.put("stats", new Object2ObjectOpenHashMap<>() {{
-            put("item_stats", "Collect statistics related to items.");
-            put("entity_stats", "Collect statistics related to entities.");
-            put("time_stats", "Collect statistics related to time.");
-            put("distance_stats", "Collect statistics related to distance.");
-            put("damage_stats", "Collect statistics related to damage.");
-            put("block_gui_interaction_stats", "Collect statistics related to block GUIs.");
-            put("block_general_interaction_stats", "Collect statistics related to blocks.");
-            put("general_stats", "Collect general statistics.");
+            statTypeRegistry.forEach(statType -> {
+                if (statType.equals(Stats.CUSTOM)) return;
+                put(Objects.requireNonNull(statTypeRegistry.getKey(statType)) + "_stat_type",
+                        "Toggles stats in the '" + cleanup(statType) + "' category.");
+            });
+            customStatRegistry.keySet().forEach(customStat ->
+                    put(customStat + "_custom_stat", "Toggles the '" + cleanup(customStat) + "' custom stat."));
         }});
         entityData.put("damage", new Object2ObjectOpenHashMap<>() {{
             damageTypeRegistry.keySet().forEach(damageType ->
@@ -585,7 +603,7 @@ public class DataHandler {
         }});
         entityData.put("knockback", new Object2ObjectOpenHashMap<>() {{
             entityTypeRegistry.keySet().forEach(entityType ->
-                    put(lightCleanup(entityType) + "_knockback", "Toggles knockback from " + cleanup(entityType) + " affecting the mob."));
+                    put(entityType + "_knockback", "Toggles knockback from " + cleanup(entityType) + " affecting the mob."));
             put("explosion_knockback", "Toggles knockback from explosions affecting the entity.");
         }});
         entityData.put("effects", new Object2ObjectOpenHashMap<>() {{
@@ -627,7 +645,6 @@ public class DataHandler {
             put("despawn_on_player_death", "Toggle the ender pearl despawning when the player dies (fixes MC-199344).");
             put("can_breed", "Toggle the mob being able to breed.");
             put("spawned_by_villagers", "Toggle the mob being able to be spawned by villagers.");
-            put("min_spawn_distance", "Control the minimum distance away from the player where the entity can spawn.");
             put("min_despawn_distance", "Control the minimum distance away from the player where the entity can despawn.");
             put("instant_despawn_distance", "Control the distance away from the player where the entity will instantly despawn.");
         }});
@@ -635,20 +652,19 @@ public class DataHandler {
             itemRegistry.keySet().forEach(item ->
                     put("can_breed_with_" + lightCleanup(item), "Toggles the mob being able to be bred with " + cleanup(item) + "."));
         }});
-        entityData.put("possible_biomes", new Object2ObjectOpenHashMap<>() {{
-            biomeRegistry.keySet().forEach(biome ->
-                    put("can_spawn_in_" + lightCleanup(biome), "Toggle the mob being able to spawn in the " + cleanup(biome) + " biome."));
-        }});
         entityData.put("other", new Object2ObjectOpenHashMap<>() {{
             put("can_exist", "Toggle the entity being able to exist.");
-            put("can_be_cured", "Toggle the mob being able to be cured.");
-            put("can_be_converted_to", "Toggle the mob being able to convert to another mob.");
+            put("can_be_converted_to", "Toggle another mob being able to convert to the mob.");
             put("burns_in_sunlight", "Toggle the mob being able to burn in sunlight.");
             put("can_drop_xp", "Toggle the mob being able to drop XP.");
             put("ai", "Toggle the mob's AI.");
             put("can_trade", "Toggle the mob being able to trade.");
+            put("can_infinitely_trade", "Toggle villagers being able to trade infinitely.");
             put("daily_restocks", "Control the number of times per day a villager restocks.");
-            put("can_be_lit", "Toggle the creeper being able to be lit by a flint and steel.");
+            put("can_player_interact", "Toggle players being able to interact with the entity.");
+            put("can_be_lit_by_fire_aspect", "Toggle hitting creepers with a fire aspect enchanted item lighting them on fire.");
+            put("alpha_behaviour", "Toggle boats behaving like they did in alpha.");
+            put("can_shoot_fireballs", "Toggle ender dragons being able to shoot fireballs.");
         }});
 
         blockData.put("fluid", new Object2ObjectOpenHashMap<>() {{
@@ -747,6 +763,15 @@ public class DataHandler {
      */
     public static String getKeyFromItemRegistry(Item item) {
         return Objects.requireNonNull(itemRegistry.getKey(item)).toString();
+    }
+
+    /**
+     * Get the name of an entity type from the registry.
+     * @param entityType The entity type to get the name of.
+     * @return The name of the entity type.
+     */
+    public static String getKeyFromEntityTypeRegistry(EntityType<?> entityType) {
+        return Objects.requireNonNull(entityTypeRegistry.getKey(entityType)).toString();
     }
 
     /**
@@ -1040,6 +1065,40 @@ public class DataHandler {
             return str;
         } catch (SQLException | NullPointerException ignored) {}
         return getDefault(table, row, column);
+    }
+
+    /**
+     * Get a list of all the items that an entity can breed with.
+     * @param row The name of the entity.
+     * @return The list of items.
+     */
+    public static Ingredient getBreedingItems(String row) {
+        ObjectSet<Item> items = new ObjectArraySet<>();
+        try {
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM entities WHERE id = '" + row + "';");
+            if (resultSet.next()) {
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                int columnCount = resultSetMetaData.getColumnCount();
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnName = resultSetMetaData.getColumnName(i);
+                    if (columnName.startsWith("can_breed_with_")) {
+                         if (resultSet.getBoolean(columnName)) {
+                             items.add(Objects.requireNonNull(itemRegistry.get(ResourceLocation.of(
+                                     columnName.replace("can_breed_with_", "minecraft:"), ':'))));
+                         }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if (items.contains(Items.CARROT)) {
+            items.add(Items.CARROT_ON_A_STICK);
+        }
+        if (items.contains(Items.WARPED_FUNGUS)) {
+            items.add(Items.WARPED_FUNGUS_ON_A_STICK);
+        }
+        return Ingredient.of(items.stream().map(ItemStack::new));
     }
 
     /**
