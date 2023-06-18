@@ -15,7 +15,7 @@ public abstract class MixinPistonBaseBlock {
     @Inject(method = "triggerEvent", at = @At("HEAD"), cancellable = true)
     private void triggerEvent(BlockState blockState, Level level, BlockPos blockPos, int i, int j, CallbackInfoReturnable<Boolean> cir) {
         String type = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
-        if (!DataHandler.getBoolean("blocks", type, "works")) {
+        if (!DataHandler.getCachedBoolean("blocks", type, "works")) {
             cir.setReturnValue(false);
         }
     }

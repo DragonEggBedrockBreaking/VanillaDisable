@@ -25,7 +25,7 @@ public abstract class MixinBlockStateBase {
             return original;
         }
         String name = DataHandler.getKeyFromBlockRegistry(block);
-        String reaction = DataHandler.getString("blocks", name, "push_behaviour");
+        String reaction = DataHandler.getCachedString("blocks", name, "push_behaviour");
         return PushReaction.valueOf(reaction);
     }
 }

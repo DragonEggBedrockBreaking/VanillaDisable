@@ -14,6 +14,6 @@ public abstract class MixinVillager {
         if (!Gamerules.VILLAGERS_SPAWN_GOLEMS.getBool()) {
             return false;
         }
-        return original && DataHandler.getBoolean("entities", "minecraft:iron_golem", "spawned_by_villagers");
+        return original && DataHandler.getCachedBoolean("entities", "minecraft:iron_golem", "spawned_by_villagers");
     }
 }

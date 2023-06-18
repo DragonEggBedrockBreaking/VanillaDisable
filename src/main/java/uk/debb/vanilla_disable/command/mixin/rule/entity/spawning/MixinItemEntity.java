@@ -19,7 +19,7 @@ public abstract class MixinItemEntity {
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
         Entity entity = (Entity) (Object) this;
-        if (this.age >= DataHandler.getInt("entities", "minecraft:item", "despawn_time") && !entity.level().isClientSide()) {
+        if (this.age >= DataHandler.getCachedInt("entities", "minecraft:item", "despawn_time") && !entity.level().isClientSide()) {
             entity.discard();
         }
     }
@@ -34,7 +34,7 @@ public abstract class MixinItemEntity {
             cancellable = true
     )
     private void discard(CallbackInfo ci) {
-        if (this.pickupDelay != Short.MAX_VALUE && this.age < DataHandler.getInt("entities", "minecraft:item", "despawn_time")) {
+        if (this.pickupDelay != Short.MAX_VALUE && this.age < DataHandler.getCachedInt("entities", "minecraft:item", "despawn_time")) {
             ci.cancel();
         }
     }

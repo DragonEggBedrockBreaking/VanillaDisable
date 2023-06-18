@@ -10,6 +10,6 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinEntity {
     @ModifyReturnValue(method = "getDimensionChangingDelay", at = @At("RETURN"))
     private int getDimensionChangingDelay(int original) {
-        return DataHandler.getInt("blocks", "minecraft:nether_portal", "cooldown");
+        return DataHandler.getCachedInt("blocks", "minecraft:nether_portal", "cooldown");
     }
 }

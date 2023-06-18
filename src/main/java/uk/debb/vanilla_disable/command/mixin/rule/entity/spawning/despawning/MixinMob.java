@@ -27,6 +27,6 @@ public abstract class MixinMob {
     )
     private boolean removeWhenFarAway(boolean original) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return DataHandler.getBoolean("entities", entity, "can_despawn") && additionalRestrictionsMet();
+        return DataHandler.getCachedBoolean("entities", entity, "can_despawn") && additionalRestrictionsMet();
     }
 }

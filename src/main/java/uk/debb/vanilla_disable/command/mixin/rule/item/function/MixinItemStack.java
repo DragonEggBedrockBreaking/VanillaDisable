@@ -20,7 +20,7 @@ public abstract class MixinItemStack {
     )
     private Item getItem(Item original) {
         String item = DataHandler.getKeyFromItemRegistry(original);
-        if (!DataHandler.getBoolean("items", item, "works")) {
+        if (!DataHandler.getCachedBoolean("items", item, "works")) {
             return Items.AIR;
         }
         return original;

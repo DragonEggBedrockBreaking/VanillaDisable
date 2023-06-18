@@ -19,7 +19,7 @@ public abstract class MixinBlockStateBase {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void modifyUse(CallbackInfoReturnable<InteractionResult> cir) {
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
-        if (!DataHandler.getBoolean("blocks", block, "can_interact")) {
+        if (!DataHandler.getCachedBoolean("blocks", block, "can_interact")) {
             cir.setReturnValue(InteractionResult.FAIL);
         }
     }
@@ -27,7 +27,7 @@ public abstract class MixinBlockStateBase {
     @ModifyReturnValue(method = "getMenuProvider", at = @At("RETURN"))
     private MenuProvider modifyMenuProvider(MenuProvider original) {
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
-        if (!DataHandler.getBoolean("blocks", block, "can_interact")) {
+        if (!DataHandler.getCachedBoolean("blocks", block, "can_interact")) {
             return null;
         }
         return original;
@@ -37,20 +37,20 @@ public abstract class MixinBlockStateBase {
     private boolean ignitedByLava(boolean original) {
         if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
-        return DataHandler.getBoolean("blocks", block, "ignited_by_lava");
+        return DataHandler.getCachedBoolean("blocks", block, "ignited_by_lava");
     }
 
     @ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
     private float getDestroySpeed(float original) {
         if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
-        return (float) DataHandler.getDouble("blocks", block, "destroy_speed");
+        return (float) DataHandler.getCachedDouble("blocks", block, "destroy_speed");
     }
 
     @ModifyReturnValue(method = "requiresCorrectToolForDrops", at = @At("RETURN"))
     private boolean requiresCorrectToolForDrops(boolean original) {
         if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(this.getBlock());
-        return DataHandler.getBoolean("blocks", block, "requires_correct_tool_for_drops");
+        return DataHandler.getCachedBoolean("blocks", block, "requires_correct_tool_for_drops");
     }
 }

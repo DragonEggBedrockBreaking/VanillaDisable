@@ -12,7 +12,7 @@ public abstract class MixinAbstractFurnaceBlockEntity {
     @ModifyReturnValue(method = "isFuel", at = @At("RETURN"))
     private static boolean isFuel(boolean original, ItemStack itemStack) {
         String item = DataHandler.getKeyFromItemRegistry(itemStack.getItem());
-        if (DataHandler.getInt("items", item, "fuel_duration") <= 0) {
+        if (DataHandler.getCachedInt("items", item, "fuel_duration") <= 0) {
             return false;
         }
         return original;
@@ -21,6 +21,6 @@ public abstract class MixinAbstractFurnaceBlockEntity {
     @ModifyReturnValue(method = "getBurnDuration", at = @At("RETURN"))
     private int getBurnDuration(int original, ItemStack itemStack) {
         String item = DataHandler.getKeyFromItemRegistry(itemStack.getItem());
-        return DataHandler.getInt("items", item, "fuel_duration");
+        return DataHandler.getCachedInt("items", item, "fuel_duration");
     }
 }

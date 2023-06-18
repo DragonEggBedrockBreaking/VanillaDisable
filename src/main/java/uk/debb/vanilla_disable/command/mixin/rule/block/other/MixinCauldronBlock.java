@@ -10,6 +10,6 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinCauldronBlock {
     @ModifyReturnValue(method = "canReceiveStalactiteDrip", at = @At("RETURN"))
     private boolean canReceiveStalactiteDrip(boolean original) {
-        return DataHandler.getBoolean("blocks", "minecraft:cauldron", "can_be_filled_by_dripstone");
+        return DataHandler.getCachedBoolean("blocks", "minecraft:cauldron", "can_be_filled_by_dripstone");
     }
 }

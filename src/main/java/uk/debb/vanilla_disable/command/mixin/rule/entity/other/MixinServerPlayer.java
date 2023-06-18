@@ -16,12 +16,12 @@ public abstract class MixinServerPlayer {
     @Inject(method = "awardStat", at = @At("HEAD"), cancellable = true)
     private void awardStat(Stat<?> stat, int i, CallbackInfo ci) {
         if (stat.getType().equals(Stats.CUSTOM)) {
-            if (!DataHandler.getBoolean("entities", "minecraft:player",
+            if (!DataHandler.getCachedBoolean("entities", "minecraft:player",
                     stat.getName().split(":")[1].replace(".", ":") + "_custom_stat")) {
                 ci.cancel();
             }
         } else {
-            if (!DataHandler.getBoolean("entities", "minecraft:player", DataHandler.statTypeRegistry.getKey(stat.getType()) + "_stat_type")) {
+            if (!DataHandler.getCachedBoolean("entities", "minecraft:player", DataHandler.statTypeRegistry.getKey(stat.getType()) + "_stat_type")) {
                 ci.cancel();
             }
         }
@@ -29,7 +29,7 @@ public abstract class MixinServerPlayer {
 
     @Inject(method = "die", at = @At("HEAD"), cancellable = true)
     private void die(DamageSource damageSource, CallbackInfo ci) {
-        if (!DataHandler.getBoolean("entities", "minecraft:player",
+        if (!DataHandler.getCachedBoolean("entities", "minecraft:player",
                 DataHandler.damageTypeRegistry.getKey(damageSource.type()) + "_death")) {
             ((Player) (Object) this).setHealth(1);
             ci.cancel();

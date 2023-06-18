@@ -16,7 +16,7 @@ public abstract class MixinEnchantmentHelper {
     private static int getItemEnchantmentLevel(int original, Enchantment enchantment, ItemStack itemStack) {
         if (!enchantment.canEnchant(itemStack)) return original;
         String item = DataHandler.getKeyFromItemRegistry(itemStack.getItem());
-        if (!DataHandler.getBoolean("items", item,
+        if (!DataHandler.getCachedBoolean("items", item,
                 Objects.requireNonNull(DataHandler.enchantmentRegistry.getKey(enchantment)) + "_enchantment")) {
             return 0;
         }

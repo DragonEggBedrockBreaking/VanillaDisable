@@ -17,7 +17,7 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDelay(int delay) {
-        return DataHandler.getInt("blocks", "minecraft:observer", "redstone_delay");
+        return DataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_delay");
     }
 
     @ModifyArg(
@@ -28,6 +28,6 @@ public abstract class MixinObserverBlock {
             )
     )
     private int modifyObserverDuration(int duration) {
-        return DataHandler.getInt("blocks", "minecraft:observer", "redstone_duration");
+        return DataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_duration");
     }
 }

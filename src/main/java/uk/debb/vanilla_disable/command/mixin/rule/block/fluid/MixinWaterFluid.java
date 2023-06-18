@@ -14,9 +14,9 @@ public abstract class MixinWaterFluid {
     private int getDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return DataHandler.getBoolean("blocks", "minecraft:water", "fluid_reaches_far_in_nether") ? 1 : 2;
+                return DataHandler.getCachedBoolean("blocks", "minecraft:water", "fluid_reaches_far_in_nether") ? 1 : 2;
             } else {
-                return DataHandler.getBoolean("blocks", "minecraft:water", "fluid_reaches_far") ? 1 : 2;
+                return DataHandler.getCachedBoolean("blocks", "minecraft:water", "fluid_reaches_far") ? 1 : 2;
             }
         }
         return original;
@@ -26,9 +26,9 @@ public abstract class MixinWaterFluid {
     private int getTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return DataHandler.getInt("blocks", "minecraft:water", "fluid_speed_in_nether");
+                return DataHandler.getCachedInt("blocks", "minecraft:water", "fluid_speed_in_nether");
             } else {
-                return DataHandler.getInt("blocks", "minecraft:water", "fluid_speed");
+                return DataHandler.getCachedInt("blocks", "minecraft:water", "fluid_speed");
             }
         }
         return original;

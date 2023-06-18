@@ -1,5 +1,7 @@
 package uk.debb.vanilla_disable.command.data;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.Registry;
@@ -95,6 +97,12 @@ public class DataHandler {
     public static Registry<Structure> structureRegistry;
     public static Registry<StatType<?>> statTypeRegistry;
     private static Registry<ResourceLocation> customStatRegistry;
+
+    private static final Cache<String, Boolean> booleanCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, Integer> integerCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, Double> doubleCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, String> stringCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, Ingredient> ingredientCache = Caffeine.newBuilder().maximumSize(100000).build();
 
     /**
      * Cleans up data for display (removes underscores, 'namespace:' prefixes, 'group/' prefixes)
@@ -898,6 +906,17 @@ public class DataHandler {
     }
 
     /**
+     * Clears all the memoization data.
+     */
+    private static void invalidateCaches() {
+        booleanCache.invalidateAll();
+        integerCache.invalidateAll();
+        doubleCache.invalidateAll();
+        stringCache.invalidateAll();
+        ingredientCache.invalidateAll();
+    }
+
+    /**
      * Sets a single row-column pair to a value.
      * @param table The table in which to set the value.
      * @param row The row in which to set the value.
@@ -906,6 +925,7 @@ public class DataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setValue(String table, String row, String column, String value, boolean isString) {
+        invalidateCaches();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -926,6 +946,7 @@ public class DataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setAll(String table, String column, String value, boolean isString) {
+        invalidateCaches();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -947,6 +968,7 @@ public class DataHandler {
      * @param pattern The pattern to match.
      */
     public static void setMatching(String table, String column, String value, boolean isString, String pattern) {
+        invalidateCaches();
         if (pattern.contains(";") || pattern.contains("SELECT") || pattern.contains("ALTER")) {
             throw new RuntimeException("SQL injection attempted. Command not executed.");
         }
@@ -969,6 +991,7 @@ public class DataHandler {
      * @param condition The condition for which to check when checking whether to set a row.
      */
     public static void setWithCondition(String value, String condition) {
+        invalidateCaches();
         try {
             String query = "UPDATE others SET enabled = " + value + " WHERE id LIKE '" + condition + "';";
             statement.executeUpdate(query);
@@ -1001,7 +1024,7 @@ public class DataHandler {
      * @param column The column from which to get the value.
      * @return The value.
      */
-    public static boolean getBoolean(String table, String row, String column) {
+    private static boolean getBoolean(String table, String row, String column) {
         try {
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT \"" + column + "\" FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
@@ -1009,7 +1032,20 @@ public class DataHandler {
             resultSet.close();
             return bool;
         } catch (SQLException | NullPointerException ignored) {}
+        invalidateCaches();
         return Boolean.parseBoolean(getDefault(table, row, column));
+    }
+
+    /**
+     * Get a boolean value from the database, using memoization to cache results.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
+    public static boolean getCachedBoolean(String table, String row, String column) {
+        String cacheKey = table + "-" + row + "-" + column;
+        return booleanCache.get(cacheKey, key -> getBoolean(table, row, column));
     }
 
     /**
@@ -1019,7 +1055,7 @@ public class DataHandler {
      * @param column The column from which to get the value.
      * @return The value.
      */
-    public static int getInt(String table, String row, String column) {
+    private static int getInt(String table, String row, String column) {
         try {
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT \"" + column + "\" FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
@@ -1027,7 +1063,20 @@ public class DataHandler {
             resultSet.close();
             return integer;
         } catch (SQLException | NullPointerException ignored) {}
+        invalidateCaches();
         return Integer.parseInt(getDefault(table, row, column));
+    }
+
+    /**
+     * Get an integer value from the database, using memoization to cache results.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
+    public static int getCachedInt(String table, String row, String column) {
+        String cacheKey = table + "-" + row + "-" + column;
+        return integerCache.get(cacheKey, key -> getInt(table, row, column));
     }
 
     /**
@@ -1037,7 +1086,7 @@ public class DataHandler {
      * @param column The column from which to get the value.
      * @return The value.
      */
-    public static double getDouble(String table, String row, String column) {
+    private static double getDouble(String table, String row, String column) {
         try {
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT \"" + column + "\" FROM " + table + " WHERE id = '" + row + "';");
             resultSet.next();
@@ -1045,7 +1094,20 @@ public class DataHandler {
             resultSet.close();
             return dbl;
         } catch (SQLException | NullPointerException ignored) {}
+        invalidateCaches();
         return Double.parseDouble(getDefault(table, row, column));
+    }
+
+    /**
+     * Get a double value from the database, using memoization to cache results.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
+    public static double getCachedDouble(String table, String row, String column) {
+        String cacheKey = table + "-" + row + "-" + column;
+        return doubleCache.get(cacheKey, key -> getDouble(table, row, column));
     }
 
     /**
@@ -1055,7 +1117,7 @@ public class DataHandler {
      * @param column The column from which to get the value.
      * @return The value.
      */
-    public static String getString(String table, String row, String column) {
+    private static String getString(String table, String row, String column) {
         if (connection == null) return "";
         try {
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT \"" + column + "\" FROM " + table + " WHERE id = '" + row + "';");
@@ -1064,7 +1126,20 @@ public class DataHandler {
             resultSet.close();
             return str;
         } catch (SQLException | NullPointerException ignored) {}
+        invalidateCaches();
         return getDefault(table, row, column);
+    }
+
+    /**
+     * Get a string value from the database, using memoization to cache results.
+     * @param table The table from which to get the value.
+     * @param row The row from which to get the value.
+     * @param column The column from which to get the value.
+     * @return The value.
+     */
+    public static String getCachedString(String table, String row, String column) {
+        String cacheKey = table + "-" + row + "-" + column;
+        return stringCache.get(cacheKey, key -> getString(table, row, column));
     }
 
     /**
@@ -1072,7 +1147,7 @@ public class DataHandler {
      * @param row The name of the entity.
      * @return The list of items.
      */
-    public static Ingredient getBreedingItems(String row) {
+    private static Ingredient getBreedingItems(String row) {
         ObjectSet<Item> items = new ObjectArraySet<>();
         try {
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM entities WHERE id = '" + row + "';");
@@ -1102,9 +1177,19 @@ public class DataHandler {
     }
 
     /**
+     * Get a list of all the items that an entity can breed with, using memoization to cache results.
+     * @param row The row from which to get the value.
+     * @return The value.
+     */
+    public static Ingredient getCachedBreedingItems(String row) {
+        return ingredientCache.get(row, key -> getBreedingItems(row));
+    }
+
+    /**
      * Reset all tables in the database by deleting the sql script and resetting the in-memory db.
      */
     public static void resetAll() {
+        invalidateCaches();
         if (!new File(PATH).exists()) return;
         if (!new File(PATH).delete()) {
             throw new RuntimeException("Could not delete file " + PATH);
@@ -1118,6 +1203,7 @@ public class DataHandler {
      * @param db The table to reset.
      */
     public static void resetOne(String db) {
+        invalidateCaches();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())
@@ -1137,6 +1223,7 @@ public class DataHandler {
      * @param cols The columns to reset.
      */
     public static void resetPartial(String db, ObjectSet<String> cols) {
+        invalidateCaches();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())

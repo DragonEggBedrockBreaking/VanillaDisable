@@ -25,7 +25,7 @@ public abstract class MixinBucketItem {
     )
     private boolean isNotUltraWarm(boolean original) {
         if ((this.content.equals(Fluids.WATER) || this.content.equals(Fluids.FLOWING_WATER)) && original) {
-            return !DataHandler.getBoolean("blocks", "minecraft:water", "can_place_in_nether");
+            return !DataHandler.getCachedBoolean("blocks", "minecraft:water", "can_place_in_nether");
         }
         return original;
     }

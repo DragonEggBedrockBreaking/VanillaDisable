@@ -17,6 +17,6 @@ public abstract class MixinComparatorBlock {
             )
     )
     private int modifyComparatorDelay1(int delay) {
-        return DataHandler.getInt("blocks", "minecraft:comparator", "redstone_delay");
+        return DataHandler.getCachedInt("blocks", "minecraft:comparator", "redstone_delay");
     }
 }

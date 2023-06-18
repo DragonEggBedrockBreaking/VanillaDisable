@@ -18,7 +18,7 @@ public abstract class MixinDragonStrafePlayerPhase {
             )
     )
     private boolean spawnFreshEntity(Level instance, Entity entity) {
-        if (!DataHandler.getBoolean("entities", "minecraft:ender_dragon", "can_shoot_fireballs")) {
+        if (!DataHandler.getCachedBoolean("entities", "minecraft:ender_dragon", "can_shoot_fireballs")) {
             return false;
         }
         return instance.addFreshEntity(entity);

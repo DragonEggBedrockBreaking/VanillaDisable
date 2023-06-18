@@ -9,7 +9,7 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinGrindstoneMenu {
     @ModifyReturnValue(method = "getExperienceAmount", at = @At("RETURN"))
     private int getExperienceAmount(int original) {
-        if (!DataHandler.getBoolean("blocks", "minecraft:grindstone", "can_drop_xp")) {
+        if (!DataHandler.getCachedBoolean("blocks", "minecraft:grindstone", "can_drop_xp")) {
             return 0;
         }
         return original;

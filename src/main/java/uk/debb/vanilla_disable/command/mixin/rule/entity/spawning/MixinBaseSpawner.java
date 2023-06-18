@@ -35,7 +35,7 @@ public abstract class MixinBaseSpawner {
         Entity entity = EntityType.loadEntityRecursive(compoundTag, level, Function.identity());
         if (entity != null) {
             String entityType = DataHandler.getKeyFromEntityTypeRegistry(entity.getType());
-            if (!DataHandler.getBoolean("entities", entityType, "spawner")) {
+            if (!DataHandler.getCachedBoolean("entities", entityType, "spawner")) {
                 return false;
             }
         }

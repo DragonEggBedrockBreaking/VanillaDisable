@@ -19,6 +19,6 @@ public abstract class MixinOcelotTemptGoal {
     )
     private static Ingredient getIngredient(Ingredient ingredient) {
         if (DataHandler.isConnectionNull()) return ingredient;
-        return DataHandler.getBreedingItems("minecraft:ocelot");
+        return DataHandler.getCachedBreedingItems("minecraft:ocelot");
     }
 }

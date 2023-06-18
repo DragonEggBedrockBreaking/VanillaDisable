@@ -13,6 +13,6 @@ public abstract class MixinChestBlock {
     @ModifyReturnValue(method = "isChestBlockedAt", at = @At("RETURN"))
     private static boolean isChestBlockedAt(boolean original, LevelAccessor levelAccessor, BlockPos blockPos) {
         String name = DataHandler.getKeyFromBlockRegistry(levelAccessor.getBlockState(blockPos).getBlock());
-        return original && DataHandler.getBoolean("blocks", name, "opening_blockable");
+        return original && DataHandler.getCachedBoolean("blocks", name, "opening_blockable");
     }
 }

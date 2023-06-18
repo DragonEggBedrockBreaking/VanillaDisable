@@ -18,7 +18,7 @@ public abstract class MixinServerPlayerGameMode {
     private void destroyBlock(BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         String block = DataHandler.getKeyFromBlockRegistry(
                 this.level.getBlockState(blockPos).getBlock());
-        if (!DataHandler.getBoolean("blocks", block, "can_break")) {
+        if (!DataHandler.getCachedBoolean("blocks", block, "can_break")) {
             cir.setReturnValue(false);
         }
     }

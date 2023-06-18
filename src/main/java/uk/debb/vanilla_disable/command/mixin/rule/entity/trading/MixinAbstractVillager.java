@@ -23,7 +23,7 @@ public abstract class MixinAbstractVillager {
     )
     private MerchantOffer modifyUses(MerchantOffer receiver) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        if (DataHandler.getBoolean("entities", entity, "can_infinitely_trade")) {
+        if (DataHandler.getCachedBoolean("entities", entity, "can_infinitely_trade")) {
             return new MerchantOffer(new CompoundTag());
         }
         return receiver;
@@ -32,7 +32,7 @@ public abstract class MixinAbstractVillager {
     @ModifyReturnValue(method = "getOffers", at = @At("RETURN"))
     private MerchantOffers clearOffers(MerchantOffers original) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        if (!DataHandler.getBoolean("entities", entity, "can_trade")) {
+        if (!DataHandler.getCachedBoolean("entities", entity, "can_trade")) {
             return new MerchantOffers();
         }
         return original;

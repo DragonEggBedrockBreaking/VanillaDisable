@@ -15,7 +15,7 @@ public abstract class MixinFireBlock {
         if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
         return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)
-                ? 0 : DataHandler.getInt("blocks", block, "burn_odds");
+                ? 0 : DataHandler.getCachedInt("blocks", block, "burn_odds");
     }
 
     @ModifyReturnValue(method = "getIgniteOdds", at = @At("RETURN"))
@@ -23,6 +23,6 @@ public abstract class MixinFireBlock {
         if (DataHandler.isConnectionNull()) return original;
         String block = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
         return blockState.hasProperty(BlockStateProperties.WATERLOGGED) && blockState.getValue(BlockStateProperties.WATERLOGGED)
-                ? 0 : DataHandler.getInt("blocks", block, "ignite_odds");
+                ? 0 : DataHandler.getCachedInt("blocks", block, "ignite_odds");
     }
 }

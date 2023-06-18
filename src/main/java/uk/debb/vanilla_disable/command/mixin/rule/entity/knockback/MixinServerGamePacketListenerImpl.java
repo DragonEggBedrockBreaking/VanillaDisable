@@ -15,7 +15,7 @@ public abstract class MixinServerGamePacketListenerImpl {
     @Inject(method = "send(Lnet/minecraft/network/protocol/Packet;)V", at = @At("HEAD"), cancellable = true)
     public void send(Packet<?> packet, CallbackInfo ci) {
         if (packet instanceof ClientboundExplodePacket &&
-                !(DataHandler.getBoolean("entities", "minecraft:player", "explosion_knockback"))) {
+                !(DataHandler.getCachedBoolean("entities", "minecraft:player", "explosion_knockback"))) {
             ci.cancel();
         }
     }

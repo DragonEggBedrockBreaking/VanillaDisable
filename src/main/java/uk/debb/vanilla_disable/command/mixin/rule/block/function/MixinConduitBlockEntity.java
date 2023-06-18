@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinConduitBlockEntity {
     @Inject(method = "applyEffects", at = @At("HEAD"), cancellable = true)
     private static void applyEffects(CallbackInfo ci) {
-        if (!DataHandler.getBoolean("blocks", "minecraft:conduit", "works")) {
+        if (!DataHandler.getCachedBoolean("blocks", "minecraft:conduit", "works")) {
             ci.cancel();
         }
     }

@@ -16,12 +16,12 @@ public abstract class MixinBreedGoal {
     @ModifyReturnValue(method = "canUse", at = @At(value = "RETURN"))
     private boolean canUse(boolean original) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(this.animal.getType());
-        return original && DataHandler.getBoolean("entities", entity, "can_breed");
+        return original && DataHandler.getCachedBoolean("entities", entity, "can_breed");
     }
 
     @ModifyReturnValue(method = "canContinueToUse", at = @At(value = "RETURN"))
     private boolean canContinueToUse(boolean original) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(this.animal.getType());
-        return original && DataHandler.getBoolean("entities", entity, "can_breed");
+        return original && DataHandler.getCachedBoolean("entities", entity, "can_breed");
     }
 }

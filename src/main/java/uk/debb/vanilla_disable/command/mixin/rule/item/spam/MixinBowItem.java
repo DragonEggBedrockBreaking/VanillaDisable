@@ -10,11 +10,11 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinBowItem {
     @ModifyReturnValue(method = "getPowerForTime", at = @At("RETURN"))
     private static float getPowerForTime(float original) {
-        return DataHandler.getBoolean("items", "minecraft:bow", "can_spam") ? 1.0F : original;
+        return DataHandler.getCachedBoolean("items", "minecraft:bow", "can_spam") ? 1.0F : original;
     }
 
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int getUseDuration(int original) {
-        return DataHandler.getBoolean("items", "minecraft:bow", "can_spam") ? 4 : original;
+        return DataHandler.getCachedBoolean("items", "minecraft:bow", "can_spam") ? 4 : original;
     }
 }

@@ -17,6 +17,6 @@ public abstract class MixinEnderChestBlock {
             require = 0
     )
     private boolean isRedstoneConductor(boolean original) {
-        return original && DataHandler.getBoolean("blocks", "minecraft:ender_chest", "opening_blockable");
+        return original && DataHandler.getCachedBoolean("blocks", "minecraft:ender_chest", "opening_blockable");
     }
 }

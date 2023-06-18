@@ -18,6 +18,6 @@ public abstract class MixinEnderDragon {
             )
     )
     private boolean award(ServerLevel serverLevel, Vec3 vec3, int i) {
-        return DataHandler.getBoolean("entities", "minecraft:ender_dragon", "can_drop_xp");
+        return DataHandler.getCachedBoolean("entities", "minecraft:ender_dragon", "can_drop_xp");
     }
 }

@@ -12,6 +12,6 @@ public abstract class MixinSwordItem {
     @ModifyReturnValue(method = "canAttackBlock", at = @At("RETURN"))
     private boolean canAttackBlock(boolean original) {
         String name = DataHandler.getKeyFromItemRegistry((Item)(Object)this);
-        return original || DataHandler.getBoolean("items", name, "can_break_blocks_in_creative");
+        return original || DataHandler.getCachedBoolean("items", name, "can_break_blocks_in_creative");
     }
 }

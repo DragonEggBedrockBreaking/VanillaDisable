@@ -19,7 +19,7 @@ public abstract class MixinButtonBlock {
     )
     private int editButtonPressDuration(int original) {
         String name = DataHandler.getKeyFromBlockRegistry((Block) (Object) this);
-        return DataHandler.getInt("blocks", name, "redstone_duration");
+        return DataHandler.getCachedInt("blocks", name, "redstone_duration");
     }
 
     @ModifyArg(
@@ -32,6 +32,6 @@ public abstract class MixinButtonBlock {
     )
     private int modifyButtonPressDuration(int original) {
         String name = DataHandler.getKeyFromBlockRegistry((Block) (Object) this);
-        return DataHandler.getInt("blocks", name, "redstone_duration");
+        return DataHandler.getCachedInt("blocks", name, "redstone_duration");
     }
 }

@@ -19,20 +19,20 @@ public abstract class MixinItem {
         if (DataHandler.isConnectionNull()) return original;
         if (!this.asItem().canBeDepleted()) return original;
         String item = DataHandler.getKeyFromItemRegistry(this.asItem());
-        return DataHandler.getInt("items", item, "durability");
+        return DataHandler.getCachedInt("items", item, "durability");
     }
 
     @ModifyReturnValue(method = "isFireResistant", at = @At("RETURN"))
     private boolean isFireResistant(boolean original) {
         String item = DataHandler.getKeyFromItemRegistry(this.asItem());
-        return !DataHandler.getBoolean("items", item, "burns");
+        return !DataHandler.getCachedBoolean("items", item, "burns");
     }
 
     @ModifyReturnValue(method = "canBeHurtBy", at = @At("RETURN"))
     private boolean canBeHurtBy(boolean original, DamageSource damageSource) {
         String item = DataHandler.getKeyFromItemRegistry(this.asItem());
         if (damageSource.is(DamageTypeTags.IS_FIRE)) {
-            return DataHandler.getBoolean("items", item, "burns");
+            return DataHandler.getCachedBoolean("items", item, "burns");
         }
         return original;
     }

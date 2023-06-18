@@ -21,6 +21,6 @@ public abstract class MixinAbstractHorse {
     private Ingredient getIngredient(Ingredient original) {
         if (DataHandler.isConnectionNull()) return original;
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return DataHandler.getBreedingItems(entity);
+        return DataHandler.getCachedBreedingItems(entity);
     }
 }

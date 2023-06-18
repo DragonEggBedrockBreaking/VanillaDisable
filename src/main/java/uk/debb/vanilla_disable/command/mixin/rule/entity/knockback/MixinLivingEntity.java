@@ -20,7 +20,7 @@ public abstract class MixinLivingEntity {
     public void knockback(CallbackInfo ci) {
         String target = DataHandler.getKeyFromEntityTypeRegistry(((Entity)(Object)this).getType());
         String source = DataHandler.getKeyFromEntityTypeRegistry(Objects.requireNonNull(this.lastHurtByMob).getType());
-        if (!DataHandler.getBoolean("entities", target, source + "_knockback")) {
+        if (!DataHandler.getCachedBoolean("entities", target, source + "_knockback")) {
             ci.cancel();
         }
     }

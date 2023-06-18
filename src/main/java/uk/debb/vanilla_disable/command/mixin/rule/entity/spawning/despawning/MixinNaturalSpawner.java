@@ -19,6 +19,6 @@ public abstract class MixinNaturalSpawner {
     )
     private static boolean removeWhenFarAway(boolean original, ServerLevel serverLevel, Mob mob, double d) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return DataHandler.getBoolean("entities", entity, "can_despawn");
+        return DataHandler.getCachedBoolean("entities", entity, "can_despawn");
     }
 }

@@ -18,7 +18,7 @@ public abstract class MixinAbstractCauldronBlock {
     )
     private ItemStack getItemInHand(ItemStack original) {
         String name = DataHandler.getKeyFromItemRegistry(original.getItem());
-        if (!DataHandler.getBoolean("items", name, "cauldron_interaction")) {
+        if (!DataHandler.getCachedBoolean("items", name, "cauldron_interaction")) {
             return ItemStack.EMPTY;
         }
         return original;

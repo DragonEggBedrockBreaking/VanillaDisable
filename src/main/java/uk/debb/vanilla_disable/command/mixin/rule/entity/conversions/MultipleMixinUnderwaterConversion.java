@@ -15,7 +15,7 @@ public abstract class MultipleMixinUnderwaterConversion {
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
     private void doUnderWaterConversion(CallbackInfo ci) {
         String entity = ((Entity) (Object) this).getType().equals(EntityType.HUSK) ? "minecraft:zombie" : "minecraft:drowned";
-        if (!DataHandler.getBoolean("entities", entity, "can_be_converted_to")) {
+        if (!DataHandler.getCachedBoolean("entities", entity, "can_be_converted_to")) {
             ci.cancel();
         }
     }

@@ -14,7 +14,7 @@ public abstract class MixinDispenserBlock {
     @ModifyReturnValue(method = "getDispenseMethod", at = @At("RETURN"))
     private DispenseItemBehavior getDispenseMethod(DispenseItemBehavior original, ItemStack itemStack) {
         String name = DataHandler.getKeyFromItemRegistry(itemStack.getItem());
-        if (!DataHandler.getBoolean("items", name, "dispenser_interaction")) {
+        if (!DataHandler.getCachedBoolean("items", name, "dispenser_interaction")) {
             return new DefaultDispenseItemBehavior();
         }
         return original;

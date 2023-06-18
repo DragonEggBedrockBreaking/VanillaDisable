@@ -28,7 +28,7 @@ public abstract class MixinSpawnEggItem {
     private void useOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack itemStack = useOnContext.getItemInHand();
         String entity = DataHandler.getKeyFromEntityTypeRegistry(this.getType(itemStack.getTag()));
-        if (!DataHandler.getBoolean("entities", entity, "spawn_egg")) {
+        if (!DataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
             cir.setReturnValue(InteractionResult.FAIL);
         }
     }
@@ -36,7 +36,7 @@ public abstract class MixinSpawnEggItem {
     @Inject(method = "spawnOffspringFromSpawnEgg", at = @At("HEAD"), cancellable = true)
     private void spawnOffspringFromSpawnEgg(Player player, Mob mob, EntityType<? extends Mob> entityType, ServerLevel serverLevel, Vec3 vec3, ItemStack itemStack, CallbackInfoReturnable<Optional<Mob>> cir) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(entityType);
-        if (!DataHandler.getBoolean("entities", entity, "spawn_egg")) {
+        if (!DataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
             cir.setReturnValue(Optional.empty());
         }
     }

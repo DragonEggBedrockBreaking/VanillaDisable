@@ -16,7 +16,7 @@ public abstract class MixinFallingBlock {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
         String name = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
-        if (!DataHandler.getBoolean("blocks", name, "can_fall")) {
+        if (!DataHandler.getCachedBoolean("blocks", name, "can_fall")) {
             ci.cancel();
         }
     }

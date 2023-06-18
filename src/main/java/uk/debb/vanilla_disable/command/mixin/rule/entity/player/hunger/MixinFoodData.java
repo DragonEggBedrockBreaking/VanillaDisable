@@ -17,7 +17,7 @@ public abstract class MixinFoodData {
             )
     )
     private Difficulty getDifficulty(Difficulty original) {
-        return DataHandler.getBoolean("entities", "minecraft:player", "beta_hunger") ?
+        return DataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") ?
                 Difficulty.PEACEFUL : original;
     }
 
@@ -29,6 +29,6 @@ public abstract class MixinFoodData {
             )
     )
     private boolean getBoolean(boolean original) {
-        return !DataHandler.getBoolean("entities", "minecraft:player", "beta_hunger") && original;
+        return !DataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") && original;
     }
 }

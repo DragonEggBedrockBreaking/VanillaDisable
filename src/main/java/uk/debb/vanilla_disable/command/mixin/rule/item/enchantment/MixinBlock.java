@@ -33,7 +33,7 @@ public abstract class MixinBlock {
                         .stream()
                         .filter(entry -> {
                             String enchantment = DataHandler.enchantmentRegistry.getKey(entry.getKey()) + "_enchantment";
-                            return DataHandler.getBoolean("items", item, enchantment);
+                            return DataHandler.getCachedBoolean("items", item, enchantment);
                         }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), itemStack);
         LootParams.Builder builder = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockPos))

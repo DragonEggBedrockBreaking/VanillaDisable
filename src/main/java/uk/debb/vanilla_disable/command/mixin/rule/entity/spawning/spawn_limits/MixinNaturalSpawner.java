@@ -19,6 +19,6 @@ public abstract class MixinNaturalSpawner {
     )
     private static int isValidPositionForMob(int original, ServerLevel serverLevel, Mob mob, double d) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return DataHandler.getInt("entities", entity, "instant_despawn_distance");
+        return DataHandler.getCachedInt("entities", entity, "instant_despawn_distance");
     }
 }

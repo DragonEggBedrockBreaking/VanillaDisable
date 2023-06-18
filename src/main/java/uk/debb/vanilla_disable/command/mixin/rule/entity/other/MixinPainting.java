@@ -18,7 +18,7 @@ public abstract class MixinPainting {
 
     @ModifyReturnValue(method = "getVariant", at = @At("RETURN"))
     private Holder<PaintingVariant> getVariant(Holder<PaintingVariant> original) {
-        if (!DataHandler.getBoolean("entities", "minecraft:painting", DataHandler.paintingVariantRegistry.getKey(original.value()) + "_painting")) {
+        if (!DataHandler.getCachedBoolean("entities", "minecraft:painting", DataHandler.paintingVariantRegistry.getKey(original.value()) + "_painting")) {
             return BuiltInRegistries.PAINTING_VARIANT.getHolderOrThrow(DEFAULT_VARIANT);
         }
         return original;

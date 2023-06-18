@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinPiglinAi {
     @ModifyReturnValue(method = "isBarterCurrency", at = @At("RETURN"))
     private static boolean cancelBarter(boolean original) {
-        if (!DataHandler.getBoolean("entities", "minecraft:piglin", "can_trade")) {
+        if (!DataHandler.getCachedBoolean("entities", "minecraft:piglin", "can_trade")) {
             return false;
         }
         return original;

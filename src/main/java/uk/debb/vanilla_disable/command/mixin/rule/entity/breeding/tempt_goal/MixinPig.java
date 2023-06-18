@@ -23,7 +23,7 @@ public abstract class MixinPig {
     )
     private Ingredient getIngredient(Ingredient original) {
         if (DataHandler.isConnectionNull()) return original;
-        return DataHandler.getBreedingItems("minecraft:pig");
+        return DataHandler.getCachedBreedingItems("minecraft:pig");
     }
 
     @WrapWithCondition(

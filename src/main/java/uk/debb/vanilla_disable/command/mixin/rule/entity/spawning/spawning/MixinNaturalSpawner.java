@@ -13,6 +13,6 @@ public abstract class MixinNaturalSpawner {
     @ModifyReturnValue(method = "isValidPositionForMob", at = @At("RETURN"))
     private static boolean isValidPositionForMob(boolean original, ServerLevel serverLevel, Mob mob, double d) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return original && DataHandler.getBoolean("entities", entity, "can_spawn");
+        return original && DataHandler.getCachedBoolean("entities", entity, "can_spawn");
     }
 }

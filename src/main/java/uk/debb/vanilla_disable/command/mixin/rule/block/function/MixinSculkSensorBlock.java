@@ -13,7 +13,7 @@ public abstract class MixinSculkSensorBlock {
     @Inject(method = "canActivate", at = @At("HEAD"), cancellable = true)
     private static void canActivate(BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
         String type = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
-        if (!DataHandler.getBoolean("blocks", type, "works")) {
+        if (!DataHandler.getCachedBoolean("blocks", type, "works")) {
             cir.setReturnValue(false);
         }
     }

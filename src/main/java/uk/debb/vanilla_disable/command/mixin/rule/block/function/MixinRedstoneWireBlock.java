@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinRedstoneWireBlock {
     @ModifyReturnValue(method = "getWireSignal", at = @At("RETURN"))
     private int getWireSignal(int original) {
-        if (!DataHandler.getBoolean("blocks", "minecraft:redstone_wire", "works")) {
+        if (!DataHandler.getCachedBoolean("blocks", "minecraft:redstone_wire", "works")) {
             return 0;
         }
         return original;

@@ -12,6 +12,6 @@ public abstract class MixinMob {
     @ModifyReturnValue(method = "isSunBurnTick", at = @At("RETURN"))
     private boolean isSunBurnTick(boolean original) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return original && DataHandler.getBoolean("entities", entity, "burns_in_sunlight");
+        return original && DataHandler.getCachedBoolean("entities", entity, "burns_in_sunlight");
     }
 }

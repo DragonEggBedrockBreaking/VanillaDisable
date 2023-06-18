@@ -18,7 +18,7 @@ public abstract class MixinMob {
     private int getNoDespawnDistance(int original) {
         Mob mob = (Mob) (Object) this;
         String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return DataHandler.getInt("entities", entity, "min_despawn_distance");
+        return DataHandler.getCachedInt("entities", entity, "min_despawn_distance");
     }
 
     @ModifyExpressionValue(
@@ -31,6 +31,6 @@ public abstract class MixinMob {
     private int getDespawnDistance(int original) {
         Mob mob = (Mob) (Object) this;
         String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return DataHandler.getInt("entities", entity, "instant_despawn_distance");
+        return DataHandler.getCachedInt("entities", entity, "instant_despawn_distance");
     }
 }

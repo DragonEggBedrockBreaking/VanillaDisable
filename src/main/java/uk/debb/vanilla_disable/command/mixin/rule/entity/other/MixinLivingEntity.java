@@ -15,7 +15,7 @@ public abstract class MixinLivingEntity {
     private boolean canBeAffected(boolean original, MobEffectInstance effect) {
         if (DataHandler.isConnectionNull()) return original;
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return DataHandler.getBoolean("entities", entity, DataHandler.mobEffectRegistry.getKey(effect.getEffect()) + "_effect");
+        return DataHandler.getCachedBoolean("entities", entity, DataHandler.mobEffectRegistry.getKey(effect.getEffect()) + "_effect");
     }
 
     @WrapWithCondition(
@@ -27,6 +27,6 @@ public abstract class MixinLivingEntity {
     )
     private boolean aiStep(LivingEntity livingEntity) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return DataHandler.getBoolean("entities", entity, "ai");
+        return DataHandler.getCachedBoolean("entities", entity, "ai");
     }
 }

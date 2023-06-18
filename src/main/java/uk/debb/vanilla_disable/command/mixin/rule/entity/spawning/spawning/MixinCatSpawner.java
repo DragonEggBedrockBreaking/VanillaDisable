@@ -17,6 +17,6 @@ public abstract class MixinCatSpawner {
             )
     )
     private Entity create(Entity original) {
-        return DataHandler.getBoolean("entities", "minecraft:cat", "spawned_by_villagers") ? original : null;
+        return DataHandler.getCachedBoolean("entities", "minecraft:cat", "spawned_by_villagers") ? original : null;
     }
 }

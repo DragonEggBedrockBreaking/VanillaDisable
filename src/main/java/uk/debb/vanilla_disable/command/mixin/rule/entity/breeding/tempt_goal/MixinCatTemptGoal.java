@@ -19,6 +19,6 @@ public abstract class MixinCatTemptGoal {
     )
     private static Ingredient getIngredient(Ingredient ingredient) {
         if (DataHandler.isConnectionNull()) return ingredient;
-        return DataHandler.getBreedingItems("minecraft:cat");
+        return DataHandler.getCachedBreedingItems("minecraft:cat");
     }
 }

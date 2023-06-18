@@ -151,9 +151,9 @@ public abstract class MixinCommands {
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
         literalArgumentBuilder.executes(context -> {
             String value = switch (type) {
-                case BOOLEAN -> String.valueOf(DataHandler.getBoolean(table, row, col));
-                case INTEGER -> String.valueOf(DataHandler.getInt(table, row, col));
-                case REAL -> String.valueOf(DataHandler.getDouble(table, row, col));
+                case BOOLEAN -> String.valueOf(DataHandler.getCachedBoolean(table, row, col));
+                case INTEGER -> String.valueOf(DataHandler.getCachedInt(table, row, col));
+                case REAL -> String.valueOf(DataHandler.getCachedDouble(table, row, col));
                 case CLOB -> "";
             };
             context.getSource().sendSuccess(
@@ -187,7 +187,7 @@ public abstract class MixinCommands {
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, List<String> options) {
         literalArgumentBuilder.executes(context -> {
             context.getSource().sendSuccess(
-                    () -> Component.literal(description + "\nThe current value is: " + DataHandler.getString(table, row, col) + "\nThe default value is: " + defaultValue.replace("'", "")),
+                    () -> Component.literal(description + "\nThe current value is: " + DataHandler.getCachedString(table, row, col) + "\nThe default value is: " + defaultValue.replace("'", "")),
                     false
             );
             return 1;

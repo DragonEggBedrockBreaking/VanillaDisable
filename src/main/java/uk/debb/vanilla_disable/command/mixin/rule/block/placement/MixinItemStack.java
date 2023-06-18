@@ -44,7 +44,7 @@ public abstract class MixinItemStack {
             } else if (dimensionType.equals(END_EFFECTS)) {
                 col = "can_place_in_end";
             }
-            if (!DataHandler.getBoolean("blocks", name, col)) {
+            if (!DataHandler.getCachedBoolean("blocks", name, col)) {
                 cir.setReturnValue(InteractionResult.FAIL);
             }
         }

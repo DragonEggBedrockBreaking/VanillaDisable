@@ -14,6 +14,6 @@ public abstract class MixinAbilities {
 
     @ModifyReturnValue(method = "getFlyingSpeed", at = @At("RETURN"))
     private float getFlyingSpeed(float original) {
-        return (float) DataHandler.getDouble("entities", "minecraft:player", "flying_speed") / 0.05F * this.flyingSpeed;
+        return (float) DataHandler.getCachedDouble("entities", "minecraft:player", "flying_speed") / 0.05F * this.flyingSpeed;
     }
 }

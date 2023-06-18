@@ -10,11 +10,11 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinCrossbowItem {
     @ModifyReturnValue(method = "getChargeDuration", at = @At("RETURN"))
     private static int getChargeDuration(int original) {
-        return DataHandler.getBoolean("items", "minecraft:crossbow", "can_spam") ? 1 : original;
+        return DataHandler.getCachedBoolean("items", "minecraft:crossbow", "can_spam") ? 1 : original;
     }
 
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int getUseDuration(int original) {
-        return DataHandler.getBoolean("items", "minecraft:crossbow", "can_spam") ? 2 : original;
+        return DataHandler.getCachedBoolean("items", "minecraft:crossbow", "can_spam") ? 2 : original;
     }
 }

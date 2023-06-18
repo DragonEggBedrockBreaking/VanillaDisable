@@ -19,8 +19,8 @@ public abstract class MixinFoodData {
     private void eat(Item item, ItemStack itemStack, CallbackInfo ci) {
         if (item.isEdible()) {
             String name = DataHandler.getKeyFromItemRegistry(item);
-            int nutrition = DataHandler.getInt("items", name, "nutrition");
-            float saturation = (float) DataHandler.getDouble("items", name, "saturation");
+            int nutrition = DataHandler.getCachedInt("items", name, "nutrition");
+            float saturation = (float) DataHandler.getCachedDouble("items", name, "saturation");
             this.eat(nutrition, saturation);
         }
         ci.cancel();

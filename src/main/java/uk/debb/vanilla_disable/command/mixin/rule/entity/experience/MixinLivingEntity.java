@@ -12,7 +12,7 @@ public abstract class MixinLivingEntity {
     @Inject(method = "dropExperience", at = @At("HEAD"), cancellable = true)
     private void dropExperience(CallbackInfo ci) {
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((LivingEntity) (Object) this).getType());
-        if (!DataHandler.getBoolean("entities", entity, "can_drop_xp")) {
+        if (!DataHandler.getCachedBoolean("entities", entity, "can_drop_xp")) {
             ci.cancel();
         }
     }

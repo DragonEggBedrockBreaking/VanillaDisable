@@ -12,6 +12,6 @@ public abstract class MixinServerLevel {
     @ModifyReturnValue(method = "shouldDiscardEntity", at = @At("RETURN"))
     private boolean shouldDiscardEntity(boolean original, Entity entity) {
         String entityName = DataHandler.getKeyFromEntityTypeRegistry(entity.getType());
-        return original || !DataHandler.getBoolean("entities", entityName, "can_exist");
+        return original || !DataHandler.getCachedBoolean("entities", entityName, "can_exist");
     }
 }

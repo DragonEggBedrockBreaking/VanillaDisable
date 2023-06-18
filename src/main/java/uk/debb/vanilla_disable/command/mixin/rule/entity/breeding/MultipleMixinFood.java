@@ -25,6 +25,6 @@ public abstract class MultipleMixinFood {
         if (DataHandler.isConnectionNull()) return original;
         String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         String item = "can_breed_with_" + DataHandler.lightCleanup(DataHandler.getKeyFromItemRegistry(itemStack.getItem()));
-        return DataHandler.getBoolean("entities", entity, item);
+        return DataHandler.getCachedBoolean("entities", entity, item);
     }
 }

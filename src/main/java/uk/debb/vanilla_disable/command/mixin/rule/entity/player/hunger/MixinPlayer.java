@@ -18,7 +18,7 @@ public abstract class MixinPlayer {
     private void eat(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         FoodProperties properties = stack.getItem().getFoodProperties();
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (stack.getItem().isEdible() && properties != null && DataHandler.getBoolean("entities", "minecraft:player", "beta_hunger")) {
+        if (stack.getItem().isEdible() && properties != null && DataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
             livingEntity.setHealth(livingEntity.getHealth() + properties.getNutrition());
         }
     }
@@ -32,7 +32,7 @@ public abstract class MixinPlayer {
     )
     private boolean needsFood(boolean original) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        return DataHandler.getBoolean("entities", "minecraft:player", "beta_hunger") ?
+        return DataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") ?
                 livingEntity.getHealth() < livingEntity.getMaxHealth() : original;
     }
 }

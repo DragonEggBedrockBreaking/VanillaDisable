@@ -17,7 +17,7 @@ public abstract class MixinZombie {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (!DataHandler.getBoolean("entities", "minecraft:zombified_villager", "can_be_converted_to")) {
+        if (!DataHandler.getCachedBoolean("entities", "minecraft:zombified_villager", "can_be_converted_to")) {
             return Difficulty.PEACEFUL;
         }
         return original;

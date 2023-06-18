@@ -15,6 +15,6 @@ public abstract class MixinShulkerBoxBlock {
     @ModifyReturnValue(method = "canOpen", at = @At("RETURN"))
     private static boolean canOpen(boolean original, BlockState blockState, Level level, BlockPos blockPos, ShulkerBoxBlockEntity shulkerBoxBlockEntity) {
         String name = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
-        return original || !DataHandler.getBoolean("blocks", name, "opening_blockable");
+        return original || !DataHandler.getCachedBoolean("blocks", name, "opening_blockable");
     }
 }

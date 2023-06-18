@@ -15,7 +15,7 @@ public abstract class MixinBlock {
     @Inject(method = "popExperience", at = @At("HEAD"), cancellable = true)
     private void popExperience(CallbackInfo ci) {
         String block = DataHandler.getKeyFromBlockRegistry(this.asBlock());
-        if (!DataHandler.getBoolean("blocks", block, "can_drop_xp")) {
+        if (!DataHandler.getCachedBoolean("blocks", block, "can_drop_xp")) {
             ci.cancel();
         }
     }

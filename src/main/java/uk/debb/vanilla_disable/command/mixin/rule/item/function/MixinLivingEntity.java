@@ -10,6 +10,6 @@ import uk.debb.vanilla_disable.command.data.DataHandler;
 public abstract class MixinLivingEntity {
     @ModifyReturnValue(method = "checkTotemDeathProtection", at = @At("RETURN"))
     private boolean checkTotemDeathProtection(boolean original) {
-        return original && DataHandler.getBoolean("items", "minecraft:totem_of_undying", "works");
+        return original && DataHandler.getCachedBoolean("items", "minecraft:totem_of_undying", "works");
     }
 }

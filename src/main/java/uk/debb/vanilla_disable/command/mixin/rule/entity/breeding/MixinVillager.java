@@ -19,6 +19,6 @@ public abstract class MixinVillager {
     )
     private boolean contains(boolean original, ItemStack itemStack) {
         String name = "can_breed_with_" + DataHandler.getKeyFromItemRegistry(itemStack.getItem());
-        return DataHandler.getBoolean("entities", "minecraft:villager", name);
+        return DataHandler.getCachedBoolean("entities", "minecraft:villager", name);
     }
 }
