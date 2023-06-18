@@ -85,7 +85,8 @@ public abstract class MixinCommands {
                 overallResetDBBuilder.then(tableBuilder);
             });
 
-            this.getDispatcher().register(literal("vd").then(literal("rule")
+            this.getDispatcher().register(literal("vd").requires(commandSourceStack -> commandSourceStack.hasPermission(2))
+                    .then(literal("rule")
                             .then(majorBuilder("entity", DataHandler.entities, DataHandler.entityData, "entities"))
                             .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks"))
                             .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items"))
