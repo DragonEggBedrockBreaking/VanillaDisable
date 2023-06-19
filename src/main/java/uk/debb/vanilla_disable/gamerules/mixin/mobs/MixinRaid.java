@@ -5,7 +5,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.raid.Raid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.gamerules.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.gamerules.gamerules.Gamerules;
 
 @Mixin(Raid.class)
 public abstract class MixinRaid {

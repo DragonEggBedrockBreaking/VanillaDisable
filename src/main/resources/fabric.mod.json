@@ -23,13 +23,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "uk.debb.vanilla_disable.gamerules.util.GameruleInitializer",
+      "uk.debb.vanilla_disable.gamerules.gamerules.RegisterGamerules",
       "uk.debb.vanilla_disable.VanillaDisable"
     ]
   },
   "mixins": [
     "vanilla_disable_gamerules.mixins.json",
-    "vanilla_disable_gamerules_util.mixins.json",
     "vanilla_disable_commands.mixins.json",
     "vanilla_disable_commands_util.mixins.json",
     "vanilla_disable_worldgen.mixins.json",

@@ -8,7 +8,7 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.gamerules.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.gamerules.gamerules.Gamerules;
 
 @Mixin(Monster.class)
 public abstract class MixinMonster {

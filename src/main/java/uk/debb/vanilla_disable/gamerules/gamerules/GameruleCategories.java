@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.gamerules.util.gamerules;
+package uk.debb.vanilla_disable.gamerules.gamerules;
 
 import com.google.gson.stream.JsonReader;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;

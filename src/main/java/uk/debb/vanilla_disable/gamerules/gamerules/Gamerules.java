@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.gamerules.util.gamerules;
+package uk.debb.vanilla_disable.gamerules.gamerules;
 
 import com.google.common.base.CaseFormat;
 import net.fabricmc.api.EnvType;
@@ -9,7 +9,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.GameRules;
 
-import static uk.debb.vanilla_disable.gamerules.util.gamerules.GameruleCategories.*;
+import static uk.debb.vanilla_disable.gamerules.gamerules.GameruleCategories.*;
 
 public enum Gamerules {
     DAMAGE_ENABLED(VD_DAMAGE, true, true),

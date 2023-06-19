@@ -5,7 +5,7 @@ import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.command.data.CommandDataHandler;
-import uk.debb.vanilla_disable.gamerules.util.gamerules.Gamerules;
+import uk.debb.vanilla_disable.gamerules.gamerules.Gamerules;
 
 @Mixin(Villager.class)
 public abstract class MixinVillager {
