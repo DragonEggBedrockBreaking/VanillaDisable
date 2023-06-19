@@ -5,9 +5,6 @@
   "package": "uk.debb.vanilla_disable.gamerules.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "biome.MixinBiomeManager",
-    "biome.MixinBiomeSource",
-
     "enchantments.MixinEnchantment",
 
     "misc.MixinServerRecipeBook",
@@ -15,13 +12,7 @@
     "mobs.MixinRaid",
 
     "spawn_limits.MixinMobCategory",
-    "spawn_limits.MixinMonster",
-
-    "worldgen.MixinBiomeGenerationSettings",
-    "worldgen.MixinEndSpike",
-    "worldgen.MixinServerLevel",
-    "worldgen.MixinStructureCheck",
-    "worldgen.MixinStructureManager"
+    "spawn_limits.MixinMonster"
   ],
   "injectors": {
     "defaultRequire": 1

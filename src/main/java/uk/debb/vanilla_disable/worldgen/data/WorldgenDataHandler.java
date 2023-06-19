@@ -2,10 +2,14 @@ package uk.debb.vanilla_disable.worldgen.data;
 
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.storage.LevelResource;
@@ -15,21 +19,25 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 
 public class WorldgenDataHandler {
     public static MinecraftServer server;
     private static Toml toml;
+    public static Registry<Structure> structureRegistry;
+    public static Registry<PlacedFeature> placedFeatureRegistry;
+    public static Registry<Biome> biomeRegistry;
 
-    private static String cleanup(Object o) {
+    public static String cleanup(Object o) {
         return o.toString().replace("minecraft:", "");
     }
 
     @SuppressWarnings("unchecked")
     public static void init() {
-        Registry<Structure> structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
-        Registry<PlacedFeature> placedFeatureRegistry = server.registryAccess().registryOrThrow(Registries.PLACED_FEATURE);
-        Registry<Biome> biomeRegistry = server.registryAccess().registryOrThrow(Registries.BIOME);
+        structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
+        placedFeatureRegistry = server.registryAccess().registryOrThrow(Registries.PLACED_FEATURE);
+        biomeRegistry = server.registryAccess().registryOrThrow(Registries.BIOME);
 
         File PATH = new File(server.getWorldPath(LevelResource.ROOT) + "/vanilla_disable_worldgen.toml");
 
@@ -56,6 +64,7 @@ public class WorldgenDataHandler {
                 structures.put(structureName, true);
             }
         });
+
         placedFeatureRegistry.keySet().forEach(placedFeature -> {
             String placedFeatureName = cleanup(placedFeature);
             if (!placedFeatures.containsKey(placedFeatureName)) {
@@ -64,12 +73,17 @@ public class WorldgenDataHandler {
         });
         placedFeatures.put("obsidian_platform", true);
         placedFeatures.put("end_spike_cage", true);
+
         biomeRegistry.keySet().forEach(biome -> {
             String biomeName = cleanup(biome);
             if (!biomes.containsKey(biomeName)) {
                 biomes.put(biomeName, true);
             }
         });
+        biomes.remove("nether_wastes");
+        biomes.remove("plains");
+        biomes.remove("the_end");
+        biomes.remove("the_void");
 
         data.put("structures", structures);
         data.put("placed_features", placedFeatures);
@@ -90,6 +104,26 @@ public class WorldgenDataHandler {
     }
 
     public static boolean get(String table, String key) {
-        return toml.getTable(table).getBoolean(key);
+        try {
+            return toml.getTable(table).getBoolean(key);
+        } catch (NullPointerException e) {
+            return true;
+        }
+    }
+
+    private static boolean hasBiome(ResourceKey<Level> level, Holder<Biome> biome) {
+        return Objects.requireNonNull(server.getLevel(level)).getChunkSource().getGenerator().getBiomeSource().possibleBiomes.get().contains(biome);
+    }
+
+    public static Holder<Biome> getDefaultBiome(Holder<Biome> biome) {
+        if (hasBiome(Level.OVERWORLD, biome)) {
+            return biomeRegistry.getHolderOrThrow(Biomes.PLAINS);
+        } else if (hasBiome(Level.NETHER, biome)) {
+            return biomeRegistry.getHolderOrThrow(Biomes.NETHER_WASTES);
+        } else if (hasBiome(Level.END, biome)) {
+            return biomeRegistry.getHolderOrThrow(Biomes.THE_END);
+        } else {
+            return biomeRegistry.getHolderOrThrow(Biomes.THE_VOID);
+        }
     }
 }
