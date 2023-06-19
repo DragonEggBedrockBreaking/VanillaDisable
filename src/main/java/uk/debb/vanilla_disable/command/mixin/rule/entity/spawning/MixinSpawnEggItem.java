@@ -22,7 +22,8 @@ import java.util.Optional;
 
 @Mixin(SpawnEggItem.class)
 public abstract class MixinSpawnEggItem {
-    @Shadow public abstract EntityType<?> getType(@Nullable CompoundTag compoundTag);
+    @Shadow
+    public abstract EntityType<?> getType(@Nullable CompoundTag compoundTag);
 
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void useOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {

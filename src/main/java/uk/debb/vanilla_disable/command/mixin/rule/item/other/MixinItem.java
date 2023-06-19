@@ -11,7 +11,8 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Item.class)
 public abstract class MixinItem {
-    @Shadow public abstract Item asItem();
+    @Shadow
+    public abstract Item asItem();
 
     @ModifyReturnValue(method = "getMaxDamage", at = @At("RETURN"))
     private int getMaxDamage(int original) {

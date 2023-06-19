@@ -12,7 +12,9 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(RepeaterBlock.class)
 public abstract class MixinRepeaterBlock {
-    @Shadow @Final public static IntegerProperty DELAY;
+    @Shadow
+    @Final
+    public static IntegerProperty DELAY;
 
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int getDelay(int original, BlockState blockState) {

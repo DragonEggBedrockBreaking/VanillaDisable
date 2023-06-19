@@ -14,7 +14,9 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Painting.class)
 public abstract class MixinPainting {
-    @Shadow @Final private static ResourceKey<PaintingVariant> DEFAULT_VARIANT;
+    @Shadow
+    @Final
+    private static ResourceKey<PaintingVariant> DEFAULT_VARIANT;
 
     @ModifyReturnValue(method = "getVariant", at = @At("RETURN"))
     private Holder<PaintingVariant> getVariant(Holder<PaintingVariant> original) {

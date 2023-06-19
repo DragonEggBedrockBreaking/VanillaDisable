@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class MixinAbstractFurnaceBlockEntity {
     @Inject(method = "getRecipesToAwardAndPopExperience", at = @At("HEAD"), cancellable = true)
     private void getRecipesToAwardAndPopExperience(CallbackInfoReturnable<List<Recipe<?>>> cir) {
-        String block = CommandDataHandler.getKeyFromBlockRegistry(((BlockEntity)(Object)this).getBlockState().getBlock());
+        String block = CommandDataHandler.getKeyFromBlockRegistry(((BlockEntity) (Object) this).getBlockState().getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "can_drop_xp")) {
             cir.setReturnValue(new ObjectArrayList<>());
         }

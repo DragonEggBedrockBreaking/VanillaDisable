@@ -14,7 +14,8 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(BlockBehaviour.BlockStateBase.class)
 public abstract class MixinBlockStateBase {
-    @Shadow public abstract Block getBlock();
+    @Shadow
+    public abstract Block getBlock();
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void modifyUse(CallbackInfoReturnable<InteractionResult> cir) {

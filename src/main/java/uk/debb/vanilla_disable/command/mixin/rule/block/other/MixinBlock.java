@@ -19,7 +19,8 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Block.class)
 public abstract class MixinBlock {
-    @Shadow protected abstract Block asBlock();
+    @Shadow
+    protected abstract Block asBlock();
 
     @ModifyReturnValue(method = "getFriction", at = @At("RETURN"))
     private float getFriction(float original) {

@@ -14,11 +14,12 @@ import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
-    @Shadow private @Nullable LivingEntity lastHurtByMob;
+    @Shadow
+    private @Nullable LivingEntity lastHurtByMob;
 
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void knockback(CallbackInfo ci) {
-        String target = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity)(Object)this).getType());
+        String target = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         String source = CommandDataHandler.getKeyFromEntityTypeRegistry(Objects.requireNonNull(this.lastHurtByMob).getType());
         if (!CommandDataHandler.getCachedBoolean("entities", target, source + "_knockback")) {
             ci.cancel();

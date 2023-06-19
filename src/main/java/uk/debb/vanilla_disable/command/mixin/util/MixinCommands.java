@@ -5,7 +5,9 @@ import com.mojang.brigadier.arguments.*;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import it.unimi.dsi.fastutil.objects.*;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -103,8 +105,9 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a literal argument builder to get a value.
+     *
      * @param type The data type of the argument
-     * @param col The column name of the argument
+     * @param col  The column name of the argument
      * @return The literal argument builder
      */
     private ArgumentType<?> getArgumentTypeForType(DataType type, String col) {
@@ -120,7 +123,8 @@ public abstract class MixinCommands {
 
     /**
      * This method gets the value of an argument based on its data type.
-     * @param type The data type of the argument
+     *
+     * @param type    The data type of the argument
      * @param context The command context
      * @return The value of the argument
      */
@@ -135,13 +139,14 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a standard command that sets a row-column value in a table.
+     *
      * @param literalArgumentBuilder The command builder
-     * @param table The table to update
-     * @param row The row that the value refers to
-     * @param col The column that the value refers to
-     * @param description The description that should be printed when querying the value
-     * @param defaultValue The default value that should be printed when querying the value
-     * @param type The type of the value to be updated
+     * @param table                  The table to update
+     * @param row                    The row that the value refers to
+     * @param col                    The column that the value refers to
+     * @param description            The description that should be printed when querying the value
+     * @param defaultValue           The default value that should be printed when querying the value
+     * @param type                   The type of the value to be updated
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
         literalArgumentBuilder.executes(context -> {
@@ -171,13 +176,14 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets a row-column value (that has specific string options) in a table.
+     *
      * @param literalArgumentBuilder The command builder
-     * @param table The table to update
-     * @param row The row that the value refers to
-     * @param col The column that the value refers to
-     * @param description The description that should be printed when querying the value
-     * @param defaultValue The default value that should be printed when querying the value
-     * @param options The potential values of the value to be updated
+     * @param table                  The table to update
+     * @param row                    The row that the value refers to
+     * @param col                    The column that the value refers to
+     * @param description            The description that should be printed when querying the value
+     * @param defaultValue           The default value that should be printed when querying the value
+     * @param options                The potential values of the value to be updated
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, List<String> options) {
         literalArgumentBuilder.executes(context -> {
@@ -207,10 +213,11 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets a column value for all rows in a table.
+     *
      * @param literalArgumentBuilder The command builder
-     * @param table The table to update
-     * @param col The column that the value refers to
-     * @param type The type of the value to be updated
+     * @param table                  The table to update
+     * @param col                    The column that the value refers to
+     * @param type                   The type of the value to be updated
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type) {
         literalArgumentBuilder.then(
@@ -228,10 +235,11 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets a column value (that has specific string options) for all rows in a table.
+     *
      * @param literalArgumentBuilder The command builder
-     * @param table The table to update
-     * @param col The column that the value refers to
-     * @param options The potential values of the value to be updated
+     * @param table                  The table to update
+     * @param col                    The column that the value refers to
+     * @param options                The potential values of the value to be updated
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options) {
         literalArgumentBuilder.then(
@@ -255,8 +263,9 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets all rows in a minor group (from the 'others' table) to a value.
+     *
      * @param literalArgumentBuilder The command builder
-     * @param condition The condition that the rows should satisfy
+     * @param condition              The condition that the rows should satisfy
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String condition) {
         literalArgumentBuilder.then(
@@ -274,10 +283,11 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets a column value for all rows in a table.
+     *
      * @param literalArgumentBuilder The command builder
-     * @param table The table to update
-     * @param col The column that the value refers to
-     * @param type The type of the value to be updated
+     * @param table                  The table to update
+     * @param col                    The column that the value refers to
+     * @param type                   The type of the value to be updated
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type, String argumentName) {
         literalArgumentBuilder.then(
@@ -296,10 +306,11 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets a column value (that has specific string options) for all rows in a table.
+     *
      * @param literalArgumentBuilder The command builder
-     * @param table The table to update
-     * @param col The column that the value refers to
-     * @param options The potential values of the value to be updated
+     * @param table                  The table to update
+     * @param col                    The column that the value refers to
+     * @param options                The potential values of the value to be updated
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options, String argumentName) {
         literalArgumentBuilder.then(
@@ -324,12 +335,13 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets all columns in a group corresponding to a row from a table to a specific value.
+     *
      * @param groupBuilder The command builder
-     * @param table The table to update
-     * @param row The row that the value refers to
-     * @param group The group that the rows are in
-     * @param info The descriptions for the columns
-     * @param possible The columns that the command should update
+     * @param table        The table to update
+     * @param row          The row that the value refers to
+     * @param group        The group that the rows are in
+     * @param info         The descriptions for the columns
+     * @param possible     The columns that the command should update
      */
     private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, Object2ObjectMap<String, String> info, ObjectSet<String> possible) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
@@ -346,10 +358,11 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets all columns in a group corresponding to all rows in a table to a specific value.
+     *
      * @param groupBuilder The command builder
-     * @param table The table to update
-     * @param group The group that the rows are in
-     * @param info The descriptions for the columns
+     * @param table        The table to update
+     * @param group        The group that the rows are in
+     * @param info         The descriptions for the columns
      */
     private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, String> info) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
@@ -366,10 +379,11 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command that sets all columns in a group corresponding to all rows in a table to a specific value.
+     *
      * @param groupBuilder The command builder
-     * @param table The table to update
-     * @param group The group that the rows are in
-     * @param info The descriptions for the columns
+     * @param table        The table to update
+     * @param group        The group that the rows are in
+     * @param info         The descriptions for the columns
      * @param argumentName The pattern that the rows must match
      */
     private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, String> info, String argumentName) {
@@ -388,10 +402,11 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command to control all the rows and columns of a table.
-     * @param base The base command string
-     * @param data Data about which columns have data in each row
+     *
+     * @param base      The base command string
+     * @param data      Data about which columns have data in each row
      * @param otherData Data containing the descriptions for each column
-     * @param table The table to update
+     * @param table     The table to update
      * @return The command builder
      */
     private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, Object2ObjectMap<String, String>> otherData, String table) {
@@ -464,8 +479,9 @@ public abstract class MixinCommands {
 
     /**
      * This method creates a command to control certain rows of the 'others' table that correspond to only one registry location.
-     * @param base The base command string
-     * @param stream The stream of rows
+     *
+     * @param base      The base command string
+     * @param stream    The stream of rows
      * @param condition The condition to check
      * @return The command builder
      */

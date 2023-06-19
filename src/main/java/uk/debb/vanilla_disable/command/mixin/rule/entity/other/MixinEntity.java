@@ -26,7 +26,8 @@ public abstract class MixinEntity {
     @Shadow
     public abstract EntityType<?> getType();
 
-    @Shadow public abstract Level level();
+    @Shadow
+    public abstract Level level();
 
     @SuppressWarnings("deprecation")
     @Inject(method = "onInsideBlock", at = @At("HEAD"))

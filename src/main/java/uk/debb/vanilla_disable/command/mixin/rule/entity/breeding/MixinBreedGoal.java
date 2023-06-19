@@ -11,7 +11,9 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(BreedGoal.class)
 public abstract class MixinBreedGoal {
-    @Shadow @Final protected Animal animal;
+    @Shadow
+    @Final
+    protected Animal animal;
 
     @ModifyReturnValue(method = "canUse", at = @At(value = "RETURN"))
     private boolean canUse(boolean original) {

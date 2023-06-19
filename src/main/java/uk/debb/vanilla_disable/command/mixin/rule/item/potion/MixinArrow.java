@@ -15,7 +15,8 @@ import java.util.Objects;
 
 @Mixin(Arrow.class)
 public abstract class MixinArrow {
-    @Shadow public abstract void setEffectsFromItem(ItemStack itemStack);
+    @Shadow
+    public abstract void setEffectsFromItem(ItemStack itemStack);
 
     @Inject(method = "setEffectsFromItem", at = @At("HEAD"), cancellable = true)
     private void setEffectsFromItem(ItemStack itemStack, CallbackInfo ci) {

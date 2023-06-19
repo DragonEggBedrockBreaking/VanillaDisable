@@ -10,7 +10,8 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Block.class)
 public abstract class MixinBlock {
-    @Shadow protected abstract Block asBlock();
+    @Shadow
+    protected abstract Block asBlock();
 
     @Inject(method = "popExperience", at = @At("HEAD"), cancellable = true)
     private void popExperience(CallbackInfo ci) {

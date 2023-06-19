@@ -2,7 +2,10 @@ package uk.debb.vanilla_disable.command.mixin.rule.block.placement;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +19,8 @@ import static net.minecraft.world.level.dimension.BuiltinDimensionTypes.*;
 
 @Mixin(ItemStack.class)
 public abstract class MixinItemStack {
-    @Shadow public abstract Item getItem();
+    @Shadow
+    public abstract Item getItem();
 
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void useOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {

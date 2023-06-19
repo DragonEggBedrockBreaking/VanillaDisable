@@ -12,7 +12,8 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ServerPlayerGameMode.class)
 public abstract class MixinServerPlayerGameMode {
-    @Shadow protected ServerLevel level;
+    @Shadow
+    protected ServerLevel level;
 
     @Inject(method = "destroyBlock", at = @At("HEAD"), cancellable = true)
     private void destroyBlock(BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {

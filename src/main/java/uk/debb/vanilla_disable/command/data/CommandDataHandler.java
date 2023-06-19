@@ -26,7 +26,10 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -71,22 +74,17 @@ public class CommandDataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
     public static final Object2ObjectMap<String, List<String>> stringColSuggestions = new Object2ObjectOpenHashMap<>();
     public static final ObjectList<String> differentDataTypes = new ObjectArrayList<>();
-
+    private static final Cache<String, Boolean> booleanCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, Integer> integerCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, Double> doubleCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, String> stringCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, Ingredient> ingredientCache = Caffeine.newBuilder().maximumSize(100000).build();
     public static MinecraftServer server;
     public static boolean populationDone = false;
-    private static Connection connection;
-    private static Statement statement;
     public static RegistryAccess registryAccess;
-    private static String PATH;
-    private static ObjectList<EntityType<?>> undeadMobs;
-
-    private static Registry<Block> blockRegistry;
-    private static Registry<Item> itemRegistry;
-    private static Registry<EntityType<?>> entityTypeRegistry;
     public static Registry<PaintingVariant> paintingVariantRegistry;
     public static Registry<VillagerProfession> villagerProfessionRegistry;
     public static Registry<VillagerType> villagerTypeRegistry;
-    private static Registry<BlockEntityType<?>> blockEntityRegistry;
     public static Registry<Enchantment> enchantmentRegistry;
     public static Registry<Potion> potionRegistry;
     public static Registry<Feature<?>> featureRegistry;
@@ -96,16 +94,19 @@ public class CommandDataHandler {
     public static Registry<PlacedFeature> placedFeatureRegistry;
     public static Registry<Structure> structureRegistry;
     public static Registry<StatType<?>> statTypeRegistry;
+    private static Connection connection;
+    private static Statement statement;
+    private static String PATH;
+    private static ObjectList<EntityType<?>> undeadMobs;
+    private static Registry<Block> blockRegistry;
+    private static Registry<Item> itemRegistry;
+    private static Registry<EntityType<?>> entityTypeRegistry;
+    private static Registry<BlockEntityType<?>> blockEntityRegistry;
     private static Registry<ResourceLocation> customStatRegistry;
-
-    private static final Cache<String, Boolean> booleanCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, Integer> integerCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, Double> doubleCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, String> stringCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, Ingredient> ingredientCache = Caffeine.newBuilder().maximumSize(100000).build();
 
     /**
      * Cleans up data for display (removes underscores, 'namespace:' prefixes, 'group/' prefixes)
+     *
      * @param o The object to be cleaned up
      * @return The cleaned up object as a string
      */
@@ -122,6 +123,7 @@ public class CommandDataHandler {
 
     /**
      * Cleans up data for display (removes 'namespace:' prefixes)
+     *
      * @param o The object to be cleaned up
      * @return The cleaned up object as a string
      */
@@ -338,7 +340,7 @@ public class CommandDataHandler {
                         itemRegistry.forEach(item -> {
                             boolean villagerWants = Villager.WANTED_ITEMS.contains(item);
                             put("can_breed_with_" +
-                                    lightCleanup(Objects.requireNonNull(itemRegistry.getKey(item)).toString()),
+                                            lightCleanup(Objects.requireNonNull(itemRegistry.getKey(item)).toString()),
                                     String.valueOf(villagerWants));
                         });
                     }
@@ -354,7 +356,7 @@ public class CommandDataHandler {
                             } catch (NoSuchMethodException ignored) {
                                 try {
                                     isFood = animalClass.getMethod("isFood", ItemStack.class);
-                                }  catch (NoSuchMethodException e) {
+                                } catch (NoSuchMethodException e) {
                                     throw new RuntimeException(e);
                                 }
                             }
@@ -529,8 +531,8 @@ public class CommandDataHandler {
                     put("ignited_by_lava", String.valueOf(blockState.ignitedByLava()));
                     put("destroy_speed", String.valueOf(blockState.getDestroySpeed(null, null)));
                     put("requires_correct_tool_for_drops", String.valueOf(blockState.requiresCorrectToolForDrops()));
-                    put("burn_odds", String.valueOf(((FireBlock)Blocks.FIRE).getBurnOdds(block.defaultBlockState())));
-                    put("ignite_odds", String.valueOf(((FireBlock)Blocks.FIRE).getIgniteOdds(block.defaultBlockState())));
+                    put("burn_odds", String.valueOf(((FireBlock) Blocks.FIRE).getBurnOdds(block.defaultBlockState())));
+                    put("ignite_odds", String.valueOf(((FireBlock) Blocks.FIRE).getIgniteOdds(block.defaultBlockState())));
                 }}));
 
         itemRegistry.forEach((item) ->
@@ -741,6 +743,7 @@ public class CommandDataHandler {
 
     /**
      * Get the name of a block from the registry.
+     *
      * @param block The block to get the name of.
      * @return The name of the block.
      */
@@ -750,6 +753,7 @@ public class CommandDataHandler {
 
     /**
      * Get the name of an item from the registry.
+     *
      * @param item The item to get the name of.
      * @return The name of the block.
      */
@@ -759,6 +763,7 @@ public class CommandDataHandler {
 
     /**
      * Get the name of an entity type from the registry.
+     *
      * @param entityType The entity type to get the name of.
      * @return The name of the entity type.
      */
@@ -768,6 +773,7 @@ public class CommandDataHandler {
 
     /**
      * Generates the default data for the database.
+     *
      * @param create Whether to create the tables or not.
      * @param tables The tables to generate data for.
      */
@@ -847,7 +853,8 @@ public class CommandDataHandler {
                 while (scanner.hasNext()) {
                     try {
                         statement.execute(scanner.nextLine());
-                    } catch (SQLException ignored) {}
+                    } catch (SQLException ignored) {
+                    }
                 }
             }
         } catch (SQLException | IOException e) {
@@ -869,6 +876,7 @@ public class CommandDataHandler {
 
     /**
      * Checks if the connection is null.
+     *
      * @return Whether the connection is null.
      */
     public static boolean isConnectionNull() {
@@ -877,6 +885,7 @@ public class CommandDataHandler {
 
     /**
      * Saves commands to an .sql file for persistence.
+     *
      * @param command The command to save.
      */
     public static void writeToFile(String command) {
@@ -902,10 +911,11 @@ public class CommandDataHandler {
 
     /**
      * Sets a single row-column pair to a value.
-     * @param table The table in which to set the value.
-     * @param row The row in which to set the value.
-     * @param column The column in which to set the value.
-     * @param value The value to set.
+     *
+     * @param table    The table in which to set the value.
+     * @param row      The row in which to set the value.
+     * @param column   The column in which to set the value.
+     * @param value    The value to set.
      * @param isString Whether the value is a string.
      */
     public static void setValue(String table, String row, String column, String value, boolean isString) {
@@ -924,9 +934,10 @@ public class CommandDataHandler {
 
     /**
      * Sets all rows in a column to a value.
-     * @param table The table in which to set the value.
-     * @param column The column in which to set the value.
-     * @param value The value to set.
+     *
+     * @param table    The table in which to set the value.
+     * @param column   The column in which to set the value.
+     * @param value    The value to set.
      * @param isString Whether the value is a string.
      */
     public static void setAll(String table, String column, String value, boolean isString) {
@@ -945,11 +956,12 @@ public class CommandDataHandler {
 
     /**
      * Sets all rows which match a pattern in a column to a value.
-     * @param table The table in which to set the value.
-     * @param column The column in which to set the value.
-     * @param value The value to set.
+     *
+     * @param table    The table in which to set the value.
+     * @param column   The column in which to set the value.
+     * @param value    The value to set.
      * @param isString Whether the value is a string.
-     * @param pattern The pattern to match.
+     * @param pattern  The pattern to match.
      */
     public static void setMatching(String table, String column, String value, boolean isString, String pattern) {
         invalidateCaches();
@@ -971,7 +983,8 @@ public class CommandDataHandler {
     /**
      * Set all rows in a column to a value if they match a condition.
      * Used for the 'others' table where different groups are handled differently.
-     * @param value The value to set.
+     *
+     * @param value     The value to set.
      * @param condition The condition for which to check when checking whether to set a row.
      */
     public static void setWithCondition(String value, String condition) {
@@ -987,8 +1000,9 @@ public class CommandDataHandler {
 
     /**
      * Get the default value for a row-column pair.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1003,8 +1017,9 @@ public class CommandDataHandler {
 
     /**
      * Get a boolean value from the database.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1015,15 +1030,17 @@ public class CommandDataHandler {
             boolean bool = resultSet.getBoolean(column);
             resultSet.close();
             return bool;
-        } catch (SQLException | NullPointerException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {
+        }
         invalidateCaches();
         return Boolean.parseBoolean(getDefault(table, row, column));
     }
 
     /**
      * Get a boolean value from the database, using memoization to cache results.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1034,8 +1051,9 @@ public class CommandDataHandler {
 
     /**
      * Get an integer value from the database.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1046,15 +1064,17 @@ public class CommandDataHandler {
             int integer = resultSet.getInt(column);
             resultSet.close();
             return integer;
-        } catch (SQLException | NullPointerException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {
+        }
         invalidateCaches();
         return Integer.parseInt(getDefault(table, row, column));
     }
 
     /**
      * Get an integer value from the database, using memoization to cache results.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1065,8 +1085,9 @@ public class CommandDataHandler {
 
     /**
      * Get a double value from the database.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1077,15 +1098,17 @@ public class CommandDataHandler {
             double dbl = resultSet.getDouble(column);
             resultSet.close();
             return dbl;
-        } catch (SQLException | NullPointerException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {
+        }
         invalidateCaches();
         return Double.parseDouble(getDefault(table, row, column));
     }
 
     /**
      * Get a double value from the database, using memoization to cache results.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1096,8 +1119,9 @@ public class CommandDataHandler {
 
     /**
      * Get a string value from the database.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1109,15 +1133,17 @@ public class CommandDataHandler {
             String str = resultSet.getString(column);
             resultSet.close();
             return str;
-        } catch (SQLException | NullPointerException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {
+        }
         invalidateCaches();
         return getDefault(table, row, column);
     }
 
     /**
      * Get a string value from the database, using memoization to cache results.
-     * @param table The table from which to get the value.
-     * @param row The row from which to get the value.
+     *
+     * @param table  The table from which to get the value.
+     * @param row    The row from which to get the value.
      * @param column The column from which to get the value.
      * @return The value.
      */
@@ -1128,6 +1154,7 @@ public class CommandDataHandler {
 
     /**
      * Get a list of all the items that an entity can breed with.
+     *
      * @param row The name of the entity.
      * @return The list of items.
      */
@@ -1141,10 +1168,10 @@ public class CommandDataHandler {
                 for (int i = 1; i <= columnCount; i++) {
                     String columnName = resultSetMetaData.getColumnName(i);
                     if (columnName.startsWith("can_breed_with_")) {
-                         if (resultSet.getBoolean(columnName)) {
-                             items.add(Objects.requireNonNull(itemRegistry.get(ResourceLocation.of(
-                                     columnName.replace("can_breed_with_", "minecraft:"), ':'))));
-                         }
+                        if (resultSet.getBoolean(columnName)) {
+                            items.add(Objects.requireNonNull(itemRegistry.get(ResourceLocation.of(
+                                    columnName.replace("can_breed_with_", "minecraft:"), ':'))));
+                        }
                     }
                 }
             }
@@ -1162,6 +1189,7 @@ public class CommandDataHandler {
 
     /**
      * Get a list of all the items that an entity can breed with, using memoization to cache results.
+     *
      * @param row The row from which to get the value.
      * @return The value.
      */
@@ -1184,6 +1212,7 @@ public class CommandDataHandler {
 
     /**
      * Reset a single table in the database by removing its commands from the sql script and resetting the in-memory db.
+     *
      * @param db The table to reset.
      */
     public static void resetOne(String db) {
@@ -1203,7 +1232,8 @@ public class CommandDataHandler {
 
     /**
      * Reset some columns in a database by removing them from the sql script and resetting the in-memory db.
-     * @param db The table to reset.
+     *
+     * @param db   The table to reset.
      * @param cols The columns to reset.
      */
     public static void resetPartial(String db, ObjectSet<String> cols) {
