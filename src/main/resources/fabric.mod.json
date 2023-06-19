@@ -31,7 +31,8 @@
     "vanilla_disable_gamerules.mixins.json",
     "vanilla_disable_gamerules_util.mixins.json",
     "vanilla_disable_commands.mixins.json",
-    "vanilla_disable_commands_util.mixins.json"
+    "vanilla_disable_commands_util.mixins.json",
+    "vanilla_disable_worldgen_util.mixins.json"
   ],
   "accessWidener": "vanilla_disable.aw",
   "depends": {

@@ -50,6 +50,6 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
 
     @Override
     protected String mixinPackageRoot() {
-        return "uk.debb.vanilla_disable.command.mixin.rule";
+        return "uk.debb.vanilla_disable.command.mixin.rule.";
     }
 }
