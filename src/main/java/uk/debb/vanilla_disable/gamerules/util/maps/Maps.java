@@ -18,7 +18,6 @@ public interface Maps {
     Object2ObjectMap<String, Gamerules> commandsStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, Gamerules> commandsStringMapDedicated = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<MobCategory, Gamerules> mobCategoryMobCategoryMapMobcap = new Object2ObjectOpenHashMap<>();
-    Object2ObjectMap<String, Gamerules> playerAdvancementsStringMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Pair<Enchantment, Enchantment>, Gamerules> enchantmentPairEnchantmentMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<Holder<Biome>, Gamerules> biomeSourceBiomeHolderMap = new Object2ObjectOpenHashMap<>();
     Object2ObjectMap<String, GameruleCategories> stringToVanillaDisableGameruleCategoryMap = new Object2ObjectOpenHashMap<>();

@@ -10,14 +10,11 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
     @Override
     protected CaffeineConfig createConfig() {
         caffeineConfig = CaffeineConfig.builder("VanillaDisable")
-                .addMixinOption("advancement", true)
                 .addMixinOption("biome", true)
-                .addMixinOption("commands", true)
                 .addMixinOption("enchantments", true)
                 .addMixinOption("misc", true)
                 .addMixinOption("mobs", true)
                 .addMixinOption("spawn_limits", true)
-                .addMixinOption("spawning", true)
                 .addMixinOption("worldgen", true)
                 .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
                 .build(FabricLoader.getInstance().getConfigDir().resolve("vanilla-disable-mixin.properties"));

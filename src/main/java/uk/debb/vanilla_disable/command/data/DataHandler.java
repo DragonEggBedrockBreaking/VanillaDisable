@@ -587,14 +587,6 @@ public class DataHandler {
                 .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).toList());
         others.addAll(new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup()))
                 .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).toList());
-        others.addAll(structureRegistry.keySet()
-                .stream().map(s -> s + "_structure").toList());
-        others.addAll(placedFeatureRegistry.keySet()
-                .stream().map(s -> s + "_feature").toList());
-        others.addAll(featureRegistry.keySet()
-                .stream().map(s -> s + "_feature").toList());
-        others.addAll(biomeRegistry.keySet()
-                .stream().map(s -> s + "_biome").toList());
 
         entityData.put("stats", new Object2ObjectOpenHashMap<>() {{
             statTypeRegistry.forEach(statType -> {
@@ -735,14 +727,6 @@ public class DataHandler {
         new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup()))
                 .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).forEach(command ->
                         otherData.put(command, "Toggle the /" + cleanup(command) + " command being usable."));
-        structureRegistry.keySet().forEach(structure ->
-                otherData.put(structure + "_structure", "Toggle the " + cleanup(structure) + " structure being able to be generated."));
-        placedFeatureRegistry.keySet().forEach(placedFeature ->
-                otherData.put(placedFeature + "_feature", "Toggle the " + cleanup(placedFeature) + " feature being able to be generated."));
-        featureRegistry.keySet().forEach(feature ->
-                otherData.put(feature + "_feature", "Toggle the " + cleanup(feature) + " feature being able to be generated."));
-        biomeRegistry.keySet().forEach(biome ->
-                otherData.put(biome + "_biome", "Toggle the " + cleanup(biome) + " biome being able to be generated."));
 
         intRowMaximums.put("nutrition", 20);
         doubleRowMaximums.put("saturation", 9.9);
@@ -799,7 +783,7 @@ public class DataHandler {
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS items(id CLOB NOT NULL, " +
                         cols.get("items").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
                                 .collect(Collectors.joining(", ")) + ");");
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS others(id CLOB NOT NULL, enabled BOOLEAN);");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS others(id CLOB NOT NULL, \"enabled\" BOOLEAN);");
             }
 
             if (tables.equals("*") || tables.equals("entities")) {
@@ -835,7 +819,7 @@ public class DataHandler {
             if (tables.equals("*") || tables.equals("others")) {
                 others.forEach((key) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO others (id, enabled) VALUES ('" + key + "', true);");
+                        statement.executeUpdate("INSERT INTO others (id, \"enabled\") VALUES ('" + key + "', true);");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }

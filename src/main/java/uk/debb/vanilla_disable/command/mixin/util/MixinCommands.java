@@ -91,15 +91,9 @@ public abstract class MixinCommands {
                             .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks"))
                             .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items"))
                             .then(literal("other")
-                                    .then(minorBuilderComplex("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
+                                    .then(minorBuilder("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
                                             .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
-                                    .then(minorBuilderComplex("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
-                                    .then(minorBuilderSimple("biome", DataHandler.biomeRegistry.keySet().stream().map(Object::toString)))
-                                    .then(minorBuilderSimple("structure", DataHandler.structureRegistry.keySet().stream().map(Object::toString)))
-                                    .then(minorBuilder(new ObjectArrayList<>() {{
-                                        add(DataHandler.featureRegistry.keySet().stream().map(Object::toString));
-                                        add(DataHandler.placedFeatureRegistry.keySet().stream().map(Object::toString));
-                                    }}))
+                                    .then(minorBuilder("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
                             )
                     ).then(overallResetDBBuilder)
             );
@@ -469,65 +463,23 @@ public abstract class MixinCommands {
     }
 
     /**
-     * This method creates a command to control all the rows of the 'others' table that have a complex condition.
-     * @param base The base command string
-     * @param stream The stream of rows
-     * @param condition The condition to check
-     * @return The command builder
-     */
-    private LiteralArgumentBuilder<CommandSourceStack> minorBuilderComplex(String base, Stream<String> stream, String condition) {
-        return minorBuilder(base, stream, condition, "");
-    }
-
-    /**
-     * This method creates a command to control all the rows of the 'others' table that have a simple condition.
-     * @param base The base command string
-     * @param stream The stream of rows
-     * @return The command builder
-     */
-    private LiteralArgumentBuilder<CommandSourceStack> minorBuilderSimple(String base, Stream<String> stream) {
-        return minorBuilder(base, stream, "%_" + base, "_" + base);
-    }
-
-    /**
      * This method creates a command to control certain rows of the 'others' table that correspond to only one registry location.
      * @param base The base command string
      * @param stream The stream of rows
      * @param condition The condition to check
-     * @param ending The ending of the row name
      * @return The command builder
      */
-    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, Stream<String> stream, String condition, String ending) {
+    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, Stream<String> stream, String condition) {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         stream.forEach((property) -> {
             LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            execute(temp, "others", property + ending, "enabled", DataHandler.otherData.get(property + ending), "true", DataType.BOOLEAN);
+            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
             overallBuilder.then(literal(property).then(temp));
         });
 
         LiteralArgumentBuilder<CommandSourceStack> allBuilder = literal("enabled");
         execute(allBuilder, condition);
         overallBuilder.then(literal("all").then(allBuilder));
-
-        return overallBuilder;
-    }
-
-    /**
-     * This method creates a command to control all the rows of the 'others' table that correspond to multiple registries.
-     * @param streams The streams of the rows
-     * @return The command builder
-     */
-    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(ObjectList<Stream<String>> streams) {
-        LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal("feature");
-        streams.forEach(stream -> stream.forEach((property) -> {
-            LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            execute(temp, "others", property + "_feature", "enabled", DataHandler.otherData.get(property + "_feature"), "true", DataType.BOOLEAN);
-            overallBuilder.then(literal(property).then(temp));
-        }));
-
-        LiteralArgumentBuilder<CommandSourceStack> allBuilder = literal("all");
-        execute(allBuilder, "%_feature");
-        overallBuilder.then(allBuilder);
 
         return overallBuilder;
     }

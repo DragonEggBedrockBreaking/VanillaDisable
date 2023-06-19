@@ -2107,6 +2107,8 @@
     "gamerule.category.vd.biome": "VanillaDisable Biome",
     "gamerule.category.vd.misc": "VanillaDisable Misc",
 
+    "advancements.disabled.by.vd": "This advancement has been disabled by an operator.",
+
     "commands.disabled.by.vd": "This command has been disabled by an operator.",
     "commands.gamerule.already_default": "This is the default value",
     "commands.gamerule.default": "The default value is: %s",

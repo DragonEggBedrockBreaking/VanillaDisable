@@ -102,7 +102,9 @@
     "item.potion.MixinArrow",
     "item.potion.MixinPotionUtils",
     "item.spam.MixinBowItem",
-    "item.spam.MixinCrossbowItem"
+    "item.spam.MixinCrossbowItem",
+    "other.MixinCommands",
+    "other.MixinPlayerAdvancements"
   ],
   "injectors": {
     "defaultRequire": 1
