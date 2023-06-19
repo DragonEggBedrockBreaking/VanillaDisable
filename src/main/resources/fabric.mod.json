@@ -24,7 +24,7 @@
   "entrypoints": {
     "main": [
       "uk.debb.vanilla_disable.gamerules.util.GameruleInitializer",
-      "uk.debb.vanilla_disable.common.VanillaDisable"
+      "uk.debb.vanilla_disable.VanillaDisable"
     ]
   },
   "mixins": [
