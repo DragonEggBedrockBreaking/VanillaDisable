@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import java.util.List;
 import java.util.Map;
@@ -26,14 +26,14 @@ import java.util.stream.Collectors;
 public abstract class MixinBlock {
     @Inject(method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", at = @At("HEAD"), cancellable = true)
     private static void getDrops(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack itemStack, CallbackInfoReturnable<List<ItemStack>> cir) {
-        String item = DataHandler.getKeyFromItemRegistry(itemStack.getItem());
+        String item = CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem());
         EnchantmentHelper.setEnchantments(
                 EnchantmentHelper.getEnchantments(itemStack)
                         .entrySet()
                         .stream()
                         .filter(entry -> {
-                            String enchantment = DataHandler.enchantmentRegistry.getKey(entry.getKey()) + "_enchantment";
-                            return DataHandler.getCachedBoolean("items", item, enchantment);
+                            String enchantment = CommandDataHandler.enchantmentRegistry.getKey(entry.getKey()) + "_enchantment";
+                            return CommandDataHandler.getCachedBoolean("items", item, enchantment);
                         }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), itemStack);
         LootParams.Builder builder = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockPos))

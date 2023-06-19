@@ -8,7 +8,7 @@ import net.minecraft.world.level.material.PushReaction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(BlockBehaviour.BlockStateBase.class)
 public abstract class MixinBlockStateBase {
@@ -17,15 +17,15 @@ public abstract class MixinBlockStateBase {
     @ModifyReturnValue(method = "getPistonPushReaction", at = @At("RETURN"))
     private PushReaction getPistonPushReaction(PushReaction original) {
         Block block = this.getBlock();
-        if (DataHandler.isConnectionNull()) {
+        if (CommandDataHandler.isConnectionNull()) {
             if (block.equals(Blocks.OBSIDIAN) || block.equals(Blocks.CRYING_OBSIDIAN) || block.equals(Blocks.RESPAWN_ANCHOR) ||
                     block.equals(Blocks.REINFORCED_DEEPSLATE)) {
                 return PushReaction.BLOCK;
             }
             return original;
         }
-        String name = DataHandler.getKeyFromBlockRegistry(block);
-        String reaction = DataHandler.getCachedString("blocks", name, "push_behaviour");
+        String name = CommandDataHandler.getKeyFromBlockRegistry(block);
+        String reaction = CommandDataHandler.getCachedString("blocks", name, "push_behaviour");
         return PushReaction.valueOf(reaction);
     }
 }

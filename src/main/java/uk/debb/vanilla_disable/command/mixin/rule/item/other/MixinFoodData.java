@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(FoodData.class)
 public abstract class MixinFoodData {
@@ -18,9 +18,9 @@ public abstract class MixinFoodData {
     @Inject(method = "eat(Lnet/minecraft/world/item/Item;Lnet/minecraft/world/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
     private void eat(Item item, ItemStack itemStack, CallbackInfo ci) {
         if (item.isEdible()) {
-            String name = DataHandler.getKeyFromItemRegistry(item);
-            int nutrition = DataHandler.getCachedInt("items", name, "nutrition");
-            float saturation = (float) DataHandler.getCachedDouble("items", name, "saturation");
+            String name = CommandDataHandler.getKeyFromItemRegistry(item);
+            int nutrition = CommandDataHandler.getCachedInt("items", name, "nutrition");
+            float saturation = (float) CommandDataHandler.getCachedDouble("items", name, "saturation");
             this.eat(nutrition, saturation);
         }
         ci.cancel();

@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Pig.class)
 public abstract class MixinPig {
@@ -22,8 +22,8 @@ public abstract class MixinPig {
             index = 2
     )
     private Ingredient getIngredient(Ingredient original) {
-        if (DataHandler.isConnectionNull()) return original;
-        return DataHandler.getCachedBreedingItems("minecraft:pig");
+        if (CommandDataHandler.isConnectionNull()) return original;
+        return CommandDataHandler.getCachedBreedingItems("minecraft:pig");
     }
 
     @WrapWithCondition(

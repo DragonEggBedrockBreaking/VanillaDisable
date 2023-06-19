@@ -4,7 +4,7 @@ import net.minecraft.world.level.block.ObserverBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ObserverBlock.class)
 public abstract class MixinObserverBlock {
@@ -17,7 +17,7 @@ public abstract class MixinObserverBlock {
             index = 2
     )
     private int modifyObserverDelay(int delay) {
-        return DataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_delay");
+        return CommandDataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_delay");
     }
 
     @ModifyArg(
@@ -28,6 +28,6 @@ public abstract class MixinObserverBlock {
             )
     )
     private int modifyObserverDuration(int duration) {
-        return DataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_duration");
+        return CommandDataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_duration");
     }
 }

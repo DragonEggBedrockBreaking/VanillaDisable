@@ -5,7 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.CatSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(CatSpawner.class)
 public abstract class MixinCatSpawner {
@@ -17,6 +17,6 @@ public abstract class MixinCatSpawner {
             )
     )
     private Entity create(Entity original) {
-        return DataHandler.getCachedBoolean("entities", "minecraft:cat", "spawned_by_villagers") ? original : null;
+        return CommandDataHandler.getCachedBoolean("entities", "minecraft:cat", "spawned_by_villagers") ? original : null;
     }
 }

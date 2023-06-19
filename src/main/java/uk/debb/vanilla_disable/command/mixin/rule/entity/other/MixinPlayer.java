@@ -13,28 +13,28 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
     private boolean isInvulnerableTo(boolean original, DamageSource damageSource) {
-        return original || !DataHandler.getCachedBoolean("entities", "minecraft:player",
-                DataHandler.damageTypeRegistry.getKey(damageSource.type()) + "_damage");
+        return original || !CommandDataHandler.getCachedBoolean("entities", "minecraft:player",
+                CommandDataHandler.damageTypeRegistry.getKey(damageSource.type()) + "_damage");
     }
 
     @Inject(method = "attack", at = @At("RETURN"))
     private void attack(Entity target, CallbackInfo ci) {
         if (target instanceof Creeper creeper && EnchantmentHelper.getFireAspect((Player) (Object) this) > 0 &&
-                DataHandler.getCachedBoolean("entities", "minecraft:creeper", "can_be_lit_by_fire_aspect")) {
+                CommandDataHandler.getCachedBoolean("entities", "minecraft:creeper", "can_be_lit_by_fire_aspect")) {
             creeper.ignite();
         }
     }
 
     @Inject(method = "interactOn", at = @At("HEAD"), cancellable = true)
     private void interactOn(Entity entity, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        String entityType = DataHandler.getKeyFromEntityTypeRegistry(entity.getType());
-        if (!DataHandler.getCachedBoolean("entities", entityType, "can_player_interact")) {
+        String entityType = CommandDataHandler.getKeyFromEntityTypeRegistry(entity.getType());
+        if (!CommandDataHandler.getCachedBoolean("entities", entityType, "can_player_interact")) {
             cir.setReturnValue(InteractionResult.FAIL);
         }
     }

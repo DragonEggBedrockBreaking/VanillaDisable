@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(FarmBlock.class)
 public abstract class MixinFarmBlock {
@@ -21,6 +21,6 @@ public abstract class MixinFarmBlock {
             require = 0
     )
     private boolean turnToDirt(Entity entity, BlockState blockState, Level level, BlockPos blockPos, Level level2, BlockState blockState2, BlockPos blockPos2, Entity entity2, float f) {
-        return DataHandler.getCachedBoolean("blocks", "minecraft:farmland", "can_be_trampled");
+        return CommandDataHandler.getCachedBoolean("blocks", "minecraft:farmland", "can_be_trampled");
     }
 }

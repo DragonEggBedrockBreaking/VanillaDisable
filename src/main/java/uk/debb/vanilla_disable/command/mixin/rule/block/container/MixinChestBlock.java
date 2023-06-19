@@ -6,13 +6,13 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.ChestBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ChestBlock.class)
 public abstract class MixinChestBlock {
     @ModifyReturnValue(method = "isChestBlockedAt", at = @At("RETURN"))
     private static boolean isChestBlockedAt(boolean original, LevelAccessor levelAccessor, BlockPos blockPos) {
-        String name = DataHandler.getKeyFromBlockRegistry(levelAccessor.getBlockState(blockPos).getBlock());
-        return original && DataHandler.getCachedBoolean("blocks", name, "opening_blockable");
+        String name = CommandDataHandler.getKeyFromBlockRegistry(levelAccessor.getBlockState(blockPos).getBlock());
+        return original && CommandDataHandler.getCachedBoolean("blocks", name, "opening_blockable");
     }
 }

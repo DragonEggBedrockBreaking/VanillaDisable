@@ -9,7 +9,7 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(AbstractVillager.class)
 public abstract class MixinAbstractVillager {
@@ -22,8 +22,8 @@ public abstract class MixinAbstractVillager {
             require = 0
     )
     private MerchantOffer modifyUses(MerchantOffer receiver) {
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        if (DataHandler.getCachedBoolean("entities", entity, "can_infinitely_trade")) {
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
+        if (CommandDataHandler.getCachedBoolean("entities", entity, "can_infinitely_trade")) {
             return new MerchantOffer(new CompoundTag());
         }
         return receiver;
@@ -31,8 +31,8 @@ public abstract class MixinAbstractVillager {
 
     @ModifyReturnValue(method = "getOffers", at = @At("RETURN"))
     private MerchantOffers clearOffers(MerchantOffers original) {
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        if (!DataHandler.getCachedBoolean("entities", entity, "can_trade")) {
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
+        if (!CommandDataHandler.getCachedBoolean("entities", entity, "can_trade")) {
             return new MerchantOffers();
         }
         return original;

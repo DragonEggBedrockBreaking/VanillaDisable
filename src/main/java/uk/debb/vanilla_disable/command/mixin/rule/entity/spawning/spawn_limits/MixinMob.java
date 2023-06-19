@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.world.entity.Mob;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Mob.class)
 public abstract class MixinMob {
@@ -17,8 +17,8 @@ public abstract class MixinMob {
     )
     private int getNoDespawnDistance(int original) {
         Mob mob = (Mob) (Object) this;
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return DataHandler.getCachedInt("entities", entity, "min_despawn_distance");
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
+        return CommandDataHandler.getCachedInt("entities", entity, "min_despawn_distance");
     }
 
     @ModifyExpressionValue(
@@ -30,7 +30,7 @@ public abstract class MixinMob {
     )
     private int getDespawnDistance(int original) {
         Mob mob = (Mob) (Object) this;
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return DataHandler.getCachedInt("entities", entity, "instant_despawn_distance");
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
+        return CommandDataHandler.getCachedInt("entities", entity, "instant_despawn_distance");
     }
 }

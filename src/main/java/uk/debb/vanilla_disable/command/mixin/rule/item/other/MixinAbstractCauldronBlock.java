@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(AbstractCauldronBlock.class)
 public abstract class MixinAbstractCauldronBlock {
@@ -17,8 +17,8 @@ public abstract class MixinAbstractCauldronBlock {
             )
     )
     private ItemStack getItemInHand(ItemStack original) {
-        String name = DataHandler.getKeyFromItemRegistry(original.getItem());
-        if (!DataHandler.getCachedBoolean("items", name, "cauldron_interaction")) {
+        String name = CommandDataHandler.getKeyFromItemRegistry(original.getItem());
+        if (!CommandDataHandler.getCachedBoolean("items", name, "cauldron_interaction")) {
             return ItemStack.EMPTY;
         }
         return original;

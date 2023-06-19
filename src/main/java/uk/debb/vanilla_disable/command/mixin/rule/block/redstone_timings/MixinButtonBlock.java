@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.ButtonBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ButtonBlock.class)
 public abstract class MixinButtonBlock {
@@ -18,8 +18,8 @@ public abstract class MixinButtonBlock {
             index = 2
     )
     private int editButtonPressDuration(int original) {
-        String name = DataHandler.getKeyFromBlockRegistry((Block) (Object) this);
-        return DataHandler.getCachedInt("blocks", name, "redstone_duration");
+        String name = CommandDataHandler.getKeyFromBlockRegistry((Block) (Object) this);
+        return CommandDataHandler.getCachedInt("blocks", name, "redstone_duration");
     }
 
     @ModifyArg(
@@ -31,7 +31,7 @@ public abstract class MixinButtonBlock {
             index = 2
     )
     private int modifyButtonPressDuration(int original) {
-        String name = DataHandler.getKeyFromBlockRegistry((Block) (Object) this);
-        return DataHandler.getCachedInt("blocks", name, "redstone_duration");
+        String name = CommandDataHandler.getKeyFromBlockRegistry((Block) (Object) this);
+        return CommandDataHandler.getCachedInt("blocks", name, "redstone_duration");
     }
 }

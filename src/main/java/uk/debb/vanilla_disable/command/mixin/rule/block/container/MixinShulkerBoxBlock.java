@@ -8,13 +8,13 @@ import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ShulkerBoxBlock.class)
 public abstract class MixinShulkerBoxBlock {
     @ModifyReturnValue(method = "canOpen", at = @At("RETURN"))
     private static boolean canOpen(boolean original, BlockState blockState, Level level, BlockPos blockPos, ShulkerBoxBlockEntity shulkerBoxBlockEntity) {
-        String name = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
-        return original || !DataHandler.getCachedBoolean("blocks", name, "opening_blockable");
+        String name = CommandDataHandler.getKeyFromBlockRegistry(blockState.getBlock());
+        return original || !CommandDataHandler.getCachedBoolean("blocks", name, "opening_blockable");
     }
 }

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 import uk.debb.vanilla_disable.command.data.DataType;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public abstract class MixinCommands {
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onRegister(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {
         Thread t = new Thread(() -> {
-            while (!DataHandler.populationDone) {
+            while (!CommandDataHandler.populationDone) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (InterruptedException e) {
@@ -51,7 +51,7 @@ public abstract class MixinCommands {
 
             LiteralArgumentBuilder<CommandSourceStack> overallResetDBBuilder = literal("reset");
             LiteralArgumentBuilder<CommandSourceStack> resetDBBuilder = literal("all").executes(context -> {
-                DataHandler.resetAll();
+                CommandDataHandler.resetAll();
                 context.getSource().sendSuccess(
                         () -> Component.literal("All databases have been reset."),
                         false
@@ -61,7 +61,7 @@ public abstract class MixinCommands {
             overallResetDBBuilder.then(resetDBBuilder);
             Stream.of("entities", "blocks", "items", "others").forEach(table -> {
                 LiteralArgumentBuilder<CommandSourceStack> tableBuilder = literal(table).executes(context -> {
-                    DataHandler.resetOne(table);
+                    CommandDataHandler.resetOne(table);
                     context.getSource().sendSuccess(
                             () -> Component.literal("The " + table + " table has been reset."),
                             false
@@ -69,13 +69,13 @@ public abstract class MixinCommands {
                     return 1;
                 });
                 Object2ObjectMap<String, Object2ObjectMap<String, String>> groups = switch (table) {
-                    case "entities" -> DataHandler.entityData;
-                    case "blocks" -> DataHandler.blockData;
-                    case "items" -> DataHandler.itemData;
+                    case "entities" -> CommandDataHandler.entityData;
+                    case "blocks" -> CommandDataHandler.blockData;
+                    case "items" -> CommandDataHandler.itemData;
                     default -> new Object2ObjectOpenHashMap<>();
                 };
                 groups.forEach((group, data) -> tableBuilder.then(literal(group).executes(context -> {
-                    DataHandler.resetPartial(table, data.keySet());
+                    CommandDataHandler.resetPartial(table, data.keySet());
                     context.getSource().sendSuccess(
                             () -> Component.literal("The " + group + " group in the " + table + " table has been reset."),
                             false
@@ -87,11 +87,11 @@ public abstract class MixinCommands {
 
             this.getDispatcher().register(literal("vd").requires(commandSourceStack -> commandSourceStack.hasPermission(2))
                     .then(literal("rule")
-                            .then(majorBuilder("entity", DataHandler.entities, DataHandler.entityData, "entities"))
-                            .then(majorBuilder("block", DataHandler.blocks, DataHandler.blockData, "blocks"))
-                            .then(majorBuilder("item", DataHandler.items, DataHandler.itemData, "items"))
+                            .then(majorBuilder("entity", CommandDataHandler.entities, CommandDataHandler.entityData, "entities"))
+                            .then(majorBuilder("block", CommandDataHandler.blocks, CommandDataHandler.blockData, "blocks"))
+                            .then(majorBuilder("item", CommandDataHandler.items, CommandDataHandler.itemData, "items"))
                             .then(literal("other")
-                                    .then(minorBuilder("advancement", DataHandler.server.getAdvancements().getAllAdvancements()
+                                    .then(minorBuilder("advancement", CommandDataHandler.server.getAdvancements().getAllAdvancements()
                                             .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
                                     .then(minorBuilder("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
                             )
@@ -111,9 +111,9 @@ public abstract class MixinCommands {
         return switch (type) {
             case BOOLEAN -> BoolArgumentType.bool();
             case INTEGER ->
-                    IntegerArgumentType.integer(0, DataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
+                    IntegerArgumentType.integer(0, CommandDataHandler.intRowMaximums.getOrDefault(col, Integer.MAX_VALUE));
             case REAL ->
-                    DoubleArgumentType.doubleArg(0.0, DataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
+                    DoubleArgumentType.doubleArg(0.0, CommandDataHandler.doubleRowMaximums.getOrDefault(col, Double.MAX_VALUE));
             case CLOB -> StringArgumentType.greedyString();
         };
     }
@@ -146,9 +146,9 @@ public abstract class MixinCommands {
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
         literalArgumentBuilder.executes(context -> {
             String value = switch (type) {
-                case BOOLEAN -> String.valueOf(DataHandler.getCachedBoolean(table, row, col));
-                case INTEGER -> String.valueOf(DataHandler.getCachedInt(table, row, col));
-                case REAL -> String.valueOf(DataHandler.getCachedDouble(table, row, col));
+                case BOOLEAN -> String.valueOf(CommandDataHandler.getCachedBoolean(table, row, col));
+                case INTEGER -> String.valueOf(CommandDataHandler.getCachedInt(table, row, col));
+                case REAL -> String.valueOf(CommandDataHandler.getCachedDouble(table, row, col));
                 case CLOB -> "";
             };
             context.getSource().sendSuccess(
@@ -159,7 +159,7 @@ public abstract class MixinCommands {
         }).then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    DataHandler.setValue(table, row, col, value, type.equals(DataType.CLOB));
+                    CommandDataHandler.setValue(table, row, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the value to " + value + "."),
                             false
@@ -182,7 +182,7 @@ public abstract class MixinCommands {
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, List<String> options) {
         literalArgumentBuilder.executes(context -> {
             context.getSource().sendSuccess(
-                    () -> Component.literal(description + "\nThe current value is: " + DataHandler.getCachedString(table, row, col) + "\nThe default value is: " + defaultValue.replace("'", "")),
+                    () -> Component.literal(description + "\nThe current value is: " + CommandDataHandler.getCachedString(table, row, col) + "\nThe default value is: " + defaultValue.replace("'", "")),
                     false
             );
             return 1;
@@ -195,7 +195,7 @@ public abstract class MixinCommands {
                         );
                         return 0;
                     }
-                    DataHandler.setValue(table, row, col, value, true);
+                    CommandDataHandler.setValue(table, row, col, value, true);
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the value to " + value + "."),
                             false
@@ -216,7 +216,7 @@ public abstract class MixinCommands {
         literalArgumentBuilder.then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
-                    DataHandler.setAll(table, col, value, type.equals(DataType.CLOB));
+                    CommandDataHandler.setAll(table, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the values to " + value + "."),
                             false
@@ -243,7 +243,7 @@ public abstract class MixinCommands {
                         );
                         return 0;
                     }
-                    DataHandler.setAll(table, col, value, true);
+                    CommandDataHandler.setAll(table, col, value, true);
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the values to " + value + "."),
                             false
@@ -262,7 +262,7 @@ public abstract class MixinCommands {
         literalArgumentBuilder.then(
                 argument("value", BoolArgumentType.bool()).executes(context -> {
                     String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
-                    DataHandler.setWithCondition(value, condition);
+                    CommandDataHandler.setWithCondition(value, condition);
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the values to " + value + "."),
                             false
@@ -284,7 +284,7 @@ public abstract class MixinCommands {
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
                     String value = getArgumentValueForType(type, context);
                     String pattern = StringArgumentType.getString(context, argumentName);
-                    DataHandler.setMatching(table, col, value, type.equals(DataType.CLOB), pattern);
+                    CommandDataHandler.setMatching(table, col, value, type.equals(DataType.CLOB), pattern);
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the values to " + value + "."),
                             false
@@ -312,7 +312,7 @@ public abstract class MixinCommands {
                         );
                         return 0;
                     }
-                    DataHandler.setMatching(table, col, value, true, pattern);
+                    CommandDataHandler.setMatching(table, col, value, true, pattern);
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the values to " + value + "."),
                             false
@@ -335,7 +335,7 @@ public abstract class MixinCommands {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
             info.keySet().stream().filter(possible::contains).forEach((groupProperty ->
-                    DataHandler.setValue(table, row, groupProperty, value, false)));
+                    CommandDataHandler.setValue(table, row, groupProperty, value, false)));
             context.getSource().sendSuccess(
                     () -> Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
                     false
@@ -355,7 +355,7 @@ public abstract class MixinCommands {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
             info.keySet().forEach((groupProperty ->
-                    DataHandler.setAll(table, groupProperty, value, false)));
+                    CommandDataHandler.setAll(table, groupProperty, value, false)));
             context.getSource().sendSuccess(
                     () -> Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
                     false
@@ -377,7 +377,7 @@ public abstract class MixinCommands {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
             String pattern = StringArgumentType.getString(context, argumentName);
             info.keySet().forEach((groupProperty ->
-                    DataHandler.setMatching(table, groupProperty, value, false, pattern)));
+                    CommandDataHandler.setMatching(table, groupProperty, value, false, pattern)));
             context.getSource().sendSuccess(
                     () -> Component.literal("Successfully set the value of all " + group + " properties to " + value + "."),
                     false
@@ -405,15 +405,15 @@ public abstract class MixinCommands {
                 LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
                 properties.forEach((key, value) -> {
                     LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(key);
-                    if (DataHandler.stringColSuggestions.containsKey(key)) {
-                        execute(propertyBuilder, table, row, key, value, map.get(key), DataHandler.stringColSuggestions.get(key));
+                    if (CommandDataHandler.stringColSuggestions.containsKey(key)) {
+                        execute(propertyBuilder, table, row, key, value, map.get(key), CommandDataHandler.stringColSuggestions.get(key));
                     } else {
                         execute(propertyBuilder, table, row, key, value, map.get(key),
-                                DataHandler.cols.get(table).get(key));
+                                CommandDataHandler.cols.get(table).get(key));
                     }
                     groupBuilder.then(propertyBuilder);
                 });
-                if (!DataHandler.differentDataTypes.contains(group)) {
+                if (!CommandDataHandler.differentDataTypes.contains(group)) {
                     allCols(groupBuilder, table, row, group, info, map.keySet());
                 }
                 rowBuilder.then(groupBuilder);
@@ -426,14 +426,14 @@ public abstract class MixinCommands {
             LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
             info.keySet().forEach((property) -> {
                 LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property);
-                if (DataHandler.stringColSuggestions.containsKey(property)) {
-                    execute(propertyBuilder, table, property, DataHandler.stringColSuggestions.get(property));
+                if (CommandDataHandler.stringColSuggestions.containsKey(property)) {
+                    execute(propertyBuilder, table, property, CommandDataHandler.stringColSuggestions.get(property));
                 } else {
-                    execute(propertyBuilder, table, property, DataHandler.cols.get(table).get(property));
+                    execute(propertyBuilder, table, property, CommandDataHandler.cols.get(table).get(property));
                 }
                 groupBuilder.then(propertyBuilder);
             });
-            if (!DataHandler.differentDataTypes.contains(group)) {
+            if (!CommandDataHandler.differentDataTypes.contains(group)) {
                 allCols(groupBuilder, table, group, info);
             }
             allBuilder.then(groupBuilder);
@@ -445,14 +445,14 @@ public abstract class MixinCommands {
             LiteralArgumentBuilder<CommandSourceStack> groupBuilder = literal(group);
             info.keySet().forEach((property) -> {
                 LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property);
-                if (DataHandler.stringColSuggestions.containsKey(property)) {
-                    execute(propertyBuilder, table, property, DataHandler.stringColSuggestions.get(property), "pattern");
+                if (CommandDataHandler.stringColSuggestions.containsKey(property)) {
+                    execute(propertyBuilder, table, property, CommandDataHandler.stringColSuggestions.get(property), "pattern");
                 } else {
-                    execute(propertyBuilder, table, property, DataHandler.cols.get(table).get(property), "pattern");
+                    execute(propertyBuilder, table, property, CommandDataHandler.cols.get(table).get(property), "pattern");
                 }
                 groupBuilder.then(propertyBuilder);
             });
-            if (!DataHandler.differentDataTypes.contains(group)) {
+            if (!CommandDataHandler.differentDataTypes.contains(group)) {
                 allCols(groupBuilder, table, group, info, "pattern");
             }
             matchesBuilder.then(groupBuilder);
@@ -473,7 +473,7 @@ public abstract class MixinCommands {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         stream.forEach((property) -> {
             LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            execute(temp, "others", property, "enabled", DataHandler.otherData.get(property), "true", DataType.BOOLEAN);
+            execute(temp, "others", property, "enabled", CommandDataHandler.otherData.get(property), "true", DataType.BOOLEAN);
             overallBuilder.then(literal(property).then(temp));
         });
 

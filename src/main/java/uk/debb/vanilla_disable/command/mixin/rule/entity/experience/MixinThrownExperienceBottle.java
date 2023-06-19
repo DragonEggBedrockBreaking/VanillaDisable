@@ -6,7 +6,7 @@ import net.minecraft.world.entity.projectile.ThrownExperienceBottle;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ThrownExperienceBottle.class)
 public abstract class MixinThrownExperienceBottle {
@@ -18,6 +18,6 @@ public abstract class MixinThrownExperienceBottle {
             )
     )
     private boolean award(ServerLevel serverLevel, Vec3 vec3, int i) {
-        return DataHandler.getCachedBoolean("entities", "minecraft:experience_bottle", "can_drop_xp");
+        return CommandDataHandler.getCachedBoolean("entities", "minecraft:experience_bottle", "can_drop_xp");
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(AbstractHorse.class)
 public abstract class MixinAbstractHorse {
@@ -19,8 +19,8 @@ public abstract class MixinAbstractHorse {
             index = 2
     )
     private Ingredient getIngredient(Ingredient original) {
-        if (DataHandler.isConnectionNull()) return original;
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return DataHandler.getCachedBreedingItems(entity);
+        if (CommandDataHandler.isConnectionNull()) return original;
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
+        return CommandDataHandler.getCachedBreedingItems(entity);
     }
 }

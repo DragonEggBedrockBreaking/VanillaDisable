@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import java.util.Objects;
 
@@ -13,9 +13,9 @@ import java.util.Objects;
 public abstract class MixinEnchantment {
     @ModifyReturnValue(method = "canEnchant", at = @At("RETURN"))
     private boolean canEnchant(boolean original, ItemStack itemStack) {
-        if (DataHandler.isConnectionNull()) return original;
+        if (CommandDataHandler.isConnectionNull()) return original;
         if (!itemStack.getItem().canBeDepleted()) return original;
-        String enchantment = Objects.requireNonNull(DataHandler.enchantmentRegistry.getKey((Enchantment) (Object) this)) + "_enchantment";
-        return DataHandler.getCachedBoolean("items", DataHandler.getKeyFromItemRegistry(itemStack.getItem()), enchantment);
+        String enchantment = Objects.requireNonNull(CommandDataHandler.enchantmentRegistry.getKey((Enchantment) (Object) this)) + "_enchantment";
+        return CommandDataHandler.getCachedBoolean("items", CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem()), enchantment);
     }
 }

@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ThrownEnderpearl.class)
 public abstract class MixinThrownEnderpearl {
@@ -18,7 +18,7 @@ public abstract class MixinThrownEnderpearl {
             cancellable = true
     )
     private void discard(CallbackInfo ci) {
-        if (!DataHandler.getCachedBoolean("entities", "minecraft:ender_pearl", "despawn_on_player_death")) {
+        if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:ender_pearl", "despawn_on_player_death")) {
             ci.cancel();
         }
     }

@@ -9,14 +9,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(FallingBlock.class)
 public abstract class MixinFallingBlock {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
-        String name = DataHandler.getKeyFromBlockRegistry(blockState.getBlock());
-        if (!DataHandler.getCachedBoolean("blocks", name, "can_fall")) {
+        String name = CommandDataHandler.getKeyFromBlockRegistry(blockState.getBlock());
+        if (!CommandDataHandler.getCachedBoolean("blocks", name, "can_fall")) {
             ci.cancel();
         }
     }

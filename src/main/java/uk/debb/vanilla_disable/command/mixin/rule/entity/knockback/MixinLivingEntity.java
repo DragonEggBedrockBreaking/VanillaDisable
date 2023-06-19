@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import java.util.Objects;
 
@@ -18,9 +18,9 @@ public abstract class MixinLivingEntity {
 
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
     public void knockback(CallbackInfo ci) {
-        String target = DataHandler.getKeyFromEntityTypeRegistry(((Entity)(Object)this).getType());
-        String source = DataHandler.getKeyFromEntityTypeRegistry(Objects.requireNonNull(this.lastHurtByMob).getType());
-        if (!DataHandler.getCachedBoolean("entities", target, source + "_knockback")) {
+        String target = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity)(Object)this).getType());
+        String source = CommandDataHandler.getKeyFromEntityTypeRegistry(Objects.requireNonNull(this.lastHurtByMob).getType());
+        if (!CommandDataHandler.getCachedBoolean("entities", target, source + "_knockback")) {
             ci.cancel();
         }
     }

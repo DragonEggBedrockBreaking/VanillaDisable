@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(RepeaterBlock.class)
 public abstract class MixinRepeaterBlock {
@@ -16,6 +16,6 @@ public abstract class MixinRepeaterBlock {
 
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
     private int getDelay(int original, BlockState blockState) {
-        return blockState.getValue(DELAY) * DataHandler.getCachedInt("blocks", "minecraft:repeater", "redstone_delay");
+        return blockState.getValue(DELAY) * CommandDataHandler.getCachedInt("blocks", "minecraft:repeater", "redstone_delay");
     }
 }

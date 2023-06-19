@@ -5,7 +5,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.monster.Zombie;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Zombie.class)
 public abstract class MixinZombie {
@@ -17,7 +17,7 @@ public abstract class MixinZombie {
             )
     )
     private Difficulty getWrongDifficulty(Difficulty original) {
-        if (!DataHandler.getCachedBoolean("entities", "minecraft:zombified_villager", "can_be_converted_to")) {
+        if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:zombified_villager", "can_be_converted_to")) {
             return Difficulty.PEACEFUL;
         }
         return original;

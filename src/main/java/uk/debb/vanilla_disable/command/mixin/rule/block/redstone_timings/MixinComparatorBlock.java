@@ -1,11 +1,10 @@
 package uk.debb.vanilla_disable.command.mixin.rule.block.redstone_timings;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.ComparatorBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(ComparatorBlock.class)
 public abstract class MixinComparatorBlock {
@@ -17,6 +16,6 @@ public abstract class MixinComparatorBlock {
             )
     )
     private int modifyComparatorDelay1(int delay) {
-        return DataHandler.getCachedInt("blocks", "minecraft:comparator", "redstone_delay");
+        return CommandDataHandler.getCachedInt("blocks", "minecraft:comparator", "redstone_delay");
     }
 }

@@ -5,21 +5,21 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
     @Inject(method = "createLevels", at = @At("RETURN"))
     private void afterLevelCreation(CallbackInfo ci) {
-        DataHandler.server = (MinecraftServer) (Object) this;
-        if (!DataHandler.populationDone) {
-            DataHandler.populate();
+        CommandDataHandler.server = (MinecraftServer) (Object) this;
+        if (!CommandDataHandler.populationDone) {
+            CommandDataHandler.populate();
         }
-        DataHandler.handleDatabase();
+        CommandDataHandler.handleDatabase();
     }
 
     @Inject(method = "stopServer", at = @At("TAIL"))
     private void afterServerShutdown(CallbackInfo ci) {
-        DataHandler.closeConnection();
+        CommandDataHandler.closeConnection();
     }
 }

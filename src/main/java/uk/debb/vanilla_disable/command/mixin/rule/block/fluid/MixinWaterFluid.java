@@ -6,7 +6,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.material.WaterFluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(WaterFluid.class)
 public abstract class MixinWaterFluid {
@@ -14,9 +14,9 @@ public abstract class MixinWaterFluid {
     private int getDropOff(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return DataHandler.getCachedBoolean("blocks", "minecraft:water", "fluid_reaches_far_in_nether") ? 1 : 2;
+                return CommandDataHandler.getCachedBoolean("blocks", "minecraft:water", "fluid_reaches_far_in_nether") ? 1 : 2;
             } else {
-                return DataHandler.getCachedBoolean("blocks", "minecraft:water", "fluid_reaches_far") ? 1 : 2;
+                return CommandDataHandler.getCachedBoolean("blocks", "minecraft:water", "fluid_reaches_far") ? 1 : 2;
             }
         }
         return original;
@@ -26,9 +26,9 @@ public abstract class MixinWaterFluid {
     private int getTickDelay(int original, LevelReader world) {
         if (world instanceof Level) {
             if (world.dimensionType().ultraWarm()) {
-                return DataHandler.getCachedInt("blocks", "minecraft:water", "fluid_speed_in_nether");
+                return CommandDataHandler.getCachedInt("blocks", "minecraft:water", "fluid_speed_in_nether");
             } else {
-                return DataHandler.getCachedInt("blocks", "minecraft:water", "fluid_speed");
+                return CommandDataHandler.getCachedInt("blocks", "minecraft:water", "fluid_speed");
             }
         }
         return original;

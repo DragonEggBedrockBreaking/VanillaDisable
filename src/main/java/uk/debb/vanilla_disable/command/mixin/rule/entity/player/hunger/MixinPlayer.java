@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Player.class)
 public abstract class MixinPlayer {
@@ -18,7 +18,7 @@ public abstract class MixinPlayer {
     private void eat(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         FoodProperties properties = stack.getItem().getFoodProperties();
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (stack.getItem().isEdible() && properties != null && DataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
+        if (stack.getItem().isEdible() && properties != null && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
             livingEntity.setHealth(livingEntity.getHealth() + properties.getNutrition());
         }
     }
@@ -32,7 +32,7 @@ public abstract class MixinPlayer {
     )
     private boolean needsFood(boolean original) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        return DataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") ?
+        return CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") ?
                 livingEntity.getHealth() < livingEntity.getMaxHealth() : original;
     }
 }

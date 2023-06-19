@@ -5,7 +5,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Cat.CatTemptGoal.class)
 public abstract class MixinCatTemptGoal {
@@ -18,7 +18,7 @@ public abstract class MixinCatTemptGoal {
             index = 2
     )
     private static Ingredient getIngredient(Ingredient ingredient) {
-        if (DataHandler.isConnectionNull()) return ingredient;
-        return DataHandler.getCachedBreedingItems("minecraft:cat");
+        if (CommandDataHandler.isConnectionNull()) return ingredient;
+        return CommandDataHandler.getCachedBreedingItems("minecraft:cat");
     }
 }

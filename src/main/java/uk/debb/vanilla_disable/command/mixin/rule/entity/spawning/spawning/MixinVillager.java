@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 import uk.debb.vanilla_disable.gamerules.util.gamerules.Gamerules;
 
 @Mixin(Villager.class)
@@ -14,6 +14,6 @@ public abstract class MixinVillager {
         if (!Gamerules.VILLAGERS_SPAWN_GOLEMS.getBool()) {
             return false;
         }
-        return original && DataHandler.getCachedBoolean("entities", "minecraft:iron_golem", "spawned_by_villagers");
+        return original && CommandDataHandler.getCachedBoolean("entities", "minecraft:iron_golem", "spawned_by_villagers");
     }
 }

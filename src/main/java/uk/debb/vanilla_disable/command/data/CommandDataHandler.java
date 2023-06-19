@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
 
 import static uk.debb.vanilla_disable.command.data.DataType.*;
 
-public class DataHandler {
+public class CommandDataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, DataType>> cols = new Object2ObjectOpenHashMap<>();
 
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entities = new Object2ObjectOpenHashMap<>();
@@ -834,7 +834,7 @@ public class DataHandler {
      * Inserts default values into the database the first time, updates the database between versions.
      */
     public static void handleDatabase() {
-        PATH = server.getWorldPath(LevelResource.ROOT) + "/vanilla_disable.sql";
+        PATH = server.getWorldPath(LevelResource.ROOT) + "/vanilla_disable_command.sql";
 
         try {
             connection = DriverManager.getConnection("jdbc:h2:mem:vd");

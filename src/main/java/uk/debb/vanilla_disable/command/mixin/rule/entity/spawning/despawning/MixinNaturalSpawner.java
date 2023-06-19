@@ -6,7 +6,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.NaturalSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(NaturalSpawner.class)
 public abstract class MixinNaturalSpawner {
@@ -18,7 +18,7 @@ public abstract class MixinNaturalSpawner {
             )
     )
     private static boolean removeWhenFarAway(boolean original, ServerLevel serverLevel, Mob mob, double d) {
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(mob.getType());
-        return DataHandler.getCachedBoolean("entities", entity, "can_despawn");
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
+        return CommandDataHandler.getCachedBoolean("entities", entity, "can_despawn");
     }
 }

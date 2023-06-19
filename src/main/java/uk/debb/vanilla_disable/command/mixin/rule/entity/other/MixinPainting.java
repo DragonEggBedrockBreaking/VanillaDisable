@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(Painting.class)
 public abstract class MixinPainting {
@@ -18,7 +18,7 @@ public abstract class MixinPainting {
 
     @ModifyReturnValue(method = "getVariant", at = @At("RETURN"))
     private Holder<PaintingVariant> getVariant(Holder<PaintingVariant> original) {
-        if (!DataHandler.getCachedBoolean("entities", "minecraft:painting", DataHandler.paintingVariantRegistry.getKey(original.value()) + "_painting")) {
+        if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:painting", CommandDataHandler.paintingVariantRegistry.getKey(original.value()) + "_painting")) {
             return BuiltInRegistries.PAINTING_VARIANT.getHolderOrThrow(DEFAULT_VARIANT);
         }
         return original;

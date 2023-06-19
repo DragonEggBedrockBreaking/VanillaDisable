@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import java.util.Optional;
 
@@ -27,16 +27,16 @@ public abstract class MixinSpawnEggItem {
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void useOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack itemStack = useOnContext.getItemInHand();
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(this.getType(itemStack.getTag()));
-        if (!DataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(this.getType(itemStack.getTag()));
+        if (!CommandDataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
             cir.setReturnValue(InteractionResult.FAIL);
         }
     }
 
     @Inject(method = "spawnOffspringFromSpawnEgg", at = @At("HEAD"), cancellable = true)
     private void spawnOffspringFromSpawnEgg(Player player, Mob mob, EntityType<? extends Mob> entityType, ServerLevel serverLevel, Vec3 vec3, ItemStack itemStack, CallbackInfoReturnable<Optional<Mob>> cir) {
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(entityType);
-        if (!DataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(entityType);
+        if (!CommandDataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
             cir.setReturnValue(Optional.empty());
         }
     }

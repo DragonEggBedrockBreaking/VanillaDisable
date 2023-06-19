@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin({Bee.class, Chicken.class, Cow.class, Llama.class, Panda.class, Rabbit.class, Sheep.class, Strider.class, Turtle.class})
 public abstract class MultipleMixinAnimalTemptGoal {
@@ -21,8 +21,8 @@ public abstract class MultipleMixinAnimalTemptGoal {
             index = 2
     )
     private Ingredient getIngredient(Ingredient original) {
-        if (DataHandler.isConnectionNull()) return original;
-        String entity = DataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return DataHandler.getCachedBreedingItems(entity);
+        if (CommandDataHandler.isConnectionNull()) return original;
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
+        return CommandDataHandler.getCachedBreedingItems(entity);
     }
 }

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import static net.minecraft.world.level.dimension.BuiltinDimensionTypes.*;
 
@@ -23,7 +23,7 @@ public abstract class MixinItemStack {
         ResourceLocation dimensionType = useOnContext.getLevel().dimensionType().effectsLocation();
         String name = "";
         if (this.getItem() instanceof BlockItem blockItem) {
-            name = DataHandler.getKeyFromBlockRegistry(blockItem.getBlock());
+            name = CommandDataHandler.getKeyFromBlockRegistry(blockItem.getBlock());
         } else if (this.getItem() instanceof BucketItem bucketItem) {
             if ((bucketItem.content.equals(Fluids.WATER) || bucketItem.content.equals(Fluids.FLOWING_WATER)) &&
                     !dimensionType.equals(NETHER_EFFECTS)) {
@@ -44,7 +44,7 @@ public abstract class MixinItemStack {
             } else if (dimensionType.equals(END_EFFECTS)) {
                 col = "can_place_in_end";
             }
-            if (!DataHandler.getCachedBoolean("blocks", name, col)) {
+            if (!CommandDataHandler.getCachedBoolean("blocks", name, col)) {
                 cir.setReturnValue(InteractionResult.FAIL);
             }
         }

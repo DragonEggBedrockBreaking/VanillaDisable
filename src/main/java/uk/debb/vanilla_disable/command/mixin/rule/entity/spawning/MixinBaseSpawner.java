@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import uk.debb.vanilla_disable.command.data.DataHandler;
+import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import java.util.function.Function;
 
@@ -34,8 +34,8 @@ public abstract class MixinBaseSpawner {
         CompoundTag compoundTag = this.getOrCreateNextSpawnData(level, level.getRandom(), blockPos).getEntityToSpawn();
         Entity entity = EntityType.loadEntityRecursive(compoundTag, level, Function.identity());
         if (entity != null) {
-            String entityType = DataHandler.getKeyFromEntityTypeRegistry(entity.getType());
-            if (!DataHandler.getCachedBoolean("entities", entityType, "spawner")) {
+            String entityType = CommandDataHandler.getKeyFromEntityTypeRegistry(entity.getType());
+            if (!CommandDataHandler.getCachedBoolean("entities", entityType, "spawner")) {
                 return false;
             }
         }
