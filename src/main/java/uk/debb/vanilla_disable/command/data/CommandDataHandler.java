@@ -74,11 +74,11 @@ public class CommandDataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
     public static final Object2ObjectMap<String, List<String>> stringColSuggestions = new Object2ObjectOpenHashMap<>();
     public static final ObjectList<String> differentDataTypes = new ObjectArrayList<>();
-    private static final Cache<String, Boolean> booleanCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, Integer> integerCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, Double> doubleCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, String> stringCache = Caffeine.newBuilder().maximumSize(100000).build();
-    private static final Cache<String, Ingredient> ingredientCache = Caffeine.newBuilder().maximumSize(100000).build();
+    private static final Cache<String, Boolean> booleanCache = Caffeine.newBuilder().maximumSize(1000000).build();
+    private static final Cache<String, Integer> integerCache = Caffeine.newBuilder().maximumSize(1000000).build();
+    private static final Cache<String, Double> doubleCache = Caffeine.newBuilder().maximumSize(1000000).build();
+    private static final Cache<String, String> stringCache = Caffeine.newBuilder().maximumSize(1000000).build();
+    private static final Cache<String, Ingredient> ingredientCache = Caffeine.newBuilder().maximumSize(1000000).build();
     public static MinecraftServer server;
     public static boolean populationDone = false;
     public static RegistryAccess registryAccess;
