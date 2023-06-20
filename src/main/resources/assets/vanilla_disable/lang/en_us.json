@@ -2110,6 +2110,9 @@
     "advancements.disabled.by.vd": "This advancement has been disabled by an operator.",
 
     "commands.disabled.by.vd": "This command has been disabled by an operator.",
+    "commands.summon.disabled": "Summoning this entity with a command has been disabled by an operator.",
+    "commands.give.disabled": "Giving this item with a command has been disabled by an operator.",
+    "commands.setblock.disabled": "Placing this block with a command has been disabled by an operator.",
     "commands.gamerule.already_default": "This is the default value",
     "commands.gamerule.default": "The default value is: %s",
     "commands.gamerule.category.invalid": "Invalid gamerule category.",

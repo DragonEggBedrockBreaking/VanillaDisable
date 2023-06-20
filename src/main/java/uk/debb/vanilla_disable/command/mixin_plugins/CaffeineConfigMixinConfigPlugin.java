@@ -12,6 +12,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
         caffeineConfig = CaffeineConfig.builder("VanillaDisable")
                 .addMixinOption("advancement", true)
                 .addMixinOption("block", true)
+                .addMixinOption("block.command", true)
                 .addMixinOption("block.container", true)
                 .addMixinOption("block.experience", true)
                 .addMixinOption("block.falling", true)

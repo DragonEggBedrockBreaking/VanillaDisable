@@ -220,6 +220,7 @@ public class CommandDataHandler {
 
             put("alpha_behaviour", BOOLEAN);
             put("can_shoot_fireballs", BOOLEAN);
+            put("can_be_summoned", BOOLEAN);
         }});
         cols.put("blocks", new Object2ObjectOpenHashMap<>() {{
             put("can_place_in_overworld", BOOLEAN);
@@ -250,6 +251,7 @@ public class CommandDataHandler {
             put("requires_correct_tool_for_drops", BOOLEAN);
             put("burn_odds", INTEGER);
             put("ignite_odds", INTEGER);
+            put("can_be_placed_by_command", BOOLEAN);
         }});
         cols.put("items", new Object2ObjectOpenHashMap<>() {{
             put("works", BOOLEAN);
@@ -266,6 +268,7 @@ public class CommandDataHandler {
             put("dispenser_interaction", BOOLEAN);
             put("cauldron_interaction", BOOLEAN);
             put("fuel_duration", INTEGER);
+            put("can_be_given_by_command", BOOLEAN);
         }});
         cols.put("enchantments", new Object2ObjectOpenHashMap<>() {{
             itemRegistry.keySet().forEach(item ->
@@ -436,6 +439,8 @@ public class CommandDataHandler {
                     if (entityType.equals(EntityType.IRON_GOLEM) || entityType.equals(EntityType.CAT)) {
                         put("spawned_by_villagers", "true");
                     }
+
+                    put("can_be_summoned", "true");
                 }}));
 
         blockRegistry.forEach((block) ->
@@ -547,6 +552,7 @@ public class CommandDataHandler {
                     put("requires_correct_tool_for_drops", String.valueOf(blockState.requiresCorrectToolForDrops()));
                     put("burn_odds", String.valueOf(((FireBlock) Blocks.FIRE).getBurnOdds(block.defaultBlockState())));
                     put("ignite_odds", String.valueOf(((FireBlock) Blocks.FIRE).getIgniteOdds(block.defaultBlockState())));
+                    put("can_be_placed_by_command", "true");
                 }}));
 
         itemRegistry.forEach((item) ->
@@ -588,6 +594,7 @@ public class CommandDataHandler {
                         }
 
                         put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
+                        put("can_be_given_by_command", "true");
                     }
                 }}));
 
@@ -681,6 +688,7 @@ public class CommandDataHandler {
             put("spawned_by_villagers", "Toggle the mob being able to be spawned by villagers.");
             put("min_despawn_distance", "Control the minimum distance away from the player where the entity can despawn.");
             put("instant_despawn_distance", "Control the distance away from the player where the entity will instantly despawn.");
+            put("can_be_summoned", "Toggle the mob being able to be summoned using the /summon command.");
         }});
         entityData.put("breeding_ingredient", new Object2ObjectOpenHashMap<>() {{
             itemRegistry.keySet().forEach(item ->
@@ -732,6 +740,7 @@ public class CommandDataHandler {
             put("requires_correct_tool_for_drops", "Toggle whether the block requires the correct tool to drop its drops.");
             put("burn_odds", "Control the chance that the block will burn.");
             put("ignite_odds", "Control the chance that the block will ignite.");
+            put("can_be_placed_by_command", "Toggle the block being able to be placed by the /setblock or the /fill command.");
         }});
 
         itemData.put("potion", new Object2ObjectOpenHashMap<>() {{
@@ -749,6 +758,7 @@ public class CommandDataHandler {
             put("dispenser_interaction", "Toggle the item having a special interaction with a dispenser.");
             put("cauldron_interaction", "Toggle the item having a special interaction with a cauldron.");
             put("fuel_duration", "Controls how long a fuel lasts in a furnace, blast furnace, or smoker.");
+            put("can_be_given_by_command", "Toggle the item being able to be given to a player by the /give command.");
         }});
 
         enchantmentData.put("item", new Object2ObjectOpenHashMap<>() {{
@@ -1125,6 +1135,8 @@ public class CommandDataHandler {
         } catch (SQLException | NullPointerException ignored) {
         }
         invalidateCaches();
+        System.out.println(table + " " + row + " " + column);
+        System.out.println(getDefault(table, row, column));
         return Integer.parseInt(getDefault(table, row, column));
     }
 

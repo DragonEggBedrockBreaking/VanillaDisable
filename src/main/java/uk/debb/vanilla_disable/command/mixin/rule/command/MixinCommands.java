@@ -19,6 +19,5 @@ public abstract class MixinCommands {
             CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), false);
             cir.setReturnValue(0);
         }
-        CommandDataHandler.lastRunCommandMap.put(parseResults.getContext().getSource().getTextName(), command.split(" ")[0]);
     }
 }
