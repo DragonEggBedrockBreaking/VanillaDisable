@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.command.mixin.rule.other;
+package uk.debb.vanilla_disable.command.mixin.rule.command;
 
 import com.mojang.brigadier.ParseResults;
 import net.minecraft.ChatFormatting;
@@ -15,9 +15,10 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 public abstract class MixinCommands {
     @Inject(method = "performCommand", at = @At(value = "HEAD"), cancellable = true)
     private void performCommand(ParseResults<CommandSourceStack> parseResults, String command, CallbackInfoReturnable<Integer> cir) {
-        if (!CommandDataHandler.getCachedBoolean("others", "/" + command.split(" ")[0], "enabled")) {
+        if (!CommandDataHandler.getCachedBoolean("commands", "/" + command.split(" ")[0], "enabled")) {
             CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), false);
             cir.setReturnValue(0);
         }
+        CommandDataHandler.lastRunCommandMap.put(parseResults.getContext().getSource().getTextName(), command.split(" ")[0]);
     }
 }

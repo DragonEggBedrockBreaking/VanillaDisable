@@ -64,13 +64,15 @@ public class CommandDataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blocks = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> items = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> enchantments = new Object2ObjectOpenHashMap<>();
-    public static final ObjectSet<String> others = new ObjectArraySet<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> commands = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> advancements = new Object2ObjectOpenHashMap<>();
 
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entityData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blockData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> itemData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> enchantmentData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, String> otherData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> commandData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> advancementData = new Object2ObjectOpenHashMap<>();
 
     public static final Object2IntMap<String> intRowMaximums = new Object2IntArrayMap<>();
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
@@ -271,6 +273,12 @@ public class CommandDataHandler {
 
             enchantmentRegistry.keySet().forEach(enchantment ->
                     put("compatible_with_" + lightCleanup(enchantment), BOOLEAN));
+        }});
+        cols.put("commands", new Object2ObjectOpenHashMap<>() {{
+            put("enabled", BOOLEAN);
+        }});
+        cols.put("advancements", new Object2ObjectOpenHashMap<>() {{
+            put("enabled", BOOLEAN);
         }});
 
         entityTypeRegistry.forEach((entityType) ->
@@ -600,10 +608,19 @@ public class CommandDataHandler {
                     });
                 }}));
 
-        others.addAll(server.getAdvancements().getAllAdvancements()
-                .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).toList());
-        others.addAll(new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup()))
-                .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).toList());
+        new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup())).getDispatcher().getRoot().getChildren().forEach(commandNode ->
+                commands.put("/" + commandNode.getName(), new Object2ObjectOpenHashMap<>() {{
+                    put("enabled", "true");
+                }}));
+
+        server.getAdvancements().getAllAdvancements().forEach(advancement -> {
+            String name = advancement.getId().toString();
+            if (!name.contains("recipe")) {
+                advancements.put(name, new Object2ObjectOpenHashMap<>() {{
+                    put("enabled", "true");
+                }});
+            }
+        });
 
         entityData.put("stats", new Object2ObjectOpenHashMap<>() {{
             statTypeRegistry.forEach(statType -> {
@@ -743,12 +760,13 @@ public class CommandDataHandler {
                     put("compatible_with_" + lightCleanup(enchantment1), "Toggle the enchantment being compatible with the " + cleanup(enchantment1) + " enchantment.\nNOTE: The reverse option may also need to be set for the compatibility to be changed."));
         }});
 
-        server.getAdvancements().getAllAdvancements()
-                .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")).forEach(advancement ->
-                        otherData.put(advancement, "Toggle the " + cleanup(advancement) + " advancement being obtainable."));
-        new Commands(Commands.CommandSelection.ALL, Commands.createValidationContext(VanillaRegistries.createLookup()))
-                .getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()).forEach(command ->
-                        otherData.put(command, "Toggle the /" + cleanup(command) + " command being usable."));
+        commandData.put("other", new Object2ObjectOpenHashMap<>() {{
+            put("enabled", "Toggle the command being able to be used.");
+        }});
+
+        advancementData.put("other", new Object2ObjectOpenHashMap<>() {{
+            put("enabled", "Toggle the advancement being able to be obtained.");
+        }});
 
         intRowMaximums.put("nutrition", 20);
         doubleRowMaximums.put("saturation", 9.9);
@@ -822,7 +840,12 @@ public class CommandDataHandler {
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS enchantments(id CLOB NOT NULL, " +
                         cols.get("enchantments").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
                                 .collect(Collectors.joining(", ")) + ");");
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS others(id CLOB NOT NULL, \"enabled\" BOOLEAN);");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS commands(id CLOB NOT NULL, " +
+                        cols.get("commands").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
+                                .collect(Collectors.joining(", ")) + ");");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS advancements(id CLOB NOT NULL, " +
+                        cols.get("advancements").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
+                                .collect(Collectors.joining(", ")) + ");");
             }
 
             if (tables.equals("*") || tables.equals("entities")) {
@@ -865,10 +888,20 @@ public class CommandDataHandler {
                 });
             }
 
-            if (tables.equals("*") || tables.equals("others")) {
-                others.forEach((key) -> {
+            if (tables.equals("*") || tables.equals("commands")) {
+                commands.forEach((key, value) -> {
                     try {
-                        statement.executeUpdate("INSERT INTO others (id, \"enabled\") VALUES ('" + key + "', true);");
+                        statement.executeUpdate("INSERT INTO commands (id, \"" + String.join("\", \"", value.keySet()) + "\") VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            if (tables.equals("*") || tables.equals("advancements")) {
+                advancements.forEach((key, value) -> {
+                    try {
+                        statement.executeUpdate("INSERT INTO advancements (id, \"" + String.join("\", \"", value.keySet()) + "\") VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -1016,24 +1049,6 @@ public class CommandDataHandler {
         }
         try {
             String query = "UPDATE " + table + " SET \"" + column + "\" = " + value + " WHERE \"" + column + "\" IS NOT NULL AND id LIKE '" + pattern + "';";
-            statement.executeUpdate(query);
-            writeToFile(query);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Set all rows in a column to a value if they match a condition.
-     * Used for the 'others' table where different groups are handled differently.
-     *
-     * @param value     The value to set.
-     * @param condition The condition for which to check when checking whether to set a row.
-     */
-    public static void setWithCondition(String value, String condition) {
-        invalidateCaches();
-        try {
-            String query = "UPDATE others SET enabled = " + value + " WHERE id LIKE '" + condition + "';";
             statement.executeUpdate(query);
             writeToFile(query);
         } catch (SQLException e) {

@@ -10,6 +10,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
     @Override
     protected CaffeineConfig createConfig() {
         caffeineConfig = CaffeineConfig.builder("VanillaDisable")
+                .addMixinOption("advancement", true)
                 .addMixinOption("block", true)
                 .addMixinOption("block.container", true)
                 .addMixinOption("block.experience", true)
@@ -20,6 +21,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("block.piston", true)
                 .addMixinOption("block.placement", true)
                 .addMixinOption("block.redstone_timings", true)
+                .addMixinOption("command", true)
                 .addMixinOption("enchantment", true)
                 .addMixinOption("enchantment.compatibility", true)
                 .addMixinOption("enchantment.item", true)
@@ -43,7 +45,6 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("item.other", true)
                 .addMixinOption("item.potion", true)
                 .addMixinOption("item.spam", true)
-                .addMixinOption("other", true)
                 .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
                 .build(FabricLoader.getInstance().getConfigDir().resolve("vanilla-disable-command-mixin.properties"));
 

@@ -1,24 +1,23 @@
-package uk.debb.vanilla_disable.command.mixin.rule.other;
+package uk.debb.vanilla_disable.command.mixin.rule.advancement;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.PlayerAdvancements;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(PlayerAdvancements.class)
 public abstract class MixinPlayerAdvancements {
-    @ModifyReturnValue(method = "getOrStartProgress", at = @At("RETURN"))
-    private AdvancementProgress getOrStartProgress(AdvancementProgress original, Advancement advancement) {
+    @Inject(method = "award", at = @At("RETURN"), cancellable = true)
+    private void award(Advancement advancement, String string, CallbackInfoReturnable<Boolean> cir) {
         String adv = advancement.getId().toString();
-        if (!adv.contains("recipe") && !CommandDataHandler.getCachedBoolean("others", adv, "enabled")) {
+        if (!adv.contains("recipe") && !CommandDataHandler.getCachedBoolean("advancements", adv, "enabled")) {
             CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("advancements.disabled.by.vd").withStyle(ChatFormatting.RED), false);
-            return new AdvancementProgress();
+            cir.setReturnValue(false);
         }
-        return original;
     }
 }

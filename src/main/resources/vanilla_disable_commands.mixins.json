@@ -5,6 +5,7 @@
   "package": "uk.debb.vanilla_disable.command.mixin.rule",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "advancement.MixinPlayerAdvancements",
     "block.container.MixinChestBlock",
     "block.container.MixinEnderChestBlock",
     "block.container.MixinShulkerBoxBlock",
@@ -39,6 +40,7 @@
     "block.redstone_timings.MixinComparatorBlock",
     "block.redstone_timings.MixinObserverBlock",
     "block.redstone_timings.MixinRepeaterBlock",
+    "command.MixinCommands",
     "enchantment.compatibility.MixinEnchantment",
     "enchantment.item.MixinBlock",
     "enchantment.item.MixinEnchantment",
@@ -104,9 +106,7 @@
     "item.potion.MixinArrow",
     "item.potion.MixinPotionUtils",
     "item.spam.MixinBowItem",
-    "item.spam.MixinCrossbowItem",
-    "other.MixinCommands",
-    "other.MixinPlayerAdvancements"
+    "item.spam.MixinCrossbowItem"
   ],
   "injectors": {
     "defaultRequire": 1

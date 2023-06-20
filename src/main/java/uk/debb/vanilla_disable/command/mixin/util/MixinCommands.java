@@ -93,11 +93,8 @@ public abstract class MixinCommands {
                             .then(majorBuilder("block", CommandDataHandler.blocks, CommandDataHandler.blockData, "blocks"))
                             .then(majorBuilder("item", CommandDataHandler.items, CommandDataHandler.itemData, "items"))
                             .then(majorBuilder("enchantment", CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, "enchantments"))
-                            .then(literal("other")
-                                    .then(minorBuilder("advancement", CommandDataHandler.server.getAdvancements().getAllAdvancements()
-                                            .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))
-                                    .then(minorBuilder("command", this.getDispatcher().getRoot().getChildren().stream().map(commandNode -> "/" + commandNode.getName()), "/%"))
-                            )
+                            .then(majorBuilder("command", CommandDataHandler.commands, CommandDataHandler.commandData, "commands"))
+                            .then(majorBuilder("advancement", CommandDataHandler.advancements, CommandDataHandler.advancementData, "advancements"))
                     ).then(overallResetDBBuilder)
             );
         });
@@ -253,26 +250,6 @@ public abstract class MixinCommands {
                         return 0;
                     }
                     CommandDataHandler.setAll(table, col, value, true);
-                    context.getSource().sendSuccess(
-                            () -> Component.literal("Successfully set the values to " + value + "."),
-                            false
-                    );
-                    return 1;
-                })
-        );
-    }
-
-    /**
-     * This method creates a command that sets all rows in a minor group (from the 'others' table) to a value.
-     *
-     * @param literalArgumentBuilder The command builder
-     * @param condition              The condition that the rows should satisfy
-     */
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String condition) {
-        literalArgumentBuilder.then(
-                argument("value", BoolArgumentType.bool()).executes(context -> {
-                    String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
-                    CommandDataHandler.setWithCondition(value, condition);
                     context.getSource().sendSuccess(
                             () -> Component.literal("Successfully set the values to " + value + "."),
                             false
@@ -474,29 +451,6 @@ public abstract class MixinCommands {
             matchesBuilder.then(groupBuilder);
         });
         overallBuilder.then(literal("matches").then(matchesBuilder));
-
-        return overallBuilder;
-    }
-
-    /**
-     * This method creates a command to control certain rows of the 'others' table that correspond to only one registry location.
-     *
-     * @param base      The base command string
-     * @param stream    The stream of rows
-     * @param condition The condition to check
-     * @return The command builder
-     */
-    private LiteralArgumentBuilder<CommandSourceStack> minorBuilder(String base, Stream<String> stream, String condition) {
-        LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
-        stream.forEach((property) -> {
-            LiteralArgumentBuilder<CommandSourceStack> temp = literal("enabled");
-            execute(temp, "others", property, "enabled", CommandDataHandler.otherData.get(property), "true", DataType.BOOLEAN);
-            overallBuilder.then(literal(property).then(temp));
-        });
-
-        LiteralArgumentBuilder<CommandSourceStack> allBuilder = literal("enabled");
-        execute(allBuilder, condition);
-        overallBuilder.then(literal("all").then(allBuilder));
 
         return overallBuilder;
     }
