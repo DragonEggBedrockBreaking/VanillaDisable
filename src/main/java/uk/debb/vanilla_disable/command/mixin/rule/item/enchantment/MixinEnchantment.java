@@ -16,6 +16,6 @@ public abstract class MixinEnchantment {
         if (CommandDataHandler.isConnectionNull()) return original;
         if (!itemStack.getItem().canBeDepleted()) return original;
         String enchantment = Objects.requireNonNull(CommandDataHandler.enchantmentRegistry.getKey((Enchantment) (Object) this)) + "_enchantment";
-        return CommandDataHandler.getCachedBoolean("items", CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem()), enchantment);
+        return CommandDataHandler.getCachedBoolean("items", CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem()), CommandDataHandler.lightCleanup(enchantment));
     }
 }

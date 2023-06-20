@@ -9,13 +9,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
+import java.util.Objects;
+
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
     @ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
     private boolean canBeAffected(boolean original, MobEffectInstance effect) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return CommandDataHandler.getCachedBoolean("entities", entity, CommandDataHandler.mobEffectRegistry.getKey(effect.getEffect()) + "_effect");
+        return CommandDataHandler.getCachedBoolean("entities", entity,
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.mobEffectRegistry.getKey(effect.getEffect()))) + "_effect");
     }
 
     @WrapWithCondition(

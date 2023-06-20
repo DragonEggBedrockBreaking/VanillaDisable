@@ -23,7 +23,7 @@ public abstract class MixinArrow {
         if (itemStack.is(Items.TIPPED_ARROW)) {
             String item = CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem());
             String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(PotionUtils.getPotion(itemStack))) + "_effect";
-            if (!CommandDataHandler.getCachedBoolean("items", item, potion)) {
+            if (!CommandDataHandler.getCachedBoolean("items", item, CommandDataHandler.lightCleanup(potion))) {
                 this.setEffectsFromItem(new ItemStack(Items.ARROW));
                 ci.cancel();
             }

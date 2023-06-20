@@ -20,6 +20,7 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Mixin(Block.class)
@@ -32,7 +33,7 @@ public abstract class MixinBlock {
                         .entrySet()
                         .stream()
                         .filter(entry -> {
-                            String enchantment = CommandDataHandler.enchantmentRegistry.getKey(entry.getKey()) + "_enchantment";
+                            String enchantment = CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.enchantmentRegistry.getKey(entry.getKey()))) + "_enchantment";
                             return CommandDataHandler.getCachedBoolean("items", item, enchantment);
                         }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), itemStack);
         LootParams.Builder builder = new LootParams.Builder(serverLevel)

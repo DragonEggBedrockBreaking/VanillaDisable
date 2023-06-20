@@ -173,22 +173,22 @@ public class CommandDataHandler {
 
             statTypeRegistry.forEach(statType -> {
                 if (statType.equals(Stats.CUSTOM)) return;
-                put(Objects.requireNonNull(statTypeRegistry.getKey(statType)) + "_stat_type", BOOLEAN);
+                put(lightCleanup(Objects.requireNonNull(statTypeRegistry.getKey(statType))) + "_stat_type", BOOLEAN);
             });
-            customStatRegistry.keySet().forEach(customStat -> put(customStat + "_custom_stat", BOOLEAN));
+            customStatRegistry.keySet().forEach(customStat -> put(lightCleanup(customStat) + "_custom_stat", BOOLEAN));
 
             damageTypeRegistry.keySet().forEach(damageType -> {
-                put(damageType + "_damage", BOOLEAN);
-                put(damageType + "_death", BOOLEAN);
+                put(lightCleanup(damageType) + "_damage", BOOLEAN);
+                put(lightCleanup(damageType) + "_death", BOOLEAN);
             });
 
-            entityTypeRegistry.keySet().forEach(entityType -> put(entityType + "_knockback", BOOLEAN));
+            entityTypeRegistry.keySet().forEach(entityType -> put(lightCleanup(entityType) + "_knockback", BOOLEAN));
             put("explosion_knockback", BOOLEAN);
 
-            mobEffectRegistry.keySet().forEach(mobEffect -> put(mobEffect + "_effect", BOOLEAN));
-            paintingVariantRegistry.keySet().forEach(painting -> put(painting + "_painting", BOOLEAN));
-            villagerProfessionRegistry.keySet().forEach(profession -> put(profession + "_profession", BOOLEAN));
-            villagerTypeRegistry.keySet().forEach(type -> put(type + "_type", BOOLEAN));
+            mobEffectRegistry.keySet().forEach(mobEffect -> put(lightCleanup(mobEffect) + "_effect", BOOLEAN));
+            paintingVariantRegistry.keySet().forEach(painting -> put(lightCleanup(painting) + "_painting", BOOLEAN));
+            villagerProfessionRegistry.keySet().forEach(profession -> put(lightCleanup(profession) + "_profession", BOOLEAN));
+            villagerTypeRegistry.keySet().forEach(type -> put(lightCleanup(type) + "_type", BOOLEAN));
 
             put("can_despawn", BOOLEAN);
             put("despawn_time", INTEGER);
@@ -257,10 +257,10 @@ public class CommandDataHandler {
             put("can_break_blocks_in_creative", BOOLEAN);
 
             enchantmentRegistry.keySet().forEach(enchantment ->
-                    put(enchantment + "_enchantment", BOOLEAN));
+                    put(lightCleanup(enchantment) + "_enchantment", BOOLEAN));
 
             potionRegistry.keySet().forEach(potion ->
-                    put(potion + "_effect", BOOLEAN));
+                    put(lightCleanup(potion) + "_effect", BOOLEAN));
 
             put("dispenser_interaction", BOOLEAN);
             put("cauldron_interaction", BOOLEAN);
@@ -285,13 +285,13 @@ public class CommandDataHandler {
 
                         statTypeRegistry.forEach(statType -> {
                             if (statType.equals(Stats.CUSTOM)) return;
-                            put(Objects.requireNonNull(statTypeRegistry.getKey(statType)) + "_stat_type", "true");
+                            put(lightCleanup(Objects.requireNonNull(statTypeRegistry.getKey(statType))) + "_stat_type", "true");
                         });
-                        customStatRegistry.keySet().forEach(customStat -> put(customStat + "_custom_stat", "true"));
+                        customStatRegistry.keySet().forEach(customStat -> put(lightCleanup(customStat) + "_custom_stat", "true"));
 
                         damageTypeRegistry.keySet().forEach(damageType -> {
-                            put(damageType + "_damage", "true");
-                            put(damageType + "_death", "true");
+                            put(lightCleanup(damageType) + "_damage", "true");
+                            put(lightCleanup(damageType) + "_death", "true");
                         });
 
                         put("explosion_knockback", "true");
@@ -299,10 +299,10 @@ public class CommandDataHandler {
 
                     if (entity instanceof LivingEntity || entityType.equals(EntityType.PLAYER)) {
                         entityTypeRegistry.keySet().forEach(entityType ->
-                                put(entityType + "_knockback", "true"));
+                                put(lightCleanup(entityType) + "_knockback", "true"));
 
                         mobEffectRegistry.forEach(mobEffect ->
-                                put(mobEffectRegistry.getKey(mobEffect) + "_effect", String.valueOf(
+                                put(lightCleanup(Objects.requireNonNull(mobEffectRegistry.getKey(mobEffect))) + "_effect", String.valueOf(
                                         !((mobEffect.equals(MobEffects.WITHER) &&
                                                 (entityType.equals(EntityType.WITHER) || entityType.equals(EntityType.WITHER_SKELETON))) ||
                                                 (mobEffect.equals(MobEffects.POISON) && entityType.equals(EntityType.SPIDER)) ||
@@ -329,13 +329,13 @@ public class CommandDataHandler {
 
                     if (entityType.equals(EntityType.PAINTING)) {
                         paintingVariantRegistry.keySet().forEach(painting ->
-                                put(painting + "_painting", "true"));
+                                put(lightCleanup(painting) + "_painting", "true"));
                     }
 
                     if (entityType.equals(EntityType.VILLAGER)) {
                         villagerProfessionRegistry.keySet().forEach(profession ->
-                                put(profession + "_profession", "true"));
-                        villagerTypeRegistry.keySet().forEach(type -> put(type + "_type", "true"));
+                                put(lightCleanup(profession) + "_profession", "true"));
+                        villagerTypeRegistry.keySet().forEach(type -> put(lightCleanup(type) + "_type", "true"));
                         put("can_breed", "true");
                         itemRegistry.forEach(item -> {
                             boolean villagerWants = Villager.WANTED_ITEMS.contains(item);
@@ -552,7 +552,7 @@ public class CommandDataHandler {
                                 item.equals(Items.ENCHANTED_BOOK)) {
                             put("durability", String.valueOf(item.getMaxDamage()));
                             enchantmentRegistry.forEach((enchantment) ->
-                                    put(enchantmentRegistry.getKey(enchantment) + "_enchantment",
+                                    put(lightCleanup(Objects.requireNonNull(enchantmentRegistry.getKey(enchantment))) + "_enchantment",
                                             String.valueOf(enchantment.canEnchant(item.getDefaultInstance()) || item.equals(Items.ENCHANTED_BOOK))));
                         }
 
@@ -564,7 +564,7 @@ public class CommandDataHandler {
 
                         if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
                                 item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
-                            potionRegistry.keySet().forEach((potion) -> put(potion + "_effect", "true"));
+                            potionRegistry.keySet().forEach((potion) -> put(lightCleanup(potion) + "_effect", "true"));
                         }
 
                         if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
@@ -593,40 +593,40 @@ public class CommandDataHandler {
         entityData.put("stats", new Object2ObjectOpenHashMap<>() {{
             statTypeRegistry.forEach(statType -> {
                 if (statType.equals(Stats.CUSTOM)) return;
-                put(Objects.requireNonNull(statTypeRegistry.getKey(statType)) + "_stat_type",
+                put(lightCleanup(Objects.requireNonNull(statTypeRegistry.getKey(statType))) + "_stat_type",
                         "Toggles stats in the '" + cleanup(statType) + "' category.");
             });
             customStatRegistry.keySet().forEach(customStat ->
-                    put(customStat + "_custom_stat", "Toggles the '" + cleanup(customStat) + "' custom stat."));
+                    put(lightCleanup(customStat) + "_custom_stat", "Toggles the '" + cleanup(customStat) + "' custom stat."));
         }});
         entityData.put("damage", new Object2ObjectOpenHashMap<>() {{
             damageTypeRegistry.keySet().forEach(damageType ->
-                    put(damageType + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the player."));
+                    put(lightCleanup(damageType) + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the player."));
         }});
         entityData.put("knockback", new Object2ObjectOpenHashMap<>() {{
             entityTypeRegistry.keySet().forEach(entityType ->
-                    put(entityType + "_knockback", "Toggles knockback from " + cleanup(entityType) + " affecting the mob."));
+                    put(lightCleanup(entityType) + "_knockback", "Toggles knockback from " + cleanup(entityType) + " affecting the mob."));
             put("explosion_knockback", "Toggles knockback from explosions affecting the entity.");
         }});
         entityData.put("effects", new Object2ObjectOpenHashMap<>() {{
             mobEffectRegistry.keySet().forEach(mobEffect ->
-                    put(mobEffect + "_effect", "Toggles " + cleanup(mobEffect) + " affecting the mob."));
+                    put(lightCleanup(mobEffect) + "_effect", "Toggles " + cleanup(mobEffect) + " affecting the mob."));
         }});
         entityData.put("death", new Object2ObjectOpenHashMap<>() {{
             damageTypeRegistry.keySet().forEach(damageType ->
-                    put(damageType + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the player."));
+                    put(lightCleanup(damageType) + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the player."));
         }});
         entityData.put("painting", new Object2ObjectOpenHashMap<>() {{
             paintingVariantRegistry.keySet().forEach(painting ->
-                    put(painting + "_painting", "Toggles the " + cleanup(painting) + " design being able to show on paintings."));
+                    put(lightCleanup(painting) + "_painting", "Toggles the " + cleanup(painting) + " design being able to show on paintings."));
         }});
-        entityData.put("villager_type", new Object2ObjectOpenHashMap<>() {{
+        entityData.put("biome_type", new Object2ObjectOpenHashMap<>() {{
             villagerTypeRegistry.keySet().forEach(villagerType ->
-                    put(villagerType + "_type", "Toggles villagers being able to be of the " + cleanup(villagerType) + " type."));
+                    put(lightCleanup(villagerType) + "_type", "Toggles villagers being able to be of the " + cleanup(villagerType) + " biome type."));
         }});
-        entityData.put("villager_profession", new Object2ObjectOpenHashMap<>() {{
+        entityData.put("profession", new Object2ObjectOpenHashMap<>() {{
             villagerProfessionRegistry.keySet().forEach(villagerProfession ->
-                    put(villagerProfession + "_profession", "Toggles villagers being able to have the " + cleanup(villagerProfession) + " profession."));
+                    put(lightCleanup(villagerProfession) + "_profession", "Toggles villagers being able to have the " + cleanup(villagerProfession) + " profession."));
         }});
         entityData.put("player", new Object2ObjectOpenHashMap<>() {{
             put("can_be_on_fire", "Toggle the player being able to be on fire.");
@@ -704,11 +704,11 @@ public class CommandDataHandler {
 
         itemData.put("enchantment", new Object2ObjectOpenHashMap<>() {{
             enchantmentRegistry.keySet().forEach(enchantment ->
-                    put(enchantment + "_enchantment", "Toggle the " + cleanup(enchantment) + " enchantment being able to be applied to the item."));
+                    put(lightCleanup(enchantment) + "_enchantment", "Toggle the " + cleanup(enchantment) + " enchantment being able to be applied to the item."));
         }});
         itemData.put("potion", new Object2ObjectOpenHashMap<>() {{
             potionRegistry.keySet().forEach(potion ->
-                    put(potion + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item."));
+                    put(lightCleanup(potion) + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item."));
         }});
         itemData.put("other", new Object2ObjectOpenHashMap<>() {{
             put("works", "Toggle the item being able to carry out its purpose.");

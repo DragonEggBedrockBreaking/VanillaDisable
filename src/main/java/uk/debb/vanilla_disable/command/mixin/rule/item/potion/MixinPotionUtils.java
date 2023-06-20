@@ -18,7 +18,7 @@ public abstract class MixinPotionUtils {
     private static List<MobEffectInstance> getMobEffects(List<MobEffectInstance> original, ItemStack itemStack) {
         String item = CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem());
         String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(PotionUtils.getPotion(itemStack))) + "_effect";
-        if (!CommandDataHandler.getCachedBoolean("items", item, potion)) {
+        if (!CommandDataHandler.getCachedBoolean("items", item, CommandDataHandler.lightCleanup(potion))) {
             return new ObjectArrayList<>();
         }
         return original;

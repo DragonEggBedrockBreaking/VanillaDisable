@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
+import java.util.Objects;
+
 @Mixin(VillagerData.class)
 public abstract class MixinVillagerData {
     @Shadow
@@ -23,7 +25,7 @@ public abstract class MixinVillagerData {
     private VillagerType getType(VillagerType original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:villager",
-                CommandDataHandler.villagerTypeRegistry.getKey(type) + "_type")) {
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.villagerTypeRegistry.getKey(type))) + "_type")) {
             return VillagerType.PLAINS;
         }
         return original;
@@ -33,7 +35,7 @@ public abstract class MixinVillagerData {
     private VillagerProfession getProfession(VillagerProfession original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:villager",
-                CommandDataHandler.villagerProfessionRegistry.getKey(profession) + "_profession")) {
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.villagerProfessionRegistry.getKey(profession))) + "_profession")) {
             return VillagerProfession.NONE;
         }
         return original;

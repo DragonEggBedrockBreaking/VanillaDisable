@@ -15,12 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
+import java.util.Objects;
+
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
     private boolean isInvulnerableTo(boolean original, DamageSource damageSource) {
         return original || !CommandDataHandler.getCachedBoolean("entities", "minecraft:player",
-                CommandDataHandler.damageTypeRegistry.getKey(damageSource.type()) + "_damage");
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.damageTypeRegistry.getKey(damageSource.type()))) + "_damage");
     }
 
     @Inject(method = "attack", at = @At("RETURN"))

@@ -17,7 +17,7 @@ public abstract class MixinEnchantmentHelper {
         if (!enchantment.canEnchant(itemStack)) return original;
         String item = CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem());
         if (!CommandDataHandler.getCachedBoolean("items", item,
-                Objects.requireNonNull(CommandDataHandler.enchantmentRegistry.getKey(enchantment)) + "_enchantment")) {
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.enchantmentRegistry.getKey(enchantment))) + "_enchantment")) {
             return 0;
         }
 

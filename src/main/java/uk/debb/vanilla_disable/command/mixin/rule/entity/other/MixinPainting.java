@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
+import java.util.Objects;
+
 @Mixin(Painting.class)
 public abstract class MixinPainting {
     @Shadow
@@ -20,7 +22,8 @@ public abstract class MixinPainting {
 
     @ModifyReturnValue(method = "getVariant", at = @At("RETURN"))
     private Holder<PaintingVariant> getVariant(Holder<PaintingVariant> original) {
-        if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:painting", CommandDataHandler.paintingVariantRegistry.getKey(original.value()) + "_painting")) {
+        if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:painting",
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.paintingVariantRegistry.getKey(original.value()))) + "_painting")) {
             return BuiltInRegistries.PAINTING_VARIANT.getHolderOrThrow(DEFAULT_VARIANT);
         }
         return original;
