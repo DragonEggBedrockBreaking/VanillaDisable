@@ -24,10 +24,10 @@ import java.util.TreeMap;
 
 public class WorldgenDataHandler {
     public static MinecraftServer server;
-    private static Toml toml;
     public static Registry<Structure> structureRegistry;
     public static Registry<PlacedFeature> placedFeatureRegistry;
     public static Registry<Biome> biomeRegistry;
+    private static Toml toml;
 
     public static String cleanup(Object o) {
         return o.toString().replace("minecraft:", "");
