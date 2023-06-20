@@ -13,3 +13,4 @@ accessible class net/minecraft/world/entity/animal/Ocelot$OcelotTemptGoal
 accessible field net/minecraft/world/entity/Mob goalSelector Lnet/minecraft/world/entity/ai/goal/GoalSelector;
 accessible field net/minecraft/world/level/biome/BiomeSource possibleBiomes Ljava/util/function/Supplier;
 accessible class net/minecraft/server/commands/FillCommand$Mode
+accessible method net/minecraft/world/level/NaturalSpawner isRightDistanceToPlayerAndSpawnPoint (Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/core/BlockPos$MutableBlockPos;D)Z

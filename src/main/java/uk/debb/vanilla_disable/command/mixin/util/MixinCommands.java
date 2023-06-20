@@ -95,6 +95,7 @@ public abstract class MixinCommands {
                             .then(majorBuilder("enchantment", CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, "enchantments"))
                             .then(majorBuilder("command", CommandDataHandler.commands, CommandDataHandler.commandData, "commands"))
                             .then(majorBuilder("advancement", CommandDataHandler.advancements, CommandDataHandler.advancementData, "advancements"))
+                            .then(majorBuilder("mob_category", CommandDataHandler.mobCategories, CommandDataHandler.mobCategoryData, "mob_categories"))
                     ).then(overallResetDBBuilder)
             );
         });
@@ -148,6 +149,7 @@ public abstract class MixinCommands {
      */
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, String description, String defaultValue, DataType type) {
         literalArgumentBuilder.executes(context -> {
+            System.out.println("HERE1");
             String value = switch (type) {
                 case BOOLEAN -> String.valueOf(CommandDataHandler.getCachedBoolean(table, row, col));
                 case INTEGER -> String.valueOf(CommandDataHandler.getCachedInt(table, row, col));
@@ -161,6 +163,7 @@ public abstract class MixinCommands {
             return 1;
         }).then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
+                    System.out.println("HERE2");
                     String value = getArgumentValueForType(type, context);
                     CommandDataHandler.setValue(table, row, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(

@@ -7,10 +7,7 @@
   "mixins": [
     "misc.MixinServerRecipeBook",
 
-    "mobs.MixinRaid",
-
-    "spawn_limits.MixinMobCategory",
-    "spawn_limits.MixinMonster"
+    "mobs.MixinRaid"
   ],
   "injectors": {
     "defaultRequire": 1

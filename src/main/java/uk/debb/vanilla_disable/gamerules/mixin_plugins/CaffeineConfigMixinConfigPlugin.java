@@ -12,7 +12,6 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
         caffeineConfig = CaffeineConfig.builder("VanillaDisable")
                 .addMixinOption("misc", true)
                 .addMixinOption("mobs", true)
-                .addMixinOption("spawn_limits", true)
                 .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
                 .build(FabricLoader.getInstance().getConfigDir().resolve("vanilla-disable-gamerule-mixin.properties"));
 

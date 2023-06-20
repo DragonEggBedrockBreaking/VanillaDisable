@@ -66,6 +66,7 @@ public class CommandDataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> enchantments = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> commands = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> advancements = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> mobCategories = new Object2ObjectOpenHashMap<>();
 
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entityData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blockData = new Object2ObjectOpenHashMap<>();
@@ -73,6 +74,7 @@ public class CommandDataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> enchantmentData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> commandData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> advancementData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> mobCategoryData = new Object2ObjectOpenHashMap<>();
 
     public static final Object2IntMap<String> intRowMaximums = new Object2IntArrayMap<>();
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
@@ -282,6 +284,10 @@ public class CommandDataHandler {
         }});
         cols.put("advancements", new Object2ObjectOpenHashMap<>() {{
             put("enabled", BOOLEAN);
+        }});
+        cols.put("mob_categories", new Object2ObjectOpenHashMap<>() {{
+            put("min_spawn_distance", REAL);
+            put("mobcap", INTEGER);
         }});
 
         entityTypeRegistry.forEach((entityType) ->
@@ -595,6 +601,10 @@ public class CommandDataHandler {
 
                         put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
                         put("can_be_given_by_command", "true");
+
+                        if (item.canBeDepleted()) {
+                            put("durability", String.valueOf(item.getMaxDamage()));
+                        }
                     }
                 }}));
 
@@ -628,6 +638,11 @@ public class CommandDataHandler {
                 }});
             }
         });
+        Arrays.stream(MobCategory.values()).forEach(mobCategory ->
+                mobCategories.put(mobCategory.getName(), new Object2ObjectOpenHashMap<>() {{
+                    put("min_spawn_distance", "24.0");
+                    put("mobcap", String.valueOf(mobCategory.getMaxInstancesPerChunk()));
+                }}));
 
         entityData.put("stats", new Object2ObjectOpenHashMap<>() {{
             statTypeRegistry.forEach(statType -> {
@@ -778,6 +793,11 @@ public class CommandDataHandler {
             put("enabled", "Toggle the advancement being able to be obtained.");
         }});
 
+        mobCategoryData.put("other", new Object2ObjectOpenHashMap<>() {{
+            put("min_spawn_distance", "Control the minimum distance from the player that the mob can spawn.");
+            put("mobcap", "Control the maximum number of mobs per render distance of the mob category.");
+        }});
+
         intRowMaximums.put("nutrition", 20);
         doubleRowMaximums.put("saturation", 9.9);
         stringColSuggestions.put("push_behaviour", Arrays.stream(PushReaction.values()).map(Enum::name).toList());
@@ -856,6 +876,9 @@ public class CommandDataHandler {
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS advancements(id CLOB NOT NULL, " +
                         cols.get("advancements").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
                                 .collect(Collectors.joining(", ")) + ");");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS mob_categories(id CLOB NOT NULL, " +
+                        cols.get("mob_categories").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
+                                .collect(Collectors.joining(", ")) + ");");
             }
 
             if (tables.equals("*") || tables.equals("entities")) {
@@ -912,6 +935,16 @@ public class CommandDataHandler {
                 advancements.forEach((key, value) -> {
                     try {
                         statement.executeUpdate("INSERT INTO advancements (id, \"" + String.join("\", \"", value.keySet()) + "\") VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            if (tables.equals("*") || tables.equals("mob_categories")) {
+                mobCategories.forEach((key, value) -> {
+                    try {
+                        statement.executeUpdate("INSERT INTO mob_categories (id, \"" + String.join("\", \"", value.keySet()) + "\") VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -1079,6 +1112,10 @@ public class CommandDataHandler {
             case "blocks" -> blocks.get(row).get(column);
             case "entities" -> entities.get(row).get(column);
             case "items" -> items.get(row).get(column);
+            case "enchantments" -> enchantments.get(row).get(column);
+            case "commands" -> commands.get(row).get(column);
+            case "advancements" -> advancements.get(row).get(column);
+            case "mob_categories" -> mobCategories.get(row).get(column);
             default -> "true";
         };
     }
@@ -1132,11 +1169,10 @@ public class CommandDataHandler {
             int integer = resultSet.getInt(column);
             resultSet.close();
             return integer;
-        } catch (SQLException | NullPointerException ignored) {
-        }
-        invalidateCaches();
+        } catch (SQLException | NullPointerException ignored) {}
         System.out.println(table + " " + row + " " + column);
         System.out.println(getDefault(table, row, column));
+        invalidateCaches();
         return Integer.parseInt(getDefault(table, row, column));
     }
 

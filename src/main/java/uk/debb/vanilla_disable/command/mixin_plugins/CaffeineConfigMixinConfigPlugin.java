@@ -46,6 +46,7 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
                 .addMixinOption("item.other", true)
                 .addMixinOption("item.potion", true)
                 .addMixinOption("item.spam", true)
+                .addMixinOption("mob_category", true)
                 .withInfoUrl("https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File")
                 .build(FabricLoader.getInstance().getConfigDir().resolve("vanilla-disable-command-mixin.properties"));
 
