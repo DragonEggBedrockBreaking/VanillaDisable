@@ -92,6 +92,7 @@ public abstract class MixinCommands {
                             .then(majorBuilder("entity", CommandDataHandler.entities, CommandDataHandler.entityData, "entities"))
                             .then(majorBuilder("block", CommandDataHandler.blocks, CommandDataHandler.blockData, "blocks"))
                             .then(majorBuilder("item", CommandDataHandler.items, CommandDataHandler.itemData, "items"))
+                            .then(majorBuilder("enchantment", CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, "enchantments"))
                             .then(literal("other")
                                     .then(minorBuilder("advancement", CommandDataHandler.server.getAdvancements().getAllAdvancements()
                                             .stream().map(a -> a.getId().toString()).filter(a -> !a.contains("recipe")), "minecraft:%/%"))

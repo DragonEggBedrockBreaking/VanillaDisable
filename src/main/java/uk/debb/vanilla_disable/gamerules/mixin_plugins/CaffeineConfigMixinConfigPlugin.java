@@ -10,7 +10,6 @@ public class CaffeineConfigMixinConfigPlugin extends AbstractCaffeineConfigMixin
     @Override
     protected CaffeineConfig createConfig() {
         caffeineConfig = CaffeineConfig.builder("VanillaDisable")
-                .addMixinOption("enchantments", true)
                 .addMixinOption("misc", true)
                 .addMixinOption("mobs", true)
                 .addMixinOption("spawn_limits", true)

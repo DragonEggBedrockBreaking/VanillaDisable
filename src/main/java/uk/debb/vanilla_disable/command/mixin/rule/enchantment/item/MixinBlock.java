@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.command.mixin.rule.item.enchantment;
+package uk.debb.vanilla_disable.command.mixin.rule.enchantment.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -20,21 +20,20 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Mixin(Block.class)
 public abstract class MixinBlock {
     @Inject(method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", at = @At("HEAD"), cancellable = true)
     private static void getDrops(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack itemStack, CallbackInfoReturnable<List<ItemStack>> cir) {
-        String item = CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem());
+        String item = "can_enchant_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem()));
         EnchantmentHelper.setEnchantments(
                 EnchantmentHelper.getEnchantments(itemStack)
                         .entrySet()
                         .stream()
                         .filter(entry -> {
-                            String enchantment = CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.enchantmentRegistry.getKey(entry.getKey()))) + "_enchantment";
-                            return CommandDataHandler.getCachedBoolean("items", item, enchantment);
+                            String enchantment = CommandDataHandler.getKeyFromEnchantmentRegistry(entry.getKey());
+                            return CommandDataHandler.getCachedBoolean("enchantments", enchantment, item);
                         }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), itemStack);
         LootParams.Builder builder = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockPos))

@@ -63,11 +63,13 @@ public class CommandDataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entities = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blocks = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> items = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> enchantments = new Object2ObjectOpenHashMap<>();
     public static final ObjectSet<String> others = new ObjectArraySet<>();
 
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entityData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blockData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> itemData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> enchantmentData = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, String> otherData = new Object2ObjectOpenHashMap<>();
 
     public static final Object2IntMap<String> intRowMaximums = new Object2IntArrayMap<>();
@@ -256,15 +258,19 @@ public class CommandDataHandler {
             put("saturation", REAL);
             put("can_break_blocks_in_creative", BOOLEAN);
 
-            enchantmentRegistry.keySet().forEach(enchantment ->
-                    put(lightCleanup(enchantment) + "_enchantment", BOOLEAN));
-
             potionRegistry.keySet().forEach(potion ->
                     put(lightCleanup(potion) + "_effect", BOOLEAN));
 
             put("dispenser_interaction", BOOLEAN);
             put("cauldron_interaction", BOOLEAN);
             put("fuel_duration", INTEGER);
+        }});
+        cols.put("enchantments", new Object2ObjectOpenHashMap<>() {{
+            itemRegistry.keySet().forEach(item ->
+                    put("can_enchant_" + lightCleanup(item), BOOLEAN));
+
+            enchantmentRegistry.keySet().forEach(enchantment ->
+                    put("compatible_with_" + lightCleanup(enchantment), BOOLEAN));
         }});
 
         entityTypeRegistry.forEach((entityType) ->
@@ -548,14 +554,6 @@ public class CommandDataHandler {
                             put("can_spam", "false");
                         }
 
-                        if (enchantmentRegistry.stream().anyMatch(enchantment -> enchantment.canEnchant(item.getDefaultInstance())) ||
-                                item.equals(Items.ENCHANTED_BOOK)) {
-                            put("durability", String.valueOf(item.getMaxDamage()));
-                            enchantmentRegistry.forEach((enchantment) ->
-                                    put(lightCleanup(Objects.requireNonNull(enchantmentRegistry.getKey(enchantment))) + "_enchantment",
-                                            String.valueOf(enchantment.canEnchant(item.getDefaultInstance()) || item.equals(Items.ENCHANTED_BOOK))));
-                        }
-
                         FoodProperties foodProperties = item.getFoodProperties();
                         if (foodProperties != null) {
                             put("nutrition", String.valueOf(foodProperties.getNutrition()));
@@ -583,6 +581,23 @@ public class CommandDataHandler {
 
                         put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
                     }
+                }}));
+
+        enchantmentRegistry.forEach((enchantment) ->
+                enchantments.put(Objects.requireNonNull(enchantmentRegistry.getKey(enchantment)).toString(), new Object2ObjectOpenHashMap<>() {{
+                    itemRegistry.forEach(item -> {
+                        if (enchantmentRegistry.stream().anyMatch(e -> e.canEnchant(item.getDefaultInstance()))) {
+                            put("can_enchant_" + lightCleanup(Objects.requireNonNull(itemRegistry.getKey(item))),
+                                    String.valueOf(enchantment.canEnchant(item.getDefaultInstance())));
+                        }
+                        put("can_enchant_enchanted_book", "true");
+                    });
+
+                    enchantmentRegistry.forEach(enchantment1 -> {
+                        if (enchantment1.equals(enchantment)) return;
+                        put("compatible_with_" + lightCleanup(Objects.requireNonNull(enchantmentRegistry.getKey(enchantment1))),
+                                String.valueOf(enchantment.isCompatibleWith(enchantment1) && enchantment1.isCompatibleWith(enchantment)));
+                    });
                 }}));
 
         others.addAll(server.getAdvancements().getAllAdvancements()
@@ -702,10 +717,6 @@ public class CommandDataHandler {
             put("ignite_odds", "Control the chance that the block will ignite.");
         }});
 
-        itemData.put("enchantment", new Object2ObjectOpenHashMap<>() {{
-            enchantmentRegistry.keySet().forEach(enchantment ->
-                    put(lightCleanup(enchantment) + "_enchantment", "Toggle the " + cleanup(enchantment) + " enchantment being able to be applied to the item."));
-        }});
         itemData.put("potion", new Object2ObjectOpenHashMap<>() {{
             potionRegistry.keySet().forEach(potion ->
                     put(lightCleanup(potion) + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item."));
@@ -721,6 +732,15 @@ public class CommandDataHandler {
             put("dispenser_interaction", "Toggle the item having a special interaction with a dispenser.");
             put("cauldron_interaction", "Toggle the item having a special interaction with a cauldron.");
             put("fuel_duration", "Controls how long a fuel lasts in a furnace, blast furnace, or smoker.");
+        }});
+
+        enchantmentData.put("item", new Object2ObjectOpenHashMap<>() {{
+            itemRegistry.keySet().forEach(item ->
+                    put("can_enchant_" + lightCleanup(item), "Toggle the " + cleanup(item) + " item being able to be enchanted with the enchantment."));
+        }});
+        enchantmentData.put("enchantment_compatibility", new Object2ObjectOpenHashMap<>() {{
+            enchantmentRegistry.keySet().forEach(enchantment1 ->
+                    put("compatible_with_" + lightCleanup(enchantment1), "Toggle the enchantment being compatible with the " + cleanup(enchantment1) + " enchantment.\nNOTE: The reverse option may also need to be set for the compatibility to be changed."));
         }});
 
         server.getAdvancements().getAllAdvancements()
@@ -772,6 +792,16 @@ public class CommandDataHandler {
     }
 
     /**
+     * Get the name of an enchantment from the registry.
+     *
+     * @param enchantment The enchantment to get the name of.
+     * @return The name of the enchantment.
+     */
+    public static String getKeyFromEnchantmentRegistry(Enchantment enchantment) {
+        return Objects.requireNonNull(enchantmentRegistry.getKey(enchantment)).toString();
+    }
+
+    /**
      * Generates the default data for the database.
      *
      * @param create Whether to create the tables or not.
@@ -788,6 +818,9 @@ public class CommandDataHandler {
                                 .collect(Collectors.joining(", ")) + ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS items(id CLOB NOT NULL, " +
                         cols.get("items").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
+                                .collect(Collectors.joining(", ")) + ");");
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS enchantments(id CLOB NOT NULL, " +
+                        cols.get("enchantments").entrySet().stream().map(entry -> "\"" + entry.getKey() + "\" " + entry.getValue())
                                 .collect(Collectors.joining(", ")) + ");");
                 statement.executeUpdate("CREATE TABLE IF NOT EXISTS others(id CLOB NOT NULL, \"enabled\" BOOLEAN);");
             }
@@ -816,6 +849,16 @@ public class CommandDataHandler {
                 items.forEach((key, value) -> {
                     try {
                         statement.executeUpdate("INSERT INTO items (id, \"" + String.join("\", \"", value.keySet()) + "\") VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            if (tables.equals("*") || tables.equals("enchantments")) {
+                enchantments.forEach((key, value) -> {
+                    try {
+                        statement.executeUpdate("INSERT INTO enchantments (id, \"" + String.join("\", \"", value.keySet()) + "\") VALUES ('" + key + "', " + String.join(", ", value.values()) + ");");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
