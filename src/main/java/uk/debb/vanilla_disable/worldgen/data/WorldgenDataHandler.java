@@ -34,6 +34,7 @@ public class WorldgenDataHandler {
 
     /**
      * Removes the "minecraft:" prefix from a string.
+     *
      * @param o The object to clean up.
      * @return The cleaned up string.
      */
@@ -43,9 +44,10 @@ public class WorldgenDataHandler {
 
     /**
      * Writes the data to the file.
-     * @param structures The structures to write.
+     *
+     * @param structures     The structures to write.
      * @param placedFeatures The placed features to write.
-     * @param biomeLevels The biome levels to write.
+     * @param biomeLevels    The biome levels to write.
      */
     private static void write(Map<String, Object> structures, Map<String, Object> placedFeatures, Map<String, Object> biomeLevels) {
         Map<String, Object> data = new HashMap<>();
@@ -132,8 +134,9 @@ public class WorldgenDataHandler {
 
     /**
      * Gets a boolean from the toml file.
+     *
      * @param table The table to get the boolean from.
-     * @param key The key to get the boolean from.
+     * @param key   The key to get the boolean from.
      * @return The boolean.
      */
     public static boolean get(String table, String key) {
@@ -146,6 +149,7 @@ public class WorldgenDataHandler {
 
     /**
      * Checks if a biome is in a dimension.
+     *
      * @param level The dimension.
      * @param biome The biome.
      * @return Whether the biome is in the dimension.
@@ -156,6 +160,7 @@ public class WorldgenDataHandler {
 
     /**
      * Gets the default biome for a dimension, from a biome in that dimension.
+     *
      * @param biome The biome.
      * @return The default biome.
      */
@@ -173,9 +178,10 @@ public class WorldgenDataHandler {
 
     /**
      * Updates the values in the toml file based on gamerule migration.
-     * @param structureMap The structures to update.
+     *
+     * @param structureMap     The structures to update.
      * @param placedFeatureMap The placed features to update.
-     * @param biomeMap The biomes to update.
+     * @param biomeMap         The biomes to update.
      */
     @SuppressWarnings("unchecked")
     public static void updateVals(Object2ObjectMap<String, Boolean> structureMap, Object2ObjectMap<String, Boolean> placedFeatureMap, Object2ObjectMap<String, Boolean> biomeMap) {

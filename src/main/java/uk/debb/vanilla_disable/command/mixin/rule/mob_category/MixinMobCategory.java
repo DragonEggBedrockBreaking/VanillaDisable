@@ -9,7 +9,8 @@ import uk.debb.vanilla_disable.command.data.CommandDataHandler;
 
 @Mixin(MobCategory.class)
 public abstract class MixinMobCategory {
-    @Shadow public abstract String getName();
+    @Shadow
+    public abstract String getName();
 
     @ModifyReturnValue(method = "getMaxInstancesPerChunk", at = @At("RETURN"))
     private int getMaxInstancesPerChunk(int original) {

@@ -13,12 +13,9 @@ public abstract class MixinRaid {
     private int modifyNumGroups(int original, Difficulty difficulty) {
         return switch (difficulty) {
             case PEACEFUL -> 0;
-            case EASY ->
-                    RegisterGamerules.server.getGameRules().getInt(RegisterGamerules.RAID_WAVES_EASY) - 1;
-            case NORMAL ->
-                    RegisterGamerules.server.getGameRules().getInt(RegisterGamerules.RAID_WAVES_NORMAL) - 1;
-            case HARD ->
-                    RegisterGamerules.server.getGameRules().getInt(RegisterGamerules.RAID_WAVES_HARD) - 1;
+            case EASY -> RegisterGamerules.server.getGameRules().getInt(RegisterGamerules.RAID_WAVES_EASY) - 1;
+            case NORMAL -> RegisterGamerules.server.getGameRules().getInt(RegisterGamerules.RAID_WAVES_NORMAL) - 1;
+            case HARD -> RegisterGamerules.server.getGameRules().getInt(RegisterGamerules.RAID_WAVES_HARD) - 1;
         };
     }
 }

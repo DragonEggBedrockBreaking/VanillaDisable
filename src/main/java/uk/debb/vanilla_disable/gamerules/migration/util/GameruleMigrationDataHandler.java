@@ -10,64 +10,6 @@ import uk.debb.vanilla_disable.worldgen.data.WorldgenDataHandler;
 import java.util.List;
 
 public class GameruleMigrationDataHandler {
-    public static class SqlDataHolder {
-        public String rule;
-        public String table;
-        public String pattern;
-        public String column;
-        public String value;
-        public String defaultValue;
-
-        public SqlDataHolder(String rule, String table, String pattern, String column, String defaultValue) {
-            this.rule = rule;
-            this.table = table;
-            this.pattern = pattern;
-            this.column = column;
-            this.defaultValue = defaultValue;
-        }
-    }
-
-    public static class MassColumnSqlDataHolder {
-        public String rule;
-        public String table;
-        public String pattern;
-        public List<String> columns;
-        public String value;
-
-        public MassColumnSqlDataHolder(String rule, String table, String pattern, List<String> columns) {
-            this.rule = rule;
-            this.table = table;
-            this.pattern = pattern;
-            this.columns = columns;
-        }
-    }
-
-    public static class AllRowSqlDataHolder {
-        public String rule;
-        public String table;
-        public String column;
-        public String value;
-
-        public AllRowSqlDataHolder(String rule, String table, String column) {
-            this.rule = rule;
-            this.table = table;
-            this.column = column;
-        }
-    }
-
-    public static class TomlDataHolder {
-        public String rule;
-        public String table;
-        public String attribute;
-        public String value;
-
-        public TomlDataHolder(String rule, String table, String attribute) {
-            this.rule = rule;
-            this.table = table;
-            this.attribute = attribute;
-        }
-    }
-
     public static ObjectList<SqlDataHolder> sqlData = new ObjectArrayList<>() {{
         add(new SqlDataHolder("projectileDamage", "entities", "minecraft:player", "mob_projectile_damage", "true"));
         add(new SqlDataHolder("explosionDamage", "entities", "minecraft:player", "explosion_damage", "true"));
@@ -949,7 +891,6 @@ public class GameruleMigrationDataHandler {
         add(new SqlDataHolder("toolsmithVillagerProfession", "entities", "minecraft:villager", "toolsmith_profession", "true"));
         add(new SqlDataHolder("weaponsmithVillagerProfession", "entities", "minecraft:villager", "weaponsmith_profession", "true"));
     }};
-
     public static ObjectList<MassColumnSqlDataHolder> massColumnSqlData = new ObjectArrayList<>() {{
         List<String> potions = List.of(
                 "water_effect", "mundane_effect", "thick_effect", "awkward_effect", "night_vision_effect", "long_night_vision_effect", "invisibility_effect", "long_invisibility_effect",
@@ -1018,7 +959,6 @@ public class GameruleMigrationDataHandler {
                 "mason_profession", "nitwit_profession", "shepherd_profession", "toolsmith_profession", "weaponsmith_profession"
         )));
     }};
-
     public static ObjectList<AllRowSqlDataHolder> allRowSqlDataHolders = new ObjectArrayList<>() {{
         add(new AllRowSqlDataHolder("animalBreeding", "entities", "can_breed"));
         add(new AllRowSqlDataHolder("spawnersEnabled", "entities", "spawner"));
@@ -1027,7 +967,6 @@ public class GameruleMigrationDataHandler {
         add(new AllRowSqlDataHolder("mobsDropXp", "entities", "can_drop_xp"));
         add(new AllRowSqlDataHolder("blocksDropXp", "blocks", "can_drop_xp"));
     }};
-
     public static ObjectList<TomlDataHolder> tomlData = new ObjectArrayList<>() {{
         add(new TomlDataHolder("ancientCityGeneration", "structures", "ancient_city"));
         add(new TomlDataHolder("bastionRemnantGeneration", "structures", "bastion_remnant"));
@@ -1111,7 +1050,6 @@ public class GameruleMigrationDataHandler {
         add(new TomlDataHolder("endMidlandsBiome", "biomes", "end_midlands"));
         add(new TomlDataHolder("smallEndIslandsBiome", "biomes", "small_end_islands"));
     }};
-
     public static String biomesEnabled = "";
 
     public static void updateSql() {
@@ -1150,5 +1088,63 @@ public class GameruleMigrationDataHandler {
             biomeMap.replaceAll((k, v) -> false);
         }
         WorldgenDataHandler.updateVals(structureMap, placedFeatureMap, biomeMap);
+    }
+
+    public static class SqlDataHolder {
+        public String rule;
+        public String table;
+        public String pattern;
+        public String column;
+        public String value;
+        public String defaultValue;
+
+        public SqlDataHolder(String rule, String table, String pattern, String column, String defaultValue) {
+            this.rule = rule;
+            this.table = table;
+            this.pattern = pattern;
+            this.column = column;
+            this.defaultValue = defaultValue;
+        }
+    }
+
+    public static class MassColumnSqlDataHolder {
+        public String rule;
+        public String table;
+        public String pattern;
+        public List<String> columns;
+        public String value;
+
+        public MassColumnSqlDataHolder(String rule, String table, String pattern, List<String> columns) {
+            this.rule = rule;
+            this.table = table;
+            this.pattern = pattern;
+            this.columns = columns;
+        }
+    }
+
+    public static class AllRowSqlDataHolder {
+        public String rule;
+        public String table;
+        public String column;
+        public String value;
+
+        public AllRowSqlDataHolder(String rule, String table, String column) {
+            this.rule = rule;
+            this.table = table;
+            this.column = column;
+        }
+    }
+
+    public static class TomlDataHolder {
+        public String rule;
+        public String table;
+        public String attribute;
+        public String value;
+
+        public TomlDataHolder(String rule, String table, String attribute) {
+            this.rule = rule;
+            this.table = table;
+            this.attribute = attribute;
+        }
     }
 }

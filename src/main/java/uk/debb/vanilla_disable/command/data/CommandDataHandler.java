@@ -975,7 +975,8 @@ public class CommandDataHandler {
                 while (scanner.hasNext()) {
                     try {
                         statement.execute(scanner.nextLine());
-                    } catch (SQLException ignored) {}
+                    } catch (SQLException ignored) {
+                    }
                 }
             } else {
                 if (!new File(PATH).exists()) {
@@ -1177,7 +1178,8 @@ public class CommandDataHandler {
             int integer = resultSet.getInt(column);
             resultSet.close();
             return integer;
-        } catch (SQLException | NullPointerException ignored) {}
+        } catch (SQLException | NullPointerException ignored) {
+        }
         invalidateCaches();
         return Integer.parseInt(getDefault(table, row, column));
     }

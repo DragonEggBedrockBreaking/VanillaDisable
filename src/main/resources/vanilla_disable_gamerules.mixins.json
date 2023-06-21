@@ -4,8 +4,8 @@
   "package": "uk.debb.vanilla_disable.gamerules.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MixinServerRecipeBook",
-    "MixinRaid"
+    "MixinRaid",
+    "MixinServerRecipeBook"
   ],
   "injectors": {
     "defaultRequire": 1
