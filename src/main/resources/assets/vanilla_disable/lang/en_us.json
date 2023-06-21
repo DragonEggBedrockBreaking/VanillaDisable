@@ -109,5 +109,7 @@
   "command.vd.successfully_set_value": "Successfully set the value to %s.",
   "command.vd.invalid_value": "Invalid value.",
   "command.vd.successfully_set_values": "Successfully set the values to %s.",
-  "command.vd.successfully_set_all_properties": "Successfully set the values of all %s properties to %s."
+  "command.vd.successfully_set_all_properties": "Successfully set the values of all %s properties to %s.",
+  "migration.done": "You might've used this mod in the past. Most of the gamerule values should've been migrated to the new system, but some cannot be migrated, and must be manually set. Click here for a full list: ",
+  "migration.done.wiki": "[VanillaDisable Wiki]"
 }

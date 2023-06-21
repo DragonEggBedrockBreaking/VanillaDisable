@@ -103,6 +103,7 @@ public class CommandDataHandler {
     private static Registry<EntityType<?>> entityTypeRegistry;
     private static Registry<BlockEntityType<?>> blockEntityRegistry;
     private static Registry<ResourceLocation> customStatRegistry;
+    public static boolean migrated = false;
 
     /**
      * Cleans up data for display (removes underscores, 'namespace:' prefixes, 'group/' prefixes)
@@ -955,8 +956,10 @@ public class CommandDataHandler {
 
             generateData(true, "*");
 
+            migrated = true;
             if (!new File(PATH).exists()) {
                 GameruleMigrationDataHandler.updateSql();
+                migrated = true;
             }
             if (new File(PATH).exists()) {
                 Scanner scanner = new Scanner(new File(PATH));

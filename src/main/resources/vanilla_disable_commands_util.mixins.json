@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "util.MixinCommands",
-    "util.MixinMinecraftServer"
+    "util.MixinMinecraftServer",
+    "util.MixinPlayerList"
   ],
   "injectors": {
     "defaultRequire": 1
