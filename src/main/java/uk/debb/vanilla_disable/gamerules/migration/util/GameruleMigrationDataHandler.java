@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.worldgen.data.WorldgenDataHandler;
 import java.util.List;
 
 public class GameruleMigrationDataHandler {
-    public static ObjectList<SqlDataHolder> sqlData = new ObjectArrayList<>() {{
+    public static final ObjectList<SqlDataHolder> sqlData = new ObjectArrayList<>() {{
         add(new SqlDataHolder("projectileDamage", "entities", "minecraft:player", "mob_projectile_damage", "true"));
         add(new SqlDataHolder("explosionDamage", "entities", "minecraft:player", "explosion_damage", "true"));
         add(new SqlDataHolder("voidDamage", "entities", "minecraft:player", "fell_out_of_world_damage", "true"));
@@ -891,7 +891,7 @@ public class GameruleMigrationDataHandler {
         add(new SqlDataHolder("toolsmithVillagerProfession", "entities", "minecraft:villager", "toolsmith_profession", "true"));
         add(new SqlDataHolder("weaponsmithVillagerProfession", "entities", "minecraft:villager", "weaponsmith_profession", "true"));
     }};
-    public static ObjectList<MassColumnSqlDataHolder> massColumnSqlData = new ObjectArrayList<>() {{
+    public static final ObjectList<MassColumnSqlDataHolder> massColumnSqlData = new ObjectArrayList<>() {{
         List<String> potions = List.of(
                 "water_effect", "mundane_effect", "thick_effect", "awkward_effect", "night_vision_effect", "long_night_vision_effect", "invisibility_effect", "long_invisibility_effect",
                 "leaping_effect", "long_leaping_effect", "strong_leaping_effect", "fire_resistance_effect", "long_fire_resistance_effect", "swiftness_effect", "long_swiftness_effect",
@@ -959,7 +959,7 @@ public class GameruleMigrationDataHandler {
                 "mason_profession", "nitwit_profession", "shepherd_profession", "toolsmith_profession", "weaponsmith_profession"
         )));
     }};
-    public static ObjectList<AllRowSqlDataHolder> allRowSqlDataHolders = new ObjectArrayList<>() {{
+    public static final ObjectList<AllRowSqlDataHolder> allRowSqlDataHolders = new ObjectArrayList<>() {{
         add(new AllRowSqlDataHolder("animalBreeding", "entities", "can_breed"));
         add(new AllRowSqlDataHolder("spawnersEnabled", "entities", "spawner"));
         add(new AllRowSqlDataHolder("commandsEnabled", "commands", "enabled"));
@@ -967,7 +967,7 @@ public class GameruleMigrationDataHandler {
         add(new AllRowSqlDataHolder("mobsDropXp", "entities", "can_drop_xp"));
         add(new AllRowSqlDataHolder("blocksDropXp", "blocks", "can_drop_xp"));
     }};
-    public static ObjectList<TomlDataHolder> tomlData = new ObjectArrayList<>() {{
+    public static final ObjectList<TomlDataHolder> tomlData = new ObjectArrayList<>() {{
         add(new TomlDataHolder("ancientCityGeneration", "structures", "ancient_city"));
         add(new TomlDataHolder("bastionRemnantGeneration", "structures", "bastion_remnant"));
         add(new TomlDataHolder("buriedTreasureGeneration", "structures", "buried_treasure"));
@@ -1091,12 +1091,12 @@ public class GameruleMigrationDataHandler {
     }
 
     public static class SqlDataHolder {
-        public String rule;
-        public String table;
-        public String pattern;
-        public String column;
+        public final String rule;
+        public final String table;
+        public final String pattern;
+        public final String column;
         public String value;
-        public String defaultValue;
+        public final String defaultValue;
 
         public SqlDataHolder(String rule, String table, String pattern, String column, String defaultValue) {
             this.rule = rule;
@@ -1108,10 +1108,10 @@ public class GameruleMigrationDataHandler {
     }
 
     public static class MassColumnSqlDataHolder {
-        public String rule;
-        public String table;
-        public String pattern;
-        public List<String> columns;
+        public final String rule;
+        public final String table;
+        public final String pattern;
+        public final List<String> columns;
         public String value;
 
         public MassColumnSqlDataHolder(String rule, String table, String pattern, List<String> columns) {
@@ -1123,9 +1123,9 @@ public class GameruleMigrationDataHandler {
     }
 
     public static class AllRowSqlDataHolder {
-        public String rule;
-        public String table;
-        public String column;
+        public final String rule;
+        public final String table;
+        public final String column;
         public String value;
 
         public AllRowSqlDataHolder(String rule, String table, String column) {
@@ -1136,15 +1136,13 @@ public class GameruleMigrationDataHandler {
     }
 
     public static class TomlDataHolder {
-        public String rule;
-        public String table;
-        public String attribute;
+        public final String rule;
+        public final String table;
         public String value;
 
         public TomlDataHolder(String rule, String table, String attribute) {
             this.rule = rule;
             this.table = table;
-            this.attribute = attribute;
         }
     }
 }

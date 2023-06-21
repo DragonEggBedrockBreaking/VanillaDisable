@@ -32,6 +32,8 @@ public class WorldgenDataHandler {
     private static Toml toml;
     private static File PATH;
 
+    private record Tables(Map<String, Object> structures, Map<String, Object> placedFeatures, Map<String, Object> biomes) { }
+
     /**
      * Removes the "minecraft:" prefix from a string.
      *
@@ -70,7 +72,6 @@ public class WorldgenDataHandler {
     /**
      * Initializes and sets up all the data.
      */
-    @SuppressWarnings("unchecked")
     public static void init() {
         structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
         placedFeatureRegistry = server.registryAccess().registryOrThrow(Registries.PLACED_FEATURE);
@@ -90,46 +91,57 @@ public class WorldgenDataHandler {
         }
 
         toml = new Toml().read(PATH);
-        Map<String, Object> data = toml.toMap();
-
-        Map<String, Object> structures = new TreeMap<>((Map<String, Object>) data.getOrDefault("structures", new HashMap<>()));
-        Map<String, Object> placedFeatures = new TreeMap<>((Map<String, Object>) data.getOrDefault("placed_features", new HashMap<>()));
-        Map<String, Object> biomes = new TreeMap<>((Map<String, Object>) data.getOrDefault("biomes", new HashMap<>()));
+        Tables data = getTomlTables();
 
         structureRegistry.keySet().forEach(structure -> {
             String structureName = cleanup(structure);
-            if (!structures.containsKey(structureName)) {
-                structures.put(structureName, true);
+            if (!data.structures().containsKey(structureName)) {
+                data.structures().put(structureName, true);
             }
         });
 
         placedFeatureRegistry.keySet().forEach(placedFeature -> {
             String placedFeatureName = cleanup(placedFeature);
-            if (!placedFeatures.containsKey(placedFeatureName)) {
-                placedFeatures.put(placedFeatureName, true);
+            if (!data.placedFeatures().containsKey(placedFeatureName)) {
+                data.placedFeatures().put(placedFeatureName, true);
             }
         });
-        placedFeatures.put("obsidian_platform", true);
-        placedFeatures.put("end_spike_cage", true);
+        data.placedFeatures().put("obsidian_platform", true);
+        data.placedFeatures().put("end_spike_cage", true);
 
         biomeRegistry.keySet().forEach(biome -> {
             String biomeName = cleanup(biome);
-            if (!biomes.containsKey(biomeName)) {
-                biomes.put(biomeName, true);
+            if (!data.biomes().containsKey(biomeName)) {
+                data.biomes().put(biomeName, true);
             }
         });
-        biomes.remove("nether_wastes");
-        biomes.remove("plains");
-        biomes.remove("the_end");
-        biomes.remove("the_void");
+        data.biomes().remove("nether_wastes");
+        data.biomes().remove("plains");
+        data.biomes().remove("the_end");
+        data.biomes().remove("the_void");
 
-        write(structures, placedFeatures, biomes);
+        write(data.structures(), data.placedFeatures(), data.biomes());
 
         toml = new Toml().read(PATH);
 
         if (first) {
             GameruleMigrationDataHandler.updateToml();
         }
+    }
+
+    /**
+     * Gets the tables from the toml file.
+     * @return The tables.
+     */
+    @SuppressWarnings("unchecked")
+    private static Tables getTomlTables() {
+        Map<String, Object> data = toml.toMap();
+
+        return new Tables(
+                new TreeMap<>((Map<String, Object>) data.getOrDefault("structures", new HashMap<>())),
+                new TreeMap<>((Map<String, Object>) data.getOrDefault("placed_features", new HashMap<>())),
+                new TreeMap<>((Map<String, Object>) data.getOrDefault("biomes", new HashMap<>()))
+        );
     }
 
     /**
@@ -183,19 +195,14 @@ public class WorldgenDataHandler {
      * @param placedFeatureMap The placed features to update.
      * @param biomeMap         The biomes to update.
      */
-    @SuppressWarnings("unchecked")
     public static void updateVals(Object2ObjectMap<String, Boolean> structureMap, Object2ObjectMap<String, Boolean> placedFeatureMap, Object2ObjectMap<String, Boolean> biomeMap) {
-        Map<String, Object> data = toml.toMap();
+        Tables data = getTomlTables();
 
-        Map<String, Object> structures = new TreeMap<>((Map<String, Object>) data.getOrDefault("structures", new HashMap<>()));
-        Map<String, Object> placedFeatures = new TreeMap<>((Map<String, Object>) data.getOrDefault("placed_features", new HashMap<>()));
-        Map<String, Object> biomes = new TreeMap<>((Map<String, Object>) data.getOrDefault("biomes", new HashMap<>()));
+        data.structures().putAll(structureMap);
+        data.placedFeatures().putAll(placedFeatureMap);
+        data.biomes().putAll(biomeMap);
 
-        structures.putAll(structureMap);
-        placedFeatures.putAll(placedFeatureMap);
-        biomes.putAll(biomeMap);
-
-        write(structures, placedFeatures, biomes);
+        write(data.structures(), data.placedFeatures(), data.biomes());
 
         toml = new Toml().read(PATH);
     }
