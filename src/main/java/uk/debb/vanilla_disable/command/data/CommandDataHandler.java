@@ -10,6 +10,7 @@ import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.packs.VanillaHusbandryAdvancements;
 import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.StatType;
@@ -69,13 +70,13 @@ public class CommandDataHandler {
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> advancements = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> mobCategories = new Object2ObjectOpenHashMap<>();
 
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> entityData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> blockData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> itemData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> enchantmentData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> commandData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> advancementData = new Object2ObjectOpenHashMap<>();
-    public static final Object2ObjectMap<String, Object2ObjectMap<String, String>> mobCategoryData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, Component>> entityData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, Component>> blockData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, Component>> itemData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, Component>> enchantmentData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, Component>> commandData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, Component>> advancementData = new Object2ObjectOpenHashMap<>();
+    public static final Object2ObjectMap<String, Object2ObjectMap<String, Component>> mobCategoryData = new Object2ObjectOpenHashMap<>();
 
     public static final Object2IntMap<String> intRowMaximums = new Object2IntArrayMap<>();
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
@@ -287,7 +288,6 @@ public class CommandDataHandler {
             put("enabled", BOOLEAN);
         }});
         cols.put("mob_categories", new Object2ObjectOpenHashMap<>() {{
-            put("min_spawn_distance", REAL);
             put("mobcap", INTEGER);
         }});
 
@@ -641,7 +641,6 @@ public class CommandDataHandler {
         });
         Arrays.stream(MobCategory.values()).forEach(mobCategory ->
                 mobCategories.put(mobCategory.getName(), new Object2ObjectOpenHashMap<>() {{
-                    put("min_spawn_distance", "24.0");
                     put("mobcap", String.valueOf(mobCategory.getMaxInstancesPerChunk()));
                 }}));
 
@@ -649,154 +648,153 @@ public class CommandDataHandler {
             statTypeRegistry.forEach(statType -> {
                 if (statType.equals(Stats.CUSTOM)) return;
                 put(lightCleanup(Objects.requireNonNull(statTypeRegistry.getKey(statType))) + "_stat_type",
-                        "Toggles stats in the '" + cleanup(statType) + "' category.");
+                        Component.translatable("commandRule.entities.statTypes", cleanup(statType)));
             });
             customStatRegistry.keySet().forEach(customStat ->
-                    put(lightCleanup(customStat) + "_custom_stat", "Toggles the '" + cleanup(customStat) + "' custom stat."));
+                    put(lightCleanup(customStat) + "_custom_stat", Component.translatable("commandRule.entities.customStats", cleanup(customStat))));
         }});
         entityData.put("damage", new Object2ObjectOpenHashMap<>() {{
             damageTypeRegistry.keySet().forEach(damageType ->
-                    put(lightCleanup(damageType) + "_damage", "Toggles " + cleanup(damageType) + " damage affecting the player."));
+                    put(lightCleanup(damageType) + "_damage", Component.translatable("commandRule.entities.damageTypes", cleanup(damageType))));
         }});
         entityData.put("knockback", new Object2ObjectOpenHashMap<>() {{
             entityTypeRegistry.keySet().forEach(entityType ->
-                    put(lightCleanup(entityType) + "_knockback", "Toggles knockback from " + cleanup(entityType) + " affecting the mob."));
-            put("explosion_knockback", "Toggles knockback from explosions affecting the entity.");
+                    put(lightCleanup(entityType) + "_knockback", Component.translatable("commandRule.entities.knockbackTypes", cleanup(entityType))));
+            put("explosion_knockback", Component.translatable("commandRule.entities.explosionKnockback"));
         }});
         entityData.put("effects", new Object2ObjectOpenHashMap<>() {{
             mobEffectRegistry.keySet().forEach(mobEffect ->
-                    put(lightCleanup(mobEffect) + "_effect", "Toggles " + cleanup(mobEffect) + " affecting the mob."));
+                    put(lightCleanup(mobEffect) + "_effect", Component.translatable("commandRule.entities.mobEffect", cleanup(mobEffect))));
         }});
         entityData.put("death", new Object2ObjectOpenHashMap<>() {{
             damageTypeRegistry.keySet().forEach(damageType ->
-                    put(lightCleanup(damageType) + "_death", "Toggles " + cleanup(damageType) + " damage being able to kill the player."));
+                    put(lightCleanup(damageType) + "_death", Component.translatable("commandRule.entities.deathTypes", cleanup(damageType))));
         }});
         entityData.put("painting", new Object2ObjectOpenHashMap<>() {{
             paintingVariantRegistry.keySet().forEach(painting ->
-                    put(lightCleanup(painting) + "_painting", "Toggles the " + cleanup(painting) + " design being able to show on paintings."));
+                    put(lightCleanup(painting) + "_painting", Component.translatable("commandRule.entities.paintingVariants", cleanup(painting))));
         }});
         entityData.put("biome_type", new Object2ObjectOpenHashMap<>() {{
             villagerTypeRegistry.keySet().forEach(villagerType ->
-                    put(lightCleanup(villagerType) + "_type", "Toggles villagers being able to be of the " + cleanup(villagerType) + " biome type."));
+                    put(lightCleanup(villagerType) + "_type", Component.translatable("commandRule.entities.villagerTypes", cleanup(villagerType))));
         }});
         entityData.put("profession", new Object2ObjectOpenHashMap<>() {{
             villagerProfessionRegistry.keySet().forEach(villagerProfession ->
-                    put(lightCleanup(villagerProfession) + "_profession", "Toggles villagers being able to have the " + cleanup(villagerProfession) + " profession."));
+                    put(lightCleanup(villagerProfession) + "_profession", Component.translatable("commandRule.entities.villagerProfessions", cleanup(villagerProfession))));
         }});
         entityData.put("player", new Object2ObjectOpenHashMap<>() {{
-            put("can_be_on_fire", "Toggle the player being able to be on fire.");
-            put("can_sprint", "Toggle the player being able to sprint.");
-            put("can_crouch", "Toggle the player being able to crouch.");
-            put("can_swim", "Toggle the player being able to swim.");
-            put("can_jump", "Toggle the player being able to jump.");
-            put("can_be_invisible", "Toggle the player being able to be invisible.");
-            put("flying_speed", "Control the player's flying speed.");
-            put("beta_hunger", "Toggle hunger having beta behaviour");
+            put("can_be_on_fire", Component.translatable("commandRule.entities.canBeOnFire"));
+            put("can_sprint", Component.translatable("commandRule.entities.canSprint"));
+            put("can_crouch", Component.translatable("commandRule.entities.canCrouch"));
+            put("can_swim", Component.translatable("commandRule.entities.canSwim"));
+            put("can_jump", Component.translatable("commandRule.entities.canJump"));
+            put("can_be_invisible", Component.translatable("commandRule.entities.canBeInvisible"));
+            put("flying_speed", Component.translatable("commandRule.entities.flyingSpeed"));
+            put("beta_hunger", Component.translatable("commandRule.entities.betaHunger"));
         }});
         entityData.put("spawning", new Object2ObjectOpenHashMap<>() {{
-            put("can_despawn", "Toggle the mob being able to despawn.");
-            put("despawn_time", "Controls how long it takes for an entity to despawn.");
-            put("can_spawn", "Toggle the mob being able to spawn.");
-            put("spawn_egg", "Toggle the mob being able to be spawned by a spawn egg.");
-            put("spawner", "Toggle the mob being able to be spawned by a spawner.");
-            put("despawn_on_player_death", "Toggle the ender pearl despawning when the player dies (fixes MC-199344).");
-            put("can_breed", "Toggle the mob being able to breed.");
-            put("spawned_by_villagers", "Toggle the mob being able to be spawned by villagers.");
-            put("min_despawn_distance", "Control the minimum distance away from the player where the entity can despawn.");
-            put("instant_despawn_distance", "Control the distance away from the player where the entity will instantly despawn.");
-            put("can_be_summoned", "Toggle the mob being able to be summoned using the /summon command.");
+            put("can_despawn", Component.translatable("commandRule.entities.canDespawn"));
+            put("despawn_time", Component.translatable("commandRule.entities.despawnTime"));
+            put("can_spawn", Component.translatable("commandRule.entities.canSpawn"));
+            put("spawn_egg", Component.translatable("commandRule.entities.spawnEgg"));
+            put("spawner", Component.translatable("commandRule.entities.spawner"));
+            put("despawn_on_player_death", Component.translatable("commandRule.entities.despawnOnPlayerDeath"));
+            put("can_breed", Component.translatable("commandRule.entities.canBreed"));
+            put("spawned_by_villagers", Component.translatable("commandRule.entities.spawnedByVillagers"));
+            put("min_despawn_distance", Component.translatable("commandRule.entities.minDespawnDistance"));
+            put("instant_despawn_distance", Component.translatable("commandRule.entities.instantDespawnDistance"));
+            put("can_be_summoned", Component.translatable("commandRule.entities.canBeSummoned"));
         }});
         entityData.put("breeding_ingredient", new Object2ObjectOpenHashMap<>() {{
             itemRegistry.keySet().forEach(item ->
-                    put("can_breed_with_" + lightCleanup(item), "Toggles the mob being able to be bred with " + cleanup(item) + "."));
+                    put("can_breed_with_" + lightCleanup(item), Component.translatable("commandRule.entities.breedingIngredient", cleanup(item))));
         }});
         entityData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("can_exist", "Toggle the entity being able to exist.");
-            put("can_be_converted_to", "Toggle another mob being able to convert to the mob.");
-            put("burns_in_sunlight", "Toggle the mob being able to burn in sunlight.");
-            put("can_drop_xp", "Toggle the mob being able to drop XP.");
-            put("ai", "Toggle the mob's AI.");
-            put("can_trade", "Toggle the mob being able to trade.");
-            put("can_infinitely_trade", "Toggle villagers being able to trade infinitely.");
-            put("daily_restocks", "Control the number of times per day a villager restocks.");
-            put("can_player_interact", "Toggle players being able to interact with the entity.");
-            put("can_be_lit_by_fire_aspect", "Toggle hitting creepers with a fire aspect enchanted item lighting them on fire.");
-            put("alpha_behaviour", "Toggle boats behaving like they did in alpha.");
-            put("can_shoot_fireballs", "Toggle ender dragons being able to shoot fireballs.");
+            put("can_exist", Component.translatable("commandRule.entities.canExist"));
+            put("can_be_converted_to", Component.translatable("commandRule.entities.canBeConvertedTo"));
+            put("burns_in_sunlight", Component.translatable("commandRule.entities.burnsInSunlight"));
+            put("can_drop_xp", Component.translatable("commandRule.entities.canDropXp"));
+            put("ai", Component.translatable("commandRule.entities.ai"));
+            put("can_trade", Component.translatable("commandRule.entities.canTrade"));
+            put("can_infinitely_trade", Component.translatable("commandRule.entities.canInfinitelyTrade"));
+            put("daily_restocks", Component.translatable("commandRule.entities.dailyRestocks"));
+            put("can_player_interact", Component.translatable("commandRule.entities.canPlayerInteract"));
+            put("can_be_lit_by_fire_aspect", Component.translatable("commandRule.entities.canBeLitByFireAspect"));
+            put("alpha_behaviour", Component.translatable("commandRule.entities.alphaBehaviour"));
+            put("can_shoot_fireballs", Component.translatable("commandRule.entities.canShootFireballs"));
         }});
 
         blockData.put("fluid", new Object2ObjectOpenHashMap<>() {{
-            put("fluid_reaches_far", "Toggle whether the fluid can travel 8 blocks or only 4 in the overworld or end.");
-            put("fluid_reaches_far_in_nether", "Toggle whether the fluid can travel 8 blocks or only 4 in the nether.");
-            put("fluid_speed", "Control how fast the fluid flows in the overworld or end.");
-            put("fluid_speed_in_nether", "Control how fast the fluid flows in the nether.");
+            put("fluid_reaches_far", Component.translatable("commandRule.blocks.fluidReachesFar"));
+            put("fluid_reaches_far_in_nether", Component.translatable("commandRule.blocks.fluidReachesFarInNether"));
+            put("fluid_speed", Component.translatable("commandRule.blocks.fluidSpeed"));
+            put("fluid_speed_in_nether", Component.translatable("commandRule.blocks.fluidSpeedInNether"));
         }});
         blockData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("can_place_in_overworld", "Toggle being able to place the block in the overworld.");
-            put("can_place_in_nether", "Toggle being able to place the block in the nether.");
-            put("can_place_in_end", "Toggle being able to place the block in the end.");
-            put("can_break", "Toggle being able to break the block.");
-            put("can_interact", "Toggle being able to interact with the block.");
-            put("works", "Toggle the block being able to carry out its function.");
-            put("friction_factor", "Control how much friction is applied to entities on the block.");
-            put("speed_factor", "Control how fast entities can travel on the block relative to others.");
-            put("jump_factor", "Control how high entities can jump on the block relative to others.");
-            put("can_be_filled_by_dripstone", "Toggle the block being able to be filled by dripstone.");
-            put("redstone_delay", "Control the redstone delay of the block.");
-            put("redstone_duration", "Control the redstone duration of the block.");
-            put("can_drop_xp", "Toggle the block being able to drop XP.");
-            put("can_fall", "Toggle the block being able to fall.");
-            put("can_be_trampled", "Toggle farmland being able to be trampled by the player.");
-            put("alpha_behaviour", "Toggle tnt behaving like it did in alpha.");
-            put("opening_blockable", "Toggle solid blocks or cats blocking the opening of the container.");
-            put("cooldown", "Control the cooldown of the portal.");
-            put("push_behaviour", "Control the behaviour of the block being pushed by a piston.");
-            put("ignited_by_lava", "Toggle the block being able to be ignited by lava.");
-            put("destroy_speed", "Control how fast the block is destroyed.");
-            put("requires_correct_tool_for_drops", "Toggle whether the block requires the correct tool to drop its drops.");
-            put("burn_odds", "Control the chance that the block will burn.");
-            put("ignite_odds", "Control the chance that the block will ignite.");
-            put("can_be_placed_by_command", "Toggle the block being able to be placed by the /setblock or the /fill command.");
+            put("can_place_in_overworld", Component.translatable("commandRule.blocks.canPlaceInOverworld"));
+            put("can_place_in_nether", Component.translatable("commandRule.blocks.canPlaceInNether"));
+            put("can_place_in_end", Component.translatable("commandRule.blocks.canPlaceInEnd"));
+            put("can_break", Component.translatable("commandRule.blocks.canBreak"));
+            put("can_interact", Component.translatable("commandRule.blocks.canInteract"));
+            put("works", Component.translatable("commandRule.blocks.works"));
+            put("friction_factor", Component.translatable("commandRule.blocks.frictionFactor"));
+            put("speed_factor", Component.translatable("commandRule.blocks.speedFactor"));
+            put("jump_factor", Component.translatable("commandRule.blocks.jumpFactor"));
+            put("can_be_filled_by_dripstone", Component.translatable("commandRule.blocks.canBeFilledByDripstone"));
+            put("redstone_delay", Component.translatable("commandRule.blocks.redstoneDelay"));
+            put("redstone_duration", Component.translatable("commandRule.blocks.redstoneDuration"));
+            put("can_drop_xp", Component.translatable("commandRule.blocks.canDropXp"));
+            put("can_fall", Component.translatable("commandRule.blocks.canFall"));
+            put("can_be_trampled", Component.translatable("commandRule.blocks.canBeTrampled"));
+            put("alpha_behaviour", Component.translatable("commandRule.blocks.alphaBehaviour"));
+            put("opening_blockable", Component.translatable("commandRule.blocks.openingBlockable"));
+            put("cooldown", Component.translatable("commandRule.blocks.cooldown"));
+            put("push_behaviour", Component.translatable("commandRule.blocks.pushBehaviour"));
+            put("ignited_by_lava", Component.translatable("commandRule.blocks.ignitedByLava"));
+            put("destroy_speed", Component.translatable("commandRule.blocks.destroySpeed"));
+            put("requires_correct_tool_for_drops", Component.translatable("commandRule.blocks.requiresCorrectToolForDrops"));
+            put("burn_odds", Component.translatable("commandRule.blocks.burnOdds"));
+            put("ignite_odds", Component.translatable("commandRule.blocks.igniteOdds"));
+            put("can_be_placed_by_command", Component.translatable("commandRule.blocks.canBePlacedByCommand"));
         }});
 
         itemData.put("potion", new Object2ObjectOpenHashMap<>() {{
             potionRegistry.keySet().forEach(potion ->
-                    put(lightCleanup(potion) + "_effect", "Toggle the " + cleanup(potion) + " potion effect being able to be applied to the item."));
+                    put(lightCleanup(potion) + "_effect", Component.translatable("commandRule.items.potionEffects", cleanup(potion))));
         }});
         itemData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("works", "Toggle the item being able to carry out its purpose.");
-            put("durability", "Control the durability of the item.");
-            put("burns", "Toggle the item being able to burn in fire or lava.");
-            put("can_spam", "Toggle being able to spam the bow/crossbow");
-            put("nutrition", "Control the nutrition of the item.");
-            put("saturation", "Control the saturation of the item.");
-            put("can_break_blocks_in_creative", "Toggle whether the item can be used to break blocks in creative mode.");
-            put("dispenser_interaction", "Toggle the item having a special interaction with a dispenser.");
-            put("cauldron_interaction", "Toggle the item having a special interaction with a cauldron.");
-            put("fuel_duration", "Controls how long a fuel lasts in a furnace, blast furnace, or smoker.");
-            put("can_be_given_by_command", "Toggle the item being able to be given to a player by the /give command.");
+            put("works", Component.translatable("commandRule.items.works"));
+            put("durability", Component.translatable("commandRule.items.durability"));
+            put("burns", Component.translatable("commandRule.items.burns"));
+            put("can_spam", Component.translatable("commandRule.items.canSpam"));
+            put("nutrition", Component.translatable("commandRule.items.nutrition"));
+            put("saturation", Component.translatable("commandRule.items.saturation"));
+            put("can_break_blocks_in_creative", Component.translatable("commandRule.items.canBreakBlocksInCreative"));
+            put("dispenser_interaction", Component.translatable("commandRule.items.dispenserInteraction"));
+            put("cauldron_interaction", Component.translatable("commandRule.items.cauldronInteraction"));
+            put("fuel_duration", Component.translatable("commandRule.items.fuelDuration"));
+            put("can_be_given_by_command", Component.translatable("commandRule.items.canBeGivenByCommand"));
         }});
 
         enchantmentData.put("item", new Object2ObjectOpenHashMap<>() {{
             itemRegistry.keySet().forEach(item ->
-                    put("can_enchant_" + lightCleanup(item), "Toggle the " + cleanup(item) + " item being able to be enchanted with the enchantment."));
+                    put("can_enchant_" + lightCleanup(item), Component.translatable("commandRule.enchantments.enchantItem", cleanup(item))));
         }});
         enchantmentData.put("enchantment_compatibility", new Object2ObjectOpenHashMap<>() {{
             enchantmentRegistry.keySet().forEach(enchantment1 ->
-                    put("compatible_with_" + lightCleanup(enchantment1), "Toggle the enchantment being compatible with the " + cleanup(enchantment1) + " enchantment.\nNOTE: The reverse option may also need to be set for the compatibility to be changed."));
+                    put("compatible_with_" + lightCleanup(enchantment1), Component.translatable("commandRule.enchantments.enchantmentCompatibility", cleanup(enchantment1))));
         }});
 
         commandData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("enabled", "Toggle the command being able to be used.");
+            put("enabled", Component.translatable("commandRule.commands.enabled"));
         }});
 
         advancementData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("enabled", "Toggle the advancement being able to be obtained.");
+            put("enabled", Component.translatable("commandRule.advancements.enabled"));
         }});
 
         mobCategoryData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("min_spawn_distance", "Control the minimum distance from the player that the mob can spawn.");
-            put("mobcap", "Control the maximum number of mobs per render distance of the mob category.");
+            put("mobcap", Component.translatable("commandRule.mobCategory.mobcap"));
         }});
 
         intRowMaximums.put("nutrition", 20);
