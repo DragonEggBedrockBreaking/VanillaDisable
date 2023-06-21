@@ -44,6 +44,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.LevelResource;
 import org.apache.commons.io.FileUtils;
+import uk.debb.vanilla_disable.gamerules.migration.util.GameruleMigrationDataHandler;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -950,6 +951,7 @@ public class CommandDataHandler {
                     }
                 });
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -972,7 +974,13 @@ public class CommandDataHandler {
                 while (scanner.hasNext()) {
                     try {
                         statement.execute(scanner.nextLine());
-                    } catch (SQLException ignored) {
+                    } catch (SQLException ignored) {}
+                }
+            } else {
+                GameruleMigrationDataHandler.updateSql();
+                if (!new File(PATH).exists()) {
+                    if (!new File(PATH).createNewFile()) {
+                        throw new RuntimeException("Could not create file " + PATH);
                     }
                 }
             }
@@ -1170,8 +1178,6 @@ public class CommandDataHandler {
             resultSet.close();
             return integer;
         } catch (SQLException | NullPointerException ignored) {}
-        System.out.println(table + " " + row + " " + column);
-        System.out.println(getDefault(table, row, column));
         invalidateCaches();
         return Integer.parseInt(getDefault(table, row, column));
     }
@@ -1311,6 +1317,13 @@ public class CommandDataHandler {
         if (!new File(PATH).exists()) return;
         if (!new File(PATH).delete()) {
             throw new RuntimeException("Could not delete file " + PATH);
+        }
+        try {
+            if (!new File(PATH).createNewFile()) {
+                throw new RuntimeException("Could not create file " + PATH);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         closeConnection();
         handleDatabase();

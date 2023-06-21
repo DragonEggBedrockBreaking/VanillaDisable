@@ -29,6 +29,8 @@
   },
   "mixins": [
     "vanilla_disable_gamerules.mixins.json",
+    "vanilla_disable_gamerules_migration.mixins.json",
+    "vanilla_disable_gamerules_util.mixins.json",
     "vanilla_disable_commands.mixins.json",
     "vanilla_disable_commands_util.mixins.json",
     "vanilla_disable_worldgen.mixins.json",

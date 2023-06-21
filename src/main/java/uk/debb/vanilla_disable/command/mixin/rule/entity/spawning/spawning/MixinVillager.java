@@ -5,15 +5,11 @@ import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.command.data.CommandDataHandler;
-import uk.debb.vanilla_disable.gamerules.gamerules.Gamerules;
 
 @Mixin(Villager.class)
 public abstract class MixinVillager {
     @ModifyReturnValue(method = "wantsToSpawnGolem", at = @At("RETURN"))
     private boolean wantsToSpawnGolem(boolean original) {
-        if (!Gamerules.VILLAGERS_SPAWN_GOLEMS.getBool()) {
-            return false;
-        }
         return original && CommandDataHandler.getCachedBoolean("entities", "minecraft:iron_golem", "spawned_by_villagers");
     }
 }
