@@ -967,6 +967,9 @@ public class CommandDataHandler {
 
             generateData(true, "*");
 
+            if (!new File(PATH).exists()) {
+                GameruleMigrationDataHandler.updateSql();
+            }
             if (new File(PATH).exists()) {
                 Scanner scanner = new Scanner(new File(PATH));
                 while (scanner.hasNext()) {
@@ -975,7 +978,6 @@ public class CommandDataHandler {
                     } catch (SQLException ignored) {}
                 }
             } else {
-                GameruleMigrationDataHandler.updateSql();
                 if (!new File(PATH).exists()) {
                     if (!new File(PATH).createNewFile()) {
                         throw new RuntimeException("Could not create file " + PATH);
