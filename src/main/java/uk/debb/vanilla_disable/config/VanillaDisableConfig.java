@@ -14,11 +14,11 @@ public class VanillaDisableConfig implements ModInitializer {
     private static Properties data;
     public static boolean autoMigration = true;
     public static boolean worldLoadingScreen = true;
+    public static long cache = 1_000_000_000_000L;
 
     private static void generateConfig() {
         Properties properties = new Properties();
-        properties.setProperty("auto_migration", "true");
-        properties.setProperty("world_loading_screen", "true");
+        updateProperties(properties);
 
         try {
             properties.store(new FileOutputStream(PATH), null);
@@ -37,17 +37,11 @@ public class VanillaDisableConfig implements ModInitializer {
             throw new RuntimeException(e);
         }
 
-        autoMigration = Boolean.parseBoolean(properties.getProperty("auto_migration", "true"));
-        worldLoadingScreen = Boolean.parseBoolean(properties.getProperty("world_loading_screen", "true"));
+        autoMigration = Boolean.parseBoolean(properties.getProperty("auto_migration", String.valueOf(autoMigration)));
+        worldLoadingScreen = Boolean.parseBoolean(properties.getProperty("world_loading_screen", String.valueOf(worldLoadingScreen)));
+        cache = Long.parseLong(properties.getProperty("cache", String.valueOf(cache)));
 
-        properties.setProperty("auto_migration", String.valueOf(autoMigration));
-        properties.setProperty("world_loading_screen", String.valueOf(worldLoadingScreen));
-
-        try {
-            properties.store(new FileOutputStream(PATH), null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        updateProperties(properties);
 
         data = properties;
     }
@@ -55,11 +49,17 @@ public class VanillaDisableConfig implements ModInitializer {
     public static void resetConfig() {
         autoMigration = Boolean.parseBoolean(data.getProperty("auto_migration"));
         worldLoadingScreen = Boolean.parseBoolean(data.getProperty("world_loading_screen"));
+        cache = Long.parseLong(data.getProperty("cache"));
     }
 
     public static void saveConfig() {
+        updateProperties(data);
+    }
+
+    private static void updateProperties(Properties data) {
         data.setProperty("auto_migration", String.valueOf(autoMigration));
         data.setProperty("world_loading_screen", String.valueOf(worldLoadingScreen));
+        data.setProperty("cache", String.valueOf(cache));
 
         try {
             data.store(new FileOutputStream(PATH), null);

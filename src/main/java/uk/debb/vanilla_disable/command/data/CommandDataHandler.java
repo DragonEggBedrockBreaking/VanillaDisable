@@ -41,6 +41,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.LevelResource;
 import org.apache.commons.io.FileUtils;
+import uk.debb.vanilla_disable.config.VanillaDisableConfig;
 import uk.debb.vanilla_disable.gamerules.migration.util.GameruleMigrationDataHandler;
 
 import java.io.File;
@@ -78,11 +79,7 @@ public class CommandDataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
     public static final Object2ObjectMap<String, List<String>> stringColSuggestions = new Object2ObjectOpenHashMap<>();
     public static final ObjectList<String> differentDataTypes = new ObjectArrayList<>();
-    private static final Cache<String, Boolean> booleanCache = Caffeine.newBuilder().maximumSize(1000000).build();
-    private static final Cache<String, Integer> integerCache = Caffeine.newBuilder().maximumSize(1000000).build();
-    private static final Cache<String, Double> doubleCache = Caffeine.newBuilder().maximumSize(1000000).build();
-    private static final Cache<String, String> stringCache = Caffeine.newBuilder().maximumSize(1000000).build();
-    private static final Cache<String, Ingredient> ingredientCache = Caffeine.newBuilder().maximumSize(1000000).build();
+    private static Cache<String, Object> cache = null;
     public static MinecraftServer server;
     public static boolean populationDone = false;
     public static RegistryAccess registryAccess;
@@ -979,6 +976,8 @@ public class CommandDataHandler {
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
+
+        cache = Caffeine.newBuilder().maximumSize(VanillaDisableConfig.cache).build();
     }
 
     /**
@@ -1018,17 +1017,6 @@ public class CommandDataHandler {
     }
 
     /**
-     * Clears all the memoization data.
-     */
-    private static void invalidateCaches() {
-        booleanCache.invalidateAll();
-        integerCache.invalidateAll();
-        doubleCache.invalidateAll();
-        stringCache.invalidateAll();
-        ingredientCache.invalidateAll();
-    }
-
-    /**
      * Sets a single row-column pair to a value.
      *
      * @param table    The table in which to set the value.
@@ -1038,7 +1026,7 @@ public class CommandDataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setValue(String table, String row, String column, String value, boolean isString) {
-        invalidateCaches();
+        cache.invalidateAll();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -1060,7 +1048,7 @@ public class CommandDataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setAll(String table, String column, String value, boolean isString) {
-        invalidateCaches();
+        cache.invalidateAll();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -1083,7 +1071,7 @@ public class CommandDataHandler {
      * @param pattern  The pattern to match.
      */
     public static void setMatching(String table, String column, String value, boolean isString, String pattern) {
-        invalidateCaches();
+        cache.invalidateAll();
         if (pattern.contains(";") || pattern.contains("SELECT") || pattern.contains("ALTER")) {
             throw new RuntimeException("SQL injection attempted. Command not executed.");
         }
@@ -1137,7 +1125,7 @@ public class CommandDataHandler {
             return bool;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        cache.invalidateAll();
         return Boolean.parseBoolean(getDefault(table, row, column));
     }
 
@@ -1151,7 +1139,7 @@ public class CommandDataHandler {
      */
     public static boolean getCachedBoolean(String table, String row, String column) {
         String cacheKey = table + "-" + row + "-" + column;
-        return booleanCache.get(cacheKey, key -> getBoolean(table, row, column));
+        return (boolean) cache.get(cacheKey, key -> getBoolean(table, row, column));
     }
 
     /**
@@ -1171,7 +1159,7 @@ public class CommandDataHandler {
             return integer;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        cache.invalidateAll();
         return Integer.parseInt(getDefault(table, row, column));
     }
 
@@ -1185,7 +1173,7 @@ public class CommandDataHandler {
      */
     public static int getCachedInt(String table, String row, String column) {
         String cacheKey = table + "-" + row + "-" + column;
-        return integerCache.get(cacheKey, key -> getInt(table, row, column));
+        return (int) cache.get(cacheKey, key -> getInt(table, row, column));
     }
 
     /**
@@ -1205,7 +1193,7 @@ public class CommandDataHandler {
             return dbl;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        cache.invalidateAll();
         return Double.parseDouble(getDefault(table, row, column));
     }
 
@@ -1219,7 +1207,7 @@ public class CommandDataHandler {
      */
     public static double getCachedDouble(String table, String row, String column) {
         String cacheKey = table + "-" + row + "-" + column;
-        return doubleCache.get(cacheKey, key -> getDouble(table, row, column));
+        return (double) cache.get(cacheKey, key -> getDouble(table, row, column));
     }
 
     /**
@@ -1240,7 +1228,7 @@ public class CommandDataHandler {
             return str;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        cache.invalidateAll();
         return getDefault(table, row, column);
     }
 
@@ -1254,7 +1242,7 @@ public class CommandDataHandler {
      */
     public static String getCachedString(String table, String row, String column) {
         String cacheKey = table + "-" + row + "-" + column;
-        return stringCache.get(cacheKey, key -> getString(table, row, column));
+        return (String) cache.get(cacheKey, key -> getString(table, row, column));
     }
 
     /**
@@ -1299,14 +1287,14 @@ public class CommandDataHandler {
      * @return The value.
      */
     public static Ingredient getCachedBreedingItems(String row) {
-        return ingredientCache.get(row, key -> getBreedingItems(row));
+        return (Ingredient) cache.get(row, key -> getBreedingItems(row));
     }
 
     /**
      * Reset all tables in the database by deleting the sql script and resetting the in-memory db.
      */
     public static void resetAll() {
-        invalidateCaches();
+        cache.invalidateAll();
         if (!new File(PATH).exists()) return;
         if (!new File(PATH).delete()) {
             throw new RuntimeException("Could not delete file " + PATH);
@@ -1328,7 +1316,7 @@ public class CommandDataHandler {
      * @param db The table to reset.
      */
     public static void resetOne(String db) {
-        invalidateCaches();
+        cache.invalidateAll();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())
@@ -1349,7 +1337,7 @@ public class CommandDataHandler {
      * @param cols The columns to reset.
      */
     public static void resetPartial(String db, ObjectSet<String> cols) {
-        invalidateCaches();
+        cache.invalidateAll();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())
