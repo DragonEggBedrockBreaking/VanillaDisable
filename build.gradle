@@ -33,13 +33,13 @@ dependencies {
 }
 
 base {
-	archivesName = project.archives_base_name + "-mc" + project.minecraft_version + "-" + project.mod_version
+	archivesName = archives_base_name + "-mc" + minecraft_version + "-" + mod_version
 }
 
 processResources {
-	inputs.property "version", project.mod_version
+	inputs.property "version", mod_version
 	filesMatching("fabric.mod.json") {
-		expand "version": project.mod_version
+		expand "version": mod_version
 	}
 }
 
@@ -54,6 +54,6 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${archives_base_name}"}
 	}
 }
