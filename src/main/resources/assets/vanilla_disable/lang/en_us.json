@@ -111,5 +111,10 @@
   "command.vd.successfully_set_values": "Successfully set the values to %s.",
   "command.vd.successfully_set_all_properties": "Successfully set the values of all %s properties to %s.",
   "migration.done": "You might've used this mod in the past. Most of the gamerule values should've been migrated to the new system, but some cannot be migrated, and must be manually set. Click here for a full list: ",
-  "migration.done.wiki": "[VanillaDisable Wiki]"
+  "migration.done.wiki": "[VanillaDisable Wiki]",
+  "vd.main_config": "VanillaDisable Main Config",
+  "vd.main_config.auto_migration": "Toggle automatic migration of legacy gamerules to new config system.",
+  "vd.main_config.world_loading_screen": "Toggle world loading screen for worldgen configuration.",
+  "vd.main_config.cancel": "Cancel",
+  "vd.main_config.done": "Done"
 }

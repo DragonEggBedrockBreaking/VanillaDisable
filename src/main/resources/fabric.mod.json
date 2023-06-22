@@ -23,8 +23,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
+      "uk.debb.vanilla_disable.config.VanillaDisableConfig",
       "uk.debb.vanilla_disable.gamerules.gamerules.RegisterGamerules",
       "uk.debb.vanilla_disable.VanillaDisable"
+    ],
+    "modmenu": [
+      "uk.debb.vanilla_disable.config.ModMenuSettingsApi"
     ]
   },
   "mixins": [

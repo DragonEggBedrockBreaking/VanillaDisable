@@ -14,6 +14,9 @@ repositories {
 	maven {
 		url "https://jitpack.io"
 	}
+	maven {
+		url "https://maven.terraformersmc.com/"
+	}
 }
 
 dependencies {
@@ -26,6 +29,7 @@ dependencies {
 	include(modImplementation("com.h2database:h2:${project.h2_version}"))
 	include(modImplementation("com.github.ben-manes.caffeine:caffeine:${project.caffeine_version}"))
 	include(modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}"))
+	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 base {
