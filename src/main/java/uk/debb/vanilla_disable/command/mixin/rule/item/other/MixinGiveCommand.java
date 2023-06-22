@@ -21,7 +21,7 @@ public abstract class MixinGiveCommand {
     private static void giveItem(CommandSourceStack commandSourceStack, ItemInput itemInput, Collection<ServerPlayer> collection, int i, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
         String item = CommandDataHandler.getKeyFromItemRegistry(itemInput.getItem());
         if (!CommandDataHandler.getCachedBoolean("items", item, "can_be_given_by_command")) {
-            throw new SimpleCommandExceptionType(Component.translatable("commands.give.disabled")).create();
+            throw new SimpleCommandExceptionType(Component.translatable("vd.commands.give.disabled")).create();
         }
     }
 }

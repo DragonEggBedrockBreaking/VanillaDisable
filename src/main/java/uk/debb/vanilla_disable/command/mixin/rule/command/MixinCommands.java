@@ -17,7 +17,7 @@ public abstract class MixinCommands {
     private void performCommand(ParseResults<CommandSourceStack> parseResults, String command, CallbackInfoReturnable<Integer> cir) {
         if (!CommandDataHandler.commands.containsKey("/" + command.split(" ")[0])) return;
         if (!CommandDataHandler.getCachedBoolean("commands", "/" + command.split(" ")[0], "enabled")) {
-            CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("commands.disabled.by.vd").withStyle(ChatFormatting.RED), false);
+            CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("vd.commands.disabled.by.vd").withStyle(ChatFormatting.RED), false);
             cir.setReturnValue(0);
         }
     }

@@ -637,153 +637,153 @@ public class CommandDataHandler {
             statTypeRegistry.forEach(statType -> {
                 if (statType.equals(Stats.CUSTOM)) return;
                 put(lightCleanup(Objects.requireNonNull(statTypeRegistry.getKey(statType))) + "_stat_type",
-                        Component.translatable("commandRule.entities.statTypes", cleanup(statType)));
+                        Component.translatable("vd.commandRule.entities.statTypes", cleanup(statType)));
             });
             customStatRegistry.keySet().forEach(customStat ->
-                    put(lightCleanup(customStat) + "_custom_stat", Component.translatable("commandRule.entities.customStats", cleanup(customStat))));
+                    put(lightCleanup(customStat) + "_custom_stat", Component.translatable("vd.commandRule.entities.customStats", cleanup(customStat))));
         }});
         entityData.put("damage", new Object2ObjectOpenHashMap<>() {{
             damageTypeRegistry.keySet().forEach(damageType ->
-                    put(lightCleanup(damageType) + "_damage", Component.translatable("commandRule.entities.damageTypes", cleanup(damageType))));
+                    put(lightCleanup(damageType) + "_damage", Component.translatable("vd.commandRule.entities.damageTypes", cleanup(damageType))));
         }});
         entityData.put("knockback", new Object2ObjectOpenHashMap<>() {{
             entityTypeRegistry.keySet().forEach(entityType ->
-                    put(lightCleanup(entityType) + "_knockback", Component.translatable("commandRule.entities.knockbackTypes", cleanup(entityType))));
-            put("explosion_knockback", Component.translatable("commandRule.entities.explosionKnockback"));
+                    put(lightCleanup(entityType) + "_knockback", Component.translatable("vd.commandRule.entities.knockbackTypes", cleanup(entityType))));
+            put("explosion_knockback", Component.translatable("vd.commandRule.entities.explosionKnockback"));
         }});
         entityData.put("effects", new Object2ObjectOpenHashMap<>() {{
             mobEffectRegistry.keySet().forEach(mobEffect ->
-                    put(lightCleanup(mobEffect) + "_effect", Component.translatable("commandRule.entities.mobEffect", cleanup(mobEffect))));
+                    put(lightCleanup(mobEffect) + "_effect", Component.translatable("vd.commandRule.entities.mobEffect", cleanup(mobEffect))));
         }});
         entityData.put("death", new Object2ObjectOpenHashMap<>() {{
             damageTypeRegistry.keySet().forEach(damageType ->
-                    put(lightCleanup(damageType) + "_death", Component.translatable("commandRule.entities.deathTypes", cleanup(damageType))));
+                    put(lightCleanup(damageType) + "_death", Component.translatable("vd.commandRule.entities.deathTypes", cleanup(damageType))));
         }});
         entityData.put("painting", new Object2ObjectOpenHashMap<>() {{
             paintingVariantRegistry.keySet().forEach(painting ->
-                    put(lightCleanup(painting) + "_painting", Component.translatable("commandRule.entities.paintingVariants", cleanup(painting))));
+                    put(lightCleanup(painting) + "_painting", Component.translatable("vd.commandRule.entities.paintingVariants", cleanup(painting))));
         }});
         entityData.put("biome_type", new Object2ObjectOpenHashMap<>() {{
             villagerTypeRegistry.keySet().forEach(villagerType ->
-                    put(lightCleanup(villagerType) + "_type", Component.translatable("commandRule.entities.villagerTypes", cleanup(villagerType))));
+                    put(lightCleanup(villagerType) + "_type", Component.translatable("vd.commandRule.entities.villagerTypes", cleanup(villagerType))));
         }});
         entityData.put("profession", new Object2ObjectOpenHashMap<>() {{
             villagerProfessionRegistry.keySet().forEach(villagerProfession ->
-                    put(lightCleanup(villagerProfession) + "_profession", Component.translatable("commandRule.entities.villagerProfessions", cleanup(villagerProfession))));
+                    put(lightCleanup(villagerProfession) + "_profession", Component.translatable("vd.commandRule.entities.villagerProfessions", cleanup(villagerProfession))));
         }});
         entityData.put("player", new Object2ObjectOpenHashMap<>() {{
-            put("can_be_on_fire", Component.translatable("commandRule.entities.canBeOnFire"));
-            put("can_sprint", Component.translatable("commandRule.entities.canSprint"));
-            put("can_crouch", Component.translatable("commandRule.entities.canCrouch"));
-            put("can_swim", Component.translatable("commandRule.entities.canSwim"));
-            put("can_jump", Component.translatable("commandRule.entities.canJump"));
-            put("can_be_invisible", Component.translatable("commandRule.entities.canBeInvisible"));
-            put("flying_speed", Component.translatable("commandRule.entities.flyingSpeed"));
-            put("beta_hunger", Component.translatable("commandRule.entities.betaHunger"));
+            put("can_be_on_fire", Component.translatable("vd.commandRule.entities.canBeOnFire"));
+            put("can_sprint", Component.translatable("vd.commandRule.entities.canSprint"));
+            put("can_crouch", Component.translatable("vd.commandRule.entities.canCrouch"));
+            put("can_swim", Component.translatable("vd.commandRule.entities.canSwim"));
+            put("can_jump", Component.translatable("vd.commandRule.entities.canJump"));
+            put("can_be_invisible", Component.translatable("vd.commandRule.entities.canBeInvisible"));
+            put("flying_speed", Component.translatable("vd.commandRule.entities.flyingSpeed"));
+            put("beta_hunger", Component.translatable("vd.commandRule.entities.betaHunger"));
         }});
         entityData.put("spawning", new Object2ObjectOpenHashMap<>() {{
-            put("can_despawn", Component.translatable("commandRule.entities.canDespawn"));
-            put("despawn_time", Component.translatable("commandRule.entities.despawnTime"));
-            put("can_spawn", Component.translatable("commandRule.entities.canSpawn"));
-            put("spawn_egg", Component.translatable("commandRule.entities.spawnEgg"));
-            put("spawner", Component.translatable("commandRule.entities.spawner"));
-            put("despawn_on_player_death", Component.translatable("commandRule.entities.despawnOnPlayerDeath"));
-            put("can_breed", Component.translatable("commandRule.entities.canBreed"));
-            put("spawned_by_villagers", Component.translatable("commandRule.entities.spawnedByVillagers"));
-            put("min_despawn_distance", Component.translatable("commandRule.entities.minDespawnDistance"));
-            put("instant_despawn_distance", Component.translatable("commandRule.entities.instantDespawnDistance"));
-            put("can_be_summoned", Component.translatable("commandRule.entities.canBeSummoned"));
+            put("can_despawn", Component.translatable("vd.commandRule.entities.canDespawn"));
+            put("despawn_time", Component.translatable("vd.commandRule.entities.despawnTime"));
+            put("can_spawn", Component.translatable("vd.commandRule.entities.canSpawn"));
+            put("spawn_egg", Component.translatable("vd.commandRule.entities.spawnEgg"));
+            put("spawner", Component.translatable("vd.commandRule.entities.spawner"));
+            put("despawn_on_player_death", Component.translatable("vd.commandRule.entities.despawnOnPlayerDeath"));
+            put("can_breed", Component.translatable("vd.commandRule.entities.canBreed"));
+            put("spawned_by_villagers", Component.translatable("vd.commandRule.entities.spawnedByVillagers"));
+            put("min_despawn_distance", Component.translatable("vd.commandRule.entities.minDespawnDistance"));
+            put("instant_despawn_distance", Component.translatable("vd.commandRule.entities.instantDespawnDistance"));
+            put("can_be_summoned", Component.translatable("vd.commandRule.entities.canBeSummoned"));
         }});
         entityData.put("breeding_ingredient", new Object2ObjectOpenHashMap<>() {{
             itemRegistry.keySet().forEach(item ->
-                    put("can_breed_with_" + lightCleanup(item), Component.translatable("commandRule.entities.breedingIngredient", cleanup(item))));
+                    put("can_breed_with_" + lightCleanup(item), Component.translatable("vd.commandRule.entities.breedingIngredient", cleanup(item))));
         }});
         entityData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("can_exist", Component.translatable("commandRule.entities.canExist"));
-            put("can_be_converted_to", Component.translatable("commandRule.entities.canBeConvertedTo"));
-            put("burns_in_sunlight", Component.translatable("commandRule.entities.burnsInSunlight"));
-            put("can_drop_xp", Component.translatable("commandRule.entities.canDropXp"));
-            put("ai", Component.translatable("commandRule.entities.ai"));
-            put("can_trade", Component.translatable("commandRule.entities.canTrade"));
-            put("can_infinitely_trade", Component.translatable("commandRule.entities.canInfinitelyTrade"));
-            put("daily_restocks", Component.translatable("commandRule.entities.dailyRestocks"));
-            put("can_player_interact", Component.translatable("commandRule.entities.canPlayerInteract"));
-            put("can_be_lit_by_fire_aspect", Component.translatable("commandRule.entities.canBeLitByFireAspect"));
-            put("alpha_behaviour", Component.translatable("commandRule.entities.alphaBehaviour"));
-            put("can_shoot_fireballs", Component.translatable("commandRule.entities.canShootFireballs"));
+            put("can_exist", Component.translatable("vd.commandRule.entities.canExist"));
+            put("can_be_converted_to", Component.translatable("vd.commandRule.entities.canBeConvertedTo"));
+            put("burns_in_sunlight", Component.translatable("vd.commandRule.entities.burnsInSunlight"));
+            put("can_drop_xp", Component.translatable("vd.commandRule.entities.canDropXp"));
+            put("ai", Component.translatable("vd.commandRule.entities.ai"));
+            put("can_trade", Component.translatable("vd.commandRule.entities.canTrade"));
+            put("can_infinitely_trade", Component.translatable("vd.commandRule.entities.canInfinitelyTrade"));
+            put("daily_restocks", Component.translatable("vd.commandRule.entities.dailyRestocks"));
+            put("can_player_interact", Component.translatable("vd.commandRule.entities.canPlayerInteract"));
+            put("can_be_lit_by_fire_aspect", Component.translatable("vd.commandRule.entities.canBeLitByFireAspect"));
+            put("alpha_behaviour", Component.translatable("vd.commandRule.entities.alphaBehaviour"));
+            put("can_shoot_fireballs", Component.translatable("vd.commandRule.entities.canShootFireballs"));
         }});
 
         blockData.put("fluid", new Object2ObjectOpenHashMap<>() {{
-            put("fluid_reaches_far", Component.translatable("commandRule.blocks.fluidReachesFar"));
-            put("fluid_reaches_far_in_nether", Component.translatable("commandRule.blocks.fluidReachesFarInNether"));
-            put("fluid_speed", Component.translatable("commandRule.blocks.fluidSpeed"));
-            put("fluid_speed_in_nether", Component.translatable("commandRule.blocks.fluidSpeedInNether"));
+            put("fluid_reaches_far", Component.translatable("vd.commandRule.blocks.fluidReachesFar"));
+            put("fluid_reaches_far_in_nether", Component.translatable("vd.commandRule.blocks.fluidReachesFarInNether"));
+            put("fluid_speed", Component.translatable("vd.commandRule.blocks.fluidSpeed"));
+            put("fluid_speed_in_nether", Component.translatable("vd.commandRule.blocks.fluidSpeedInNether"));
         }});
         blockData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("can_place_in_overworld", Component.translatable("commandRule.blocks.canPlaceInOverworld"));
-            put("can_place_in_nether", Component.translatable("commandRule.blocks.canPlaceInNether"));
-            put("can_place_in_end", Component.translatable("commandRule.blocks.canPlaceInEnd"));
-            put("can_break", Component.translatable("commandRule.blocks.canBreak"));
-            put("can_interact", Component.translatable("commandRule.blocks.canInteract"));
-            put("works", Component.translatable("commandRule.blocks.works"));
-            put("friction_factor", Component.translatable("commandRule.blocks.frictionFactor"));
-            put("speed_factor", Component.translatable("commandRule.blocks.speedFactor"));
-            put("jump_factor", Component.translatable("commandRule.blocks.jumpFactor"));
-            put("can_be_filled_by_dripstone", Component.translatable("commandRule.blocks.canBeFilledByDripstone"));
-            put("redstone_delay", Component.translatable("commandRule.blocks.redstoneDelay"));
-            put("redstone_duration", Component.translatable("commandRule.blocks.redstoneDuration"));
-            put("can_drop_xp", Component.translatable("commandRule.blocks.canDropXp"));
-            put("can_fall", Component.translatable("commandRule.blocks.canFall"));
-            put("can_be_trampled", Component.translatable("commandRule.blocks.canBeTrampled"));
-            put("alpha_behaviour", Component.translatable("commandRule.blocks.alphaBehaviour"));
-            put("opening_blockable", Component.translatable("commandRule.blocks.openingBlockable"));
-            put("cooldown", Component.translatable("commandRule.blocks.cooldown"));
-            put("push_behaviour", Component.translatable("commandRule.blocks.pushBehaviour"));
-            put("ignited_by_lava", Component.translatable("commandRule.blocks.ignitedByLava"));
-            put("destroy_speed", Component.translatable("commandRule.blocks.destroySpeed"));
-            put("requires_correct_tool_for_drops", Component.translatable("commandRule.blocks.requiresCorrectToolForDrops"));
-            put("burn_odds", Component.translatable("commandRule.blocks.burnOdds"));
-            put("ignite_odds", Component.translatable("commandRule.blocks.igniteOdds"));
-            put("can_be_placed_by_command", Component.translatable("commandRule.blocks.canBePlacedByCommand"));
+            put("can_place_in_overworld", Component.translatable("vd.commandRule.blocks.canPlaceInOverworld"));
+            put("can_place_in_nether", Component.translatable("vd.commandRule.blocks.canPlaceInNether"));
+            put("can_place_in_end", Component.translatable("vd.commandRule.blocks.canPlaceInEnd"));
+            put("can_break", Component.translatable("vd.commandRule.blocks.canBreak"));
+            put("can_interact", Component.translatable("vd.commandRule.blocks.canInteract"));
+            put("works", Component.translatable("vd.commandRule.blocks.works"));
+            put("friction_factor", Component.translatable("vd.commandRule.blocks.frictionFactor"));
+            put("speed_factor", Component.translatable("vd.commandRule.blocks.speedFactor"));
+            put("jump_factor", Component.translatable("vd.commandRule.blocks.jumpFactor"));
+            put("can_be_filled_by_dripstone", Component.translatable("vd.commandRule.blocks.canBeFilledByDripstone"));
+            put("redstone_delay", Component.translatable("vd.commandRule.blocks.redstoneDelay"));
+            put("redstone_duration", Component.translatable("vd.commandRule.blocks.redstoneDuration"));
+            put("can_drop_xp", Component.translatable("vd.commandRule.blocks.canDropXp"));
+            put("can_fall", Component.translatable("vd.commandRule.blocks.canFall"));
+            put("can_be_trampled", Component.translatable("vd.commandRule.blocks.canBeTrampled"));
+            put("alpha_behaviour", Component.translatable("vd.commandRule.blocks.alphaBehaviour"));
+            put("opening_blockable", Component.translatable("vd.commandRule.blocks.openingBlockable"));
+            put("cooldown", Component.translatable("vd.commandRule.blocks.cooldown"));
+            put("push_behaviour", Component.translatable("vd.commandRule.blocks.pushBehaviour"));
+            put("ignited_by_lava", Component.translatable("vd.commandRule.blocks.ignitedByLava"));
+            put("destroy_speed", Component.translatable("vd.commandRule.blocks.destroySpeed"));
+            put("requires_correct_tool_for_drops", Component.translatable("vd.commandRule.blocks.requiresCorrectToolForDrops"));
+            put("burn_odds", Component.translatable("vd.commandRule.blocks.burnOdds"));
+            put("ignite_odds", Component.translatable("vd.commandRule.blocks.igniteOdds"));
+            put("can_be_placed_by_command", Component.translatable("vd.commandRule.blocks.canBePlacedByCommand"));
         }});
 
         itemData.put("potion", new Object2ObjectOpenHashMap<>() {{
             potionRegistry.keySet().forEach(potion ->
-                    put(lightCleanup(potion) + "_effect", Component.translatable("commandRule.items.potionEffects", cleanup(potion))));
+                    put(lightCleanup(potion) + "_effect", Component.translatable("vd.commandRule.items.potionEffects", cleanup(potion))));
         }});
         itemData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("works", Component.translatable("commandRule.items.works"));
-            put("durability", Component.translatable("commandRule.items.durability"));
-            put("burns", Component.translatable("commandRule.items.burns"));
-            put("can_spam", Component.translatable("commandRule.items.canSpam"));
-            put("nutrition", Component.translatable("commandRule.items.nutrition"));
-            put("saturation", Component.translatable("commandRule.items.saturation"));
-            put("can_break_blocks_in_creative", Component.translatable("commandRule.items.canBreakBlocksInCreative"));
-            put("dispenser_interaction", Component.translatable("commandRule.items.dispenserInteraction"));
-            put("cauldron_interaction", Component.translatable("commandRule.items.cauldronInteraction"));
-            put("fuel_duration", Component.translatable("commandRule.items.fuelDuration"));
-            put("can_be_given_by_command", Component.translatable("commandRule.items.canBeGivenByCommand"));
+            put("works", Component.translatable("vd.commandRule.items.works"));
+            put("durability", Component.translatable("vd.commandRule.items.durability"));
+            put("burns", Component.translatable("vd.commandRule.items.burns"));
+            put("can_spam", Component.translatable("vd.commandRule.items.canSpam"));
+            put("nutrition", Component.translatable("vd.commandRule.items.nutrition"));
+            put("saturation", Component.translatable("vd.commandRule.items.saturation"));
+            put("can_break_blocks_in_creative", Component.translatable("vd.commandRule.items.canBreakBlocksInCreative"));
+            put("dispenser_interaction", Component.translatable("vd.commandRule.items.dispenserInteraction"));
+            put("cauldron_interaction", Component.translatable("vd.commandRule.items.cauldronInteraction"));
+            put("fuel_duration", Component.translatable("vd.commandRule.items.fuelDuration"));
+            put("can_be_given_by_command", Component.translatable("vd.commandRule.items.canBeGivenByCommand"));
         }});
 
         enchantmentData.put("item", new Object2ObjectOpenHashMap<>() {{
             itemRegistry.keySet().forEach(item ->
-                    put("can_enchant_" + lightCleanup(item), Component.translatable("commandRule.enchantments.enchantItem", cleanup(item))));
+                    put("can_enchant_" + lightCleanup(item), Component.translatable("vd.commandRule.enchantments.enchantItem", cleanup(item))));
         }});
         enchantmentData.put("enchantment_compatibility", new Object2ObjectOpenHashMap<>() {{
             enchantmentRegistry.keySet().forEach(enchantment1 ->
-                    put("compatible_with_" + lightCleanup(enchantment1), Component.translatable("commandRule.enchantments.enchantmentCompatibility", cleanup(enchantment1))));
+                    put("compatible_with_" + lightCleanup(enchantment1), Component.translatable("vd.commandRule.enchantments.enchantmentCompatibility", cleanup(enchantment1))));
         }});
 
         commandData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("enabled", Component.translatable("commandRule.commands.enabled"));
+            put("enabled", Component.translatable("vd.commandRule.commands.enabled"));
         }});
 
         advancementData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("enabled", Component.translatable("commandRule.advancements.enabled"));
+            put("enabled", Component.translatable("vd.commandRule.advancements.enabled"));
         }});
 
         mobCategoryData.put("other", new Object2ObjectOpenHashMap<>() {{
-            put("mobcap", Component.translatable("commandRule.mobCategory.mobcap"));
+            put("mobcap", Component.translatable("vd.commandRule.mobCategory.mobcap"));
         }});
 
         intRowMaximums.put("nutrition", 20);

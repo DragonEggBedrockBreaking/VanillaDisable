@@ -16,7 +16,7 @@ public abstract class MixinPlayerAdvancements {
     private void award(Advancement advancement, String string, CallbackInfoReturnable<Boolean> cir) {
         String adv = advancement.getId().toString();
         if (!adv.contains("recipe") && !CommandDataHandler.getCachedBoolean("advancements", adv, "enabled")) {
-            CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("advancements.disabled.by.vd").withStyle(ChatFormatting.RED), false);
+            CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("vd.advancements.disabled.by.vd").withStyle(ChatFormatting.RED), false);
             cir.setReturnValue(false);
         }
     }

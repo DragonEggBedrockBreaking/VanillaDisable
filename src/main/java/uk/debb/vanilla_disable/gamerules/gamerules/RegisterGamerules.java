@@ -12,8 +12,8 @@ import net.minecraft.world.level.GameRules;
 
 public class RegisterGamerules implements ModInitializer {
     public static final CustomGameRuleCategory VANILLA_DISABLE = new CustomGameRuleCategory(
-            new ResourceLocation("gamerule.category.vanilla_disable"),
-            Component.translatable("gamerule.category.vanilla_disable")
+            new ResourceLocation("vd.gamerule.category.vanilla_disable"),
+            Component.translatable("vd.gamerule.category.vanilla_disable")
                     .withStyle(ChatFormatting.BOLD)
                     .withStyle(ChatFormatting.DARK_GREEN)
     );

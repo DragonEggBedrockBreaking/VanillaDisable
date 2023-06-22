@@ -23,10 +23,10 @@ public abstract class MixinPlayerList {
         if (CommandDataHandler.migrated) {
             CommandDataHandler.migrated = false;
             this.broadcastSystemMessage(
-                    Component.translatable("migration.done")
+                    Component.translatable("vd.migration.done")
                             .withStyle(ChatFormatting.GOLD)
                             .append(
-                                    Component.translatable("migration.done.wiki")
+                                    Component.translatable("vd.migration.done.wiki")
                                             .withStyle(ChatFormatting.GOLD)
                                             .withStyle(ChatFormatting.UNDERLINE)
                                             .withStyle(Style.EMPTY.withClickEvent(

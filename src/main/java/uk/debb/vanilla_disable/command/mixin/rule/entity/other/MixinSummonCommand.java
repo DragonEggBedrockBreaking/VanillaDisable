@@ -22,7 +22,7 @@ public abstract class MixinSummonCommand {
     private static void createEntity(CommandSourceStack commandSourceStack, Holder.Reference<EntityType<?>> reference, Vec3 vec3, CompoundTag compoundTag, boolean bl, CallbackInfoReturnable<Entity> cir) throws CommandSyntaxException {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(reference.value());
         if (!CommandDataHandler.getCachedBoolean("entities", entity, "can_be_summoned")) {
-            throw new SimpleCommandExceptionType(Component.translatable("commands.summon.disabled")).create();
+            throw new SimpleCommandExceptionType(Component.translatable("vd.commands.summon.disabled")).create();
         }
     }
 }
