@@ -135,12 +135,9 @@ public class CommandDataHandler {
     }
 
     /**
-     * Populates the data maps with the data dynamically pulled from registries, and custom data.
-     * This includes names of columns corresponding to data type, default value for each row, and descriptions.
+     * Populates the data for all registries.
      */
-    public static void populate() {
-        undeadMobs = ObjectList.of(EntityType.SKELETON_HORSE, EntityType.ZOMBIE_HORSE, EntityType.SKELETON, EntityType.PHANTOM, EntityType.WITHER, EntityType.ZOGLIN, EntityType.ZOMBIE);
-
+    public static void populateRegistries() {
         registryAccess = server.registryAccess();
         blockRegistry = registryAccess.registryOrThrow(Registries.BLOCK);
         itemRegistry = registryAccess.registryOrThrow(Registries.ITEM);
@@ -155,6 +152,14 @@ public class CommandDataHandler {
         mobEffectRegistry = registryAccess.registryOrThrow(Registries.MOB_EFFECT);
         statTypeRegistry = registryAccess.registryOrThrow(Registries.STAT_TYPE);
         customStatRegistry = registryAccess.registryOrThrow(Registries.CUSTOM_STAT);
+    }
+
+    /**
+     * Populates the data maps with the data dynamically pulled from registries, and custom data.
+     * This includes names of columns corresponding to data type, default value for each row, and descriptions.
+     */
+    public static void populate() {
+        undeadMobs = ObjectList.of(EntityType.SKELETON_HORSE, EntityType.ZOMBIE_HORSE, EntityType.SKELETON, EntityType.PHANTOM, EntityType.WITHER, EntityType.ZOGLIN, EntityType.ZOMBIE);
 
         cols.put("entities", new Object2ObjectOpenHashMap<>() {{
             put("can_be_on_fire", BOOLEAN);

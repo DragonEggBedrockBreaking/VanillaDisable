@@ -12,6 +12,7 @@ public class MixinMinecraftServer {
     @Inject(method = "createLevels", at = @At("RETURN"))
     private void afterLevelCreation(CallbackInfo ci) {
         CommandDataHandler.server = (MinecraftServer) (Object) this;
+        CommandDataHandler.populateRegistries();
         if (!CommandDataHandler.populationDone) {
             CommandDataHandler.populate();
         }
