@@ -8,5 +8,9 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "MixinCreateWorldScreen",
+    "MixinMinecraft"
+  ]
 }

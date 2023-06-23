@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.worldgen.data.WorldgenDataHandler;
 
+import java.util.concurrent.TimeUnit;
+
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
     @Inject(
@@ -16,8 +18,19 @@ public abstract class MixinMinecraftServer {
                     target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"
             )
     )
-    private void beforeServerSetup(CallbackInfo ci) {
+    private void initServer(CallbackInfo ci) {
         WorldgenDataHandler.server = (MinecraftServer) (Object) this;
         WorldgenDataHandler.init();
+    }
+
+    @Inject(method = "createLevels", at = @At("HEAD"))
+    private void createLevels(CallbackInfo ci) {
+        while (!WorldgenDataHandler.continueGeneration) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

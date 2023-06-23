@@ -101,6 +101,7 @@ public class CommandDataHandler {
     private static Registry<BlockEntityType<?>> blockEntityRegistry;
     private static Registry<ResourceLocation> customStatRegistry;
     public static boolean migrated = false;
+    public static boolean shouldMigrate = true;
 
     /**
      * Cleans up data for display (removes underscores, 'namespace:' prefixes, 'group/' prefixes)
@@ -953,8 +954,7 @@ public class CommandDataHandler {
 
             generateData(true, "*");
 
-            migrated = true;
-            if (!new File(PATH).exists()) {
+            if (!new File(PATH).exists() && shouldMigrate && VanillaDisableConfig.autoMigration) {
                 GameruleMigrationDataHandler.updateSql();
                 migrated = true;
             }

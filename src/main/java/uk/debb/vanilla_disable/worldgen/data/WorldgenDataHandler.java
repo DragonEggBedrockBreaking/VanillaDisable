@@ -14,6 +14,7 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.storage.LevelResource;
+import uk.debb.vanilla_disable.config.VanillaDisableConfig;
 import uk.debb.vanilla_disable.gamerules.migration.util.GameruleMigrationDataHandler;
 
 import java.io.File;
@@ -29,8 +30,11 @@ public class WorldgenDataHandler {
     public static Registry<Structure> structureRegistry;
     public static Registry<PlacedFeature> placedFeatureRegistry;
     public static Registry<Biome> biomeRegistry;
-    private static Toml toml;
-    private static File PATH;
+    public static Toml toml;
+    public static File PATH;
+    public static File DIRECTORY;
+    public static boolean continueGeneration = true;
+    public static boolean shouldMigrate = true;
 
     private record Tables(Map<String, Object> structures, Map<String, Object> placedFeatures, Map<String, Object> biomes) { }
 
@@ -78,6 +82,7 @@ public class WorldgenDataHandler {
         biomeRegistry = server.registryAccess().registryOrThrow(Registries.BIOME);
 
         PATH = new File(server.getWorldPath(LevelResource.ROOT) + "/vanilla_disable_worldgen.toml");
+        DIRECTORY = server.getWorldPath(LevelResource.ROOT).toFile();
         boolean first = !PATH.exists();
 
         try {
@@ -124,7 +129,7 @@ public class WorldgenDataHandler {
 
         toml = new Toml().read(PATH);
 
-        if (first) {
+        if (first && shouldMigrate && VanillaDisableConfig.autoMigration) {
             GameruleMigrationDataHandler.updateToml();
         }
     }

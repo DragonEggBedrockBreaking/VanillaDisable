@@ -1,5 +1,6 @@
 package uk.debb.vanilla_disable.config;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
@@ -12,7 +13,7 @@ public class VanillaDisableConfigScreen extends Screen {
     private final Screen lastScreen;
 
     public VanillaDisableConfigScreen(Screen screen) {
-        super(Component.translatable("vd.main_config"));
+        super(Component.translatable("vd.main_config").withStyle(ChatFormatting.BOLD));
         this.lastScreen = screen;
     }
 
@@ -68,6 +69,7 @@ public class VanillaDisableConfigScreen extends Screen {
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(g);
         super.render(g, mouseX, mouseY, partialTick);
+        g.drawCenteredString(this.font, this.title, width / 2, 36, 16777215);
     }
 
     @Override
