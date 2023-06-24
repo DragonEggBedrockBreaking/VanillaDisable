@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.util.gamerule.other;
+package uk.debb.vanilla_disable.mixin.util.gamerule;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;

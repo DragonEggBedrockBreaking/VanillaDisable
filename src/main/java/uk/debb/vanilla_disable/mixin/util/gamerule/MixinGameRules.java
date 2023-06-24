@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin.util.gamerule.migration;
+package uk.debb.vanilla_disable.mixin.util.gamerule;
 
 import com.mojang.serialization.DynamicLike;
 import net.minecraft.world.level.GameRules;
