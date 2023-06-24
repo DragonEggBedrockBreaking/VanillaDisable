@@ -21,6 +21,8 @@ public class MixinMinecraftServer {
 
     @Inject(method = "stopServer", at = @At("TAIL"))
     private void afterServerShutdown(CallbackInfo ci) {
+        CommandDataHandler.migrated = false;
+        CommandDataHandler.shouldMigrate = true;
         CommandDataHandler.closeConnection();
     }
 }
