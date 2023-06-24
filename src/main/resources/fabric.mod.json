@@ -23,22 +23,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "uk.debb.vanilla_disable.config.VanillaDisableConfig",
-      "uk.debb.vanilla_disable.gamerules.gamerules.RegisterGamerules",
-      "uk.debb.vanilla_disable.VanillaDisable"
+      "uk.debb.vanilla_disable.config.global.VanillaDisableConfig",
+      "uk.debb.vanilla_disable.data.gamerule.RegisterGamerules",
+      "uk.debb.vanilla_disable.LangFileManager"
     ],
     "modmenu": [
-      "uk.debb.vanilla_disable.config.ModMenuSettingsApi"
+      "uk.debb.vanilla_disable.config.global.ModMenuSettingsApi"
     ]
   },
   "mixins": [
-    "vanilla_disable_gamerules.mixins.json",
-    "vanilla_disable_gamerules_migration.mixins.json",
-    "vanilla_disable_gamerules_util.mixins.json",
-    "vanilla_disable_commands.mixins.json",
-    "vanilla_disable_commands_util.mixins.json",
-    "vanilla_disable_worldgen.mixins.json",
-    "vanilla_disable_worldgen_util.mixins.json"
+    "vanilla_disable.mixins.json"
   ],
   "accessWidener": "vanilla_disable.aw",
   "depends": {
