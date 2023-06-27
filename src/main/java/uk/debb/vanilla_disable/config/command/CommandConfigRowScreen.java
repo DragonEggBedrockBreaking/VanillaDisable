@@ -78,15 +78,15 @@ public class CommandConfigRowScreen extends BaseOwoScreen<FlowLayout> {
             entries.child(entry);
         });
 
-        rootComponent.child(Containers.verticalScroll(Sizing.fill(65), Sizing.fill(75),
+        rootComponent.child(Containers.verticalScroll(Sizing.fill(60), Sizing.fill(75),
                         entries.horizontalAlignment(HorizontalAlignment.RIGHT).margins(Insets.top(10)))
                 .scrollbar(ScrollContainer.Scrollbar.flat(Color.ofArgb(0xA0FFFFFF))));
 
-        TextBoxComponent textBoxComponent = Components.textBox(Sizing.fill(65));
+        TextBoxComponent textBoxComponent = Components.textBox(Sizing.fill(60));
         textBoxComponent.setValue(this.searchTerm);
         rootComponent.child(textBoxComponent.margins(Insets.top(10)));
 
-        GridLayout gridLayout = Containers.grid(Sizing.fill(65), Sizing.content(), 1, 2);
+        GridLayout gridLayout = Containers.grid(Sizing.fill(60), Sizing.content(), 1, 2);
         gridLayout.child(Components.button(Component.translatable("vd.command.search.search"), (button ->
                 Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(data, subData, this.lastScreen, table, textBoxComponent.getValue())))
         ).horizontalSizing(Sizing.fill(50)), 0, 0);

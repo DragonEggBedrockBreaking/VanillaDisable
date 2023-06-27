@@ -142,14 +142,14 @@ public class CommandConfigColumnScreen extends BaseOwoScreen<FlowLayout> {
                 overall.child(Containers.collapsible(Sizing.fill(100), Sizing.content(), Component.literal(group).withStyle(ChatFormatting.GREEN), true).child(entries));
             }
         });
-        rootComponent.child(Containers.verticalScroll(Sizing.fill(55), Sizing.fill(75), overall)
+        rootComponent.child(Containers.verticalScroll(Sizing.fill(60), Sizing.fill(75), overall)
                 .scrollbar(ScrollContainer.Scrollbar.flat(Color.ofArgb(0xA0FFFFFF))));
 
-        TextBoxComponent textBoxComponent = Components.textBox(Sizing.fill(55));
+        TextBoxComponent textBoxComponent = Components.textBox(Sizing.fill(60));
         textBoxComponent.setValue(this.searchTerm);
         rootComponent.child(textBoxComponent.margins(Insets.top(10)));
 
-        GridLayout gridLayout = Containers.grid(Sizing.fill(55), Sizing.content(), 1, 2);
+        GridLayout gridLayout = Containers.grid(Sizing.fill(60), Sizing.content(), 1, 2);
         gridLayout.child(Components.button(Component.translatable("vd.command.search.search"), (button ->
                 Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigColumnScreen(this.row, this.data, this.lastScreen, this.table, textBoxComponent.getValue())))
         ).horizontalSizing(Sizing.fill(50)), 0, 0);
