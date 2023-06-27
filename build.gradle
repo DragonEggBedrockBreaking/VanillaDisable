@@ -17,6 +17,9 @@ repositories {
 	maven {
 		url "https://maven.terraformersmc.com/"
 	}
+	maven {
+		url 'https://maven.wispforest.io'
+	}
 }
 
 dependencies {
@@ -24,12 +27,15 @@ dependencies {
 	mappings loom.officialMojangMappings()
 	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 	include(modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version)))
+	include(modImplementation(fabricApi.module("fabric-key-binding-api-v1", project.fabric_version)))
 	include(modImplementation("net.caffeinemc:mixin-config:${project.caffeine_config_version}"))
+	include(modImplementation("com.github.Fallen-Breath:conditional-mixin:${project.conditional_mixin_version}"))
 	include(modImplementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixin_extras_version}")))
 	include(modImplementation("com.h2database:h2:${project.h2_version}"))
 	include(modImplementation("com.github.ben-manes.caffeine:caffeine:${project.caffeine_version}"))
 	include(modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}"))
 	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+	modImplementation("io.wispforest:owo-lib:${project.owo_version}")
 }
 
 base {

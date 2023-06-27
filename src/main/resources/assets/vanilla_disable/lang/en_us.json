@@ -123,5 +123,19 @@
   "vd.worldgen_config.done": "Done",
   "vd.worldgen_config.description.1": "Please configure any world generation settings by editing the config file.",
   "vd.worldgen_config.description.2": "This must be done now, before the world is created.",
-  "vd.worldgen_config.description.3": "To disable this screen, edit VanillaDisable's mod config via ModMenu."
+  "vd.worldgen_config.description.3": "To disable this screen, edit VanillaDisable's mod config via ModMenu.",
+  "vd.command_config.base": "VanillaDisable Command Config",
+  "vd.command_config.base.entities": "Entities",
+  "vd.command_config.base.blocks": "Blocks",
+  "vd.command_config.base.items": "Items",
+  "vd.command_config.base.enchantments": "Enchantments",
+  "vd.command_config.base.commands": "Commands",
+  "vd.command_config.base.advancements": "Advancements",
+  "vd.command_config.base.mob_categories": "Mob Categories",
+  "vd.command.search.search": "Search",
+  "vd.command.search.clear": "Clear",
+  "vd.key.open_command_config": "Open Command Config",
+  "vd.key.category": "VanillaDisable",
+  "vd.key.cannot_press": "You can only use the configuration GUI in singleplayer.",
+  "vd.key.cannot_open_gui": "You need to install the 'owo lib' mod for the GUI to work."
 }

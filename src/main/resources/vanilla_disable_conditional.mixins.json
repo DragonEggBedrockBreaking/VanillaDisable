@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "plugin": "uk.debb.vanilla_disable.mixin_plugin.ConditionalMixinMixinPlugin",
+  "package": "uk.debb.vanilla_disable.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "util.command.MixinKeyboardHandlerWithOwo",
+    "util.command.MixinKeyboardHandlerWithoutOwo"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

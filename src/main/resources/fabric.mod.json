@@ -29,10 +29,14 @@
     ],
     "modmenu": [
       "uk.debb.vanilla_disable.config.global.ModMenuSettingsApi"
+    ],
+    "client": [
+      "uk.debb.vanilla_disable.config.command.CommandConfigHotkeyManager"
     ]
   },
   "mixins": [
-    "vanilla_disable.mixins.json"
+    "vanilla_disable.mixins.json",
+    "vanilla_disable_conditional.mixins.json"
   ],
   "accessWidener": "vanilla_disable.aw",
   "depends": {
@@ -40,5 +44,8 @@
     "fabric-game-rule-api-v1": ">=1.0.38",
     "minecraft": "1.20.*",
     "java": ">=17"
+  },
+  "suggests": {
+    "owo": "*"
   }
 }
