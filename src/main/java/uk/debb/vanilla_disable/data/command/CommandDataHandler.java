@@ -1031,7 +1031,8 @@ public class CommandDataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setValue(String table, String row, String column, String value, boolean isString) {
-        cache.invalidateAll();
+        if (table.equals("") || row.equals("") || column.equals("") || value.equals("")) return;
+        invalidateCaches();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -1053,7 +1054,8 @@ public class CommandDataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setAll(String table, String column, String value, boolean isString) {
-        cache.invalidateAll();
+        if (table.equals("") || column.equals("") || value.equals("")) return;
+        invalidateCaches();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -1076,7 +1078,8 @@ public class CommandDataHandler {
      * @param pattern  The pattern to match.
      */
     public static void setMatching(String table, String column, String value, boolean isString, String pattern) {
-        cache.invalidateAll();
+        if (table.equals("") || column.equals("") || value.equals("") || pattern.equals("")) return;
+        invalidateCaches();
         if (pattern.contains(";") || pattern.contains("SELECT") || pattern.contains("ALTER")) {
             throw new RuntimeException("SQL injection attempted. Command not executed.");
         }
@@ -1130,7 +1133,7 @@ public class CommandDataHandler {
             return bool;
         } catch (SQLException | NullPointerException ignored) {
         }
-        cache.invalidateAll();
+        invalidateCaches();
         return Boolean.parseBoolean(getDefault(table, row, column));
     }
 
@@ -1164,7 +1167,7 @@ public class CommandDataHandler {
             return integer;
         } catch (SQLException | NullPointerException ignored) {
         }
-        cache.invalidateAll();
+        invalidateCaches();
         return Integer.parseInt(getDefault(table, row, column));
     }
 
@@ -1198,7 +1201,7 @@ public class CommandDataHandler {
             return dbl;
         } catch (SQLException | NullPointerException ignored) {
         }
-        cache.invalidateAll();
+        invalidateCaches();
         return Double.parseDouble(getDefault(table, row, column));
     }
 
@@ -1233,7 +1236,7 @@ public class CommandDataHandler {
             return str;
         } catch (SQLException | NullPointerException ignored) {
         }
-        cache.invalidateAll();
+        invalidateCaches();
         return getDefault(table, row, column);
     }
 
@@ -1299,7 +1302,7 @@ public class CommandDataHandler {
      * Reset all tables in the database by deleting the sql script and resetting the in-memory db.
      */
     public static void resetAll() {
-        cache.invalidateAll();
+        invalidateCaches();
         if (!new File(PATH).exists()) return;
         if (!new File(PATH).delete()) {
             throw new RuntimeException("Could not delete file " + PATH);
@@ -1321,7 +1324,7 @@ public class CommandDataHandler {
      * @param db The table to reset.
      */
     public static void resetOne(String db) {
-        cache.invalidateAll();
+        invalidateCaches();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())
@@ -1342,7 +1345,7 @@ public class CommandDataHandler {
      * @param cols The columns to reset.
      */
     public static void resetPartial(String db, ObjectSet<String> cols) {
-        cache.invalidateAll();
+        invalidateCaches();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())
@@ -1358,6 +1361,15 @@ public class CommandDataHandler {
             generateData(false, db);
         } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Invalidate caches if they aren't null.
+     */
+    private static void invalidateCaches() {
+        if (cache != null) {
+            cache.invalidateAll();
         }
     }
 }
