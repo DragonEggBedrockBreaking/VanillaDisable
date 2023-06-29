@@ -50,17 +50,19 @@ public class VanillaDisableConfigScreen extends Screen {
                 new Button(
                         this.width / 4 * 3, this.height / 5 * 4 - 12, 100, 20,
                         Component.translatable("vd.main_config.done"), (button) -> {
-                            VanillaDisableConfig.saveConfig();
-                            this.onClose();
-                            }, null
-                ) {}
+                    VanillaDisableConfig.saveConfig();
+                    this.onClose();
+                }, null
+                ) {
+                }
         );
         this.addRenderableWidget(
                 new Button(
                         this.width / 4 * 3, this.height / 5 * 4 + 12, 100, 20,
                         Component.translatable("vd.main_config.cancel"), (button) -> this.onClose(),
                         null
-                ) {}
+                ) {
+                }
         );
         super.init();
     }

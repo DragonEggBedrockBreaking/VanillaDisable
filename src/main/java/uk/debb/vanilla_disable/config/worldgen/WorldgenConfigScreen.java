@@ -26,21 +26,24 @@ public class WorldgenConfigScreen extends Screen {
                         width / 2 - 240, height / 8 * 5, 150, 20,
                         Component.translatable("vd.worldgen_config.open_directory"),
                         (button) -> Util.getPlatform().openUri(WorldgenDataHandler.DIRECTORY.toURI()), null
-                ) {}
+                ) {
+                }
         );
         this.addRenderableWidget(
                 new Button(
                         width / 2 - 80, height / 8 * 5, 150, 20,
                         Component.translatable("vd.worldgen_config.open_file"),
                         (button) -> Util.getPlatform().openFile(WorldgenDataHandler.PATH), null
-                ) {}
+                ) {
+                }
         );
         this.addRenderableWidget(
                 new Button(
                         width / 2 + 80, height / 8 * 5, 150, 20,
                         Component.translatable("vd.worldgen_config.done"),
                         (button) -> this.onClose(), null
-                ) {}
+                ) {
+                }
         );
         super.init();
     }

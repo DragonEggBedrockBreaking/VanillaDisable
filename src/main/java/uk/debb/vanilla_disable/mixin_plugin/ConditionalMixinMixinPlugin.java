@@ -12,7 +12,8 @@ public class ConditionalMixinMixinPlugin extends RestrictiveMixinConfigPlugin {
     }
 
     @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {}
+    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
+    }
 
     @Override
     public List<String> getMixins() {

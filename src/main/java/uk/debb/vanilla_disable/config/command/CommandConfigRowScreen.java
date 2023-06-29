@@ -73,7 +73,7 @@ public class CommandConfigRowScreen extends BaseOwoScreen<FlowLayout> {
             GridLayout entry = Containers.grid(Sizing.fill(100), Sizing.content(), 1, 2);
             entry.child(Components.label(Component.literal(row)), 0, 0);
             entry.child(Components.button(Component.literal("Edit"), (button ->
-                    Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigColumnScreen(row, relevantData, this, table))))
+                            Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigColumnScreen(row, relevantData, this, table))))
                     .horizontalSizing(Sizing.fixed(60)).verticalSizing(Sizing.fixed(25)).margins(Insets.left((int) (this.width * 0.3 - 65))), 0, 1);
             entries.child(entry);
         });

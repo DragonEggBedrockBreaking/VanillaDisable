@@ -5,7 +5,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 
 import java.util.concurrent.TimeUnit;

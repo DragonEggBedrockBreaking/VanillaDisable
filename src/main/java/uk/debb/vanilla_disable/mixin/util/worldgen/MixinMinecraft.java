@@ -13,14 +13,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 import uk.debb.vanilla_disable.config.worldgen.WorldgenConfigScreen;
+import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 
 import java.time.Instant;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
-    @Shadow public abstract void setScreen(@Nullable Screen screen);
+    @Shadow
+    public abstract void setScreen(@Nullable Screen screen);
 
     @Inject(
             method = "doWorldLoad",

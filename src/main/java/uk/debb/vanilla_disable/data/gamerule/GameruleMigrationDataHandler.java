@@ -1095,8 +1095,8 @@ public class GameruleMigrationDataHandler {
         public final String table;
         public final String pattern;
         public final String column;
-        public String value;
         public final String defaultValue;
+        public String value;
 
         public SqlDataHolder(String rule, String table, String pattern, String column, String defaultValue) {
             this.rule = rule;

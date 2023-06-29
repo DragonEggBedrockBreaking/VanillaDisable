@@ -36,8 +36,6 @@ public class WorldgenDataHandler {
     public static boolean continueGeneration = true;
     public static boolean shouldMigrate = true;
 
-    private record Tables(Map<String, Object> structures, Map<String, Object> placedFeatures, Map<String, Object> biomes) { }
-
     /**
      * Removes the "minecraft:" prefix from a string.
      *
@@ -136,6 +134,7 @@ public class WorldgenDataHandler {
 
     /**
      * Gets the tables from the toml file.
+     *
      * @return The tables.
      */
     @SuppressWarnings("unchecked")
@@ -210,5 +209,9 @@ public class WorldgenDataHandler {
         write(data.structures(), data.placedFeatures(), data.biomes());
 
         toml = new Toml().read(PATH);
+    }
+
+    private record Tables(Map<String, Object> structures, Map<String, Object> placedFeatures,
+                          Map<String, Object> biomes) {
     }
 }

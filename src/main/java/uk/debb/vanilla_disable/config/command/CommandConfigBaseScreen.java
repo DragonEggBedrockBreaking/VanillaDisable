@@ -27,31 +27,31 @@ public class CommandConfigBaseScreen extends BaseOwoScreen<FlowLayout> {
                 .margins(Insets.of(7)));
 
         rootComponent.child(Components.button(Component.translatable("vd.command_config.base.entities"),
-                (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.entities, CommandDataHandler.entityData, this, "entities"))))
+                        (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.entities, CommandDataHandler.entityData, this, "entities"))))
                 .margins(Insets.of(3)).horizontalSizing(Sizing.fixed(120)).verticalSizing(Sizing.fixed(20)));
 
         rootComponent.child(Components.button(Component.translatable("vd.command_config.base.blocks"),
-                (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.blocks, CommandDataHandler.blockData, this, "blocks"))))
+                        (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.blocks, CommandDataHandler.blockData, this, "blocks"))))
                 .margins(Insets.of(3)).horizontalSizing(Sizing.fixed(120)).verticalSizing(Sizing.fixed(20)));
 
         rootComponent.child(Components.button(Component.translatable("vd.command_config.base.items"),
-                (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.items, CommandDataHandler.itemData, this, "items"))))
+                        (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.items, CommandDataHandler.itemData, this, "items"))))
                 .margins(Insets.of(3)).horizontalSizing(Sizing.fixed(120)).verticalSizing(Sizing.fixed(20)));
 
         rootComponent.child(Components.button(Component.translatable("vd.command_config.base.enchantments"),
-                (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, this, "enchantments"))))
+                        (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, this, "enchantments"))))
                 .margins(Insets.of(3)).horizontalSizing(Sizing.fixed(120)).verticalSizing(Sizing.fixed(20)));
 
         rootComponent.child(Components.button(Component.translatable("vd.command_config.base.commands"),
-                (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.commands, CommandDataHandler.commandData, this, "commands"))))
+                        (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.commands, CommandDataHandler.commandData, this, "commands"))))
                 .margins(Insets.of(3)).horizontalSizing(Sizing.fixed(120)).verticalSizing(Sizing.fixed(20)));
 
         rootComponent.child(Components.button(Component.translatable("vd.command_config.base.advancements"),
-                (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.advancements, CommandDataHandler.advancementData, this, "advancements"))))
+                        (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.advancements, CommandDataHandler.advancementData, this, "advancements"))))
                 .margins(Insets.of(3)).horizontalSizing(Sizing.fixed(120)).verticalSizing(Sizing.fixed(20)));
 
         rootComponent.child(Components.button(Component.translatable("vd.command_config.base.mob_categories"),
-                (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.mobCategories, CommandDataHandler.mobCategoryData, this, "mob_categories"))))
+                        (button -> Objects.requireNonNull(this.minecraft).setScreen(new CommandConfigRowScreen(CommandDataHandler.mobCategories, CommandDataHandler.mobCategoryData, this, "mob_categories"))))
                 .margins(Insets.of(3)).horizontalSizing(Sizing.fixed(120)).verticalSizing(Sizing.fixed(20)));
     }
 }

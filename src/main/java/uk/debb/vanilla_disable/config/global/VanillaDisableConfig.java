@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class VanillaDisableConfig implements ModInitializer {
-    private static String PATH = "";
-    private static Properties data;
     public static boolean autoMigration = true;
     public static boolean worldLoadingScreen = true;
     public static long cache = 1_000_000_000_000L;
+    private static String PATH = "";
+    private static Properties data;
 
     private static void generateConfig() {
         Properties properties = new Properties();

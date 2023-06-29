@@ -16,7 +16,8 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 
 @Mixin(PlayerList.class)
 public abstract class MixinPlayerList {
-    @Shadow public abstract void broadcastSystemMessage(Component component, boolean bl);
+    @Shadow
+    public abstract void broadcastSystemMessage(Component component, boolean bl);
 
     @Inject(method = "placeNewPlayer", at = @At("RETURN"))
     private void placeNewPlayer(Connection connection, ServerPlayer serverPlayer, CallbackInfo ci) {

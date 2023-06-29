@@ -9,13 +9,13 @@ import org.lwjgl.glfw.GLFW;
 public class CommandConfigHotkeyManager implements ClientModInitializer {
     private static KeyMapping keyMapping;
 
+    public static boolean isPressed() {
+        return keyMapping.isDown();
+    }
+
     @Override
     public void onInitializeClient() {
         keyMapping = new KeyMapping("vd.key.open_command_config", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, "vd.key.category");
         KeyBindingHelper.registerKeyBinding(keyMapping);
-    }
-
-    public static boolean isPressed() {
-        return keyMapping.isDown();
     }
 }

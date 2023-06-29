@@ -79,7 +79,6 @@ public class CommandDataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
     public static final Object2ObjectMap<String, List<String>> stringColSuggestions = new Object2ObjectOpenHashMap<>();
     public static final ObjectList<String> differentDataTypes = new ObjectArrayList<>();
-    private static Cache<String, Object> cache = null;
     public static MinecraftServer server;
     public static boolean populationDone = false;
     public static RegistryAccess registryAccess;
@@ -91,6 +90,9 @@ public class CommandDataHandler {
     public static Registry<DamageType> damageTypeRegistry;
     public static Registry<MobEffect> mobEffectRegistry;
     public static Registry<StatType<?>> statTypeRegistry;
+    public static boolean migrated = false;
+    public static boolean shouldMigrate = true;
+    private static Cache<String, Object> cache = null;
     private static Connection connection;
     private static Statement statement;
     private static String PATH;
@@ -100,8 +102,6 @@ public class CommandDataHandler {
     private static Registry<EntityType<?>> entityTypeRegistry;
     private static Registry<BlockEntityType<?>> blockEntityRegistry;
     private static Registry<ResourceLocation> customStatRegistry;
-    public static boolean migrated = false;
-    public static boolean shouldMigrate = true;
 
     /**
      * Cleans up data for display (removes underscores, 'namespace:' prefixes, 'group/' prefixes)
