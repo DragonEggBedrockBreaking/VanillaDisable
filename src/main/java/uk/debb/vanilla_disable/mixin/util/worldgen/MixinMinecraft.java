@@ -31,7 +31,7 @@ public abstract class MixinMinecraft {
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void doWorldLoad(String string, LevelStorageSource.LevelStorageAccess levelStorageAccess, PackRepository packRepository, WorldStem worldStem, boolean bl, CallbackInfo ci, Instant instant, LevelLoadingScreen levelLoadingScreen) {
+    private void doWorldLoad(String levelId, LevelStorageSource.LevelStorageAccess level, PackRepository packRepository, WorldStem worldStem, boolean newWorld, CallbackInfo ci, Instant instant, LevelLoadingScreen levelLoadingScreen) {
         if (!WorldgenDataHandler.continueGeneration) {
             this.setScreen(new WorldgenConfigScreen(levelLoadingScreen));
         }

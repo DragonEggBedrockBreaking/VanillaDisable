@@ -27,7 +27,7 @@ public abstract class MixinEntity {
 
     @SuppressWarnings("deprecation")
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
-    private void onInsideBlock(BlockState blockState, CallbackInfo ci) {
+    private void onInsideBlock(CallbackInfo ci) {
         if (((Entity) (Object) this) instanceof Boat boat && CommandDataHandler.getCachedBoolean("entities", "minecraft:boat", "alpha_behaviour")) {
             if (!boat.checkInWater()) {
                 this.hurt(this.level().damageSources().generic(), Float.MAX_VALUE);

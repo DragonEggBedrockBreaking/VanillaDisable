@@ -8,23 +8,19 @@ loom {
 }
 
 repositories {
-	maven {
-		url "https://maven.flashyreese.me/releases"
-	}
-	maven {
-		url "https://jitpack.io"
-	}
-	maven {
-		url "https://maven.terraformersmc.com/"
-	}
-	maven {
-		url 'https://maven.wispforest.io'
-	}
+	maven { url "https://maven.flashyreese.me/releases" }
+	maven { url "https://jitpack.io" }
+	maven { url "https://maven.terraformersmc.com/" }
+	maven { url 'https://maven.wispforest.io' }
+	maven { url "https://maven.parchmentmc.org" }
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.officialMojangMappings()
+	mappings loom.layered {
+		it.officialMojangMappings()
+		it.parchment("org.parchmentmc.data:${project.parchment_version}@zip")
+	}
 	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 	include(modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version)))
 	include(modImplementation(fabricApi.module("fabric-key-binding-api-v1", project.fabric_version)))

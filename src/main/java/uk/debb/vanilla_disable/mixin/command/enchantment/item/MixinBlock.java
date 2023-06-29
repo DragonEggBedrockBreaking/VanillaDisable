@@ -25,21 +25,21 @@ import java.util.stream.Collectors;
 @Mixin(Block.class)
 public abstract class MixinBlock {
     @Inject(method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", at = @At("HEAD"), cancellable = true)
-    private static void getDrops(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack itemStack, CallbackInfoReturnable<List<ItemStack>> cir) {
-        String item = "can_enchant_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem()));
+    private static void getDrops(BlockState state, ServerLevel level, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack tool, CallbackInfoReturnable<List<ItemStack>> cir) {
+        String item = "can_enchant_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromItemRegistry(tool.getItem()));
         EnchantmentHelper.setEnchantments(
-                EnchantmentHelper.getEnchantments(itemStack)
+                EnchantmentHelper.getEnchantments(tool)
                         .entrySet()
                         .stream()
                         .filter(entry -> {
                             String enchantment = CommandDataHandler.getKeyFromEnchantmentRegistry(entry.getKey());
                             return CommandDataHandler.getCachedBoolean("enchantments", enchantment, item);
-                        }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), itemStack);
-        LootParams.Builder builder = new LootParams.Builder(serverLevel)
-                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockPos))
-                .withParameter(LootContextParams.TOOL, itemStack)
+                        }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)), tool);
+        LootParams.Builder builder = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                .withParameter(LootContextParams.TOOL, tool)
                 .withOptionalParameter(LootContextParams.THIS_ENTITY, entity)
                 .withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockEntity);
-        cir.setReturnValue(blockState.getDrops(builder));
+        cir.setReturnValue(state.getDrops(builder));
     }
 }

@@ -35,7 +35,7 @@ public abstract class MixinMinecraftServer {
     }
 
     @Inject(method = "stopServer", at = @At("TAIL"))
-    private void afterServerShutdown(CallbackInfo ci) {
+    private void stopServer(CallbackInfo ci) {
         WorldgenDataHandler.shouldMigrate = true;
     }
 }

@@ -17,7 +17,7 @@ public abstract class MixinNaturalSpawner {
                     target = "Lnet/minecraft/world/entity/Mob;removeWhenFarAway(D)Z"
             )
     )
-    private static boolean removeWhenFarAway(boolean original, ServerLevel serverLevel, Mob mob, double d) {
+    private static boolean removeWhenFarAway(boolean original, ServerLevel level, Mob mob, double distance) {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
         return CommandDataHandler.getCachedBoolean("entities", entity, "can_despawn");
     }

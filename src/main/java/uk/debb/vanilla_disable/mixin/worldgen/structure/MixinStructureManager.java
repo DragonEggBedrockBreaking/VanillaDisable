@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 @Mixin(StructureManager.class)
 public abstract class MixinStructureManager {
     @Inject(method = "fillStartsForStructure", at = @At("HEAD"), cancellable = true)
-    private void fillStartsForStructure(Structure structure, LongSet longSet, Consumer<StructureStart> consumer, CallbackInfo ci) {
+    private void fillStartsForStructure(Structure structure, LongSet structureRefs, Consumer<StructureStart> startConsumer, CallbackInfo ci) {
         String rule = WorldgenDataHandler.cleanup(Objects.requireNonNull(WorldgenDataHandler.structureRegistry.getKey(structure)));
         if (!WorldgenDataHandler.get("structures", rule)) {
             ci.cancel();

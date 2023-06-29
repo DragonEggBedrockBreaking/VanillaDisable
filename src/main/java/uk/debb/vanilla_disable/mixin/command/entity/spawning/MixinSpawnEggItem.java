@@ -26,8 +26,8 @@ public abstract class MixinSpawnEggItem {
     public abstract EntityType<?> getType(@Nullable CompoundTag compoundTag);
 
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
-    private void useOn(UseOnContext useOnContext, CallbackInfoReturnable<InteractionResult> cir) {
-        ItemStack itemStack = useOnContext.getItemInHand();
+    private void useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+        ItemStack itemStack = context.getItemInHand();
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(this.getType(itemStack.getTag()));
         if (!CommandDataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
             cir.setReturnValue(InteractionResult.FAIL);
@@ -35,7 +35,7 @@ public abstract class MixinSpawnEggItem {
     }
 
     @Inject(method = "spawnOffspringFromSpawnEgg", at = @At("HEAD"), cancellable = true)
-    private void spawnOffspringFromSpawnEgg(Player player, Mob mob, EntityType<? extends Mob> entityType, ServerLevel serverLevel, Vec3 vec3, ItemStack itemStack, CallbackInfoReturnable<Optional<Mob>> cir) {
+    private void spawnOffspringFromSpawnEgg(Player player, Mob mob, EntityType<? extends Mob> entityType, ServerLevel serverLevel, Vec3 pos, ItemStack stack, CallbackInfoReturnable<Optional<Mob>> cir) {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(entityType);
         if (!CommandDataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
             cir.setReturnValue(Optional.empty());

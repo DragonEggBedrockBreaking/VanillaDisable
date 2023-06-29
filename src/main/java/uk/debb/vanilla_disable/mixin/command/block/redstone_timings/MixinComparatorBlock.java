@@ -15,7 +15,7 @@ public abstract class MixinComparatorBlock {
                     target = "Lnet/minecraft/world/level/Level;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;ILnet/minecraft/world/ticks/TickPriority;)V"
             )
     )
-    private int modifyComparatorDelay1(int delay) {
+    private int scheduleTick(int delay) {
         return CommandDataHandler.getCachedInt("blocks", "minecraft:comparator", "redstone_delay");
     }
 }

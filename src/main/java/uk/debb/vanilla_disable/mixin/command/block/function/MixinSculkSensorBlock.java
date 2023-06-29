@@ -11,8 +11,8 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(SculkSensorBlock.class)
 public abstract class MixinSculkSensorBlock {
     @Inject(method = "canActivate", at = @At("HEAD"), cancellable = true)
-    private static void canActivate(BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
-        String type = CommandDataHandler.getKeyFromBlockRegistry(blockState.getBlock());
+    private static void canActivate(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+        String type = CommandDataHandler.getKeyFromBlockRegistry(state.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", type, "works")) {
             cir.setReturnValue(false);
         }

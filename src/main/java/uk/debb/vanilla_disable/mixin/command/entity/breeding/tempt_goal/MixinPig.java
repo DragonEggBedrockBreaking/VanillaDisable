@@ -34,7 +34,7 @@ public abstract class MixinPig {
                     ordinal = 0
             )
     )
-    private boolean shouldRegisterGoal(GoalSelector goalSelector, int i, Goal goal) {
+    private boolean shouldRegisterGoal(GoalSelector goalSelector, int priority, Goal goal) {
         return false;
     }
 }

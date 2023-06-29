@@ -20,9 +20,9 @@ import java.util.Objects;
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
-    private boolean isInvulnerableTo(boolean original, DamageSource damageSource) {
+    private boolean isInvulnerableTo(boolean original, DamageSource source) {
         return original || !CommandDataHandler.getCachedBoolean("entities", "minecraft:player",
-                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.damageTypeRegistry.getKey(damageSource.type()))) + "_damage");
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.damageTypeRegistry.getKey(source.type()))) + "_damage");
     }
 
     @Inject(method = "attack", at = @At("RETURN"))
@@ -34,8 +34,8 @@ public abstract class MixinPlayer {
     }
 
     @Inject(method = "interactOn", at = @At("HEAD"), cancellable = true)
-    private void interactOn(Entity entity, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
-        String entityType = CommandDataHandler.getKeyFromEntityTypeRegistry(entity.getType());
+    private void interactOn(Entity entityToInteractOn, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+        String entityType = CommandDataHandler.getKeyFromEntityTypeRegistry(entityToInteractOn.getType());
         if (!CommandDataHandler.getCachedBoolean("entities", entityType, "can_player_interact")) {
             cir.setReturnValue(InteractionResult.FAIL);
         }

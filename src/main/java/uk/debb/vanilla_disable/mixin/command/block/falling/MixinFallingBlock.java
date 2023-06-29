@@ -14,8 +14,8 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(FallingBlock.class)
 public abstract class MixinFallingBlock {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    private void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource, CallbackInfo ci) {
-        String name = CommandDataHandler.getKeyFromBlockRegistry(blockState.getBlock());
+    private void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+        String name = CommandDataHandler.getKeyFromBlockRegistry(state.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", name, "can_fall")) {
             ci.cancel();
         }

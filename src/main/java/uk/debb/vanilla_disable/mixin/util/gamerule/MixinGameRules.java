@@ -11,21 +11,21 @@ import uk.debb.vanilla_disable.data.gamerule.GameruleMigrationDataHandler;
 @Mixin(GameRules.class)
 public abstract class MixinGameRules {
     @Inject(method = "loadFromTag", at = @At("HEAD"))
-    private void loadFromTag(DynamicLike<?> dynamicLike, CallbackInfo ci) {
+    private void loadFromTag(DynamicLike<?> dynamic, CallbackInfo ci) {
         GameruleMigrationDataHandler.sqlData.forEach(rule -> rule.value = "");
         GameruleMigrationDataHandler.massColumnSqlData.forEach(rule -> rule.value = "");
         GameruleMigrationDataHandler.allRowSqlDataHolders.forEach(rule -> rule.value = "");
         GameruleMigrationDataHandler.tomlData.forEach(rule -> rule.value = "");
 
         GameruleMigrationDataHandler.sqlData.forEach(rule ->
-                dynamicLike.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
+                dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
         GameruleMigrationDataHandler.massColumnSqlData.forEach(rule ->
-                dynamicLike.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
+                dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
         GameruleMigrationDataHandler.allRowSqlDataHolders.forEach(rule ->
-                dynamicLike.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
+                dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
         GameruleMigrationDataHandler.tomlData.forEach(rule ->
-                dynamicLike.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
-        dynamicLike.get("biomesEnabled").asString().result().ifPresent(str ->
+                dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
+        dynamic.get("biomesEnabled").asString().result().ifPresent(str ->
                 GameruleMigrationDataHandler.biomesEnabled = str);
     }
 }

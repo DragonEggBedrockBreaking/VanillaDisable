@@ -16,7 +16,7 @@ import java.util.Objects;
 @Mixin(ServerPlayer.class)
 public abstract class MixinServerPlayer {
     @Inject(method = "awardStat", at = @At("HEAD"), cancellable = true)
-    private void awardStat(Stat<?> stat, int i, CallbackInfo ci) {
+    private void awardStat(Stat<?> stat, int increment, CallbackInfo ci) {
         if (stat.getType().equals(Stats.CUSTOM)) {
             if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:player",
                     CommandDataHandler.lightCleanup(stat.getName().split(":")[1].replace(".", ":")) + "_custom_stat")) {

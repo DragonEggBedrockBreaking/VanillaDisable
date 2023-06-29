@@ -11,8 +11,8 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(ChestBlock.class)
 public abstract class MixinChestBlock {
     @ModifyReturnValue(method = "isChestBlockedAt", at = @At("RETURN"))
-    private static boolean isChestBlockedAt(boolean original, LevelAccessor levelAccessor, BlockPos blockPos) {
-        String name = CommandDataHandler.getKeyFromBlockRegistry(levelAccessor.getBlockState(blockPos).getBlock());
+    private static boolean isChestBlockedAt(boolean original, LevelAccessor level, BlockPos pos) {
+        String name = CommandDataHandler.getKeyFromBlockRegistry(level.getBlockState(pos).getBlock());
         return original && CommandDataHandler.getCachedBoolean("blocks", name, "opening_blockable");
     }
 }

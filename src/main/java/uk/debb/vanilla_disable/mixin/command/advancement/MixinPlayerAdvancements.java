@@ -13,7 +13,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(PlayerAdvancements.class)
 public abstract class MixinPlayerAdvancements {
     @Inject(method = "award", at = @At("RETURN"), cancellable = true)
-    private void award(Advancement advancement, String string, CallbackInfoReturnable<Boolean> cir) {
+    private void award(Advancement advancement, String criterionKey, CallbackInfoReturnable<Boolean> cir) {
         String adv = advancement.getId().toString();
         if (!adv.contains("recipe") && !CommandDataHandler.getCachedBoolean("advancements", adv, "enabled")) {
             CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("vd.advancements.disabled.by.vd").withStyle(ChatFormatting.RED), false);

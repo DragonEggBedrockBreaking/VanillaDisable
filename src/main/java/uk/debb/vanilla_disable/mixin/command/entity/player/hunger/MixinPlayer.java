@@ -15,10 +15,10 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     @Inject(method = "eat", at = @At("HEAD"))
-    private void eat(Level level, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        FoodProperties properties = stack.getItem().getFoodProperties();
+    private void eat(Level level, ItemStack food, CallbackInfoReturnable<ItemStack> cir) {
+        FoodProperties properties = food.getItem().getFoodProperties();
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (stack.getItem().isEdible() && properties != null && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
+        if (food.getItem().isEdible() && properties != null && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
             livingEntity.setHealth(livingEntity.getHealth() + properties.getNutrition());
         }
     }

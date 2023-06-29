@@ -20,8 +20,8 @@ import java.util.function.Predicate;
 @Mixin(FillCommand.class)
 public abstract class MixinFillCommand {
     @Inject(method = "fillBlocks", at = @At("HEAD"))
-    private static void fillBlocks(CommandSourceStack commandSourceStack, BoundingBox boundingBox, BlockInput blockInput, FillCommand.Mode mode, @Nullable Predicate<BlockInWorld> predicate, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
-        String block = CommandDataHandler.getKeyFromBlockRegistry(blockInput.getState().getBlock());
+    private static void fillBlocks(CommandSourceStack source, BoundingBox area, BlockInput newBlock, FillCommand.Mode mode, @Nullable Predicate<BlockInWorld> replacingPredicate, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
+        String block = CommandDataHandler.getKeyFromBlockRegistry(newBlock.getState().getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "can_be_placed_by_command")) {
             throw new SimpleCommandExceptionType(Component.translatable("vd.commands.setblock.disabled")).create();
         }

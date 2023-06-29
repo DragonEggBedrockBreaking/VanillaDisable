@@ -19,8 +19,8 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(SummonCommand.class)
 public abstract class MixinSummonCommand {
     @Inject(method = "createEntity", at = @At("HEAD"))
-    private static void createEntity(CommandSourceStack commandSourceStack, Holder.Reference<EntityType<?>> reference, Vec3 vec3, CompoundTag compoundTag, boolean bl, CallbackInfoReturnable<Entity> cir) throws CommandSyntaxException {
-        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(reference.value());
+    private static void createEntity(CommandSourceStack source, Holder.Reference<EntityType<?>> type, Vec3 pos, CompoundTag tag, boolean randomizeProperties, CallbackInfoReturnable<Entity> cir) throws CommandSyntaxException {
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(type.value());
         if (!CommandDataHandler.getCachedBoolean("entities", entity, "can_be_summoned")) {
             throw new SimpleCommandExceptionType(Component.translatable("vd.commands.summon.disabled")).create();
         }

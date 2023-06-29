@@ -17,7 +17,7 @@ public abstract class MixinRepeaterBlock {
     public static IntegerProperty DELAY;
 
     @ModifyReturnValue(method = "getDelay", at = @At("RETURN"))
-    private int getDelay(int original, BlockState blockState) {
-        return blockState.getValue(DELAY) * CommandDataHandler.getCachedInt("blocks", "minecraft:repeater", "redstone_delay");
+    private int getDelay(int original, BlockState state) {
+        return state.getValue(DELAY) * CommandDataHandler.getCachedInt("blocks", "minecraft:repeater", "redstone_delay");
     }
 }

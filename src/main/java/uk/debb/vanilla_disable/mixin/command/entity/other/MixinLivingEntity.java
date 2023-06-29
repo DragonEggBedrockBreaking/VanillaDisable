@@ -14,11 +14,11 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
     @ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
-    private boolean canBeAffected(boolean original, MobEffectInstance effect) {
+    private boolean canBeAffected(boolean original, MobEffectInstance effectInstance) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         return CommandDataHandler.getCachedBoolean("entities", entity,
-                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.mobEffectRegistry.getKey(effect.getEffect()))) + "_effect");
+                CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.mobEffectRegistry.getKey(effectInstance.getEffect()))) + "_effect");
     }
 
     @WrapWithCondition(

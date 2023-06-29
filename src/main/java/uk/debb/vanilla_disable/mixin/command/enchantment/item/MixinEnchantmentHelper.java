@@ -11,9 +11,9 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(EnchantmentHelper.class)
 public abstract class MixinEnchantmentHelper {
     @ModifyReturnValue(method = "getItemEnchantmentLevel", at = @At("RETURN"))
-    private static int getItemEnchantmentLevel(int original, Enchantment enchantment, ItemStack itemStack) {
-        if (!enchantment.canEnchant(itemStack)) return original;
-        String item = "can_enchant_" + CommandDataHandler.getKeyFromItemRegistry(itemStack.getItem());
+    private static int getItemEnchantmentLevel(int original, Enchantment enchantment, ItemStack stack) {
+        if (!enchantment.canEnchant(stack)) return original;
+        String item = "can_enchant_" + CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
         if (!CommandDataHandler.getCachedBoolean("enchantments", CommandDataHandler.getKeyFromEnchantmentRegistry(enchantment), item)) {
             return 0;
         }

@@ -20,8 +20,8 @@ public abstract class MixinPistonBaseBlock {
                     target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"
             )
     )
-    private static boolean is(boolean original, BlockState blockState, Level level, BlockPos blockPos, Direction direction, boolean bl, Direction direction2) {
-        Block block = blockState.getBlock();
+    private static boolean is(boolean original, BlockState state, Level level, BlockPos pos, Direction movementDirection, boolean allowDestroy, Direction pistonFacing) {
+        Block block = state.getBlock();
         return original && !(block.equals(Blocks.OBSIDIAN) || block.equals(Blocks.CRYING_OBSIDIAN) ||
                 block.equals(Blocks.RESPAWN_ANCHOR) || block.equals(Blocks.REINFORCED_DEEPSLATE));
     }

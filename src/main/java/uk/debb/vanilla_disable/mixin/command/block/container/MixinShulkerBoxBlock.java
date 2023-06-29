@@ -13,8 +13,8 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(ShulkerBoxBlock.class)
 public abstract class MixinShulkerBoxBlock {
     @ModifyReturnValue(method = "canOpen", at = @At("RETURN"))
-    private static boolean canOpen(boolean original, BlockState blockState, Level level, BlockPos blockPos, ShulkerBoxBlockEntity shulkerBoxBlockEntity) {
-        String name = CommandDataHandler.getKeyFromBlockRegistry(blockState.getBlock());
+    private static boolean canOpen(boolean original, BlockState state, Level level, BlockPos pos, ShulkerBoxBlockEntity blockEntity) {
+        String name = CommandDataHandler.getKeyFromBlockRegistry(state.getBlock());
         return original || !CommandDataHandler.getCachedBoolean("blocks", name, "opening_blockable");
     }
 }

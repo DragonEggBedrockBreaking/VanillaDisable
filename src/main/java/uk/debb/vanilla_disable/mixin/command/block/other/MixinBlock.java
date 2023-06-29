@@ -42,9 +42,9 @@ public abstract class MixinBlock {
 
 
     @Inject(method = "playerDestroy", at = @At("HEAD"), cancellable = true)
-    private void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack itemStack, CallbackInfo ci) {
-        if (blockState.is(Blocks.TNT) && CommandDataHandler.getCachedBoolean("blocks", "minecraft:tnt", "alpha_behaviour")) {
-            TntBlock.explode(level, blockPos);
+    private void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack tool, CallbackInfo ci) {
+        if (state.is(Blocks.TNT) && CommandDataHandler.getCachedBoolean("blocks", "minecraft:tnt", "alpha_behaviour")) {
+            TntBlock.explode(level, pos);
             ci.cancel();
         }
     }
