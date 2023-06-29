@@ -1,7 +1,10 @@
 package uk.debb.vanilla_disable;
 
-import net.fabricmc.api.ModInitializer;
+import it.unimi.dsi.fastutil.objects.ObjectList;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.SharedConstants;
+import net.minecraft.server.packs.PackType;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -12,21 +15,30 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-public class LangFileManager implements ModInitializer {
+public class LangFileManager implements ClientModInitializer {
+    ObjectList<String> languages = ObjectList.of("en_us");
+
     @Override
-    public void onInitialize() {
+    public void onInitializeClient() {
         try {
             if (!FabricLoader.getInstance().isModLoaded("fabric-resource-loader-v0")) {
                 File outerrpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile");
                 FileUtils.deleteDirectory(outerrpackdir);
                 File rpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile/assets/vanilladisablelangfile/lang");
                 if (!rpackdir.mkdirs()) return;
-                InputStream inputUrl = LangFileManager.class.getResourceAsStream("/assets/vanilla_disable/lang/en_us.json");
-                Path dest = new File(rpackdir + "/en_us.json").toPath();
-                if (inputUrl != null) {
-                    Files.copy(inputUrl, dest, StandardCopyOption.REPLACE_EXISTING);
-                }
-                String content = "{\"pack\":{\"pack_format\":15,\"description\":\"Vanilla Disable Language File\"}}";
+                languages.forEach(language -> {
+                    InputStream inputUrl = LangFileManager.class.getResourceAsStream("/assets/vanilla_disable/lang/" + language + ".json");
+                    Path dest = new File(rpackdir + "/" + language + ".json").toPath();
+                    if (inputUrl != null) {
+                        try {
+                            Files.copy(inputUrl, dest, StandardCopyOption.REPLACE_EXISTING);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+                int version = SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES);
+                String content = "{\"pack\":{\"pack_format\":" + version + ",\"description\":\"Vanilla Disable Language File\"}}";
                 String mcmetaPath = new File(outerrpackdir + "/pack.mcmeta").toString();
                 FileWriter mcmetaWriter = new FileWriter(mcmetaPath);
                 mcmetaWriter.write(content);

@@ -24,13 +24,13 @@
   "entrypoints": {
     "main": [
       "uk.debb.vanilla_disable.config.global.VanillaDisableConfig",
-      "uk.debb.vanilla_disable.data.gamerule.RegisterGamerules",
-      "uk.debb.vanilla_disable.LangFileManager"
+      "uk.debb.vanilla_disable.data.gamerule.RegisterGamerules"
     ],
     "modmenu": [
       "uk.debb.vanilla_disable.config.global.ModMenuSettingsApi"
     ],
     "client": [
+      "uk.debb.vanilla_disable.LangFileManager",
       "uk.debb.vanilla_disable.config.command.CommandConfigHotkeyManager"
     ]
   },
