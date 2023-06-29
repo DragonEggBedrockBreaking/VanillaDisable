@@ -12,4 +12,9 @@ public abstract class MixinCauldronBlock {
     private boolean canReceiveStalactiteDrip(boolean original) {
         return CommandDataHandler.getCachedBoolean("blocks", "minecraft:cauldron", "can_be_filled_by_dripstone");
     }
+
+    @ModifyReturnValue(method = "shouldHandlePrecipitation", at = @At("RETURN"))
+    private static boolean shouldHandlePrecipitation(boolean original) {
+        return original && CommandDataHandler.getCachedBoolean("blocks", "minecraft:cauldron", "can_be_filled_by_precipitation");
+    }
 }

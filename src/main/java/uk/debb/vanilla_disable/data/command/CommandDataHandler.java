@@ -229,6 +229,7 @@ public class CommandDataHandler {
             put("speed_factor", REAL);
             put("jump_factor", REAL);
             put("can_be_filled_by_dripstone", BOOLEAN);
+            put("can_be_filled_by_precipitation", BOOLEAN);
             put("fluid_reaches_far", BOOLEAN);
             put("fluid_reaches_far_in_nether", BOOLEAN);
             put("fluid_speed", INTEGER);
@@ -478,6 +479,7 @@ public class CommandDataHandler {
 
                     if (block.equals(Blocks.CAULDRON)) {
                         put("can_be_filled_by_dripstone", "true");
+                        put("can_be_filled_by_precipitation", "true");
                     }
 
                     if (block.equals(Blocks.WATER)) {
@@ -733,6 +735,7 @@ public class CommandDataHandler {
             put("speed_factor", Component.translatable("vd.commandRule.blocks.speedFactor"));
             put("jump_factor", Component.translatable("vd.commandRule.blocks.jumpFactor"));
             put("can_be_filled_by_dripstone", Component.translatable("vd.commandRule.blocks.canBeFilledByDripstone"));
+            put("can_be_filled_by_precipitation", Component.translatable("vd.commandRule.blocks.canBeFilledByPrecipitation"));
             put("redstone_delay", Component.translatable("vd.commandRule.blocks.redstoneDelay"));
             put("redstone_duration", Component.translatable("vd.commandRule.blocks.redstoneDuration"));
             put("can_drop_xp", Component.translatable("vd.commandRule.blocks.canDropXp"));

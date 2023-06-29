@@ -64,6 +64,7 @@
   "vd.commandRule.blocks.speedFactor": "Control how fast entities can travel on the block relative to others.",
   "vd.commandRule.blocks.jumpFactor": "Control how high entities can jump on the block relative to others.",
   "vd.commandRule.blocks.canBeFilledByDripstone": "Toggle the block being able to be filled by dripstone.",
+  "vd.commandRule.blocks.canBeFilledByPrecipitation": "Toggle the block being able to be filled by rain.",
   "vd.commandRule.blocks.redstoneDelay": "Control the redstone delay of the block.",
   "vd.commandRule.blocks.redstoneDuration": "Control the redstone duration of the block.",
   "vd.commandRule.blocks.canDropXp": "Toggle the block being able to drop XP.",
