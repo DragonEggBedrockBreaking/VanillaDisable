@@ -1,4 +1,4 @@
-Copyright 2022 DragonEggBedrockBreaking
+Copyright 2023 DragonEggBedrockBreaking
 
 Mozilla Public License Version 2.0
 ==================================
