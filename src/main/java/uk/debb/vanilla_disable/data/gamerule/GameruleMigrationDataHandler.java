@@ -1078,9 +1078,9 @@ public class GameruleMigrationDataHandler {
         tomlData.forEach(tomlDataHolder -> {
             if (tomlDataHolder.value != null && tomlDataHolder.value.equals("false")) {
                 switch (tomlDataHolder.table) {
-                    case "structures" -> structureMap.put(tomlDataHolder.rule, false);
-                    case "placed_features" -> placedFeatureMap.put(tomlDataHolder.rule, false);
-                    case "biomes" -> biomeMap.put(tomlDataHolder.rule, false);
+                    case "structures" -> structureMap.put(tomlDataHolder.attribute, false);
+                    case "placed_features" -> placedFeatureMap.put(tomlDataHolder.attribute, false);
+                    case "biomes" -> biomeMap.put(tomlDataHolder.attribute, false);
                 }
             }
         });
@@ -1138,11 +1138,13 @@ public class GameruleMigrationDataHandler {
     public static class TomlDataHolder {
         public final String rule;
         public final String table;
+        public final String attribute;
         public String value;
 
         public TomlDataHolder(String rule, String table, String attribute) {
             this.rule = rule;
             this.table = table;
+            this.attribute = attribute;
         }
     }
 }
