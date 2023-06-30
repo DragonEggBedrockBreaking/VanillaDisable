@@ -31,7 +31,7 @@ public abstract class MixinPlayerList {
                                             .withStyle(ChatFormatting.GOLD)
                                             .withStyle(ChatFormatting.UNDERLINE)
                                             .withStyle(Style.EMPTY.withClickEvent(
-                                                    new ClickEvent(ClickEvent.Action.OPEN_URL, "https://example.com")
+                                                    new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/GameRules#migration")
                                             ))
                             ),
                     false
