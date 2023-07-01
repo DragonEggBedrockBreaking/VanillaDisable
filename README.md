@@ -6,7 +6,7 @@ This is a fabric mod that allows you to toggle or change many vanilla features t
 
 ## Downloads
 
-You can download both stable releases of the mod, and also beta releases, from [GitHub Releases](https://github.com/DragonEggBedrockBreaking/VanillaDisable/releases). You can also download stable releases from [Modrinth](https://modrinth.com/mod/vanilla-disable).
+You can download stable releases of the mod from [GitHub Releases](https://github.com/DragonEggBedrockBreaking/VanillaDisable/releases) or [Modrinth](https://modrinth.com/mod/vanilla-disable).
 
 ## Other
 
