@@ -24,18 +24,21 @@ public abstract class MixinBlock {
 
     @ModifyReturnValue(method = "getFriction", at = @At("RETURN"))
     private float getFriction(float original) {
+        if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.asBlock());
         return (float) CommandDataHandler.getCachedDouble("blocks", block, "friction_factor");
     }
 
     @ModifyReturnValue(method = "getSpeedFactor", at = @At("RETURN"))
     private float getSpeedFactor(float original) {
+        if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.asBlock());
         return (float) CommandDataHandler.getCachedDouble("blocks", block, "speed_factor");
     }
 
     @ModifyReturnValue(method = "getJumpFactor", at = @At("RETURN"))
     private float getJumpFactor(float original) {
+        if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.asBlock());
         return (float) CommandDataHandler.getCachedDouble("blocks", block, "jump_factor");
     }
