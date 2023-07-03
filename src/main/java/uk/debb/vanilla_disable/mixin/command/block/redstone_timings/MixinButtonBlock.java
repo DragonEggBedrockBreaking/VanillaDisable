@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 
-@Mixin(ButtonBlock.class)
+@Mixin(value = ButtonBlock.class, priority = 999)
 public abstract class MixinButtonBlock {
     @ModifyArg(
             method = "press",
