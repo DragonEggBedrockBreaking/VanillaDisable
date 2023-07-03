@@ -15,6 +15,7 @@ import java.util.Objects;
 public abstract class MixinBiomeManager {
     @ModifyReturnValue(method = "getBiome", at = @At("RETURN"))
     private Holder<Biome> getBiome(Holder<Biome> original) {
+        if (WorldgenDataHandler.toml == null) return original;
         Registry<Biome> biomeRegistry = WorldgenDataHandler.biomeRegistry;
         String rule = WorldgenDataHandler.cleanup(Objects.requireNonNull(biomeRegistry.getKey(original.value())));
         if (!WorldgenDataHandler.get("biomes", rule)) {

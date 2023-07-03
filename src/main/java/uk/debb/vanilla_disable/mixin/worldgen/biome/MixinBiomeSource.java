@@ -16,6 +16,7 @@ import java.util.Set;
 public abstract class MixinBiomeSource {
     @ModifyReturnValue(method = "possibleBiomes", at = @At("RETURN"))
     private Set<Holder<Biome>> possibleBiomes(Set<Holder<Biome>> original) {
+        if (WorldgenDataHandler.toml == null) return original;
         Set<Holder<Biome>> set = new HashSet<>(original);
         for (Holder<Biome> biomeHolder : original) {
             String rule = WorldgenDataHandler.cleanup(Objects.requireNonNull(WorldgenDataHandler.biomeRegistry.getKey(biomeHolder.value())));
