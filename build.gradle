@@ -62,7 +62,7 @@ jar {
 }
 
 modrinth {
-	token = System.getenv("MODRINTH_TOKEN")
+	token = System.getenv("secrets.MODRINTH_TOKEN")
 	projectId = "vanilla-disable"
 	versionName = mod_version + " for " + minecraft_version
 	versionNumber = mod_version
