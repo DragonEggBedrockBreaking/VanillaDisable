@@ -175,7 +175,7 @@ public abstract class MixinCommands {
                     String value = getArgumentValueForType(type, context);
                     CommandDataHandler.setValue(table, row, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
-                            () -> Component.translatable("vd.command.successfully_set_value"),
+                            () -> Component.translatable("vd.command.successfully_set_value", value),
                             false
                     );
                     return 1;
