@@ -23,7 +23,7 @@ jobs:
           path: |
             ~/.gradle
             .gradle
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/settings.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Build with Gradle
         run: ./gradlew build
