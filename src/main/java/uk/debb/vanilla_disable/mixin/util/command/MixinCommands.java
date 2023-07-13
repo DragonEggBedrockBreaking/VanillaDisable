@@ -15,6 +15,7 @@ import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -109,6 +110,7 @@ public abstract class MixinCommands {
      * @param col  The column name of the argument
      * @return The literal argument builder
      */
+    @Unique
     private ArgumentType<?> getArgumentTypeForType(DataType type, String col) {
         return switch (type) {
             case BOOLEAN -> BoolArgumentType.bool();
@@ -127,6 +129,7 @@ public abstract class MixinCommands {
      * @param context The command context
      * @return The value of the argument
      */
+    @Unique
     private String getArgumentValueForType(DataType type, CommandContext<?> context) {
         return switch (type) {
             case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
@@ -147,6 +150,7 @@ public abstract class MixinCommands {
      * @param defaultValue           The default value that should be printed when querying the value
      * @param type                   The type of the value to be updated
      */
+    @Unique
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, Component description, String defaultValue, DataType type) {
         literalArgumentBuilder.executes(context -> {
             String value = switch (type) {
@@ -192,6 +196,7 @@ public abstract class MixinCommands {
      * @param defaultValue           The default value that should be printed when querying the value
      * @param options                The potential values of the value to be updated
      */
+    @Unique
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, Component description, String defaultValue, List<String> options) {
         literalArgumentBuilder.executes(context -> {
             context.getSource().sendSuccess(
@@ -234,6 +239,7 @@ public abstract class MixinCommands {
      * @param col                    The column that the value refers to
      * @param type                   The type of the value to be updated
      */
+    @Unique
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type) {
         literalArgumentBuilder.then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
@@ -256,6 +262,7 @@ public abstract class MixinCommands {
      * @param col                    The column that the value refers to
      * @param options                The potential values of the value to be updated
      */
+    @Unique
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options) {
         literalArgumentBuilder.then(
                 argument("value", StringArgumentType.word()).suggests((ctx, builder) -> SharedSuggestionProvider.suggest(options, builder)).executes(context -> {
@@ -284,6 +291,7 @@ public abstract class MixinCommands {
      * @param col                    The column that the value refers to
      * @param type                   The type of the value to be updated
      */
+    @Unique
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type, String argumentName) {
         literalArgumentBuilder.then(
                 argument("value", getArgumentTypeForType(type, col)).executes(context -> {
@@ -307,6 +315,7 @@ public abstract class MixinCommands {
      * @param col                    The column that the value refers to
      * @param options                The potential values of the value to be updated
      */
+    @Unique
     private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options, String argumentName) {
         literalArgumentBuilder.then(
                 argument("value", StringArgumentType.word()).suggests((ctx, builder) -> SharedSuggestionProvider.suggest(options, builder)).executes(context -> {
@@ -338,6 +347,7 @@ public abstract class MixinCommands {
      * @param info         The descriptions for the columns
      * @param possible     The columns that the command should update
      */
+    @Unique
     private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, Object2ObjectMap<String, Component> info, ObjectSet<String> possible) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
@@ -359,6 +369,7 @@ public abstract class MixinCommands {
      * @param group        The group that the rows are in
      * @param info         The descriptions for the columns
      */
+    @Unique
     private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, Component> info) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
@@ -381,6 +392,7 @@ public abstract class MixinCommands {
      * @param info         The descriptions for the columns
      * @param argumentName The pattern that the rows must match
      */
+    @Unique
     private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, Component> info, String argumentName) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
@@ -404,6 +416,7 @@ public abstract class MixinCommands {
      * @param table     The table to update
      * @return The command builder
      */
+    @Unique
     private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, Object2ObjectMap<String, Component>> otherData, String table) {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         data.forEach((row, map) -> {

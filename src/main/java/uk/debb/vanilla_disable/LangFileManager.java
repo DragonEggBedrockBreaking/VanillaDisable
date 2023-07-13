@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 public class LangFileManager implements ClientModInitializer {
-    ObjectList<String> languages = ObjectList.of("en_us");
+    private final ObjectList<String> languages = ObjectList.of("en_us");
 
     @Override
     public void onInitializeClient() {
