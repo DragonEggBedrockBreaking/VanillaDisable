@@ -31,7 +31,7 @@ public abstract class MixinPig {
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",
-                    ordinal = 0
+                    ordinal = 3
             )
     )
     private boolean shouldRegisterGoal(GoalSelector goalSelector, int priority, Goal goal) {
