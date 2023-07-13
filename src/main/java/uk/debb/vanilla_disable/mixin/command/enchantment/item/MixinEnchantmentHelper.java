@@ -13,7 +13,7 @@ public abstract class MixinEnchantmentHelper {
     @ModifyReturnValue(method = "getItemEnchantmentLevel", at = @At("RETURN"))
     private static int getItemEnchantmentLevel(int original, Enchantment enchantment, ItemStack stack) {
         if (!enchantment.canEnchant(stack)) return original;
-        String item = "can_enchant_" + CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
+        String item = "can_enchant_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromItemRegistry(stack.getItem()));
         if (!CommandDataHandler.getCachedBoolean("enchantments", CommandDataHandler.getKeyFromEnchantmentRegistry(enchantment), item)) {
             return 0;
         }
