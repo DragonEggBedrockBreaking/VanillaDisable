@@ -33,6 +33,4 @@ jobs:
           files: build/libs/*.jar
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to Modrinth using Minotaur
-        run: |
-          echo "${{ github.event.release.body }}" > CHANGELOG.md
-          ./gradlew modrinth
+        run: ./gradlew modrinth

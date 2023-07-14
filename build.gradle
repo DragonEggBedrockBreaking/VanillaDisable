@@ -68,9 +68,11 @@ modrinth {
 	versionNumber = mod_version
 	versionType = "release"
 	uploadFile = remapJar
+	gameVersions.add("1.20")
+	loaders.add("quilt")
 	dependencies {
 		optional.project "modmenu"
 		optional.project "owo-lib"
 	}
-	changelog = file("CHANGELOG.md").text
+	changelog = System.getenv("github.event.release.body")
 }
