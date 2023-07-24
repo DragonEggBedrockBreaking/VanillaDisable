@@ -1,4 +1,4 @@
-# Vanilla Disable
+# VanillaDisable
 
 ## Description
 
@@ -8,10 +8,14 @@ This is a fabric mod that allows you to toggle or change many vanilla features t
 
 You can download stable releases of the mod from [GitHub Releases](https://github.com/DragonEggBedrockBreaking/VanillaDisable/releases) or [Modrinth](https://modrinth.com/mod/vanilla-disable).
 
+## Dependencies/JIJs/Recommendations
+
+This mod has no hard dependencies, and will run on its own. However, installing [ModMenu](https://modrinth.com/mod/modmenu) will give you a global GUI, installing [owo-lib](https://modrinth.com/mod/owo-lib) will give you an in-game command-rule-config GUI, and installing [Fabric API](https://modrinth.com/mod/fabric-api) for Fabric or [Quilted Standard Libraries](https://modrinth.com/mod/qsl) for Quilt will remove the requirement to manually enable a resource pack for translatable text. This mod also has a range of libraries included in the jar, which leads to the increased file size. You can read about these in [the wiki](https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Dependencies#jij). 
+
 ## Other
 
 The wiki page contains information for development, more detailed installation instructions, info about configuration systems and properties, information about the mixin configuration system, and details about the choice of modloader, version, and feature toggling system.
 
 ## License
 
-This mod is available under the [MPL 2.0](LICENSE) license.
+This mod is available under the [MPL 2.0](LICENSE) license. Some libraries included in the jar are available under different licenses, which are listed in [the wiki](https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Dependencies#jij).
