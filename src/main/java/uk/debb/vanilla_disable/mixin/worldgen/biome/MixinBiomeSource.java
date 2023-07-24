@@ -2,6 +2,7 @@ package uk.debb.vanilla_disable.mixin.worldgen.biome;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +20,11 @@ public abstract class MixinBiomeSource {
         if (WorldgenDataHandler.toml == null) return original;
         Set<Holder<Biome>> set = new HashSet<>(original);
         for (Holder<Biome> biomeHolder : original) {
-            String rule = WorldgenDataHandler.cleanup(Objects.requireNonNull(WorldgenDataHandler.biomeRegistry.getKey(biomeHolder.value())));
+            ResourceLocation biome = WorldgenDataHandler.biomeRegistry.getKey(biomeHolder.value());
+            if (biome == null) {
+                continue;
+            }
+            String rule = WorldgenDataHandler.cleanup(Objects.requireNonNull(biome));
             if (!WorldgenDataHandler.get("biomes", rule)) {
                 set.remove(biomeHolder);
             }
