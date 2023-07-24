@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(LavaFluid.class)
 public abstract class MixinLavaFluid {
     @ModifyReturnValue(method = "getDropOff", at = @At("RETURN"))
-    private int getDropOff(int original, LevelReader level) {
+    private int vanillaDisable$getDropOff(int original, LevelReader level) {
         if (level instanceof Level) {
             if (level.dimensionType().ultraWarm()) {
                 return CommandDataHandler.getCachedBoolean("blocks", "minecraft:lava", "fluid_reaches_far_in_nether") ? 1 : 2;
@@ -23,7 +23,7 @@ public abstract class MixinLavaFluid {
     }
 
     @ModifyReturnValue(method = "getTickDelay", at = @At("RETURN"))
-    private int getTickDelay(int original, LevelReader level) {
+    private int vanillaDisable$getTickDelay(int original, LevelReader level) {
         if (level instanceof Level) {
             if (level.dimensionType().ultraWarm()) {
                 return CommandDataHandler.getCachedInt("blocks", "minecraft:lava", "fluid_speed_in_nether");

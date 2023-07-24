@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class MixinAbstractFurnaceBlockEntity {
     @ModifyReturnValue(method = "isFuel", at = @At("RETURN"))
-    private static boolean isFuel(boolean original, ItemStack stack) {
+    private static boolean vanillaDisable$isFuel(boolean original, ItemStack stack) {
         String item = CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
         if (CommandDataHandler.getCachedInt("items", item, "fuel_duration") <= 0) {
             return false;
@@ -19,7 +19,7 @@ public abstract class MixinAbstractFurnaceBlockEntity {
     }
 
     @ModifyReturnValue(method = "getBurnDuration", at = @At("RETURN"))
-    private int getBurnDuration(int original, ItemStack fuel) {
+    private int vanillaDisable$getBurnDuration(int original, ItemStack fuel) {
         String item = CommandDataHandler.getKeyFromItemRegistry(fuel.getItem());
         return CommandDataHandler.getCachedInt("items", item, "fuel_duration");
     }

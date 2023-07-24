@@ -42,7 +42,7 @@ public abstract class MixinCommands {
     public abstract CommandDispatcher<CommandSourceStack> getDispatcher();
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void onRegister(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {
+    private void vanillaDisable$init(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {
         Thread t = new Thread(() -> {
             while (!CommandDataHandler.populationDone) {
                 try {
@@ -90,13 +90,13 @@ public abstract class MixinCommands {
 
             this.getDispatcher().register(literal("vd").requires(commandSourceStack -> commandSourceStack.hasPermission(2))
                     .then(literal("rule")
-                            .then(majorBuilder("entity", CommandDataHandler.entities, CommandDataHandler.entityData, "entities"))
-                            .then(majorBuilder("block", CommandDataHandler.blocks, CommandDataHandler.blockData, "blocks"))
-                            .then(majorBuilder("item", CommandDataHandler.items, CommandDataHandler.itemData, "items"))
-                            .then(majorBuilder("enchantment", CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, "enchantments"))
-                            .then(majorBuilder("command", CommandDataHandler.commands, CommandDataHandler.commandData, "commands"))
-                            .then(majorBuilder("advancement", CommandDataHandler.advancements, CommandDataHandler.advancementData, "advancements"))
-                            .then(majorBuilder("mob_category", CommandDataHandler.mobCategories, CommandDataHandler.mobCategoryData, "mob_categories"))
+                            .then(vanillaDisable$init$builder("entity", CommandDataHandler.entities, CommandDataHandler.entityData, "entities"))
+                            .then(vanillaDisable$init$builder("block", CommandDataHandler.blocks, CommandDataHandler.blockData, "blocks"))
+                            .then(vanillaDisable$init$builder("item", CommandDataHandler.items, CommandDataHandler.itemData, "items"))
+                            .then(vanillaDisable$init$builder("enchantment", CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, "enchantments"))
+                            .then(vanillaDisable$init$builder("command", CommandDataHandler.commands, CommandDataHandler.commandData, "commands"))
+                            .then(vanillaDisable$init$builder("advancement", CommandDataHandler.advancements, CommandDataHandler.advancementData, "advancements"))
+                            .then(vanillaDisable$init$builder("mob_category", CommandDataHandler.mobCategories, CommandDataHandler.mobCategoryData, "mob_categories"))
                     ).then(overallResetDBBuilder)
             );
         });
@@ -111,7 +111,7 @@ public abstract class MixinCommands {
      * @return The literal argument builder
      */
     @Unique
-    private ArgumentType<?> getArgumentTypeForType(DataType type, String col) {
+    private ArgumentType<?> vanillaDisable$init$getArgumentTypeForType(DataType type, String col) {
         return switch (type) {
             case BOOLEAN -> BoolArgumentType.bool();
             case INTEGER ->
@@ -130,7 +130,7 @@ public abstract class MixinCommands {
      * @return The value of the argument
      */
     @Unique
-    private String getArgumentValueForType(DataType type, CommandContext<?> context) {
+    private String vanillaDisable$init$getArgumentValueForType(DataType type, CommandContext<?> context) {
         return switch (type) {
             case BOOLEAN -> String.valueOf(BoolArgumentType.getBool(context, "value"));
             case INTEGER -> String.valueOf(IntegerArgumentType.getInteger(context, "value"));
@@ -151,7 +151,7 @@ public abstract class MixinCommands {
      * @param type                   The type of the value to be updated
      */
     @Unique
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, Component description, String defaultValue, DataType type) {
+    private void vanillaDisable$init$execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, Component description, String defaultValue, DataType type) {
         literalArgumentBuilder.executes(context -> {
             String value = switch (type) {
                 case BOOLEAN -> String.valueOf(CommandDataHandler.getCachedBoolean(table, row, col));
@@ -173,8 +173,8 @@ public abstract class MixinCommands {
             );
             return 1;
         }).then(
-                argument("value", getArgumentTypeForType(type, col)).executes(context -> {
-                    String value = getArgumentValueForType(type, context);
+                argument("value", vanillaDisable$init$getArgumentTypeForType(type, col)).executes(context -> {
+                    String value = vanillaDisable$init$getArgumentValueForType(type, context);
                     CommandDataHandler.setValue(table, row, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
                             () -> Component.translatable("vd.command.successfully_set_value", value),
@@ -197,7 +197,7 @@ public abstract class MixinCommands {
      * @param options                The potential values of the value to be updated
      */
     @Unique
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, Component description, String defaultValue, List<String> options) {
+    private void vanillaDisable$init$execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String row, String col, Component description, String defaultValue, List<String> options) {
         literalArgumentBuilder.executes(context -> {
             context.getSource().sendSuccess(
                     () -> description,
@@ -240,10 +240,10 @@ public abstract class MixinCommands {
      * @param type                   The type of the value to be updated
      */
     @Unique
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type) {
+    private void vanillaDisable$init$execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type) {
         literalArgumentBuilder.then(
-                argument("value", getArgumentTypeForType(type, col)).executes(context -> {
-                    String value = getArgumentValueForType(type, context);
+                argument("value", vanillaDisable$init$getArgumentTypeForType(type, col)).executes(context -> {
+                    String value = vanillaDisable$init$getArgumentValueForType(type, context);
                     CommandDataHandler.setAll(table, col, value, type.equals(DataType.CLOB));
                     context.getSource().sendSuccess(
                             () -> Component.translatable("vd.command.successfully_set_values", value),
@@ -263,7 +263,7 @@ public abstract class MixinCommands {
      * @param options                The potential values of the value to be updated
      */
     @Unique
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options) {
+    private void vanillaDisable$init$execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options) {
         literalArgumentBuilder.then(
                 argument("value", StringArgumentType.word()).suggests((ctx, builder) -> SharedSuggestionProvider.suggest(options, builder)).executes(context -> {
                     String value = StringArgumentType.getString(context, "value");
@@ -292,10 +292,10 @@ public abstract class MixinCommands {
      * @param type                   The type of the value to be updated
      */
     @Unique
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type, String argumentName) {
+    private void vanillaDisable$init$execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, DataType type, String argumentName) {
         literalArgumentBuilder.then(
-                argument("value", getArgumentTypeForType(type, col)).executes(context -> {
-                    String value = getArgumentValueForType(type, context);
+                argument("value", vanillaDisable$init$getArgumentTypeForType(type, col)).executes(context -> {
+                    String value = vanillaDisable$init$getArgumentValueForType(type, context);
                     String pattern = StringArgumentType.getString(context, argumentName);
                     CommandDataHandler.setMatching(table, col, value, type.equals(DataType.CLOB), pattern);
                     context.getSource().sendSuccess(
@@ -316,7 +316,7 @@ public abstract class MixinCommands {
      * @param options                The potential values of the value to be updated
      */
     @Unique
-    private void execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options, String argumentName) {
+    private void vanillaDisable$init$execute(LiteralArgumentBuilder<CommandSourceStack> literalArgumentBuilder, String table, String col, List<String> options, String argumentName) {
         literalArgumentBuilder.then(
                 argument("value", StringArgumentType.word()).suggests((ctx, builder) -> SharedSuggestionProvider.suggest(options, builder)).executes(context -> {
                     String value = StringArgumentType.getString(context, "value");
@@ -348,7 +348,7 @@ public abstract class MixinCommands {
      * @param possible     The columns that the command should update
      */
     @Unique
-    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, Object2ObjectMap<String, Component> info, ObjectSet<String> possible) {
+    private void vanillaDisable$init$allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String row, String group, Object2ObjectMap<String, Component> info, ObjectSet<String> possible) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
             info.keySet().stream().filter(possible::contains).forEach((groupProperty ->
@@ -370,7 +370,7 @@ public abstract class MixinCommands {
      * @param info         The descriptions for the columns
      */
     @Unique
-    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, Component> info) {
+    private void vanillaDisable$init$allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, Component> info) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
             info.keySet().forEach((groupProperty ->
@@ -393,7 +393,7 @@ public abstract class MixinCommands {
      * @param argumentName The pattern that the rows must match
      */
     @Unique
-    private void allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, Component> info, String argumentName) {
+    private void vanillaDisable$init$allCols(LiteralArgumentBuilder<CommandSourceStack> groupBuilder, String table, String group, Object2ObjectMap<String, Component> info, String argumentName) {
         groupBuilder.then(literal("all").then(argument("value", BoolArgumentType.bool()).executes(context -> {
             String value = String.valueOf(BoolArgumentType.getBool(context, "value"));
             String pattern = StringArgumentType.getString(context, argumentName);
@@ -417,7 +417,7 @@ public abstract class MixinCommands {
      * @return The command builder
      */
     @Unique
-    private LiteralArgumentBuilder<CommandSourceStack> majorBuilder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, Object2ObjectMap<String, Component>> otherData, String table) {
+    private LiteralArgumentBuilder<CommandSourceStack> vanillaDisable$init$builder(String base, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, Object2ObjectMap<String, Component>> otherData, String table) {
         LiteralArgumentBuilder<CommandSourceStack> overallBuilder = literal(base);
         data.forEach((row, map) -> {
             LiteralArgumentBuilder<CommandSourceStack> rowBuilder = literal(row);
@@ -429,15 +429,15 @@ public abstract class MixinCommands {
                 properties.forEach((key, value) -> {
                     LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(key);
                     if (CommandDataHandler.stringColSuggestions.containsKey(key)) {
-                        execute(propertyBuilder, table, row, key, value, map.get(key), CommandDataHandler.stringColSuggestions.get(key));
+                        vanillaDisable$init$execute(propertyBuilder, table, row, key, value, map.get(key), CommandDataHandler.stringColSuggestions.get(key));
                     } else {
-                        execute(propertyBuilder, table, row, key, value, map.get(key),
+                        vanillaDisable$init$execute(propertyBuilder, table, row, key, value, map.get(key),
                                 CommandDataHandler.cols.get(table).get(key));
                     }
                     groupBuilder.then(propertyBuilder);
                 });
                 if (!CommandDataHandler.differentDataTypes.contains(group)) {
-                    allCols(groupBuilder, table, row, group, info, map.keySet());
+                    vanillaDisable$init$allCols(groupBuilder, table, row, group, info, map.keySet());
                 }
                 rowBuilder.then(groupBuilder);
             });
@@ -450,14 +450,14 @@ public abstract class MixinCommands {
             info.keySet().forEach((property) -> {
                 LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property);
                 if (CommandDataHandler.stringColSuggestions.containsKey(property)) {
-                    execute(propertyBuilder, table, property, CommandDataHandler.stringColSuggestions.get(property));
+                    vanillaDisable$init$execute(propertyBuilder, table, property, CommandDataHandler.stringColSuggestions.get(property));
                 } else {
-                    execute(propertyBuilder, table, property, CommandDataHandler.cols.get(table).get(property));
+                    vanillaDisable$init$execute(propertyBuilder, table, property, CommandDataHandler.cols.get(table).get(property));
                 }
                 groupBuilder.then(propertyBuilder);
             });
             if (!CommandDataHandler.differentDataTypes.contains(group)) {
-                allCols(groupBuilder, table, group, info);
+                vanillaDisable$init$allCols(groupBuilder, table, group, info);
             }
             allBuilder.then(groupBuilder);
         });
@@ -469,14 +469,14 @@ public abstract class MixinCommands {
             info.keySet().forEach((property) -> {
                 LiteralArgumentBuilder<CommandSourceStack> propertyBuilder = literal(property);
                 if (CommandDataHandler.stringColSuggestions.containsKey(property)) {
-                    execute(propertyBuilder, table, property, CommandDataHandler.stringColSuggestions.get(property), "pattern");
+                    vanillaDisable$init$execute(propertyBuilder, table, property, CommandDataHandler.stringColSuggestions.get(property), "pattern");
                 } else {
-                    execute(propertyBuilder, table, property, CommandDataHandler.cols.get(table).get(property), "pattern");
+                    vanillaDisable$init$execute(propertyBuilder, table, property, CommandDataHandler.cols.get(table).get(property), "pattern");
                 }
                 groupBuilder.then(propertyBuilder);
             });
             if (!CommandDataHandler.differentDataTypes.contains(group)) {
-                allCols(groupBuilder, table, group, info, "pattern");
+                vanillaDisable$init$allCols(groupBuilder, table, group, info, "pattern");
             }
             matchesBuilder.then(groupBuilder);
         });

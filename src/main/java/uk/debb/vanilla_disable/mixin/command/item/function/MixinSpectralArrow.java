@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(SpectralArrow.class)
 public abstract class MixinSpectralArrow {
     @Inject(method = "doPostHurtEffects", at = @At("HEAD"), cancellable = true)
-    private void doPostHurtEffects(CallbackInfo ci) {
+    private void vanillaDisable$doPostHurtEffects(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("items", "minecraft:spectral_arrow", "works")) {
             ci.cancel();
         }

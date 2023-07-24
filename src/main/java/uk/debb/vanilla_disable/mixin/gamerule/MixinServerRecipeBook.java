@@ -10,14 +10,14 @@ import uk.debb.vanilla_disable.data.gamerule.RegisterGamerules;
 @Mixin(ServerRecipeBook.class)
 public class MixinServerRecipeBook {
     @Inject(method = "loadRecipes", at = @At("HEAD"), cancellable = true)
-    private void loadRecipes(CallbackInfo ci) {
+    private void vanillaDisable$loadRecipes(CallbackInfo ci) {
         if (!RegisterGamerules.server.getGameRules().getBoolean(RegisterGamerules.RECIPE_BOOK_ENABLED)) {
             ci.cancel();
         }
     }
 
     @Inject(method = "sendRecipes", at = @At("HEAD"), cancellable = true)
-    private void sendRecipes(CallbackInfo ci) {
+    private void vanillaDisable$sendRecipes(CallbackInfo ci) {
         if (!RegisterGamerules.server.getGameRules().getBoolean(RegisterGamerules.RECIPE_BOOK_ENABLED)) {
             ci.cancel();
         }

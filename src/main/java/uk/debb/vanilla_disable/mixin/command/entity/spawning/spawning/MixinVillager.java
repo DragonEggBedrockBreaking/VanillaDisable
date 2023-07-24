@@ -9,7 +9,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Villager.class)
 public abstract class MixinVillager {
     @ModifyReturnValue(method = "wantsToSpawnGolem", at = @At("RETURN"))
-    private boolean wantsToSpawnGolem(boolean original) {
+    private boolean vanillaDisable$wantsToSpawnGolem(boolean original) {
         return original && CommandDataHandler.getCachedBoolean("entities", "minecraft:iron_golem", "spawned_by_villagers");
     }
 }

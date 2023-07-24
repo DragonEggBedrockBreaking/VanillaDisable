@@ -18,7 +18,7 @@ public abstract class MixinAbstractHorse {
             ),
             index = 2
     )
-    private Ingredient getIngredient(Ingredient original) {
+    private Ingredient vanillaDisable$TemptGoal(Ingredient original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         return CommandDataHandler.getCachedBreedingItems(entity);

@@ -13,7 +13,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(PistonBaseBlock.class)
 public abstract class MixinPistonBaseBlock {
     @Inject(method = "triggerEvent", at = @At("HEAD"), cancellable = true)
-    private void triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param, CallbackInfoReturnable<Boolean> cir) {
+    private void vanillaDisable$triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param, CallbackInfoReturnable<Boolean> cir) {
         String type = CommandDataHandler.getKeyFromBlockRegistry(state.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", type, "works")) {
             cir.setReturnValue(false);

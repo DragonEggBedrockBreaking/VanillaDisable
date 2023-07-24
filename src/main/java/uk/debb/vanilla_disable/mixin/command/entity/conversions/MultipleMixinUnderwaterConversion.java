@@ -13,7 +13,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin({Husk.class, Zombie.class})
 public abstract class MultipleMixinUnderwaterConversion {
     @Inject(method = "doUnderWaterConversion", at = @At("HEAD"), cancellable = true)
-    private void doUnderWaterConversion(CallbackInfo ci) {
+    private void vanillaDisable$doUnderWaterConversion(CallbackInfo ci) {
         String entity = ((Entity) (Object) this).getType().equals(EntityType.HUSK) ? "minecraft:zombie" : "minecraft:drowned";
         if (!CommandDataHandler.getCachedBoolean("entities", entity, "can_be_converted_to")) {
             ci.cancel();

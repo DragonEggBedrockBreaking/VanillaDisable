@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Enchantment.class)
 public abstract class MixinEnchantment {
     @ModifyReturnValue(method = "canEnchant", at = @At("RETURN"))
-    private boolean canEnchant(boolean original, ItemStack stack) {
+    private boolean vanillaDisable$canEnchant(boolean original, ItemStack stack) {
         if (CommandDataHandler.isConnectionNull()) return original;
         if (!stack.getItem().canBeDepleted()) return original;
         String item = "can_enchant_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromItemRegistry(stack.getItem()));

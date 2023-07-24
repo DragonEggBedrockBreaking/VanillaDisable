@@ -9,7 +9,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(AbstractPiglin.class)
 public abstract class MixinAbstractPiglin {
     @ModifyReturnValue(method = "isImmuneToZombification", at = @At("RETURN"))
-    private boolean isImmuneToZombification(boolean original) {
+    private boolean vanillaDisable$isImmuneToZombification(boolean original) {
         return original || !CommandDataHandler.getCachedBoolean("entities", "minecraft:zombified_piglin", "can_be_converted_to");
     }
 }

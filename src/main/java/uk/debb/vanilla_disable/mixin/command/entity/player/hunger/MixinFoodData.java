@@ -16,7 +16,7 @@ public abstract class MixinFoodData {
                     target = "Lnet/minecraft/world/level/Level;getDifficulty()Lnet/minecraft/world/Difficulty;"
             )
     )
-    private Difficulty getDifficulty(Difficulty original) {
+    private Difficulty vanillaDisable$getDifficulty(Difficulty original) {
         return CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") ?
                 Difficulty.PEACEFUL : original;
     }
@@ -28,7 +28,7 @@ public abstract class MixinFoodData {
                     target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z"
             )
     )
-    private boolean getBoolean(boolean original) {
+    private boolean vanillaDisable$getBoolean(boolean original) {
         return !CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") && original;
     }
 }

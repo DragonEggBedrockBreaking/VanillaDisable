@@ -19,7 +19,7 @@ public abstract class MixinArrow {
     public abstract void setEffectsFromItem(ItemStack itemStack);
 
     @Inject(method = "setEffectsFromItem", at = @At("HEAD"), cancellable = true)
-    private void setEffectsFromItem(ItemStack stack, CallbackInfo ci) {
+    private void vanillaDisable$setEffectsFromItem(ItemStack stack, CallbackInfo ci) {
         if (stack.is(Items.TIPPED_ARROW)) {
             String item = CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
             String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(PotionUtils.getPotion(stack))) + "_effect";

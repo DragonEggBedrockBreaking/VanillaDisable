@@ -17,7 +17,7 @@ public abstract class MixinOcelotTemptGoal {
             ),
             index = 2
     )
-    private static Ingredient getIngredient(Ingredient ingredient) {
+    private static Ingredient vanillaDisable$TemptGoal(Ingredient ingredient) {
         if (CommandDataHandler.isConnectionNull()) return ingredient;
         return CommandDataHandler.getCachedBreedingItems("minecraft:ocelot");
     }

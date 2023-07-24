@@ -17,7 +17,7 @@ public abstract class MixinNaturalSpawner {
                     target = "Lnet/minecraft/world/entity/MobCategory;getDespawnDistance()I"
             )
     )
-    private static int isValidPositionForMob(int original, ServerLevel serverLevel, Mob mob, double d) {
+    private static int vanillaDisable$getDespawnDistance(int original, ServerLevel serverLevel, Mob mob, double d) {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
         return CommandDataHandler.getCachedInt("entities", entity, "instant_despawn_distance");
     }

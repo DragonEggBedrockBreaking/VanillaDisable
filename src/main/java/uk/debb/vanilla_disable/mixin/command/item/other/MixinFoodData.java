@@ -16,7 +16,7 @@ public abstract class MixinFoodData {
     public abstract void eat(int i, float f);
 
     @Inject(method = "eat(Lnet/minecraft/world/item/Item;Lnet/minecraft/world/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
-    private void eat(Item item, ItemStack stack, CallbackInfo ci) {
+    private void vanillaDisable$eat(Item item, ItemStack stack, CallbackInfo ci) {
         if (item.isEdible()) {
             String name = CommandDataHandler.getKeyFromItemRegistry(item);
             int nutrition = CommandDataHandler.getCachedInt("items", name, "nutrition");

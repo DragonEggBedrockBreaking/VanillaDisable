@@ -23,7 +23,7 @@ public abstract class MixinBucketItem {
                     target = "Lnet/minecraft/world/level/dimension/DimensionType;ultraWarm()Z"
             )
     )
-    private boolean isNotUltraWarm(boolean original) {
+    private boolean vanillaDisable$ultraWarm(boolean original) {
         if ((this.content.equals(Fluids.WATER) || this.content.equals(Fluids.FLOWING_WATER)) && original) {
             return !CommandDataHandler.getCachedBoolean("blocks", "minecraft:water", "can_place_in_nether");
         }

@@ -21,7 +21,7 @@ public abstract class MixinAbstractVillager {
             ),
             require = 0
     )
-    private MerchantOffer increaseUses(MerchantOffer receiver) {
+    private MerchantOffer vanillaDisable$increaseUses(MerchantOffer receiver) {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         if (CommandDataHandler.getCachedBoolean("entities", entity, "can_infinitely_trade")) {
             return new MerchantOffer(new CompoundTag());

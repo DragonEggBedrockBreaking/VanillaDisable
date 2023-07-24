@@ -15,7 +15,7 @@ public abstract class MixinMob {
                     target = "Lnet/minecraft/world/entity/MobCategory;getNoDespawnDistance()I"
             )
     )
-    private int getNoDespawnDistance(int original) {
+    private int vanillaDisable$getNoDespawnDistance(int original) {
         Mob mob = (Mob) (Object) this;
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
         return CommandDataHandler.getCachedInt("entities", entity, "min_despawn_distance");
@@ -28,7 +28,7 @@ public abstract class MixinMob {
                     target = "Lnet/minecraft/world/entity/MobCategory;getDespawnDistance()I"
             )
     )
-    private int getDespawnDistance(int original) {
+    private int vanillaDisable$getDespawnDistance(int original) {
         Mob mob = (Mob) (Object) this;
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
         return CommandDataHandler.getCachedInt("entities", entity, "instant_despawn_distance");

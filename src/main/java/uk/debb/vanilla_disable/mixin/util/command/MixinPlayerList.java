@@ -20,7 +20,7 @@ public abstract class MixinPlayerList {
     public abstract void broadcastSystemMessage(Component component, boolean bl);
 
     @Inject(method = "placeNewPlayer", at = @At("RETURN"))
-    private void placeNewPlayer(Connection netManager, ServerPlayer player, CallbackInfo ci) {
+    private void vanillaDisable$placeNewPlayer(Connection netManager, ServerPlayer player, CallbackInfo ci) {
         if (CommandDataHandler.migrated) {
             CommandDataHandler.migrated = false;
             this.broadcastSystemMessage(

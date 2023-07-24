@@ -17,7 +17,7 @@ public abstract class MixinDragonStrafePlayerPhase {
                     target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"
             )
     )
-    private boolean spawnFreshEntity(Level instance, Entity entity) {
+    private boolean vanillaDisable$addFreshEntity(Level instance, Entity entity) {
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:ender_dragon", "can_shoot_fireballs")) {
             return false;
         }

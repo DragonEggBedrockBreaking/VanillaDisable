@@ -8,7 +8,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(targets = {"net.minecraft.world.inventory.GrindstoneMenu$4"})
 public abstract class MixinGrindstoneMenu {
     @ModifyReturnValue(method = "getExperienceAmount", at = @At("RETURN"))
-    private int getExperienceAmount(int original) {
+    private int vanillaDisable$getExperienceAmount(int original) {
         if (!CommandDataHandler.getCachedBoolean("blocks", "minecraft:grindstone", "can_drop_xp")) {
             return 0;
         }

@@ -14,7 +14,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Commands.class)
 public abstract class MixinCommands {
     @Inject(method = "performCommand", at = @At(value = "HEAD"), cancellable = true)
-    private void performCommand(ParseResults<CommandSourceStack> parseResults, String command, CallbackInfoReturnable<Integer> cir) {
+    private void vanillaDisable$performCommand(ParseResults<CommandSourceStack> parseResults, String command, CallbackInfoReturnable<Integer> cir) {
         if (!CommandDataHandler.commands.containsKey("/" + command.split(" ")[0])) return;
         if (!CommandDataHandler.getCachedBoolean("commands", "/" + command.split(" ")[0], "enabled")) {
             CommandDataHandler.server.getPlayerList().broadcastSystemMessage(Component.translatable("vd.commands.disabled.by.vd").withStyle(ChatFormatting.RED), false);

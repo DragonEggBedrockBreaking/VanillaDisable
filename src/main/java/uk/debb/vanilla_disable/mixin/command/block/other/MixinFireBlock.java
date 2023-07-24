@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(FireBlock.class)
 public abstract class MixinFireBlock {
     @ModifyReturnValue(method = "getBurnOdds", at = @At("RETURN"))
-    private int getBurnOdds(int original, BlockState state) {
+    private int vanillaDisable$getBurnOdds(int original, BlockState state) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(state.getBlock());
         return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)
@@ -19,7 +19,7 @@ public abstract class MixinFireBlock {
     }
 
     @ModifyReturnValue(method = "getIgniteOdds", at = @At("RETURN"))
-    private int getIgniteOdds(int original, BlockState state) {
+    private int vanillaDisable$getIgniteOdds(int original, BlockState state) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(state.getBlock());
         return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)

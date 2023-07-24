@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Mob.class)
 public abstract class MixinMob {
     @ModifyReturnValue(method = "isSunBurnTick", at = @At("RETURN"))
-    private boolean isSunBurnTick(boolean original) {
+    private boolean vanillaDisable$isSunBurnTick(boolean original) {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         return original && CommandDataHandler.getCachedBoolean("entities", entity, "burns_in_sunlight");
     }

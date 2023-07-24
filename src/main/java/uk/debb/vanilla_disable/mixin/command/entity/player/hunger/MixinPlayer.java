@@ -15,7 +15,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     @Inject(method = "eat", at = @At("HEAD"))
-    private void eat(Level level, ItemStack food, CallbackInfoReturnable<ItemStack> cir) {
+    private void vanillaDisable$eat(Level level, ItemStack food, CallbackInfoReturnable<ItemStack> cir) {
         FoodProperties properties = food.getItem().getFoodProperties();
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         if (food.getItem().isEdible() && properties != null && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
@@ -30,7 +30,7 @@ public abstract class MixinPlayer {
                     target = "Lnet/minecraft/world/food/FoodData;needsFood()Z"
             )
     )
-    private boolean needsFood(boolean original) {
+    private boolean vanillaDisable$needsFood(boolean original) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         return CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger") ?
                 livingEntity.getHealth() < livingEntity.getMaxHealth() : original;

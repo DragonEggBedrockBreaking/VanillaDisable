@@ -16,7 +16,7 @@ public abstract class MixinServerPlayerGameMode {
     protected ServerLevel level;
 
     @Inject(method = "destroyBlock", at = @At("HEAD"), cancellable = true)
-    private void destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private void vanillaDisable$destroyBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(
                 this.level.getBlockState(pos).getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "can_break")) {

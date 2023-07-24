@@ -13,7 +13,7 @@ public abstract class MixinItem {
     public abstract Item asItem();
 
     @ModifyReturnValue(method = "canAttackBlock", at = @At("RETURN"))
-    private boolean canAttackBlock(boolean original) {
+    private boolean vanillaDisable$canAttackBlock(boolean original) {
         String name = CommandDataHandler.getKeyFromItemRegistry(this.asItem());
         return CommandDataHandler.getCachedBoolean("items", name, "can_break_blocks_in_creative");
     }

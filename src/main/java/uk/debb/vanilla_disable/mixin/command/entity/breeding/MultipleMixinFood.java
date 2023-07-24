@@ -21,7 +21,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
         Rabbit.class, Sniffer.class, Strider.class, Turtle.class, Wolf.class})
 public abstract class MultipleMixinFood {
     @ModifyReturnValue(method = "isFood", at = @At("RETURN"))
-    private boolean isFood(boolean original, ItemStack stack) {
+    private boolean vanillaDisable$isFood(boolean original, ItemStack stack) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         String item = "can_breed_with_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromItemRegistry(stack.getItem()));

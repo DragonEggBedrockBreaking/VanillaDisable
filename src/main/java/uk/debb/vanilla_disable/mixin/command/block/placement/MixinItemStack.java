@@ -23,7 +23,7 @@ public abstract class MixinItemStack {
     public abstract Item getItem();
 
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
-    private void useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+    private void vanillaDisable$useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         ResourceLocation dimensionType = context.getLevel().dimensionType().effectsLocation();
         String name = "";
         if (this.getItem() instanceof BlockItem blockItem) {

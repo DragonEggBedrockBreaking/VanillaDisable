@@ -16,7 +16,7 @@ public abstract class MixinBlockStateBase {
     public abstract Block getBlock();
 
     @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
-    private void entityInside(CallbackInfo ci) {
+    private void vanillaDisable$entityInside(CallbackInfo ci) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "works")) {
             ci.cancel();
@@ -24,7 +24,7 @@ public abstract class MixinBlockStateBase {
     }
 
     @ModifyReturnValue(method = "getSignal", at = @At("RETURN"))
-    private int getSignal(int original) {
+    private int vanillaDisable$getSignal(int original) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "works")) {
             return 0;
@@ -33,7 +33,7 @@ public abstract class MixinBlockStateBase {
     }
 
     @ModifyReturnValue(method = "getDirectSignal", at = @At("RETURN"))
-    private int getDirectSignal(int original) {
+    private int vanillaDisable$getDirectSignal(int original) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "works")) {
             return 0;
@@ -42,7 +42,7 @@ public abstract class MixinBlockStateBase {
     }
 
     @ModifyReturnValue(method = "getAnalogOutputSignal", at = @At("RETURN"))
-    private int getAnalogOutputSignal(int original) {
+    private int vanillaDisable$getAnalogOutputSignal(int original) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "works")) {
             return 0;

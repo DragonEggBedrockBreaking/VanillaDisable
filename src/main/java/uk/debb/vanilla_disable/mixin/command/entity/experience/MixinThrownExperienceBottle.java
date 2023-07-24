@@ -17,7 +17,7 @@ public abstract class MixinThrownExperienceBottle {
                     target = "Lnet/minecraft/world/entity/ExperienceOrb;award(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;I)V"
             )
     )
-    private boolean award(ServerLevel level, Vec3 pos, int amount) {
+    private boolean vanillaDisable$award(ServerLevel level, Vec3 pos, int amount) {
         return CommandDataHandler.getCachedBoolean("entities", "minecraft:experience_bottle", "can_drop_xp");
     }
 }

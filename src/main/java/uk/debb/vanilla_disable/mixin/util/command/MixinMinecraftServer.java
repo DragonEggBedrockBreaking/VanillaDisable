@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(MinecraftServer.class)
 public class MixinMinecraftServer {
     @Inject(method = "createLevels", at = @At("RETURN"))
-    private void createLevels(CallbackInfo ci) {
+    private void vanillaDisable$createLevels(CallbackInfo ci) {
         CommandDataHandler.server = (MinecraftServer) (Object) this;
         CommandDataHandler.populateRegistries();
         if (!CommandDataHandler.populationDone) {
@@ -20,7 +20,7 @@ public class MixinMinecraftServer {
     }
 
     @Inject(method = "stopServer", at = @At("TAIL"))
-    private void stopServer(CallbackInfo ci) {
+    private void vanillaDisable$stopServer(CallbackInfo ci) {
         CommandDataHandler.migrated = false;
         CommandDataHandler.shouldMigrate = true;
         CommandDataHandler.closeConnection();

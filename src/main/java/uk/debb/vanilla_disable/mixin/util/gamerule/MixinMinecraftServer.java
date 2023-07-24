@@ -16,7 +16,7 @@ public abstract class MixinMinecraftServer {
                     target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"
             )
     )
-    private void beforeServerSetup(CallbackInfo ci) {
+    private void vanillaDisable$initServer(CallbackInfo ci) {
         RegisterGamerules.server = (MinecraftServer) (Object) this;
     }
 }

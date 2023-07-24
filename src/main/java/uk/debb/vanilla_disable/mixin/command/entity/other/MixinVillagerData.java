@@ -22,7 +22,7 @@ public abstract class MixinVillagerData {
     private VillagerProfession profession;
 
     @ModifyReturnValue(method = "getType", at = @At("RETURN"))
-    private VillagerType getType(VillagerType original) {
+    private VillagerType vanillaDisable$getType(VillagerType original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:villager",
                 CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.villagerTypeRegistry.getKey(type))) + "_type")) {
@@ -32,7 +32,7 @@ public abstract class MixinVillagerData {
     }
 
     @ModifyReturnValue(method = "getProfession", at = @At("RETURN"))
-    private VillagerProfession getProfession(VillagerProfession original) {
+    private VillagerProfession vanillaDisable$getProfession(VillagerProfession original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:villager",
                 CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.villagerProfessionRegistry.getKey(profession))) + "_profession")) {

@@ -20,13 +20,13 @@ import java.util.Objects;
 @Mixin(Player.class)
 public abstract class MixinPlayer {
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At(value = "RETURN"))
-    private boolean isInvulnerableTo(boolean original, DamageSource source) {
+    private boolean vanillaDisable$isInvulnerableTo(boolean original, DamageSource source) {
         return original || !CommandDataHandler.getCachedBoolean("entities", "minecraft:player",
                 CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.damageTypeRegistry.getKey(source.type()))) + "_damage");
     }
 
     @Inject(method = "attack", at = @At("RETURN"))
-    private void attack(Entity target, CallbackInfo ci) {
+    private void vanillaDisable$attack(Entity target, CallbackInfo ci) {
         if (target instanceof Creeper creeper && EnchantmentHelper.getFireAspect((Player) (Object) this) > 0 &&
                 CommandDataHandler.getCachedBoolean("entities", "minecraft:creeper", "can_be_lit_by_fire_aspect")) {
             creeper.ignite();
@@ -34,7 +34,7 @@ public abstract class MixinPlayer {
     }
 
     @Inject(method = "interactOn", at = @At("HEAD"), cancellable = true)
-    private void interactOn(Entity entityToInteractOn, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+    private void vanillaDisable$interactOn(Entity entityToInteractOn, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         String entityType = CommandDataHandler.getKeyFromEntityTypeRegistry(entityToInteractOn.getType());
         if (!CommandDataHandler.getCachedBoolean("entities", entityType, "can_player_interact")) {
             cir.setReturnValue(InteractionResult.FAIL);

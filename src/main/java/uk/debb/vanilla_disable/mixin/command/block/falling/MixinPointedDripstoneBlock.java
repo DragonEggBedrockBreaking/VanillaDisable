@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(PointedDripstoneBlock.class)
 public abstract class MixinPointedDripstoneBlock {
     @Inject(method = "spawnFallingStalactite", at = @At("HEAD"), cancellable = true)
-    private static void spawnFallingStalactite(CallbackInfo ci) {
+    private static void vanillaDisable$spawnFallingStalactite(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("blocks", "minecraft:pointed_dripstone", "can_fall")) {
             ci.cancel();
         }

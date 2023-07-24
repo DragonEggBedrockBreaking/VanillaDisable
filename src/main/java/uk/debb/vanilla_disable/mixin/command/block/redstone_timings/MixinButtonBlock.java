@@ -17,7 +17,7 @@ public abstract class MixinButtonBlock {
             ),
             index = 2
     )
-    private int editButtonPressDuration(int original) {
+    private int vanillaDisable$scheduleTick1(int original) {
         String name = CommandDataHandler.getKeyFromBlockRegistry((Block) (Object) this);
         return CommandDataHandler.getCachedInt("blocks", name, "redstone_duration");
     }
@@ -30,7 +30,7 @@ public abstract class MixinButtonBlock {
             ),
             index = 2
     )
-    private int modifyButtonPressDuration(int original) {
+    private int vanillaDisable$scheduleTick2(int original) {
         String name = CommandDataHandler.getKeyFromBlockRegistry((Block) (Object) this);
         return CommandDataHandler.getCachedInt("blocks", name, "redstone_duration");
     }

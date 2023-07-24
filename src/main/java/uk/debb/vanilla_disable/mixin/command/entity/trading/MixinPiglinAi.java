@@ -9,7 +9,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(PiglinAi.class)
 public abstract class MixinPiglinAi {
     @ModifyReturnValue(method = "isBarterCurrency", at = @At("RETURN"))
-    private static boolean isBarterCurrency(boolean original) {
+    private static boolean vanillaDisable$isBarterCurrency(boolean original) {
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:piglin", "can_trade")) {
             return false;
         }

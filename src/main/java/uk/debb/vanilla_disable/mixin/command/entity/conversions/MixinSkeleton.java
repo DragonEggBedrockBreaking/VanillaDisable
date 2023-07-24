@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Skeleton.class)
 public abstract class MixinSkeleton {
     @Inject(method = "doFreezeConversion", at = @At("HEAD"), cancellable = true)
-    private void doFreezeConversion(CallbackInfo ci) {
+    private void vanillaDisable$doFreezeConversion(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:stray", "can_be_converted_to")) {
             ci.cancel();
         }

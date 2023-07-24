@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 @Mixin(CreateWorldScreen.class)
 public abstract class MixinCreateWorldScreen {
     @Inject(method = "onCreate", at = @At("HEAD"))
-    private void onCreate(CallbackInfo ci) {
+    private void vanillaDisable$onCreate(CallbackInfo ci) {
         CommandDataHandler.shouldMigrate = false;
         WorldgenDataHandler.shouldMigrate = false;
         if (VanillaDisableConfig.worldLoadingScreen) {

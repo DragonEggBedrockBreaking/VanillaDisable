@@ -16,7 +16,7 @@ public abstract class MixinAbstractCauldronBlock {
                     target = "Lnet/minecraft/world/entity/player/Player;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"
             )
     )
-    private ItemStack getItemInHand(ItemStack original) {
+    private ItemStack vanillaDisable$getItemInHand(ItemStack original) {
         String name = CommandDataHandler.getKeyFromItemRegistry(original.getItem());
         if (!CommandDataHandler.getCachedBoolean("items", name, "cauldron_interaction")) {
             return ItemStack.EMPTY;

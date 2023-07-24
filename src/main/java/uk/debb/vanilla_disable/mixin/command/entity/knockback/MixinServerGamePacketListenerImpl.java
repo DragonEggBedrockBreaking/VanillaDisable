@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(ServerGamePacketListenerImpl.class)
 public abstract class MixinServerGamePacketListenerImpl {
     @Inject(method = "send(Lnet/minecraft/network/protocol/Packet;)V", at = @At("HEAD"), cancellable = true)
-    public void send(Packet<?> packet, CallbackInfo ci) {
+    public void vanillaDisable$send(Packet<?> packet, CallbackInfo ci) {
         if (packet instanceof ClientboundExplodePacket &&
                 !(CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "explosion_knockback"))) {
             ci.cancel();

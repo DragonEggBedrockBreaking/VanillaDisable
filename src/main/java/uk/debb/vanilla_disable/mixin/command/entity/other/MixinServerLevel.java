@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(ServerLevel.class)
 public abstract class MixinServerLevel {
     @ModifyReturnValue(method = "shouldDiscardEntity", at = @At("RETURN"))
-    private boolean shouldDiscardEntity(boolean original, Entity entity) {
+    private boolean vanillaDisable$shouldDiscardEntity(boolean original, Entity entity) {
         String entityName = CommandDataHandler.getKeyFromEntityTypeRegistry(entity.getType());
         return original || !CommandDataHandler.getCachedBoolean("entities", entityName, "can_exist");
     }

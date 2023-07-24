@@ -10,14 +10,14 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Entity.class)
 public abstract class MixinEntity {
     @Inject(method = "onAboveBubbleCol", at = @At("HEAD"), cancellable = true)
-    private void cancelAboveBubbleCol(CallbackInfo ci) {
+    private void vanillaDisable$onAboveBubbleCol(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("blocks", "minecraft:bubble_column", "works")) {
             ci.cancel();
         }
     }
 
     @Inject(method = "onInsideBubbleColumn", at = @At("HEAD"), cancellable = true)
-    private void cancelInsideBubbleCol(CallbackInfo ci) {
+    private void vanillaDisable$onInsideBubbleColumn(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("blocks", "minecraft:bubble_column", "works")) {
             ci.cancel();
         }

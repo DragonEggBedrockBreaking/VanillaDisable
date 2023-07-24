@@ -9,7 +9,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Enchantment.class)
 public abstract class MixinEnchantment {
     @ModifyReturnValue(method = "isCompatibleWith", at = @At("RETURN"))
-    private boolean isCompatibleWith(boolean original, Enchantment other) {
+    private boolean vanillaDisable$isCompatibleWith(boolean original, Enchantment other) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String enchantment = CommandDataHandler.getKeyFromEnchantmentRegistry((Enchantment) (Object) this);
         String otherEnchantment = "compatible_with_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromEnchantmentRegistry(other));

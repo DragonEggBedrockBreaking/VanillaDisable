@@ -16,7 +16,7 @@ public abstract class MixinObserverBlock {
             ),
             index = 2
     )
-    private int scheduleTick1(int delay) {
+    private int vanillaDisable$scheduleTick1(int delay) {
         return CommandDataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_delay");
     }
 
@@ -27,7 +27,7 @@ public abstract class MixinObserverBlock {
                     target = "Lnet/minecraft/server/level/ServerLevel;scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;I)V"
             )
     )
-    private int scheduleTick2(int duration) {
+    private int vanillaDisable$scheduleTick2(int duration) {
         return CommandDataHandler.getCachedInt("blocks", "minecraft:observer", "redstone_duration");
     }
 }

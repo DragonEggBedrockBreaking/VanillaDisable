@@ -16,7 +16,7 @@ public abstract class MixinLivingEntity {
     private @Nullable LivingEntity lastHurtByMob;
 
     @Inject(method = "knockback", at = @At("HEAD"), cancellable = true)
-    public void knockback(CallbackInfo ci) {
+    public void vanillaDisable$knockback(CallbackInfo ci) {
         String target = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
         if (this.lastHurtByMob != null) {
             String source = CommandDataHandler.getKeyFromEntityTypeRegistry(this.lastHurtByMob.getType());

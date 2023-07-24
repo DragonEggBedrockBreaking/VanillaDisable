@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(DispenserBlock.class)
 public abstract class MixinDispenserBlock {
     @ModifyReturnValue(method = "getDispenseMethod", at = @At("RETURN"))
-    private DispenseItemBehavior getDispenseMethod(DispenseItemBehavior original, ItemStack stack) {
+    private DispenseItemBehavior vanillaDisable$getDispenseMethod(DispenseItemBehavior original, ItemStack stack) {
         String name = CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
         if (!CommandDataHandler.getCachedBoolean("items", name, "dispenser_interaction")) {
             return new DefaultDispenseItemBehavior();

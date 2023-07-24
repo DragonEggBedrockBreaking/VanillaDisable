@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 @Mixin(ServerLevel.class)
 public abstract class MixinServerLevel {
     @Inject(method = "makeObsidianPlatform", at = @At("HEAD"), cancellable = true)
-    private static void makeObsidianPlatform(CallbackInfo ci) {
+    private static void vanillaDisable$makeObsidianPlatform(CallbackInfo ci) {
         if (!WorldgenDataHandler.get("placed_features", "obsidian_platform")) {
             ci.cancel();
         }

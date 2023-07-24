@@ -18,7 +18,7 @@ import java.util.Collection;
 @Mixin(GiveCommand.class)
 public abstract class MixinGiveCommand {
     @Inject(method = "giveItem", at = @At("HEAD"))
-    private static void giveItem(CommandSourceStack source, ItemInput item, Collection<ServerPlayer> targets, int count, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
+    private static void vanillaDisable$giveItem(CommandSourceStack source, ItemInput item, Collection<ServerPlayer> targets, int count, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
         String name = CommandDataHandler.getKeyFromItemRegistry(item.getItem());
         if (!CommandDataHandler.getCachedBoolean("items", name, "can_be_given_by_command")) {
             throw new SimpleCommandExceptionType(Component.translatable("vd.commands.give.disabled")).create();

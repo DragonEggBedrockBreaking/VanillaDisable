@@ -30,7 +30,7 @@ public abstract class MixinBaseSpawner {
                     target = "Lnet/minecraft/world/level/BaseSpawner;isNearPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z"
             )
     )
-    private boolean isNearPlayer(boolean original, ServerLevel serverLevel, BlockPos pos) {
+    private boolean vanillaDisable$isNearPlayer(boolean original, ServerLevel serverLevel, BlockPos pos) {
         CompoundTag compoundTag = this.getOrCreateNextSpawnData(serverLevel, serverLevel.getRandom(), pos).getEntityToSpawn();
         Entity entity = EntityType.loadEntityRecursive(compoundTag, serverLevel, Function.identity());
         if (entity != null) {

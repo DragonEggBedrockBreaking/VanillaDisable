@@ -17,7 +17,7 @@ public abstract class MixinItemStack {
                     target = "Lnet/minecraft/world/item/ItemStack;getItem()Lnet/minecraft/world/item/Item;"
             )
     )
-    private Item getItem(Item original) {
+    private Item vanillaDisable$getItem(Item original) {
         String item = CommandDataHandler.getKeyFromItemRegistry(original);
         if (!CommandDataHandler.getCachedBoolean("items", item, "works")) {
             return Items.AIR;

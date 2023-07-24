@@ -17,7 +17,7 @@ public abstract class MixinItemEntity {
     private int pickupDelay;
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void tick(CallbackInfo ci) {
+    private void vanillaDisable$tick(CallbackInfo ci) {
         Entity entity = (Entity) (Object) this;
         if (this.age >= CommandDataHandler.getCachedInt("entities", "minecraft:item", "despawn_time") && !entity.level().isClientSide()) {
             entity.discard();
@@ -33,7 +33,7 @@ public abstract class MixinItemEntity {
             ),
             cancellable = true
     )
-    private void discard(CallbackInfo ci) {
+    private void vanillaDisable$discard(CallbackInfo ci) {
         if (this.pickupDelay != Short.MAX_VALUE && this.age < CommandDataHandler.getCachedInt("entities", "minecraft:item", "despawn_time")) {
             ci.cancel();
         }

@@ -23,21 +23,21 @@ public abstract class MixinBlock {
     protected abstract Block asBlock();
 
     @ModifyReturnValue(method = "getFriction", at = @At("RETURN"))
-    private float getFriction(float original) {
+    private float vanillaDisable$getFriction(float original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.asBlock());
         return (float) CommandDataHandler.getCachedDouble("blocks", block, "friction_factor");
     }
 
     @ModifyReturnValue(method = "getSpeedFactor", at = @At("RETURN"))
-    private float getSpeedFactor(float original) {
+    private float vanillaDisable$getSpeedFactor(float original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.asBlock());
         return (float) CommandDataHandler.getCachedDouble("blocks", block, "speed_factor");
     }
 
     @ModifyReturnValue(method = "getJumpFactor", at = @At("RETURN"))
-    private float getJumpFactor(float original) {
+    private float vanillaDisable$getJumpFactor(float original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.asBlock());
         return (float) CommandDataHandler.getCachedDouble("blocks", block, "jump_factor");
@@ -45,7 +45,7 @@ public abstract class MixinBlock {
 
 
     @Inject(method = "playerDestroy", at = @At("HEAD"), cancellable = true)
-    private void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack tool, CallbackInfo ci) {
+    private void vanillaDisable$playerDestroy(Level level, Player player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack tool, CallbackInfo ci) {
         if (state.is(Blocks.TNT) && CommandDataHandler.getCachedBoolean("blocks", "minecraft:tnt", "alpha_behaviour")) {
             TntBlock.explode(level, pos);
             ci.cancel();

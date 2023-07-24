@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(DropperBlock.class)
 public abstract class MixinDropperBlock {
     @Inject(method = "dispenseFrom", at = @At("HEAD"), cancellable = true)
-    private void dispenseFrom(CallbackInfo ci) {
+    private void vanillaDisable$dispenseFrom(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("blocks", "minecraft:dropper", "works")) {
             ci.cancel();
         }

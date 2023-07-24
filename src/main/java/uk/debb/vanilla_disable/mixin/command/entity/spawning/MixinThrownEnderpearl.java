@@ -17,7 +17,7 @@ public abstract class MixinThrownEnderpearl {
             ),
             cancellable = true
     )
-    private void discard(CallbackInfo ci) {
+    private void vanillaDisable$discard(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:ender_pearl", "despawn_on_player_death")) {
             ci.cancel();
         }

@@ -16,7 +16,7 @@ public abstract class MixinVillager {
                     target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
             )
     )
-    private Difficulty getWrongDifficulty(Difficulty original) {
+    private Difficulty vanillaDisable$getDifficulty(Difficulty original) {
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:witch", "can_be_converted_to")) {
             return Difficulty.PEACEFUL;
         }

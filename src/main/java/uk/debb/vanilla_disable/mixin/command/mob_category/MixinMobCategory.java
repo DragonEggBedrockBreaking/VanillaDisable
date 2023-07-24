@@ -13,7 +13,7 @@ public abstract class MixinMobCategory {
     public abstract String getName();
 
     @ModifyReturnValue(method = "getMaxInstancesPerChunk", at = @At("RETURN"))
-    private int getMaxInstancesPerChunk(int original) {
+    private int vanillaDisable$getMaxInstancesPerChunk(int original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         return CommandDataHandler.getCachedInt("mob_categories", this.getName(), "mobcap");
     }

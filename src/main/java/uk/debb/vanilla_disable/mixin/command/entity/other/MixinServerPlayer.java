@@ -16,7 +16,7 @@ import java.util.Objects;
 @Mixin(ServerPlayer.class)
 public abstract class MixinServerPlayer {
     @Inject(method = "awardStat", at = @At("HEAD"), cancellable = true)
-    private void awardStat(Stat<?> stat, int increment, CallbackInfo ci) {
+    private void vanillaDisable$awardStat(Stat<?> stat, int increment, CallbackInfo ci) {
         if (stat.getType().equals(Stats.CUSTOM)) {
             if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:player",
                     CommandDataHandler.lightCleanup(stat.getName().split(":")[1].replace(".", ":")) + "_custom_stat")) {
@@ -31,7 +31,7 @@ public abstract class MixinServerPlayer {
     }
 
     @Inject(method = "die", at = @At("HEAD"), cancellable = true)
-    private void die(DamageSource damageSource, CallbackInfo ci) {
+    private void vanillaDisable$die(DamageSource damageSource, CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:player",
                 CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.damageTypeRegistry.getKey(damageSource.type()))) + "_death")) {
             ((Player) (Object) this).setHealth(1);

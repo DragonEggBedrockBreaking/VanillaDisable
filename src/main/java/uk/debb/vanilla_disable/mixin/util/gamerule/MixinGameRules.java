@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.data.gamerule.RegisterGamerules;
 @Mixin(GameRules.class)
 public abstract class MixinGameRules {
     @Inject(method = "loadFromTag", at = @At("HEAD"))
-    private void loadFromTag(DynamicLike<?> dynamic, CallbackInfo ci) {
+    private void vanillaDisable$loadFromTag(DynamicLike<?> dynamic, CallbackInfo ci) {
         if (RegisterGamerules.server == null) return;
 
         GameruleMigrationDataHandler.sqlData.forEach(rule -> rule.value = "");

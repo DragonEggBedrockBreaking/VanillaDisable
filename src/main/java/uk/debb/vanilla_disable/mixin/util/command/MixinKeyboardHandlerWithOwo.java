@@ -25,7 +25,7 @@ public abstract class MixinKeyboardHandlerWithOwo {
     private Minecraft minecraft;
 
     @Inject(method = "keyPress", at = @At("RETURN"))
-    private void keyPress(CallbackInfo ci) {
+    private void vanillaDisable$keyPress(CallbackInfo ci) {
         if (CommandConfigHotkeyManager.isPressed()) {
             if (!this.minecraft.hasSingleplayerServer()) {
                 Objects.requireNonNull(this.minecraft.player).displayClientMessage(Component.translatable("vd.key.cannot_press").withStyle(ChatFormatting.RED), true);

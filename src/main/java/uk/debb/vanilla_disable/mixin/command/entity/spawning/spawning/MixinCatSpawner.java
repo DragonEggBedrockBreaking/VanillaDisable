@@ -16,7 +16,7 @@ public abstract class MixinCatSpawner {
                     target = "Lnet/minecraft/world/entity/EntityType;create(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/Entity;"
             )
     )
-    private Entity create(Entity original) {
+    private Entity vanillaDisable$create(Entity original) {
         return CommandDataHandler.getCachedBoolean("entities", "minecraft:cat", "spawned_by_villagers") ? original : null;
     }
 }

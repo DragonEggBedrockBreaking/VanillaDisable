@@ -16,7 +16,7 @@ public abstract class MixinBlockStateBase {
     public abstract Block getBlock();
 
     @ModifyReturnValue(method = "getPistonPushReaction", at = @At("RETURN"))
-    private PushReaction getPistonPushReaction(PushReaction original) {
+    private PushReaction vanillaDisable$getPistonPushReaction(PushReaction original) {
         Block block = this.getBlock();
         if (CommandDataHandler.isConnectionNull()) {
             if (block.equals(Blocks.OBSIDIAN) || block.equals(Blocks.CRYING_OBSIDIAN) || block.equals(Blocks.RESPAWN_ANCHOR) ||

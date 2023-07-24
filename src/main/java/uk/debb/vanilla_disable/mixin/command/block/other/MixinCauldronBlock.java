@@ -9,12 +9,12 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(CauldronBlock.class)
 public abstract class MixinCauldronBlock {
     @ModifyReturnValue(method = "shouldHandlePrecipitation", at = @At("RETURN"))
-    private static boolean shouldHandlePrecipitation(boolean original) {
+    private static boolean vanillaDisable$shouldHandlePrecipitation(boolean original) {
         return original && CommandDataHandler.getCachedBoolean("blocks", "minecraft:cauldron", "can_be_filled_by_precipitation");
     }
 
     @ModifyReturnValue(method = "canReceiveStalactiteDrip", at = @At("RETURN"))
-    private boolean canReceiveStalactiteDrip(boolean original) {
+    private boolean vanillaDisable$canReceiveStalactiteDrip(boolean original) {
         return CommandDataHandler.getCachedBoolean("blocks", "minecraft:cauldron", "can_be_filled_by_dripstone");
     }
 }

@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.gamerule.RegisterGamerules;
 @Mixin(Raid.class)
 public abstract class MixinRaid {
     @ModifyReturnValue(method = "getNumGroups", at = @At("RETURN"))
-    private int modifyNumGroups(int original, Difficulty difficulty) {
+    private int vanillaDisable$getNumGroups(int original, Difficulty difficulty) {
         return switch (difficulty) {
             case PEACEFUL -> 0;
             case EASY -> RegisterGamerules.server.getGameRules().getInt(RegisterGamerules.RAID_WAVES_EASY) - 1;

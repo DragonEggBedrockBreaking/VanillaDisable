@@ -12,7 +12,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(Mob.class)
 public abstract class MixinMob {
     @Unique
-    private boolean additionalRestrictionsMet() {
+    private boolean vanillaDisable$checkDespawn$additionalRestrictionsMet() {
         if (((Entity) (Object) this).hasCustomName()) return false;
         if (this instanceof Bucketable bucketable) return !bucketable.fromBucket();
         return true;
@@ -25,8 +25,8 @@ public abstract class MixinMob {
                     target = "Lnet/minecraft/world/entity/Mob;removeWhenFarAway(D)Z"
             )
     )
-    private boolean removeWhenFarAway(boolean original) {
+    private boolean vanillaDisable$removeWhenFarAway(boolean original) {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        return CommandDataHandler.getCachedBoolean("entities", entity, "can_despawn") && additionalRestrictionsMet();
+        return CommandDataHandler.getCachedBoolean("entities", entity, "can_despawn") && vanillaDisable$checkDespawn$additionalRestrictionsMet();
     }
 }

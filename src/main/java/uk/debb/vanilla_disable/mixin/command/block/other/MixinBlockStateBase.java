@@ -18,7 +18,7 @@ public abstract class MixinBlockStateBase {
     public abstract Block getBlock();
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void modifyUse(CallbackInfoReturnable<InteractionResult> cir) {
+    private void vanillaDisable$use(CallbackInfoReturnable<InteractionResult> cir) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "can_interact")) {
             cir.setReturnValue(InteractionResult.FAIL);
@@ -26,7 +26,7 @@ public abstract class MixinBlockStateBase {
     }
 
     @ModifyReturnValue(method = "getMenuProvider", at = @At("RETURN"))
-    private MenuProvider modifyMenuProvider(MenuProvider original) {
+    private MenuProvider vanillaDisable$modifyMenuProvider(MenuProvider original) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "can_interact")) {
             return null;
@@ -35,21 +35,21 @@ public abstract class MixinBlockStateBase {
     }
 
     @ModifyReturnValue(method = "ignitedByLava", at = @At("RETURN"))
-    private boolean ignitedByLava(boolean original) {
+    private boolean vanillaDisable$ignitedByLava(boolean original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         return CommandDataHandler.getCachedBoolean("blocks", block, "ignited_by_lava");
     }
 
     @ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
-    private float getDestroySpeed(float original) {
+    private float vanillaDisable$getDestroySpeed(float original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         return (float) CommandDataHandler.getCachedDouble("blocks", block, "destroy_speed");
     }
 
     @ModifyReturnValue(method = "requiresCorrectToolForDrops", at = @At("RETURN"))
-    private boolean requiresCorrectToolForDrops(boolean original) {
+    private boolean vanillaDisable$requiresCorrectToolForDrops(boolean original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         return CommandDataHandler.getCachedBoolean("blocks", block, "requires_correct_tool_for_drops");

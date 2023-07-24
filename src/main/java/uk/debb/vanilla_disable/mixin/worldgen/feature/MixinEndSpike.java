@@ -9,7 +9,7 @@ import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 @Mixin(SpikeFeature.EndSpike.class)
 public abstract class MixinEndSpike {
     @ModifyReturnValue(method = "isGuarded", at = @At("RETURN"))
-    private boolean isGuarded(boolean original) {
+    private boolean vanillaDisable$isGuarded(boolean original) {
         return original && WorldgenDataHandler.get("placed_features", "end_spike_cage");
     }
 }

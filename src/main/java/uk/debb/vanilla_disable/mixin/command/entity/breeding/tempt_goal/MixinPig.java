@@ -21,7 +21,7 @@ public abstract class MixinPig {
             ),
             index = 2
     )
-    private Ingredient getIngredient(Ingredient original) {
+    private Ingredient vanillaDisable$TemptGoal(Ingredient original) {
         if (CommandDataHandler.isConnectionNull()) return original;
         return CommandDataHandler.getCachedBreedingItems("minecraft:pig");
     }
@@ -34,7 +34,7 @@ public abstract class MixinPig {
                     ordinal = 3
             )
     )
-    private boolean shouldRegisterGoal(GoalSelector goalSelector, int priority, Goal goal) {
+    private boolean vanillaDisable$addGoal(GoalSelector goalSelector, int priority, Goal goal) {
         return false;
     }
 }

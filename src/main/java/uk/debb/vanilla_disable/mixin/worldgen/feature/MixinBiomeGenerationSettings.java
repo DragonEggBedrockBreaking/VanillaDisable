@@ -12,7 +12,7 @@ import java.util.Objects;
 @Mixin(BiomeGenerationSettings.class)
 public abstract class MixinBiomeGenerationSettings {
     @ModifyReturnValue(method = "hasFeature", at = @At("RETURN"))
-    private boolean hasFeature(boolean original, PlacedFeature feature) {
+    private boolean vanillaDisable$hasFeature(boolean original, PlacedFeature feature) {
         String rule = WorldgenDataHandler.cleanup(Objects.requireNonNull(WorldgenDataHandler.placedFeatureRegistry.getKey(feature)));
         if (!WorldgenDataHandler.get("placed_features", rule)) {
             return false;

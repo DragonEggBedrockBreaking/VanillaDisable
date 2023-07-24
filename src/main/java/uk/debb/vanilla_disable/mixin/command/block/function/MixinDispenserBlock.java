@@ -10,7 +10,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(DispenserBlock.class)
 public abstract class MixinDispenserBlock {
     @Inject(method = "dispenseFrom", at = @At("HEAD"), cancellable = true)
-    private void dispenseFrom(CallbackInfo ci) {
+    private void vanillaDisable$dispenseFrom(CallbackInfo ci) {
         if (!CommandDataHandler.getCachedBoolean("blocks", "minecraft:dispenser", "works")) {
             ci.cancel();
         }

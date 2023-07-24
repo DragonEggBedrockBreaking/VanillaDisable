@@ -16,7 +16,7 @@ public abstract class MixinVillager {
                     target = "Ljava/util/Set;contains(Ljava/lang/Object;)Z"
             )
     )
-    private boolean contains(boolean original, ItemStack stack) {
+    private boolean vanillaDisable$contains(boolean original, ItemStack stack) {
         String name = "can_breed_with_" + CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
         return CommandDataHandler.getCachedBoolean("entities", "minecraft:villager", name);
     }

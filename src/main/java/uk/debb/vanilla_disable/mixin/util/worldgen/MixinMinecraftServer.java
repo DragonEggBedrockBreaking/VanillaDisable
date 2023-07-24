@@ -18,13 +18,13 @@ public abstract class MixinMinecraftServer {
                     target = "Lnet/minecraft/server/MinecraftServer;initServer()Z"
             )
     )
-    private void initServer(CallbackInfo ci) {
+    private void vanillaDisable$initServer(CallbackInfo ci) {
         WorldgenDataHandler.server = (MinecraftServer) (Object) this;
         WorldgenDataHandler.init();
     }
 
     @Inject(method = "createLevels", at = @At("HEAD"))
-    private void createLevels(CallbackInfo ci) {
+    private void vanillaDisable$createLevels(CallbackInfo ci) {
         while (!WorldgenDataHandler.continueGeneration) {
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
@@ -35,7 +35,7 @@ public abstract class MixinMinecraftServer {
     }
 
     @Inject(method = "stopServer", at = @At("TAIL"))
-    private void stopServer(CallbackInfo ci) {
+    private void vanillaDisable$stopServer(CallbackInfo ci) {
         WorldgenDataHandler.shouldMigrate = true;
     }
 }

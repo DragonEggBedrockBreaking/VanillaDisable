@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(NaturalSpawner.class)
 public abstract class MixinNaturalSpawner {
     @ModifyReturnValue(method = "isValidPositionForMob", at = @At("RETURN"))
-    private static boolean isValidPositionForMob(boolean original, ServerLevel serverLevel, Mob mob, double d) {
+    private static boolean vanillaDisable$isValidPositionForMob(boolean original, ServerLevel serverLevel, Mob mob, double d) {
         String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(mob.getType());
         return original && CommandDataHandler.getCachedBoolean("entities", entity, "can_spawn");
     }

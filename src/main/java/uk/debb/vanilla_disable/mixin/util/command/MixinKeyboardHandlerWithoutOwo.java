@@ -24,7 +24,7 @@ public abstract class MixinKeyboardHandlerWithoutOwo {
     private Minecraft minecraft;
 
     @Inject(method = "keyPress", at = @At("RETURN"))
-    private void keyPress(CallbackInfo ci) {
+    private void vanillaDisable$keyPress(CallbackInfo ci) {
         if (CommandConfigHotkeyManager.isPressed()) {
             Objects.requireNonNull(this.minecraft.player).displayClientMessage(Component.translatable("vd.key.cannot_open_gui").withStyle(ChatFormatting.RED), true);
         }

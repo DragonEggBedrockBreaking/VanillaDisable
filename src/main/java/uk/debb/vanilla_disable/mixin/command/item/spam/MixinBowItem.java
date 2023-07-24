@@ -9,12 +9,12 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 @Mixin(BowItem.class)
 public abstract class MixinBowItem {
     @ModifyReturnValue(method = "getPowerForTime", at = @At("RETURN"))
-    private static float getPowerForTime(float original) {
+    private static float vanillaDisable$getPowerForTime(float original) {
         return CommandDataHandler.getCachedBoolean("items", "minecraft:bow", "can_spam") ? 1.0F : original;
     }
 
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
-    private int getUseDuration(int original) {
+    private int vanillaDisable$getUseDuration(int original) {
         return CommandDataHandler.getCachedBoolean("items", "minecraft:bow", "can_spam") ? 4 : original;
     }
 }
