@@ -14,4 +14,4 @@ The wiki page contains information for development, more detailed installation i
 
 ## License
 
-This mod is available under the [MPL 2.0](LICENSE.txt) license.
+This mod is available under the [MPL 2.0](LICENSE) license.
