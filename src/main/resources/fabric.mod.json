@@ -36,8 +36,7 @@
     ]
   },
   "mixins": [
-    "vanilla_disable.mixins.json",
-    "vanilla_disable_conditional.mixins.json"
+    "vanilla_disable.mixins.json"
   ],
   "accessWidener": "vanilla_disable.aw",
   "depends": {
