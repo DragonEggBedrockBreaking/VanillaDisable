@@ -21,11 +21,13 @@ public class LangFileManager implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         try {
+            File outerrpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile");
+            FileUtils.deleteDirectory(outerrpackdir);
+
             if (!FabricLoader.getInstance().isModLoaded("fabric-resource-loader-v0")) {
-                File outerrpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile");
-                FileUtils.deleteDirectory(outerrpackdir);
                 File rpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile/assets/vanilladisablelangfile/lang");
                 if (!rpackdir.mkdirs()) return;
+
                 languages.forEach(language -> {
                     InputStream inputUrl = LangFileManager.class.getResourceAsStream("/assets/vanilla_disable/lang/" + language + ".json");
                     Path dest = new File(rpackdir + "/" + language + ".json").toPath();
@@ -37,6 +39,7 @@ public class LangFileManager implements ClientModInitializer {
                         }
                     }
                 });
+
                 int version = SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES);
                 String content = "{\"pack\":{\"pack_format\":" + version + ",\"description\":\"Vanilla Disable Language File\"}}";
                 String mcmetaPath = new File(outerrpackdir + "/pack.mcmeta").toString();
