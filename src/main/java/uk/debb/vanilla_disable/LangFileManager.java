@@ -30,7 +30,7 @@ public class LangFileManager implements ClientModInitializer {
             boolean exists = outerrpackdir.exists();
             FileUtils.deleteDirectory(outerrpackdir);
 
-            if (FabricLoader.getInstance().isModLoaded("fabric-resource-loader-v0") && !FabricLoader.getInstance().isModLoaded("quilt_resource_loader")) {
+            if (!FabricLoader.getInstance().isModLoaded("fabric-resource-loader-v0") && !FabricLoader.getInstance().isModLoaded("quilt_resource_loader")) {
                 File rpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile/assets/vanilladisablelangfile/lang");
                 if (!rpackdir.mkdirs()) return;
 
