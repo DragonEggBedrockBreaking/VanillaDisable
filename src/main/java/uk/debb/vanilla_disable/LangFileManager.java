@@ -60,7 +60,7 @@ public class LangFileManager implements ClientModInitializer {
                 mcmetaWriter.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
