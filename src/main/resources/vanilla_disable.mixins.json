@@ -129,8 +129,9 @@
     "worldgen.structure.MixinStructureManager"
   ],
   "client": [
-    "util.command.MixinKeyboardHandlerWithOwo",
     "util.command.MixinKeyboardHandlerWithoutOwo",
+    "util.command.MixinKeyboardHandlerWithOwo",
+    "util.other.MixinMinecraft",
     "util.worldgen.MixinCreateWorldScreen",
     "util.worldgen.MixinMinecraft"
   ],
