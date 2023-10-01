@@ -6,6 +6,7 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.players.PlayerList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,7 +21,7 @@ public abstract class MixinPlayerList {
     public abstract void broadcastSystemMessage(Component component, boolean bl);
 
     @Inject(method = "placeNewPlayer", at = @At("RETURN"))
-    private void vanillaDisable$placeNewPlayer(Connection netManager, ServerPlayer player, CallbackInfo ci) {
+    private void vanillaDisable$placeNewPlayer(Connection connection, ServerPlayer serverPlayer, CommonListenerCookie commonListenerCookie, CallbackInfo ci) {
         if (CommandDataHandler.migrated) {
             CommandDataHandler.migrated = false;
             this.broadcastSystemMessage(

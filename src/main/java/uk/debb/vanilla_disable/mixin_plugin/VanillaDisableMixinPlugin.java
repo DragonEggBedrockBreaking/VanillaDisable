@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public class VanillaDisableMixinPlugin implements IMixinConfigPlugin {
-    CaffeineConfigMixinPlugin caffeineConfigMixinPlugin = new CaffeineConfigMixinPlugin();
-    ConditionalMixinMixinPlugin conditionalMixinMixinPlugin = new ConditionalMixinMixinPlugin();
+    final CaffeineConfigMixinPlugin caffeineConfigMixinPlugin = new CaffeineConfigMixinPlugin();
+    final ConditionalMixinMixinPlugin conditionalMixinMixinPlugin = new ConditionalMixinMixinPlugin();
 
     @Override
     public void onLoad(String mixinPackage) {

@@ -138,7 +138,7 @@ public class CommandConfigColumnScreen extends BaseOwoScreen<FlowLayout> {
                 }
                 entries.child(entry.tooltip(description));
             });
-            if (entries.children().size() > 0) {
+            if (!entries.children().isEmpty()) {
                 overall.child(Containers.collapsible(Sizing.fill(100), Sizing.content(), Component.literal(group).withStyle(ChatFormatting.GREEN), true).child(entries));
             }
         });

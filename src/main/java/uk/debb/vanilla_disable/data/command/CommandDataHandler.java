@@ -626,7 +626,7 @@ public class CommandDataHandler {
                 }}));
 
         server.getAdvancements().getAllAdvancements().forEach(advancement -> {
-            String name = advancement.getId().toString();
+            String name = advancement.id().toString();
             if (!name.contains("recipe")) {
                 advancements.put(name, new Object2ObjectOpenHashMap<>() {{
                     put("enabled", "true");
@@ -1034,7 +1034,7 @@ public class CommandDataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setValue(String table, String row, String column, String value, boolean isString) {
-        if (table.equals("") || row.equals("") || column.equals("") || value.equals("")) return;
+        if (table.isEmpty() || row.isEmpty() || column.isEmpty() || value.isEmpty()) return;
         invalidateCaches();
         if (isString) {
             value = "'" + value + "'";
@@ -1057,7 +1057,7 @@ public class CommandDataHandler {
      * @param isString Whether the value is a string.
      */
     public static void setAll(String table, String column, String value, boolean isString) {
-        if (table.equals("") || column.equals("") || value.equals("")) return;
+        if (table.isEmpty() || column.isEmpty() || value.isEmpty()) return;
         invalidateCaches();
         if (isString) {
             value = "'" + value + "'";
@@ -1081,7 +1081,7 @@ public class CommandDataHandler {
      * @param pattern  The pattern to match.
      */
     public static void setMatching(String table, String column, String value, boolean isString, String pattern) {
-        if (table.equals("") || column.equals("") || value.equals("") || pattern.equals("")) return;
+        if (table.isEmpty() || column.isEmpty() || value.isEmpty() || pattern.isEmpty()) return;
         invalidateCaches();
         if (pattern.contains(";") || pattern.contains("SELECT") || pattern.contains("ALTER")) {
             throw new RuntimeException("SQL injection attempted. Command not executed.");

@@ -39,7 +39,7 @@ public abstract class MixinItemStack {
         if (name.equals("minecraft:powder_snow_bucket")) {
             name = "minecraft:powder_snow";
         }
-        if (!name.equals("")) {
+        if (!name.isEmpty()) {
             String col = "invalid dimension";
             if (dimensionType.equals(OVERWORLD_EFFECTS)) {
                 col = "can_place_in_overworld";

@@ -65,7 +65,7 @@
     "command.entity.experience.MixinLivingEntity",
     "command.entity.experience.MixinThrownExperienceBottle",
     "command.entity.knockback.MixinLivingEntity",
-    "command.entity.knockback.MixinServerGamePacketListenerImpl",
+    "command.entity.knockback.MixinServerCommonPacketListenerImpl",
     "command.entity.other.MixinDragonStrafePlayerPhase",
     "command.entity.other.MixinEntity",
     "command.entity.other.MixinLivingEntity",

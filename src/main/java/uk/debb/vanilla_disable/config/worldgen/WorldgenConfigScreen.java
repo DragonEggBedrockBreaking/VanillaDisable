@@ -50,7 +50,7 @@ public class WorldgenConfigScreen extends Screen {
 
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(g);
+        this.renderBackground(g, mouseX, mouseY, partialTick);
         super.render(g, mouseX, mouseY, partialTick);
         g.drawCenteredString(this.font, this.title, width / 2, 48, 16777215);
         g.drawCenteredString(this.font, Component.translatable("vd.worldgen_config.description.1"), width / 2, 72, 16777215);

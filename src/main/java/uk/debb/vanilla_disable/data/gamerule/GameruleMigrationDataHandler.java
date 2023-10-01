@@ -1054,7 +1054,7 @@ public class GameruleMigrationDataHandler {
 
     public static void updateSql() {
         sqlData.forEach(sqlDataHolder -> {
-            if (sqlDataHolder.value != null && !sqlDataHolder.value.equals("") && !sqlDataHolder.value.equals(sqlDataHolder.defaultValue)) {
+            if (sqlDataHolder.value != null && !sqlDataHolder.value.isEmpty() && !sqlDataHolder.value.equals(sqlDataHolder.defaultValue)) {
                 CommandDataHandler.setMatching(sqlDataHolder.table, sqlDataHolder.column, sqlDataHolder.value, false, sqlDataHolder.pattern);
             }
         });
