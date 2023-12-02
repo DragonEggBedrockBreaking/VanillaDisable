@@ -41,7 +41,7 @@
   ],
   "accessWidener": "vanilla_disable.aw",
   "depends": {
-    "minecraft": "1.20.*"
+    "minecraft": "1.20.2"
   },
   "suggests": {
     "owo": "*",
