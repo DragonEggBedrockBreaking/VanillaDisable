@@ -18,7 +18,7 @@ public abstract class MixinFireBlock {
                 ? 0 : CommandDataHandler.getCachedInt("blocks", block, "burn_odds");
     }
 
-    @ModifyReturnValue(method = "getIgniteOdds", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getIgniteOdds(Lnet/minecraft/world/level/block/state/BlockState;)I", at = @At("RETURN"))
     private int vanillaDisable$getIgniteOdds(int original, BlockState state) {
         if (CommandDataHandler.isConnectionNull()) return original;
         String block = CommandDataHandler.getKeyFromBlockRegistry(state.getBlock());

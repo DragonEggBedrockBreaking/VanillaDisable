@@ -17,6 +17,7 @@ public abstract class MixinMinecraft {
     private void destroy(CallbackInfo ci) {
         try {
             FileUtils.deleteDirectory(new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile"));
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 }

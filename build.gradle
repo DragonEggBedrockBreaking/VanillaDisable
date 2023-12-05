@@ -67,7 +67,7 @@ modrinth {
 	versionNumber = mod_version
 	versionType = "release"
 	uploadFile = remapJar
-	gameVersions.add("1.20.2")
+	gameVersions.add("1.20.3")
 	loaders.add("fabric")
 	loaders.add("quilt")
 	dependencies {

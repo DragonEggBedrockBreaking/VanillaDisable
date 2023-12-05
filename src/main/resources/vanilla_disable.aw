@@ -10,3 +10,4 @@ accessible class net/minecraft/world/entity/animal/Cat$CatTemptGoal
 accessible class net/minecraft/world/entity/animal/Ocelot$OcelotTemptGoal
 accessible field net/minecraft/world/level/biome/BiomeSource possibleBiomes Ljava/util/function/Supplier;
 accessible class net/minecraft/server/commands/FillCommand$Mode
+accessible field net/minecraft/core/cauldron/CauldronInteraction$InteractionMap map Ljava/util/Map;

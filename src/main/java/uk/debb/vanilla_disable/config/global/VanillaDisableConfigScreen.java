@@ -21,30 +21,20 @@ public class VanillaDisableConfigScreen extends Screen {
     protected void init() {
         int length = Component.translatable("vd.main_config.auto_migration").toString().length() * 3;
         this.addRenderableWidget(
-                new Checkbox(
-                        width / 2 - length, height / 2 - 10 - 10, 200, 20,
-                        Component.translatable("vd.main_config.auto_migration"),
-                        VanillaDisableConfig.autoMigration
-                ) {
-                    @Override
-                    public void onPress() {
-                        VanillaDisableConfig.autoMigration = !VanillaDisableConfig.autoMigration;
-                        super.onPress();
-                    }
-                }
+                Checkbox.builder(
+                                Component.translatable("vd.main_config.auto_migration"),
+                                this.font
+                        ).pos(width / 2 - length, height / 2 - 10 - 10).onValueChange(((checkbox, bl) ->
+                                VanillaDisableConfig.autoMigration = !VanillaDisableConfig.autoMigration))
+                        .selected(VanillaDisableConfig.autoMigration).build()
         );
         this.addRenderableWidget(
-                new Checkbox(
-                        width / 2 - length, height / 2 - 10 + 10, 200, 20,
-                        Component.translatable("vd.main_config.world_loading_screen"),
-                        VanillaDisableConfig.worldLoadingScreen
-                ) {
-                    @Override
-                    public void onPress() {
-                        VanillaDisableConfig.worldLoadingScreen = !VanillaDisableConfig.worldLoadingScreen;
-                        super.onPress();
-                    }
-                }
+                Checkbox.builder(
+                                Component.translatable("vd.main_config.world_loading_screen"),
+                                this.font
+                        ).pos(width / 2 - length, height / 2 - 10 + 10).onValueChange(((checkbox, bl) ->
+                                VanillaDisableConfig.worldLoadingScreen = !VanillaDisableConfig.worldLoadingScreen))
+                        .selected(VanillaDisableConfig.worldLoadingScreen).build()
         );
         this.addRenderableWidget(
                 new Button(

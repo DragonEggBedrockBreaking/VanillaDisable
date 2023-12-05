@@ -20,7 +20,7 @@ public abstract class MixinPainting {
     @Final
     private static ResourceKey<PaintingVariant> DEFAULT_VARIANT;
 
-    @ModifyReturnValue(method = "getVariant", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getVariant()Lnet/minecraft/core/Holder;", at = @At("RETURN"))
     private Holder<PaintingVariant> vanillaDisable$getVariant(Holder<PaintingVariant> original) {
         if (!CommandDataHandler.getCachedBoolean("entities", "minecraft:painting",
                 CommandDataHandler.lightCleanup(Objects.requireNonNull(CommandDataHandler.paintingVariantRegistry.getKey(original.value()))) + "_painting")) {

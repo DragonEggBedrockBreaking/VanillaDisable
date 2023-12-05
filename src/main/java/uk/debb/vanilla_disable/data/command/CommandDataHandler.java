@@ -584,8 +584,8 @@ public class CommandDataHandler {
                             put("dispenser_interaction", "true");
                         }
 
-                        if (CauldronInteraction.EMPTY.containsKey(item) || CauldronInteraction.WATER.containsKey(item) ||
-                                CauldronInteraction.LAVA.containsKey(item) || CauldronInteraction.POWDER_SNOW.containsKey(item)) {
+                        if (CauldronInteraction.EMPTY.map.containsKey(item) || CauldronInteraction.WATER.map.containsKey(item) ||
+                                CauldronInteraction.LAVA.map.containsKey(item) || CauldronInteraction.POWDER_SNOW.map.containsKey(item)) {
                             put("cauldron_interaction", "true");
                         }
 
