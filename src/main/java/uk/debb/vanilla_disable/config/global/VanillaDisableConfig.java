@@ -12,7 +12,7 @@ import java.util.Properties;
 public class VanillaDisableConfig implements ModInitializer {
     public static boolean autoMigration = true;
     public static boolean worldLoadingScreen = true;
-    public static long cache = 1_000_000_000_000L;
+    public static long cache = 10_000_000L;
     private static String PATH = "";
     private static Properties data;
 
