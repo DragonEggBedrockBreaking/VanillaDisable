@@ -54,13 +54,8 @@ public class LangFileManager implements ClientModInitializer {
                 FileUtils.write(optionsTxt, String.join("\n", lines), StandardCharsets.UTF_8);
 
                 Thread thread = new Thread(() -> {
-                    while (Minecraft.getInstance().getLanguageManager() == null) {
-                    }
-                    while (Minecraft.getInstance().getLanguageManager().getLanguages().size() == 1) {
-                        try {
-                            TimeUnit.MILLISECONDS.sleep(100);
-                        } catch (InterruptedException ignored) {
-                        }
+                    while (Minecraft.getInstance().getLanguageManager() == null ||
+                            Minecraft.getInstance().getLanguageManager().getLanguages().size() == 1) {
                     }
                     Set<String> languages = Minecraft.getInstance().getLanguageManager().getLanguages().keySet();
 
@@ -75,6 +70,7 @@ public class LangFileManager implements ClientModInitializer {
                             }
                         }
                     });
+                    Minecraft.getInstance().getLanguageManager().onResourceManagerReload(Minecraft.getInstance().getResourceManager());
                 });
                 thread.start();
             }
