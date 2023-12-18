@@ -19,7 +19,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class LangFileManager implements ClientModInitializer {
     @SuppressWarnings("ConstantConditions StatementWithEmptyBody")

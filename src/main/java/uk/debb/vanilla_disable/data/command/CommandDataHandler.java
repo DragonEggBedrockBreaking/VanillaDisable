@@ -1019,8 +1019,7 @@ public class CommandDataHandler {
             FileWriter writer = new FileWriter(PATH, true);
             writer.write(command + "\n");
             writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 

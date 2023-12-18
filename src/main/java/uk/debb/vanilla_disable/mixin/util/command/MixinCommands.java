@@ -47,8 +47,7 @@ public abstract class MixinCommands {
             while (!CommandDataHandler.populationDone) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException ignored) {
                 }
             }
 
