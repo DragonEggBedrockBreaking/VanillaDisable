@@ -1,7 +1,5 @@
 package uk.debb.vanilla_disable.data.command;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.Registry;
@@ -92,7 +90,7 @@ public class CommandDataHandler {
     public static Registry<StatType<?>> statTypeRegistry;
     public static boolean migrated = false;
     public static boolean shouldMigrate = true;
-    private static Cache<String, Object> cache = null;
+    private static final Object2ObjectMap<String, Object> memo = new Object2ObjectOpenHashMap<>();
     private static Connection connection;
     private static Statement statement;
     private static String PATH;
@@ -984,8 +982,6 @@ public class CommandDataHandler {
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
-
-        cache = Caffeine.newBuilder().maximumSize(VanillaDisableConfig.cache).build();
     }
 
     /**
@@ -1034,7 +1030,7 @@ public class CommandDataHandler {
      */
     public static void setValue(String table, String row, String column, String value, boolean isString) {
         if (table.isEmpty() || row.isEmpty() || column.isEmpty() || value.isEmpty()) return;
-        invalidateCaches();
+        memo.clear();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -1057,7 +1053,7 @@ public class CommandDataHandler {
      */
     public static void setAll(String table, String column, String value, boolean isString) {
         if (table.isEmpty() || column.isEmpty() || value.isEmpty()) return;
-        invalidateCaches();
+        memo.clear();
         if (isString) {
             value = "'" + value + "'";
         }
@@ -1081,7 +1077,7 @@ public class CommandDataHandler {
      */
     public static void setMatching(String table, String column, String value, boolean isString, String pattern) {
         if (table.isEmpty() || column.isEmpty() || value.isEmpty() || pattern.isEmpty()) return;
-        invalidateCaches();
+        memo.clear();
         if (pattern.contains(";") || pattern.contains("SELECT") || pattern.contains("ALTER")) {
             throw new RuntimeException("SQL injection attempted. Command not executed.");
         }
@@ -1135,7 +1131,7 @@ public class CommandDataHandler {
             return bool;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        memo.clear();
         return Boolean.parseBoolean(getDefault(table, row, column));
     }
 
@@ -1148,8 +1144,13 @@ public class CommandDataHandler {
      * @return The value.
      */
     public static boolean getCachedBoolean(String table, String row, String column) {
-        String cacheKey = table + "-" + row + "-" + column;
-        return (boolean) cache.get(cacheKey, key -> getBoolean(table, row, column));
+        String cacheKey = "getCachedBoolean-" + table + "-" + row + "-" + column;
+        if (memo.containsKey(cacheKey)) {
+            return (boolean) memo.get(cacheKey);
+        }
+        boolean bool = getBoolean(table, row, column);
+        memo.put(cacheKey, bool);
+        return bool;
     }
 
     /**
@@ -1169,7 +1170,7 @@ public class CommandDataHandler {
             return integer;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        memo.clear();
         return Integer.parseInt(getDefault(table, row, column));
     }
 
@@ -1182,8 +1183,13 @@ public class CommandDataHandler {
      * @return The value.
      */
     public static int getCachedInt(String table, String row, String column) {
-        String cacheKey = table + "-" + row + "-" + column;
-        return (int) cache.get(cacheKey, key -> getInt(table, row, column));
+        String cacheKey = "getCachedInt-" + table + "-" + row + "-" + column;
+        if (memo.containsKey(cacheKey)) {
+            return (int) memo.get(cacheKey);
+        }
+        int integer = getInt(table, row, column);
+        memo.put(cacheKey, integer);
+        return integer;
     }
 
     /**
@@ -1203,7 +1209,7 @@ public class CommandDataHandler {
             return dbl;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        memo.clear();
         return Double.parseDouble(getDefault(table, row, column));
     }
 
@@ -1216,8 +1222,13 @@ public class CommandDataHandler {
      * @return The value.
      */
     public static double getCachedDouble(String table, String row, String column) {
-        String cacheKey = table + "-" + row + "-" + column;
-        return (double) cache.get(cacheKey, key -> getDouble(table, row, column));
+        String cacheKey = "getCachedDouble-" + table + "-" + row + "-" + column;
+        if (memo.containsKey(cacheKey)) {
+            return (double) memo.get(cacheKey);
+        }
+        double real = getDouble(table, row, column);
+        memo.put(cacheKey, real);
+        return real;
     }
 
     /**
@@ -1238,7 +1249,7 @@ public class CommandDataHandler {
             return str;
         } catch (SQLException | NullPointerException ignored) {
         }
-        invalidateCaches();
+        memo.clear();
         return getDefault(table, row, column);
     }
 
@@ -1251,8 +1262,13 @@ public class CommandDataHandler {
      * @return The value.
      */
     public static String getCachedString(String table, String row, String column) {
-        String cacheKey = table + "-" + row + "-" + column;
-        return (String) cache.get(cacheKey, key -> getString(table, row, column));
+        String cacheKey = "getCachedString-" + table + "-" + row + "-" + column;
+        if (memo.containsKey(cacheKey)) {
+            return (String) memo.get(cacheKey);
+        }
+        String string = getString(table, row, column);
+        memo.put(cacheKey, string);
+        return string;
     }
 
     /**
@@ -1297,14 +1313,20 @@ public class CommandDataHandler {
      * @return The value.
      */
     public static Ingredient getCachedBreedingItems(String row) {
-        return (Ingredient) cache.get(row, key -> getBreedingItems(row));
+        String cacheKey = "getBreedingItems-" + row;
+        if (memo.containsKey(cacheKey)) {
+            return (Ingredient) memo.get(cacheKey);
+        }
+        Ingredient ingredient = getBreedingItems(row);
+        memo.put(cacheKey, ingredient);
+        return ingredient;
     }
 
     /**
      * Reset all tables in the database by deleting the sql script and resetting the in-memory db.
      */
     public static void resetAll() {
-        invalidateCaches();
+        memo.clear();
         if (!new File(PATH).exists()) return;
         if (!new File(PATH).delete()) {
             throw new RuntimeException("Could not delete file " + PATH);
@@ -1326,7 +1348,7 @@ public class CommandDataHandler {
      * @param db The table to reset.
      */
     public static void resetOne(String db) {
-        invalidateCaches();
+        memo.clear();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())
@@ -1347,7 +1369,7 @@ public class CommandDataHandler {
      * @param cols The columns to reset.
      */
     public static void resetPartial(String db, ObjectSet<String> cols) {
-        invalidateCaches();
+        memo.clear();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset())
@@ -1372,7 +1394,7 @@ public class CommandDataHandler {
      * @param count The number of commands to undo.
      */
     public static void undo(int count) {
-        invalidateCaches();
+        memo.clear();
         if (!new File(PATH).exists()) return;
         try {
             List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset());
@@ -1386,15 +1408,6 @@ public class CommandDataHandler {
             handleDatabase();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Invalidate caches if they aren't null.
-     */
-    private static void invalidateCaches() {
-        if (cache != null) {
-            cache.invalidateAll();
         }
     }
 }
