@@ -138,6 +138,5 @@
   "vd.command_config.done": "Pronto",
   "vd.key.open_command_config": "Abrir configuração de comandos",
   "vd.key.category": "VanillaDisable",
-  "vd.key.cannot_press": "Você só pode usar essa tela de configuração no singleplayer.",
-  "vd.key.cannot_open_gui": "Você precisa instalar o mod 'owo lib' para a tela funcionar."
+  "vd.key.cannot_press": "Você só pode usar essa tela de configuração no singleplayer."
 }

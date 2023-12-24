@@ -141,6 +141,5 @@
   "vd.command_config.done": "Done",
   "vd.key.open_command_config": "Open Command Config",
   "vd.key.category": "VanillaDisable",
-  "vd.key.cannot_press": "You can only use the configuration GUI in singleplayer.",
-  "vd.key.cannot_open_gui": "You need to install the 'owo lib' mod for the GUI to work."
+  "vd.key.cannot_press": "You can only use the configuration GUI in singleplayer."
 }
