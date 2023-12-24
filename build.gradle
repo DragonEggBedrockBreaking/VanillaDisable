@@ -58,6 +58,7 @@ jar {
 modrinth {
 	token = System.getenv("MODRINTH_TOKEN")
 	projectId = "vanilla-disable"
+	changelog = file("CHANGELOG.md").getText("UTF-8")
 	versionName = mod_version + " for " + minecraft_version
 	versionNumber = mod_version
 	versionType = "release"
