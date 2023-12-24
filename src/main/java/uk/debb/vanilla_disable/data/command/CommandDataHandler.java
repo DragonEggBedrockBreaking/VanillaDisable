@@ -1368,6 +1368,7 @@ public class CommandDataHandler {
 
     /**
      * Undo the last n commands in the sql script and reset the in-memory db.
+     *
      * @param count The number of commands to undo.
      */
     public static void undo(int count) {

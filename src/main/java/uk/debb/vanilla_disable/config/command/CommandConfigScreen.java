@@ -2,7 +2,9 @@ package uk.debb.vanilla_disable.config.command;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.objects.*;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
@@ -59,7 +61,7 @@ public class CommandConfigScreen extends Screen {
             int i = this.width - 28;
             int j = Mth.roundToward(i / this.tabNavigationBar.tabs.size(), 2);
 
-            for(TabButton tabButton : this.tabNavigationBar.tabButtons) {
+            for (TabButton tabButton : this.tabNavigationBar.tabButtons) {
                 tabButton.setWidth(j);
             }
 
@@ -72,10 +74,10 @@ public class CommandConfigScreen extends Screen {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         this.renderDirtBackground(g);
-        for(Renderable renderable : this.renderables) {
+        for (Renderable renderable : this.renderables) {
             renderable.render(g, mouseX, mouseY, partialTick);
         }
-        ObjectSet<String> leftList = ((Tab)Objects.requireNonNull(this.tabManager.getCurrentTab())).leftList;
+        ObjectSet<String> leftList = ((Tab) Objects.requireNonNull(this.tabManager.getCurrentTab())).leftList;
         if (!(leftList.contains(this.labelText) || leftList.contains("minecraft:" + this.labelText))) {
             this.labelText = "n/a";
         }
@@ -109,8 +111,8 @@ public class CommandConfigScreen extends Screen {
     }
 
     class Tab extends GridLayoutTab {
-        String search;
         public ObjectSet<String> leftList;
+        String search;
 
         Tab(Component title, Object2ObjectMap<String, Object2ObjectMap<String, Component>> dataData, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, String colsKey) {
             super(title);
@@ -234,9 +236,9 @@ public class CommandConfigScreen extends Screen {
     }
 
     class RightEntry extends ContainerObjectSelectionList.Entry<RightEntry> {
+        protected final List<AbstractWidget> children = Lists.newArrayList();
         final String main;
         final Component tooltip;
-        protected final List<AbstractWidget> children = Lists.newArrayList();
 
         RightEntry(String main, Component tooltip) {
             this.main = main;
