@@ -1367,6 +1367,28 @@ public class CommandDataHandler {
     }
 
     /**
+     * Undo the last n commands in the sql script and reset the in-memory db.
+     * @param count The number of commands to undo.
+     */
+    public static void undo(int count) {
+        invalidateCaches();
+        if (!new File(PATH).exists()) return;
+        try {
+            List<String> lines = FileUtils.readLines(new File(PATH), Charset.defaultCharset());
+            for (int i = 0; i < count; i++) {
+                if (lines.isEmpty()) break;
+                lines.remove(lines.size() - 1);
+            }
+            FileUtils.writeLines(new File(PATH), lines, false);
+
+            closeConnection();
+            handleDatabase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Invalidate caches if they aren't null.
      */
     private static void invalidateCaches() {

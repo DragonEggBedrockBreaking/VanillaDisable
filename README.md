@@ -10,7 +10,7 @@ You can download stable releases of the mod from [GitHub Releases](https://githu
 
 ## Dependencies/JIJs/Recommendations
 
-This mod has no hard dependencies, and will run on its own. However, installing [ModMenu](https://modrinth.com/mod/modmenu) will give you a global GUI, installing [owo-lib](https://modrinth.com/mod/owo-lib) will give you an in-game command-rule-config GUI, and installing [Fabric API](https://modrinth.com/mod/fabric-api) for Fabric or [Quilted Standard Libraries](https://modrinth.com/mod/qsl) for Quilt will remove the use of hacky, cursed code to dynamically generate and enable an on-disk resource pack at runtime. This mod also has a range of libraries included in the jar, which leads to the increased file size. You can read about these in [the wiki](https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Dependencies#jij). 
+This mod has no hard dependencies, and will run on its own. However, installing [ModMenu](https://modrinth.com/mod/modmenu) will give you a global GUI and installing [Fabric API](https://modrinth.com/mod/fabric-api) for Fabric or [Quilted Standard Libraries](https://modrinth.com/mod/qsl) for Quilt will remove the use of hacky, cursed code to dynamically generate and enable a resource pack at runtime. This mod also has a range of libraries included in the jar, which leads to the increased file size. You can read about these in [the wiki](https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Dependencies#jij). 
 
 ## Other
 

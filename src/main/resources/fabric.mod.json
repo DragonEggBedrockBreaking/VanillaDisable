@@ -33,7 +33,7 @@
     ],
     "client": [
       "uk.debb.vanilla_disable.LangFileManager",
-      "uk.debb.vanilla_disable.config.command.CommandConfigHotkeyManager"
+      "uk.debb.vanilla_disable.config.command.HotkeyManager"
     ]
   },
   "mixins": [
@@ -45,7 +45,6 @@
     "fabricloader": ">=0.15.0"
   },
   "suggests": {
-    "owo": "*",
     "modmenu": "*",
     "fabric-resource-loader-v0": "*"
   }

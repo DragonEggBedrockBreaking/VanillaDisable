@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
 
-public class CommandConfigHotkeyManager implements ClientModInitializer {
+public class HotkeyManager implements ClientModInitializer {
     private static KeyMapping keyMapping;
 
     public static boolean isPressed() {

@@ -1,4 +1,4 @@
-package uk.debb.vanilla_disable.mixin_plugin;
+package uk.debb.vanilla_disable.mixin;
 
 import net.caffeinemc.caffeineconfig.AbstractCaffeineConfigMixinPlugin;
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
