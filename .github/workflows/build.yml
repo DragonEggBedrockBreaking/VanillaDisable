@@ -30,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@v4.0.0
       with:
         name: VanillaDisable-Artifacts
-        path: build/libs
+        path: fabric/build/libs

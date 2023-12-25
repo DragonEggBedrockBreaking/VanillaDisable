@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "package": "uk.debb.vanilla_disable.mixin",
+  "refmap": "${mod_id}.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "gamerule.MixinRaid",
+    "gamerule.MixinServerRecipeBook",
+    "util.gamerule.MixinMinecraftServer_Common"
+  ],
+  "client": [
+    "util.command.MixinKeyboardHandler",
+    "util.other.MixinMinecraft"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

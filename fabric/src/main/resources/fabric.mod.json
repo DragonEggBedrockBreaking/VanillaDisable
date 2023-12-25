@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "Vanilla Disable",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_author}"
+  ],
+  "contributors": [
+    "Wesley1808",
+    "FallenBreath",
+    "NoComment",
+    "LittleLily",
+    "ThatTrollzer",
+    "Kichura",
+    "ellieisjelly"
+  ],
+  "contact": {
+    "sources": "https://github.com/DragonEggBedrockBreaking/VanillaDisable",
+    "issues": "https://github.com/DragonEggBedrockBreaking/VanillaDisable/issues"
+  },
+  "license": "${license}",
+  "icon": "assets/${mod_id}/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "uk.debb.vanilla_disable.config.global.VanillaDisableConfigLoader",
+      "uk.debb.vanilla_disable.data.gamerule.RegisterGamerules"
+    ],
+    "modmenu": [
+      "uk.debb.vanilla_disable.config.global.ModMenuSettingsApi"
+    ],
+    "client": [
+      "uk.debb.vanilla_disable.LangFileManager",
+      "uk.debb.vanilla_disable.config.command.HotkeyManager"
+    ]
+  },
+  "mixins": [
+    "vanilla_disable.mixins.json",
+    "vanilla_disable.fabric.mixins.json"
+  ],
+  "accessWidener": "vanilla_disable.aw",
+  "depends": {
+    "minecraft": ">=1.20.3",
+    "fabricloader": ">=0.15.0"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "fabric-resource-loader-v0": "*"
+  }
+}

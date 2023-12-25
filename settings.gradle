@@ -4,7 +4,28 @@ pluginManagement {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
+        maven {
+            name = 'NeoForge'
+            url = 'https://maven.neoforged.net/releases/'
+        }
+        maven {
+            url = 'https://maven.parchmentmc.org'
+        }
+        maven {
+            name = 'Sponge Snapshots'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
+}
+
+rootProject.name = 'MultiLoader-Template'
+include("common")
+include("fabric")
+//include("neoforge")

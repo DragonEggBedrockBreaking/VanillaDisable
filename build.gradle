@@ -1,73 +1,86 @@
 plugins {
-	id 'fabric-loom' version '1.4-SNAPSHOT'
-	id "com.modrinth.minotaur" version "2.+"
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
 }
 
-loom {
-	accessWidenerPath = file("src/main/resources/vanilla_disable.aw")
-}
+subprojects {
+    apply plugin: 'java'
 
-repositories {
-	maven { url "https://maven.flashyreese.me/releases" }
-	maven { url "https://jitpack.io" }
-	maven { url "https://maven.terraformersmc.com/" }
-	maven { url "https://maven.parchmentmc.org" }
-}
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+    java.withSourcesJar()
+    java.withJavadocJar()
 
-dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.layered {
-		it.officialMojangMappings()
-		it.parchment("org.parchmentmc.data:${project.parchment_version}@zip")
-	}
-	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
-	include(modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version)))
-	include(modImplementation(fabricApi.module("fabric-key-binding-api-v1", project.fabric_version)))
-	include(modImplementation("net.caffeinemc:CaffeineConfig:${project.caffeine_config_version}"))
-	include(modImplementation("com.h2database:h2:${project.h2_version}"))
-	include(modImplementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}"))
-	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
-}
+    jar {
+        from(rootProject.file("LICENSE")) {
+            rename { "${it}_${mod_name}" }
+        }
+        manifest {
+            attributes([
+                    'Specification-Title'     : mod_name,
+                    'Specification-Vendor'    : mod_author,
+                    'Specification-Version'   : project.jar.archiveVersion,
+                    'Implementation-Title'    : project.name,
+                    'Implementation-Version'  : project.jar.archiveVersion,
+                    'Implementation-Vendor'   : mod_author,
+                    'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                    'Timestamp'               : System.currentTimeMillis(),
+                    'Built-On-Java'           : "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
+                    'Built-On-Minecraft'      : minecraft_version
+            ])
+        }
+    }
 
-base {
-	archivesName = archives_base_name + "-mc" + minecraft_version + "-" + mod_version
-}
+    sourcesJar {
+        from(rootProject.file("LICENSE")) {
+            rename { "${it}_${mod_name}" }
+        }
+    }
 
-processResources {
-	inputs.property "version", mod_version
-	filesMatching("fabric.mod.json") {
-		expand "version": mod_version
-	}
-}
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'Sponge / Mixin'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
+        maven {
+            name = 'BlameJared Maven (JEI / CraftTweaker / Bookshelf)'
+            url = 'https://maven.blamejared.com'
+        }
+    }
 
-tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
-}
+    tasks.withType(JavaCompile).configureEach {
 
-java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
-}
+        it.options.encoding = 'UTF-8'
+        it.options.getRelease().set(17)
+    }
 
-jar {
-	from("LICENSE") {
-		rename { "${it}_${archives_base_name}"}
-	}
-}
+    processResources {
+        def expandProps = [
+                "mod_version": mod_version,
+                "group": project.group,
+                "minecraft_version": minecraft_version,
+                "minecraft_version_range": minecraft_version_range,
+                "fabric_version": fabric_version,
+                "fabric_loader_version": fabric_loader_version,
+                "mod_name": mod_name,
+                "mod_author": mod_author,
+                "mod_id": mod_id,
+                "license": license,
+                "mod_description": mod_description,
+                "neoforge_version": neoforge_version,
+                "neoforge_loader_version_range": neoforge_loader_version_range,
+                "credits": credits
+        ]
 
-modrinth {
-	token = System.getenv("MODRINTH_TOKEN")
-	projectId = "vanilla-disable"
-	changelog = file("CHANGELOG.md").getText("UTF-8")
-	versionName = mod_version + " for " + minecraft_version
-	versionNumber = mod_version
-	versionType = "release"
-	uploadFile = remapJar
-	gameVersions.add("1.20.3")
-	gameVersions.add("1.20.4")
-	loaders.add("fabric")
-	loaders.add("quilt")
-	dependencies {
-		optional.project "modmenu"
-	}
+        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
+            expand expandProps
+        }
+        inputs.properties(expandProps)
+    }
+
+    // Disables Gradle's custom module metadata from being published to maven. The
+    // metadata includes mapped dependencies which are not reasonably consumable by
+    // other mod developers.
+    tasks.withType(GenerateModuleMetadata).configureEach {
+        enabled = false
+    }
 }
