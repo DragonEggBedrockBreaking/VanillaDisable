@@ -37,7 +37,6 @@
     ]
   },
   "mixins": [
-    "vanilla_disable.mixins.json",
     "vanilla_disable.fabric.mixins.json"
   ],
   "accessWidener": "vanilla_disable.aw",

@@ -8,6 +8,7 @@ base {
     archivesName = "${mod_name}-fabric-${minecraft_version}"
 }
 repositories {
+    maven { url "https://maven.flashyreese.me/releases" }
     maven { url "https://jitpack.io" }
     maven { url "https://maven.terraformersmc.com/" }
 }
@@ -20,6 +21,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${project.fabric_loader_version}")
     include(modImplementation(fabricApi.module("fabric-game-rule-api-v1", project.fabric_version)))
     include(modImplementation(fabricApi.module("fabric-key-binding-api-v1", project.fabric_version)))
+    include(implementation("net.caffeinemc:CaffeineConfig:${project.caffeine_config_version}"))
     include(implementation("com.h2database:h2:${project.h2_version}"))
     include(implementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}"))
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
