@@ -21,18 +21,3 @@ dependencies {
     implementation("com.moandjiezana.toml:toml4j:${project.toml4j_version}")
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.3.2"))
 }
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId base.archivesName.get()
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url "file://" + System.getenv("local_maven")
-        }
-    }
-}
-javadoc.options.addStringOption('Xdoclint:none', '-quiet')

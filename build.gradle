@@ -4,11 +4,7 @@ plugins {
 
 subprojects {
     apply plugin: 'java'
-
     java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-    java.withSourcesJar()
-    java.withJavadocJar()
-
     jar {
         from(rootProject.file("LICENSE")) {
             rename { "${it}_${mod_name}" }
@@ -28,13 +24,6 @@ subprojects {
             ])
         }
     }
-
-    sourcesJar {
-        from(rootProject.file("LICENSE")) {
-            rename { "${it}_${mod_name}" }
-        }
-    }
-
     repositories {
         mavenCentral()
         maven {
@@ -46,12 +35,10 @@ subprojects {
             url = 'https://maven.blamejared.com'
         }
     }
-
     tasks.withType(JavaCompile).configureEach {
         it.options.encoding = 'UTF-8'
         it.options.getRelease().set(17)
     }
-
     processResources {
         def expandProps = [
                 "mod_version": mod_version,
@@ -77,7 +64,6 @@ subprojects {
         }
         inputs.properties(expandProps)
     }
-
     // Disables Gradle's custom module metadata from being published to maven. The
     // metadata includes mapped dependencies which are not reasonably consumable by
     // other mod developers.
