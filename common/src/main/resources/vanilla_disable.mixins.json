@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8.5",
   "package": "uk.debb.vanilla_disable.mixin",
+  "plugin": "uk.debb.vanilla_disable.mixin_plugin.VanillaDisableMixinPlugin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
