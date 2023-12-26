@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.platform;
 
-import uk.debb.vanilla_disable.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
+import uk.debb.vanilla_disable.platform.services.IPlatformHelper;
 
 
 public class FabricPlatformHelper implements IPlatformHelper {

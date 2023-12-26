@@ -1,6 +1,5 @@
 package uk.debb.vanilla_disable.config.global;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

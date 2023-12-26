@@ -25,7 +25,7 @@ public class VanillaDisableMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         String[] mixinPath = mixinClassName.substring(30).split("\\.");
-            StringBuilder current = new StringBuilder("mixin");
+        StringBuilder current = new StringBuilder("mixin");
         for (String part : mixinPath) {
             current.append(".").append(part);
             if (config.isMixinConfigured(current.toString())) {

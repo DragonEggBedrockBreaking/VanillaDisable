@@ -1,8 +1,8 @@
 package uk.debb.vanilla_disable.platform;
 
-import uk.debb.vanilla_disable.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
+import uk.debb.vanilla_disable.platform.services.IPlatformHelper;
 
 public class NeoForgePlatformHelper implements IPlatformHelper {
 

@@ -15,6 +15,7 @@ public class RegisterGamerules implements ModInitializer {
                     .withStyle(ChatFormatting.BOLD)
                     .withStyle(ChatFormatting.DARK_GREEN)
     );
+
     @Override
     public void onInitialize() {
         VDGamerules.RAID_WAVES_EASY = GameRuleRegistry.register("raidWavesEasy", VANILLA_DISABLE, GameRuleFactory.createIntRule(4, 1));

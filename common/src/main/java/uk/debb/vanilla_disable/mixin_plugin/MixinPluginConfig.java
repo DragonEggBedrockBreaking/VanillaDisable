@@ -7,8 +7,8 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class MixinPluginConfig {
-    private final File configFile;
     public final Properties properties;
+    private final File configFile;
 
     public MixinPluginConfig() {
         this.configFile = new File(Paths.get(".").toAbsolutePath().toString(), "config/vanilla-disable-mixin.properties");

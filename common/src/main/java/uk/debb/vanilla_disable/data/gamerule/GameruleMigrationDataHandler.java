@@ -4,7 +4,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
-import net.minecraft.server.MinecraftServer;
 import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 

@@ -77,6 +77,7 @@ public class CommandDataHandler {
     public static final Object2DoubleMap<String> doubleRowMaximums = new Object2DoubleArrayMap<>();
     public static final Object2ObjectMap<String, List<String>> stringColSuggestions = new Object2ObjectOpenHashMap<>();
     public static final ObjectList<String> differentDataTypes = new ObjectArrayList<>();
+    private static final Object2ObjectMap<String, Object> memo = new Object2ObjectOpenHashMap<>();
     public static MinecraftServer server;
     public static boolean populationDone = false;
     public static RegistryAccess registryAccess;
@@ -90,7 +91,6 @@ public class CommandDataHandler {
     public static Registry<StatType<?>> statTypeRegistry;
     public static boolean migrated = false;
     public static boolean shouldMigrate = true;
-    private static final Object2ObjectMap<String, Object> memo = new Object2ObjectOpenHashMap<>();
     private static Connection connection;
     private static Statement statement;
     private static String PATH;
