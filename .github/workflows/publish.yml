@@ -42,6 +42,5 @@ jobs:
         with:
           files: |
             fabric/build/libs/*.jar
-            !fabric/build/libs/*-*.jar
             neoforge/build/libs/*-all.jar
           repo-token: ${{ secrets.GITHUB_TOKEN }}
