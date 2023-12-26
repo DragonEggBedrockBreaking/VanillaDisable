@@ -22,6 +22,8 @@ jobs:
         path: | 
           ~/.gradle
           .gradle
+          fabric/.gradle
+          neoforge/.gradle
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/settings.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
     - name: Build with Gradle
@@ -30,4 +32,8 @@ jobs:
       uses: actions/upload-artifact@v4.0.0
       with:
         name: VanillaDisable-Artifacts
-        path: fabric/build/libs
+        path: |
+          fabric/build/libs/*.jar
+          !fabric/build/libs/*-javadoc.jar
+          !fabric/build/libs/*-sources.jar
+          neoforge/build/libs/*-all.jar
