@@ -72,7 +72,7 @@ public class CommandConfigScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+    public void render(@NotNull GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         this.renderDirtBackground(g);
         for (Renderable renderable : this.renderables) {
             renderable.render(g, mouseX, mouseY, partialTick);
@@ -111,7 +111,7 @@ public class CommandConfigScreen extends Screen {
     }
 
     class Tab extends GridLayoutTab {
-        public ObjectSet<String> leftList;
+        public final ObjectSet<String> leftList;
         String search;
 
         Tab(Component title, Object2ObjectMap<String, Object2ObjectMap<String, Component>> dataData, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, String colsKey) {
@@ -202,7 +202,7 @@ public class CommandConfigScreen extends Screen {
         }
 
         @Override
-        public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+        public void render(@NotNull GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
             this.button.setX(left - Math.max(0, (int) (width * 0.05)));
             this.button.setY(top);
             this.button.setWidth(width);
@@ -223,7 +223,7 @@ public class CommandConfigScreen extends Screen {
 
     class LeftList extends ContainerObjectSelectionList<LeftEntry> {
         public LeftList(ObjectSet<String> leftItems, RightList rightList) {
-            super(CommandConfigScreen.this.minecraft, (int) (CommandConfigScreen.this.width * 0.43), CommandConfigScreen.this.height - 75, 50, 24);
+            super(Objects.requireNonNull(CommandConfigScreen.this.minecraft), (int) (CommandConfigScreen.this.width * 0.43), CommandConfigScreen.this.height - 75, 50, 24);
             this.setX((int) (CommandConfigScreen.this.width * 0.02));
             leftItems.stream().sorted().forEach(leftItem -> {
                 if (leftItem.contains("/") && leftItem.contains(":")) {
@@ -374,7 +374,7 @@ public class CommandConfigScreen extends Screen {
     }
 
     class RightStringEntry extends RightEntry {
-        Button button;
+        final Button button;
 
         RightStringEntry(String main, Component tooltip, String table) {
             super(main, tooltip);
@@ -408,13 +408,13 @@ public class CommandConfigScreen extends Screen {
     }
 
     class RightList extends ContainerObjectSelectionList<RightEntry> {
-        Object2ObjectMap<String, Object2ObjectMap<String, Component>> dataData;
-        Object2ObjectMap<String, Object2ObjectMap<String, String>> data;
-        Object2ObjectMap<String, DataType> dataTypeData;
-        String table;
+        final Object2ObjectMap<String, Object2ObjectMap<String, Component>> dataData;
+        final Object2ObjectMap<String, Object2ObjectMap<String, String>> data;
+        final Object2ObjectMap<String, DataType> dataTypeData;
+        final String table;
 
         public RightList(int numCategories, Object2ObjectMap<String, Object2ObjectMap<String, Component>> dataData, Object2ObjectMap<String, Object2ObjectMap<String, String>> data, Object2ObjectMap<String, DataType> dataTypeData, String table) {
-            super(CommandConfigScreen.this.minecraft, (int) (CommandConfigScreen.this.width * 0.48), CommandConfigScreen.this.height - (numCategories <= 1 ? 75 : 100), numCategories <= 1 ? 50 : 75, 24);
+            super(Objects.requireNonNull(CommandConfigScreen.this.minecraft), (int) (CommandConfigScreen.this.width * 0.48), CommandConfigScreen.this.height - (numCategories <= 1 ? 75 : 100), numCategories <= 1 ? 50 : 75, 24);
             this.setX(CommandConfigScreen.this.width / 2);
             this.dataData = dataData;
             this.data = data;

@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 
 import java.util.Objects;
@@ -49,7 +50,7 @@ public class WorldgenConfigScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+    public void render(@NotNull GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(g, mouseX, mouseY, partialTick);
         super.render(g, mouseX, mouseY, partialTick);
         g.drawCenteredString(this.font, this.title, width / 2, 48, 16777215);

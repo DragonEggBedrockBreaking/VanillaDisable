@@ -537,7 +537,7 @@ public class CommandDataHandler {
                         put("cooldown", "300");
                     }
 
-                    if (!blockEntityRegistry.containsKey(blockRegistry.getKey(block))) {
+                    if (!blockEntityRegistry.containsKey(Objects.requireNonNull(blockRegistry.getKey(block)))) {
                         if (block.equals(Blocks.OBSIDIAN) || block.equals(Blocks.CRYING_OBSIDIAN) ||
                                 block.equals(Blocks.REINFORCED_DEEPSLATE) || block.equals(Blocks.RESPAWN_ANCHOR)) {
                             put("push_behaviour", "'" + PushReaction.BLOCK + "'");
