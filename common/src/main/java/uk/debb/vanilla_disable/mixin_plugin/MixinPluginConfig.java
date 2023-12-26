@@ -8,10 +8,12 @@ import java.util.Properties;
 
 public class MixinPluginConfig {
     public final Properties properties;
+    private final File configDirectory;
     private final File configFile;
 
     public MixinPluginConfig() {
-        this.configFile = new File(Paths.get(".").toAbsolutePath().toString(), "config/vanilla-disable-mixin.properties");
+        this.configDirectory = new File(Paths.get(".").toAbsolutePath().toString(), "config");
+        this.configFile = new File(this.configDirectory, "vanilla-disable-mixin.properties");
         this.properties = new Properties();
 
         if (!configFile.exists()) {
@@ -22,7 +24,11 @@ public class MixinPluginConfig {
     }
 
     private void createConfigFile() {
-        try (FileWriter writer = new FileWriter(configFile)) {
+        if (!this.configDirectory.exists() && !this.configDirectory.mkdirs()) {
+            Constants.LOG.error("Failed to create config directory for VanillaDisable.");
+            return;
+        }
+        try (FileWriter writer = new FileWriter(this.configFile)) {
             writer.write("# Mixin config file for debugging purposes only. Please read the wiki for more information.\n");
             writer.write("# https://github.com/DragonEggBedrockBreaking/VanillaDisable/wiki/Mixin-Configuration-File\n");
         } catch (IOException e) {
