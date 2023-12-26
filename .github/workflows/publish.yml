@@ -26,6 +26,8 @@ jobs:
           path: |
             ~/.gradle
             .gradle
+            fabric/.gradle
+            neoforge/.gradle
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/settings.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Build with Gradle
@@ -33,5 +35,8 @@ jobs:
       - name: Publish to GitHub
         uses: AButler/upload-release-assets@v3.0
         with:
-          files: build/libs/*.jar
+          files: |
+            fabric/build/libs/*.jar
+            !fabric/build/libs/*-*.jar
+            neoforge/build/libs/*-all.jar
           repo-token: ${{ secrets.GITHUB_TOKEN }}

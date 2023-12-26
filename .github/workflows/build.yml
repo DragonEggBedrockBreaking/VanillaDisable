@@ -34,6 +34,5 @@ jobs:
         name: VanillaDisable-Artifacts
         path: |
           fabric/build/libs/*.jar
-          !fabric/build/libs/*-javadoc.jar
-          !fabric/build/libs/*-sources.jar
+          !fabric/build/libs/*-*.jar
           neoforge/build/libs/*-all.jar
