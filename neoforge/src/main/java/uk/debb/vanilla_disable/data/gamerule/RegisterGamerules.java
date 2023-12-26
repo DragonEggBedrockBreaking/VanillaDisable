@@ -10,9 +10,9 @@ import uk.debb.vanilla_disable.Constants;
 public class RegisterGamerules {
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
-        VDGamerules.RAID_WAVES_EASY = GameRules.register("raidWavesEasy", GameRules.Category.SPAWNING, GameRules.IntegerValue.create(4));
-        VDGamerules.RAID_WAVES_NORMAL = GameRules.register("raidWavesNormal", GameRules.Category.SPAWNING, GameRules.IntegerValue.create(6));
-        VDGamerules.RAID_WAVES_HARD = GameRules.register("raidWavesHard", GameRules.Category.SPAWNING, GameRules.IntegerValue.create(8));
-        VDGamerules.RECIPE_BOOK_ENABLED = GameRules.register("recipeBookEnabled", GameRules.Category.MISC, GameRules.BooleanValue.create(true));
+        VDGamerules.RAID_WAVES_EASY = GameRules.register("raidWavesEasy", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(4));
+        VDGamerules.RAID_WAVES_NORMAL = GameRules.register("raidWavesNormal", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(6));
+        VDGamerules.RAID_WAVES_HARD = GameRules.register("raidWavesHard", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(8));
+        VDGamerules.RECIPE_BOOK_ENABLED = GameRules.register("recipeBookEnabled", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.BooleanValue.create(true));
     }
 }
