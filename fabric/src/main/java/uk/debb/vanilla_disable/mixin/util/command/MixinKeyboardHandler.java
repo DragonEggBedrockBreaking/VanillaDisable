@@ -23,7 +23,7 @@ public abstract class MixinKeyboardHandler {
 
     @Inject(method = "keyPress", at = @At("RETURN"))
     private void vanillaDisable$keyPress(CallbackInfo ci) {
-        if (HotkeyManager.isPressed()) {
+        if (HotkeyManager.keyMapping.isDown()) {
             if (!this.minecraft.hasSingleplayerServer()) {
                 Objects.requireNonNull(this.minecraft.player).displayClientMessage(Component.translatable("vd.key.cannot_press").withStyle(ChatFormatting.RED), true);
             } else {

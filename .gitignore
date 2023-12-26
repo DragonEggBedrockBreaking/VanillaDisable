@@ -5,11 +5,6 @@ build/
 out/
 classes/
 
-# brachyura
-.brachyura
-.brachyura-old/
-buildscript/build/
-
 # eclipse
 
 *.launch
@@ -36,6 +31,10 @@ bin/
 # fabric
 
 run/
+
+# neoforge
+
+runs/
 
 # netbeans
 

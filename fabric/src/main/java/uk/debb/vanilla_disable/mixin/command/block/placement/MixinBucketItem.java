@@ -14,7 +14,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 public abstract class MixinBucketItem {
     @Shadow
     @Final
-    public Fluid content;
+    private Fluid content;
 
     @ModifyExpressionValue(
             method = "emptyContents",
@@ -24,7 +24,7 @@ public abstract class MixinBucketItem {
             )
     )
     private boolean vanillaDisable$ultraWarm(boolean original) {
-        if ((this.content.equals(Fluids.WATER) || this.content.equals(Fluids.FLOWING_WATER)) && original) {
+        if (original && this.content.equals(Fluids.WATER)) {
             return !CommandDataHandler.getCachedBoolean("blocks", "minecraft:water", "can_place_in_nether");
         }
         return original;

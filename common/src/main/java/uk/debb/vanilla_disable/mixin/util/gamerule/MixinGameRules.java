@@ -7,12 +7,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.data.gamerule.GameruleMigrationDataHandler;
+import uk.debb.vanilla_disable.data.gamerule.VDGamerules;
 
 @Mixin(GameRules.class)
 public abstract class MixinGameRules {
     @Inject(method = "loadFromTag", at = @At("HEAD"))
     private void vanillaDisable$loadFromTag(DynamicLike<?> dynamic, CallbackInfo ci) {
-        if (GameruleMigrationDataHandler.server == null) return;
+        if (VDGamerules.server == null) return;
 
         GameruleMigrationDataHandler.sqlData.forEach(rule -> rule.value = "");
         GameruleMigrationDataHandler.massColumnSqlData.forEach(rule -> rule.value = "");

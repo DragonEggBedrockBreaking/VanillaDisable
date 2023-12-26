@@ -11,8 +11,6 @@ import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 import java.util.List;
 
 public class GameruleMigrationDataHandler {
-    public static MinecraftServer server;
-
     public static final ObjectList<SqlDataHolder> sqlData = new ObjectArrayList<>() {{
         add(new SqlDataHolder("projectileDamage", "entities", "minecraft:player", "mob_projectile_damage", "true"));
         add(new SqlDataHolder("explosionDamage", "entities", "minecraft:player", "explosion_damage", "true"));

@@ -48,7 +48,6 @@ subprojects {
     }
 
     tasks.withType(JavaCompile).configureEach {
-
         it.options.encoding = 'UTF-8'
         it.options.getRelease().set(17)
     }
@@ -56,6 +55,7 @@ subprojects {
     processResources {
         def expandProps = [
                 "mod_version": mod_version,
+                "version": mod_version,
                 "group": project.group,
                 "minecraft_version": minecraft_version,
                 "minecraft_version_range": minecraft_version_range,
@@ -66,6 +66,7 @@ subprojects {
                 "mod_id": mod_id,
                 "license": license,
                 "mod_description": mod_description,
+                "description": mod_description,
                 "neoforge_version": neoforge_version,
                 "neoforge_loader_version_range": neoforge_loader_version_range,
                 "credits": credits
