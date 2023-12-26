@@ -41,22 +41,22 @@ subprojects {
     }
     processResources {
         def expandProps = [
-                "mod_version": mod_version,
-                "version": mod_version,
-                "group": project.group,
-                "minecraft_version": minecraft_version,
-                "minecraft_version_range": minecraft_version_range,
-                "fabric_version": fabric_version,
-                "fabric_loader_version": fabric_loader_version,
-                "mod_name": mod_name,
-                "mod_author": mod_author,
-                "mod_id": mod_id,
-                "license": license,
-                "mod_description": mod_description,
-                "description": mod_description,
-                "neoforge_version": neoforge_version,
+                "mod_version"                  : mod_version,
+                "version"                      : mod_version,
+                "group"                        : project.group,
+                "minecraft_version"            : minecraft_version,
+                "minecraft_version_range"      : minecraft_version_range,
+                "fabric_version"               : fabric_version,
+                "fabric_loader_version"        : fabric_loader_version,
+                "mod_name"                     : mod_name,
+                "mod_author"                   : mod_author,
+                "mod_id"                       : mod_id,
+                "license"                      : license,
+                "mod_description"              : mod_description,
+                "description"                  : mod_description,
+                "neoforge_version"             : neoforge_version,
                 "neoforge_loader_version_range": neoforge_loader_version_range,
-                "credits": credits
+                "credits"                      : credits
         ]
 
         filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {

@@ -51,9 +51,9 @@ runs {
 }
 jar {
     manifest {
-        attributes (
-            "Specification-Version": version,
-            "Implementation-Version": version
+        attributes(
+                "Specification-Version": version,
+                "Implementation-Version": version
         )
     }
 }
