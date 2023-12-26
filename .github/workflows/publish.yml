@@ -26,10 +26,15 @@ jobs:
           path: |
             ~/.gradle
             .gradle
+            build
             fabric/.gradle
+            fabric/build
             neoforge/.gradle
+            neoforge/build
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/settings.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+      - name: Delete old files
+        run: rm -rf build/libs fabric/build/libs neoforge/build/libs
       - name: Build with Gradle
         run: ./gradlew build
       - name: Publish to GitHub
