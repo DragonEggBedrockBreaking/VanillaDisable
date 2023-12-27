@@ -7,9 +7,6 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "command.block.placement.MixinBucketItem",
-    "util.gamerule.MixinGameRulesCategory"
-  ],
-  "client": [
     "util.gamerule.MixinEditGameRulesScreenRuleList"
   ],
   "injectors": {

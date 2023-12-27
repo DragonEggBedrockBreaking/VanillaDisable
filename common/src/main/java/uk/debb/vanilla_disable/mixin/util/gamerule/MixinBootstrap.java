@@ -1,15 +1,17 @@
-package uk.debb.vanilla_disable.data.gamerule;
+package uk.debb.vanilla_disable.mixin.util.gamerule;
 
+import net.minecraft.server.Bootstrap;
 import net.minecraft.world.level.GameRules;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import uk.debb.vanilla_disable.Constants;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.debb.vanilla_disable.data.gamerule.VDGamerules;
 
-@Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class RegisterGamerules {
-    @SubscribeEvent
-    public static void onCommonSetup(FMLCommonSetupEvent event) {
+@Mixin(Bootstrap.class)
+public abstract class MixinBootstrap {
+    @Inject(method = "bootStrap", at = @At("RETURN"))
+    private static void onInitialize(CallbackInfo ci) {
         VDGamerules.RAID_WAVES_EASY = GameRules.register("raidWavesEasy", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(4));
         VDGamerules.RAID_WAVES_NORMAL = GameRules.register("raidWavesNormal", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(6));
         VDGamerules.RAID_WAVES_HARD = GameRules.register("raidWavesHard", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(8));
