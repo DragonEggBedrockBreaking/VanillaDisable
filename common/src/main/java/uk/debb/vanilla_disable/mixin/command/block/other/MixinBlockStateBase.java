@@ -17,8 +17,16 @@ public abstract class MixinBlockStateBase {
     @Shadow
     public abstract Block getBlock();
 
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void vanillaDisable$use(CallbackInfoReturnable<InteractionResult> cir) {
+    @Inject(method = "useWithoutItem", at = @At("HEAD"), cancellable = true)
+    private void vanillaDisable$useWithoutItem(CallbackInfoReturnable<InteractionResult> cir) {
+        String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
+        if (!CommandDataHandler.getCachedBoolean("blocks", block, "can_interact")) {
+            cir.setReturnValue(InteractionResult.FAIL);
+        }
+    }
+
+    @Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
+    private void vanillaDisable$useItemOn(CallbackInfoReturnable<InteractionResult> cir) {
         String block = CommandDataHandler.getKeyFromBlockRegistry(this.getBlock());
         if (!CommandDataHandler.getCachedBoolean("blocks", block, "can_interact")) {
             cir.setReturnValue(InteractionResult.FAIL);

@@ -28,4 +28,4 @@ plugins {
 rootProject.name = 'VanillaDisable'
 include("common")
 include("fabric")
-include("neoforge")
+//include("neoforge")

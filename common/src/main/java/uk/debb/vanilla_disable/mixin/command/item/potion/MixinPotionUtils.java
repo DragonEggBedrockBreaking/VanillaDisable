@@ -17,7 +17,7 @@ public abstract class MixinPotionUtils {
     @ModifyReturnValue(method = "getMobEffects", at = @At("RETURN"))
     private static List<MobEffectInstance> vanillaDisable$getMobEffects(List<MobEffectInstance> original, ItemStack stack) {
         String item = CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
-        String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(PotionUtils.getPotion(stack))) + "_effect";
+        String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(PotionUtils.getPotion(stack).value())) + "_effect";
         if (!CommandDataHandler.getCachedBoolean("items", item, CommandDataHandler.lightCleanup(potion))) {
             return new ObjectArrayList<>();
         }
