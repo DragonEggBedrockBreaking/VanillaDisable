@@ -22,7 +22,7 @@ public abstract class MixinArrow {
     private void vanillaDisable$setEffectsFromItem(ItemStack stack, CallbackInfo ci) {
         if (stack.is(Items.TIPPED_ARROW)) {
             String item = CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
-            String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(PotionUtils.getPotion(stack))) + "_effect";
+            String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(PotionUtils.getPotion(stack).value())) + "_effect";
             if (!CommandDataHandler.getCachedBoolean("items", item, CommandDataHandler.lightCleanup(potion))) {
                 this.setEffectsFromItem(new ItemStack(Items.ARROW));
                 ci.cancel();
