@@ -11,7 +11,7 @@ import uk.debb.vanilla_disable.data.gamerule.VDGamerules;
 @Mixin(Bootstrap.class)
 public abstract class MixinBootstrap {
     @Inject(method = "bootStrap", at = @At("RETURN"))
-    private static void onInitialize(CallbackInfo ci) {
+    private static void vanillaDisable$bootStrap(CallbackInfo ci) {
         VDGamerules.RAID_WAVES_EASY = GameRules.register("raidWavesEasy", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(4));
         VDGamerules.RAID_WAVES_NORMAL = GameRules.register("raidWavesNormal", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(6));
         VDGamerules.RAID_WAVES_HARD = GameRules.register("raidWavesHard", GameRules.Category.valueOf("VANILLA_DISABLE"), GameRules.IntegerValue.create(8));

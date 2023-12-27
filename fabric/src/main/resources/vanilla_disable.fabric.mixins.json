@@ -10,7 +10,6 @@
     "util.gamerule.MixinEditGameRulesScreenRuleList"
   ],
   "client": [
-    "util.command.MixinKeyboardHandler",
     "util.other.MixinMinecraft"
   ],
   "injectors": {

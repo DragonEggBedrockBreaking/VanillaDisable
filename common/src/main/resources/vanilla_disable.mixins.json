@@ -115,6 +115,8 @@
     "gamerule.MixinRaid",
     "gamerule.MixinServerRecipeBook",
     "util.command.MixinCommands",
+    "util.command.MixinKeyboardHandler",
+    "util.command.MixinMinecraft",
     "util.command.MixinMinecraftServer",
     "util.command.MixinPlayerList",
     "util.gamerule.MixinBootstrap",

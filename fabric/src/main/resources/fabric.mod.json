@@ -31,8 +31,7 @@
       "uk.debb.vanilla_disable.config.global.ModMenuSettingsApi"
     ],
     "client": [
-      "uk.debb.vanilla_disable.LangFileManager",
-      "uk.debb.vanilla_disable.config.command.HotkeyManager"
+      "uk.debb.vanilla_disable.LangFileManager"
     ]
   },
   "mixins": [
