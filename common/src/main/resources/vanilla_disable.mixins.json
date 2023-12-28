@@ -123,6 +123,7 @@
     "util.gamerule.MixinGameRules",
     "util.gamerule.MixinGameRulesCategory",
     "util.gamerule.MixinMinecraftServer",
+    "util.worldgen.MixinCreateWorldScreenMoreTab",
     "util.worldgen.MixinMinecraftServer",
     "worldgen.biome.MixinBiomeManager",
     "worldgen.biome.MixinBiomeSource",
@@ -133,8 +134,7 @@
     "worldgen.structure.MixinStructureManager"
   ],
   "client": [
-    "util.worldgen.MixinCreateWorldScreen",
-    "util.worldgen.MixinMinecraft"
+    "util.worldgen.MixinCreateWorldScreen"
   ],
   "injectors": {
     "defaultRequire": 1

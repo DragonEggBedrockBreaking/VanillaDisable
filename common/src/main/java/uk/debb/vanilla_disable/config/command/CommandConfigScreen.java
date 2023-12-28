@@ -154,13 +154,9 @@ public class CommandConfigScreen extends Screen {
             Button doneButton = Button.builder(Component.translatable("vd.command_config.done"), button ->
                     CommandConfigScreen.this.onClose()).build();
 
-            defaultsButton.setX(CommandConfigScreen.this.width / 2 - 270);
-            defaultsButton.setY(CommandConfigScreen.this.height - 22);
-            cancelButton.setX(CommandConfigScreen.this.width / 2 - 90);
-            cancelButton.setY(CommandConfigScreen.this.height - 22);
-            doneButton.setX(CommandConfigScreen.this.width / 2 + 90);
-            doneButton.setY(CommandConfigScreen.this.height - 22);
-
+            defaultsButton.setPosition(CommandConfigScreen.this.width / 2 - 270, CommandConfigScreen.this.height - 22);
+            cancelButton.setPosition(CommandConfigScreen.this.width / 2 - 90, CommandConfigScreen.this.height - 22);
+            doneButton.setPosition(CommandConfigScreen.this.width / 2 + 90, CommandConfigScreen.this.height - 22);
             rowHelper.addChild(defaultsButton);
             rowHelper.addChild(cancelButton);
             rowHelper.addChild(doneButton);

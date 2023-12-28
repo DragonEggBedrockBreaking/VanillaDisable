@@ -5,7 +5,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import uk.debb.vanilla_disable.config.global.VanillaDisableConfig;
 import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 
@@ -15,8 +14,12 @@ public abstract class MixinCreateWorldScreen {
     private void vanillaDisable$onCreate(CallbackInfo ci) {
         CommandDataHandler.shouldMigrate = false;
         WorldgenDataHandler.shouldMigrate = false;
-        if (VanillaDisableConfig.worldLoadingScreen) {
-            WorldgenDataHandler.continueGeneration = false;
-        }
+    }
+
+    @Inject(method = "popScreen", at = @At("HEAD"))
+    private void vanillaDisable$popScreen(CallbackInfo ci) {
+        WorldgenDataHandler.biomeMap.clear();
+        WorldgenDataHandler.structureMap.clear();
+        WorldgenDataHandler.placedFeatureMap.clear();
     }
 }

@@ -30,14 +30,6 @@ public class VanillaDisableConfigScreen extends Screen {
                         .selected(VanillaDisableConfig.autoMigration).build()
         );
         this.addRenderableWidget(
-                Checkbox.builder(
-                                Component.translatable("vd.main_config.world_loading_screen"),
-                                this.font
-                        ).pos(width / 2 - length, height / 2 - 10 + 10).onValueChange(((checkbox, bl) ->
-                                VanillaDisableConfig.worldLoadingScreen = !VanillaDisableConfig.worldLoadingScreen))
-                        .selected(VanillaDisableConfig.worldLoadingScreen).build()
-        );
-        this.addRenderableWidget(
                 new Button(
                         this.width / 4 * 3, this.height / 5 * 4 - 12, 100, 20,
                         Component.translatable("vd.main_config.done"), (button) -> {

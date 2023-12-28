@@ -20,3 +20,5 @@ accessible method net/minecraft/world/level/GameRules$IntegerValue create (I)Lne
 accessible method net/minecraft/world/level/GameRules register (Ljava/lang/String;Lnet/minecraft/world/level/GameRules$Category;Lnet/minecraft/world/level/GameRules$Type;)Lnet/minecraft/world/level/GameRules$Key;
 mutable field net/minecraft/client/Options keyMappings [Lnet/minecraft/client/KeyMapping;
 accessible field net/minecraft/client/KeyMapping CATEGORY_SORT_ORDER Ljava/util/Map;
+accessible class net/minecraft/client/gui/screens/worldselection/CreateWorldScreen$MoreTab
+accessible field net/minecraft/client/gui/components/Checkbox selected Z

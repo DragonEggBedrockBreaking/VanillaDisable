@@ -115,16 +115,8 @@
   "vd.migration.done.wiki": "[VanillaDisable Wiki]",
   "vd.main_config": "VanillaDisable Configuração Principal",
   "vd.main_config.auto_migration": "Ativar / Desativar a migração automatica de regras de jogos antigas para o novo sistema.",
-  "vd.main_config.world_loading_screen": "Ativar / Desativar a tela de carregamento nas configurações de geração de mundo.",
   "vd.main_config.cancel": "Cancelar",
   "vd.main_config.done": "Pronto",
-  "vd.worldgen_config": "VanillaDisable Configurações de Geração de Mundo",
-  "vd.worldgen_config.open_directory": "Abrir pasta de configuração",
-  "vd.worldgen_config.open_file": "Abrir arquivo de configuração",
-  "vd.worldgen_config.done": "Pronto",
-  "vd.worldgen_config.description.1": "Por favor configure qualquer configurações de geração de mundo editando o arquivo de configuração.",
-  "vd.worldgen_config.description.2": "Isso deve ser feito agora, antes do mundo ser criado.",
-  "vd.worldgen_config.description.3": "Para desativar essa tela, modifique a configuração do mod VanillaDisable com o ModMenu.",
   "vd.command_config": "VanillaDisable Configuração de Comandos",
   "vd.command_config.tab.entities": "Entidades",
   "vd.command_config.tab.blocks": "Blocos",
@@ -138,5 +130,8 @@
   "vd.command_config.done": "Pronto",
   "vd.key.open_command_config": "Abrir configuração de comandos",
   "vd.key.category": "VanillaDisable",
-  "vd.key.cannot_press": "Você só pode usar essa tela de configuração no singleplayer."
+  "vd.key.cannot_press": "Você só pode usar essa tela de configuração no singleplayer.",
+  "vd.worldgen_config": "VanillaDisable Configurações de Geração de Mundo",
+  "vd.worldgen_config.done": "Pronto",
+  "vd.worldgen_config.search": "Procurar"
 }

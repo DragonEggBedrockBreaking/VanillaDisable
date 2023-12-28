@@ -7,8 +7,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 
-import java.util.concurrent.TimeUnit;
-
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer {
     @Inject(
@@ -21,17 +19,6 @@ public abstract class MixinMinecraftServer {
     private void vanillaDisable$initServer(CallbackInfo ci) {
         WorldgenDataHandler.server = (MinecraftServer) (Object) this;
         WorldgenDataHandler.init();
-    }
-
-    @Inject(method = "createLevels", at = @At("HEAD"))
-    private void vanillaDisable$createLevels(CallbackInfo ci) {
-        while (!WorldgenDataHandler.continueGeneration) {
-            try {
-                TimeUnit.MILLISECONDS.sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     @Inject(method = "stopServer", at = @At("TAIL"))

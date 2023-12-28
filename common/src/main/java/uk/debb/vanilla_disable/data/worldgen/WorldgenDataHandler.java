@@ -2,6 +2,8 @@ package uk.debb.vanilla_disable.data.worldgen;
 
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
+import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -30,10 +32,12 @@ public class WorldgenDataHandler {
     public static Registry<Structure> structureRegistry;
     public static Registry<PlacedFeature> placedFeatureRegistry;
     public static Registry<Biome> biomeRegistry;
+    public static Object2BooleanMap<String> biomeMap = new Object2BooleanOpenHashMap<>();
+    public static Object2BooleanMap<String> structureMap = new Object2BooleanOpenHashMap<>();
+    public static Object2BooleanMap<String> placedFeatureMap = new Object2BooleanOpenHashMap<>();
     public static Toml toml;
     public static File PATH;
     public static File DIRECTORY;
-    public static boolean continueGeneration = true;
     public static boolean shouldMigrate = true;
 
     /**
@@ -43,7 +47,8 @@ public class WorldgenDataHandler {
      * @return The cleaned up string.
      */
     public static String cleanup(Object o) {
-        return o.toString().replace("minecraft:", "");
+        String[] output = o.toString().split(":");
+        return output[output.length - 1];
     }
 
     /**
@@ -95,6 +100,25 @@ public class WorldgenDataHandler {
 
         toml = new Toml().read(PATH);
         Tables data = getTomlTables();
+
+        structureMap.forEach((structure, enabled) -> {
+            String structureName = cleanup(structure);
+            if (!data.structures().containsKey(structureName)) {
+                data.structures().put(structureName, enabled);
+            }
+        });
+        placedFeatureMap.forEach((placedFeature, enabled) -> {
+            String placedFeatureName = cleanup(placedFeature);
+            if (!data.placedFeatures().containsKey(placedFeatureName)) {
+                data.placedFeatures().put(placedFeatureName, enabled);
+            }
+        });
+        biomeMap.forEach((biome, enabled) -> {
+            String biomeName = cleanup(biome);
+            if (!data.biomes().containsKey(biomeName)) {
+                data.biomes().put(biomeName, enabled);
+            }
+        });
 
         structureRegistry.keySet().forEach(structure -> {
             String structureName = cleanup(structure);

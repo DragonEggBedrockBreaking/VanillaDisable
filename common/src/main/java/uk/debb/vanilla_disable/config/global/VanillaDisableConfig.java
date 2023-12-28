@@ -7,7 +7,6 @@ import java.util.Properties;
 
 public class VanillaDisableConfig {
     public static boolean autoMigration = true;
-    public static boolean worldLoadingScreen = true;
     public static String PATH = "";
     private static Properties data;
 
@@ -33,7 +32,6 @@ public class VanillaDisableConfig {
         }
 
         autoMigration = Boolean.parseBoolean(properties.getProperty("auto_migration", String.valueOf(autoMigration)));
-        worldLoadingScreen = Boolean.parseBoolean(properties.getProperty("world_loading_screen", String.valueOf(worldLoadingScreen)));
 
         updateProperties(properties);
 
@@ -42,7 +40,6 @@ public class VanillaDisableConfig {
 
     public static void resetConfig() {
         autoMigration = Boolean.parseBoolean(data.getProperty("auto_migration"));
-        worldLoadingScreen = Boolean.parseBoolean(data.getProperty("world_loading_screen"));
     }
 
     public static void saveConfig() {
@@ -51,7 +48,6 @@ public class VanillaDisableConfig {
 
     private static void updateProperties(Properties data) {
         data.setProperty("auto_migration", String.valueOf(autoMigration));
-        data.setProperty("world_loading_screen", String.valueOf(worldLoadingScreen));
 
         try {
             data.store(new FileOutputStream(PATH), null);
