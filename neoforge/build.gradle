@@ -33,9 +33,7 @@ jarJar.enable()
 dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
     implementation "com.h2database:h2:${h2_version}"
-    implementation "com.moandjiezana.toml:toml4j:${toml4j_version}"
     jarJar(group: "com.h2database", name: "h2", version: "${h2_version_range}")
-    jarJar(group: "com.moandjiezana.toml", name: "toml4j", version: "${toml4j_version_range}")
     compileOnly project(":common")
 }
 runs {

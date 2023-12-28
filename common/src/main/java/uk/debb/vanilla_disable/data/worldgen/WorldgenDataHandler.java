@@ -1,10 +1,10 @@
 package uk.debb.vanilla_disable.data.worldgen;
 
-import com.moandjiezana.toml.Toml;
-import com.moandjiezana.toml.TomlWriter;
+import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -16,28 +16,28 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.storage.LevelResource;
+import org.apache.commons.io.FileUtils;
+import uk.debb.vanilla_disable.Constants;
 import uk.debb.vanilla_disable.config.global.VanillaDisableConfig;
 import uk.debb.vanilla_disable.data.gamerule.GameruleMigrationDataHandler;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.Objects;
-import java.util.TreeMap;
+import java.util.Properties;
 
 public class WorldgenDataHandler {
     public static MinecraftServer server;
+    public static Registry<Biome> biomeRegistry;
     public static Registry<Structure> structureRegistry;
     public static Registry<PlacedFeature> placedFeatureRegistry;
-    public static Registry<Biome> biomeRegistry;
     public static Object2BooleanMap<String> biomeMap = new Object2BooleanOpenHashMap<>();
     public static Object2BooleanMap<String> structureMap = new Object2BooleanOpenHashMap<>();
     public static Object2BooleanMap<String> placedFeatureMap = new Object2BooleanOpenHashMap<>();
-    public static Toml toml;
-    public static File PATH;
-    public static File DIRECTORY;
+    public static File directory;
+    public static File tomlFile;
+    public static File propertiesFile;
+    public static Properties properties = new Properties();
     public static boolean shouldMigrate = true;
 
     /**
@@ -52,139 +52,140 @@ public class WorldgenDataHandler {
     }
 
     /**
-     * Writes the data to the file.
-     *
-     * @param structures     The structures to write.
-     * @param placedFeatures The placed features to write.
-     * @param biomeLevels    The biome levels to write.
+     * Create basic constants, and decide what to do with the config.
      */
-    private static void write(Map<String, Object> structures, Map<String, Object> placedFeatures, Map<String, Object> biomeLevels) {
-        Map<String, Object> data = new HashMap<>();
-        data.put("structures", structures);
-        data.put("placed_features", placedFeatures);
-        data.put("biomes", biomeLevels);
+    public static void init() {
+        biomeRegistry = server.registryAccess().registryOrThrow(Registries.BIOME);
+        structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
+        placedFeatureRegistry = server.registryAccess().registryOrThrow(Registries.PLACED_FEATURE);
 
-        TomlWriter writer = new TomlWriter.Builder()
-                .indentValuesBy(2)
-                .build();
-        String tomlString = writer.write(data).replace("[", "\n[").substring(1);
+        directory = server.getWorldPath(LevelResource.ROOT).toFile();
+        tomlFile = new File(directory, "vanilla_disable_worldgen.toml");
+        propertiesFile = new File(directory, "vanilla_disable_worldgen.properties");
+
+        if (!propertiesFile.exists()) {
+            if (tomlFile.exists()) {
+                convertConfig();
+            } else {
+                createConfig();
+                if (VanillaDisableConfig.autoMigration && shouldMigrate) {
+                    GameruleMigrationDataHandler.updateProperties();
+                }
+            }
+        }
+        loadConfig();
+    }
+
+    /**
+     * Migrate the config from the old .toml format to the new .properties format.
+     */
+    private static void convertConfig() {
+        if (!tomlFile.renameTo(propertiesFile)) {
+            Constants.LOG.error("Unable to convert legacy .toml worldgen config to .properties format.");
+            return;
+        }
 
         try {
-            Files.write(PATH.toPath(), tomlString.getBytes());
+            String[] lines = FileUtils.readFileToString(propertiesFile, Charset.defaultCharset()).split("\n");
+            Object2ObjectMap<String, StringBuilder> sections = new Object2ObjectOpenHashMap<>();
+
+            String current = "";
+            for (String line : lines) {
+                if (line.startsWith("[")) {
+                    current = line.substring(1, line.length() - 1);
+                    sections.put(current, new StringBuilder());
+                } else {
+                    sections.get(current).append(line.replace("  ", current + ".")).append("\n");
+                }
+            }
+
+            try (FileWriter writer = new FileWriter(propertiesFile)) {
+                sections.values().forEach(content -> {
+                    try { writer.write(content.toString()); }
+                    catch (IOException ex) { throw new UncheckedIOException(ex); }
+                });
+            } catch (IOException e) {
+                throw new IOException(e);
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Constants.LOG.error("Unable to convert legacy .toml worldgen config to .properties format.");
         }
     }
 
     /**
-     * Initializes and sets up all the data.
+     * Create the config file with default values (and values configured in the creation screen GUI).
      */
-    public static void init() {
-        structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
-        placedFeatureRegistry = server.registryAccess().registryOrThrow(Registries.PLACED_FEATURE);
-        biomeRegistry = server.registryAccess().registryOrThrow(Registries.BIOME);
-
-        PATH = new File(server.getWorldPath(LevelResource.ROOT) + "/vanilla_disable_worldgen.toml");
-        DIRECTORY = server.getWorldPath(LevelResource.ROOT).toFile();
-        boolean first = !PATH.exists();
-
-        try {
-            if (!PATH.exists()) {
-                if (!PATH.createNewFile()) {
-                    throw new IOException();
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        toml = new Toml().read(PATH);
-        Tables data = getTomlTables();
-
-        structureMap.forEach((structure, enabled) -> {
-            String structureName = cleanup(structure);
-            if (!data.structures().containsKey(structureName)) {
-                data.structures().put(structureName, enabled);
-            }
-        });
-        placedFeatureMap.forEach((placedFeature, enabled) -> {
-            String placedFeatureName = cleanup(placedFeature);
-            if (!data.placedFeatures().containsKey(placedFeatureName)) {
-                data.placedFeatures().put(placedFeatureName, enabled);
-            }
-        });
-        biomeMap.forEach((biome, enabled) -> {
-            String biomeName = cleanup(biome);
-            if (!data.biomes().containsKey(biomeName)) {
-                data.biomes().put(biomeName, enabled);
-            }
+    private static void createConfig() {
+        biomeRegistry.keySet().forEach(biome -> {
+            if (!biome.toString().contains("minecraft:")) { return; }
+            String clean = cleanup(biome);
+            if ("plains the_nether the_end the_void".contains(clean)) { return; }
+            properties.put("biomes." + clean, biomeMap.getOrDefault(clean, true));
         });
 
         structureRegistry.keySet().forEach(structure -> {
-            String structureName = cleanup(structure);
-            if (!data.structures().containsKey(structureName)) {
-                data.structures().put(structureName, true);
-            }
+            if (!structure.toString().contains("minecraft:")) { return; }
+            String clean = cleanup(structure);
+            properties.put("structures." + clean, structureMap.getOrDefault(clean, true));
         });
 
         placedFeatureRegistry.keySet().forEach(placedFeature -> {
-            String placedFeatureName = cleanup(placedFeature);
-            if (!data.placedFeatures().containsKey(placedFeatureName)) {
-                data.placedFeatures().put(placedFeatureName, true);
-            }
+            if (!placedFeature.toString().contains("minecraft:")) { return; }
+            String clean = cleanup(placedFeature);
+            properties.put("placed_features." + clean, placedFeatureMap.getOrDefault(clean, true));
         });
-        data.placedFeatures().put("obsidian_platform", true);
-        data.placedFeatures().put("end_spike_cage", true);
+        ImmutableList.of("obsidian_platform", "end_spike_cage").forEach(placedFeature ->
+                properties.put("placed_features." + placedFeature, placedFeatureMap.getOrDefault(placedFeature, true)));
 
-        biomeRegistry.keySet().forEach(biome -> {
-            String biomeName = cleanup(biome);
-            if (!data.biomes().containsKey(biomeName)) {
-                data.biomes().put(biomeName, true);
+        try {
+            if (!propertiesFile.createNewFile()) {
+                throw new UncheckedIOException(new IOException());
             }
-        });
-        data.biomes().remove("nether_wastes");
-        data.biomes().remove("plains");
-        data.biomes().remove("the_end");
-        data.biomes().remove("the_void");
+        } catch (IOException e) {
+            Constants.LOG.error("Unable to generate new worldgen config.");
+        }
 
-        write(data.structures(), data.placedFeatures(), data.biomes());
+        write();
+    }
 
-        toml = new Toml().read(PATH);
-
-        if (first && shouldMigrate && VanillaDisableConfig.autoMigration) {
-            GameruleMigrationDataHandler.updateToml();
+    /**
+     * Load the config file.
+     */
+    private static void loadConfig() {
+        try (FileInputStream in = new FileInputStream(propertiesFile)) {
+            properties.load(in);
+        } catch (IOException e) {
+            Constants.LOG.error("Unable to load worldgen config.", e);
         }
     }
 
     /**
-     * Gets the tables from the toml file.
-     *
-     * @return The tables.
+     * Write the properties to the config file.
      */
-    @SuppressWarnings("unchecked")
-    private static Tables getTomlTables() {
-        Map<String, Object> data = toml.toMap();
-
-        return new Tables(
-                new TreeMap<>((Map<String, Object>) data.getOrDefault("structures", new HashMap<>())),
-                new TreeMap<>((Map<String, Object>) data.getOrDefault("placed_features", new HashMap<>())),
-                new TreeMap<>((Map<String, Object>) data.getOrDefault("biomes", new HashMap<>()))
-        );
+    public static void write() {
+        try (FileWriter writer = new FileWriter(propertiesFile)) {
+            properties.keySet().stream().sorted().forEach(key -> {
+                boolean value = (boolean) properties.get(key);
+                try {
+                    writer.write(key + "=" + value + "\n");
+                } catch (IOException e) {
+                    Constants.LOG.error("Unable to write to worldgen config.");
+                }
+            });
+        } catch (IOException e) {
+            Constants.LOG.error("Unable to write to worldgen config.");
+        }
     }
 
     /**
-     * Gets a boolean from the toml file.
+     * Get a value from the config file.
      *
-     * @param table The table to get the boolean from.
-     * @param key   The key to get the boolean from.
-     * @return The boolean.
+     * @param table The table to get the value from.
+     * @param key   The key to get the value of.
+     * @return      The value of the key.
      */
     public static boolean get(String table, String key) {
-        try {
-            return toml.getTable(table).getBoolean(key);
-        } catch (NullPointerException e) {
-            return true;
-        }
+        return Boolean.parseBoolean(properties.getProperty(table + "." + key));
     }
 
     /**
@@ -224,18 +225,9 @@ public class WorldgenDataHandler {
      * @param biomeMap         The biomes to update.
      */
     public static void updateVals(Object2ObjectMap<String, Boolean> structureMap, Object2ObjectMap<String, Boolean> placedFeatureMap, Object2ObjectMap<String, Boolean> biomeMap) {
-        Tables data = getTomlTables();
-
-        data.structures().putAll(structureMap);
-        data.placedFeatures().putAll(placedFeatureMap);
-        data.biomes().putAll(biomeMap);
-
-        write(data.structures(), data.placedFeatures(), data.biomes());
-
-        toml = new Toml().read(PATH);
-    }
-
-    private record Tables(Map<String, Object> structures, Map<String, Object> placedFeatures,
-                          Map<String, Object> biomes) {
+        biomeMap.forEach((key, value) -> properties.put("biomes." + key, value.toString()));
+        structureMap.forEach((key, value) -> properties.put("structures." + key, value.toString()));
+        placedFeatureMap.forEach((key, value) -> properties.put("placed_features." + key, value.toString()));
+        write();
     }
 }

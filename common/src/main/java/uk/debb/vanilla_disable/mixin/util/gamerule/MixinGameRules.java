@@ -18,7 +18,7 @@ public abstract class MixinGameRules {
         GameruleMigrationDataHandler.sqlData.forEach(rule -> rule.value = "");
         GameruleMigrationDataHandler.massColumnSqlData.forEach(rule -> rule.value = "");
         GameruleMigrationDataHandler.allRowSqlDataHolders.forEach(rule -> rule.value = "");
-        GameruleMigrationDataHandler.tomlData.forEach(rule -> rule.value = "");
+        GameruleMigrationDataHandler.propertiesData.forEach(rule -> rule.value = "");
 
         GameruleMigrationDataHandler.sqlData.forEach(rule ->
                 dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
@@ -26,7 +26,7 @@ public abstract class MixinGameRules {
                 dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
         GameruleMigrationDataHandler.allRowSqlDataHolders.forEach(rule ->
                 dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
-        GameruleMigrationDataHandler.tomlData.forEach(rule ->
+        GameruleMigrationDataHandler.propertiesData.forEach(rule ->
                 dynamic.get(rule.rule).asString().result().ifPresent(str -> rule.value = str));
         dynamic.get("biomesEnabled").asString().result().ifPresent(str ->
                 GameruleMigrationDataHandler.biomesEnabled = str);

@@ -967,88 +967,88 @@ public class GameruleMigrationDataHandler {
         add(new AllRowSqlDataHolder("mobsDropXp", "entities", "can_drop_xp"));
         add(new AllRowSqlDataHolder("blocksDropXp", "blocks", "can_drop_xp"));
     }};
-    public static final ObjectList<TomlDataHolder> tomlData = new ObjectArrayList<>() {{
-        add(new TomlDataHolder("ancientCityGeneration", "structures", "ancient_city"));
-        add(new TomlDataHolder("bastionRemnantGeneration", "structures", "bastion_remnant"));
-        add(new TomlDataHolder("buriedTreasureGeneration", "structures", "buried_treasure"));
-        add(new TomlDataHolder("desertPyramidGeneration", "structures", "desert_pyramid"));
-        add(new TomlDataHolder("endCityGeneration", "structures", "end_city"));
-        add(new TomlDataHolder("fortressGeneration", "structures", "fortress"));
-        add(new TomlDataHolder("iglooGeneration", "structures", "igloo"));
-        add(new TomlDataHolder("junglePyramidGeneration", "structures", "jungle_pyramid"));
-        add(new TomlDataHolder("mansionGeneration", "structures", "mansion"));
-        add(new TomlDataHolder("mineshaftGeneration", "structures", "mineshaft"));
-        add(new TomlDataHolder("monumentGeneration", "structures", "monument"));
-        add(new TomlDataHolder("netherFossilGeneration", "structures", "nether_fossil"));
-        add(new TomlDataHolder("oceanRuinGeneration", "structures", "ocean_ruin"));
-        add(new TomlDataHolder("pillagerOutpostGeneration", "structures", "pillager_outpost"));
-        add(new TomlDataHolder("ruinedPortalGeneration", "structures", "ruined_portal"));
-        add(new TomlDataHolder("shipwreckGeneration", "structures", "shipwreck"));
-        add(new TomlDataHolder("strongholdGeneration", "structures", "stronghold"));
-        add(new TomlDataHolder("swampHutGeneration", "structures", "swamp_hut"));
-        add(new TomlDataHolder("trailRuinsGeneration", "structures", "trail_ruins"));
-        add(new TomlDataHolder("villageGeneration", "structures", "village"));
+    public static final ObjectList<PropertiesDataHolder> propertiesData = new ObjectArrayList<>() {{
+        add(new PropertiesDataHolder("ancientCityGeneration", "structures", "ancient_city"));
+        add(new PropertiesDataHolder("bastionRemnantGeneration", "structures", "bastion_remnant"));
+        add(new PropertiesDataHolder("buriedTreasureGeneration", "structures", "buried_treasure"));
+        add(new PropertiesDataHolder("desertPyramidGeneration", "structures", "desert_pyramid"));
+        add(new PropertiesDataHolder("endCityGeneration", "structures", "end_city"));
+        add(new PropertiesDataHolder("fortressGeneration", "structures", "fortress"));
+        add(new PropertiesDataHolder("iglooGeneration", "structures", "igloo"));
+        add(new PropertiesDataHolder("junglePyramidGeneration", "structures", "jungle_pyramid"));
+        add(new PropertiesDataHolder("mansionGeneration", "structures", "mansion"));
+        add(new PropertiesDataHolder("mineshaftGeneration", "structures", "mineshaft"));
+        add(new PropertiesDataHolder("monumentGeneration", "structures", "monument"));
+        add(new PropertiesDataHolder("netherFossilGeneration", "structures", "nether_fossil"));
+        add(new PropertiesDataHolder("oceanRuinGeneration", "structures", "ocean_ruin"));
+        add(new PropertiesDataHolder("pillagerOutpostGeneration", "structures", "pillager_outpost"));
+        add(new PropertiesDataHolder("ruinedPortalGeneration", "structures", "ruined_portal"));
+        add(new PropertiesDataHolder("shipwreckGeneration", "structures", "shipwreck"));
+        add(new PropertiesDataHolder("strongholdGeneration", "structures", "stronghold"));
+        add(new PropertiesDataHolder("swampHutGeneration", "structures", "swamp_hut"));
+        add(new PropertiesDataHolder("trailRuinsGeneration", "structures", "trail_ruins"));
+        add(new PropertiesDataHolder("villageGeneration", "structures", "village"));
 
-        add(new TomlDataHolder("badlandsBiome", "biomes", "badlands"));
-        add(new TomlDataHolder("bambooJungleBiome", "biomes", "bamboo_jungle"));
-        add(new TomlDataHolder("beachBiome", "biomes", "beach"));
-        add(new TomlDataHolder("birchForestBiome", "biomes", "birch_forest"));
-        add(new TomlDataHolder("cherryGroveBiome", "biomes", "cherry_grove"));
-        add(new TomlDataHolder("coldOceanBiome", "biomes", "cold_ocean"));
-        add(new TomlDataHolder("darkForestBiome", "biomes", "dark_forest"));
-        add(new TomlDataHolder("deepColdOceanBiome", "biomes", "deep_cold_ocean"));
-        add(new TomlDataHolder("deepDarkBiome", "biomes", "deep_dark"));
-        add(new TomlDataHolder("deepFrozenOceanBiome", "biomes", "deep_frozen_ocean"));
-        add(new TomlDataHolder("deepLukewarmOceanBiome", "biomes", "deep_lukewarm_ocean"));
-        add(new TomlDataHolder("deepOceanBiome", "biomes", "deep_ocean"));
-        add(new TomlDataHolder("desertBiome", "biomes", "desert"));
-        add(new TomlDataHolder("dripstoneCavesBiome", "biomes", "dripstone_caves"));
-        add(new TomlDataHolder("erodedBadlandsBiome", "biomes", "eroded_badlands"));
-        add(new TomlDataHolder("flowerForestBiome", "biomes", "flower_forest"));
-        add(new TomlDataHolder("forestBiome", "biomes", "forest"));
-        add(new TomlDataHolder("frozenOceanBiome", "biomes", "frozen_ocean"));
-        add(new TomlDataHolder("frozenPeaksBiome", "biomes", "frozen_peaks"));
-        add(new TomlDataHolder("frozenRiverBiome", "biomes", "frozen_river"));
-        add(new TomlDataHolder("groveBiome", "biomes", "grove"));
-        add(new TomlDataHolder("iceSpikesBiome", "biomes", "ice_spikes"));
-        add(new TomlDataHolder("jaggedPeaksBiome", "biomes", "jagged_peaks"));
-        add(new TomlDataHolder("jungleBiome", "biomes", "jungle"));
-        add(new TomlDataHolder("lukewarmOceanBiome", "biomes", "lukewarm_ocean"));
-        add(new TomlDataHolder("lushCavesBiome", "biomes", "lush_caves"));
-        add(new TomlDataHolder("mangroveSwampBiome", "biomes", "mangrove_swamp"));
-        add(new TomlDataHolder("meadowBiome", "biomes", "meadow"));
-        add(new TomlDataHolder("mushroomFieldsBiome", "biomes", "mushroom_fields"));
-        add(new TomlDataHolder("oceanBiome", "biomes", "ocean"));
-        add(new TomlDataHolder("oldGrowthBirchForestBiome", "biomes", "old_growth_birch_forest"));
-        add(new TomlDataHolder("oldGrowthPineTaigaBiome", "biomes", "old_growth_pine_taiga"));
-        add(new TomlDataHolder("oldGrowthSpruceTaigaBiome", "biomes", "old_growth_spruce_taiga"));
-        add(new TomlDataHolder("riverBiome", "biomes", "river"));
-        add(new TomlDataHolder("savannaBiome", "biomes", "savanna"));
-        add(new TomlDataHolder("savannaPlateauBiome", "biomes", "savanna_plateau"));
-        add(new TomlDataHolder("snowyBeachBiome", "biomes", "snowy_beach"));
-        add(new TomlDataHolder("snowyPlainsBiome", "biomes", "snowy_plains"));
-        add(new TomlDataHolder("snowySlopesBiome", "biomes", "snowy_slopes"));
-        add(new TomlDataHolder("snowyTaigaBiome", "biomes", "snowy_taiga"));
-        add(new TomlDataHolder("sparseJungleBiome", "biomes", "sparse_jungle"));
-        add(new TomlDataHolder("stonyPeaksBiome", "biomes", "stony_peaks"));
-        add(new TomlDataHolder("stonyShoreBiome", "biomes", "stony_shore"));
-        add(new TomlDataHolder("sunflowerPlainsBiome", "biomes", "sunflower_plains"));
-        add(new TomlDataHolder("swampBiome", "biomes", "swamp"));
-        add(new TomlDataHolder("taigaBiome", "biomes", "taiga"));
-        add(new TomlDataHolder("warmOceanBiome", "biomes", "warm_ocean"));
-        add(new TomlDataHolder("windsweptForestBiome", "biomes", "windswept_forest"));
-        add(new TomlDataHolder("windsweptGravellyHillsBiome", "biomes", "windswept_gravelly_hills"));
-        add(new TomlDataHolder("windsweptHillsBiome", "biomes", "windswept_hills"));
-        add(new TomlDataHolder("windsweptSavannaBiome", "biomes", "windswept_savanna"));
-        add(new TomlDataHolder("woodedBadlandsBiome", "biomes", "wooded_badlands"));
-        add(new TomlDataHolder("basaltDeltasBiome", "biomes", "basalt_deltas"));
-        add(new TomlDataHolder("crimsonForestBiome", "biomes", "crimson_forest"));
-        add(new TomlDataHolder("soulSandValleyBiome", "biomes", "soul_sand_valley"));
-        add(new TomlDataHolder("warpedForestBiome", "biomes", "warped_forest"));
-        add(new TomlDataHolder("endBarrensBiome", "biomes", "end_barrens"));
-        add(new TomlDataHolder("endHighlandsBiome", "biomes", "end_highlands"));
-        add(new TomlDataHolder("endMidlandsBiome", "biomes", "end_midlands"));
-        add(new TomlDataHolder("smallEndIslandsBiome", "biomes", "small_end_islands"));
+        add(new PropertiesDataHolder("badlandsBiome", "biomes", "badlands"));
+        add(new PropertiesDataHolder("bambooJungleBiome", "biomes", "bamboo_jungle"));
+        add(new PropertiesDataHolder("beachBiome", "biomes", "beach"));
+        add(new PropertiesDataHolder("birchForestBiome", "biomes", "birch_forest"));
+        add(new PropertiesDataHolder("cherryGroveBiome", "biomes", "cherry_grove"));
+        add(new PropertiesDataHolder("coldOceanBiome", "biomes", "cold_ocean"));
+        add(new PropertiesDataHolder("darkForestBiome", "biomes", "dark_forest"));
+        add(new PropertiesDataHolder("deepColdOceanBiome", "biomes", "deep_cold_ocean"));
+        add(new PropertiesDataHolder("deepDarkBiome", "biomes", "deep_dark"));
+        add(new PropertiesDataHolder("deepFrozenOceanBiome", "biomes", "deep_frozen_ocean"));
+        add(new PropertiesDataHolder("deepLukewarmOceanBiome", "biomes", "deep_lukewarm_ocean"));
+        add(new PropertiesDataHolder("deepOceanBiome", "biomes", "deep_ocean"));
+        add(new PropertiesDataHolder("desertBiome", "biomes", "desert"));
+        add(new PropertiesDataHolder("dripstoneCavesBiome", "biomes", "dripstone_caves"));
+        add(new PropertiesDataHolder("erodedBadlandsBiome", "biomes", "eroded_badlands"));
+        add(new PropertiesDataHolder("flowerForestBiome", "biomes", "flower_forest"));
+        add(new PropertiesDataHolder("forestBiome", "biomes", "forest"));
+        add(new PropertiesDataHolder("frozenOceanBiome", "biomes", "frozen_ocean"));
+        add(new PropertiesDataHolder("frozenPeaksBiome", "biomes", "frozen_peaks"));
+        add(new PropertiesDataHolder("frozenRiverBiome", "biomes", "frozen_river"));
+        add(new PropertiesDataHolder("groveBiome", "biomes", "grove"));
+        add(new PropertiesDataHolder("iceSpikesBiome", "biomes", "ice_spikes"));
+        add(new PropertiesDataHolder("jaggedPeaksBiome", "biomes", "jagged_peaks"));
+        add(new PropertiesDataHolder("jungleBiome", "biomes", "jungle"));
+        add(new PropertiesDataHolder("lukewarmOceanBiome", "biomes", "lukewarm_ocean"));
+        add(new PropertiesDataHolder("lushCavesBiome", "biomes", "lush_caves"));
+        add(new PropertiesDataHolder("mangroveSwampBiome", "biomes", "mangrove_swamp"));
+        add(new PropertiesDataHolder("meadowBiome", "biomes", "meadow"));
+        add(new PropertiesDataHolder("mushroomFieldsBiome", "biomes", "mushroom_fields"));
+        add(new PropertiesDataHolder("oceanBiome", "biomes", "ocean"));
+        add(new PropertiesDataHolder("oldGrowthBirchForestBiome", "biomes", "old_growth_birch_forest"));
+        add(new PropertiesDataHolder("oldGrowthPineTaigaBiome", "biomes", "old_growth_pine_taiga"));
+        add(new PropertiesDataHolder("oldGrowthSpruceTaigaBiome", "biomes", "old_growth_spruce_taiga"));
+        add(new PropertiesDataHolder("riverBiome", "biomes", "river"));
+        add(new PropertiesDataHolder("savannaBiome", "biomes", "savanna"));
+        add(new PropertiesDataHolder("savannaPlateauBiome", "biomes", "savanna_plateau"));
+        add(new PropertiesDataHolder("snowyBeachBiome", "biomes", "snowy_beach"));
+        add(new PropertiesDataHolder("snowyPlainsBiome", "biomes", "snowy_plains"));
+        add(new PropertiesDataHolder("snowySlopesBiome", "biomes", "snowy_slopes"));
+        add(new PropertiesDataHolder("snowyTaigaBiome", "biomes", "snowy_taiga"));
+        add(new PropertiesDataHolder("sparseJungleBiome", "biomes", "sparse_jungle"));
+        add(new PropertiesDataHolder("stonyPeaksBiome", "biomes", "stony_peaks"));
+        add(new PropertiesDataHolder("stonyShoreBiome", "biomes", "stony_shore"));
+        add(new PropertiesDataHolder("sunflowerPlainsBiome", "biomes", "sunflower_plains"));
+        add(new PropertiesDataHolder("swampBiome", "biomes", "swamp"));
+        add(new PropertiesDataHolder("taigaBiome", "biomes", "taiga"));
+        add(new PropertiesDataHolder("warmOceanBiome", "biomes", "warm_ocean"));
+        add(new PropertiesDataHolder("windsweptForestBiome", "biomes", "windswept_forest"));
+        add(new PropertiesDataHolder("windsweptGravellyHillsBiome", "biomes", "windswept_gravelly_hills"));
+        add(new PropertiesDataHolder("windsweptHillsBiome", "biomes", "windswept_hills"));
+        add(new PropertiesDataHolder("windsweptSavannaBiome", "biomes", "windswept_savanna"));
+        add(new PropertiesDataHolder("woodedBadlandsBiome", "biomes", "wooded_badlands"));
+        add(new PropertiesDataHolder("basaltDeltasBiome", "biomes", "basalt_deltas"));
+        add(new PropertiesDataHolder("crimsonForestBiome", "biomes", "crimson_forest"));
+        add(new PropertiesDataHolder("soulSandValleyBiome", "biomes", "soul_sand_valley"));
+        add(new PropertiesDataHolder("warpedForestBiome", "biomes", "warped_forest"));
+        add(new PropertiesDataHolder("endBarrensBiome", "biomes", "end_barrens"));
+        add(new PropertiesDataHolder("endHighlandsBiome", "biomes", "end_highlands"));
+        add(new PropertiesDataHolder("endMidlandsBiome", "biomes", "end_midlands"));
+        add(new PropertiesDataHolder("smallEndIslandsBiome", "biomes", "small_end_islands"));
     }};
     public static String biomesEnabled = "";
 
@@ -1071,16 +1071,16 @@ public class GameruleMigrationDataHandler {
         });
     }
 
-    public static void updateToml() {
+    public static void updateProperties() {
         Object2ObjectMap<String, Boolean> structureMap = new Object2ObjectOpenHashMap<>();
         Object2ObjectMap<String, Boolean> placedFeatureMap = new Object2ObjectOpenHashMap<>();
         Object2ObjectMap<String, Boolean> biomeMap = new Object2ObjectOpenHashMap<>();
-        tomlData.forEach(tomlDataHolder -> {
-            if (tomlDataHolder.value != null && tomlDataHolder.value.equals("false")) {
-                switch (tomlDataHolder.table) {
-                    case "structures" -> structureMap.put(tomlDataHolder.attribute, false);
-                    case "placed_features" -> placedFeatureMap.put(tomlDataHolder.attribute, false);
-                    case "biomes" -> biomeMap.put(tomlDataHolder.attribute, false);
+        propertiesData.forEach(propertiesDataHolder -> {
+            if (propertiesDataHolder.value != null && propertiesDataHolder.value.equals("false")) {
+                switch (propertiesDataHolder.table) {
+                    case "structures" -> structureMap.put(propertiesDataHolder.attribute, false);
+                    case "placed_features" -> placedFeatureMap.put(propertiesDataHolder.attribute, false);
+                    case "biomes" -> biomeMap.put(propertiesDataHolder.attribute, false);
                 }
             }
         });
@@ -1135,13 +1135,13 @@ public class GameruleMigrationDataHandler {
         }
     }
 
-    public static class TomlDataHolder {
+    public static class PropertiesDataHolder {
         public final String rule;
         public final String table;
         public final String attribute;
         public String value;
 
-        public TomlDataHolder(String rule, String table, String attribute) {
+        public PropertiesDataHolder(String rule, String table, String attribute) {
             this.rule = rule;
             this.table = table;
             this.attribute = attribute;
