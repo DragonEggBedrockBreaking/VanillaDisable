@@ -24,9 +24,6 @@
   "icon": "assets/${mod_id}/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "uk.debb.vanilla_disable.config.global.VanillaDisableConfigLoader"
-    ],
     "modmenu": [
       "uk.debb.vanilla_disable.config.global.ModMenuSettingsApi"
     ],

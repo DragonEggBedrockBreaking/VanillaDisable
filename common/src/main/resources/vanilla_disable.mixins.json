@@ -123,6 +123,7 @@
     "util.gamerule.MixinGameRules",
     "util.gamerule.MixinGameRulesCategory",
     "util.gamerule.MixinMinecraftServer",
+    "util.global.MixinBootstrap",
     "util.worldgen.MixinCreateWorldScreenMoreTab",
     "util.worldgen.MixinMinecraftServer",
     "worldgen.biome.MixinBiomeManager",
