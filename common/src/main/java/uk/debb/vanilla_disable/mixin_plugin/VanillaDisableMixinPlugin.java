@@ -9,12 +9,14 @@ import java.util.List;
 import java.util.Set;
 
 public class VanillaDisableMixinPlugin implements IMixinConfigPlugin {
-    MixinPluginConfig config;
+    static MixinPluginConfig config;
 
     @Override
     public void onLoad(String s) {
-        config = new MixinPluginConfig();
-        Constants.LOG.info("Loaded VanillaDisable mixin config file with {} overrides.", config.properties.size());
+        if (config == null) {
+            config = new MixinPluginConfig();
+            Constants.LOG.info("Loaded VanillaDisable mixin config file with {} override(s).", config.properties.size());
+        }
     }
 
     @Override
