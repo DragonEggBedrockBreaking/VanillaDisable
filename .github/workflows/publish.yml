@@ -31,7 +31,7 @@ jobs:
             fabric/build
             neoforge/.gradle
             neoforge/build
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/settings.gradle') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/LICENSE') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Delete old files
         run: rm -rf build/libs fabric/build/libs neoforge/build/libs
