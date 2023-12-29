@@ -39,6 +39,7 @@ public class WorldgenDataHandler {
     public static File propertiesFile;
     public static Properties properties = new Properties();
     public static boolean shouldMigrate = true;
+    public static boolean updated = false;
 
     /**
      * Removes the "minecraft:" prefix from a string.
@@ -67,13 +68,19 @@ public class WorldgenDataHandler {
             if (tomlFile.exists()) {
                 convertConfig();
             } else {
-                createConfig();
+                createConfig(true);
                 if (VanillaDisableConfig.autoMigration && shouldMigrate) {
                     GameruleMigrationDataHandler.updateProperties();
                 }
             }
+        } else {
+            updateConfig();
         }
         loadConfig();
+
+        biomeMap.clear();
+        structureMap.clear();
+        placedFeatureMap.clear();
     }
 
     /**
@@ -115,7 +122,7 @@ public class WorldgenDataHandler {
     /**
      * Create the config file with default values (and values configured in the creation screen GUI).
      */
-    private static void createConfig() {
+    private static void createConfig(boolean write) {
         biomeRegistry.keySet().forEach(biome -> {
             if (!biome.toString().contains("minecraft:")) { return; }
             String clean = cleanup(biome);
@@ -137,15 +144,39 @@ public class WorldgenDataHandler {
         ImmutableList.of("obsidian_platform", "end_spike_cage").forEach(placedFeature ->
                 properties.put("placed_features." + placedFeature, placedFeatureMap.getOrDefault(placedFeature, true)));
 
-        try {
-            if (!propertiesFile.createNewFile()) {
-                throw new UncheckedIOException(new IOException());
+        if (write) {
+            try {
+                if (!propertiesFile.createNewFile()) {
+                    throw new UncheckedIOException(new IOException());
+                }
+            } catch (IOException e) {
+                Constants.LOG.error("Unable to generate new worldgen config.");
             }
+            write();
+        }
+    }
+
+    /**
+     * Updates the config file.
+     */
+    private static void updateConfig() {
+        Properties loadedProperties = new Properties();
+        try (FileInputStream in = new FileInputStream(propertiesFile)) {
+            loadedProperties.load(in);
         } catch (IOException e) {
-            Constants.LOG.error("Unable to generate new worldgen config.");
+            Constants.LOG.error("Unable to load worldgen config.", e);
         }
 
-        write();
+        loadedProperties.forEach((key, value) -> loadedProperties.put(key, Boolean.parseBoolean(value.toString())));
+        createConfig(false);
+        properties.putAll(loadedProperties);
+
+        if (!Objects.equals(properties.keySet(), loadedProperties.keySet())) {
+            write();
+            if (properties.values().stream().anyMatch(value -> !(boolean)value)) {
+                updated = true;
+            }
+        }
     }
 
     /**

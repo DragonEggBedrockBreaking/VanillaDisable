@@ -115,6 +115,7 @@
   "vd.migration.done.wiki": "[VanillaDisable Wiki]",
   "vd.main_config": "VanillaDisable Main Config",
   "vd.main_config.auto_migration": "Toggle automatic migration of legacy gamerules to new config system.",
+  "vd.main_config.worldgen_update_message": "Toggle a chat message being sent if new worldgen features are detected.",
   "vd.main_config.cancel": "Cancel",
   "vd.main_config.done": "Done",
   "vd.command_config": "VanillaDisable Command Config",
@@ -143,5 +144,7 @@
   "vd.worldgen_config.reset_all": "Reset All",
   "vd.worldgen_config.disable_all": "Disable All",
   "vd.worldgen_config.done": "Done",
-  "vd.worldgen_config.search": "Search"
+  "vd.worldgen_config.search": "Search",
+  "vd.worldgen.updated": "New worldgen features have been detected. These have been automatically enabled. This message can be disabled in the main config. Click here to configure the new worldgen features: ",
+  "vd.worldgen.updated.file": "[config file]"
 }

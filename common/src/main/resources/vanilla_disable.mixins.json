@@ -126,6 +126,7 @@
     "util.global.MixinBootstrap",
     "util.worldgen.MixinCreateWorldScreenMoreTab",
     "util.worldgen.MixinMinecraftServer",
+    "util.worldgen.MixinPlayerList",
     "worldgen.biome.MixinBiomeManager",
     "worldgen.biome.MixinBiomeSource",
     "worldgen.feature.MixinBiomeGenerationSettings",

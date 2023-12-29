@@ -30,6 +30,14 @@ public class VanillaDisableConfigScreen extends Screen {
                         .selected(VanillaDisableConfig.autoMigration).build()
         );
         this.addRenderableWidget(
+                Checkbox.builder(
+                                Component.translatable("vd.main_config.worldgen_update_message"),
+                                this.font
+                        ).pos(width / 2 - length, height / 2 - 10 + 10).onValueChange(((checkbox, bl) ->
+                                VanillaDisableConfig.worldgenUpdateMessage = !VanillaDisableConfig.worldgenUpdateMessage))
+                        .selected(VanillaDisableConfig.worldgenUpdateMessage).build()
+        );
+        this.addRenderableWidget(
                 new Button(
                         this.width / 4 * 3, this.height / 5 * 4 - 12, 100, 20,
                         Component.translatable("vd.main_config.done"), (button) -> {

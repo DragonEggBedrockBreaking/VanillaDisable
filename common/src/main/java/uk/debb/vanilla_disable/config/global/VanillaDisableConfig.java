@@ -7,6 +7,7 @@ import java.util.Properties;
 
 public class VanillaDisableConfig {
     public static boolean autoMigration = true;
+    public static boolean worldgenUpdateMessage = true;
     public static String PATH = "";
     private static Properties data;
 
@@ -32,6 +33,7 @@ public class VanillaDisableConfig {
         }
 
         autoMigration = Boolean.parseBoolean(properties.getProperty("auto_migration", String.valueOf(autoMigration)));
+        worldgenUpdateMessage = Boolean.parseBoolean(properties.getProperty("worldgen_update_message", String.valueOf(worldgenUpdateMessage)));
 
         updateProperties(properties);
 
@@ -40,6 +42,7 @@ public class VanillaDisableConfig {
 
     public static void resetConfig() {
         autoMigration = Boolean.parseBoolean(data.getProperty("auto_migration"));
+        worldgenUpdateMessage = Boolean.parseBoolean(data.getProperty("worldgen_update_message"));
     }
 
     public static void saveConfig() {
@@ -48,6 +51,7 @@ public class VanillaDisableConfig {
 
     private static void updateProperties(Properties data) {
         data.setProperty("auto_migration", String.valueOf(autoMigration));
+        data.setProperty("worldgen_update_message", String.valueOf(worldgenUpdateMessage));
 
         try {
             data.store(new FileOutputStream(PATH), null);
