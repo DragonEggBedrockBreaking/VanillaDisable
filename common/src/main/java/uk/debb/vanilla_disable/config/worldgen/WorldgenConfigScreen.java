@@ -1,6 +1,5 @@
 package uk.debb.vanilla_disable.config.worldgen;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,17 +16,15 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import uk.debb.vanilla_disable.data.worldgen.WorldgenDataHandler;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class WorldgenConfigScreen extends Screen {
-    CreateWorldScreen lastScreen;
-    Set<ResourceLocation> biomes;
-    Set<ResourceLocation> structures;
-    Set<ResourceLocation> placedFeatures;
-    String search = "";
+    private final CreateWorldScreen lastScreen;
+    private Set<ResourceLocation> biomes;
+    private Set<ResourceLocation> structures;
+    private Set<ResourceLocation> placedFeatures;
+    private String search = "";
+    private final String[] extraPlacedFeatures = {"obsidian_platform", "end_spike_cage"};
 
     public WorldgenConfigScreen(CreateWorldScreen lastScreen) {
         super(Component.translatable("vd.worldgen_config"));
@@ -56,12 +53,14 @@ public class WorldgenConfigScreen extends Screen {
             this.biomes.forEach(biome -> WorldgenDataHandler.biomeMap.put(WorldgenDataHandler.cleanup(biome), true));
             this.structures.forEach(structure -> WorldgenDataHandler.structureMap.put(WorldgenDataHandler.cleanup(structure), true));
             this.placedFeatures.forEach(placedFeature -> WorldgenDataHandler.placedFeatureMap.put(WorldgenDataHandler.cleanup(placedFeature), true));
+            Arrays.stream(extraPlacedFeatures).forEach(placedFeature -> WorldgenDataHandler.placedFeatureMap.put(placedFeature, true));
             worldgenConfigList.refreshEntries();
         }).width(80).build();
         Button disableButton = Button.builder(Component.translatable("vd.worldgen_config.disable_all"), (button) -> {
             this.biomes.forEach(biome -> WorldgenDataHandler.biomeMap.put(WorldgenDataHandler.cleanup(biome), false));
             this.structures.forEach(structure -> WorldgenDataHandler.structureMap.put(WorldgenDataHandler.cleanup(structure), false));
             this.placedFeatures.forEach(placedFeature -> WorldgenDataHandler.placedFeatureMap.put(WorldgenDataHandler.cleanup(placedFeature), false));
+            Arrays.stream(extraPlacedFeatures).forEach(placedFeature -> WorldgenDataHandler.placedFeatureMap.put(placedFeature, false));
             worldgenConfigList.refreshEntries();
         }).width(80).build();
         Button doneButton = Button.builder(Component.translatable("vd.worldgen_config.done"), (button) -> {
@@ -128,6 +127,7 @@ public class WorldgenConfigScreen extends Screen {
                     case PLACED_FEATURE -> {
                         boolean val = Collections.frequency(WorldgenDataHandler.placedFeatureMap.values(), false) < WorldgenConfigScreen.this.placedFeatures.size() / 2;
                         WorldgenConfigScreen.this.placedFeatures.forEach(placedFeature -> WorldgenDataHandler.placedFeatureMap.put(WorldgenDataHandler.cleanup(placedFeature), !val));
+                        Arrays.stream(extraPlacedFeatures).forEach(placedFeature -> WorldgenDataHandler.placedFeatureMap.put(placedFeature, !val));
                     }
                 }
                 list.refreshEntries();
@@ -197,9 +197,10 @@ public class WorldgenConfigScreen extends Screen {
                     this.addEntry(new WorldgenConfigToggleEntry(placedFeature.toString(), WorldgenConfigType.PLACED_FEATURE));
                 }
             });
-            ImmutableList.of("minecraft_unofficial:obsidian_platform", "minecraft_unofficial:end_spike_cage").stream().sorted().forEach(placedFeature -> {
-                if (placedFeature.contains(WorldgenConfigScreen.this.search)) {
-                    this.addEntry(new WorldgenConfigToggleEntry(placedFeature, WorldgenConfigType.PLACED_FEATURE));
+            Arrays.stream(extraPlacedFeatures).sorted().forEach(placedFeature -> {
+                String adjustedPlacedFeature = "minecraft_unofficial:" + placedFeature;
+                if (adjustedPlacedFeature.contains(WorldgenConfigScreen.this.search)) {
+                    this.addEntry(new WorldgenConfigToggleEntry(adjustedPlacedFeature, WorldgenConfigType.PLACED_FEATURE));
                 }
             });
         }
