@@ -4,7 +4,7 @@ plugins {
     id 'java-library'
 }
 base {
-    archivesName = "${mod_name}-neoforge-${minecraft_version}"
+    archivesName = "${mod_id}-neoforge-mc${minecraft_version}-${mod_version}"
 }
 minecraft.accessTransformers.file rootProject.file('neoforge/src/main/resources/META-INF/accesstransformer.cfg')
 runs {

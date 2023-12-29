@@ -4,7 +4,7 @@ plugins {
     id 'fabric-loom' version '1.4.+'
 }
 base {
-    archivesName = "${mod_name}-fabric-${minecraft_version}"
+    archivesName = "${mod_id}-fabric-mc${minecraft_version}-${mod_version}"
 }
 repositories {
     maven { url "https://jitpack.io" }
