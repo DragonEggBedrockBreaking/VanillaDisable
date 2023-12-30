@@ -14,7 +14,7 @@ import uk.debb.vanilla_disable.config.worldgen.WorldgenConfigScreen;
 
 @Mixin(CreateWorldScreen.MoreTab.class)
 public abstract class MixinCreateWorldScreenMoreTab {
-    @Inject(method="<init>", at=@At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "<init>", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
     private void vanillaDisable$init(CreateWorldScreen createWorldScreen, CallbackInfo ci, GridLayout.RowHelper rowHelper) {
         rowHelper.addChild(Button.builder(Component.translatable("vd.worldgen_config.button"), button -> {
             Minecraft.getInstance().setScreen(new WorldgenConfigScreen(createWorldScreen));

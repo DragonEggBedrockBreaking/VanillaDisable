@@ -20,11 +20,11 @@ import java.util.*;
 
 public class WorldgenConfigScreen extends Screen {
     private final CreateWorldScreen lastScreen;
+    private final String[] extraPlacedFeatures = {"obsidian_platform", "end_spike_cage"};
     private Set<ResourceLocation> biomes;
     private Set<ResourceLocation> structures;
     private Set<ResourceLocation> placedFeatures;
     private String search = "";
-    private final String[] extraPlacedFeatures = {"obsidian_platform", "end_spike_cage"};
 
     public WorldgenConfigScreen(CreateWorldScreen lastScreen) {
         super(Component.translatable("vd.worldgen_config"));

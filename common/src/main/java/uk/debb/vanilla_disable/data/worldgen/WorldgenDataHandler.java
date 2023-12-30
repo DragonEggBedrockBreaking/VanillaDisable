@@ -108,8 +108,11 @@ public class WorldgenDataHandler {
 
             try (FileWriter writer = new FileWriter(propertiesFile)) {
                 sections.values().forEach(content -> {
-                    try { writer.write(content.toString()); }
-                    catch (IOException ex) { throw new UncheckedIOException(ex); }
+                    try {
+                        writer.write(content.toString());
+                    } catch (IOException ex) {
+                        throw new UncheckedIOException(ex);
+                    }
                 });
             } catch (IOException e) {
                 throw new IOException(e);
@@ -124,20 +127,28 @@ public class WorldgenDataHandler {
      */
     private static void createConfig(boolean write) {
         biomeRegistry.keySet().forEach(biome -> {
-            if (!biome.toString().contains("minecraft:")) { return; }
+            if (!biome.toString().contains("minecraft:")) {
+                return;
+            }
             String clean = cleanup(biome);
-            if ("plains the_nether the_end the_void".contains(clean)) { return; }
+            if ("plains the_nether the_end the_void".contains(clean)) {
+                return;
+            }
             properties.put("biomes." + clean, biomeMap.getOrDefault(clean, true));
         });
 
         structureRegistry.keySet().forEach(structure -> {
-            if (!structure.toString().contains("minecraft:")) { return; }
+            if (!structure.toString().contains("minecraft:")) {
+                return;
+            }
             String clean = cleanup(structure);
             properties.put("structures." + clean, structureMap.getOrDefault(clean, true));
         });
 
         placedFeatureRegistry.keySet().forEach(placedFeature -> {
-            if (!placedFeature.toString().contains("minecraft:")) { return; }
+            if (!placedFeature.toString().contains("minecraft:")) {
+                return;
+            }
             String clean = cleanup(placedFeature);
             properties.put("placed_features." + clean, placedFeatureMap.getOrDefault(clean, true));
         });
@@ -173,7 +184,7 @@ public class WorldgenDataHandler {
 
         if (!Objects.equals(properties.keySet(), loadedProperties.keySet())) {
             write();
-            if (properties.values().stream().anyMatch(value -> !(boolean)value)) {
+            if (properties.values().stream().anyMatch(value -> !(boolean) value)) {
                 updated = true;
             }
         }
@@ -213,7 +224,7 @@ public class WorldgenDataHandler {
      *
      * @param table The table to get the value from.
      * @param key   The key to get the value of.
-     * @return      The value of the key.
+     * @return The value of the key.
      */
     public static boolean get(String table, String key) {
         return Boolean.parseBoolean(properties.getProperty(table + "." + key));
