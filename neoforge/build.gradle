@@ -40,7 +40,6 @@ runs {
     configureEach {
         dependencies {
             runtime "com.h2database:h2:${h2_version}"
-            runtime "com.moandjiezana.toml:toml4j:${toml4j_version}"
         }
     }
 }
@@ -58,4 +57,10 @@ tasks.withType(JavaCompile).matching(notNeoTask).configureEach {
 }
 tasks.withType(ProcessResources).matching(notNeoTask).configureEach {
     from project(":common").sourceSets.main.resources
+}
+subsystems {
+    parchment {
+        minecraftVersion = parchment_mc_version
+        mappingsVersion = parchment_version
+    }
 }

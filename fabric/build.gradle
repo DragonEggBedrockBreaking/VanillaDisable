@@ -14,7 +14,7 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings loom.layered {
         it.officialMojangMappings()
-        it.parchment("org.parchmentmc.data:${project.fabric_parchment_version}@zip")
+        it.parchment("org.parchmentmc.data:parchment-${project.parchment_mc_version}:${project.parchment_version}@zip")
     }
     modImplementation("net.fabricmc:fabric-loader:${project.fabric_loader_version}")
     include(implementation("com.h2database:h2:${project.h2_version}"))
