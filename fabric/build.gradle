@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'fabric-loom' version '1.4.+'
+    id 'fabric-loom' version '1.5.+'
 }
 base {
     archivesName = "${mod_id}-fabric-mc${minecraft_version}-${mod_version}"

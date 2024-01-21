@@ -18,5 +18,5 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
     implementation("com.h2database:h2:${project.h2_version}")
     implementation("org.ow2.asm:asm-tree:${project.asm_version}")
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.3.2"))
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.3.3"))
 }
