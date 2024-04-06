@@ -20,7 +20,8 @@ import java.util.Optional;
 
 @Mixin(SpawnEggItem.class)
 public abstract class MixinSpawnEggItem {
-    @Shadow public abstract EntityType<?> getType(ItemStack par1);
+    @Shadow
+    public abstract EntityType<?> getType(ItemStack par1);
 
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void vanillaDisable$useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {

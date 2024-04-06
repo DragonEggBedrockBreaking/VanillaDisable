@@ -30,6 +30,10 @@ import java.util.stream.Stream;
 @Mixin(Commands.class)
 public abstract class MixinCommands {
     @Shadow
+    @Final
+    private CommandDispatcher<CommandSourceStack> dispatcher;
+
+    @Shadow
     public static LiteralArgumentBuilder<CommandSourceStack> literal(String pString0) {
         return null;
     }
@@ -38,8 +42,6 @@ public abstract class MixinCommands {
     public static <T> RequiredArgumentBuilder<CommandSourceStack, T> argument(String pString0, ArgumentType<T> pArgumentType1) {
         return null;
     }
-
-    @Shadow @Final private CommandDispatcher<CommandSourceStack> dispatcher;
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void vanillaDisable$init(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {

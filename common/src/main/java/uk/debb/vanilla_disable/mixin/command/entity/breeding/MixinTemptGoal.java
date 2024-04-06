@@ -13,7 +13,9 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 
 @Mixin(TemptGoal.class)
 public abstract class MixinTemptGoal {
-    @Shadow @Final protected PathfinderMob mob;
+    @Shadow
+    @Final
+    protected PathfinderMob mob;
 
     @ModifyReturnValue(method = "shouldFollow", at = @At("RETURN"))
     private boolean shouldFollow(boolean original, LivingEntity livingEntity) {

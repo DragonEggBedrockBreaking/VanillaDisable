@@ -17,15 +17,22 @@ import java.util.List;
 
 @Mixin(value = Varint21FrameDecoder.class, priority = 1001)
 public abstract class MixinVarint21FrameDecoder {
+    @Unique
+    private final ByteBuf vanillaDisable$helperBuf = Unpooled.directBuffer(8);
+    @Shadow
+    @Final
+    @Nullable
+    private BandwidthDebugMonitor monitor;
+
     @Shadow
     private static boolean copyVarint(ByteBuf $$0, ByteBuf $$1) {
         return false;
     }
 
-    @Shadow @Final @Nullable private BandwidthDebugMonitor monitor;
-
-    @Unique
-    private final ByteBuf vanillaDisable$helperBuf = Unpooled.directBuffer(8);
+    @ModifyConstant(method = "copyVarint", constant = @Constant(intValue = 3))
+    private static int vanillaDisable$copyVarint1(int value) {
+        return 8;
+    }
 
     @ModifyReceiver(
             method = "handlerRemoved0",
@@ -36,11 +43,6 @@ public abstract class MixinVarint21FrameDecoder {
     )
     private ByteBuf vanillaDisable$release(ByteBuf instance) {
         return this.vanillaDisable$helperBuf;
-    }
-
-    @ModifyConstant(method = "copyVarint", constant = @Constant(intValue = 3))
-    private static int vanillaDisable$copyVarint1(int value) {
-        return 8;
     }
 
     /**
