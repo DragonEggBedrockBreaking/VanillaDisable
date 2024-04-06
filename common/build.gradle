@@ -20,3 +20,7 @@ dependencies {
     implementation("org.ow2.asm:asm-tree:${project.asm_version}")
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.3.3"))
 }
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}

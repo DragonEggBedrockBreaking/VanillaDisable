@@ -12,7 +12,7 @@ public abstract class MixinEnchantment {
     @ModifyReturnValue(method = "canEnchant", at = @At("RETURN"))
     private boolean vanillaDisable$canEnchant(boolean original, ItemStack stack) {
         if (CommandDataHandler.isConnectionNull()) return original;
-        if (!stack.getItem().canBeDepleted()) return original;
+        if (stack.getMaxDamage() == 0) return original;
         String item = "can_enchant_" + CommandDataHandler.lightCleanup(CommandDataHandler.getKeyFromItemRegistry(stack.getItem()));
         return CommandDataHandler.getCachedBoolean("enchantments", CommandDataHandler.getKeyFromEnchantmentRegistry((Enchantment) (Object) this), item);
     }

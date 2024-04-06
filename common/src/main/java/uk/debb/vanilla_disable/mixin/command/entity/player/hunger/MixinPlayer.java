@@ -1,9 +1,9 @@
 package uk.debb.vanilla_disable.mixin.command.entity.player.hunger;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,10 +16,10 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 public abstract class MixinPlayer {
     @Inject(method = "eat", at = @At("HEAD"))
     private void vanillaDisable$eat(Level level, ItemStack food, CallbackInfoReturnable<ItemStack> cir) {
-        FoodProperties properties = food.getItem().getFoodProperties();
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if (food.getItem().isEdible() && properties != null && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
-            livingEntity.setHealth(livingEntity.getHealth() + properties.getNutrition());
+        if (food.get(DataComponents.FOOD) != null && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
+            int nutrition = CommandDataHandler.getCachedInt("items", CommandDataHandler.getKeyFromItemRegistry(food.getItem()), "nutrition");
+            livingEntity.setHealth(livingEntity.getHealth() + nutrition);
         }
     }
 

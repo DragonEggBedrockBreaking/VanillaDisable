@@ -1,6 +1,7 @@
 package uk.debb.vanilla_disable.mixin.command.entity.player.hunger;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,7 +12,7 @@ import uk.debb.vanilla_disable.data.command.CommandDataHandler;
 public abstract class MixinItem {
     @ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
     private int vanillaDisable$getUseDuration(int original, ItemStack stack) {
-        if (stack.getItem().isEdible() && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
+        if (stack.get(DataComponents.FOOD) != null && CommandDataHandler.getCachedBoolean("entities", "minecraft:player", "beta_hunger")) {
             return 1;
         }
         return original;

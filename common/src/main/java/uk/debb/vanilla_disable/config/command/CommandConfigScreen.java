@@ -75,7 +75,6 @@ public class CommandConfigScreen extends Screen {
 
     @Override
     public void render(@NotNull GuiGraphics g, int mouseX, int mouseY, float partialTick) {
-        this.renderDirtBackground(g);
         for (Renderable renderable : this.renderables) {
             renderable.render(g, mouseX, mouseY, partialTick);
         }

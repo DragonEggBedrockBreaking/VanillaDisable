@@ -13,6 +13,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,69 +39,75 @@ public abstract class MixinCommands {
         return null;
     }
 
-    @Shadow
-    public abstract CommandDispatcher<CommandSourceStack> getDispatcher();
+    @Shadow @Final private CommandDispatcher<CommandSourceStack> dispatcher;
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void vanillaDisable$init(Commands.CommandSelection commandSelection, CommandBuildContext commandBuildContext, CallbackInfo ci) {
-        Thread t = new Thread(() -> {
+        new Thread(() -> {
             while (!CommandDataHandler.populationDone) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(100);
                 } catch (InterruptedException ignored) {
                 }
             }
+            vanillaDisable$init$init();
+        }).start();
+    }
 
-            LiteralArgumentBuilder<CommandSourceStack> overallResetDBBuilder = literal("reset");
-            LiteralArgumentBuilder<CommandSourceStack> resetDBBuilder = literal("all").executes(context -> {
-                CommandDataHandler.resetAll();
+    /**
+     * This method creates the command.
+     */
+    @Unique
+    private void vanillaDisable$init$init() {
+        LiteralArgumentBuilder<CommandSourceStack> overallResetDBBuilder = literal("reset");
+        LiteralArgumentBuilder<CommandSourceStack> resetDBBuilder = literal("all").executes(context -> {
+            CommandDataHandler.resetAll();
+            context.getSource().sendSuccess(
+                    () -> Component.translatable("vd.command.all_db_reset"),
+                    false
+            );
+            return 1;
+        });
+        overallResetDBBuilder.then(resetDBBuilder);
+        Stream.of("entities", "blocks", "items", "others").forEach(table -> {
+            LiteralArgumentBuilder<CommandSourceStack> tableBuilder = literal(table).executes(context -> {
+                CommandDataHandler.resetOne(table);
                 context.getSource().sendSuccess(
-                        () -> Component.translatable("vd.command.all_db_reset"),
+                        () -> Component.translatable("vd.command.one_db_reset", table),
                         false
                 );
                 return 1;
             });
-            overallResetDBBuilder.then(resetDBBuilder);
-            Stream.of("entities", "blocks", "items", "others").forEach(table -> {
-                LiteralArgumentBuilder<CommandSourceStack> tableBuilder = literal(table).executes(context -> {
-                    CommandDataHandler.resetOne(table);
-                    context.getSource().sendSuccess(
-                            () -> Component.translatable("vd.command.one_db_reset", table),
-                            false
-                    );
-                    return 1;
-                });
-                Object2ObjectMap<String, Object2ObjectMap<String, Component>> groups = switch (table) {
-                    case "entities" -> CommandDataHandler.entityData;
-                    case "blocks" -> CommandDataHandler.blockData;
-                    case "items" -> CommandDataHandler.itemData;
-                    default -> new Object2ObjectOpenHashMap<>();
-                };
-                groups.forEach((group, data) -> tableBuilder.then(literal(group).executes(context -> {
-                    CommandDataHandler.resetPartial(table, data.keySet());
-                    context.getSource().sendSuccess(
-                            () -> Component.translatable("vd.command.one_group_reset", group, table),
-                            false
-                    );
-                    return 1;
-                })));
-                overallResetDBBuilder.then(tableBuilder);
-            });
-
-            this.getDispatcher().register(literal("vd").requires(commandSourceStack -> commandSourceStack.hasPermission(2))
-                    .then(literal("rule")
-                            .then(vanillaDisable$init$builder("entity", CommandDataHandler.entities, CommandDataHandler.entityData, "entities"))
-                            .then(vanillaDisable$init$builder("block", CommandDataHandler.blocks, CommandDataHandler.blockData, "blocks"))
-                            .then(vanillaDisable$init$builder("item", CommandDataHandler.items, CommandDataHandler.itemData, "items"))
-                            .then(vanillaDisable$init$builder("enchantment", CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, "enchantments"))
-                            .then(vanillaDisable$init$builder("command", CommandDataHandler.commands, CommandDataHandler.commandData, "commands"))
-                            .then(vanillaDisable$init$builder("advancement", CommandDataHandler.advancements, CommandDataHandler.advancementData, "advancements"))
-                            .then(vanillaDisable$init$builder("mob_category", CommandDataHandler.mobCategories, CommandDataHandler.mobCategoryData, "mob_categories"))
-                    ).then(overallResetDBBuilder)
-            );
+            Object2ObjectMap<String, Object2ObjectMap<String, Component>> groups = switch (table) {
+                case "entities" -> CommandDataHandler.entityData;
+                case "blocks" -> CommandDataHandler.blockData;
+                case "items" -> CommandDataHandler.itemData;
+                default -> new Object2ObjectOpenHashMap<>();
+            };
+            groups.forEach((group, data) -> tableBuilder.then(literal(group).executes(context -> {
+                CommandDataHandler.resetPartial(table, data.keySet());
+                context.getSource().sendSuccess(
+                        () -> Component.translatable("vd.command.one_group_reset", group, table),
+                        false
+                );
+                return 1;
+            })));
+            overallResetDBBuilder.then(tableBuilder);
         });
-        t.start();
+
+        this.dispatcher.register(literal("vd").requires(commandSourceStack -> commandSourceStack.hasPermission(2))
+                .then(literal("rule")
+                        .then(vanillaDisable$init$builder("entity", CommandDataHandler.entities, CommandDataHandler.entityData, "entities"))
+                        .then(vanillaDisable$init$builder("block", CommandDataHandler.blocks, CommandDataHandler.blockData, "blocks"))
+                        .then(vanillaDisable$init$builder("item", CommandDataHandler.items, CommandDataHandler.itemData, "items"))
+                        .then(vanillaDisable$init$builder("enchantment", CommandDataHandler.enchantments, CommandDataHandler.enchantmentData, "enchantments"))
+                        .then(vanillaDisable$init$builder("command", CommandDataHandler.commands, CommandDataHandler.commandData, "commands"))
+                        .then(vanillaDisable$init$builder("advancement", CommandDataHandler.advancements, CommandDataHandler.advancementData, "advancements"))
+                        .then(vanillaDisable$init$builder("mob_category", CommandDataHandler.mobCategories, CommandDataHandler.mobCategoryData, "mob_categories"))
+                ).then(overallResetDBBuilder)
+        );
     }
+
 
     /**
      * This method creates a literal argument builder to get a value.

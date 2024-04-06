@@ -1,6 +1,5 @@
 package uk.debb.vanilla_disable.mixin.command.entity.spawning;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -10,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,13 +20,12 @@ import java.util.Optional;
 
 @Mixin(SpawnEggItem.class)
 public abstract class MixinSpawnEggItem {
-    @Shadow
-    public abstract EntityType<?> getType(@Nullable CompoundTag compoundTag);
+    @Shadow public abstract EntityType<?> getType(ItemStack par1);
 
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void vanillaDisable$useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack itemStack = context.getItemInHand();
-        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(this.getType(itemStack.getTag()));
+        String entity = CommandDataHandler.getKeyFromEntityTypeRegistry(this.getType(itemStack));
         if (!CommandDataHandler.getCachedBoolean("entities", entity, "spawn_egg")) {
             cir.setReturnValue(InteractionResult.FAIL);
         }

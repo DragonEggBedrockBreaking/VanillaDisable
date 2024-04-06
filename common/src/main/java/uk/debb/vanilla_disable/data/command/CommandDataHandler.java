@@ -5,6 +5,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.packs.VanillaHusbandryAdvancements;
 import net.minecraft.data.registries.VanillaRegistries;
@@ -30,7 +31,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
@@ -318,10 +318,10 @@ public class CommandDataHandler {
 
                         mobEffectRegistry.forEach(mobEffect ->
                                 put(lightCleanup(Objects.requireNonNull(mobEffectRegistry.getKey(mobEffect))) + "_effect", String.valueOf(
-                                        !((mobEffect.equals(MobEffects.WITHER) &&
+                                        !((mobEffect.equals(MobEffects.WITHER.value()) &&
                                                 (entityType.equals(EntityType.WITHER) || entityType.equals(EntityType.WITHER_SKELETON))) ||
-                                                (mobEffect.equals(MobEffects.POISON) && entityType.equals(EntityType.SPIDER)) ||
-                                                ((mobEffect.equals(MobEffects.REGENERATION) || mobEffect.equals(MobEffects.POISON)) &&
+                                                (mobEffect.equals(MobEffects.POISON.value()) && entityType.equals(EntityType.SPIDER)) ||
+                                                ((mobEffect.equals(MobEffects.REGENERATION.value()) || mobEffect.equals(MobEffects.POISON.value())) &&
                                                         undeadMobs.contains(entityType)))
                                 )));
 
@@ -556,6 +556,7 @@ public class CommandDataHandler {
 
         itemRegistry.forEach((item) ->
                 items.put(Objects.requireNonNull(itemRegistry.getKey(item)).toString(), new Object2ObjectOpenHashMap<>() {{
+                    ItemStack itemStack = new ItemStack(item);
                     if (!blockRegistry.stream().map(Block::toString).toList().contains(item.toString())) {
                         String name = item.toString();
 
@@ -567,10 +568,10 @@ public class CommandDataHandler {
                             put("can_spam", "false");
                         }
 
-                        FoodProperties foodProperties = item.getFoodProperties();
+                        FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
                         if (foodProperties != null) {
-                            put("nutrition", String.valueOf(foodProperties.getNutrition()));
-                            put("saturation", String.valueOf(foodProperties.getSaturationModifier()));
+                            put("nutrition", String.valueOf(foodProperties.nutrition()));
+                            put("saturation", String.valueOf(foodProperties.saturationModifier()));
                         }
 
                         if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
@@ -595,8 +596,8 @@ public class CommandDataHandler {
                         put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
                         put("can_be_given_by_command", "true");
 
-                        if (item.canBeDepleted()) {
-                            put("durability", String.valueOf(item.getMaxDamage()));
+                        if (itemStack.getMaxDamage() > 0) {
+                            put("durability", String.valueOf(itemStack.getMaxDamage()));
                         }
                     }
                 }}));
@@ -1277,7 +1278,7 @@ public class CommandDataHandler {
      * @param row The name of the entity.
      * @return The list of items.
      */
-    private static Ingredient getBreedingItems(String row) {
+    private static List<ItemStack> getBreedingItems(String row) {
         ObjectSet<Item> items = new ObjectArraySet<>();
         try {
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM entities WHERE id = '" + row + "';");
@@ -1303,7 +1304,7 @@ public class CommandDataHandler {
         if (items.contains(Items.WARPED_FUNGUS)) {
             items.add(Items.WARPED_FUNGUS_ON_A_STICK);
         }
-        return Ingredient.of(items.stream().map(ItemStack::new));
+        return items.stream().map(ItemStack::new).toList();
     }
 
     /**
@@ -1312,14 +1313,14 @@ public class CommandDataHandler {
      * @param row The row from which to get the value.
      * @return The value.
      */
-    public static Ingredient getCachedBreedingItems(String row) {
+    public static List<ItemStack> getCachedBreedingItems(String row) {
         String cacheKey = "getBreedingItems-" + row;
         if (memo.containsKey(cacheKey)) {
-            return (Ingredient) memo.get(cacheKey);
+            return (List<ItemStack>) memo.get(cacheKey);
         }
-        Ingredient ingredient = getBreedingItems(row);
-        memo.put(cacheKey, ingredient);
-        return ingredient;
+        List<ItemStack> itemStack = getBreedingItems(row);
+        memo.put(cacheKey, itemStack);
+        return itemStack;
     }
 
     /**

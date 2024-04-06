@@ -19,9 +19,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class LangFileManager implements ClientModInitializer {
-    @SuppressWarnings("ConstantConditions StatementWithEmptyBody")
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onInitializeClient() {
         try {
@@ -52,10 +53,16 @@ public class LangFileManager implements ClientModInitializer {
                 });
                 FileUtils.write(optionsTxt, String.join("\n", lines), StandardCharsets.UTF_8);
 
-                Thread thread = new Thread(() -> {
+                new Thread(() -> {
                     while (Minecraft.getInstance().getLanguageManager() == null ||
                             Minecraft.getInstance().getLanguageManager().getLanguages().size() == 1) {
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(100);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
+
                     Set<String> languages = Minecraft.getInstance().getLanguageManager().getLanguages().keySet();
 
                     languages.forEach(language -> {
@@ -70,8 +77,7 @@ public class LangFileManager implements ClientModInitializer {
                         }
                     });
                     Minecraft.getInstance().getLanguageManager().onResourceManagerReload(Minecraft.getInstance().getResourceManager());
-                });
-                thread.start();
+                }).start();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
