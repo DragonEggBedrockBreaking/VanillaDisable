@@ -2,12 +2,15 @@ package uk.debb.vanilla_disable.mixin.command.entity.spawning;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.debb.vanilla_disable.data.command.CommandDataHandler;
+
+import java.io.IOException;
 
 @Mixin(ItemEntity.class)
 public abstract class MixinItemEntity {
@@ -19,8 +22,12 @@ public abstract class MixinItemEntity {
     @Inject(method = "tick", at = @At("HEAD"))
     private void vanillaDisable$tick(CallbackInfo ci) {
         Entity entity = (Entity) (Object) this;
-        if (this.age >= CommandDataHandler.getCachedInt("entities", "minecraft:item", "despawn_time") && !entity.level().isClientSide()) {
-            entity.discard();
+        try (Level level = entity.level()) {
+            if (this.age >= CommandDataHandler.getCachedInt("entities", "minecraft:item", "despawn_time") && !level.isClientSide()) {
+                entity.discard();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

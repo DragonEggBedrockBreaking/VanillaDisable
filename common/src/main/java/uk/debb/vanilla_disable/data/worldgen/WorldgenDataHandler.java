@@ -31,13 +31,13 @@ public class WorldgenDataHandler {
     public static Registry<Biome> biomeRegistry;
     public static Registry<Structure> structureRegistry;
     public static Registry<PlacedFeature> placedFeatureRegistry;
-    public static Object2BooleanMap<String> biomeMap = new Object2BooleanOpenHashMap<>();
-    public static Object2BooleanMap<String> structureMap = new Object2BooleanOpenHashMap<>();
-    public static Object2BooleanMap<String> placedFeatureMap = new Object2BooleanOpenHashMap<>();
+    public static final Object2BooleanMap<String> biomeMap = new Object2BooleanOpenHashMap<>();
+    public static final Object2BooleanMap<String> structureMap = new Object2BooleanOpenHashMap<>();
+    public static final Object2BooleanMap<String> placedFeatureMap = new Object2BooleanOpenHashMap<>();
     public static File directory;
     public static File tomlFile;
     public static File propertiesFile;
-    public static Properties properties = new Properties();
+    public static final Properties properties = new Properties();
     public static boolean shouldMigrate = true;
     public static boolean updated = false;
 

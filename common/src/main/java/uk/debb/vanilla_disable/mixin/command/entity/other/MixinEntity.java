@@ -22,20 +22,19 @@ public abstract class MixinEntity {
     @Shadow
     public abstract boolean hurt(DamageSource source, float amount);
 
-    @Shadow
-    public abstract Level level();
+    @Shadow private Level level;
 
     @SuppressWarnings("deprecation")
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
     private void vanillaDisable$onInsideBlock(CallbackInfo ci) {
         if (((Entity) (Object) this) instanceof Boat boat && CommandDataHandler.getCachedBoolean("entities", "minecraft:boat", "alpha_behaviour")) {
             if (!boat.checkInWater()) {
-                this.hurt(this.level().damageSources().generic(), Float.MAX_VALUE);
+                this.hurt(this.level.damageSources().generic(), Float.MAX_VALUE);
             } else {
                 for (Direction direction : Direction.Plane.HORIZONTAL) {
-                    BlockState otherBlockState = this.level().getBlockState(this.blockPosition.relative(direction));
+                    BlockState otherBlockState = this.level.getBlockState(this.blockPosition.relative(direction));
                     if (otherBlockState.isSolid()) {
-                        this.hurt(this.level().damageSources().generic(), Float.MAX_VALUE);
+                        this.hurt(this.level.damageSources().generic(), Float.MAX_VALUE);
                     }
                 }
             }

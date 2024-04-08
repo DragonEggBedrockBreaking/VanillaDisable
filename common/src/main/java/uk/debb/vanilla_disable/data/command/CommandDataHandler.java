@@ -1313,6 +1313,7 @@ public class CommandDataHandler {
      * @param row The row from which to get the value.
      * @return The value.
      */
+    @SuppressWarnings("unchecked")
     public static List<ItemStack> getCachedBreedingItems(String row) {
         String cacheKey = "getBreedingItems-" + row;
         if (memo.containsKey(cacheKey)) {
