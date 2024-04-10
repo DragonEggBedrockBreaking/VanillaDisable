@@ -1,7 +1,7 @@
 package uk.debb.vanilla_disable.mixin.command.enchantment.item;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -19,7 +19,7 @@ public abstract class MixinEnchantmentHelper {
             ItemEnchantments itemEnchantments = stack.getEnchantments();
             itemEnchantments.enchantments = itemEnchantments.enchantments.object2IntEntrySet().stream()
                     .filter(e -> CommandDataHandler.getCachedBoolean("enchantments", CommandDataHandler.getKeyFromEnchantmentRegistry(e.getKey().value()), item))
-                    .collect(Object2IntLinkedOpenHashMap::new, (m, e) -> m.put(e.getKey(), e.getIntValue()), Object2IntLinkedOpenHashMap::putAll);
+                    .collect(Object2IntOpenHashMap::new, (m, e) -> m.put(e.getKey(), e.getIntValue()), Object2IntOpenHashMap::putAll);
             EnchantmentHelper.setEnchantments(stack, itemEnchantments);
             return 0;
         }

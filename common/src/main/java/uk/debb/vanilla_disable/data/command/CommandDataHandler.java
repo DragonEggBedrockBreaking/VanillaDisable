@@ -571,7 +571,7 @@ public class CommandDataHandler {
                         FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
                         if (foodProperties != null) {
                             put("nutrition", String.valueOf(foodProperties.nutrition()));
-                            put("saturation", String.valueOf(foodProperties.saturationModifier()));
+                            put("saturation", String.valueOf(foodProperties.saturation()));
                         }
 
                         if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
