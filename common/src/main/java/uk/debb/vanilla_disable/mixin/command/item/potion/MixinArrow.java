@@ -3,7 +3,6 @@ package uk.debb.vanilla_disable.mixin.command.item.potion;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -18,13 +17,11 @@ import java.util.Optional;
 public abstract class MixinArrow {
     @ModifyReturnValue(method = "getPotionContents", at = @At("RETURN"))
     private PotionContents vanillaDisable$getPotionContents(PotionContents original) {
-        ItemStack stack = ((Arrow) (Object) this).getPickupItem();
-        if (stack.is(Items.TIPPED_ARROW)) {
-            String item = CommandDataHandler.getKeyFromItemRegistry(stack.getItem());
+        if (((Arrow) (Object) this).getPickupItemStackOrigin().is(Items.TIPPED_ARROW)) {
             Optional<Holder<Potion>> optionalPotionHolder = original.potion();
             if (optionalPotionHolder.isPresent()) {
                 String potion = Objects.requireNonNull(CommandDataHandler.potionRegistry.getKey(optionalPotionHolder.get().value())) + "_effect";
-                if (!CommandDataHandler.getCachedBoolean("items", item, CommandDataHandler.lightCleanup(potion))) {
+                if (!CommandDataHandler.getCachedBoolean("items", "minecraft:tipped_arrow", CommandDataHandler.lightCleanup(potion))) {
                     return PotionContents.EMPTY;
                 }
             }

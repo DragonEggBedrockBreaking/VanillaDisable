@@ -22,6 +22,5 @@ mutable field net/minecraft/client/Options keyMappings [Lnet/minecraft/client/Ke
 accessible field net/minecraft/client/KeyMapping CATEGORY_SORT_ORDER Ljava/util/Map;
 accessible class net/minecraft/client/gui/screens/worldselection/CreateWorldScreen$MoreTab
 accessible field net/minecraft/client/gui/components/Checkbox selected Z
-accessible method net/minecraft/world/entity/projectile/AbstractArrow getPickupItem ()Lnet/minecraft/world/item/ItemStack;
 accessible field net/minecraft/world/item/enchantment/ItemEnchantments enchantments Lit/unimi/dsi/fastutil/objects/Object2IntLinkedOpenHashMap;
 mutable field net/minecraft/world/item/enchantment/ItemEnchantments enchantments Lit/unimi/dsi/fastutil/objects/Object2IntLinkedOpenHashMap;
