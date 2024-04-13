@@ -4,7 +4,7 @@
   "package": "uk.debb.vanilla_disable.mixin",
   "plugin": "uk.debb.vanilla_disable.mixin_plugin.VanillaDisableMixinPlugin",
   "refmap": "${mod_id}.refmap.json",
-  "compatibilityLevel": "JAVA_18",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "command.advancement.MixinPlayerAdvancements",
     "command.block.command.MixinFillCommand",
