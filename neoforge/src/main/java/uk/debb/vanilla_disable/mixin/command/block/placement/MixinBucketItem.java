@@ -27,7 +27,8 @@ public abstract class MixinBucketItem {
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/neoforged/neoforge/fluids/FluidType;isVaporizedOnPlacement(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/neoforged/neoforge/fluids/FluidStack;)Z"
-            )
+            ),
+            remap = false
     )
     private boolean vanillaDisable$isVaporisedOnPlacement(boolean original) {
         if (original && this.content.equals(Fluids.WATER)) {

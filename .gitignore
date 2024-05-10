@@ -39,3 +39,7 @@ runs/
 # netbeans
 
 netbeans/
+
+# architectury
+
+.architectury-transformer/
