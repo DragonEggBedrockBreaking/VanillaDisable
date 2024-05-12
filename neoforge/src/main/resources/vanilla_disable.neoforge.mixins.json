@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8.5",
-  "package": "uk.debb.vanilla_disable.mixin",
+  "package": "uk.debb.vanilla_disable.neoforge.mixin",
   "plugin": "uk.debb.vanilla_disable.mixin_plugin.VanillaDisableMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [

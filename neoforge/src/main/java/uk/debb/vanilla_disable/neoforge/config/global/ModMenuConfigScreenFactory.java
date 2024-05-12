@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-package uk.debb.vanilla_disable.config.global;
+package uk.debb.vanilla_disable.neoforge.config.global;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -12,6 +12,7 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.jetbrains.annotations.NotNull;
+import uk.debb.vanilla_disable.config.global.VanillaDisableConfigScreen;
 
 @Mod("vanilla_disable")
 public class ModMenuConfigScreenFactory {

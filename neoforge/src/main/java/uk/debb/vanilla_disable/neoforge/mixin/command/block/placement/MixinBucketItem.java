@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-package uk.debb.vanilla_disable.mixin.command.block.placement;
+package uk.debb.vanilla_disable.neoforge.mixin.command.block.placement;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.world.item.BucketItem;
