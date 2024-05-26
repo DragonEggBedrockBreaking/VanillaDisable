@@ -46,6 +46,11 @@ subprojects {
 
     tasks.create("clientIdeBeforeRun") {}
     tasks.create("idePostSync") {}
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
 }
 
 allprojects {
@@ -72,4 +77,9 @@ allprojects {
         options.release = 21
     }
     tasks.create("prepareWorkspace") {}
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
 }
