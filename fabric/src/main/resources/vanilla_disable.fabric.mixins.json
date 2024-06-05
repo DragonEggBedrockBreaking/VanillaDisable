@@ -1,6 +1,6 @@
 {
   "required": true,
-  "minVersion": "0.8.5",
+  "minVersion": "0.8.6",
   "package": "uk.debb.vanilla_disable.mixin",
   "plugin": "uk.debb.vanilla_disable.mixin_plugin.VanillaDisableMixinPlugin",
   "compatibilityLevel": "JAVA_21",
