@@ -2,7 +2,7 @@
 
 plugins {
     id("java")
-    id("fabric-loom") version("1.7.+") apply(false)
+    id("fabric-loom") version("1.9.+") apply(false)
 }
 
 val MOD_NAME by extra { "VanillaDisable" }
