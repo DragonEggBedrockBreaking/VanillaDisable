@@ -22,7 +22,7 @@ val ASM_VERSION by extra { "9.7.1" }
 val PARCHMENT_MC_VERSION by extra { "1.21.4" }
 val PARCHMENT_VERSION by extra { "2025.01.19" }
 val MIXIN_EXTRAS_VERSION by extra { "0.4.1" }
-val FABRIC_MIXIN_VERSION by extra { "0.15.4+mixin.0.8.7" }
+val FABRIC_MIXIN_VERSION by extra { "0.15.5+mixin.0.8.7" }
 val FABRIC_LOADER_VERSION by extra { "0.16.9" }
 val FABRIC_LOADER_VERSION_RANGE by extra { ">=0.16.9" }
 val NEOFORGE_VERSION by extra { "21.4.87-beta"}
