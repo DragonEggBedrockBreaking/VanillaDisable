@@ -419,10 +419,5 @@ public class CommandConfigScreen extends Screen {
             this.data = data;
             this.table = table;
         }
-
-        @Override
-        protected int getScrollbarPosition() {
-            return (int) (CommandConfigScreen.this.width * 0.75 + 150);
-        }
     }
 }

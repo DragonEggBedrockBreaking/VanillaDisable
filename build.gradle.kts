@@ -14,9 +14,9 @@ val MAVEN_GROUP by extra { "uk.debb" }
 val LICENSE by extra { "MPL-2.0" }
 val MOD_VERSION by extra { "4.0.3" }
 
-val MINECRAFT_VERSION by extra { "1.21.3" }
-val MINECRAFT_VERSION_RANGE_FABRIC by extra { ">=1.21.2" }
-val MINECRAFT_VERSION_RANGE_NEOFORGE by extra { "[1.21.2,1.22)" }
+val MINECRAFT_VERSION by extra { "1.21.4" }
+val MINECRAFT_VERSION_RANGE_FABRIC by extra { ">=1.21.4" }
+val MINECRAFT_VERSION_RANGE_NEOFORGE by extra { "[1.21.4,1.22)" }
 val H2_VERSION by extra { "2.3.232" }
 val ASM_VERSION by extra { "9.7.1" }
 val PARCHMENT_MC_VERSION by extra { "1.21" }
@@ -24,9 +24,9 @@ val PARCHMENT_VERSION by extra { "2024.07.28" }
 val MIXIN_EXTRAS_VERSION by extra { "0.4.1" }
 val FABRIC_MIXIN_VERSION by extra { "0.15.4+mixin.0.8.7" }
 val FABRIC_LOADER_VERSION by extra { "0.16.9" }
-val FABRIC_LOADER_VERSION_RANGE by extra { ">=0.15.10" }
-val NEOFORGE_VERSION by extra { "21.3.4-beta"}
-val NEOFORGE_LOADER_VERSION_RANGE by extra { ">=21.2.0-beta" }
+val FABRIC_LOADER_VERSION_RANGE by extra { ">=0.16.9" }
+val NEOFORGE_VERSION by extra { "21.4.87-beta"}
+val NEOFORGE_LOADER_VERSION_RANGE by extra { ">=21.4.0-beta" }
 
 allprojects {
     apply(plugin = "java")

@@ -25,8 +25,10 @@ dependencies {
     compileOnly(project(":common"))
 }
 
-minecraft.accessTransformers {
-    file("src/main/resources/META-INF/accesstransformer.cfg")
+minecraft {
+    accessTransformers {
+        file("src/main/resources/META-INF/accesstransformer.cfg")
+    }
 }
 
 runs {
