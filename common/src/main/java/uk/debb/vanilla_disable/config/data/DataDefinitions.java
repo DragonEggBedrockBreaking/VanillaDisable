@@ -134,6 +134,7 @@ public class DataDefinitions {
             put("other", new Object2ObjectOpenHashMap<>() {{
                 put("ai", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.ai")));
                 put("alpha_behaviour", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.alphaBehaviour")));
+                put("breeding_can_drop_xp", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.breedingCanDropXp")));
                 put("burns_in_sunlight", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.burnsInSunlight")));
                 put("can_be_converted_to", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.canBeConvertedTo")));
                 put("can_be_lit_by_fire_aspect", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.canBeLitByFireAspect")));
@@ -389,6 +390,7 @@ public class DataDefinitions {
                                                         lightCleanup(Objects.requireNonNull(itemRegistry.getKey(item)).toString()),
                                                 String.valueOf(animal.isFood(item.getDefaultInstance()))));
                             }
+                            put("breeding_can_drop_xp", "true");
                         }
 
                         if (entityType.equals(EntityType.ZOMBIE_VILLAGER) || entityType.equals(EntityType.WITCH) ||

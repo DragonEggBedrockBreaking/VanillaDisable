@@ -63,6 +63,7 @@
     "feature.entity.experience.MixinThrownExperienceBottle",
     "feature.entity.knockback.MixinLivingEntity",
     "feature.entity.knockback.MixinServerCommonPacketListenerImpl",
+    "feature.entity.other.MixinAnimal",
     "feature.entity.other.MixinDragonStrafePlayerPhase",
     "feature.entity.other.MixinEntity",
     "feature.entity.other.MixinLivingEntity",

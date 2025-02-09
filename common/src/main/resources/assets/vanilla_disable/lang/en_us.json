@@ -31,6 +31,7 @@
   "vd.commandRule.entities.breedingIngredient": "Toggle the mob being able to be bred with %s.",
   "vd.commandRule.entities.canExist": "Toggle the entity being able to exist.",
   "vd.commandRule.entities.canBeConvertedTo": "Toggle another mob being able to convert to the mob.",
+  "vd.commandRule.entities.breedingCanDropXp": "Toggle the mob dropping XP when bred.",
   "vd.commandRule.entities.burnsInSunlight": "Toggle the mob being able to burn in sunlight.",
   "vd.commandRule.entities.canDropXp": "Toggle the mob being able to drop XP.",
   "vd.commandRule.entities.ai": "Toggle the mob's AI.",
