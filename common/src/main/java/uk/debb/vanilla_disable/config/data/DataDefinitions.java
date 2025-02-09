@@ -145,6 +145,7 @@ public class DataDefinitions {
                 put("can_shoot_fireballs", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.canShootFireballs")));
                 put("can_trade", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.canTrade")));
                 put("daily_restocks", new ObjectObjectImmutablePair<>(INTEGER, Component.translatable("vd.commandRule.entities.dailyRestocks")));
+                put("trading_can_drop_xp", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.entities.tradingCanDropXp")));
             }});
             put("painting", new Object2ObjectOpenHashMap<>() {{
                 paintingVariantRegistry.keySet().forEach(paintingVariant -> put(lightCleanup(paintingVariant) + "_painting",
@@ -414,6 +415,7 @@ public class DataDefinitions {
                         if (entityType.equals(EntityType.VILLAGER) || entityType.equals(EntityType.WANDERING_TRADER)) {
                             put("can_infinitely_trade", "false");
                             put("daily_restocks", "2");
+                            put("trading_can_drop_xp", "true");
                         }
 
                         if (entityType.equals(EntityType.ITEM)) {

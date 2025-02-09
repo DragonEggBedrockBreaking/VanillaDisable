@@ -42,6 +42,7 @@
   "vd.commandRule.entities.canBeLitByFireAspect": "Toggle hitting creepers with a fire aspect enchanted item lighting them on fire.",
   "vd.commandRule.entities.alphaBehaviour": "Toggle boats behaving like they did in alpha.",
   "vd.commandRule.entities.canShootFireballs": "Toggle ender dragons being able to shoot fireballs.",
+  "vd.commandRule.entities.tradingCanDropXp": "Toggle villagers/wandering traders dropping XP when traded with.",
   "vd.commandRule.blocks.fluidReachesFar": "Toggle whether the fluid can travel 8 blocks or only 4 in the overworld or end.",
   "vd.commandRule.blocks.fluidReachesFarInNether": "Toggle whether the fluid can travel 8 blocks or only 4 in the nether.",
   "vd.commandRule.blocks.fluidSpeed": "Control how fast the fluid flows in the overworld or end.",
