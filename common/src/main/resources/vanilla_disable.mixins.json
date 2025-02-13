@@ -104,6 +104,7 @@
     "feature.item.function.MixinSpectralArrow",
     "feature.item.other.MixinAbstractCauldronBlock",
     "feature.item.other.MixinDispenserBlock",
+    "feature.item.other.MixinFishingHook",
     "feature.item.other.MixinFuelValues",
     "feature.item.other.MixinGiveCommand",
     "feature.item.other.MixinItemStack",

@@ -234,6 +234,7 @@ public class DataDefinitions {
                 put("burns", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.items.burns")));
                 put("can_be_given_by_command", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.items.canBeGivenByCommand")));
                 put("can_break_blocks_in_creative", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.items.canBreakBlocksInCreative")));
+                put("can_provide_xp", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.items.canProvideXp")));
                 put("can_spam", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.items.canSpam")));
                 put("cauldron_interaction", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.items.cauldronInteraction")));
                 put("dispenser_interaction", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.items.dispenserInteraction")));
@@ -612,6 +613,10 @@ public class DataDefinitions {
 
                             if (itemStack.getMaxDamage() > 0) {
                                 put("durability", String.valueOf(itemStack.getMaxDamage()));
+                            }
+
+                            if (item.equals(Items.FISHING_ROD)) {
+                                put("can_provide_xp", "true");
                             }
                         }
                     }}));

@@ -85,6 +85,7 @@
   "vd.commandRule.items.cauldronInteraction": "Toggle the item having a special interaction with a cauldron.",
   "vd.commandRule.items.fuelDuration": "Controls how long a fuel lasts in a furnace, blast furnace, or smoker.",
   "vd.commandRule.items.canBeGivenByCommand": "Toggle the item being able to be given to a player by the /give command.",
+  "vd.commandRule.items.canProvideXp": "Toggle the use of the item being able to provide xp.",
   "vd.commandRule.enchantments.enchantItem": "Toggle the %s item being able to be enchanted with the enchantment.",
   "vd.commandRule.enchantments.enchantmentCompatibility": "Toggle the enchantment being compatible with the %s enchantment.\nNOTE: The reverse option may also need to be set for the compatibility to be changed.",
   "vd.commandRule.commands.enabled": "Toggle the command being able to be used.",
