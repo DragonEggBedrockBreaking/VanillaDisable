@@ -219,6 +219,7 @@ public class DataDefinitions {
                 put("push_behaviour", new ObjectObjectImmutablePair<>(CLOB, Component.translatable("vd.commandRule.blocks.pushBehaviour")));
                 put("redstone_delay", new ObjectObjectImmutablePair<>(INTEGER, Component.translatable("vd.commandRule.blocks.redstoneDelay")));
                 put("redstone_duration", new ObjectObjectImmutablePair<>(INTEGER, Component.translatable("vd.commandRule.blocks.redstoneDuration")));
+                put("requires_correct_tool_for_break", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.blocks.requiresCorrectToolForBreak")));
                 put("requires_correct_tool_for_drops", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.blocks.requiresCorrectToolForDrops")));
                 put("speed_factor", new ObjectObjectImmutablePair<>(REAL, Component.translatable("vd.commandRule.blocks.speedFactor")));
                 put("works", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.blocks.works")));
@@ -558,6 +559,7 @@ public class DataDefinitions {
 
                         put("ignited_by_lava", String.valueOf(blockState.ignitedByLava()));
                         put("destroy_speed", String.valueOf(blockState.getDestroySpeed(null, null)));
+                        put("requires_correct_tool_for_break", "false");
                         put("requires_correct_tool_for_drops", String.valueOf(blockState.requiresCorrectToolForDrops()));
                         put("burn_odds", String.valueOf(((FireBlock) Blocks.FIRE).getBurnOdds(block.defaultBlockState())));
                         put("ignite_odds", String.valueOf(((FireBlock) Blocks.FIRE).getIgniteOdds(block.defaultBlockState())));

@@ -69,6 +69,7 @@
   "vd.commandRule.blocks.pushBehaviour": "Control the behaviour of the block being pushed by a piston.",
   "vd.commandRule.blocks.ignitedByLava": "Toggle the block being able to be ignited by lava.",
   "vd.commandRule.blocks.destroySpeed": "Control how fast the block is destroyed.",
+  "vd.commandRule.blocks.requiresCorrectToolForBreak": "Toggle stopping the player from mining the block if doing so wouldn't drop its drops.",
   "vd.commandRule.blocks.requiresCorrectToolForDrops": "Toggle whether the block requires the correct tool to drop its drops.",
   "vd.commandRule.blocks.burnOdds": "Control the chance that the block will burn.",
   "vd.commandRule.blocks.igniteOdds": "Control the chance that the block will ignite.",
