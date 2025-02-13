@@ -264,6 +264,7 @@ public class DataDefinitions {
         colData.put("advancements", new Object2ObjectOpenHashMap<>() {{
             put("other", new Object2ObjectOpenHashMap<>() {{
                 put("enabled", new ObjectObjectImmutablePair<>(BOOLEAN, Component.translatable("vd.commandRule.advancements.enabled")));
+                put("xp", new ObjectObjectImmutablePair<>(INTEGER, Component.translatable("vd.commandRule.advancements.xp")));
             }});
         }});
         colData.put("mob_categories", new Object2ObjectOpenHashMap<>() {{
@@ -645,6 +646,7 @@ public class DataDefinitions {
                 if (!name.contains("recipe")) {
                     put(name, new Object2ObjectOpenHashMap<>() {{
                         put("enabled", "true");
+                        put("xp", String.valueOf(advancement.value().rewards().experience()));
                     }});
                 }
             });

@@ -89,6 +89,7 @@
   "vd.commandRule.enchantments.enchantmentCompatibility": "Toggle the enchantment being compatible with the %s enchantment.\nNOTE: The reverse option may also need to be set for the compatibility to be changed.",
   "vd.commandRule.commands.enabled": "Toggle the command being able to be used.",
   "vd.commandRule.advancements.enabled": "Toggle the advancement being able to be obtained.",
+  "vd.commandRule.advancements.xp": "The amount of xp the advancement can give.",
   "vd.commandRule.mobCategory.mobcap": "Control the maximum number of mobs per render distance of the mob category.",
   "vd.commandRule.biomes.enabled": "Toggle the biome's generation.",
   "vd.commandRule.structures.enabled": "Toggle the structure's generation.",
