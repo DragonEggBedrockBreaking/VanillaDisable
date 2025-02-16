@@ -24,5 +24,3 @@ accessible field net/minecraft/world/level/block/state/BlockBehaviour$BlockState
 accessible field net/minecraft/world/item/enchantment/ItemEnchantments enchantments Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;
 mutable field net/minecraft/world/item/enchantment/ItemEnchantments enchantments Lit/unimi/dsi/fastutil/objects/Object2IntOpenHashMap;
 accessible field net/minecraft/world/level/block/entity/FuelValues values Lit/unimi/dsi/fastutil/objects/Object2IntSortedMap;
-accessible field net/minecraft/advancements/AdvancementRewards experience I
-mutable field net/minecraft/advancements/AdvancementRewards experience I

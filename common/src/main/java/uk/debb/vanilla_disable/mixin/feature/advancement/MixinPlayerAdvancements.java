@@ -49,8 +49,8 @@ public abstract class MixinPlayerAdvancements {
     private AdvancementRewards vanillaDisable$award(AdvancementRewards instance, ServerPlayer player, AdvancementHolder advancement, String criterionKey) {
         String adv = advancement.id().toString();
         if (adv.contains("recipe")) return instance;
-        instance.experience = SqlManager.getInt("advancements", adv, "xp");
-        return instance;
+        int experience = SqlManager.getInt("advancements", adv, "xp");
+        return new AdvancementRewards(experience, instance.loot(), instance.recipes(), instance.function());
     }
 
     @ModifyReceiver(
@@ -62,10 +62,12 @@ public abstract class MixinPlayerAdvancements {
     )
     private AdvancementRewards vanillaDisable$award(AdvancementRewards instance, ServerPlayer player, @Local Advancement advancement) {
         Optional<ResourceLocation> parent = advancement.parent();
-        parent.ifPresent(resourceLocation -> {
-            if (resourceLocation.toString().contains("recipe")) return;
-            instance.experience = SqlManager.getInt("advancements", resourceLocation.toString(), "xp");
-        });
+        if (parent.isPresent()) {
+            String adv = parent.get().toString();
+            if (adv.contains("recipe")) return instance;
+            int experience = SqlManager.getInt("advancements", adv, "xp");
+            return new AdvancementRewards(experience, instance.loot(), instance.recipes(), instance.function());
+        }
         return instance;
     }
 }
