@@ -3,8 +3,6 @@ accessWidener v1 named
 accessible field net/minecraft/world/level/block/DispenserBlock DISPENSER_REGISTRY Ljava/util/Map;
 accessible method net/minecraft/world/level/block/FireBlock getBurnOdds (Lnet/minecraft/world/level/block/state/BlockState;)I
 accessible method net/minecraft/world/level/block/FireBlock getIgniteOdds (Lnet/minecraft/world/level/block/state/BlockState;)I
-accessible class net/minecraft/world/entity/animal/Cat$CatTemptGoal
-accessible class net/minecraft/world/entity/animal/Ocelot$OcelotTemptGoal
 accessible field net/minecraft/world/level/biome/BiomeSource possibleBiomes Ljava/util/function/Supplier;
 accessible class net/minecraft/server/commands/FillCommand$Mode
 accessible field net/minecraft/client/gui/components/tabs/TabNavigationBar tabs Lcom/google/common/collect/ImmutableList;
