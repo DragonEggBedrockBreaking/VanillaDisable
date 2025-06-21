@@ -27,7 +27,7 @@ import java.util.function.Predicate;
 @Mixin(FillCommand.class)
 public abstract class MixinFillCommand {
     @Inject(method = "fillBlocks", at = @At("HEAD"))
-    private static void vanillaDisable$fillBlocks(CommandSourceStack source, BoundingBox area, BlockInput newBlock, FillCommand.Mode mode, @Nullable Predicate<BlockInWorld> replacingPredicate, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
+    private static void vanillaDisable$fillBlocks(CommandSourceStack source, BoundingBox area, BlockInput newBlock, FillCommand.Mode mode, @Nullable Predicate<BlockInWorld> replacingPredicate, boolean bl, CallbackInfoReturnable<Integer> cir) throws CommandSyntaxException {
         String block = DataUtils.getKeyFromBlockRegistry(newBlock.getState().getBlock());
         if (!SqlManager.getBoolean("blocks", block, "can_be_placed_by_command")) {
             throw new SimpleCommandExceptionType(Component.translatable("vd.commands.setblock.disabled")).create();

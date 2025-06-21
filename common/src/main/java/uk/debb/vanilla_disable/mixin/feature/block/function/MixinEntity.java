@@ -8,16 +8,17 @@ package uk.debb.vanilla_disable.mixin.feature.block.function;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import uk.debb.vanilla_disable.config.data.SqlManager;
 
 @Mixin(Entity.class)
 public abstract class MixinEntity {
-    @WrapMethod(method = "onAboveBubbleCol")
-    private void vanillaDisable$onAboveBubbleCol(boolean downwards, Operation<Void> original) {
+    @WrapMethod(method = "onAboveBubbleColumn")
+    private void vanillaDisable$onAboveBubbleColumn(boolean downwards, BlockPos blockPos, Operation<Void> original) {
         if (SqlManager.getBoolean("blocks", "minecraft:bubble_column", "works")) {
-            original.call(downwards);
+            original.call(downwards, blockPos);
         }
     }
 

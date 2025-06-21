@@ -35,7 +35,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
@@ -568,60 +567,62 @@ public class DataDefinitions {
         }});
         FuelValues fuelValues = server.overworld().fuelValues();
         rowData.put("items", new Object2ObjectOpenHashMap<>() {{
-            itemRegistry.forEach((item) ->
-                    put(Objects.requireNonNull(itemRegistry.getKey(item)).toString(), new Object2ObjectOpenHashMap<>() {{
-                        ItemStack itemStack = new ItemStack(item);
-                        if (!blockRegistry.stream().map(Block::toString).toList().contains(item.toString())) {
-                            String name = item.toString();
+            itemRegistry.forEach((item) -> {
+                String itemName = Objects.requireNonNull(itemRegistry.getKey(item)).toString();
+                put(itemName, new Object2ObjectOpenHashMap<>() {{
+                    ItemStack itemStack = new ItemStack(item);
+                    if (!blockRegistry.stream().map(Block::toString).toList().contains(item.toString())) {
+                        String name = item.toString();
 
-                            put("works", "true");
+                        put("works", "true");
 
-                            put("burns", String.valueOf(!(name.contains("netherite") || name.contains("debris"))));
+                        put("burns", String.valueOf(!(name.contains("netherite") || name.contains("debris"))));
 
-                            if (item.equals(Items.BOW) || item.equals(Items.CROSSBOW)) {
-                                put("can_spam", "false");
+                        if (item.equals(Items.BOW) || item.equals(Items.CROSSBOW)) {
+                            put("can_spam", "false");
+                        }
+
+                        FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
+                        if (!Services.PLATFORM.isModLoaded("nostalgic_tweaks")) {
+                            if (foodProperties != null) {
+                                put("nutrition", String.valueOf(foodProperties.nutrition()));
+                                put("saturation", String.valueOf(foodProperties.saturation()));
                             }
-
-                            FoodProperties foodProperties = itemStack.get(DataComponents.FOOD);
-                            if (!Services.PLATFORM.isModLoaded("nostalgic_tweaks")) {
-                                if (foodProperties != null) {
-                                    put("nutrition", String.valueOf(foodProperties.nutrition()));
-                                    put("saturation", String.valueOf(foodProperties.saturation()));
-                                }
-                                if (item.equals(Items.CAKE)) {
-                                    put("nutrition", "2");
-                                    put("saturation", "0.1");
-                                }
-                            }
-
-                            if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
-                                    item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
-                                potionRegistry.keySet().forEach((potion) -> put(lightCleanup(potion) + "_effect", "true"));
-                            }
-
-                            if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
-                                put("dispenser_interaction", "true");
-                            }
-
-                            if (CauldronInteraction.EMPTY.map().containsKey(item) || CauldronInteraction.WATER.map().containsKey(item) ||
-                                    CauldronInteraction.LAVA.map().containsKey(item) || CauldronInteraction.POWDER_SNOW.map().containsKey(item)) {
-                                put("cauldron_interaction", "true");
-                            }
-
-                            put("fuel_duration", String.valueOf(fuelValues.values.getOrDefault(item, 0)));
-
-                            put("can_break_blocks_in_creative", String.valueOf(!(item instanceof SwordItem)));
-                            put("can_be_given_by_command", "true");
-
-                            if (itemStack.getMaxDamage() > 0) {
-                                put("durability", String.valueOf(itemStack.getMaxDamage()));
+                            if (item.equals(Items.CAKE)) {
+                                put("nutrition", "2");
+                                put("saturation", "0.1");
                             }
 
                             if (item.equals(Items.FISHING_ROD)) {
                                 put("can_provide_xp", "true");
                             }
                         }
-                    }}));
+
+                        if (item.equals(Items.POTION) || item.equals(Items.SPLASH_POTION) ||
+                                item.equals(Items.LINGERING_POTION) || item.equals(Items.TIPPED_ARROW)) {
+                            potionRegistry.keySet().forEach((potion) -> put(lightCleanup(potion) + "_effect", "true"));
+                        }
+
+                        if (DispenserBlock.DISPENSER_REGISTRY.containsKey(item)) {
+                            put("dispenser_interaction", "true");
+                        }
+
+                        if (CauldronInteraction.EMPTY.map().containsKey(item) || CauldronInteraction.WATER.map().containsKey(item) ||
+                                CauldronInteraction.LAVA.map().containsKey(item) || CauldronInteraction.POWDER_SNOW.map().containsKey(item)) {
+                            put("cauldron_interaction", "true");
+                        }
+
+                        put("fuel_duration", String.valueOf(fuelValues.values.getOrDefault(item, 0)));
+
+                        put("can_break_blocks_in_creative", String.valueOf(!(itemName.contains("sword"))));
+                        put("can_be_given_by_command", "true");
+
+                        if (itemStack.getMaxDamage() > 0) {
+                            put("durability", String.valueOf(itemStack.getMaxDamage()));
+                        }
+                    }
+                }});
+            });
         }});
         rowData.put("enchantments", new Object2ObjectOpenHashMap<>() {{
             enchantmentRegistry.forEach((enchantment) ->

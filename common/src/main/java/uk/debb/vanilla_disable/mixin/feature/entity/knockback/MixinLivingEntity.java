@@ -19,13 +19,14 @@ import uk.debb.vanilla_disable.config.data.SqlManager;
 @Mixin(LivingEntity.class)
 public abstract class MixinLivingEntity {
     @Shadow
-    private @Nullable LivingEntity lastHurtByMob;
+    public abstract @Nullable LivingEntity getLastHurtByMob();
 
     @WrapMethod(method = "knockback")
     public void vanillaDisable$knockback(double strength, double x, double z, Operation<Void> original) {
         String target = DataUtils.getKeyFromEntityTypeRegistry(((Entity) (Object) this).getType());
-        if (this.lastHurtByMob != null) {
-            String source = DataUtils.getKeyFromEntityTypeRegistry(this.lastHurtByMob.getType());
+        LivingEntity lastHurtByMob = this.getLastHurtByMob();
+        if (lastHurtByMob != null) {
+            String source = DataUtils.getKeyFromEntityTypeRegistry(lastHurtByMob.getType());
             if (!SqlManager.getBoolean("entities", target, DataUtils.lightCleanup(source) + "_knockback")) {
                 return;
             }

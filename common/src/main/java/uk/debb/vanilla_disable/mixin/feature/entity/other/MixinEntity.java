@@ -37,15 +37,12 @@ public abstract class MixinEntity {
     @SuppressWarnings("deprecation")
     @Inject(method = "onInsideBlock", at = @At("HEAD"))
     private void vanillaDisable$onInsideBlock(CallbackInfo ci) {
-        if (((Entity) (Object) this) instanceof Boat boat && SqlManager.getBoolean("entities", "minecraft:boat", "alpha_behaviour")) {
-            if (!boat.isInWaterOrBubble()) {
-                boat.hurt(this.level.damageSources().generic(), Float.MAX_VALUE);
-            } else {
-                for (Direction direction : Direction.Plane.HORIZONTAL) {
-                    BlockState otherBlockState = this.level.getBlockState(this.blockPosition.relative(direction));
-                    if (otherBlockState.isSolid()) {
-                        boat.hurt(this.level.damageSources().generic(), Float.MAX_VALUE);
-                    }
+        String name = DataUtils.getKeyFromEntityTypeRegistry(this.getType());
+        if (((Entity) (Object) this) instanceof Boat boat && SqlManager.getBoolean("entities", name, "alpha_behaviour")) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                BlockState otherBlockState = this.level.getBlockState(this.blockPosition.relative(direction));
+                if (otherBlockState.isSolid()) {
+                    boat.hurt(this.level.damageSources().generic(), Float.MAX_VALUE);
                 }
             }
         }

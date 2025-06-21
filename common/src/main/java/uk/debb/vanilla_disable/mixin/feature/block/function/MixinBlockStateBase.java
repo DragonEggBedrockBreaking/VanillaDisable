@@ -11,6 +11,7 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -26,10 +27,10 @@ public abstract class MixinBlockStateBase {
     public abstract Block getBlock();
 
     @WrapMethod(method = "entityInside")
-    private void vanillaDisable$entityInside(Level level, BlockPos pos, Entity entity, Operation<Void> original) {
+    private void vanillaDisable$entityInside(Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier, Operation<Void> original) {
         String block = DataUtils.getKeyFromBlockRegistry(this.getBlock());
         if (SqlManager.getBoolean("blocks", block, "works")) {
-            original.call(level, pos, entity);
+            original.call(level, pos, entity, insideBlockEffectApplier);
         }
     }
 

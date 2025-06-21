@@ -54,7 +54,7 @@ public abstract class MixinBlock {
     @WrapMethod(method = "playerDestroy")
     private void vanillaDisable$playerDestroy(Level level, Player player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack tool, Operation<Void> original) {
         if (state.is(Blocks.TNT) && SqlManager.getBoolean("blocks", "minecraft:tnt", "alpha_behaviour")) {
-            TntBlock.explode(level, pos);
+            TntBlock.prime(level, pos);
         } else {
             original.call(level, player, pos, state, blockEntity, tool);
         }

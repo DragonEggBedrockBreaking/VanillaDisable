@@ -22,11 +22,11 @@ public abstract class MixinPotionContents {
             method = "onConsume",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/item/alchemy/PotionContents;applyToLivingEntity(Lnet/minecraft/world/entity/LivingEntity;)V"
+                    target = "Lnet/minecraft/world/item/alchemy/PotionContents;applyToLivingEntity(Lnet/minecraft/world/entity/LivingEntity;F)V"
             )
     )
-    private boolean vanillaDisable$onConsume(PotionContents instance, LivingEntity livingEntity, Level level, LivingEntity livingEntity1, ItemStack itemStack, Consumable consumable) {
-        String item = DataUtils.getKeyFromItemRegistry(itemStack.getItem());
+    private boolean vanillaDisable$onConsume(PotionContents instance, LivingEntity livingEntity, float f, Level level, LivingEntity entity, ItemStack stack, Consumable consumable) {
+        String item = DataUtils.getKeyFromItemRegistry(stack.getItem());
         return !DataUtils.getPotionContents(instance, item).equals(PotionContents.EMPTY);
     }
 }

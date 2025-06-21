@@ -19,13 +19,14 @@ import uk.debb.vanilla_disable.config.data.SqlManager;
 
 @Mixin(Villager.class)
 public abstract class MixinVillager {
-    @Shadow public abstract VillagerData getVillagerData();
+    @Shadow
+    public abstract VillagerData getVillagerData();
 
     @ModifyReturnValue(method = "wantsToPickUp", at = @At("RETURN"))
     private boolean vanillaDisable$wantsToPickUp(boolean original, ServerLevel serverLevel, ItemStack itemStack) {
         String name = "can_breed_with_" + DataUtils.lightCleanup(DataUtils.getKeyFromItemRegistry(itemStack.getItem()));
         return (SqlManager.getBoolean("entities", "minecraft:villager", name) ||
-                this.getVillagerData().getProfession().requestedItems().contains(itemStack.getItem())) &&
+                this.getVillagerData().profession().value().requestedItems().contains(itemStack.getItem())) &&
                 ((Villager) (Object) this).getInventory().canAddItem(itemStack);
     }
 }

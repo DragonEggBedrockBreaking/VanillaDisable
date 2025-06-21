@@ -26,7 +26,7 @@ public abstract class MixinFarmBlock {
             ),
             require = 0
     )
-    private boolean vanillaDisable$turnToDirt(Entity entity, BlockState state, Level level, BlockPos pos, Level level2, BlockState state2, BlockPos pos2, Entity entity2, float f) {
+    private boolean vanillaDisable$turnToDirt(Entity entity, BlockState state, Level level, BlockPos pos) {
         return SqlManager.getBoolean("blocks", "minecraft:farmland", "can_be_trampled");
     }
 }

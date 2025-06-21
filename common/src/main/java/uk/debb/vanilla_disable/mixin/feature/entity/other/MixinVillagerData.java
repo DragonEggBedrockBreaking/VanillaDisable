@@ -7,12 +7,11 @@
 package uk.debb.vanilla_disable.mixin.feature.entity.other;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerType;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import uk.debb.vanilla_disable.config.data.DataDefinitions;
 import uk.debb.vanilla_disable.config.data.DataUtils;
@@ -22,31 +21,24 @@ import java.util.Objects;
 
 @Mixin(VillagerData.class)
 public abstract class MixinVillagerData {
-    @Shadow
-    @Final
-    private VillagerType type;
-    @Shadow
-    @Final
-    private VillagerProfession profession;
-
-    @ModifyReturnValue(method = "getType", at = @At("RETURN"))
-    private VillagerType vanillaDisable$getType(VillagerType original) {
+    @ModifyReturnValue(method = "type", at = @At("RETURN"))
+    private Holder<VillagerType> vanillaDisable$type(Holder<VillagerType> original) {
         if (SqlManager.isConnectionNull()) return original;
-        if (DataDefinitions.villagerTypeRegistry.getKey(this.type) == null) return original;
+        if (DataDefinitions.villagerTypeRegistry.getKey(original.value()) == null) return original;
         if (!SqlManager.getBoolean("entities", "minecraft:villager",
-                DataUtils.lightCleanup(Objects.requireNonNull(DataDefinitions.villagerTypeRegistry.getKey(this.type))) + "_type")) {
-            return VillagerType.PLAINS;
+                DataUtils.lightCleanup(Objects.requireNonNull(DataDefinitions.villagerTypeRegistry.getKey(original.value()))) + "_type")) {
+            return DataDefinitions.villagerTypeRegistry.getOrThrow(VillagerType.PLAINS);
         }
         return original;
     }
 
-    @ModifyReturnValue(method = "getProfession", at = @At("RETURN"))
-    private VillagerProfession vanillaDisable$getProfession(VillagerProfession original) {
+    @ModifyReturnValue(method = "profession", at = @At("RETURN"))
+    private Holder<VillagerProfession> vanillaDisable$profession(Holder<VillagerProfession> original) {
         if (SqlManager.isConnectionNull()) return original;
-        if (DataDefinitions.villagerProfessionRegistry.getKey(this.profession) == null) return original;
+        if (DataDefinitions.villagerProfessionRegistry.getKey(original.value()) == null) return original;
         if (!SqlManager.getBoolean("entities", "minecraft:villager",
-                DataUtils.lightCleanup(Objects.requireNonNull(DataDefinitions.villagerProfessionRegistry.getKey(this.profession))) + "_profession")) {
-            return VillagerProfession.NONE;
+                DataUtils.lightCleanup(Objects.requireNonNull(DataDefinitions.villagerProfessionRegistry.getKey(original.value()))) + "_profession")) {
+            return DataDefinitions.villagerProfessionRegistry.getOrThrow(VillagerProfession.NONE);
         }
         return original;
     }
