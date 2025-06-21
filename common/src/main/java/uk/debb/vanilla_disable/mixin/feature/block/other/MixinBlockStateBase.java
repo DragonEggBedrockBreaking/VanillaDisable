@@ -24,7 +24,8 @@ public abstract class MixinBlockStateBase {
     @Shadow
     public abstract Block getBlock();
 
-    @Shadow protected abstract BlockState asState();
+    @Shadow
+    protected abstract BlockState asState();
 
     @ModifyReturnValue(method = "ignitedByLava", at = @At("RETURN"))
     private boolean vanillaDisable$ignitedByLava(boolean original) {
