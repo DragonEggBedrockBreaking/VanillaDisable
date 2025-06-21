@@ -12,7 +12,7 @@ val MOD_AUTHOR by extra { "DragonEggBedrockBreaking" }
 val CREDITS by extra { "Wesley1808, FallenBreath, NoComment, LittleLily, ThatTrollzer, Kichura, ellieisjelly" }
 val MAVEN_GROUP by extra { "uk.debb" }
 val LICENSE by extra { "MPL-2.0" }
-val MOD_VERSION by extra { "4.1.0" }
+val MOD_VERSION by extra { "4.1.1" }
 
 val MINECRAFT_VERSION by extra { "1.21.5" }
 val MINECRAFT_VERSION_RANGE_FABRIC by extra { ">=1.21.5" }
