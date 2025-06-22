@@ -250,9 +250,9 @@ public class CommandConfigScreen extends Screen {
             int newLeft = left > 300 ? left - width / 10 : left + width / 10;
             int newMouseX = mouseX > 300 ? mouseX + width / 20 * 3 : mouseX - width / 20;
             guiGraphics.drawString(Objects.requireNonNull(CommandConfigScreen.this.minecraft).font, main, newLeft, top + 10, 0xFFFFFF);
-            if (this.isMouseOver(newMouseX, mouseY)) {
-                guiGraphics.renderTooltip(Objects.requireNonNull(CommandConfigScreen.this.minecraft).font, tooltip, mouseX, mouseY);
-            }
+//            if (this.isMouseOver(newMouseX, mouseY)) {
+//                guiGraphics.renderTooltip(Objects.requireNonNull(CommandConfigScreen.this.minecraft).font, tooltip, mouseX, mouseY);
+//            }
         }
 
         @Override

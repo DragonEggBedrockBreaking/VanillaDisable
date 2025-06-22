@@ -40,7 +40,7 @@ public class LangFileManager implements ClientModInitializer {
                 File rpackdir = new File(FabricLoader.getInstance().getGameDir().toString() + "/resourcepacks/vdlangfile/assets/vanilladisablelangfile/lang");
                 if (!rpackdir.mkdirs()) return;
 
-                int version = SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES);
+                int version = SharedConstants.getCurrentVersion().packVersion(PackType.CLIENT_RESOURCES);
                 String content = "{\"pack\":{\"pack_format\":" + version + ",\"description\":\"Vanilla Disable Language File\"}}";
                 String mcmetaPath = new File(outerrpackdir + "/pack.mcmeta").toString();
                 FileWriter mcmetaWriter = new FileWriter(mcmetaPath);

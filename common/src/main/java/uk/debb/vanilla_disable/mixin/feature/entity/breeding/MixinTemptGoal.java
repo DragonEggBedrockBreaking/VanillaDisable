@@ -8,7 +8,7 @@ package uk.debb.vanilla_disable.mixin.feature.entity.breeding;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Final;
@@ -22,7 +22,7 @@ import uk.debb.vanilla_disable.config.data.SqlManager;
 public abstract class MixinTemptGoal {
     @Shadow
     @Final
-    protected PathfinderMob mob;
+    protected Mob mob;
 
     @ModifyReturnValue(method = "shouldFollow", at = @At("RETURN"))
     private boolean shouldFollow(boolean original, LivingEntity livingEntity) {

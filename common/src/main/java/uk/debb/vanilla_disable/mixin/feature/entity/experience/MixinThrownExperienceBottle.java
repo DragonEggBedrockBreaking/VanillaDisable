@@ -20,10 +20,10 @@ public abstract class MixinThrownExperienceBottle {
             method = "onHit",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/ExperienceOrb;award(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;I)V"
+                    target = "Lnet/minecraft/world/entity/ExperienceOrb;awardWithDirection(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;I)V"
             )
     )
-    private boolean vanillaDisable$award(ServerLevel level, Vec3 pos, int amount) {
+    private boolean vanillaDisable$awardWithDirection(ServerLevel serverLevel, Vec3 vec3, Vec3 vec32, int i) {
         return SqlManager.getBoolean("entities", "minecraft:experience_bottle", "can_drop_xp");
     }
 }

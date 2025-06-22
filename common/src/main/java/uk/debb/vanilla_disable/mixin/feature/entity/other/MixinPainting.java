@@ -21,6 +21,9 @@ import uk.debb.vanilla_disable.config.data.SqlManager;
 public abstract class MixinPainting {
     @ModifyReturnValue(method = "getVariant()Lnet/minecraft/core/Holder;", at = @At("RETURN"))
     private Holder<PaintingVariant> vanillaDisable$getVariant(Holder<PaintingVariant> original) {
+        if (SqlManager.isConnectionNull()) {
+            return original;
+        }
         if (!SqlManager.getBoolean("entities", "minecraft:painting", DataUtils.lightCleanup(original.value().assetId()) + "_painting")) {
             return new Holder.Direct<>(DataDefinitions.paintingVariantRegistry.getValueOrThrow(PaintingVariants.KEBAB));
         }
